@@ -1,0 +1,22 @@
+[2026-11-08 20:11:06.610] [hook] [error] [menus] 'mevr_reload_pouch' refused: lists need 2-255 printable ASCII labels
+[2026-11-08 20:11:06.610] [hook] [info] [menus] menu hook installed
+[2026-11-08 20:11:06.643] [hook] [info] [glyphs] VR controller icons loaded
+[2026-11-08 20:11:09.971] [hook] [info] [menus] game variable 'aim_assist' pinned to 0
+[2026-11-08 20:11:09.971] [hook] [info] [menus] game variable 'auto_aim_border' pinned to 0
+[2026-11-08 20:11:09.971] [hook] [info] [menus] game variable 'g_show_crosshair' follows its condition
+[2026-11-08 20:11:09.971] [hook] [info] [menus] game variable 'g_show_hitmarks' follows its condition
+[2026-11-08 20:11:09.971] [hook] [info] [menus] game variable 'g_qte_mode' starts at 1
+[2026-11-08 20:11:09.972] [hook] [info] [menus] 125 settings registered before the game loads its preferences
+[2026-11-08 20:11:14.098] [hook] [info] [ui] capture hooks installation result=0
+[2026-11-08 20:11:14.932] [hook] [info] [menus] game option 'resolution' locked
+[2026-11-08 20:11:14.932] [hook] [info] [menus] game option 'r_vsync' locked
+[2026-11-08 20:11:14.932] [hook] [info] [menus] game option 'api' locked
+[2026-11-08 20:11:14.932] [hook] [info] [menus] game option 'aim_assist' locked
+[2026-11-08 20:11:14.932] [hook] [info] [menus] game option 'auto_aim_border' locked
+[2026-11-08 20:11:14.932] [hook] [error] [menus] mevr_weapons: a row refers to a refused setting
+[2026-11-08 20:11:14.932] [hook] [error] [menus] mevr_weapons: a row refers to a refused setting
+[2026-11-08 20:11:14.932] [hook] [info] [menus] 125 settings given options
+[2026-11-08 20:11:14.932] [hook] [info] [menus] Options menus cached 0.0 s after the first update
+[2026-11-08 20:11:14.934] [hook] [info] [ui] capture target 1920x1080 fmt=29 displayEncoded=false
+[2026-11-08 20:11:14.934] [hook] [info] [ui] UI laid out natively in a 1920x1080 region of 1920x1080
+[2026-11-08 20:11:14.978] [hook] [info] [menus] 29 menus loaded (3 replaced, 26 new), 221 captions set

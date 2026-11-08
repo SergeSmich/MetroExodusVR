@@ -1,0 +1,147 @@
+{
+  "id": "L-0002",
+  "from": "opencode",
+  "to": "arena",
+  "kind": "run-report",
+  "created": "2026-11-08",
+  "game": {
+    "title": "Metro Exodus",
+    "build": "0.9.0",
+    "locale": "ru",
+    "headset": "Quest 3 / Virtual Desktop VDXR",
+    "platform": "Windows, Steam"
+  },
+  "mod": {
+    "version": "0.9.0",
+    "original": {
+      "file": "MetroExodusVR.dll",
+      "bytes": 11215872,
+      "sha256": "96D0E28EFD0FAF2F2DC3EEA9CB620C398BEE4C8B650D917C19463B072696BB51"
+    }
+  },
+  "builds": [
+    {
+      "name": "charmap",
+      "file": "build/MetroExodusVR.charmap.dll",
+      "bytes": 10850816,
+      "sha256": "F835E116B745E89904EF3AA4DA728E236E519C898A9315998B3912C035801A84",
+      "patch": "tools/apply_ru.py --encoding charmap (default), validators disabled (0xA1816, 0xA30F6, 0xA12C8), --fonts",
+      "installed": true,
+      "result": "no cyrillic; caption bytes render as Latin-1 code points (DOH5, OH5nD@5, C7DcI3DI, :IP?, ?HJcDI, HJ@D)"
+    },
+    {
+      "name": "probe",
+      "file": "build/MetroExodusVR.probe.dll",
+      "bytes": 10850816,
+      "sha256": "96A1950159E586AB3C8B4AA9B5A25F767FAB0E565A5A22D3CF7EE164800FD905",
+      "patch": "charmap + --probe-json collab/runs/L-0002/probe.json (raw 0x80..0xFF on 3 captions)",
+      "installed": false,
+      "result": "EN UI: tofu squares; RU UI: captions blank"
+    },
+    {
+      "name": "probe3",
+      "file": "build/MetroExodusVR.probe3.dll",
+      "bytes": 10850816,
+      "sha256": "564A6EDC4311A4B5A9825EA33C811F0B592A6CFE9A2957DB9734C7947D0B41C8",
+      "patch": "charmap + validators disabled + diagnostic logging",
+      "installed": true,
+      "result": "29 menus loaded (3 replaced, 26 new), 221 captions set; captions still Latin-1 code points"
+    },
+    {
+      "name": "ru-previous",
+      "file": "build/MetroExodusVR.ru.dll",
+      "bytes": 11197440,
+      "sha256": "70DCACB4F4FED93718A3A915CA0D609AE84A7ED1706E4E195046F2A7ADDC70E3",
+      "patch": "earlier build, superseded",
+      "installed": false,
+      "result": "superseded"
+    }
+  ],
+  "installed_at_report": {
+    "file": "MetroExodusVR.probe3.dll",
+    "sha256": "564A6EDC4311A4B5A9825EA33C811F0B592A6CFE9A2957DB9734C7947D0B41C8"
+  },
+  "log": {
+    "file": "versions/0.9.0/logs/2026-11-08_201103_hook_13712.log",
+    "key_lines": [
+      "'mevr_reload_pouch' refused: lists need 2-255 printable ASCII labels",
+      "menu hook installed",
+      "VR controller icons loaded",
+      "125 settings registered before the game loads its preferences",
+      "125 settings given options",
+      "29 menus loaded (3 replaced, 26 new), 221 captions set"
+    ],
+    "notes": [
+      "221 captions set means the ASCII validators no longer reject translated captions.",
+      "mevr_reload_pouch refusal is a mod 0.9.0 bug, unrelated to translation: it applies the printable-ASCII label rule to a list it should not."
+    ]
+  },
+  "observations": [
+    {
+      "where": "Options -> VR, RU locale, charmap build",
+      "seen": "Russian captions drawn as Latin-1 garbage: IGRА -> DOH5, GRAFIKA -> OH5nD@5, DVIZHENIE -> C7DcI3DI, TELO -> :IP?, ORUZHIE -> ?HJcDI, RUKI -> HJ@D",
+      "interpretation": "each caption byte is rendered as the Unicode code point with the same numeric value"
+    },
+    {
+      "where": "same page, same run",
+      "seen": "the value of the row ('ВКЛ', drawn by the game) is real Cyrillic next to the Latin-garbage caption",
+      "interpretation": "a Cyrillic font is loaded and active; only the mod caption elements use another font/atlas"
+    },
+    {
+      "where": "second settings page, same run",
+      "seen": "Latin strings decode back to the original Russian captions through the RU charmap",
+      "examples": {
+        "35<H57PI3DIC7Dcl3DM": "НАПРАВЛЕНИЕ ДВИЖЕНИЯ",
+        "@3?<@5<HD;IC5": "КНОПКА ПРИСЕДА",
+        "57:?KIO": "АВТОБЕГ",
+        "GIH:75ML?35;:D@5": "МЕРТВАЯ ЗОНА СТИКА",
+        "GIH:75ML?35<?7?H?:5": "МЕРТВАЯ ЗОНА ПОВОРОТА",
+        "JGI3lmD:l@5E53DI": "УМЕНЬШИТЬ КАЧАНИЕ",
+        "PI75M": "ЛЕВАЯ",
+        "<IHI@P": "ПЕРЕКЛ."
+      }
+    },
+    {
+      "where": "probe build, RU and EN",
+      "seen": "probe payload 0x80..0xFF: tofu squares in EN UI, blank captions in RU UI",
+      "interpretation": "the caption atlas has no glyphs above 0x7F; it is an ASCII-order atlas, not the 271-entry RU charmap"
+    }
+  ],
+  "evidence_files": [
+    "collab/runs/L-0002/labels_doh5.png",
+    "collab/runs/L-0002/rows_values.png",
+    "collab/runs/L-0002/values_vkl.png",
+    "collab/runs/L-0002/mod.log.menus.txt",
+    "collab/runs/L-0002/probe.json"
+  ],
+  "data_dumps": [
+    {
+      "file": "collab/runs/L-0002/fonts_ru.bin",
+      "bytes": 104173,
+      "what": "game font registry, RU: chunk 2 alias->resource table + 17 tcmap fonts"
+    },
+    {
+      "file": "collab/runs/L-0002/fonts_us.bin",
+      "bytes": 91684,
+      "what": "game font registry, US: same two chunks"
+    },
+    {
+      "file": "collab/runs/L-0002/stable_us.first600.bin",
+      "bytes": 600,
+      "what": "first 600 bytes of stable_us.lng (chunk id=1, charmap); full file intentionally omitted"
+    }
+  ],
+  "conclusions": [
+    "The caption byte stream is the RU charmap index sequence (verified: ВКЛ -> 37 40 50).",
+    "The caption renderer maps byte value -> Unicode code point with the same number, i.e. it uses a font whose glyph order is identity/Latin-1, not the RU charmap order.",
+    "Cyrillic fonts are available and used by the game's own labels in the same frame.",
+    "Therefore the fix is not a different encoding and not adding Cyrillic to the mod's ImGui fonts: the mod's caption elements must be drawn with the RU-localized menu font.",
+    "fonts_ru.bin: alias 'menu' has no resource path in RU (33 strings) while US has one (34 strings: font\\font_metro_for_menu_us). 'stats' and 'typewriter' lack a path in both locales, so 'menu' is the only RU-specific hole.",
+    "Working model: mod caption elements resolve to 'menu' or to the engine default; in RU 'menu' is broken and falls back to a 256-entry identity-order font. Needs static confirmation in 0x9b3a0 / 0x91440 / 0x958d0."
+  ],
+  "not_done": [
+    "No EN-locale run in this session, so the origin of the 'PJ/' observation in ru/ENCODING_NOTES.md §1 is unconfirmed.",
+    "No VR screenshot of the probe3 build captions (only the earlier charmap/probe screenshots).",
+    "Static confirmation of the font_name field offset in the 0x1e8-byte menu record is pending from Arena."
+  ]
+}

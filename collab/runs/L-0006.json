@@ -1,0 +1,85 @@
+{
+  "id": "L-0006",
+  "from": "opencode",
+  "to": "arena",
+  "kind": "run-report",
+  "created": "2026-11-08",
+  "purpose": "Check whether the caption font depends on the game locale",
+  "game": {
+    "title": "Metro Exodus",
+    "build": "0.9.0",
+    "headset": "Quest 3 / Virtual Desktop VDXR",
+    "locales_tested": ["ru", "en"]
+  },
+  "build_under_test": {
+    "name": "probe3",
+    "file": "build/MetroExodusVR.probe3.dll",
+    "bytes": 10850816,
+    "sha256": "564A6EDC4311A4B5A9825EA33C811F0B592A6CFE9A2957DB9734C7947D0B41C8",
+    "encoding": "charmap",
+    "validators_disabled": ["0xA1816", "0xA30F6", "0xA12C8"]
+  },
+  "protocol": "Same installed DLL, only the game language changed between runs. Same page (Options top level), same headset, same session.",
+  "results": {
+    "ru": {
+      "bottom_hint": "Esc НАЗАД",
+      "captions_seen": ["DOH5", "OH5nD@5", ":IP?"],
+      "caption_source_ru": ["ИГРА", "ГРАФИКА", "ТЕЛО"],
+      "empty_bands_between_rows": true
+    },
+    "en": {
+      "bottom_hint": "Esc BACK",
+      "captions_seen": ["DOH5", "OH5nD@5", ":IP?"],
+      "caption_source_ru": ["ИГРА", "ГРАФИКА", "ТЕЛО"],
+      "bands_between_rows": "filled with a wide run of '?' characters"
+    }
+  },
+  "conclusion": {
+    "caption_font_is_locale_independent": true,
+    "falsified_model": "caption elements resolve to 'menu' -> RU fallback / US font",
+    "dead_hypothesis_evidence": "identical glyphs in RU and EN despite different locale font registries",
+    "remaining_facts": [
+      "ASCII range renders 1:1 (0x44->D, 0x4F->O, 0x35->5)",
+      "0x80..0xFF have no glyphs (tofu in EN, nothing in RU)",
+      "font choice does not change with the game locale"
+    ]
+  },
+  "new_hypothesis": {
+    "statement": "Caption elements use a fixed, locale-independent font with a 256-entry identity-order table whose atlas contains only ASCII glyphs.",
+    "most_likely_alias": "arial",
+    "reason": "font\\font_arial has the same path in fonts_ru.bin and fonts_us.bin",
+    "other_locale_independent_aliases": [
+      "console", "nixie", "symbols", "symbols_durango", "symbols_ps",
+      "editor_symbols", "small", "stats", "typewriter"
+    ],
+    "status": "hypothesis, needs static confirmation"
+  },
+  "separate_symptom": {
+    "what": "The row bands are empty in RU and '?' in EN.",
+    "interpretation": "Those elements do take the locale charmap font: RU indices are out of range in the US 203-entry table -> '?'. They are a different code path from the captions and must not be used as evidence about the caption font.",
+    "open_question": "Why are they invisible in RU rather than Cyrillic?"
+  },
+  "corrections_to_previous_reports": [
+    "L-0002 §3/§5: the 'menu' fallback model is falsified by this run.",
+    "L-0002 §7 item 1-2 (find menu fallback / default): superseded, do not spend time on it.",
+    "ru/ENCODING_NOTES.md §1: 'ВКЛ -> PJ/' does not reproduce in 0.9.0 charmap in either locale."
+  ],
+  "next_static_questions": [
+    "In 0x9b3a0 / 0x91440 / 0x958d0, what value does the font_name field of a caption element get when the mod does not set it?",
+    "Is there a constant pointer to an existing font-name string in the text-element constructor path?",
+    "Which alias does the exe substitute for an empty font_name on a text element (candidate: arial)?",
+    "Cost of patching font_name to 'main_menu' for the element the mod creates (RU only)."
+  ],
+  "static_lead": {
+    "file": "work/crops/mcl.asm",
+    "site": "0x96870",
+    "instruction": "call qword ptr [rax + 0x20]",
+    "context": "this = [rbp+0x1d8], arg rdx = &[rbp+0x1a0] (std::string), dl = is-heap flag",
+    "interpretation": "candidate SetCaption(std::string); no SetFont-like second virtual call on the same object",
+    "follow_up": "find where [rbp+0x1d8] comes from and whether it is the parsed menu element with the font_name field"
+  },
+  "screenshots": {
+    "attached": false,
+    "note": "Both screenshots exist in the chat only; the user can copy them to collab/runs/L-0006/ if needed."
+  }
+}

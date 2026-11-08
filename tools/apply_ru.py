@@ -5,10 +5,15 @@ The original English literals are left untouched: some of them are shared with
 engine / graphics code (FSR, DLSS, TAA, OFF, NORMAL, VISIBLE, LEFT/RIGHT HAND).
 Instead a new PE section ``.ru`` is appended that holds
 
-  * the translated strings as UTF-8 (the encoding the engine's text API expects
-    from the mod; the 2-byte ``.lng`` glyph-index scheme is a container format
-    that the localization loader decodes itself), and
+  * the translated strings as Windows-1251 (the engine widens the mod's
+    ``char*`` captions with the system ANSI code page, CP1251 on a Russian
+    Windows), and
   * small copy stubs for strings that the mod builds inline on the stack.
+
+The embedded TTF fonts (RCDATA resources) are replaced as well: the shipped
+Inter/Barlow files only cover Latin, so the Russian glyphs are merged in by
+``tools/merge_cyrillic.py`` before patching.  The resource data entries are
+repointed at the new font payloads in the ``.ru`` section.
 
 Per display site inside the mod's menu code (0xB0000-0xBFFFF):
 
@@ -19,8 +24,9 @@ Per display site inside the mod's menu code (0xB0000-0xBFFFF):
     the whole translated string, patches the explicit length constant and jumps
     back after the replaced region.
 
-Finally the two "captions are printable ASCII" validators are relaxed
-(``cmp al,0x5e`` -> ``cmp al,0xff``) so that UTF-8 Cyrillic bytes pass.
+Finally the "captions are printable ASCII" validators are relaxed
+(``cmp al,0x5e`` -> ``cmp al,0xff``) so that the high CP1251 Cyrillic
+bytes pass.
 
 Usage:
     python tools/apply_ru.py --check
@@ -51,6 +57,16 @@ DEFAULT_SRC = ROOT / "work" / "0.9.0" / "versions" / "0.9.0" / "MetroExodusVR.dl
 DEFAULT_OUT = ROOT / "build" / "MetroExodusVR.dll"
 STRINGS_TSV = ROOT / "ru" / "strings.tsv"
 UI2_JSON = ROOT / "ru" / "ui2.json"
+
+# Embedded font resources that have to carry Cyrillic before the strings can be
+# displayed.  The files are produced by tools/merge_cyrillic.py.
+FONT_DIR = ROOT / "build" / "fonts"
+FONT_RESOURCES = (
+    "INFO_BARLOW_CONDENSED_SEMIBOLD",
+    "INFO_INTER_MEDIUM",
+    "INFO_INTER_REGULAR",
+    "INFO_INTER_SEMIBOLD",
+)
 
 IMAGE_BASE = 0x180000000
 
@@ -118,17 +134,24 @@ HEAP_BASES = {
 
 
 def encode_text(s):
-    """Encode a display string as UTF-8.
+    """Encode a display string as Windows-1251.
 
-    The mod's captions are handed to the engine as plain ``const char*`` /
-    ``string_view`` text; the engine performs the codepoint -> glyph mapping
-    internally.  Only ``.lng`` localization files store text as charmap indices,
-    and the loader decodes those itself, so the charmap must not be applied here.
+    The mod hands its captions to the engine as plain ``char*`` /
+    ``string_view``, and the engine widens them with the system ANSI code page
+    (``MultiByteToWideChar(CP_ACP, ...)``).  On a Russian Windows that is
+    code page 1251, so the bytes must be Cyrillic CP1251, not UTF-8 (UTF-8 is
+    shown as ``.notdef`` boxes) and not the compact ``.lng`` charmap indices
+    (those are decoded by the localization loader only, and the renderer shows
+    them as raw Latin letters).  ASCII is a subset of CP1251, so format strings
+    keep working.
     """
     try:
-        enc = s.encode("utf-8")
-    except UnicodeEncodeError as ex:
-        raise ValueError(f"{s!r}: cannot encode as UTF-8 ({ex})") from ex
+        enc = s.encode("cp1251")
+    except UnicodeEncodeError as exc:
+        raise ValueError(
+            f"{s!r}: character {s[exc.start]!r} (U+{ord(s[exc.start]):04X}) "
+            "cannot be encoded as CP1251"
+        ) from None
     if 0 in enc:
         raise ValueError(f"encoded {s!r} contains a NUL byte")
     return enc
@@ -170,6 +193,66 @@ class PE:
         if e < 0:
             return None
         return bytes(self.data[o:e]).decode("latin-1")
+
+
+def resource_leaves(pe, data):
+    """Yield the PE resource leaves as (path, data-entry offset, rva, size)."""
+    # PE32+: data directories start after the 112-byte optional header
+    rsrc_rva = struct.unpack_from("<I", data, pe.opt + 112 + 8 * 2)[0]
+    if not rsrc_rva:
+        return
+    base = pe.rva_to_off(rsrc_rva)
+    if base is None:
+        raise RuntimeError("resource directory is not mapped")
+
+    def name_at(off):
+        ln = struct.unpack_from("<H", data, base + off)[0]
+        raw = data[base + off + 2 : base + off + 2 + ln * 2]
+        return raw.decode("utf-16-le")
+
+    def walk(dir_off, path):
+        n_named, n_id = struct.unpack_from("<HH", data, base + dir_off + 12)
+        for i in range(n_named + n_id):
+            e = base + dir_off + 16 + i * 8
+            name_field, data_field = struct.unpack_from("<II", data, e)
+            nm = (
+                name_at(name_field & 0x7FFFFFFF)
+                if name_field & 0x80000000
+                else f"#{name_field}"
+            )
+            if data_field & 0x80000000:
+                yield from walk(data_field & 0x7FFFFFFF, path + [nm])
+            else:
+                de = base + data_field
+                rva, size = struct.unpack_from("<II", data, de)
+                yield path + [nm], de, rva, size
+
+    yield from walk(0, [])
+
+
+def collect_fonts(pe, data, errors):
+    """Load the patched fonts and match them with their RCDATA entries."""
+    leaves = list(resource_leaves(pe, data))
+    out = []
+    for name in FONT_RESOURCES:
+        path = FONT_DIR / f"{name}.ttf"
+        if not path.exists():
+            errors.append(
+                f"font {name}: {path} is missing (run tools/merge_cyrillic.py first)"
+            )
+            continue
+        found = [leaf for leaf in leaves if name in leaf[0]]
+        if len(found) != 1:
+            errors.append(
+                f"font {name}: expected one resource entry, found {len(found)}"
+            )
+            continue
+        blob = path.read_bytes()
+        if blob[:4] not in (b"\x00\x01\x00\x00", b"true", b"OTTO"):
+            errors.append(f"font {name}: {path} is not a TrueType/OpenType file")
+            continue
+        out.append(dict(name=name, blob=blob, entry=found[0][1]))
+    return out
 
 
 def parse_tsv(path):
@@ -504,6 +587,11 @@ def main():
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true", help="verify the patched output")
+    ap.add_argument(
+        "--no-fonts",
+        action="store_true",
+        help="keep the original Latin-only fonts (Cyrillic shows as boxes)",
+    )
     args = ap.parse_args()
 
     data = Path(args.src).read_bytes()
@@ -631,6 +719,7 @@ def main():
 
     ui2 = load_ui2(data, pe, errors)
     extras = resolve_extras(md, data, pe, funcs, errors)
+    fonts = [] if args.no_fonts else collect_fonts(pe, data, errors)
 
     if errors:
         for x in errors:
@@ -724,7 +813,19 @@ def main():
     while len(stubs) % 16:
         stubs.append(0xCC)
 
-    payload = bytes(strings_blob) + bytes(stubs)
+    # ---- append the Cyrillic fonts --------------------------------------------
+    font_blob = bytearray()
+    font_off = {}
+    font_base = len(strings_blob) + len(stubs)
+    for f in fonts:
+        while len(font_blob) % 16:
+            font_blob.append(0)
+        font_off[f["name"]] = font_base + len(font_blob)
+        font_blob += f["blob"]
+    while len(font_blob) % 16:
+        font_blob.append(0)
+
+    payload = bytes(strings_blob) + bytes(stubs) + bytes(font_blob)
 
     # ---- collect byte patches -------------------------------------------------
     patches = []
@@ -803,6 +904,10 @@ def main():
             continue
         patches.append((foff, b"\xff"))
 
+    for f in fonts:
+        rva = new_va + font_off[f["name"]]
+        patches.append((f["entry"], struct.pack("<II", rva, len(f["blob"]))))
+
     if errors:
         for x in errors:
             print("ERROR", x)
@@ -837,6 +942,18 @@ def main():
         print(f"validator patches: {len(VALIDATORS)}")
         print(f"new section .ru @ RVA {new_va:#x}, payload {len(payload)} bytes")
         print(f"strings {len(strings_blob)} bytes, stubs {len(stubs)} bytes")
+        if fonts:
+            print(
+                f"fonts: {len(fonts)} patched, "
+                f"{sum(len(f['blob']) for f in fonts)} bytes"
+            )
+            for f in fonts:
+                print(
+                    f"  font {f['name']} {len(f['blob'])}B -> RVA "
+                    f"{new_va + font_off[f['name']]:#x}"
+                )
+        else:
+            print("fonts: kept as shipped (--no-fonts)")
         for sp in stub_plans:
             e = sp["text"]
             print(
@@ -909,6 +1026,8 @@ def main():
             new_va,
             patches,
             md,
+            fonts,
+            font_off,
         )
     return 0
 
@@ -925,10 +1044,13 @@ def verify(
     new_va,
     patches,
     md,
+    fonts=(),
+    font_off=None,
 ):
     data = Path(path).read_bytes()
     pe = PE(data)
     errors = []
+    font_off = font_off or {}
 
     for e in entries:
         if e["skip"]:
@@ -1010,6 +1132,17 @@ def verify(
         lo = pe.rva_to_off(si.address + si.size - 4)
         if struct.unpack_from("<I", pe.data, lo)[0] != len(sp["enc"]):
             errors.append(f"{si.address:#x}: length constant not updated")
+
+    for f in fonts:
+        o = pe.rva_to_off(new_va + font_off[f["name"]])
+        if o is None:
+            errors.append(f"font {f['name']}: payload is not mapped")
+            continue
+        if bytes(pe.data[o : o + len(f["blob"])]) != f["blob"]:
+            errors.append(f"font {f['name']}: bytes mismatch in .ru")
+        rva, size = struct.unpack_from("<II", pe.data, f["entry"])
+        if (rva, size) != (new_va + font_off[f["name"]], len(f["blob"])):
+            errors.append(f"font {f['name']}: resource data entry not repointed")
 
     if errors:
         for x in errors:

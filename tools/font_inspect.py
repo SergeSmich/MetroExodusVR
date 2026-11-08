@@ -5,7 +5,10 @@ import sys
 import zlib
 from pathlib import Path
 
-EXE = r"F:\SteamLibrary\steamapps\common\Metro Exodus\MetroExodus.exe"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+
+EXE = str(re_paths.EXE)
 ROOT = Path(__file__).resolve().parent.parent
 
 

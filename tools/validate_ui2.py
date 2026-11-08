@@ -18,10 +18,36 @@ TABLES = {
 }
 
 
+def lng_charmap(path):
+    """Charmap chunk of a Metro .lng (chunk id 1 holds u16 codepoints)."""
+    d = Path(path).read_bytes()
+    p = 0
+    while p + 8 <= len(d):
+        cid, size = struct.unpack_from("<II", d, p)
+        p += 8
+        if cid == 1:
+            return list(struct.unpack("<%dH" % (size // 2), d[p : p + size]))
+        p += size
+    raise ValueError(f"{path}: no charmap chunk")
+
+
 def load_charmap():
-    d = (ROOT / "work" / "stable_ru.lng").read_bytes()
-    count = struct.unpack_from("<I", d, 0x10)[0]
-    return set(struct.unpack_from("<%dH" % count, d, 0x14))
+    """Codepoints the localization charmap can express.
+
+    ``ru/charmap.txt`` is authoritative (it is what the patcher encodes with);
+    ``work/stable_ru.lng`` is only a cross-check when it is present.
+    """
+    cps = set(A.load_charmap())
+    lng = ROOT / "work" / "stable_ru.lng"
+    if lng.is_file():
+        from_lng = set(lng_charmap(lng))
+        if from_lng != cps:
+            print(
+                f"NOTE: ru/charmap.txt and {lng.name} disagree "
+                f"({len(cps ^ from_lng)} codepoints); the patcher uses ru/charmap.txt"
+            )
+            cps |= from_lng
+    return cps
 
 
 def check_text(label, orig, ru, charmap, errors):
@@ -53,10 +79,29 @@ def read_slot(d, pe, slot):
 
 def main():
     data = json.loads((ROOT / "ru" / "ui2.json").read_text(encoding="utf-8"))
-    d = Path(A.DEFAULT_SRC).read_bytes()
-    pe = A.PE(d)
     charmap = load_charmap()
     errors = []
+    tables_only = not Path(A.DEFAULT_SRC).is_file()
+    if tables_only:
+        print(f"NOTE: {A.DEFAULT_SRC} not found; checking ru/ui2.json without the DLL")
+        for table, entries in data.items():
+            for e in entries:
+                label = f"{table}[{e['index']}]"
+                if "ru_title" in e:
+                    check_text(
+                        label + ".title", e["orig_title"], e["ru_title"], charmap, errors
+                    )
+                check_text(label, e["orig"], e["ru"], charmap, errors)
+        if errors:
+            for x in errors:
+                print("ERROR", x)
+            return 1
+        print("ui2 ok")
+        for table, entries in data.items():
+            print(f"  {table}: {len(entries)} entries")
+        return 0
+    d = Path(A.DEFAULT_SRC).read_bytes()
+    pe = A.PE(d)
 
     for table, entries in data.items():
         base, stride, body_off, title_off = TABLES[table]

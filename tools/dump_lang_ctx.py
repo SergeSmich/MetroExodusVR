@@ -2,7 +2,7 @@
 
 import os
 
-BASE = r"F:\SteamLibrary\steamapps\common\Metro Exodus"
+BASE = str(re_paths.GAME)
 
 files = [
     r"patch_03.vfs1",

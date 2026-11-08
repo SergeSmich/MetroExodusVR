@@ -6,11 +6,17 @@ Also accepts a substring: --str tcmap
 
 import struct
 import sys
+from pathlib import Path
 
 from capstone import CS_ARCH_X86, CS_MODE_64, Cs
 from capstone.x86 import X86_OP_MEM, X86_REG_RIP
 
-EXE = r"F:\SteamLibrary\steamapps\common\Metro Exodus\MetroExodus.exe"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.EXE))
+
+
+EXE = str(re_paths.EXE)
 
 
 def load():

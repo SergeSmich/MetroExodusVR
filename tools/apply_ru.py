@@ -5,15 +5,16 @@ The original English literals are left untouched: some of them are shared with
 engine / graphics code (FSR, DLSS, TAA, OFF, NORMAL, VISIBLE, LEFT/RIGHT HAND).
 Instead a new PE section ``.ru`` is appended that holds
 
-  * the translated strings as Windows-1251 (the engine widens the mod's
-    ``char*`` captions with the system ANSI code page, CP1251 on a Russian
-    Windows), and
+  * the translated strings as **localization charmap indices** -- the engine
+    has no code-page step in its UI text path, a caption's bytes are used
+    directly as glyph indices of the font that draws it, and for the game's
+    own font that mapping is the charmap of ``stable_ru.lng`` (see
+    ``ru/ENCODING_NOTES.md``), and
   * small copy stubs for strings that the mod builds inline on the stack.
 
-The embedded TTF fonts (RCDATA resources) are replaced as well: the shipped
-Inter/Barlow files only cover Latin, so the Russian glyphs are merged in by
-``tools/merge_cyrillic.py`` before patching.  The resource data entries are
-repointed at the new font payloads in the ``.ru`` section.
+The embedded Inter/Barlow TTF resources belong to the ImGui plaque and are left
+alone (``--fonts`` restores the old replacement).  ``--encoding cp1251`` still
+builds the old Windows-1251 variant for comparison.
 
 Per display site inside the mod's menu code (0xB0000-0xBFFFF):
 
@@ -25,8 +26,11 @@ Per display site inside the mod's menu code (0xB0000-0xBFFFF):
     back after the replaced region.
 
 Finally the "captions are printable ASCII" validators are relaxed
-(``cmp al,0x5e`` -> ``cmp al,0xff``) so that the high CP1251 Cyrillic
-bytes pass.
+(``cmp al,0x5e`` -> ``cmp al,0xff``) so that the high charmap indices pass.
+
+Before anything is written, every payload is decoded back through the charmap
+and compared with the source text, so a wrong encoding fails the build instead
+of producing silent mojibake.
 
 Usage:
     python tools/apply_ru.py --check
@@ -53,7 +57,9 @@ from capstone.x86 import (
 )
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SRC = ROOT / "work" / "0.9.0" / "versions" / "0.9.0" / "MetroExodusVR.dll"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+DEFAULT_SRC = re_paths.DLL
 DEFAULT_OUT = ROOT / "build" / "MetroExodusVR.dll"
 STRINGS_TSV = ROOT / "ru" / "strings.tsv"
 UI2_JSON = ROOT / "ru" / "ui2.json"
@@ -133,28 +139,96 @@ HEAP_BASES = {
 }
 
 
-def encode_text(s):
-    """Encode a display string as Windows-1251.
+CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-    The mod hands its captions to the engine as plain ``char*`` /
-    ``string_view``, and the engine widens them with the system ANSI code page
-    (``MultiByteToWideChar(CP_ACP, ...)``).  On a Russian Windows that is
-    code page 1251, so the bytes must be Cyrillic CP1251, not UTF-8 (UTF-8 is
-    shown as ``.notdef`` boxes) and not the compact ``.lng`` charmap indices
-    (those are decoded by the localization loader only, and the renderer shows
-    them as raw Latin letters).  ASCII is a subset of CP1251, so format strings
-    keep working.
+# The 4A engine adds no code-page step to its UI text path: a caption's bytes
+# are used directly as glyph indices of the font that draws it, and for the
+# game's own font that mapping is exactly the localization charmap of
+# ``stable_<locale>.lng`` (271 entries for RU).  So the mod's captions carry
+# *charmap indices* -- the same bytes the game's ``.lng`` strings are stored
+# as -- not CP1251 and not UTF-8.  ``--encoding cp1251`` rebuilds the old way
+# for comparison.
+ENCODING = "charmap"
+
+
+def load_charmap(path=None):
+    """Return the localization charmap: index -> Unicode codepoint."""
+    p = Path(path) if path else CHARMAP_TXT
+    cps = [
+        int(line.strip()[2:], 16)
+        for line in p.read_text(encoding="utf-8").splitlines()
+        if line.strip().startswith("U+")
+    ]
+    if not cps:
+        raise ValueError(f"{p}: no charmap entries")
+    return cps
+
+
+_CHARMAP = None
+
+
+def charmap():
+    global _CHARMAP
+    if _CHARMAP is None:
+        _CHARMAP = load_charmap()
+    return _CHARMAP
+
+
+def encode_text(s):
+    """Encode a display string as localization charmap indices.
+
+    Indices below 0xE0 are one byte.  Larger indices use the two byte form of
+    the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
+    ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
     """
-    try:
-        enc = s.encode("cp1251")
-    except UnicodeEncodeError as exc:
-        raise ValueError(
-            f"{s!r}: character {s[exc.start]!r} (U+{ord(s[exc.start]):04X}) "
-            "cannot be encoded as CP1251"
-        ) from None
-    if 0 in enc:
+    if ENCODING == "cp1251":
+        try:
+            enc = s.encode("cp1251")
+        except UnicodeEncodeError as exc:
+            raise ValueError(
+                f"{s!r}: character {s[exc.start]!r} (U+{ord(s[exc.start]):04X}) "
+                "cannot be encoded as CP1251"
+            ) from None
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
+    rev = {}
+    for i, cp in enumerate(charmap()):
+        rev.setdefault(cp, i)
+    out = bytearray()
+    for ch in s:
+        i = rev.get(ord(ch))
+        if i is None:
+            raise ValueError(
+                f"{s!r}: character {ch!r} (U+{ord(ch):04X}) is not in the "
+                "localization charmap (see ru/charmap.txt)"
+            )
+        if i < 0xE0:
+            out.append(i)
+        else:
+            v = i + 0xDE41
+            out += bytes((v // 255, v % 255))
+    if 0 in out:
         raise ValueError(f"encoded {s!r} contains a NUL byte")
-    return enc
+    return bytes(out)
+
+
+def decode_text(enc):
+    """Inverse of encode_text (used by the self-check)."""
+    cps = charmap()
+    out = []
+    i = 0
+    while i < len(enc):
+        ci = enc[i]
+        if ci < 0xE0:
+            out.append(chr(cps[ci]))
+            i += 1
+        else:
+            idx = ci * 255 + enc[i + 1] - 0xDE41
+            out.append(chr(cps[idx]))
+            i += 2
+    return "".join(out)
 
 
 class PE:
@@ -507,6 +581,7 @@ def load_ui2(data, pe, errors):
                         parts.append(
                             dict(
                                 slot=slot + title_off,
+                                text=item["ru_title"],
                                 enc=encode_text(item["ru_title"]),
                                 has_len=True,
                             )
@@ -527,6 +602,7 @@ def load_ui2(data, pe, errors):
                     parts.append(
                         dict(
                             slot=slot + body_off,
+                            text=item["ru"],
                             enc=encode_text(item["ru"]),
                             has_len=is_sv,
                         )
@@ -581,6 +657,71 @@ def resolve_extras(md, data, pe, funcs, errors):
     return out
 
 
+def check_encodings(entries, ui2, extras):
+    """Round-trip every payload through the engine's glyph lookup.
+
+    ``encode_text`` maps text to charmap indices; the engine maps those indices
+    back to glyphs through the font of the menu.  A mismatch here means the
+    caption would render as other characters (or as .notdef).
+    """
+    errors = []
+
+    def check(label, text, enc):
+        try:
+            back = decode_text(enc)
+        except (IndexError, ValueError) as exc:
+            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
+            return
+        if back != text:
+            errors.append(f"{label}: {text!r} would render as {back!r}")
+        if 0 in enc:
+            errors.append(f"{label}: encoded text contains a NUL")
+
+    for e in entries:
+        if not e["skip"]:
+            check(f"{e['addr']:#x}", e["ru"], e["enc"])
+    for it in ui2:
+        for part in it["parts"]:
+            check(
+                f"{it['table']}[{it['index']}] @{part['slot']:#x}",
+                part.get("text", ""),
+                part["enc"],
+            )
+    for ex in extras:
+        check(f"extra {ex['info']['site']:#x}", ex["ru"], ex["enc"])
+    if len(charmap()) <= 0xE0:
+        errors.append(
+            f"charmap has {len(charmap())} entries; the two-byte form starts at 0xE0"
+        )
+    return errors
+
+
+def report_limits(entries, ui2, extras):
+    """Print how close the encoded payloads come to the engine's limits."""
+    groups = (
+        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
+        ("table entries", [p for it in ui2 for p in it["parts"]]),
+        ("extras", extras),
+    )
+    print(f"encoding: {ENCODING}")
+    for label, items in groups:
+        if not items:
+            continue
+        longest = max(len(it["enc"]) for it in items)
+        over = sum(1 for it in items if len(it["enc"]) > MAX_LEN)
+        print(
+            f"  {label}: {len(items)} payloads, longest {longest} bytes, "
+            f"{over} over {MAX_LEN:#x}"
+        )
+    inline = [e for e in entries if not e["skip"] and e["inline"]]
+    if inline:
+        tight = sum(1 for e in inline if len(e["enc"]) <= SSO_CAP)
+        print(
+            f"  inline std::string sites: {len(inline)} entries, "
+            f"{tight} fit the {SSO_CAP:#x} byte SSO buffer"
+        )
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(DEFAULT_SRC))
@@ -588,21 +729,46 @@ def main():
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true", help="verify the patched output")
     ap.add_argument(
+        "--fonts",
+        action="store_true",
+        help=(
+            "also replace the embedded Inter/Barlow RCDATA fonts; they belong to "
+            "the ImGui plaque only and play no part in the native menu text"
+        ),
+    )
+    ap.add_argument(
         "--no-fonts",
         action="store_true",
-        help="keep the original Latin-only fonts (Cyrillic shows as boxes)",
+        help=argparse.SUPPRESS,  # kept for old build scripts; now the default
+    )
+    ap.add_argument(
+        "--encoding",
+        choices=("charmap", "cp1251"),
+        default="charmap",
+        help=(
+            "how the translation is written into .ru: 'charmap' (default) emits "
+            "the localization charmap indices the engine's glyph lookup expects;"
+            " 'cp1251' rebuilds the old Windows-1251 build"
+        ),
     )
     args = ap.parse_args()
 
-    data = Path(args.src).read_bytes()
+    global ENCODING
+    ENCODING = args.encoding
+
+    src = Path(args.src)
+    if not src.is_file():
+        print(f"ERROR source DLL not found: {src}")
+        print("      unpack the mod release there, or pass --src/--out")
+        print("      (tables-only checks: tools/charmap_codec.py, tools/validate_ui2.py)")
+        return 1
+    data = src.read_bytes()
     pe = PE(data)
     md = Cs(CS_ARCH_X86, CS_MODE_64)
     md.detail = True
 
-    plan = json.loads((ROOT / "work" / "plan.json").read_text(encoding="utf-8"))
-    funcs = json.loads((ROOT / "work" / "funcs.json").read_text(encoding="utf-8"))[
-        "funcs"
-    ]
+    plan = json.loads(re_paths.PLAN.read_text(encoding="utf-8"))
+    funcs = json.loads(re_paths.FUNCS.read_text(encoding="utf-8"))["funcs"]
     plan_by_addr = {e["addr"]: e for e in plan}
 
     rows = parse_tsv(STRINGS_TSV)
@@ -719,7 +885,17 @@ def main():
 
     ui2 = load_ui2(data, pe, errors)
     extras = resolve_extras(md, data, pe, funcs, errors)
-    fonts = [] if args.no_fonts else collect_fonts(pe, data, errors)
+    # The embedded Inter/Barlow files are RCDATA resources that only the ImGui
+    # plaque asks for by name; the native menu uses the game's own fonts, so
+    # Cyrillic in them is useless.  Off unless asked for with --fonts.
+    fonts = []
+    if args.fonts:
+        fonts = collect_fonts(pe, data, errors)
+
+    # ---- the bytes must mean the same thing to the engine ---------------------
+    if not errors:
+        errors.extend(check_encodings(entries, ui2, extras))
+        report_limits(entries, ui2, extras)
 
     if errors:
         for x in errors:

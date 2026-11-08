@@ -5,9 +5,15 @@ import re, json
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_REG_RIP
 
-ROOT = r"F:\Projects\MetroExodusVR"
-DLL = ROOT + r"\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
-PE = json.load(open(ROOT + r"\work\pe_analysis.json", encoding="utf-8"))
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+ROOT = str(re_paths.ROOT)
+DLL = str(re_paths.DLL)
+PE = json.load(open(str(re_paths.PE_ANALYSIS), encoding="utf-8"))
 data = open(DLL, "rb").read()
 sections = PE["sections"]
 
@@ -37,7 +43,7 @@ FMT = re.compile(r"^[^A-Za-zА-Яа-я]*$|^\{[^}]*\}[%PX0-9.:]*$")
 
 def parse_sites():
     out = []
-    for ln in open(ROOT + r"\work\caption_sites.txt", encoding="utf-8"):
+    for ln in open(str(re_paths.WORK / "caption_sites.txt"), encoding="utf-8"):
         m = re.match(r"^0x([0-9A-Fa-f]+)\s+(\S+)\s+(.*?)\s+\|\s+(.*)$", ln.rstrip("\n"))
         if not m:
             continue

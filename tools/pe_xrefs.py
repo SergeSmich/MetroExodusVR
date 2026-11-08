@@ -14,8 +14,15 @@ import pefile
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_OP_IMM, X86_REG_RIP
 
-DLL = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
-OUT = r"F:\Projects\MetroExodusVR\work\xrefs.json"
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+
+DLL = str(re_paths.DLL)
+OUT = str(re_paths.XREFS)
 
 pe = pefile.PE(DLL, fast_load=True)
 image_base = pe.OPTIONAL_HEADER.ImageBase

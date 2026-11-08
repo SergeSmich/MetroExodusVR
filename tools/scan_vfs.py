@@ -40,7 +40,7 @@ def scan(path, needles, max_mb=4096, chunk=8 << 20):
 
 
 if __name__ == "__main__":
-    base = r"F:\SteamLibrary\steamapps\common\Metro Exodus"
+    base = str(re_paths.GAME)
     files = sys.argv[1:]
     if not files:
         files = [

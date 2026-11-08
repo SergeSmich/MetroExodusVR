@@ -160,6 +160,13 @@ and pins the mod version so an automatic update cannot replace the translated
 DLL. See [`ru/README.md`](ru/README.md) for installation and update
 instructions (in Russian).
 
+The engine does not decode menu text with a code page: caption bytes *are*
+glyph indices of the font. The fork therefore writes the translation as
+localization charmap indices (the same encoding as the game's `.lng` files).
+How that was established, the code map and the remaining font-side work are in
+[`ru/ENCODING_NOTES.md`](ru/ENCODING_NOTES.md); `tools/charmap_codec.py`
+re-checks the codec against the real `.lng` without needing the DLL.
+
 ## Uninstallation
 
 To uninstall simply remove the files you extracted during the installation.

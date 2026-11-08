@@ -9,7 +9,7 @@ import os
 import struct
 import sys
 
-BASE = r"F:\SteamLibrary\steamapps\common\Metro Exodus"
+BASE = str(re_paths.GAME)
 PATCHES = [
     "patch.vfx0",
     "patch_00.vfx",

@@ -2,10 +2,15 @@ import json, sys
 from capstone import *
 from capstone.x86 import *
 
-ROOT = r"F:\Projects\MetroExodusVR"
-DLL = ROOT + r"\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
-PE = json.load(open(ROOT + r"\work\pe_analysis.json", encoding="utf-8"))
-FUNCS = json.load(open(ROOT + r"\work\funcs.json", encoding="utf-8"))["funcs"]
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+ROOT = str(re_paths.ROOT)
+DLL = str(re_paths.DLL)
+PE = json.load(open(str(re_paths.PE_ANALYSIS), encoding="utf-8"))
+FUNCS = json.load(open(str(re_paths.FUNCS), encoding="utf-8"))["funcs"]
 data = open(DLL, "rb").read()
 
 

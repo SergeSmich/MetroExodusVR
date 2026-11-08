@@ -1,5 +1,9 @@
 import json, re, sys, os
 
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+
 
 def extract(path, min_len=3):
     with open(path, "rb") as f:
@@ -11,10 +15,10 @@ def extract(path, min_len=3):
 
 
 def main():
-    path = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
+    path = str(re_paths.DLL)
     data, strings = extract(path)
     print("total strings:", len(strings))
-    out_json = r"F:\Projects\MetroExodusVR\work\strings_ascii.json"
+    out_json = str(re_paths.WORK / "strings_ascii.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(strings, f, ensure_ascii=False, indent=0)
     print("saved", out_json)

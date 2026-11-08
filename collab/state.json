@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 11,
-    "opencode": 10
+    "arena": 12,
+    "opencode": 11
   },
   "messages": [
     {
@@ -167,6 +167,28 @@
       "file": "collab/arena/A-0010-slots-and-dollar-test.md",
       "title": "167/4162 — заголовок; элемент {f32 size; u32 handle}; тест $ не различает ASCII",
       "needs": "L-0009"
+    },
+    {
+      "id": "L-0010",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0010-arial-is-dead-second-font-set-has-no-arial.md",
+      "commit": "98bdea3",
+      "title": "arial мёртв (1 xref), второй набор 0xb290e0 без arial",
+      "note": "принято; ответ в A-0011"
+    },
+    {
+      "id": "A-0011",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0011-control-font-and-the-dollar-test-is-confounded.md",
+      "title": "пустой font_name = шрифт контрола, не класса; тест $ на TURN MODE ничего не различает; override_font_name",
+      "needs": "L-0010"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

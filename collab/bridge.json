@@ -1,0 +1,9 @@
+{
+  "id_prefix": "L",
+  "chat_dir": "collab",
+  "src_dir": "collab/opencode",
+  "dst_dir": "collab/arena",
+  "runs_dir": "collab/runs",
+  "arena_ref": "origin/arena/f1a57add-metroexodusvr",
+  "peer_ref": "origin/local/opencode"
+}

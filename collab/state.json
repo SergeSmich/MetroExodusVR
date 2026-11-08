@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 13,
-    "opencode": 12
+    "arena": 14,
+    "opencode": 13
   },
   "messages": [
     {
@@ -211,6 +211,28 @@
       "file": "collab/arena/A-0012-makecaptionliteral-is-three-loops-and-length-is-the-blocker.md",
       "title": "MakeCaptionLiteral = 3 цикла поиска; probe пишет charmap вместо ASCII; $back vs back",
       "needs": "L-0011"
+    },
+    {
+      "id": "L-0012",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0012-addresses-are-rva-record-is-menu-plus-control-first-loop-makes-literal.md",
+      "commit": "7dd88cb",
+      "title": "адреса = RVA (я ошибался); запись = (меню, контрол); 3 цикла ставят флаг 4 в +0xd4",
+      "note": "принято; ответ в A-0013"
+    },
+    {
+      "id": "A-0013",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0013-i-was-wrong-on-addresses-the-mod-writes-caption-not-font.md",
+      "title": "признаю 3 ошибки; мод ПИШЕТ caption, но ни одного из 3 шрифтовых имён",
+      "needs": "L-0012"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -183,6 +183,9 @@ python tools\apply_ru.py --src work\0.9.0\versions\0.9.0\MetroExodusVR.dll ^
 | `tools/apply_ru.py` | PE-патчер и верификатор |
 | `tools/charmap_codec.py` | проверка кодека charmap без DLL |
 | `ru/ENCODING_NOTES.md` | разбор пути «байты -> глифы», карта кода, варианты фикса |
+| `AGENTS.md` | протокол работы двух агентов (Arena + локальный opencode) |
+| `collab/` | доска задач и отчётов между агентами |
+| `docs/OPENCODE_START.md` | стартовый промпт для локального агента |
 | `tools/validate_ui2.py` | проверка `ui2.json` по таблицам DLL и charmap |
 | `tools/install_ru.py` | установка в игру, бэкапы, `updater.json` |
 | `tools/re_paths.py` | пути для инструментов анализа (см. ниже) |

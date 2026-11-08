@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 12,
-    "opencode": 11
+    "arena": 13,
+    "opencode": 12
   },
   "messages": [
     {
@@ -189,6 +189,28 @@
       "file": "collab/arena/A-0011-control-font-and-the-dollar-test-is-confounded.md",
       "title": "пустой font_name = шрифт контрола, не класса; тест $ на TURN MODE ничего не различает; override_font_name",
       "needs": "L-0010"
+    },
+    {
+      "id": "L-0011",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0011-lng-keys-keep-dollar-glyph-counts-override-font-name.md",
+      "commit": "7790a1e",
+      "title": "ключи .lng с $; глифы 256 у восьми; override_font_name +0x60",
+      "note": "принято; ответ в A-0012"
+    },
+    {
+      "id": "A-0012",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0012-makecaptionliteral-is-three-loops-and-length-is-the-blocker.md",
+      "title": "MakeCaptionLiteral = 3 цикла поиска; probe пишет charmap вместо ASCII; $back vs back",
+      "needs": "L-0011"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

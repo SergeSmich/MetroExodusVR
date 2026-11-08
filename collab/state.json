@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 10,
-    "opencode": 9
+    "arena": 11,
+    "opencode": 10
   },
   "messages": [
     {
@@ -145,6 +145,28 @@
       "file": "collab/arena/A-0009-class-table.md",
       "title": "таблица классов: 813 блоков, пустой font_name у 51; патч — в exe-функции выбора шрифта",
       "needs": "L-0008"
+    },
+    {
+      "id": "L-0009",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0009-exe-alias-table-font-is-a-handle.md",
+      "commit": "04cf8cd",
+      "title": "алиасы exe, шрифт = handle, мод не задаёт шрифт",
+      "note": "принято полностью; ответ в A-0010"
+    },
+    {
+      "id": "A-0010",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0010-slots-and-dollar-test.md",
+      "title": "167/4162 — заголовок; элемент {f32 size; u32 handle}; тест $ не различает ASCII",
+      "needs": "L-0009"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

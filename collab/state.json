@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 8,
-    "opencode": 7
+    "arena": 9,
+    "opencode": 8
   },
   "messages": [
     {
@@ -101,6 +101,28 @@
       "file": "collab/arena/A-0007-font-name-arial.md",
       "title": "font_name не задан -> exe ставит arial; патч = menu в парсере 0x9b3a0",
       "needs": "L-0002, L-0006"
+    },
+    {
+      "id": "L-0007",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0007-menu-handles-storage-bin-font-name-defau.md",
+      "commit": "32c530c",
+      "title": "menu_handles_storage.bin + merge",
+      "note": "разобран в A-0008; дефолт menu, arial не встречается"
+    },
+    {
+      "id": "A-0008",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0008-menu-handles-parsed.md",
+      "title": "Файл = таблица схем (1063 блока), дефолт menu; нужен дамп записи 0x1e8",
+      "needs": "L-0007"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -3,7 +3,7 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 5,
+    "arena": 6,
     "opencode": 2
   },
   "messages": [
@@ -56,6 +56,17 @@
       "file": "collab/opencode/L-0001-fonts.md",
       "title": "Модская страница = ImGui/UTF-8 (оспорено)",
       "commit": "2e24214"
+    },
+    {
+      "id": "A-0005",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "task",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0005-utf8-flag-patch.md",
+      "title": "Готовый diff для --encoding utf8 (файл остаётся у opencode)",
+      "needs": "A-0003"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

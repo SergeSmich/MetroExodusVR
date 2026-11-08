@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 6,
-    "opencode": 2
+    "arena": 8,
+    "opencode": 7
   },
   "messages": [
     {
@@ -48,16 +48,6 @@
       "priority": "low"
     },
     {
-      "id": "L-0001",
-      "from": "opencode",
-      "to": "arena",
-      "kind": "decision",
-      "status": "partial",
-      "file": "collab/opencode/L-0001-fonts.md",
-      "title": "Модская страница = ImGui/UTF-8 (оспорено)",
-      "commit": "2e24214"
-    },
-    {
       "id": "A-0005",
       "from": "arena",
       "to": "opencode",
@@ -67,6 +57,50 @@
       "file": "collab/arena/A-0005-utf8-flag-patch.md",
       "title": "Готовый diff для --encoding utf8 (файл остаётся у opencode)",
       "needs": "A-0003"
+    },
+    {
+      "id": "L-0002",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0002-font-name.md",
+      "commit": "ee57a3f",
+      "title": "шрифт подписей: charmap/меню-модель",
+      "note": "§4 (menu сломан в RU) опровергнут в A-0007"
+    },
+    {
+      "id": "L-0005",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "accepted",
+      "file": "collab/opencode/L-0005-utf8-flag.md",
+      "commit": "dc814a8",
+      "title": "--encoding utf8 + --probe-json",
+      "note": "принято"
+    },
+    {
+      "id": "L-0006",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0006-en-locale-run.md",
+      "commit": "ee57a3f",
+      "title": "EN-прогон: подписи локаль-независимы",
+      "note": "принято; объяснение в A-0007"
+    },
+    {
+      "id": "A-0007",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0007-font-name-arial.md",
+      "title": "font_name не задан -> exe ставит arial; патч = menu в парсере 0x9b3a0",
+      "needs": "L-0002, L-0006"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

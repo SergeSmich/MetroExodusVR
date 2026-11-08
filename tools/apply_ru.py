@@ -5,8 +5,9 @@ The original English literals are left untouched: some of them are shared with
 engine / graphics code (FSR, DLSS, TAA, OFF, NORMAL, VISIBLE, LEFT/RIGHT HAND).
 Instead a new PE section ``.ru`` is appended that holds
 
-  * the translated strings, re-encoded with the engine's compact code point
-    encoding (ASCII: 1 byte, everything else: 2 bytes), and
+  * the translated strings as UTF-8 (the encoding the engine's text API expects
+    from the mod; the 2-byte ``.lng`` glyph-index scheme is a container format
+    that the localization loader decodes itself), and
   * small copy stubs for strings that the mod builds inline on the stack.
 
 Per display site inside the mod's menu code (0xB0000-0xBFFFF):
@@ -19,7 +20,7 @@ Per display site inside the mod's menu code (0xB0000-0xBFFFF):
     back after the replaced region.
 
 Finally the two "captions are printable ASCII" validators are relaxed
-(``cmp al,0x5e`` -> ``cmp al,0xff``) so that 2-byte Cyrillic code points pass.
+(``cmp al,0x5e`` -> ``cmp al,0xff``) so that UTF-8 Cyrillic bytes pass.
 
 Usage:
     python tools/apply_ru.py --check
@@ -117,22 +118,20 @@ HEAP_BASES = {
 
 
 def encode_text(s):
-    """Encode text with the engine's compact code point encoding."""
-    out = bytearray()
-    for ch in s:
-        cp = ord(ch)
-        if cp < 0xE0:
-            out.append(cp)
-        else:
-            v = cp + 0xDE41
-            b, rest = divmod(v, 255)
-            if b > 0xFF:
-                raise ValueError(f"code point U+{cp:04X} out of range")
-            out.append(b)
-            out.append(rest)
-    if 0 in out:
+    """Encode a display string as UTF-8.
+
+    The mod's captions are handed to the engine as plain ``const char*`` /
+    ``string_view`` text; the engine performs the codepoint -> glyph mapping
+    internally.  Only ``.lng`` localization files store text as charmap indices,
+    and the loader decodes those itself, so the charmap must not be applied here.
+    """
+    try:
+        enc = s.encode("utf-8")
+    except UnicodeEncodeError as ex:
+        raise ValueError(f"{s!r}: cannot encode as UTF-8 ({ex})") from ex
+    if 0 in enc:
         raise ValueError(f"encoded {s!r} contains a NUL byte")
-    return bytes(out)
+    return enc
 
 
 class PE:

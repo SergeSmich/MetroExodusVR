@@ -8,6 +8,10 @@ Reads content.vfx (+ patch_*.vfx) and prints package names + matching paths.
 import os
 import struct
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
 
 BASE = str(re_paths.GAME)
 PATCHES = [

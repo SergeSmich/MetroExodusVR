@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
-"""Apply Russian translations to MetroExodusVR.dll (native menu captions).
+"""Apply Russian translations to MetroExodusVR.dll (mod UI strings).
 
 The original English literals are left untouched: some of them are shared with
 engine / graphics code (FSR, DLSS, TAA, OFF, NORMAL, VISIBLE, LEFT/RIGHT HAND).
 Instead a new PE section ``.ru`` is appended that holds
 
-  * the translated strings as **localization charmap indices** -- the engine
-    has no code-page step in its UI text path, a caption's bytes are used
-    directly as glyph indices of the font that draws it, and for the game's
-    own font that mapping is the charmap of ``stable_ru.lng`` (see
-    ``ru/ENCODING_NOTES.md``), and
+  * the translated strings in the encoding selected by ``--encoding`` (see
+    below), and
   * small copy stubs for strings that the mod builds inline on the stack.
 
-The embedded Inter/Barlow TTF resources belong to the ImGui plaque and are left
-alone (``--fonts`` restores the old replacement).  ``--encoding cp1251`` still
-builds the old Windows-1251 variant for comparison.
+Which encoding the native menu reads is still an open question between two
+models (``ru/ENCODING_NOTES.md`` sections 6-7, ``collab/arena/A-0003``):
+localization charmap indices (verified on the ``.lng`` files) versus UTF-8
+(the mod also ships ImGui 1.92.8, but that path is confirmed only for the
+links plaque).  ``--encoding`` therefore keeps all three builds available:
+
+  * ``charmap`` (default) -- charmap indices, one byte below ``0xE0``;
+  * ``utf8`` -- plain UTF-8, the ImGui experiment;
+  * ``cp1251`` -- the oldest comparison build.
+
+The four TTF files embedded in the DLL as RCDATA resources (``INFO_INTER_*``
+and ``INFO_BARLOW_CONDENSED_SEMIBOLD``) are Latin-only as shipped, so
+``--fonts`` (on by default) replaces them with the Cyrillic builds from
+``build/fonts/`` made by ``tools/merge_cyrillic.py``; ``--no-fonts`` keeps the
+shipped files.
 
 Per display site inside the mod's menu code (0xB0000-0xBFFFF):
 
@@ -26,11 +35,12 @@ Per display site inside the mod's menu code (0xB0000-0xBFFFF):
     back after the replaced region.
 
 Finally the "captions are printable ASCII" validators are relaxed
-(``cmp al,0x5e`` -> ``cmp al,0xff``) so that the high charmap indices pass.
+(``cmp al,0x5e`` -> ``cmp al,0xff``) so that UTF-8 bytes and high charmap
+indices both pass.
 
-Before anything is written, every payload is decoded back through the charmap
-and compared with the source text, so a wrong encoding fails the build instead
-of producing silent mojibake.
+Before anything is written, every payload is encoded and decoded back and
+compared with the source text, so a wrong encoding fails the build instead of
+producing silent mojibake.
 
 Usage:
     python tools/apply_ru.py --check
@@ -59,6 +69,7 @@ from capstone.x86 import (
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import re_paths  # noqa: E402
+
 DEFAULT_SRC = re_paths.DLL
 DEFAULT_OUT = ROOT / "build" / "MetroExodusVR.dll"
 STRINGS_TSV = ROOT / "ru" / "strings.tsv"
@@ -141,13 +152,13 @@ HEAP_BASES = {
 
 CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-# The 4A engine adds no code-page step to its UI text path: a caption's bytes
-# are used directly as glyph indices of the font that draws it, and for the
-# game's own font that mapping is exactly the localization charmap of
-# ``stable_<locale>.lng`` (271 entries for RU).  So the mod's captions carry
-# *charmap indices* -- the same bytes the game's ``.lng`` strings are stored
-# as -- not CP1251 and not UTF-8.  ``--encoding cp1251`` rebuilds the old way
-# for comparison.
+# Three encodings are kept on purpose, because the model is still open:
+#   ``charmap`` (default) -- localization charmap indices, the model that
+#       ``ru/ENCODING_NOTES.md`` verified byte-for-byte on the .lng files;
+#   ``utf8``  -- the ImGui hypothesis (bytes decoded as UTF-8 codepoints);
+#   ``cp1251`` -- the oldest experiment, kept for comparison.
+# ``charmap`` stays the default until the A-0003 section 5 experiment says
+# otherwise (A-0005: ENCODING stays ``charmap`` by default).
 ENCODING = "charmap"
 
 
@@ -175,11 +186,16 @@ def charmap():
 
 
 def encode_text(s):
-    """Encode a display string as localization charmap indices.
+    """Encode a display string for the mod's UI.
 
-    Indices below 0xE0 are one byte.  Larger indices use the two byte form of
-    the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
+    ``charmap`` (default): localization charmap indices.  Indices below 0xE0
+    are one byte.  Larger indices use the two byte form of the ``.lng``
+    format: ``value = index + 0xDE41``, bytes ``value // 255`` and
     ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
+
+    ``utf8``: plain UTF-8, the ImGui experiment build.
+
+    ``cp1251``: the oldest experiment.
     """
     if ENCODING == "cp1251":
         try:
@@ -189,6 +205,12 @@ def encode_text(s):
                 f"{s!r}: character {s[exc.start]!r} (U+{ord(s[exc.start]):04X}) "
                 "cannot be encoded as CP1251"
             ) from None
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
+    if ENCODING == "utf-8":
+        enc = s.encode("utf-8")
         if 0 in enc:
             raise ValueError(f"encoded {s!r} contains a NUL byte")
         return enc
@@ -216,6 +238,9 @@ def encode_text(s):
 
 def decode_text(enc):
     """Inverse of encode_text (used by the self-check)."""
+    if ENCODING in ("cp1251", "utf-8"):
+        codec = "cp1251" if ENCODING == "cp1251" else "utf-8"
+        return enc.decode(codec)
     cps = charmap()
     out = []
     i = 0
@@ -658,19 +683,19 @@ def resolve_extras(md, data, pe, funcs, errors):
 
 
 def check_encodings(entries, ui2, extras):
-    """Round-trip every payload through the engine's glyph lookup.
+    """Round-trip every payload through the same decoder the UI uses.
 
-    ``encode_text`` maps text to charmap indices; the engine maps those indices
-    back to glyphs through the font of the menu.  A mismatch here means the
-    caption would render as other characters (or as .notdef).
+    For UTF-8 that is ImGui's own decoder; in the legacy charmap mode it is the
+    engine's glyph lookup.  A mismatch here means the caption would render as
+    other characters (or as .notdef).
     """
     errors = []
 
     def check(label, text, enc):
         try:
             back = decode_text(enc)
-        except (IndexError, ValueError) as exc:
-            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
+        except (IndexError, ValueError, UnicodeDecodeError) as exc:
+            errors.append(f"{label}: encoded bytes are not valid ({exc})")
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
@@ -678,7 +703,11 @@ def check_encodings(entries, ui2, extras):
             errors.append(f"{label}: encoded text contains a NUL")
 
     for e in entries:
-        if not e["skip"]:
+        if e.get("probe"):
+            # raw byte probe: the payload is not text, only the NUL rule applies
+            if 0 in e["enc"]:
+                errors.append(f"{e['addr']:#x}: probe payload contains a NUL")
+        elif not e["skip"]:
             check(f"{e['addr']:#x}", e["ru"], e["enc"])
     for it in ui2:
         for part in it["parts"]:
@@ -689,7 +718,7 @@ def check_encodings(entries, ui2, extras):
             )
     for ex in extras:
         check(f"extra {ex['info']['site']:#x}", ex["ru"], ex["enc"])
-    if len(charmap()) <= 0xE0:
+    if ENCODING == "charmap" and len(charmap()) <= 0xE0:
         errors.append(
             f"charmap has {len(charmap())} entries; the two-byte form starts at 0xE0"
         )
@@ -699,7 +728,10 @@ def check_encodings(entries, ui2, extras):
 def report_limits(entries, ui2, extras):
     """Print how close the encoded payloads come to the engine's limits."""
     groups = (
-        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
+        (
+            f"captions (string_view, {MAX_LEN:#x})",
+            [e for e in entries if not e["skip"]],
+        ),
         ("table entries", [p for it in ui2 for p in it["parts"]]),
         ("extras", extras),
     )
@@ -730,37 +762,52 @@ def main():
     ap.add_argument("--verify", action="store_true", help="verify the patched output")
     ap.add_argument(
         "--fonts",
+        dest="fonts",
         action="store_true",
+        default=True,
         help=(
-            "also replace the embedded Inter/Barlow RCDATA fonts; they belong to "
-            "the ImGui plaque only and play no part in the native menu text"
+            "replace the embedded Inter/Barlow RCDATA fonts with the Cyrillic "
+            "builds from build/fonts/; the links plaque's ImGui draws with them, "
+            "so this is on by default"
         ),
     )
     ap.add_argument(
         "--no-fonts",
-        action="store_true",
-        help=argparse.SUPPRESS,  # kept for old build scripts; now the default
+        dest="fonts",
+        action="store_false",
+        help="keep the fonts as shipped (Latin-only) - rollback for comparison",
     )
     ap.add_argument(
         "--encoding",
-        choices=("charmap", "cp1251"),
+        choices=("charmap", "cp1251", "utf8"),
         default="charmap",
         help=(
             "how the translation is written into .ru: 'charmap' (default) emits "
-            "the localization charmap indices the engine's glyph lookup expects;"
-            " 'cp1251' rebuilds the old Windows-1251 build"
+            "the localization charmap indices the engine's glyph lookup expects; "
+            "'cp1251' rebuilds the old Windows-1251 build; 'utf8' is the "
+            "experiment build for the ImGui hypothesis"
+        ),
+    )
+    ap.add_argument(
+        "--probe-json",
+        default=None,
+        help=(
+            "JSON object {caption RVA hex: hex payload} that replaces the encoded "
+            "bytes of those captions with arbitrary raw bytes (diagnostic builds)"
         ),
     )
     args = ap.parse_args()
 
     global ENCODING
-    ENCODING = args.encoding
+    ENCODING = "utf-8" if args.encoding == "utf8" else args.encoding
 
     src = Path(args.src)
     if not src.is_file():
         print(f"ERROR source DLL not found: {src}")
         print("      unpack the mod release there, or pass --src/--out")
-        print("      (tables-only checks: tools/charmap_codec.py, tools/validate_ui2.py)")
+        print(
+            "      (tables-only checks: tools/charmap_codec.py, tools/validate_ui2.py)"
+        )
         return 1
     data = src.read_bytes()
     pe = PE(data)
@@ -819,6 +866,32 @@ def main():
         errors.append(
             f"{addr:#x}: {plan_by_addr[addr]['text']!r} has no translation row"
         )
+
+    # ---- optional raw byte probe ---------------------------------------------
+    # ``--probe-json {"0x49f694": "312e8081.."}`` replaces the encoded payload
+    # of the given captions with arbitrary bytes, so a VR run can show what the
+    # native renderer does with byte values (no text round-trip).
+    if args.probe_json:
+        probe = json.loads(Path(args.probe_json).read_text(encoding="utf-8"))
+        by_addr = {e["addr"]: e for e in entries}
+        for key, hexbytes in probe.items():
+            addr = int(key, 16)
+            e = by_addr.get(addr)
+            if e is None:
+                errors.append(f"probe {key}: not a caption address")
+                continue
+            enc = bytes.fromhex(hexbytes)
+            if len(enc) > MAX_LEN:
+                errors.append(f"probe {key}: {len(enc)} bytes > {MAX_LEN:#x}")
+                continue
+            if 0 in enc:
+                errors.append(f"probe {key}: payload contains a NUL")
+                continue
+            e["enc"] = enc
+            e["probe"] = True
+            print(
+                f"probe {addr:#x} ({e['orig']!r}): {' '.join(f'{b:02x}' for b in enc)}"
+            )
 
     if errors:
         for x in errors:
@@ -885,9 +958,9 @@ def main():
 
     ui2 = load_ui2(data, pe, errors)
     extras = resolve_extras(md, data, pe, funcs, errors)
-    # The embedded Inter/Barlow files are RCDATA resources that only the ImGui
-    # plaque asks for by name; the native menu uses the game's own fonts, so
-    # Cyrillic in them is useless.  Off unless asked for with --fonts.
+    # The embedded Inter/Barlow files are RCDATA resources that ImGui loads for
+    # the mod's own page; the strings are UTF-8 and these fonts must carry the
+    # Cyrillic glyphs, so replacing them is part of the normal build.
     fonts = []
     if args.fonts:
         fonts = collect_fonts(pe, data, errors)

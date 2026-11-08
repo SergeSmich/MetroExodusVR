@@ -1,0 +1,89 @@
+﻿func: (38272, 38340)
+  0x9580  mov qword ptr [rsp + 8], rbx          
+  0x9585  push rdi                              
+  0x9586  sub rsp, 0x20                         
+  0x958A  xor eax, eax                          
+  0x958C  xorps xmm0, xmm0                      
+  0x958F  movups xmmword ptr [rcx], xmm0        
+  0x9592  mov qword ptr [rcx + 0x10], rax       
+  0x9596  mov rdi, rcx                          
+  0x9599  mov qword ptr [rcx + 0x18], rax       
+  0x959D  mov rbx, rdx                          
+  0x95A0  mov rcx, rdx                          
+  0x95A3  call 0x465520                           ; sub_465520
+  0x95A8  mov r8, rax                           
+  0x95AB  mov rdx, rbx                          
+  0x95AE  mov rcx, rdi                          
+  0x95B1  call 0x8dd0                             ; sub_8DD0
+  0x95B6  mov rbx, qword ptr [rsp + 0x30]       
+  0x95BB  mov rax, rdi                          
+  0x95BE  add rsp, 0x20                         
+  0x95C2  pop rdi                               
+  0x95C3  ret                                   
+  0x95C4  int3                                  
+  0x95C5  int3                                  
+  0x95C6  int3                                  
+  0x95C7  int3                                  
+  0x95C8  int3                                  
+  0x95C9  int3                                  
+  0x95CA  int3                                  
+  0x95CB  int3                                  
+  0x95CC  int3                                  
+  0x95CD  int3                                  
+  0x95CE  int3                                  
+  0x95CF  int3                                  
+  0x95D0  push rbx                              
+  0x95D2  sub rsp, 0x20                         
+  0x95D6  mov rbx, rcx                          
+  0x95D9  mov rax, rdx                          
+  0x95DC  lea rcx, [rip + 0x47decd]             
+  0x95E3  xorps xmm0, xmm0                      
+  0x95E6  lea rdx, [rbx + 8]                    
+  0x95EA  mov qword ptr [rbx], rcx              
+  0x95ED  lea rcx, [rax + 8]                    
+  0x95F1  movups xmmword ptr [rdx], xmm0        
+  0x95F4  call 0x414720                           ; sub_414720
+  0x95F9  lea rax, [rip + 0x47dee0]             
+  0x9600  mov qword ptr [rbx], rax              
+  0x9603  mov rax, rbx                          
+  0x9606  add rsp, 0x20                         
+  0x960A  pop rbx                               
+  0x960B  ret                                   
+  0x960C  int3                                  
+  0x960D  int3                                  
+  0x960E  int3                                  
+  0x960F  int3                                  
+  0x9610  lea rax, [rip + 0x47ded9]               ; 'bad allocation'
+  0x9617  mov qword ptr [rcx + 0x10], 0         
+  0x961F  mov qword ptr [rcx + 8], rax          
+  0x9623  lea rax, [rip + 0x47deb6]             
+  0x962A  mov qword ptr [rcx], rax              
+  0x962D  mov rax, rcx                          
+  0x9630  ret                                   
+  0x9631  int3                                  
+  0x9632  int3                                  
+  0x9633  int3                                  
+  0x9634  int3                                  
+  0x9635  int3                                  
+  0x9636  int3                                  
+  0x9637  int3                                  
+  0x9638  int3                                  
+  0x9639  int3                                  
+  0x963A  int3                                  
+  0x963B  int3                                  
+  0x963C  int3                                  
+  0x963D  int3                                  
+  0x963E  int3                                  
+  0x963F  int3                                  
+  0x9640  push rbx                              
+  0x9642  sub rsp, 0x20                         
+  0x9646  mov rbx, rcx                          
+  0x9649  mov rax, rdx                          
+  0x964C  lea rcx, [rip + 0x47de5d]             
+  0x9653  xorps xmm0, xmm0                      
+  0x9656  lea rdx, [rbx + 8]                    
+  0x965A  mov qword ptr [rbx], rcx              
+  0x965D  lea rcx, [rax + 8]                    
+  0x9661  movups xmmword ptr [rdx], xmm0        
+  0x9664  call 0x414720                           ; sub_414720
+  0x9669  lea rax, [rip + 0x47de98]             

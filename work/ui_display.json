@@ -1,0 +1,4290 @@
+[
+{
+"rva": 4808832,
+"text": "head_flashlight"
+},
+{
+"rva": 4808848,
+"text": "mask_filter"
+},
+{
+"rva": 4808864,
+"text": "head_gas_mask"
+},
+{
+"rva": 4808880,
+"text": "over_shoulder_weapon"
+},
+{
+"rva": 4808904,
+"text": "over_shoulder_backpack"
+},
+{
+"rva": 4808928,
+"text": "right_chest_map"
+},
+{
+"rva": 4808944,
+"text": "left_chest_lighter"
+},
+{
+"rva": 4808968,
+"text": "right_shoulder_medkit"
+},
+{
+"rva": 4808992,
+"text": "left_back_binoculars"
+},
+{
+"rva": 4809016,
+"text": "right_back_charger"
+},
+{
+"rva": 4809040,
+"text": "left_hip_gas_mask"
+},
+{
+"rva": 4809064,
+"text": "left_hip_filter"
+},
+{
+"rva": 4809080,
+"text": "left_hip_tape"
+},
+{
+"rva": 4809096,
+"text": "forehead_night_vision"
+},
+{
+"rva": 4809120,
+"text": "visor_night_vision"
+},
+{
+"rva": 4809144,
+"text": "left_forearm_watch"
+},
+{
+"rva": 4809168,
+"text": "right_shoulder_holster"
+},
+{
+"rva": 4809192,
+"text": "right_hip_holster"
+},
+{
+"rva": 4809216,
+"text": "left_shoulder_holster"
+},
+{
+"rva": 4809240,
+"text": "belt_throwables"
+},
+{
+"rva": 4809256,
+"text": "belt_throwables_select"
+},
+{
+"rva": 4810688,
+"text": "area_visuals.mutex"
+},
+{
+"rva": 4810712,
+"text": "action_press.mutex"
+},
+{
+"rva": 4810736,
+"text": "[input] action {} (#{}) never reached the inventory"
+},
+{
+"rva": 4810792,
+"text": "[script input] action {} stopped: taken by the script of {}"
+},
+{
+"rva": 4810864,
+"text": "[input] the inventory answered action {} outside the player's update"
+},
+{
+"rva": 4810936,
+"text": "carried out"
+},
+{
+"rva": 4810952,
+"text": "refused"
+},
+{
+"rva": 4810960,
+"text": "[input] action {} (#{}) {} by the inventory"
+},
+{
+"rva": 4811008,
+"text": "[input] gameplay never took action {}"
+},
+{
+"rva": 4811048,
+"text": "script_input.mutex"
+},
+{
+"rva": 4811072,
+"text": "wpn_down"
+},
+{
+"rva": 4811088,
+"text": "wpn_reload"
+},
+{
+"rva": 4811104,
+"text": "the weapon keys"
+},
+{
+"rva": 4811120,
+"text": "[script input] {} held by the script of {}"
+},
+{
+"rva": 4811168,
+"text": "[script input] {} free again"
+},
+{
+"rva": 4812128,
+"text": "wpn_fire"
+},
+{
+"rva": 4812144,
+"text": "padRIGHT_TRIGGER"
+},
+{
+"rva": 4812168,
+"text": "wpn_aim"
+},
+{
+"rva": 4812176,
+"text": "padLEFT_TRIGGER"
+},
+{
+"rva": 4812192,
+"text": "jump"
+},
+{
+"rva": 4812200,
+"text": "padRIGHT_SHOULDER"
+},
+{
+"rva": 4812224,
+"text": "crouch_toggle"
+},
+{
+"rva": 4812240,
+"text": "padLEFT_SHOULDER"
+},
+{
+"rva": 4812260,
+"text": "sprint"
+},
+{
+"rva": 4812272,
+"text": "padLEFT_THUMB"
+},
+{
+"rva": 4812288,
+"text": "wpn_fast_knife"
+},
+{
+"rva": 4812304,
+"text": "padRIGHT_THUMB"
+},
+{
+"rva": 4812320,
+"text": "rui"
+},
+{
+"rva": 4812324,
+"text": "padX"
+},
+{
+"rva": 4812336,
+"text": "wpn_dynamite"
+},
+{
+"rva": 4812352,
+"text": "padY"
+},
+{
+"rva": 4812360,
+"text": "medkit"
+},
+{
+"rva": 4812368,
+"text": "padA"
+},
+{
+"rva": 4812376,
+"text": "wpn_next"
+},
+{
+"rva": 4812388,
+"text": "padB"
+},
+{
+"rva": 4812396,
+"text": "filter"
+},
+{
+"rva": 4812408,
+"text": "padDPAD_UP"
+},
+{
+"rva": 4812424,
+"text": "facepalm"
+},
+{
+"rva": 4812440,
+"text": "padDPAD_DOWN"
+},
+{
+"rva": 4812456,
+"text": "wpn_light"
+},
+{
+"rva": 4812472,
+"text": "padDPAD_LEFT"
+},
+{
+"rva": 4812488,
+"text": "time"
+},
+{
+"rva": 4812496,
+"text": "padDPAD_RIGHT"
+},
+{
+"rva": 4812512,
+"text": "map"
+},
+{
+"rva": 4812520,
+"text": "padBACK"
+},
+{
+"rva": 4812528,
+"text": "lighter"
+},
+{
+"rva": 4812536,
+"text": "inventory"
+},
+{
+"rva": 4812552,
+"text": "binoculars"
+},
+{
+"rva": 4812568,
+"text": "nightvision"
+},
+{
+"rva": 4812584,
+"text": "bind_gamepad "
+},
+{
+"rva": 4812600,
+"text": "gamepad_custom 1"
+},
+{
+"rva": 4812624,
+"text": "[input] gamepad defaults at start-up: the game's, until the profile load"
+},
+{
+"rva": 4812704,
+"text": "[input] gamepad defaults: the VR layout v{}, custom layout on"
+},
+{
+"rva": 4812768,
+"text": "[input] gamepad defaults: the console is missing; the game's own defaults stay"
+},
+{
+"rva": 4812848,
+"text": "gamepad_custom_defaults"
+},
+{
+"rva": 4812880,
+"text": "[input] gamepad layout: the console is missing; VR defaults not written"
+},
+{
+"rva": 4812952,
+"text": "config_save"
+},
+{
+"rva": 4812976,
+"text": "[input] gamepad layout: VR defaults v{} written over v{}, custom layout on"
+},
+{
+"rva": 4813056,
+"text": "VR GAMEPAD LAYOUT"
+},
+{
+"rva": 4813080,
+"text": "mevr_pad_layout"
+},
+{
+"rva": 4813096,
+"text": "gamepad custom defaults"
+},
+{
+"rva": 4813120,
+"text": "[input] gamepad layout: VR defaults v{}, written on first VR start"
+},
+{
+"rva": 4813200,
+"text": "[input] gamepad layout: not installed; the game's own layout stays"
+},
+{
+"rva": 4813344,
+"text": "[input] pad mode: held while the VR controllers play; the menu pointer is the mouse to the cursor and hover"
+},
+{
+"rva": 4813456,
+"text": "pad in use"
+},
+{
+"rva": 4813472,
+"text": "pad press check"
+},
+{
+"rva": 4813488,
+"text": "[input] pad mode: not installed; prompts follow the device in use"
+},
+{
+"rva": 4813560,
+"text": "[input] binding: cancelled with the menu control"
+},
+{
+"rva": 4813616,
+"text": "bind row press"
+},
+{
+"rva": 4813632,
+"text": "[input] binding: row hook unavailable; rebinding takes the menu meanings of the controls"
+},
+{
+"rva": 4813728,
+"text": "[input] combo for action {} let go of without control 0x{:X}: told as released"
+},
+{
+"rva": 4813808,
+"text": "gameplay listener release"
+},
+{
+"rva": 4813840,
+"text": "[input] combo release hook unavailable; a combo pressed by its button alone can leave the backpack's tentative press open"
+},
+{
+"rva": 4814160,
+"text": "m3\\000"
+},
+{
+"rva": 4814168,
+"text": "m3\\01_dead_moscow"
+},
+{
+"rva": 4814192,
+"text": "m3\\05_winter"
+},
+{
+"rva": 4814208,
+"text": "m3\\06_bridge"
+},
+{
+"rva": 4814224,
+"text": "m3\\06_spring"
+},
+{
+"rva": 4814240,
+"text": "m3\\07_yamantau"
+},
+{
+"rva": 4814256,
+"text": "m3\\08_desert"
+},
+{
+"rva": 4814272,
+"text": "m3\\08_summer"
+},
+{
+"rva": 4814288,
+"text": "m3\\12_valley"
+},
+{
+"rva": 4814304,
+"text": "m3\\12_autumn"
+},
+{
+"rva": 4814320,
+"text": "m3\\13_deadcity"
+},
+{
+"rva": 4814336,
+"text": "m3\\14_outro"
+},
+{
+"rva": 4814352,
+"text": "[preview] level {} is not in the preview: refused"
+},
+{
+"rva": 4814408,
+"text": "preview level gate"
+},
+{
+"rva": 4814432,
+"text": "[preview] only the main menu and the main campaign can load; the DLC levels are refused"
+},
+{
+"rva": 4814528,
+"text": "[preview] level gate unavailable; every level can load in this preview build"
+},
+{
+"rva": 4814616,
+"text": "virtual_gamepad.mutex"
+},
+{
+"rva": 4814640,
+"text": "xinput9_1_0.dll"
+},
+{
+"rva": 4814656,
+"text": "[input] the controllers play the game as its gamepad"
+},
+{
+"rva": 4814712,
+"text": "[input] the gamepad is the game's own again"
+},
+{
+"rva": 4814760,
+"text": "XInputGetState"
+},
+{
+"rva": 4814776,
+"text": "XInputSetState"
+},
+{
+"rva": 4814792,
+"text": "[input] the game does not import XInput as expected"
+},
+{
+"rva": 4814848,
+"text": "[input] could not redirect XInputGetState"
+},
+{
+"rva": 4814896,
+"text": "[input] could not redirect XInputSetState"
+},
+{
+"rva": 4814944,
+"text": "while held"
+},
+{
+"rva": 4814960,
+"text": "toggles"
+},
+{
+"rva": 4814976,
+"text": "[input] virtual gamepad installed (XInputGetState slot +0x{:X}); crouching {}"
+},
+{
+"rva": 4815088,
+"text": "[input] GetCursorPos could not be hooked ({}); the menu pointer is unavailable"
+},
+{
+"rva": 4815168,
+"text": "[input] menu pointer attached to the mouse device"
+},
+{
+"rva": 4815232,
+"text": "[input] the mouse device could not be hooked ({}); the menu pointer is unavailable"
+},
+{
+"rva": 4815320,
+"text": "hint_router.mutex"
+},
+{
+"rva": 4815340,
+"text": "_xbox"
+},
+{
+"rva": 4815352,
+"text": "[hints] {} not shown: the mask is off"
+},
+{
+"rva": 4815392,
+"text": "[hints] show {}"
+},
+{
+"rva": 4815408,
+"text": "[hints] closed by its action"
+},
+{
+"rva": 4815440,
+"text": "hint show"
+},
+{
+"rva": 4815456,
+"text": "[hints] hint show hook unavailable; hints keep their text"
+},
+{
+"rva": 4815520,
+"text": "hint hide"
+},
+{
+"rva": 4815536,
+"text": "delay fire"
+},
+{
+"rva": 4815552,
+"text": "[hints] hint hide hooks unavailable; hints keep their time"
+},
+{
+"rva": 4816072,
+"text": "<press:"
+},
+{
+"rva": 4816080,
+"text": "gasmask"
+},
+{
+"rva": 4816088,
+"text": "popup_equipment"
+},
+{
+"rva": 4816104,
+"text": "charger"
+},
+{
+"rva": 4816112,
+"text": "<xpad_guide_button>"
+},
+{
+"rva": 4816136,
+"text": "<xpad_guide_button_empty>"
+},
+{
+"rva": 4816168,
+"text": "<wpn_fire>"
+},
+{
+"rva": 4816184,
+"text": "<wpn_aim>"
+},
+{
+"rva": 4816200,
+"text": "<Press:"
+},
+{
+"rva": 4816208,
+"text": "Tap"
+},
+{
+"rva": 4816212,
+"text": "tap"
+},
+{
+"rva": 4816216,
+"text": "Hold"
+},
+{
+"rva": 4816224,
+"text": "hold"
+},
+{
+"rva": 4816232,
+"text": "Press"
+},
+{
+"rva": 4816240,
+"text": "press"
+},
+{
+"rva": 4816256,
+"text": "<grip_dominant>"
+},
+{
+"rva": 4816272,
+"text": "<grip_nondominant>"
+},
+{
+"rva": 4816296,
+"text": "<trigger_dominant>"
+},
+{
+"rva": 4816320,
+"text": "<trigger_nondominant>"
+},
+{
+"rva": 4816344,
+"text": "<nondominant>"
+},
+{
+"rva": 4816360,
+"text": "<dominant>"
+},
+{
+"rva": 4818496,
+"text": "$reload_easy_hint"
+},
+{
+"rva": 4818520,
+"text": "m3_bagpack_hint_popup"
+},
+{
+"rva": 4818544,
+"text": "m3_boat_hint"
+},
+{
+"rva": 4818560,
+"text": "m3_car_drive_hint"
+},
+{
+"rva": 4818584,
+"text": "m3_motorboat_drive_hint"
+},
+{
+"rva": 4818608,
+"text": "m3_radio_act_hint"
+},
+{
+"rva": 4818632,
+"text": "m3_radio_hint"
+},
+{
+"rva": 4818648,
+"text": "m3_special_slot_crossbow"
+},
+{
+"rva": 4818680,
+"text": "m3_vent_move_hint"
+},
+{
+"rva": 4818704,
+"text": "m3_weapon_fast_hint"
+},
+{
+"rva": 4818728,
+"text": "m3_weapon_special_slot"
+},
+{
+"rva": 4818752,
+"text": "m3_trolley_hint"
+},
+{
+"rva": 4818768,
+"text": "Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit."
+},
+{
+"rva": 4818904,
+"text": "m3_map_hint"
+},
+{
+"rva": 4818928,
+"text": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]"
+},
+{
+"rva": 4819008,
+"text": "m3_map_updated_hint"
+},
+{
+"rva": 4819032,
+"text": "m3_map_second_hint"
+},
+{
+"rva": 4819056,
+"text": "Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]"
+},
+{
+"rva": 4819152,
+"text": "m3_bagpack_hint"
+},
+{
+"rva": 4819168,
+"text": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]"
+},
+{
+"rva": 4819264,
+"text": "m3_bagpack_hint_upd"
+},
+{
+"rva": 4819288,
+"text": "m3_weapon_popup_hint"
+},
+{
+"rva": 4819312,
+"text": "Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]"
+},
+{
+"rva": 4819416,
+"text": "m3_pheumatics_upd"
+},
+{
+"rva": 4819440,
+"text": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>"
+},
+{
+"rva": 4819568,
+"text": "m3_pheumatics_upd_light"
+},
+{
+"rva": 4819600,
+"text": "Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>"
+},
+{
+"rva": 4819672,
+"text": "m3_flamethrower_upd"
+},
+{
+"rva": 4819696,
+"text": "m3_flamethrower_upd_light"
+},
+{
+"rva": 4819728,
+"text": "m3_wpn_down_hint"
+},
+{
+"rva": 4819752,
+"text": "Point your weapon down to lower it"
+},
+{
+"rva": 4819792,
+"text": "m3_wpn_down_hint_light"
+},
+{
+"rva": 4819816,
+"text": "Point your weapon down"
+},
+{
+"rva": 4819840,
+"text": "m3_wpn_down_sprint_hint"
+},
+{
+"rva": 4819864,
+"text": "To sprint further, point your weapon down"
+},
+{
+"rva": 4819912,
+"text": "m3_crouch_hint"
+},
+{
+"rva": 4819928,
+"text": "<Press:crouch_toggle> to crouch"
+},
+{
+"rva": 4819960,
+"text": "m3_weapon_jammed"
+},
+{
+"rva": 4819984,
+"text": "Weapon jammed! Pull the bolt[ or <press:rui>]"
+},
+{
+"rva": 4820032,
+"text": "m3_special_ammo_hint"
+},
+{
+"rva": 4820064,
+"text": "Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time"
+},
+{
+"rva": 4820160,
+"text": "m3_special_ammo_hint_popup"
+},
+{
+"rva": 4820192,
+"text": "Holding <popup_equipment>, press <rui>: your next reload loads the other ammo"
+},
+{
+"rva": 4820272,
+"text": "m3_special_ammo_hint_2"
+},
+{
+"rva": 4820304,
+"text": "Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time"
+},
+{
+"rva": 4820400,
+"text": "m3_secondary_hint_flame"
+},
+{
+"rva": 4820432,
+"text": "You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+},
+{
+"rva": 4820536,
+"text": "m3_secondary_hint_dynamite"
+},
+{
+"rva": 4820576,
+"text": "You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+},
+{
+"rva": 4820680,
+"text": "m3_secondary_hint_knife"
+},
+{
+"rva": 4820704,
+"text": "You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+},
+{
+"rva": 4820808,
+"text": "m3_secondary_hint"
+},
+{
+"rva": 4820832,
+"text": "Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+},
+{
+"rva": 4820920,
+"text": "m3_decoy_hint"
+},
+{
+"rva": 4820944,
+"text": "You found a decoy. Grab <grip_dominant> from the front of your belt"
+},
+{
+"rva": 4821016,
+"text": "m3_secondary_choose_hint"
+},
+{
+"rva": 4821048,
+"text": "bino_on_off"
+},
+{
+"rva": 4821072,
+"text": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]"
+},
+{
+"rva": 4821176,
+"text": "bino_on_off_popup"
+},
+{
+"rva": 4821200,
+"text": "$nightvision"
+},
+{
+"rva": 4821216,
+"text": "Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]"
+},
+{
+"rva": 4821312,
+"text": "$nightvision_popup"
+},
+{
+"rva": 4821336,
+"text": "m3_flashlight_hint"
+},
+{
+"rva": 4821360,
+"text": "Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]"
+},
+{
+"rva": 4821440,
+"text": "m3_charger_hint_2_upd"
+},
+{
+"rva": 4821472,
+"text": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]"
+},
+{
+"rva": 4821560,
+"text": "m3_charger_hint_2_popup"
+},
+{
+"rva": 4821584,
+"text": "m3_charger_hint_2_upd_light"
+},
+{
+"rva": 4821616,
+"text": "m3_lighter_hint"
+},
+{
+"rva": 4821632,
+"text": "Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]"
+},
+{
+"rva": 4821736,
+"text": "m3_lighter_hint_popup"
+},
+{
+"rva": 4821760,
+"text": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]"
+},
+{
+"rva": 4821840,
+"text": "m3_lighter_hint_easy"
+},
+{
+"rva": 4821864,
+"text": "m3_lighter_hint_popup_easy"
+},
+{
+"rva": 4821896,
+"text": "$medkit_easy_hint"
+},
+{
+"rva": 4821920,
+"text": "Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]"
+},
+{
+"rva": 4822040,
+"text": "m3_rad_watch_hint"
+},
+{
+"rva": 4822064,
+"text": "Check the radiation detector on your left wrist"
+},
+{
+"rva": 4822112,
+"text": "m3_rad_watch_hint_light"
+},
+{
+"rva": 4822136,
+"text": "Radiation detector: check your left wrist"
+},
+{
+"rva": 4822184,
+"text": "m3_gasmask_hint_upd"
+},
+{
+"rva": 4822208,
+"text": "Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]"
+},
+{
+"rva": 4822320,
+"text": "m3_hint_ingame_gasmask_filter_easy"
+},
+{
+"rva": 4822368,
+"text": "Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]"
+},
+{
+"rva": 4822448,
+"text": "m3_hint_ingame_gasmask_filter_upd"
+},
+{
+"rva": 4822496,
+"text": "Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]"
+},
+{
+"rva": 4822584,
+"text": "m3_gasmask_wipe_hint"
+},
+{
+"rva": 4822608,
+"text": "Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]"
+},
+{
+"rva": 4822680,
+"text": "m3_gasmask_wipe_hint_light"
+},
+{
+"rva": 4822712,
+"text": "Wipe: rub the visor with an open hand[, or <press:facepalm>]"
+},
+{
+"rva": 4822776,
+"text": "m3_gasmask_quick_repair"
+},
+{
+"rva": 4822800,
+"text": "Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]"
+},
+{
+"rva": 4822928,
+"text": "m3_gasmask_quick_repair_easy"
+},
+{
+"rva": 4822960,
+"text": "Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]"
+},
+{
+"rva": 4823056,
+"text": "diary_open_hint"
+},
+{
+"rva": 4823072,
+"text": "New note - read it in the pause menu"
+},
+{
+"rva": 4823112,
+"text": "diary_open_hint_xbox"
+},
+{
+"rva": 4823136,
+"text": "postcard_open_hint"
+},
+{
+"rva": 4823160,
+"text": "New postcard - watch it in the pause menu"
+},
+{
+"rva": 4823208,
+"text": "postcard_open_hint_xbox"
+},
+{
+"rva": 4823232,
+"text": "m3_photo_mode_hint"
+},
+{
+"rva": 4823256,
+"text": "m3_charger_pump"
+},
+{
+"rva": 4823272,
+"text": "Pump the charger: <wpn_fire>"
+},
+{
+"rva": 4823304,
+"text": "m3_melee_hint"
+},
+{
+"rva": 4823320,
+"text": "Melee attack: <wpn_fast_knife>"
+},
+{
+"rva": 4823352,
+"text": "m3_melee_hint_light"
+},
+{
+"rva": 4823376,
+"text": "Melee: <wpn_fast_knife>"
+},
+{
+"rva": 4823400,
+"text": "mevr_vr_hints_menu"
+},
+{
+"rva": 4823424,
+"text": "list_box"
+},
+{
+"rva": 4823440,
+"text": "hints_menu"
+},
+{
+"rva": 4823456,
+"text": "diary_menu"
+},
+{
+"rva": 4823472,
+"text": "default"
+},
+{
+"rva": 4823480,
+"text": "btn_hints"
+},
+{
+"rva": 4823496,
+"text": "btn_mevr_vr_hints"
+},
+{
+"rva": 4823520,
+"text": "VR HINTS"
+},
+{
+"rva": 4823536,
+"text": "btn_photomode"
+},
+{
+"rva": 4824000,
+"text": "Basics"
+},
+{
+"rva": 4824016,
+"text": "PAUSE MENU\n\n<tab>Press the menu button or right trackpad.\n\nRECENTER\n\n<tab>Hold the menu button.\n\nVR SETTINGS\n\n<tab>In the main or pause menu, click Options, then VR. Allows configuring VR-specific settings and the mod's behavior.\n\n"
+},
+{
+"rva": 4824248,
+"text": "Movement"
+},
+{
+"rva": 4824272,
+"text": "WALKING\n\n<tab>Move your left thumbstick (<stick_left>) in the direction you want to go.\n\nTURNING\n\n<tab>Press or hold <xpad_right_thumb_left> or <xpad_right_thumb_right> to turn in the desired direction. You can switch between snap and smooth turning in Options - VR - Movement.\n\nRUNNING\n\n<tab>Double-tap <sprint> and keep holding it.\n\nJUMPING\n\n<tab>To jump, press <jump>.\n\nCROUCHING\n\n<tab><Press:crouch_toggle>, or crouch in real life. You can change crouching options in Options - VR - Movement.\n\n"
+},
+{
+"rva": 4824776,
+"text": "Interactions"
+},
+{
+"rva": 4824800,
+"text": "INTERACTIONS\n\n<tab>To interact with world objects (e.g. doors, ladders) or perform an action (e.g. take loot, grab/swap weapon), reach out with either hand and grip (<grip_dominant> or <grip_nondominant>).\n\n<tab>In some cases you will be offered a choice (e.g. lethal vs non-lethal takedowns, take/swap weapon or just take its parts) - in such cases you can choose by either gripping with that hand (<grip_dominant> or <grip_nondominant>) or pressing/holding a trigger (<trigger_dominant> or <trigger_nondominant>).\n\nQTEs\n\n<tab>Throughout the game you will encounter quick-time events. During them - depending on your game's settings - you will have to press, hold or quickly tap the <rui> button.\n\n"
+},
+{
+"rva": 4825504,
+"text": "Weapons"
+},
+{
+"rva": 4825520,
+"text": "STORAGE\n\n<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:\n\n* main weapon - over <dominant> shoulder\n* secondary weapon - <dominant> hip\n* special weapon - over <nondominant> shoulder\n\nEQUIPPING\n\n<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.\n\nMODES / POSES\n\n<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.\n\nTHROWABLES\n\n<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you. Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]\n\nWEAPONS AND AMMO\n\n<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).\n\nMELEE\n\n<tab>Press <wpn_fast_knife>.\n\n"
+},
+{
+"rva": 4826760,
+"text": "Manual reloading"
+},
+{
+"rva": 4826784,
+"text": "MANUAL RELOADING\n\n<tab>Most weapons will require you to perform these actions with <trigger_nondominant>:\n\n* remove old magazine\n* grab a new magazine from the pouch (<nondominant> hip or chest) and insert it\n* optionally pull the bolt\n\nSome weapons might have special needs such as:\n\n* pushing the magazine through the weapon before you can take it out\n* pulling a lever to release the magazine or chamber a new slug\n* drawing the bow before inserting an arrow\n* pumping the pneumatic system (see below)\n\n<tab>If you're unsure what to do, enable PART HIGHLIGHTS in Options - VR - Weapons. It highlights the next part you need to work to reload the weapon.\n\nPNEUMATIC WEAPONS\n\n<tab>Tikhar, Helsing and Gatling need pressure. Pump manually with your <nondominant> hand: take the pump handle with <trigger_nondominant> and pump it back and forth; it lets go by itself when full. Or hold <rui> and tap <wpn_fire>.\n\nSPECIAL AMMUNITION\n\n<tab>Tikhar can fire Incendiary Ammunition and Helsing explosive bolts. With the weapon in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammunition; reload by hand as usual. Do it again to cancel, or later to switch back. The single-arrow Helsing switches at once, with the game's own reload.\n\nJAMMING\n\n<tab>Weapons in Metro Exodus can get jammed. Their condition affects how often that happens. To reduce the jamming rate, find a Workbench and clean your weapons. To unjam your weapon operate the bolt.\n\nAUTOMATIC RELOADS\n\n<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead."
+},
+{
+"rva": 4828424,
+"text": "Items and devices"
+},
+{
+"rva": 4828448,
+"text": "EQUIPPING GEAR\n\n<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.\n\nGEAR AREAS\n\n* chest:\n  * <dominant> - map\n  * <nondominant> - lighter\n* shoulders:\n  * over <dominant> - main weapon (<grip_dominant>)\n  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>)\n  * on <dominant> - medkit (<grip_nondominant>)\n* hips:\n  * <dominant> - secondary weapon (<grip_dominant>)\n  * <nondominant> - mask (<grip_nondominant>) or new ammo (<trigger_nondominant>)\n* lower back:\n  * <dominant> - charger (<grip_dominant>)\n  * <nondominant> - binoculars (<grip_nondominant>)\n* belt:\n  * front - throwables\n* forehead:\n  * flashlight (<trigger_nondominant>)\n  * night vision (<grip_dominant> - pull up or down)\n\n"
+},
+{
+"rva": 4829336,
+"text": "Gas mask"
+},
+{
+"rva": 4829360,
+"text": "GAS MASK\n\n<tab>The gas mask is usually located on your <nondominant> hip. To put it on you have to grab it (<grip_nondominant>) and bring it to your face. To take it off you have to grab it from your face (<grip_nondominant>), move it away and let it go.\n\nFILTERS\n\n<tab>When the mask is equipped and your filters can be changed, a new filter will be available for grabbing (<grip_nondominant>) at your <nondominant> hip. Once grabbed, move it close to where it sits on the mask and it will be replaced automatically.[ Alternatively <press:filter>.]\n\nWIPING\n\n<tab>Rub the visor with an open hand to wipe rain, blood or dirt off it.[ Alternatively <press:facepalm>.]\n\nFIXING CRACKS\n\n<tab>When your mask is cracked, a piece of tape will be available for grabbing (<grip_nondominant>) at your <nondominant> hip, in place of the filter. Once grabbed, bring it to the front of your visor and the cracks will be sealed. Let go of it anywhere else to put it back.[ Alternatively <press:facepalm>.]\n\n"
+},
+{
+"rva": 4830352,
+"text": "Medkit"
+},
+{
+"rva": 4830368,
+"text": "HEALING\n\n<tab>When you're hurt you will hear specific audio cues and see a red overlay around your field of view. To heal yourself (assuming you have any medkits left):\n\n1. grip and hold (<grip_nondominant>) at your <dominant> shoulder\n2. move it away from your body until you feel a pulse\n3. bring it back to your body - anywhere from above your shoulder down to your stomach - to inject\n\n<tab>Letting go before that puts it back unused.[ Alternatively <press:medkit>.]\n\n"
+},
+{
+"rva": 4830848,
+"text": "Flashlight and charger"
+},
+{
+"rva": 4830880,
+"text": "FLASHLIGHT\n\n<tab>To toggle the flashlight, press <trigger_nondominant> at your forehead[, or <press:wpn_light>].\n\nCHARGER\n\n<tab>To charge your batteries, grip (<grip_dominant>) at the <dominant> side of your lower back[, or <press:charger>]. Once equipped, pump it with <wpn_fire>.\n\n"
+},
+{
+"rva": 4831168,
+"text": "Map / journal"
+},
+{
+"rva": 4831184,
+"text": "MAP\n\n<tab>To equip the map, simply grip it (<grip_dominant>) at the <dominant> side of your chest[, or <press:map>].\n\nJOURNAL\n\n<tab>Once the map is equipped, flip the map over with your hands, or press <wpn_fire> to switch sides.\n\n"
+},
+{
+"rva": 4831416,
+"text": "Backpack / inventory"
+},
+{
+"rva": 4831440,
+"text": "OPENING BACKPACK\n\n<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder[, or <press:inventory>]. Once opened you can craft consumables/throwables and modify your weapons. Standard UI navigation rules apply - either use your controller's pointer and triggers or point away and press buttons as shown on screen.\n\n"
+},
+{
+"rva": 4831792,
+"text": "Binoculars and NV"
+},
+{
+"rva": 4831824,
+"text": "BINOCULARS\n\n<tab>Once you have binoculars, grip (<grip_nondominant>) at the <nondominant> side of your lower back[, or <press:binoculars>]. You can pass them between hands. To use them, bring them to your eyes. Zoom in with <wpn_fire> and out with <aim>.\n\nNIGHT VISION\n\n<tab>To equip night vision, grip (<grip_dominant>) above your forehead and pull them down in front of your eyes[, or <press:nightvision>]. To take them off, grip (<grip_dominant>) in front of your eyes and pull them back up[, or <press:nightvision> again].\n\n"
+},
+{
+"rva": 4832360,
+"text": "Weapon scopes"
+},
+{
+"rva": 4832384,
+"text": "<tab>To use weapon scopes simply bring them to your eye. You can configure related options in Options - VR - Scopes.\n\n"
+},
+{
+"rva": 4832504,
+"text": "Workbenches"
+},
+{
+"rva": 4832528,
+"text": "<tab>To use a workbench, reach out to it and grip (<grip_dominant> or <grip_nondominant>). Once in the workbench view use your controller's pointer and triggers or the buttons shown on screen to navigate the view.\n\n"
+},
+{
+"rva": 4832744,
+"text": "mevr_popup_menu"
+},
+{
+"rva": 4832760,
+"text": "message_menu"
+},
+{
+"rva": 4832776,
+"text": "message"
+},
+{
+"rva": 4832784,
+"text": "[popups] {}: {}"
+},
+{
+"rva": 4832800,
+"text": "btn_ok"
+},
+{
+"rva": 4832808,
+"text": "[popups] scene ended: '{}' on {}"
+},
+{
+"rva": 4832848,
+"text": "restart_warning"
+},
+{
+"rva": 4832864,
+"text": "btn_cancel"
+},
+{
+"rva": 4832880,
+"text": "mevr_popup_"
+},
+{
+"rva": 4832896,
+"text": "[popups] shown: {}"
+},
+{
+"rva": 4833000,
+"text": "mevr_reloads_{:x}"
+},
+{
+"rva": 4834656,
+"text": "welcome"
+},
+{
+"rva": 4834672,
+"text": "WELCOME\n\nThank you for playing Metro Exodus VR!\n\nBefore you start I'd like to point out few things worth\nchecking that will improve your experience."
+},
+{
+"rva": 4834824,
+"text": "check_settings"
+},
+{
+"rva": 4834848,
+"text": "VR OPTIONS\n\nBefore starting your journey please check out VR tab in the\nOptions menu and familiarize yourself with what's available,\nhow it's configured and what you can change.\n\nAll of these options are also available from Pause Menu\nwhile playing.\n\n"
+},
+{
+"rva": 4835104,
+"text": "check_hints"
+},
+{
+"rva": 4835120,
+"text": "VR HINTS\n\nWhile playing you will also have access to VR HINTS tab in the Pause Menu which cover VR-specific mechanics and interactions.\n\nCheck it out if you feel lost or unsure how to proceed."
+},
+{
+"rva": 4835320,
+"text": "ask_part_highlights"
+},
+{
+"rva": 4835344,
+"text": "MANUAL RELOADING\n\nTo help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.\n\nYou can configure this option later in Options / VR / Weapons.\n\nWould you like to enable it for first few reloads of each weapon now?\n\n"
+},
+{
+"rva": 4835640,
+"text": "pause_recenter"
+},
+{
+"rva": 4835664,
+"text": "PAUSE MENU\n\nTo enter pause menu press <start>.\nHold the same button to recenter.\n\nEverything about VR controls is in the Pause Menu under VR HINTS section."
+},
+{
+"rva": 4835824,
+"text": "vs_intro"
+},
+{
+"rva": 4835840,
+"text": "01_dead_moscow"
+},
+{
+"rva": 4835856,
+"text": "gear"
+},
+{
+"rva": 4835872,
+"text": "YOUR GEAR IS ON YOUR BODY\n\nReach for the item/place and grip with <grip_dominant> or <grip_nondominant>.\n\nYou can find details of where each device is located in Pause Menu in VR HINTS tab."
+},
+{
+"rva": 4836064,
+"text": "weapons"
+},
+{
+"rva": 4836080,
+"text": "WEAPONS\n\nTake a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.\n\nPointing a gun down holsters it and aiming down sight stabilizes it."
+},
+{
+"rva": 4836264,
+"text": "reloading"
+},
+{
+"rva": 4836288,
+"text": "RELOADING\n\nYou reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.\n\nTo reload with a button, turn Manual Reloading off in\nOptions / VR / Weapons."
+},
+{
+"rva": 4836504,
+"text": "qte"
+},
+{
+"rva": 4836512,
+"text": "ACTION PROMPTS\n\nSome scripted QTEs ask for quick button presses. Do as the prompt shows: tap, press or hold <rui>.\n\nYou can change the QTEs mode in game's options."
+},
+{
+"rva": 4836680,
+"text": "gas_mask"
+},
+{
+"rva": 4836704,
+"text": "GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor."
+},
+{
+"rva": 4837112,
+"text": "dm_roof_radio_cs"
+},
+{
+"rva": 4837136,
+"text": "backpack"
+},
+{
+"rva": 4837152,
+"text": "BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>]."
+},
+{
+"rva": 4837336,
+"text": "06_bridge"
+},
+{
+"rva": 4837360,
+"text": "MAP\n\nTo equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].\n"
+},
+{
+"rva": 4837440,
+"text": "tikhar_ammo"
+},
+{
+"rva": 4837456,
+"text": "TIKHAR AMMUNITION\n\nTikhar can fire Incendiary Ammunition.\n\nWith Tikhar in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammo.\n\nThen reload as usual. Do the same to switch back."
+},
+{
+"rva": 4837712,
+"text": "08_desert"
+},
+{
+"rva": 4837728,
+"text": "helsing_ammo"
+},
+{
+"rva": 4837744,
+"text": "HELSING AMMUNITION\n\nHelsing can fire explosive bolts.\n\nWith Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back."
+},
+{
+"rva": 4838000,
+"text": "m3_popup_vs_left"
+},
+{
+"rva": 4838024,
+"text": "m3_popup_vs_left_mouse"
+},
+{
+"rva": 4838048,
+"text": "m3_popup_secondary"
+},
+{
+"rva": 4838072,
+"text": "m3_popup_devices_l_3"
+},
+{
+"rva": 4838096,
+"text": "m3_popup_devices_l_3_1"
+},
+{
+"rva": 4838120,
+"text": "menu_3_popup_pad_dpad_xbox"
+},
+{
+"rva": 4838152,
+"text": "menu open"
+},
+{
+"rva": 4838168,
+"text": "menu activate"
+},
+{
+"rva": 4838192,
+"text": "[hints] menu open hook unavailable; d-pad menus keep the d-pad picture"
+},
+{
+"rva": 4838280,
+"text": "[debug_menu] {}"
+},
+{
+"rva": 4838296,
+"text": "g_subtitles_size"
+},
+{
+"rva": 4838316,
+"text": "found"
+},
+{
+"rva": 4838328,
+"text": "not found"
+},
+{
+"rva": 4838344,
+"text": "FindMenu('{}'): {} of {} menus compared, {}, {:.3f} ms"
+},
+{
+"rva": 4838400,
+"text": "[menus] {} at RVA 0x{:X} does not match this executable"
+},
+{
+"rva": 4838464,
+"text": "[menus] {} (vtable 0x{:X} slot {}) does not match this executable"
+},
+{
+"rva": 4838536,
+"text": "the console does not exist yet"
+},
+{
+"rva": 4838568,
+"text": "the console already has a command of that name"
+},
+{
+"rva": 4838624,
+"text": "RegisterVariable('{}') parts: console lookup {:.3f} ms ({} commands), create {:.3f} ms"
+},
+{
+"rva": 4838712,
+"text": "the menu manager does not exist yet"
+},
+{
+"rva": 4838752,
+"text": "it has no console variable"
+},
+{
+"rva": 4838784,
+"text": "the game did not allocate an option adapter"
+},
+{
+"rva": 4838832,
+"text": "the option adapter did not find its variable"
+},
+{
+"rva": 4838880,
+"text": "RegisterOption('{}') parts: create {:.3f} ms, registry insert {:.3f} ms"
+},
+{
+"rva": 4838952,
+"text": "its option adapter is of an unknown class"
+},
+{
+"rva": 4839000,
+"text": "the game has no option of that name"
+},
+{
+"rva": 4839040,
+"text": "the game has no variable of that name"
+},
+{
+"rva": 4839080,
+"text": "its variable is of an unknown class"
+},
+{
+"rva": 4839120,
+"text": "{} is outside its range [{}, {}]"
+},
+{
+"rva": 4839160,
+"text": "too many pinned variables"
+},
+{
+"rva": 4839192,
+"text": "too many shadowed variables"
+},
+{
+"rva": 4839224,
+"text": "it has no storage"
+},
+{
+"rva": 4839248,
+"text": "{} is not one of its values"
+},
+{
+"rva": 4839280,
+"text": "cannot open {}"
+},
+{
+"rva": 4839296,
+"text": "ReadGameFile('{}'): engine open {:.3f} ms, copy {:.3f} ms, {} bytes"
+},
+{
+"rva": 4839376,
+"text": "LoadPackage: engine load {:.3f} ms ({} -> {} menus, {} bytes), slot fix-up {:.3f} ms ({} menus now)"
+},
+{
+"rva": 4839480,
+"text": "control '{}' in '{}': {} of {} controls compared, {:.3f} ms"
+},
+{
+"rva": 4839696,
+"text": "menu_ingame_hint"
+},
+{
+"rva": 4839720,
+"text": "menu_ingame_hint__appearence_fade_in"
+},
+{
+"rva": 4839760,
+"text": "menu_ingame_hint_left"
+},
+{
+"rva": 4839784,
+"text": "menu_ingame_hint_kill_stun_1"
+},
+{
+"rva": 4839816,
+"text": "menu_ingame_hint_kill_stun_2"
+},
+{
+"rva": 4839848,
+"text": "menu_ingame_hint_replay_controls"
+},
+{
+"rva": 4839888,
+"text": "menu_ingame_hint_map"
+},
+{
+"rva": 4839912,
+"text": "menu_ingame_hint_map_bino"
+},
+{
+"rva": 4839944,
+"text": "menu_ingame_hint_task"
+},
+{
+"rva": 4839968,
+"text": "menu_qte"
+},
+{
+"rva": 4839984,
+"text": "menu_qte_hold"
+},
+{
+"rva": 4840000,
+"text": "use_menu_hold"
+},
+{
+"rva": 4840016,
+"text": "menu_melee_kill_stun"
+},
+{
+"rva": 4840040,
+"text": "menu_ingame_hint_no_body"
+},
+{
+"rva": 4840072,
+"text": "hint_body_big"
+},
+{
+"rva": 4840088,
+"text": "menu_3_warning"
+},
+{
+"rva": 4840176,
+"text": "mevr_description"
+},
+{
+"rva": 4840224,
+"text": "{}: cannot set {}"
+},
+{
+"rva": 4840244,
+"text": "type"
+},
+{
+"rva": 4840256,
+"text": "group_name"
+},
+{
+"rva": 4840268,
+"text": "name"
+},
+{
+"rva": 4840280,
+"text": "the game has no menu '{}'"
+},
+{
+"rva": 4840312,
+"text": "new menu '{}' would replace a menu of the game"
+},
+{
+"rva": 4840360,
+"text": "menu '{}' is declared twice"
+},
+{
+"rva": 4840392,
+"text": "controls"
+},
+{
+"rva": 4840408,
+"text": "menu '{}' has no controls"
+},
+{
+"rva": 4840440,
+"text": "menu '{}' has no control '{}'"
+},
+{
+"rva": 4840472,
+"text": "menu '{}' already has a control '{}'"
+},
+{
+"rva": 4840512,
+"text": "on_click"
+},
+{
+"rva": 4840528,
+"text": "open_menu_handler"
+},
+{
+"rva": 4840552,
+"text": "on_click_args"
+},
+{
+"rva": 4840568,
+"text": "option"
+},
+{
+"rva": 4840576,
+"text": "caption"
+},
+{
+"rva": 4840584,
+"text": "tab_index"
+},
+{
+"rva": 4840596,
+"text": "count"
+},
+{
+"rva": 4840608,
+"text": "page template '{}' has no option rows"
+},
+{
+"rva": 4840648,
+"text": "hint"
+},
+{
+"rva": 4840656,
+"text": "align_screen"
+},
+{
+"rva": 4840672,
+"text": "h_alignment"
+},
+{
+"rva": 4840688,
+"text": "v_alignment"
+},
+{
+"rva": 4840704,
+"text": "position_x"
+},
+{
+"rva": 4840720,
+"text": "position_y"
+},
+{
+"rva": 4840732,
+"text": "size_x"
+},
+{
+"rva": 4840740,
+"text": "size_y"
+},
+{
+"rva": 4840752,
+"text": "hint_control_name"
+},
+{
+"rva": 4840776,
+"text": "page '{}' has no option rows"
+},
+{
+"rva": 4840808,
+"text": "on_activate"
+},
+{
+"rva": 4840820,
+"text": "items"
+},
+{
+"rva": 4840832,
+"text": "menu '{}' has no list '{}'"
+},
+{
+"rva": 4840864,
+"text": "list '{}' has no items to clone"
+},
+{
+"rva": 4840896,
+"text": "item_{:04}"
+},
+{
+"rva": 4840908,
+"text": "img"
+},
+{
+"rva": 4840912,
+"text": "argument"
+},
+{
+"rva": 4840924,
+"text": "index"
+},
+{
+"rva": 4840952,
+"text": "content\\menu_handles_storage.bin"
+},
+{
+"rva": 4840992,
+"text": "{}: {:.3f} ms"
+},
+{
+"rva": 4841008,
+"text": "IsReadable x{}: {:.3f} ms total, {:.1f} us each ({} readable)"
+},
+{
+"rva": 4841072,
+"text": "RegisterVariables total"
+},
+{
+"rva": 4841096,
+"text": "[menus] game variable '{}' pinned to {}"
+},
+{
+"rva": 4841136,
+"text": "[menus] game variable '{}' not pinned: {}"
+},
+{
+"rva": 4841184,
+"text": "[menus] game variable '{}' follows its condition"
+},
+{
+"rva": 4841240,
+"text": "[menus] game variable '{}' not shadowed: {}"
+},
+{
+"rva": 4841296,
+"text": "[menus] game variable '{}' default skipped: preferences already loaded"
+},
+{
+"rva": 4841368,
+"text": "[menus] game variable '{}' starts at {}"
+},
+{
+"rva": 4841408,
+"text": "[menus] game variable '{}' default not set: {}"
+},
+{
+"rva": 4841456,
+"text": "RegisterVariable('{}'): {:.3f} ms"
+},
+{
+"rva": 4841496,
+"text": "[menus] setting '{}' not registered: {}"
+},
+{
+"rva": 4841536,
+"text": "[menus] {} settings registered after the game first loaded its preferences; their saved values apply once the profile loads"
+},
+{
+"rva": 4841664,
+"text": "[menus] {} settings registered before the game loads its preferences"
+},
+{
+"rva": 4841736,
+"text": "RegisterSettings total"
+},
+{
+"rva": 4841760,
+"text": "RegisterOption('{}'): {:.3f} ms"
+},
+{
+"rva": 4841792,
+"text": "[menus] setting '{}' has no option: {}"
+},
+{
+"rva": 4841832,
+"text": "[menus] game option '{}' locked"
+},
+{
+"rva": 4841864,
+"text": "[menus] game option '{}' not locked: {}"
+},
+{
+"rva": 4841904,
+"text": "BuildLayout"
+},
+{
+"rva": 4841920,
+"text": "[menus] {}"
+},
+{
+"rva": 4841936,
+"text": "[menus] {} settings given options"
+},
+{
+"rva": 4841976,
+"text": "ParseRecord('{}'): {:.3f} ms ({} bytes)"
+},
+{
+"rva": 4842016,
+"text": "InjectMenus total"
+},
+{
+"rva": 4842040,
+"text": "ReadGameFile total: {:.3f} ms"
+},
+{
+"rva": 4842072,
+"text": "[menus] {}; no menus added"
+},
+{
+"rva": 4842104,
+"text": "ReadIndex: {:.3f} ms ({} records)"
+},
+{
+"rva": 4842144,
+"text": "[menus] {}: {}; no menus added"
+},
+{
+"rva": 4842176,
+"text": "Build: {:.3f} ms, of which parsing {} records {:.3f} ms, cloning {:.3f} ms"
+},
+{
+"rva": 4842252,
+"text": " - "
+},
+{
+"rva": 4842256,
+"text": "[menus] {}{}{}; no menus added"
+},
+{
+"rva": 4842288,
+"text": "Serialize: {:.3f} ms ({} records, {} bytes)"
+},
+{
+"rva": 4842336,
+"text": "LoadPackage total: {:.3f} ms"
+},
+{
+"rva": 4842368,
+"text": "MakeCaptionLiteral({}/{}): {:.3f} ms"
+},
+{
+"rva": 4842408,
+"text": "[menus] control {}/{} not found for its caption"
+},
+{
+"rva": 4842456,
+"text": "[menus] list {}/{} not found for its text"
+},
+{
+"rva": 4842504,
+"text": "[menus] row {}/{} not found for its description"
+},
+{
+"rva": 4842552,
+"text": "captions total: {:.3f} ms ({} captions)"
+},
+{
+"rva": 4842592,
+"text": "[menus] {} menus loaded ({} replaced, {} new), {} captions set"
+},
+{
+"rva": 4842656,
+"text": "Step total"
+},
+{
+"rva": 4842672,
+"text": "RootsCached"
+},
+{
+"rva": 4842688,
+"text": "[menus] the Options menus never reached the menu cache; no menus added"
+},
+{
+"rva": 4842760,
+"text": "[menus] Options menus cached {:.1f} s after the first update"
+},
+{
+"rva": 4842824,
+"text": "[menus] {}; menu setup stopped"
+},
+{
+"rva": 4842856,
+"text": "[menus] unknown error; menu setup stopped"
+},
+{
+"rva": 4842912,
+"text": "update #{}: menu setup {:.3f} ms, game's update {:.3f} ms, poll {:.3f} ms"
+},
+{
+"rva": 4842992,
+"text": "executable checks"
+},
+{
+"rva": 4843024,
+"text": "[menus] unsupported executable; the mod's settings stay out of the game's menus"
+},
+{
+"rva": 4843104,
+"text": "[menus] menu hook installation failed, error={}"
+},
+{
+"rva": 4843152,
+"text": "[menus] menu hook installed"
+},
+{
+"rva": 4843184,
+"text": "[menus] {}; settings not registered"
+},
+{
+"rva": 4843224,
+"text": "[menus] unknown error; settings not registered"
+},
+{
+"rva": 4843342,
+"text": "i@AVER"
+},
+{
+"rva": 4844847,
+"text": "-u8"
+},
+{
+"rva": 4844856,
+"text": "bool"
+},
+{
+"rva": 4844864,
+"text": "bool8"
+},
+{
+"rva": 4844872,
+"text": "u16"
+},
+{
+"rva": 4844876,
+"text": "s16"
+},
+{
+"rva": 4844880,
+"text": "u32"
+},
+{
+"rva": 4844884,
+"text": "s32"
+},
+{
+"rva": 4844888,
+"text": "fp32"
+},
+{
+"rva": 4844896,
+"text": "color, u32"
+},
+{
+"rva": 4844908,
+"text": "u64"
+},
+{
+"rva": 4844912,
+"text": "s64"
+},
+{
+"rva": 4844916,
+"text": "fp64"
+},
+{
+"rva": 4844924,
+"text": "vec2f"
+},
+{
+"rva": 4844932,
+"text": "vec3f"
+},
+{
+"rva": 4844940,
+"text": "vec4f"
+},
+{
+"rva": 4844948,
+"text": "vec2i"
+},
+{
+"rva": 4844956,
+"text": "vec3i"
+},
+{
+"rva": 4844964,
+"text": "vec4i"
+},
+{
+"rva": 4845000,
+"text": "{} at offset 0x{:X}"
+},
+{
+"rva": 4845024,
+"text": "truncated u32"
+},
+{
+"rva": 4845040,
+"text": "unterminated string"
+},
+{
+"rva": 4845064,
+"text": "empty array"
+},
+{
+"rva": 4845080,
+"text": "array without a u32 count"
+},
+{
+"rva": 4845112,
+"text": "array element overruns its array"
+},
+{
+"rva": 4845152,
+"text": "array does not end at its size"
+},
+{
+"rva": 4845184,
+"text": "empty section"
+},
+{
+"rva": 4845200,
+"text": "@section"
+},
+{
+"rva": 4845212,
+"text": "choose"
+},
+{
+"rva": 4845224,
+"text": "stringz"
+},
+{
+"rva": 4845232,
+"text": "truncated {} '{}'"
+},
+{
+"rva": 4845252,
+"text": "array"
+},
+{
+"rva": 4845264,
+"text": "section"
+},
+{
+"rva": 4845272,
+"text": "{} '{}' overruns its section"
+},
+{
+"rva": 4845304,
+"text": "unknown type '{}' for '{}'"
+},
+{
+"rva": 4845336,
+"text": "section does not end at its size"
+},
+{
+"rva": 4845376,
+"text": "not an AVER package"
+},
+{
+"rva": 4845400,
+"text": "record overruns the package"
+},
+{
+"rva": 4845432,
+"text": "bytes after the last record"
+},
+{
+"rva": 4845460,
+"text": "{}: {}"
+},
+{
+"rva": 4845472,
+"text": "m3_main_options_menu"
+},
+{
+"rva": 4845496,
+"text": "btn_game_options"
+},
+{
+"rva": 4845520,
+"text": "m3_main_gameplay_menu"
+},
+{
+"rva": 4845544,
+"text": "btn_checked_crosshair"
+},
+{
+"rva": 4845568,
+"text": "btn_list_aim_mode"
+},
+{
+"rva": 4845592,
+"text": "m3_main_sound_menu"
+},
+{
+"rva": 4845616,
+"text": "btn_progress_music_volume"
+},
+{
+"rva": 4845648,
+"text": "hint_version"
+},
+{
+"rva": 4845664,
+"text": "options_menu"
+},
+{
+"rva": 4845680,
+"text": "gameplay_menu"
+},
+{
+"rva": 4845696,
+"text": "sound_menu"
+},
+{
+"rva": 4845712,
+"text": "random_hints"
+},
+{
+"rva": 4845728,
+"text": "random_hints_dlc1"
+},
+{
+"rva": 4845752,
+"text": "random_hints_dlc2"
+},
+{
+"rva": 4845776,
+"text": "m3_main_video_menu"
+},
+{
+"rva": 4845800,
+"text": "video_menu"
+},
+{
+"rva": 4845816,
+"text": "m3_main_accessibility_menu"
+},
+{
+"rva": 4845848,
+"text": "accessibility_menu"
+},
+{
+"rva": 4845868,
+"text": "main"
+},
+{
+"rva": 4845880,
+"text": "{}_{}_menu"
+},
+{
+"rva": 4845892,
+"text": "{}_{}"
+},
+{
+"rva": 4845904,
+"text": "'{}' refused: {}"
+},
+{
+"rva": 4845928,
+"text": "declared after the menus were built"
+},
+{
+"rva": 4845968,
+"text": "ids use letters, digits and '_' (at most 63)"
+},
+{
+"rva": 4846016,
+"text": "captions are printable ASCII (at most 127)"
+},
+{
+"rva": 4846064,
+"text": "declared twice"
+},
+{
+"rva": 4846080,
+"text": "lists need 2-255 printable ASCII labels"
+},
+{
+"rva": 4846120,
+"text": "sliders need min < max and 1-255 steps"
+},
+{
+"rva": 4846160,
+"text": "page ids and captions follow the setting rules"
+},
+{
+"rva": 4846208,
+"text": "page declared twice"
+},
+{
+"rva": 4846232,
+"text": "option locked after the menus were built"
+},
+{
+"rva": 4846280,
+"text": "not an option key"
+},
+{
+"rva": 4846304,
+"text": "variable pinned after the declarations ended"
+},
+{
+"rva": 4846352,
+"text": "not a variable name"
+},
+{
+"rva": 4846376,
+"text": "variable suppressed after the declarations ended"
+},
+{
+"rva": 4846432,
+"text": "needs a variable name and a condition"
+},
+{
+"rva": 4846472,
+"text": "default set after the declarations ended"
+},
+{
+"rva": 4846520,
+"text": "{}: link to page '{}', which is not in this menu"
+},
+{
+"rva": 4846576,
+"text": "btn_link_"
+},
+{
+"rva": 4846592,
+"text": "{}: a row refers to a refused setting"
+},
+{
+"rva": 4846632,
+"text": "{}: '{}' cannot be shown that way"
+},
+{
+"rva": 4846668,
+"text": "btn_"
+},
+{
+"rva": 4846829,
+"text": "Ga="
+},
+{
+"rva": 4846907,
+"text": "Afff?"
+},
+{
+"rva": 4847184,
+"text": "NOT SET"
+},
+{
+"rva": 4847192,
+"text": "{} CM"
+},
+{
+"rva": 4847200,
+"text": "{}% (RECOMMENDED)"
+},
+{
+"rva": 4847220,
+"text": "{}%"
+},
+{
+"rva": 4847224,
+"text": "+{} CM"
+},
+{
+"rva": 4847232,
+"text": "{} DEG"
+},
+{
+"rva": 4847240,
+"text": "{:.2f} M"
+},
+{
+"rva": 4847252,
+"text": "PLAY"
+},
+{
+"rva": 4847260,
+"text": "SKIP"
+},
+{
+"rva": 4847272,
+"text": "OFF (GAME TAA)"
+},
+{
+"rva": 4847288,
+"text": "FSR"
+},
+{
+"rva": 4847292,
+"text": "DLSS"
+},
+{
+"rva": 4847300,
+"text": "AUTO"
+},
+{
+"rva": 4847312,
+"text": "VR NO TURN"
+},
+{
+"rva": 4847324,
+"text": "CINEMA"
+},
+{
+"rva": 4847336,
+"text": "VR BODY TURN"
+},
+{
+"rva": 4847352,
+"text": "mevr_turn_mode"
+},
+{
+"rva": 4847368,
+"text": "TURN MODE"
+},
+{
+"rva": 4847380,
+"text": "SNAP"
+},
+{
+"rva": 4847388,
+"text": "SMOOTH"
+},
+{
+"rva": 4847400,
+"text": "mevr_snap_turn"
+},
+{
+"rva": 4847416,
+"text": "SNAP TURN ANGLE"
+},
+{
+"rva": 4847432,
+"text": "{:g} DEG"
+},
+{
+"rva": 4847448,
+"text": "mevr_smooth_turn"
+},
+{
+"rva": 4847472,
+"text": "SMOOTH TURN SPEED"
+},
+{
+"rva": 4847496,
+"text": "{:g} DEG/S"
+},
+{
+"rva": 4847512,
+"text": "mevr_move_direction"
+},
+{
+"rva": 4847536,
+"text": "MOVEMENT DIRECTION"
+},
+{
+"rva": 4847556,
+"text": "HEAD"
+},
+{
+"rva": 4847564,
+"text": "BODY"
+},
+{
+"rva": 4847576,
+"text": "LEFT HAND"
+},
+{
+"rva": 4847592,
+"text": "RIGHT HAND"
+},
+{
+"rva": 4847608,
+"text": "mevr_crouch"
+},
+{
+"rva": 4847624,
+"text": "CROUCH BUTTON"
+},
+{
+"rva": 4847640,
+"text": "HOLD"
+},
+{
+"rva": 4847648,
+"text": "TOGGLE"
+},
+{
+"rva": 4847656,
+"text": "mevr_auto_sprint"
+},
+{
+"rva": 4847680,
+"text": "AUTO SPRINT"
+},
+{
+"rva": 4847696,
+"text": "mevr_move_deadzone"
+},
+{
+"rva": 4847720,
+"text": "MOVE STICK DEADZONE"
+},
+{
+"rva": 4847744,
+"text": "mevr_turn_deadzone"
+},
+{
+"rva": 4847768,
+"text": "TURN STICK DEADZONE"
+},
+{
+"rva": 4847792,
+"text": "mevr_reduce_head_bob"
+},
+{
+"rva": 4847816,
+"text": "REDUCE HEAD BOB"
+},
+{
+"rva": 4847832,
+"text": "mevr_popups_again"
+},
+{
+"rva": 4847856,
+"text": "SHOW VR TIPS AGAIN"
+},
+{
+"rva": 4847880,
+"text": "mevr_play_mode"
+},
+{
+"rva": 4847896,
+"text": "PLAY MODE"
+},
+{
+"rva": 4847912,
+"text": "ROOM-SCALE"
+},
+{
+"rva": 4847928,
+"text": "STANDING"
+},
+{
+"rva": 4847940,
+"text": "SEATED"
+},
+{
+"rva": 4847952,
+"text": "mevr_player_height"
+},
+{
+"rva": 4847976,
+"text": "PLAYER HEIGHT"
+},
+{
+"rva": 4847992,
+"text": "mevr_world_scale"
+},
+{
+"rva": 4848016,
+"text": "WORLD SCALE"
+},
+{
+"rva": 4848032,
+"text": "mevr_body_turning"
+},
+{
+"rva": 4848056,
+"text": "BODY TURNING"
+},
+{
+"rva": 4848072,
+"text": "FOLLOW HEAD"
+},
+{
+"rva": 4848088,
+"text": "mevr_body_position"
+},
+{
+"rva": 4848112,
+"text": "BODY POSITION"
+},
+{
+"rva": 4848128,
+"text": "FOLLOW"
+},
+{
+"rva": 4848136,
+"text": "mevr_physical_crouch"
+},
+{
+"rva": 4848160,
+"text": "PHYSICAL CROUCH"
+},
+{
+"rva": 4848176,
+"text": "mevr_belt_height"
+},
+{
+"rva": 4848200,
+"text": "BELT HEIGHT"
+},
+{
+"rva": 4848216,
+"text": "mevr_belt_crouch"
+},
+{
+"rva": 4848240,
+"text": "BELT WHEN CROUCHING"
+},
+{
+"rva": 4848264,
+"text": "STAY WITH YOU"
+},
+{
+"rva": 4848280,
+"text": "FOLLOW BODY"
+},
+{
+"rva": 4848296,
+"text": "mevr_bhaptics"
+},
+{
+"rva": 4848312,
+"text": "BHAPTICS (EXPERIMENTAL)"
+},
+{
+"rva": 4848336,
+"text": "mevr_bhaptics_strength"
+},
+{
+"rva": 4848360,
+"text": "BHAPTICS STRENGTH"
+},
+{
+"rva": 4848384,
+"text": "mevr_dominant_hand"
+},
+{
+"rva": 4848408,
+"text": "DOMINANT HAND"
+},
+{
+"rva": 4848424,
+"text": "RIGHT"
+},
+{
+"rva": 4848432,
+"text": "LEFT"
+},
+{
+"rva": 4848440,
+"text": "mevr_grip_angle"
+},
+{
+"rva": 4848456,
+"text": "WEAPON GRIP ANGLE"
+},
+{
+"rva": 4848480,
+"text": "mevr_finger_tracking"
+},
+{
+"rva": 4848504,
+"text": "FINGER TRACKING"
+},
+{
+"rva": 4848520,
+"text": "mevr_grab"
+},
+{
+"rva": 4848532,
+"text": "GRIP"
+},
+{
+"rva": 4848544,
+"text": "mevr_vibration"
+},
+{
+"rva": 4848560,
+"text": "VIBRATION"
+},
+{
+"rva": 4848576,
+"text": "mevr_vibration_cues"
+},
+{
+"rva": 4848600,
+"text": "HAND CUES"
+},
+{
+"rva": 4848616,
+"text": "mevr_vibration_weapons"
+},
+{
+"rva": 4848640,
+"text": "WEAPONS"
+},
+{
+"rva": 4848648,
+"text": "mevr_vibration_damage"
+},
+{
+"rva": 4848672,
+"text": "DAMAGE"
+},
+{
+"rva": 4848680,
+"text": "mevr_vibration_world"
+},
+{
+"rva": 4848704,
+"text": "EXPLOSIONS"
+},
+{
+"rva": 4848720,
+"text": "mevr_vibration_scenes"
+},
+{
+"rva": 4848744,
+"text": "SCENES AND VEHICLES"
+},
+{
+"rva": 4848768,
+"text": "mevr_vibration_movement"
+},
+{
+"rva": 4848792,
+"text": "MOVEMENT"
+},
+{
+"rva": 4848808,
+"text": "mevr_use_by_looking"
+},
+{
+"rva": 4848832,
+"text": "USE BY LOOKING"
+},
+{
+"rva": 4848848,
+"text": "mevr_weapon_weight"
+},
+{
+"rva": 4848872,
+"text": "WEAPON WEIGHT"
+},
+{
+"rva": 4848888,
+"text": "mevr_manual_reload"
+},
+{
+"rva": 4848912,
+"text": "MANUAL RELOADING"
+},
+{
+"rva": 4848936,
+"text": "mevr_part_highlights"
+},
+{
+"rva": 4848960,
+"text": "PART HIGHLIGHTS"
+},
+{
+"rva": 4848976,
+"text": "OFF"
+},
+{
+"rva": 4848984,
+"text": "FIRST RELOADS"
+},
+{
+"rva": 4849000,
+"text": "ALWAYS"
+},
+{
+"rva": 4849008,
+"text": "mevr_part_highlights_reset"
+},
+{
+"rva": 4849040,
+"text": "RESET HIGHLIGHT COUNTS"
+},
+{
+"rva": 4849064,
+"text": "mevr_revolver_flick"
+},
+{
+"rva": 4849088,
+"text": "WEAPON FLICK"
+},
+{
+"rva": 4849104,
+"text": "GENTLE"
+},
+{
+"rva": 4849112,
+"text": "NORMAL"
+},
+{
+"rva": 4849120,
+"text": "HARD"
+},
+{
+"rva": 4849128,
+"text": "mevr_reload_pouch"
+},
+{
+"rva": 4849152,
+"text": "MAGAZINE POUCH"
+},
+{
+"rva": 4849168,
+"text": "HIP"
+},
+{
+"rva": 4849176,
+"text": "mevr_sighting_eye"
+},
+{
+"rva": 4849200,
+"text": "SIGHTING EYE"
+},
+{
+"rva": 4849216,
+"text": "mevr_other_eye"
+},
+{
+"rva": 4849232,
+"text": "OTHER EYE WHILE SCOPED"
+},
+{
+"rva": 4849256,
+"text": "VISIBLE"
+},
+{
+"rva": 4849264,
+"text": "BLURRED"
+},
+{
+"rva": 4849272,
+"text": "BLACK"
+},
+{
+"rva": 4849280,
+"text": "mevr_reticle"
+},
+{
+"rva": 4849296,
+"text": "RETICLE TILT"
+},
+{
+"rva": 4849312,
+"text": "WITH WEAPON"
+},
+{
+"rva": 4849324,
+"text": "LEVEL"
+},
+{
+"rva": 4849336,
+"text": "FIXED TO VIEW"
+},
+{
+"rva": 4849352,
+"text": "mevr_scope_steering"
+},
+{
+"rva": 4849376,
+"text": "SCOPE STEERING"
+},
+{
+"rva": 4849392,
+"text": "WEAPON"
+},
+{
+"rva": 4849400,
+"text": "WEAPON + HEAD"
+},
+{
+"rva": 4849416,
+"text": "mevr_night_vision_tube"
+},
+{
+"rva": 4849440,
+"text": "REALISTIC NIGHT VISION"
+},
+{
+"rva": 4849464,
+"text": "mevr_hud_shape"
+},
+{
+"rva": 4849480,
+"text": "HUD SHAPE"
+},
+{
+"rva": 4849492,
+"text": "16:9"
+},
+{
+"rva": 4849500,
+"text": "4:3"
+},
+{
+"rva": 4849504,
+"text": "mevr_hud_position"
+},
+{
+"rva": 4849528,
+"text": "HUD POSITION"
+},
+{
+"rva": 4849544,
+"text": "mevr_hud_distance"
+},
+{
+"rva": 4849568,
+"text": "HUD DISTANCE"
+},
+{
+"rva": 4849584,
+"text": "mevr_hud_size"
+},
+{
+"rva": 4849600,
+"text": "HUD SIZE"
+},
+{
+"rva": 4849616,
+"text": "mevr_hud_height"
+},
+{
+"rva": 4849632,
+"text": "HUD HEIGHT"
+},
+{
+"rva": 4849648,
+"text": "{:+.0f} DEG"
+},
+{
+"rva": 4849664,
+"text": "mevr_hud_opacity"
+},
+{
+"rva": 4849688,
+"text": "HUD OPACITY"
+},
+{
+"rva": 4849704,
+"text": "mevr_hint_height"
+},
+{
+"rva": 4849728,
+"text": "HINT HEIGHT"
+},
+{
+"rva": 4849744,
+"text": "{:+.0f}"
+},
+{
+"rva": 4849752,
+"text": "mevr_hint_size"
+},
+{
+"rva": 4849768,
+"text": "HINT SIZE"
+},
+{
+"rva": 4849784,
+"text": "{:.1f}X"
+},
+{
+"rva": 4849792,
+"text": "mevr_hint_time"
+},
+{
+"rva": 4849808,
+"text": "HINT TIME"
+},
+{
+"rva": 4849820,
+"text": "1.00X"
+},
+{
+"rva": 4849828,
+"text": "1.25X"
+},
+{
+"rva": 4849836,
+"text": "1.50X"
+},
+{
+"rva": 4849844,
+"text": "2.00X"
+},
+{
+"rva": 4849856,
+"text": "mevr_prompt_size"
+},
+{
+"rva": 4849880,
+"text": "ACTION PROMPT SIZE"
+},
+{
+"rva": 4849904,
+"text": "{:.2f}X"
+},
+{
+"rva": 4849912,
+"text": "mevr_menu_distance"
+},
+{
+"rva": 4849936,
+"text": "MENU DISTANCE"
+},
+{
+"rva": 4849952,
+"text": "mevr_menu_size"
+},
+{
+"rva": 4849968,
+"text": "MENU SIZE"
+},
+{
+"rva": 4849984,
+"text": "{:.1f} M"
+},
+{
+"rva": 4850000,
+"text": "mevr_damage_effects"
+},
+{
+"rva": 4850024,
+"text": "DAMAGE EFFECTS"
+},
+{
+"rva": 4850040,
+"text": "mevr_damage_size"
+},
+{
+"rva": 4850064,
+"text": "DAMAGE EFFECT SIZE"
+},
+{
+"rva": 4850084,
+"text": "SMALL"
+},
+{
+"rva": 4850092,
+"text": "MEDIUM"
+},
+{
+"rva": 4850100,
+"text": "LARGE"
+},
+{
+"rva": 4850112,
+"text": "mevr_hit_direction"
+},
+{
+"rva": 4850136,
+"text": "HIT DIRECTION"
+},
+{
+"rva": 4850152,
+"text": "mevr_health_pulse"
+},
+{
+"rva": 4850176,
+"text": "LOW-HEALTH PULSE"
+},
+{
+"rva": 4850200,
+"text": "mevr_debug_overlay"
+},
+{
+"rva": 4850224,
+"text": "DEBUG OVERLAY"
+},
+{
+"rva": 4850240,
+"text": "mevr_cinema_pointer"
+},
+{
+"rva": 4850264,
+"text": "CINEMA POINTER"
+},
+{
+"rva": 4850280,
+"text": "mevr_cinema_floor"
+},
+{
+"rva": 4850304,
+"text": "CINEMA FLOOR"
+},
+{
+"rva": 4850320,
+"text": "mevr_cinema_controllers"
+},
+{
+"rva": 4850344,
+"text": "CINEMA CONTROLLERS"
+},
+{
+"rva": 4850368,
+"text": "mevr_cinema_info"
+},
+{
+"rva": 4850392,
+"text": "CINEMA INFO"
+},
+{
+"rva": 4850408,
+"text": "mevr_cinema_links"
+},
+{
+"rva": 4850432,
+"text": "CINEMA LINKS"
+},
+{
+"rva": 4850448,
+"text": "mevr_camera_preset"
+},
+{
+"rva": 4850472,
+"text": "CAMERA PRESET"
+},
+{
+"rva": 4850488,
+"text": "IMMERSIVE"
+},
+{
+"rva": 4850504,
+"text": "COMFORT"
+},
+{
+"rva": 4850512,
+"text": "CINEMATIC"
+},
+{
+"rva": 4850528,
+"text": "mevr_realign"
+},
+{
+"rva": 4850544,
+"text": "RE-ALIGN AFTER SCENES"
+},
+{
+"rva": 4850568,
+"text": "mevr_cinema_distance"
+},
+{
+"rva": 4850592,
+"text": "CINEMA SCREEN DISTANCE"
+},
+{
+"rva": 4850616,
+"text": "mevr_cinema_size"
+},
+{
+"rva": 4850640,
+"text": "CINEMA SCREEN SIZE"
+},
+{
+"rva": 4850664,
+"text": "mevr_camera_cinematic_track"
+},
+{
+"rva": 4850696,
+"text": "mevr_camera_attached"
+},
+{
+"rva": 4850720,
+"text": "mevr_camera_third_person"
+},
+{
+"rva": 4850752,
+"text": "FREE CAMERA"
+},
+{
+"rva": 4850768,
+"text": "mevr_camera_free_cam"
+},
+{
+"rva": 4850792,
+"text": "mevr_camera_station"
+},
+{
+"rva": 4850816,
+"text": "BONE ANGLES"
+},
+{
+"rva": 4850832,
+"text": "mevr_camera_bone_angles"
+},
+{
+"rva": 4850856,
+"text": "SCRIPTED LOCK"
+},
+{
+"rva": 4850872,
+"text": "mevr_camera_scripted_lock"
+},
+{
+"rva": 4850904,
+"text": "ANIMATION LOCK"
+},
+{
+"rva": 4850920,
+"text": "mevr_camera_animation_lock"
+},
+{
+"rva": 4850952,
+"text": "AXIS LOCKED"
+},
+{
+"rva": 4850968,
+"text": "mevr_camera_axis_locked"
+},
+{
+"rva": 4850992,
+"text": "GAMEPLAY UI"
+},
+{
+"rva": 4851008,
+"text": "mevr_camera_gameplay_ui"
+},
+{
+"rva": 4851032,
+"text": "mevr_alternate_eye"
+},
+{
+"rva": 4851056,
+"text": "RENDER MODE"
+},
+{
+"rva": 4851068,
+"text": "STEREO"
+},
+{
+"rva": 4851080,
+"text": "PERFORMANCE (AER+)"
+},
+{
+"rva": 4851104,
+"text": "mevr_render_scale"
+},
+{
+"rva": 4851128,
+"text": "RENDER SCALE (RESTART)"
+},
+{
+"rva": 4851152,
+"text": "mevr_upscaler"
+},
+{
+"rva": 4851168,
+"text": "UPSCALER"
+},
+{
+"rva": 4851184,
+"text": "mevr_upscaling_mode"
+},
+{
+"rva": 4851208,
+"text": "UPSCALING MODE"
+},
+{
+"rva": 4851224,
+"text": "NATIVE AA"
+},
+{
+"rva": 4851240,
+"text": "QUALITY"
+},
+{
+"rva": 4851248,
+"text": "BALANCED"
+},
+{
+"rva": 4851264,
+"text": "PERFORMANCE"
+},
+{
+"rva": 4851280,
+"text": "ULTRA PERFORMANCE"
+},
+{
+"rva": 4851304,
+"text": "mevr_fsr_sharpness"
+},
+{
+"rva": 4851328,
+"text": "FSR SHARPENING"
+},
+{
+"rva": 4851344,
+"text": "LOW"
+},
+{
+"rva": 4851348,
+"text": "HIGH"
+},
+{
+"rva": 4851360,
+"text": "mevr_dlss_model"
+},
+{
+"rva": 4851376,
+"text": "DLSS MODEL"
+},
+{
+"rva": 4851392,
+"text": "AUTO (K)"
+},
+{
+"rva": 4851408,
+"text": "K (DLSS 4)"
+},
+{
+"rva": 4851424,
+"text": "M (DLSS 4.5)"
+},
+{
+"rva": 4851440,
+"text": "L (DLSS 4.5)"
+},
+{
+"rva": 4851456,
+"text": "J (DLSS 4)"
+},
+{
+"rva": 4851472,
+"text": "E (DLSS 3)"
+},
+{
+"rva": 4851488,
+"text": "mevr_upscaling_fovea"
+},
+{
+"rva": 4851512,
+"text": "FOVEATED UPSCALING"
+},
+{
+"rva": 4851536,
+"text": "ON (45 DEG)"
+},
+{
+"rva": 4851552,
+"text": "ON (40 DEG)"
+},
+{
+"rva": 4851568,
+"text": "ON (35 DEG)"
+},
+{
+"rva": 4851584,
+"text": "ON (30 DEG)"
+},
+{
+"rva": 4851600,
+"text": "ON (25 DEG)"
+},
+{
+"rva": 4851616,
+"text": "ON (20 DEG)"
+},
+{
+"rva": 4851632,
+"text": "mevr_upscaling_periphery"
+},
+{
+"rva": 4851664,
+"text": "FOVEATED PERIPHERY"
+},
+{
+"rva": 4851684,
+"text": "TAA"
+},
+{
+"rva": 4851688,
+"text": "mevr_mirror"
+},
+{
+"rva": 4851704,
+"text": "DESKTOP MIRROR"
+},
+{
+"rva": 4851720,
+"text": "LEFT EYE"
+},
+{
+"rva": 4851736,
+"text": "BOTH EYES"
+},
+{
+"rva": 4851752,
+"text": "mevr_mirror_window"
+},
+{
+"rva": 4851776,
+"text": "MIRROR WINDOW"
+},
+{
+"rva": 4851792,
+"text": "WINDOWED"
+},
+{
+"rva": 4851808,
+"text": "FULLSCREEN"
+},
+{
+"rva": 4851824,
+"text": "mevr_mirror_ui"
+},
+{
+"rva": 4851840,
+"text": "MIRROR HEADSET UI"
+},
+{
+"rva": 4851864,
+"text": "mevr_foveation"
+},
+{
+"rva": 4851880,
+"text": "FOVEATED RENDERING"
+},
+{
+"rva": 4851900,
+"text": "LIGHT"
+},
+{
+"rva": 4851912,
+"text": "AGGRESSIVE"
+},
+{
+"rva": 4851924,
+"text": "ULTRA"
+},
+{
+"rva": 4851936,
+"text": "EXTREME"
+},
+{
+"rva": 4851944,
+"text": "mevr_water_reflections"
+},
+{
+"rva": 4851968,
+"text": "BETTER WATER REFLECTIONS"
+},
+{
+"rva": 4852000,
+"text": "mevr_disable_blur"
+},
+{
+"rva": 4852024,
+"text": "DISABLE BLUR"
+},
+{
+"rva": 4852040,
+"text": "mevr_depth_of_field"
+},
+{
+"rva": 4852064,
+"text": "DEPTH OF FIELD"
+},
+{
+"rva": 4852080,
+"text": "mevr_hud_resolution"
+},
+{
+"rva": 4852104,
+"text": "HUD RESOLUTION (RESTART)"
+},
+{
+"rva": 4852132,
+"text": "{}P"
+},
+{
+"rva": 4852136,
+"text": "mevr_depth_reprojection"
+},
+{
+"rva": 4852160,
+"text": "DEPTH REPROJECTION"
+},
+{
+"rva": 4852184,
+"text": "LEGAL NOTICE VIDEO"
+},
+{
+"rva": 4852208,
+"text": "mevr_video_legal"
+},
+{
+"rva": 4852228,
+"text": "legal"
+},
+{
+"rva": 4852240,
+"text": "CREDITS VIDEO"
+},
+{
+"rva": 4852256,
+"text": "mevr_video_credits"
+},
+{
+"rva": 4852280,
+"text": "credits"
+},
+{
+"rva": 4852288,
+"text": "INTRO VIDEO"
+},
+{
+"rva": 4852304,
+"text": "mevr_video_intro"
+},
+{
+"rva": 4852324,
+"text": "intro"
+},
+{
+"rva": 4852332,
+"text": "light"
+},
+{
+"rva": 4852344,
+"text": "balanced"
+},
+{
+"rva": 4852356,
+"text": "high"
+},
+{
+"rva": 4852368,
+"text": "aggressive"
+},
+{
+"rva": 4852380,
+"text": "ultra"
+},
+{
+"rva": 4852392,
+"text": "extreme"
+},
+{
+"rva": 4852400,
+"text": "btn_use_defaults"
+},
+{
+"rva": 4852424,
+"text": "resolution"
+},
+{
+"rva": 4852440,
+"text": "r_vsync"
+},
+{
+"rva": 4852448,
+"text": "api"
+},
+{
+"rva": 4852456,
+"text": "aim_assist"
+},
+{
+"rva": 4852472,
+"text": "auto_aim_border"
+},
+{
+"rva": 4852488,
+"text": "g_show_crosshair"
+},
+{
+"rva": 4852512,
+"text": "g_show_hitmarks"
+},
+{
+"rva": 4852528,
+"text": "g_qte_mode"
+},
+{
+"rva": 4852544,
+"text": "mevr_movement"
+},
+{
+"rva": 4852560,
+"text": "mevr_body"
+},
+{
+"rva": 4852576,
+"text": "mevr_vibration_page"
+},
+{
+"rva": 4852596,
+"text": "HANDS"
+},
+{
+"rva": 4852608,
+"text": "mevr_hands"
+},
+{
+"rva": 4852624,
+"text": "mevr_weapons"
+},
+{
+"rva": 4852640,
+"text": "SCOPES"
+},
+{
+"rva": 4852648,
+"text": "mevr_scopes"
+},
+{
+"rva": 4852664,
+"text": "INTERFACE"
+},
+{
+"rva": 4852680,
+"text": "mevr_hud"
+},
+{
+"rva": 4852696,
+"text": "CAMERA OVERRIDES"
+},
+{
+"rva": 4852720,
+"text": "mevr_camera_overrides"
+},
+{
+"rva": 4852744,
+"text": "mevr_comfort"
+},
+{
+"rva": 4852760,
+"text": "GRAPHICS"
+},
+{
+"rva": 4852776,
+"text": "mevr_graphics"
+},
+{
+"rva": 4852792,
+"text": "GAME"
+},
+{
+"rva": 4852800,
+"text": "mevr_game"
+},
+{
+"rva": 4852816,
+"text": "mevr_vr"
+},
+{
+"rva": 4852828,
+"text": "inity"
+},
+{
+"rva": 4852840,
+"text": "ind"
+},
+{
+"rva": 4852844,
+"text": "snan"
+},
+{
+"rva": 4858368,
+"text": "Reset the VR tips you have already seen, as on a first playthrough."
+},
+{
+"rva": 4858448,
+"text": "STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion."
+},
+{
+"rva": 4858624,
+"text": "The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart."
+},
+{
+"rva": 4858768,
+"text": "Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards."
+},
+{
+"rva": 4858896,
+"text": "How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp."
+},
+{
+"rva": 4859040,
+"text": "Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K."
+},
+{
+"rva": 4859136,
+"text": "Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster."
+},
+{
+"rva": 4859264,
+"text": "How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry."
+},
+{
+"rva": 4859408,
+"text": "What the desktop window shows while you play."
+},
+{
+"rva": 4859456,
+"text": "The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost."
+},
+{
+"rva": 4859616,
+"text": "Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only."
+},
+{
+"rva": 4859744,
+"text": "More accurate reflections on water, reaching further. Small performance penalty."
+},
+{
+"rva": 4859840,
+"text": "Turns off the game's motion blur, which can be uncomfortable in VR."
+},
+{
+"rva": 4859920,
+"text": "Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount."
+},
+{
+"rva": 4860032,
+"text": "How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart."
+},
+{
+"rva": 4860144,
+"text": "Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it."
+},
+{
+"rva": 4860272,
+"text": "Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points."
+},
+{
+"rva": 4860400,
+"text": "HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next."
+},
+{
+"rva": 4860512,
+"text": "Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting."
+},
+{
+"rva": 4860656,
+"text": "How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched."
+},
+{
+"rva": 4860768,
+"text": "How far the turn stick must be pushed before you turn. Raise it if you turn by accident."
+},
+{
+"rva": 4860864,
+"text": "Tones down the game's camera bob while walking and running, which can be uncomfortable in VR."
+},
+{
+"rva": 4860960,
+"text": "ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down."
+},
+{
+"rva": 4861072,
+"text": "Your real height, so the game can tell when you crouch. NOT SET uses the headset alone."
+},
+{
+"rva": 4861168,
+"text": "How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes."
+},
+{
+"rva": 4861280,
+"text": "Crouching in real life crouches in the game. Needs PLAYER HEIGHT."
+},
+{
+"rva": 4861360,
+"text": "Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back."
+},
+{
+"rva": 4861520,
+"text": "STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM)."
+},
+{
+"rva": 4861728,
+"text": "FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick."
+},
+{
+"rva": 4861856,
+"text": "FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along."
+},
+{
+"rva": 4862000,
+"text": "Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps."
+},
+{
+"rva": 4862160,
+"text": "Tilts weapons and items in your hand up or down, to match how you hold your controller."
+},
+{
+"rva": 4862256,
+"text": "Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons."
+},
+{
+"rva": 4862384,
+"text": "HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken."
+},
+{
+"rva": 4862512,
+"text": "With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach."
+},
+{
+"rva": 4862656,
+"text": "How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off."
+},
+{
+"rva": 4862768,
+"text": "Light ticks as your hand reaches a body slot, something to take, a weapon part or a device."
+},
+{
+"rva": 4862864,
+"text": "The kick of every shot in the hands holding the gun, and the weapons' own vibration."
+},
+{
+"rva": 4862952,
+"text": "Vibration when you are hit or hurt."
+},
+{
+"rva": 4862992,
+"text": "Vibration in scripted scenes and while riding vehicles."
+},
+{
+"rva": 4863048,
+"text": "Light steps while running, and landings."
+},
+{
+"rva": 4863104,
+"text": "How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake."
+},
+{
+"rva": 4863248,
+"text": "Reload with your hands: work magazines, bolts, levers and pumps yourself."
+},
+{
+"rva": 4863328,
+"text": "Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never."
+},
+{
+"rva": 4863440,
+"text": "Turn on to start the FIRST RELOADS count over, so the highlights show again."
+},
+{
+"rva": 4863520,
+"text": "Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be."
+},
+{
+"rva": 4863648,
+"text": "Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on."
+},
+{
+"rva": 4863744,
+"text": "What your other eye sees while you look through a scope."
+},
+{
+"rva": 4863808,
+"text": "How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view."
+},
+{
+"rva": 4863904,
+"text": "WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view."
+},
+{
+"rva": 4864048,
+"text": "Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view."
+},
+{
+"rva": 4864160,
+"text": "The HUD's layout. 4:3 brings its edges closer to the middle of your view."
+},
+{
+"rva": 4864240,
+"text": "LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away."
+},
+{
+"rva": 4864360,
+"text": "Moves the HUD above or below your line of sight."
+},
+{
+"rva": 4864416,
+"text": "Moves the game's hint cards up or down."
+},
+{
+"rva": 4864456,
+"text": "How much longer the game's timed hints stay up."
+},
+{
+"rva": 4864512,
+"text": "The size of the prompts in the middle of the view: quick-time events, use and melee."
+},
+{
+"rva": 4864608,
+"text": "Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects."
+},
+{
+"rva": 4864720,
+"text": "How far into your view the damage glow reaches."
+},
+{
+"rva": 4864768,
+"text": "Shows an arc toward whoever just hit you."
+},
+{
+"rva": 4864816,
+"text": "The edge of your view pulses while your health is low."
+},
+{
+"rva": 4864880,
+"text": "Shows camera details in a corner of the view. Meant for testing."
+},
+{
+"rva": 4864960,
+"text": "On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse."
+},
+{
+"rva": 4865072,
+"text": "A dim dotted floor under the Cinema screen, so you do not float in the dark."
+},
+{
+"rva": 4865152,
+"text": "Shows your controllers while the Cinema screen is up."
+},
+{
+"rva": 4865216,
+"text": "In the main menu, a plaque under the Cinema screen with the mod's name and version."
+},
+{
+"rva": 4865312,
+"text": "In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game."
+},
+{
+"rva": 4865504,
+"text": "What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen."
+},
+{
+"rva": 4865664,
+"text": "After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH)."
+},
+{
+"rva": 4865792,
+"text": "Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4865872,
+"text": "Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4865960,
+"text": "Third-person views. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866008,
+"text": "Scenes with a free-flying camera. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866072,
+"text": "Seats and mounted guns. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866128,
+"text": "Scenes where an animation turns your view. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866208,
+"text": "Moments when the story locks the camera. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866288,
+"text": "Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866384,
+"text": "The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866480,
+"text": "Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET."
+},
+{
+"rva": 4866584,
+"text": "scene_cycle"
+},
+{
+"rva": 4866600,
+"text": "right_eye.replay"
+},
+{
+"rva": 4866624,
+"text": "right_eye.record"
+},
+{
+"rva": 4866648,
+"text": "left_eye.record"
+},
+{
+"rva": 4866664,
+"text": "drain.before_right_eye"
+},
+{
+"rva": 4866688,
+"text": "drain.after_right_eye"
+},
+{
+"rva": 4866712,
+"text": "drain.after_left_eye"
+},
+{
+"rva": 4866736,
+"text": "drain.scene_tail"
+},
+{
+"rva": 4866760,
+"text": "light.projection"
+},
+{
+"rva": 4866784,
+"text": "light.grid_wait"
+},
+{
+"rva": 4866800,
+"text": "terrain.join"
+},
+{
+"rva": 4866816,
+"text": "hiz.map_wait"
+},
+{
+"rva": 4866832,
+"text": "present.preview"
+},
+{
+"rva": 4866848,
+"text": "present.stereo_pass"
+},
+{
+"rva": 4866872,
+"text": "debug.target_averages"
+},
+{
+"rva": 4866896,
+"text": "gpu.frame"
+},
+{
+"rva": 4866912,
+"text": "gpu.before_right_eye"
+},
+{
+"rva": 4866936,
+"text": "gpu.right_eye"
+},
+{
+"rva": 4866952,
+"text": "gpu.left_eye"
+},
+{
+"rva": 4866968,
+"text": "gpu.tail"
+},
+{
+"rva": 4866984,
+"text": "gpu.resolve_right"
+},
+{
+"rva": 4867008,
+"text": "gpu.resolve_left"
+},
+{
+"rva": 4867032,
+"text": "gpu.upscale.input"
+},
+{
+"rva": 4867056,
+"text": "gpu.upscale.centre_inputs"
+},
+{
+"rva": 4867088,
+"text": "gpu.upscale.dlss"
+},
+{
+"rva": 4867112,
+"text": "gpu.upscale.periphery"
+},
+{
+"rva": 4867136,
+"text": "gpu.upscale.ring"
+},
+{
+"rva": 4867160,
+"text": "gpu.upscale.output"
+},
+{
+"rva": 4867184,
+"text": "aer.previous_transforms"
+},
+{
+"rva": 4867208,
+"text": "hands.player_update"
+},
+{
+"rva": 4867232,
+"text": "hands.hand_target"
+},
+{
+"rva": 4867256,
+"text": "hands.arm_pre_pass"
+},
+{
+"rva": 4867280,
+"text": "hands.arm_finish"
+},
+{
+"rva": 4867304,
+"text": "hands.between_weapons"
+},
+{
+"rva": 4867328,
+"text": "weapon.update"
+},
+{
+"rva": 4867376,
+"text": "[actions] {} - {}"
+},
+{
+"rva": 4867400,
+"text": "Show/hide the ImGui overlay"
+},
+{
+"rva": 4867432,
+"text": "toggle_overlay"
+},
+{
+"rva": 4867448,
+"text": "Show/hide the 2nd-view preview window"
+},
+{
+"rva": 4867488,
+"text": "toggle_second_window"
+},
+{
+"rva": 4867512,
+"text": "Show/hide the camera authority monitor window"
+},
+{
+"rva": 4867560,
+"text": "toggle_camera_monitor"
+},
+{
+"rva": 4867584,
+"text": "Show/hide metrics graph"
+},
+{
+"rva": 4867608,
+"text": "toggle_metrics"
+},
+{
+"rva": 4867624,
+"text": "List available actions"
+},
+{
+"rva": 4867648,
+"text": "help"
+},
+{
+"rva": 4867656,
+"text": "seated"
+},
+{
+"rva": 4867664,
+"text": "mod.vr.body.player_height is not set"
+},
+{
+"rva": 4867712,
+"text": "[vr] standing play from the floor is off ({}); the view keeps its relative height and the body stays the game's"
+},
+{
+"rva": 4867824,
+"text": "[vr] standing play from the floor: eye height {:.2f} m (a full crouch is {:.2f} m lower); needs the STAGE reference space"
+},
+{
+"rva": 4868040,
+"text": "primary swapchain replaced"
+},
+{
+"rva": 4868072,
+"text": "swapchain resize"
+},
+{
+"rva": 4868096,
+"text": "swapchain retired"
+},
+{
+"rva": 4868120,
+"text": "renderer shutdown"
+},
+{
+"rva": 4868144,
+"text": "InteractionDesktopOverlay"
+},
+{
+"rva": 4868176,
+"text": "Recenter: the screen and panels in front of the head, and in the world, the view back over the body"
+},
+{
+"rva": 4868280,
+"text": "Turn left by mod.vr.snap_turn_degrees"
+},
+{
+"rva": 4868320,
+"text": "Turn right by mod.vr.snap_turn_degrees"
+},
+{
+"rva": 4868360,
+"text": "Switch to the next sun cascade update schedule"
+},
+{
+"rva": 4868408,
+"text": "sun_cascade_schedule_next"
+},
+{
+"rva": 4868448,
+"text": "Compare: the game's TAA at the same render size as the chosen FSR or DLSS mode, and back"
+},
+{
+"rva": 4868544,
+"text": "Switch to the next upscaling mode (the game's TAA, then FSR and DLSS each at native, quality, balanced, performance, ultra performance); not saved"
+},
+{
+"rva": 4868704,
+"text": "Development: take one upscaler input away (texture LOD bias, jitter) to see what an artefact depends on"
+},
+{
+"rva": 4868816,
+"text": "Switch foveated upscaling to its next size (off, auto, 45 down to 20 degrees); not saved"
+},
+{
+"rva": 4868912,
+"text": "Switch what anti-aliases the foveated periphery (the mod's TAA or the upscaler's native AA); not saved"
+},
+{
+"rva": 4869024,
+"text": "Switch to the next DLSS preset (auto, K, M, L, J, E); not saved"
+},
+{
+"rva": 4869088,
+"text": "Record 5 s of UI panel poses and frame timing to a CSV"
+},
+{
+"rva": 4869144,
+"text": "vr_ui_pose_trace"
+},
+{
+"rva": 4869168,
+"text": "[vr] hand hooks unavailable; the game keeps the hands and weapon"
+},
+{
+"rva": 4869240,
+"text": "on: weapons are taken from the body"
+},
+{
+"rva": 4869280,
+"text": "unavailable: the inventory hooks did not install"
+},
+{
+"rva": 4869336,
+"text": "[vr] free hands {}"
+},
+{
+"rva": 4869360,
+"text": "[vr] weapon handling hooks unavailable; the game's own"
+},
+{
+"rva": 4869424,
+"text": "[vr] weapon hooks unavailable; holster and aim stay on the buttons"
+},
+{
+"rva": 4869496,
+"text": "[vr] controllers drive the hands; the {} hand always holds"
+},
+{
+"rva": 4869568,
+"text": "[vr] the controllers cannot play the game; the keyboard and mouse still do"
+},
+{
+"rva": 4869648,
+"text": "[vr] the game's aim assist could not be turned off"
+},
+{
+"rva": 4869704,
+"text": "[vr] world scale: {:.3f} world units per metre"
+},
+{
+"rva": 4869760,
+"text": "[renderer] aim focus hook unavailable; scopes focus where the head looks"
+},
+{
+"rva": 4869840,
+"text": "[vr] production stereo camera integration is unavailable"
+},
+{
+"rva": 4869904,
+"text": "[vr] production renderer path selected; OpenXR tracking camera integration active"
+},
+{
+"rva": 4869992,
+"text": "[renderer] stereo debug replay is unavailable"
+},
+{
+"rva": 4871440,
+"text": "interaction_debug.mutex"
+},
+{
+"rva": 4871479,
+"text": ">ts=0x{:08X} size=0x{:08X} sum=0x{:08X}"
+},
+{
+"rva": 4871591,
+"text": ")t$P"
+},
+{
+"rva": 4871637,
+"text": "X UH"
+},
+{
+"rva": 4871683,
+"text": "SAVAWH"
+},
+{
+"rva": 4871831,
+"text": "SUVWAUAVAW"
+},
+{
+"rva": 4872602,
+"text": "UWAV"
+},
+{
+"rva": 4873331,
+"text": " !\"#"
+},
+{
+"rva": 4874223,
+"text": "t$ "
+}
+]

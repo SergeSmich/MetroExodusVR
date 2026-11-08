@@ -1,0 +1,3484 @@
+0x49600A none         '#='
+0x496080 lea          'head_flashlight'
+        site 0x729C6 lea (lea-bucket)
+0x496090 lea          'mask_filter'
+        site 0x72A9D lea (lea-bucket)
+0x4960A0 lea          'head_gas_mask'
+        site 0x72BEE lea (lea-bucket)
+0x4960B0 lea          'over_shoulder_weapon'
+        site 0x72E0E lea (lea-bucket)
+0x4960C8 lea          'over_shoulder_backpack'
+        site 0x72FE2 lea (lea-bucket)
+0x4960E0 lea          'right_chest_map'
+        site 0x730CB lea (lea-bucket)
+0x4960F0 lea          'left_chest_lighter'
+        site 0x73341 lea (lea-bucket)
+0x496108 lea          'right_shoulder_medkit'
+        site 0x7348F lea (lea-bucket)
+0x496120 lea          'left_back_binoculars'
+        site 0x73712 lea (lea-bucket)
+0x496138 lea          'right_back_charger'
+        site 0x7393F lea (lea-bucket)
+0x496150 lea          'left_hip_gas_mask'
+        site 0x73AD8 lea (lea-bucket)
+0x496168 lea          'left_hip_filter'
+        site 0x73CC2 lea (lea-bucket)
+0x496178 lea          'left_hip_tape'
+        site 0x73FEB lea (lea-bucket)
+0x496188 lea          'forehead_night_vision'
+        site 0x74233 lea (lea-bucket)
+0x4961A0 lea          'visor_night_vision'
+        site 0x742E2 lea (lea-bucket)
+0x4961B8 lea          'left_forearm_watch'
+        site 0x74383 lea (lea-bucket)
+0x4961D0 lea          'right_shoulder_holster'
+        site 0x7543D lea (lea-bucket)
+0x4961E8 lea          'right_hip_holster'
+        site 0x754B9 lea (lea-bucket)
+0x496200 lea          'left_shoulder_holster'
+        site 0x75535 lea (lea-bucket)
+0x496218 lea          'belt_throwables'
+        site 0x74FC9 lea (lea-bucket)
+0x496228 lea          'belt_throwables_select'
+        site 0x750AA lea (lea-bucket)
+0x4967C0 ptrslot      'area_visuals.mutex'
+        site 0x79B1B0 ptrslot (ptr)
+0x4967D8 ptrslot      'action_press.mutex'
+        site 0x79B210 ptrslot (ptr)
+0x4967F0 lea          '[input] action {} (#{}) never reached the inventory'
+        site 0x7820A lea (lea-bucket)
+0x496828 lea          '[script input] action {} stopped: taken by the script of {}'
+        site 0x78211 lea (lea-bucket)
+0x496870 lea          "[input] the inventory answered action {} outside the player's update"
+        site 0x784B5 lea (lea-bucket)
+0x4968B8 lea          'carried out'
+        site 0x7853E lea (lea-bucket)
+0x4968C8 lea          'refused'
+        site 0x78545 lea (lea-bucket)
+        site 0x1E36E1 lea (lea-bucket)
+        site 0x1E391C lea (lea-bucket)
+        site 0x1E46C9 lea (lea-bucket)
+        site 0x1EF1E4 lea (lea-bucket)
+0x4968D0 lea          '[input] action {} (#{}) {} by the inventory'
+        site 0x78563 lea (lea-bucket)
+0x496900 lea          '[input] gameplay never took action {}'
+        site 0x7886C lea (lea-bucket)
+0x496928 ptrslot      'script_input.mutex'
+        site 0x79B370 ptrslot (ptr)
+0x496940 ptrslot      'wpn_down'
+        site 0x79B388 ptrslot (ptr)
+0x496950 ptrslot      'wpn_reload'
+        site 0x79B3B8 ptrslot (ptr)
+0x496960 ptrslot      'the weapon keys'
+        site 0x79B3E8 ptrslot (ptr)
+0x496970 lea          '[script input] {} held by the script of {}'
+        site 0x7952C lea (lea-bucket)
+0x4969A0 lea          '[script input] {} free again'
+        site 0x79561 lea (lea-bucket)
+0x496D60 lea,ptrslot  'wpn_fire'
+        site 0x7A3A2 lea (lea-bucket)
+        site 0x4969D0 ptrslot (ptr)
+0x496D70 ptrslot      'padRIGHT_TRIGGER'
+        site 0x4969E0 ptrslot (ptr)
+0x496D88 ptrslot      'wpn_aim'
+        site 0x496A00 ptrslot (ptr)
+0x496D90 ptrslot      'padLEFT_TRIGGER'
+        site 0x496A10 ptrslot (ptr)
+0x496DA0 lea,ptrslot  'jump'
+        site 0x39A5F9 lea (lea-bucket)
+        site 0x496A30 ptrslot (ptr)
+        site 0x5164D8 ptrslot (ptr)
+0x496DA8 ptrslot      'padRIGHT_SHOULDER'
+        site 0x496A40 ptrslot (ptr)
+0x496DC0 ptrslot      'crouch_toggle'
+        site 0x496A60 ptrslot (ptr)
+        site 0x497B10 ptrslot (ptr)
+0x496DD0 ptrslot      'padLEFT_SHOULDER'
+        site 0x496A70 ptrslot (ptr)
+0x496DE4 ptrslot      'sprint'
+        site 0x496A90 ptrslot (ptr)
+        site 0x516518 ptrslot (ptr)
+0x496DF0 ptrslot      'padLEFT_THUMB'
+        site 0x496AA0 ptrslot (ptr)
+        site 0x496CB0 ptrslot (ptr)
+0x496E00 ptrslot      'wpn_fast_knife'
+        site 0x496AC0 ptrslot (ptr)
+0x496E10 ptrslot      'padRIGHT_THUMB'
+        site 0x496AD0 ptrslot (ptr)
+0x496E20 ptrslot      'rui'
+        site 0x496AF0 ptrslot (ptr)
+        site 0x497C00 ptrslot (ptr)
+0x496E24 ptrslot      'padX'
+        site 0x496B00 ptrslot (ptr)
+        site 0x496D40 ptrslot (ptr)
+0x496E30 ptrslot      'wpn_dynamite'
+        site 0x496B20 ptrslot (ptr)
+        site 0x497BD0 ptrslot (ptr)
+0x496E40 ptrslot      'padY'
+        site 0x496B30 ptrslot (ptr)
+0x496E48 lea,ptrslot  'medkit'
+        site 0x1FD210 lea (lea-bucket)
+        site 0x496B50 ptrslot (ptr)
+        site 0x497B88 ptrslot (ptr)
+        site 0x50BC78 ptrslot (ptr)
+        site 0x50FE80 ptrslot (ptr)
+0x496E50 ptrslot      'padA'
+        site 0x496B60 ptrslot (ptr)
+        site 0x496CE0 ptrslot (ptr)
+0x496E58 ptrslot      'wpn_next'
+        site 0x496B80 ptrslot (ptr)
+0x496E64 ptrslot      'padB'
+        site 0x496B90 ptrslot (ptr)
+        site 0x496D10 ptrslot (ptr)
+0x496E6C lea,ptrslot  'filter'
+        site 0x1FA10B lea (lea-bucket)
+        site 0x2BFD1B lea (lea-bucket)
+        site 0x496BB0 ptrslot (ptr)
+        site 0x497BB8 ptrslot (ptr)
+        site 0x50BBF0 ptrslot (ptr)
+        site 0x50FE48 ptrslot (ptr)
+0x496E78 ptrslot      'padDPAD_UP'
+        site 0x496BC0 ptrslot (ptr)
+0x496E88 ptrslot      'facepalm'
+        site 0x496BE0 ptrslot (ptr)
+        site 0x497C48 ptrslot (ptr)
+0x496E98 ptrslot      'padDPAD_DOWN'
+        site 0x496BF0 ptrslot (ptr)
+0x496EA8 ptrslot      'wpn_light'
+        site 0x496C10 ptrslot (ptr)
+        site 0x497B28 ptrslot (ptr)
+0x496EB8 ptrslot      'padDPAD_LEFT'
+        site 0x496C20 ptrslot (ptr)
+0x496EC8 ptrslot      'time'
+        site 0x496C40 ptrslot (ptr)
+0x496ED0 ptrslot      'padDPAD_RIGHT'
+        site 0x496C50 ptrslot (ptr)
+0x496EE0 lea,ptrslot  'map'
+        site 0x1E393A lea (lea-bucket)
+        site 0x201D2D lea (lea-bucket)
+        site 0x496C70 ptrslot (ptr)
+        site 0x497B40 ptrslot (ptr)
+        site 0x49C410 ptrslot (ptr)
+        site 0x50BD88 ptrslot (ptr)
+        site 0x516618 ptrslot (ptr)
+0x496EE8 ptrslot      'padBACK'
+        site 0x496C80 ptrslot (ptr)
+        site 0x496CC0 ptrslot (ptr)
+        site 0x496CF0 ptrslot (ptr)
+        site 0x496D20 ptrslot (ptr)
+        site 0x496D50 ptrslot (ptr)
+0x496EF0 lea,ptrslot  'lighter'
+        site 0x1FECDA lea (lea-bucket)
+        site 0x496CA0 ptrslot (ptr)
+        site 0x497BE8 ptrslot (ptr)
+        site 0x50BD00 ptrslot (ptr)
+0x496EF8 ptrslot      'inventory'
+        site 0x496CD0 ptrslot (ptr)
+        site 0x497BA0 ptrslot (ptr)
+0x496F08 lea,ptrslot  'binoculars'
+        site 0x28C0F1 lea (lea-bucket)
+        site 0x496D00 ptrslot (ptr)
+        site 0x497C60 ptrslot (ptr)
+        site 0x50BAE0 ptrslot (ptr)
+0x496F18 ptrslot      'nightvision'
+        site 0x496D30 ptrslot (ptr)
+        site 0x497B70 ptrslot (ptr)
+0x496F28 movsd        'bind_gamepad '
+        site 0x7A098 movsd (lea-bucket)
+0x496F38 lea          'gamepad_custom 1'
+        site 0x79B93 lea (lea-bucket)
+0x496F50 lea          "[input] gamepad defaults at start-up: the game's, until the profile load"
+        site 0x79B0E lea (lea-bucket)
+0x496FA0 lea          '[input] gamepad defaults: the VR layout v{}, custom layout on'
+        site 0x79BE7 lea (lea-bucket)
+0x496FE0 lea          "[input] gamepad defaults: the console is missing; the game's own defaults stay"
+        site 0x79C46 lea (lea-bucket)
+0x497030 lea          'gamepad_custom_defaults'
+        site 0x797DE lea (lea-bucket)
+0x497050 lea          '[input] gamepad layout: the console is missing; VR defaults not written'
+        site 0x798AC lea (lea-bucket)
+0x497098 lea          'config_save'
+        site 0x79806 lea (lea-bucket)
+0x4970B0 lea          '[input] gamepad layout: VR defaults v{} written over v{}, custom layout on'
+        site 0x79830 lea (lea-bucket)
+0x497100 movups       'VR GAMEPAD LAYOUT'
+        site 0x79A1C movups (lea-bucket)
+0x497118 movsd        'mevr_pad_layout'
+        site 0x79A44 movsd (lea-bucket)
+0x497128 lea          'gamepad custom defaults'
+        site 0x79DF4 lea (lea-bucket)
+0x497140 lea          '[input] gamepad layout: VR defaults v{}, written on first VR start'
+        site 0x79EA8 lea (lea-bucket)
+0x497190 lea          "[input] gamepad layout: not installed; the game's own layout stays"
+        site 0x79EF0 lea (lea-bucket)
+        site 0x79F4B lea (lea-bucket)
+0x497220 lea          '[input] pad mode: held while the VR controllers play; the menu pointer is the mouse to the cursor and hover'
+        site 0x7ABA4 lea (lea-bucket)
+0x497290 lea          'pad in use'
+        site 0x7A51C lea (lea-bucket)
+0x4972A0 lea          'pad press check'
+        site 0x7A553 lea (lea-bucket)
+0x4972B0 lea          '[input] pad mode: not installed; prompts follow the device in use'
+        site 0x7A5F1 lea (lea-bucket)
+        site 0x7A64B lea (lea-bucket)
+0x4972F8 lea          '[input] binding: cancelled with the menu control'
+        site 0x7AFDD lea (lea-bucket)
+        site 0x7B046 lea (lea-bucket)
+0x497330 lea          'bind row press'
+        site 0x7AD94 lea (lea-bucket)
+0x497340 lea          '[input] binding: row hook unavailable; rebinding takes the menu meanings of the controls'
+        site 0x7AE0A lea (lea-bucket)
+        site 0x7AE5F lea (lea-bucket)
+0x4973A0 lea          '[input] combo for action {} let go of without control 0x{:X}: told as released'
+        site 0x7B479 lea (lea-bucket)
+0x4973F0 lea          'gameplay listener release'
+        site 0x7B274 lea (lea-bucket)
+0x497410 lea          "[input] combo release hook unavailable; a combo pressed by its button alone can leave the backpack's tentative press open"
+        site 0x7B2EA lea (lea-bucket)
+        site 0x7B33F lea (lea-bucket)
+0x497550 lea,ptrslot  'm3\\000'
+        site 0x7B587 lea (lea-bucket)
+        site 0x497490 ptrslot (ptr)
+0x497558 ptrslot      'm3\\01_dead_moscow'
+        site 0x4974A0 ptrslot (ptr)
+0x497570 ptrslot      'm3\\05_winter'
+        site 0x4974B0 ptrslot (ptr)
+0x497580 ptrslot      'm3\\06_bridge'
+        site 0x4974C0 ptrslot (ptr)
+0x497590 ptrslot      'm3\\06_spring'
+        site 0x4974D0 ptrslot (ptr)
+0x4975A0 ptrslot      'm3\\07_yamantau'
+        site 0x4974E0 ptrslot (ptr)
+0x4975B0 ptrslot      'm3\\08_desert'
+        site 0x4974F0 ptrslot (ptr)
+0x4975C0 ptrslot      'm3\\08_summer'
+        site 0x497500 ptrslot (ptr)
+0x4975D0 ptrslot      'm3\\12_valley'
+        site 0x497510 ptrslot (ptr)
+0x4975E0 ptrslot      'm3\\12_autumn'
+        site 0x497520 ptrslot (ptr)
+0x4975F0 ptrslot      'm3\\13_deadcity'
+        site 0x497530 ptrslot (ptr)
+0x497600 ptrslot      'm3\\14_outro'
+        site 0x497540 ptrslot (ptr)
+0x497610 lea          '[preview] level {} is not in the preview: refused'
+        site 0x7B82E lea (lea-bucket)
+0x497648 lea          'preview level gate'
+        site 0x7B953 lea (lea-bucket)
+0x497660 lea          '[preview] only the main menu and the main campaign can load; the DLC levels are refused'
+        site 0x7B9CC lea (lea-bucket)
+        site 0x7BA1E lea (lea-bucket)
+0x4976C0 lea          '[preview] level gate unavailable; every level can load in this preview build'
+        site 0x7BA8D lea (lea-bucket)
+        site 0x7BADF lea (lea-bucket)
+0x497718 ptrslot      'virtual_gamepad.mutex'
+        site 0x79B4C0 ptrslot (ptr)
+0x497730 lea          'xinput9_1_0.dll'
+        site 0x7CB0C lea (lea-bucket)
+        site 0x7CB25 lea (lea-bucket)
+        site 0x340B98 lea (lea-bucket)
+0x497740 lea          '[input] the controllers play the game as its gamepad'
+        site 0x7C555 lea (lea-bucket)
+        site 0x7C59E lea (lea-bucket)
+0x497778 lea          "[input] the gamepad is the game's own again"
+        site 0x7C6F2 lea (lea-bucket)
+        site 0x7C73E lea (lea-bucket)
+0x4977A8 lea          'XInputGetState'
+        site 0x7CB05 lea (lea-bucket)
+        site 0x340BFD lea (lea-bucket)
+0x4977B8 lea          'XInputSetState'
+        site 0x7CB1E lea (lea-bucket)
+0x4977C8 lea          '[input] the game does not import XInput as expected'
+        site 0x7CC90 lea (lea-bucket)
+        site 0x7CCE1 lea (lea-bucket)
+0x497800 lea          '[input] could not redirect XInputGetState'
+        site 0x7CB80 lea (lea-bucket)
+0x497830 lea          '[input] could not redirect XInputSetState'
+        site 0x7CBC3 lea (lea-bucket)
+0x497860 lea          'while held'
+        site 0x7CBE7 lea (lea-bucket)
+0x497870 lea          'toggles'
+        site 0x7CBEE lea (lea-bucket)
+0x497880 lea          '[input] virtual gamepad installed (XInputGetState slot +0x{:X}); crouching {}'
+        site 0x7CC1E lea (lea-bucket)
+0x4978F0 lea          '[input] GetCursorPos could not be hooked ({}); the menu pointer is unavailable'
+        site 0x7D80A lea (lea-bucket)
+0x497940 lea          '[input] menu pointer attached to the mouse device'
+        site 0x7DB42 lea (lea-bucket)
+0x497980 lea          '[input] the mouse device could not be hooked ({}); the menu pointer is unavailable'
+        site 0x7DC12 lea (lea-bucket)
+0x4979D8 ptrslot      'hint_router.mutex'
+        site 0x79B570 ptrslot (ptr)
+0x4979EC lea          '_xbox'
+        site 0x7EEE3 lea (lea-bucket)
+0x4979F8 lea          '[hints] {} not shown: the mask is off'
+        site 0x7F177 lea (lea-bucket)
+0x497A20 lea          '[hints] show {}'
+        site 0x7F269 lea (lea-bucket)
+0x497A30 lea          '[hints] closed by its action'
+        site 0x7E848 lea (lea-bucket)
+        site 0x7E9B2 lea (lea-bucket)
+        site 0x7EA43 lea (lea-bucket)
+0x497A50 lea          'hint show'
+        site 0x7E445 lea (lea-bucket)
+0x497A60 lea          '[hints] hint show hook unavailable; hints keep their text'
+        site 0x7E4BE lea (lea-bucket)
+        site 0x7E510 lea (lea-bucket)
+0x497AA0 lea          'hint hide'
+        site 0x7E5C1 lea (lea-bucket)
+0x497AB0 lea          'delay fire'
+        site 0x7E5F8 lea (lea-bucket)
+0x497AC0 lea          '[hints] hint hide hooks unavailable; hints keep their time'
+        site 0x7E683 lea (lea-bucket)
+        site 0x7E6D0 lea (lea-bucket)
+0x497CC8 ptrslot      '<press:'
+        site 0x497B00 ptrslot (ptr)
+0x497CD0 lea,ptrslot  'gasmask'
+        site 0x1F8959 lea (lea-bucket)
+        site 0x497B58 ptrslot (ptr)
+        site 0x4CBFC8 ptrslot (ptr)
+0x497CD8 ptrslot      'popup_equipment'
+        site 0x497C18 ptrslot (ptr)
+0x497CE8 lea,ptrslot  'charger'
+        site 0x1E3945 lea (lea-bucket)
+        site 0x201EF5 lea (lea-bucket)
+        site 0x497C30 ptrslot (ptr)
+        site 0x50BF20 ptrslot (ptr)
+0x497CF0 ptrslot      '<xpad_guide_button>'
+        site 0x497C78 ptrslot (ptr)
+0x497D08 ptrslot      '<xpad_guide_button_empty>'
+        site 0x497C88 ptrslot (ptr)
+0x497D28 ptrslot      '<wpn_fire>'
+        site 0x497C98 ptrslot (ptr)
+0x497D38 ptrslot      '<wpn_aim>'
+        site 0x497CA8 ptrslot (ptr)
+0x497D48 ptrslot      '<Press:'
+        site 0x497CB8 ptrslot (ptr)
+0x497D50 lea          'Tap'
+        site 0x808F1 lea (lea-bucket)
+0x497D54 lea          'tap'
+        site 0x808EA lea (lea-bucket)
+0x497D58 lea          'Hold'
+        site 0x808E1 lea (lea-bucket)
+0x497D60 lea          'hold'
+        site 0x808DA lea (lea-bucket)
+        site 0x251EED lea (lea-bucket)
+0x497D68 lea          'Press'
+        site 0x808D1 lea (lea-bucket)
+0x497D70 lea          'press'
+        site 0x808CA lea (lea-bucket)
+0x497D7C movzx        ' <'
+        site 0x80A13 movzx (lea-bucket)
+0x497D80 lea          '<grip_dominant>'
+        site 0x7FE70 lea (lea-bucket)
+        site 0x7FEED lea (lea-bucket)
+0x497D90 lea          '<grip_nondominant>'
+        site 0x7FF57 lea (lea-bucket)
+        site 0x7FFCD lea (lea-bucket)
+0x497DA8 lea          '<trigger_dominant>'
+        site 0x80012 lea (lea-bucket)
+        site 0x80091 lea (lea-bucket)
+0x497DC0 lea          '<trigger_nondominant>'
+        site 0x800D6 lea (lea-bucket)
+        site 0x80155 lea (lea-bucket)
+0x497DD8 lea          '<nondominant>'
+        site 0x801BB lea (lea-bucket)
+        site 0x8022F lea (lea-bucket)
+0x497DE8 lea          '<dominant>'
+        site 0x80290 lea (lea-bucket)
+        site 0x8030D lea (lea-bucket)
+0x498640 lea,ptrslot  '$reload_easy_hint'
+        site 0x80D97 lea (lea-bucket)
+        site 0x497E00 ptrslot (ptr)
+0x498658 ptrslot      'm3_bagpack_hint_popup'
+        site 0x497E20 ptrslot (ptr)
+0x498670 ptrslot      'm3_boat_hint'
+        site 0x497E40 ptrslot (ptr)
+0x498680 ptrslot      'm3_car_drive_hint'
+        site 0x497E60 ptrslot (ptr)
+0x498698 ptrslot      'm3_motorboat_drive_hint'
+        site 0x497E80 ptrslot (ptr)
+0x4986B0 ptrslot      'm3_radio_act_hint'
+        site 0x497EA0 ptrslot (ptr)
+0x4986C8 ptrslot      'm3_radio_hint'
+        site 0x497EC0 ptrslot (ptr)
+0x4986D8 ptrslot      'm3_special_slot_crossbow'
+        site 0x497EE0 ptrslot (ptr)
+0x4986F8 ptrslot      'm3_vent_move_hint'
+        site 0x497F00 ptrslot (ptr)
+0x498710 ptrslot      'm3_weapon_fast_hint'
+        site 0x497F20 ptrslot (ptr)
+0x498728 ptrslot      'm3_weapon_special_slot'
+        site 0x497F40 ptrslot (ptr)
+0x498740 ptrslot      'm3_trolley_hint'
+        site 0x497F60 ptrslot (ptr)
+0x498750 ptrslot      'Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit.'
+        site 0x497F70 ptrslot (ptr)
+0x4987D8 ptrslot      'm3_map_hint'
+        site 0x497F80 ptrslot (ptr)
+0x4987F0 ptrslot      'Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]'
+        site 0x497F90 ptrslot (ptr)
+        site 0x497FB0 ptrslot (ptr)
+0x498840 ptrslot      'm3_map_updated_hint'
+        site 0x497FA0 ptrslot (ptr)
+0x498858 ptrslot      'm3_map_second_hint'
+        site 0x497FC0 ptrslot (ptr)
+0x498870 ptrslot      'Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]'
+        site 0x497FD0 ptrslot (ptr)
+0x4988D0 ptrslot      'm3_bagpack_hint'
+        site 0x497FE0 ptrslot (ptr)
+0x4988E0 ptrslot      'Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]'
+        site 0x497FF0 ptrslot (ptr)
+        site 0x498010 ptrslot (ptr)
+0x498940 ptrslot      'm3_bagpack_hint_upd'
+        site 0x498000 ptrslot (ptr)
+0x498958 ptrslot      'm3_weapon_popup_hint'
+        site 0x498020 ptrslot (ptr)
+        site 0x49C3C0 ptrslot (ptr)
+        site 0x49C430 ptrslot (ptr)
+0x498970 ptrslot      'Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]'
+        site 0x498030 ptrslot (ptr)
+0x4989D8 ptrslot      'm3_pheumatics_upd'
+        site 0x498040 ptrslot (ptr)
+0x4989F0 ptrslot      'Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>'
+        site 0x498050 ptrslot (ptr)
+        site 0x498090 ptrslot (ptr)
+0x498A70 ptrslot      'm3_pheumatics_upd_light'
+        site 0x498060 ptrslot (ptr)
+0x498A90 ptrslot      'Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>'
+        site 0x498070 ptrslot (ptr)
+        site 0x4980B0 ptrslot (ptr)
+0x498AD8 ptrslot      'm3_flamethrower_upd'
+        site 0x498080 ptrslot (ptr)
+0x498AF0 ptrslot      'm3_flamethrower_upd_light'
+        site 0x4980A0 ptrslot (ptr)
+0x498B10 ptrslot      'm3_wpn_down_hint'
+        site 0x4980C0 ptrslot (ptr)
+0x498B28 ptrslot      'Point your weapon down to lower it'
+        site 0x4980D0 ptrslot (ptr)
+0x498B50 ptrslot      'm3_wpn_down_hint_light'
+        site 0x4980E0 ptrslot (ptr)
+0x498B68 ptrslot      'Point your weapon down'
+        site 0x4980F0 ptrslot (ptr)
+0x498B80 ptrslot      'm3_wpn_down_sprint_hint'
+        site 0x498100 ptrslot (ptr)
+0x498B98 ptrslot      'To sprint further, point your weapon down'
+        site 0x498110 ptrslot (ptr)
+0x498BC8 ptrslot      'm3_crouch_hint'
+        site 0x498120 ptrslot (ptr)
+0x498BD8 ptrslot      '<Press:crouch_toggle> to crouch'
+        site 0x498130 ptrslot (ptr)
+0x498BF8 ptrslot      'm3_weapon_jammed'
+        site 0x498140 ptrslot (ptr)
+0x498C10 ptrslot      'Weapon jammed! Pull the bolt[ or <press:rui>]'
+        site 0x498150 ptrslot (ptr)
+0x498C40 ptrslot      'm3_special_ammo_hint'
+        site 0x498160 ptrslot (ptr)
+        site 0x49C4A0 ptrslot (ptr)
+0x498C60 ptrslot      'Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time'
+        site 0x498170 ptrslot (ptr)
+0x498CC0 ptrslot      'm3_special_ammo_hint_popup'
+        site 0x498180 ptrslot (ptr)
+0x498CE0 ptrslot      'Holding <popup_equipment>, press <rui>: your next reload loads the other ammo'
+        site 0x498190 ptrslot (ptr)
+0x498D30 ptrslot      'm3_special_ammo_hint_2'
+        site 0x4981A0 ptrslot (ptr)
+        site 0x49C510 ptrslot (ptr)
+0x498D50 ptrslot      'Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time'
+        site 0x4981B0 ptrslot (ptr)
+0x498DB0 ptrslot      'm3_secondary_hint_flame'
+        site 0x4981C0 ptrslot (ptr)
+0x498DD0 ptrslot      'You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+        site 0x4981D0 ptrslot (ptr)
+0x498E38 ptrslot      'm3_secondary_hint_dynamite'
+        site 0x4981E0 ptrslot (ptr)
+0x498E60 ptrslot      'You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+        site 0x4981F0 ptrslot (ptr)
+0x498EC8 ptrslot      'm3_secondary_hint_knife'
+        site 0x498200 ptrslot (ptr)
+0x498EE0 ptrslot      'You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+        site 0x498210 ptrslot (ptr)
+0x498F48 ptrslot      'm3_secondary_hint'
+        site 0x498220 ptrslot (ptr)
+0x498F60 ptrslot      'Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+        site 0x498230 ptrslot (ptr)
+0x498FB8 ptrslot      'm3_decoy_hint'
+        site 0x498240 ptrslot (ptr)
+0x498FD0 ptrslot      'You found a decoy. Grab <grip_dominant> from the front of your belt'
+        site 0x498250 ptrslot (ptr)
+        site 0x498270 ptrslot (ptr)
+0x499018 ptrslot      'm3_secondary_choose_hint'
+        site 0x498260 ptrslot (ptr)
+0x499038 ptrslot      'bino_on_off'
+        site 0x498280 ptrslot (ptr)
+0x499050 ptrslot      'Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]'
+        site 0x498290 ptrslot (ptr)
+        site 0x4982B0 ptrslot (ptr)
+0x4990B8 ptrslot      'bino_on_off_popup'
+        site 0x4982A0 ptrslot (ptr)
+0x4990D0 ptrslot      '$nightvision'
+        site 0x4982C0 ptrslot (ptr)
+0x4990E0 ptrslot      'Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]'
+        site 0x4982D0 ptrslot (ptr)
+        site 0x4982F0 ptrslot (ptr)
+0x499140 ptrslot      '$nightvision_popup'
+        site 0x4982E0 ptrslot (ptr)
+0x499158 ptrslot      'm3_flashlight_hint'
+        site 0x498300 ptrslot (ptr)
+0x499170 ptrslot      'Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]'
+        site 0x498310 ptrslot (ptr)
+0x4991C0 ptrslot      'm3_charger_hint_2_upd'
+        site 0x498320 ptrslot (ptr)
+0x4991E0 ptrslot      'Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]'
+        site 0x498330 ptrslot (ptr)
+        site 0x498350 ptrslot (ptr)
+        site 0x498370 ptrslot (ptr)
+0x499238 ptrslot      'm3_charger_hint_2_popup'
+        site 0x498340 ptrslot (ptr)
+0x499250 ptrslot      'm3_charger_hint_2_upd_light'
+        site 0x498360 ptrslot (ptr)
+0x499270 ptrslot      'm3_lighter_hint'
+        site 0x498380 ptrslot (ptr)
+0x499280 ptrslot      'Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]'
+        site 0x498390 ptrslot (ptr)
+0x4992E8 ptrslot      'm3_lighter_hint_popup'
+        site 0x4983A0 ptrslot (ptr)
+0x499300 ptrslot      'Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]'
+        site 0x4983B0 ptrslot (ptr)
+        site 0x4983D0 ptrslot (ptr)
+        site 0x4983F0 ptrslot (ptr)
+0x499350 ptrslot      'm3_lighter_hint_easy'
+        site 0x4983C0 ptrslot (ptr)
+0x499368 ptrslot      'm3_lighter_hint_popup_easy'
+        site 0x4983E0 ptrslot (ptr)
+0x499388 ptrslot      '$medkit_easy_hint'
+        site 0x498400 ptrslot (ptr)
+0x4993A0 ptrslot      'Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]'
+        site 0x498410 ptrslot (ptr)
+0x499418 ptrslot      'm3_rad_watch_hint'
+        site 0x498420 ptrslot (ptr)
+0x499430 ptrslot      'Check the radiation detector on your left wrist'
+        site 0x498430 ptrslot (ptr)
+0x499460 ptrslot      'm3_rad_watch_hint_light'
+        site 0x498440 ptrslot (ptr)
+0x499478 ptrslot      'Radiation detector: check your left wrist'
+        site 0x498450 ptrslot (ptr)
+0x4994A8 ptrslot      'm3_gasmask_hint_upd'
+        site 0x498460 ptrslot (ptr)
+0x4994C0 ptrslot      'Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]'
+        site 0x498470 ptrslot (ptr)
+0x499530 ptrslot      'm3_hint_ingame_gasmask_filter_easy'
+        site 0x498480 ptrslot (ptr)
+0x499560 ptrslot      'Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]'
+        site 0x498490 ptrslot (ptr)
+0x4995B0 ptrslot      'm3_hint_ingame_gasmask_filter_upd'
+        site 0x4984A0 ptrslot (ptr)
+0x4995E0 ptrslot      'Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]'
+        site 0x4984B0 ptrslot (ptr)
+0x499638 ptrslot      'm3_gasmask_wipe_hint'
+        site 0x4984C0 ptrslot (ptr)
+0x499650 ptrslot      'Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]'
+        site 0x4984D0 ptrslot (ptr)
+0x499698 ptrslot      'm3_gasmask_wipe_hint_light'
+        site 0x4984E0 ptrslot (ptr)
+0x4996B8 ptrslot      'Wipe: rub the visor with an open hand[, or <press:facepalm>]'
+        site 0x4984F0 ptrslot (ptr)
+0x4996F8 ptrslot      'm3_gasmask_quick_repair'
+        site 0x498500 ptrslot (ptr)
+0x499710 ptrslot      'Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]'
+        site 0x498510 ptrslot (ptr)
+0x499790 ptrslot      'm3_gasmask_quick_repair_easy'
+        site 0x498520 ptrslot (ptr)
+0x4997B0 ptrslot      'Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]'
+        site 0x498530 ptrslot (ptr)
+0x499810 ptrslot      'diary_open_hint'
+        site 0x498540 ptrslot (ptr)
+0x499820 ptrslot      'New note - read it in the pause menu'
+        site 0x498550 ptrslot (ptr)
+        site 0x498570 ptrslot (ptr)
+0x499848 ptrslot      'diary_open_hint_xbox'
+        site 0x498560 ptrslot (ptr)
+0x499860 ptrslot      'postcard_open_hint'
+        site 0x498580 ptrslot (ptr)
+0x499878 ptrslot      'New postcard - watch it in the pause menu'
+        site 0x498590 ptrslot (ptr)
+        site 0x4985B0 ptrslot (ptr)
+0x4998A8 ptrslot      'postcard_open_hint_xbox'
+        site 0x4985A0 ptrslot (ptr)
+0x4998C0 ptrslot      'm3_photo_mode_hint'
+        site 0x4985C0 ptrslot (ptr)
+0x4998D8 ptrslot      'm3_charger_pump'
+        site 0x4985E0 ptrslot (ptr)
+0x4998E8 ptrslot      'Pump the charger: <wpn_fire>'
+        site 0x4985F0 ptrslot (ptr)
+0x499908 ptrslot      'm3_melee_hint'
+        site 0x498600 ptrslot (ptr)
+0x499918 ptrslot      'Melee attack: <wpn_fast_knife>'
+        site 0x498610 ptrslot (ptr)
+0x499938 ptrslot      'm3_melee_hint_light'
+        site 0x498620 ptrslot (ptr)
+0x499950 ptrslot      'Melee: <wpn_fast_knife>'
+        site 0x498630 ptrslot (ptr)
+0x499968 movups       'mevr_vr_hints_menu'
+        site 0x815E1 movups (lea-bucket)
+        site 0x81A6F movups (lea-bucket)
+0x499980 lea,movload  'list_box'
+        site 0x816A1 movload (lea-bucket)
+        site 0x81AE1 lea (lea-bucket)
+0x499990 movsd        'hints_menu'
+        site 0x8161A movsd (lea-bucket)
+0x4999A0 movsd        'diary_menu'
+        site 0x8165F movsd (lea-bucket)
+0x4999B0 movload      'default'
+        site 0x81701 movload (lea-bucket)
+0x4999B8 movsd        'btn_hints'
+        site 0x81784 movsd (lea-bucket)
+0x4999C8 movups       'btn_mevr_vr_hints'
+        site 0x817E7 movups (lea-bucket)
+0x4999E0 movload      'VR HINTS'
+        site 0x8181C movload (lea-bucket)
+0x4999F0 movsd        'btn_photomode'
+        site 0x81851 movsd (lea-bucket)
+0x499BC0 ptrslot      'Basics'
+        site 0x499A00 ptrslot (ptr)
+0x499CB8 ptrslot      'Movement'
+        site 0x499A20 ptrslot (ptr)
+0x499EC8 ptrslot      'Interactions'
+        site 0x499A40 ptrslot (ptr)
+0x49A1A0 ptrslot      'Weapons'
+        site 0x499A60 ptrslot (ptr)
+0x49A688 ptrslot      'Manual reloading'
+        site 0x499A80 ptrslot (ptr)
+0x49AC9E none         '<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead.'
+0x49AD08 ptrslot      'Items and devices'
+        site 0x499AA0 ptrslot (ptr)
+0x49B098 ptrslot      'Gas mask'
+        site 0x499AC0 ptrslot (ptr)
+0x49B490 ptrslot      'Medkit'
+        site 0x499AE0 ptrslot (ptr)
+0x49B680 ptrslot      'Flashlight and charger'
+        site 0x499B00 ptrslot (ptr)
+0x49B7C0 ptrslot      'Map / journal'
+        site 0x499B20 ptrslot (ptr)
+0x49B8B8 ptrslot      'Backpack / inventory'
+        site 0x499B40 ptrslot (ptr)
+0x49BA30 ptrslot      'Binoculars and NV'
+        site 0x499B60 ptrslot (ptr)
+0x49BC68 ptrslot      'Weapon scopes'
+        site 0x499B80 ptrslot (ptr)
+0x49BCF8 ptrslot      'Workbenches'
+        site 0x499BA0 ptrslot (ptr)
+0x49BDE8 movsd        'mevr_popup_menu'
+        site 0x82697 movsd (lea-bucket)
+        site 0x83273 movsd (lea-bucket)
+        site 0x83A82 movsd (lea-bucket)
+0x49BDF8 movsd        'message_menu'
+        site 0x834DF movsd (lea-bucket)
+        site 0x88D7D movsd (lea-bucket)
+0x49BE08 lea          'message'
+        site 0x83303 lea (lea-bucket)
+        site 0x83554 lea (lea-bucket)
+0x49BE10 lea          '[popups] {}: {}'
+        site 0x836FD lea (lea-bucket)
+0x49BE20 lea          'btn_ok'
+        site 0x83381 lea (lea-bucket)
+0x49BE28 lea          "[popups] scene ended: '{}' on {}"
+        site 0x83824 lea (lea-bucket)
+0x49BE50 movsd        'restart_warning'
+        site 0x826E3 movsd (lea-bucket)
+0x49BE60 movsd        'btn_cancel'
+        site 0x82741 movsd (lea-bucket)
+0x49BE70 lea          'mevr_popup_'
+        site 0x82B66 lea (lea-bucket)
+0x49BE80 lea          '[popups] shown: {}'
+        site 0x83C58 lea (lea-bucket)
+0x49BEE8 lea          'mevr_reloads_{:x}'
+        site 0x84114 lea (lea-bucket)
+        site 0x845F1 lea (lea-bucket)
+0x49BF9A none         ' @'
+0x49C560 ptrslot      'welcome'
+        site 0x49BF40 ptrslot (ptr)
+0x49C5D9 none         'checking that will improve your experience.'
+0x49C608 ptrslot      'check_settings'
+        site 0x49BFB0 ptrslot (ptr)
+0x49C720 ptrslot      'check_hints'
+        site 0x49C020 ptrslot (ptr)
+0x49C7B9 none         'Check it out if you feel lost or unsure how to proceed.'
+0x49C7F8 ptrslot      'ask_part_highlights'
+        site 0x49C090 ptrslot (ptr)
+0x49C938 ptrslot      'pause_recenter'
+        site 0x49C100 ptrslot (ptr)
+0x49C9A2 none         'Everything about VR controls is in the Pause Menu under VR HINTS section.'
+0x49C9F0 ptrslot      'vs_intro'
+        site 0x49C130 ptrslot (ptr)
+        site 0x49C1A0 ptrslot (ptr)
+        site 0x49C210 ptrslot (ptr)
+        site 0x49C280 ptrslot (ptr)
+        site 0x49C2F0 ptrslot (ptr)
+0x49CA00 ptrslot      '01_dead_moscow'
+        site 0x49C148 ptrslot (ptr)
+        site 0x49C1B8 ptrslot (ptr)
+        site 0x49C228 ptrslot (ptr)
+        site 0x49C298 ptrslot (ptr)
+        site 0x49C308 ptrslot (ptr)
+        site 0x49C378 ptrslot (ptr)
+0x49CA10 ptrslot      'gear'
+        site 0x49C170 ptrslot (ptr)
+0x49CA8A none         'You can find details of where each device is located in Pause Menu in VR HINTS tab.'
+0x49CAE0 ptrslot      'weapons'
+        site 0x49C1E0 ptrslot (ptr)
+0x49CB60 none         'Pointing a gun down holsters it and aiming down sight stabilizes it.'
+0x49CBA8 ptrslot      'reloading'
+        site 0x49C250 ptrslot (ptr)
+0x49CC7D none         'Options / VR / Weapons.'
+0x49CC98 ptrslot      'qte'
+        site 0x49C2C0 ptrslot (ptr)
+0x49CD14 none         "You can change the QTEs mode in game's options."
+0x49CD48 ptrslot      'gas_mask'
+        site 0x49C330 ptrslot (ptr)
+0x49CE74 none         'Fix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.'
+0x49CEF8 ptrslot      'dm_roof_radio_cs'
+        site 0x49C360 ptrslot (ptr)
+0x49CF10 ptrslot      'backpack'
+        site 0x49C3A0 ptrslot (ptr)
+0x49CF89 none         'Grip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>].'
+0x49CFD8 ptrslot      '06_bridge'
+        site 0x49C3E8 ptrslot (ptr)
+        site 0x49C458 ptrslot (ptr)
+0x49D040 ptrslot      'tikhar_ammo'
+        site 0x49C480 ptrslot (ptr)
+0x49D11D none         'Then reload as usual. Do the same to switch back.'
+0x49D150 ptrslot      '08_desert'
+        site 0x49C4C8 ptrslot (ptr)
+0x49D160 ptrslot      'helsing_ammo'
+        site 0x49C4F0 ptrslot (ptr)
+0x49D1A7 none         'With Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back.'
+0x49D270 lea,movups,ptrslot 'm3_popup_vs_left'
+        site 0x84A77 lea (lea-bucket)
+        site 0x84CF7 lea (lea-bucket)
+        site 0x84DE5 lea (lea-bucket)
+        site 0x84F5B movups (lea-bucket)
+        site 0x49D248 ptrslot (ptr)
+0x49D288 ptrslot      'm3_popup_vs_left_mouse'
+        site 0x49D250 ptrslot (ptr)
+0x49D2A0 ptrslot      'm3_popup_secondary'
+        site 0x49D258 ptrslot (ptr)
+0x49D2B8 ptrslot      'm3_popup_devices_l_3'
+        site 0x49D260 ptrslot (ptr)
+0x49D2D0 ptrslot      'm3_popup_devices_l_3_1'
+        site 0x49D268 ptrslot (ptr)
+0x49D2E8 movups       'menu_3_popup_pad_dpad_xbox'
+        site 0x849E4 movups (lea-bucket)
+0x49D308 lea          'menu open'
+        site 0x84AF0 lea (lea-bucket)
+0x49D318 lea          'menu activate'
+        site 0x84B2F lea (lea-bucket)
+0x49D330 lea          '[hints] menu open hook unavailable; d-pad menus keep the d-pad picture'
+        site 0x84B9D lea (lea-bucket)
+        site 0x84C04 lea (lea-bucket)
+0x49D388 lea          '[debug_menu] {}'
+        site 0x8701C lea (lea-bucket)
+        site 0x95B88 lea (lea-bucket)
+        site 0x972FE lea (lea-bucket)
+        site 0x97E12 lea (lea-bucket)
+0x49D398 lea          'g_subtitles_size'
+        site 0x885FF lea (lea-bucket)
+0x49D3AC lea          'found'
+        site 0x862AE lea (lea-bucket)
+        site 0xCF859 lea (lea-bucket)
+        site 0x1F70A4 lea (lea-bucket)
+        site 0x22CC23 lea (lea-bucket)
+0x49D3B8 lea          'not found'
+        site 0x862B5 lea (lea-bucket)
+0x49D3C8 lea          "FindMenu('{}'): {} of {} menus compared, {}, {:.3f} ms"
+        site 0x8634A lea (lea-bucket)
+0x49D400 lea          '[menus] {} at RVA 0x{:X} does not match this executable'
+        site 0x89045 lea (lea-bucket)
+0x49D440 lea          '[menus] {} (vtable 0x{:X} slot {}) does not match this executable'
+        site 0x8918F lea (lea-bucket)
+0x49D488 movups       'the console does not exist yet'
+        site 0x85DED movups (lea-bucket)
+        site 0x8772E movups (lea-bucket)
+        site 0x88488 movups (lea-bucket)
+        site 0x88982 movups (lea-bucket)
+0x49D4A8 lea          'the console already has a command of that name'
+        site 0x88500 lea (lea-bucket)
+0x49D4E0 lea          "RegisterVariable('{}') parts: console lookup {:.3f} ms ({} commands), create {:.3f} ms"
+        site 0x888A1 lea (lea-bucket)
+0x49D538 lea,movups   'the menu manager does not exist yet'
+        site 0x86826 lea (lea-bucket)
+        site 0x86CE2 movups (lea-bucket)
+        site 0x87ED7 movups (lea-bucket)
+0x49D560 movups       'it has no console variable'
+        site 0x87F34 movups (lea-bucket)
+0x49D580 lea          'the game did not allocate an option adapter'
+        site 0x880FC lea (lea-bucket)
+0x49D5B0 lea          'the option adapter did not find its variable'
+        site 0x8813E lea (lea-bucket)
+0x49D5E0 lea          "RegisterOption('{}') parts: create {:.3f} ms, registry insert {:.3f} ms"
+        site 0x88342 lea (lea-bucket)
+0x49D628 lea          'its option adapter is of an unknown class'
+        site 0x86E5E lea (lea-bucket)
+0x49D658 movups       'the game has no option of that name'
+        site 0x86F3B movups (lea-bucket)
+0x49D680 movups       'the game has no variable of that name'
+        site 0x85E57 movups (lea-bucket)
+        site 0x87798 movups (lea-bucket)
+        site 0x889F5 movups (lea-bucket)
+0x49D6A8 lea          'its variable is of an unknown class'
+        site 0x85EA1 lea (lea-bucket)
+        site 0x877F3 lea (lea-bucket)
+        site 0x88A97 lea (lea-bucket)
+0x49D6D0 lea          '{} is outside its range [{}, {}]'
+        site 0x87A5B lea (lea-bucket)
+0x49D6F8 lea          'too many pinned variables'
+        site 0x8783C lea (lea-bucket)
+0x49D714 lea          '{}'
+        site 0x878F2 lea (lea-bucket)
+        site 0xBC4B1 lea (lea-bucket)
+        site 0x11E451 lea (lea-bucket)
+        site 0x125B1E lea (lea-bucket)
+        site 0x125D0B lea (lea-bucket)
+        site 0x126988 lea (lea-bucket)
+        site 0x1274E3 lea (lea-bucket)
+        site 0x135AC0 lea (lea-bucket)
+        site 0x135D2F lea (lea-bucket)
+        site 0x3865A1 lea (lea-bucket)
+        site 0x46F54D lea (lea-bucket)
+0x49D718 lea          'too many shadowed variables'
+        site 0x88BB2 lea (lea-bucket)
+0x49D738 lea          'it has no storage'
+        site 0x85EC8 lea (lea-bucket)
+0x49D750 lea          '{} is not one of its values'
+        site 0x85F1D lea (lea-bucket)
+0x49D770 lea          'cannot open {}'
+        site 0x87DBE lea (lea-bucket)
+0x49D780 lea          "ReadGameFile('{}'): engine open {:.3f} ms, copy {:.3f} ms, {} bytes"
+        site 0x87D09 lea (lea-bucket)
+0x49D7D0 lea          'LoadPackage: engine load {:.3f} ms ({} -> {} menus, {} bytes), slot fix-up {:.3f} ms ({} menus now)'
+        site 0x86B23 lea (lea-bucket)
+0x49D834 lea,ptrslot  '%s'
+        site 0x85FCB lea (lea-bucket)
+        site 0xCD9AD lea (lea-bucket)
+        site 0xCFD3E lea (lea-bucket)
+        site 0x251329 lea (lea-bucket)
+        site 0x251356 lea (lea-bucket)
+        site 0x271440 lea (lea-bucket)
+        site 0x271459 lea (lea-bucket)
+        site 0x271500 lea (lea-bucket)
+        site 0x271519 lea (lea-bucket)
+        site 0x2F74E4 lea (lea-bucket)
+        site 0x2FE39C lea (lea-bucket)
+        site 0x6E6950 ptrslot (ptr)
+        site 0x6E6958 ptrslot (ptr)
+0x49D838 lea          "control '{}' in '{}': {} of {} controls compared, {:.3f} ms"
+        site 0x871C9 lea (lea-bucket)
+0x49D910 lea,movups,ptrslot 'menu_ingame_hint'
+        site 0x8A61E lea (lea-bucket)
+        site 0x8AC3B movups (lea-bucket)
+        site 0x49D8A0 ptrslot (ptr)
+0x49D928 ptrslot      'menu_ingame_hint__appearence_fade_in'
+        site 0x49D8A8 ptrslot (ptr)
+0x49D950 ptrslot      'menu_ingame_hint_left'
+        site 0x49D8B0 ptrslot (ptr)
+0x49D968 ptrslot      'menu_ingame_hint_kill_stun_1'
+        site 0x49D8B8 ptrslot (ptr)
+0x49D988 ptrslot      'menu_ingame_hint_kill_stun_2'
+        site 0x49D8C0 ptrslot (ptr)
+0x49D9A8 ptrslot      'menu_ingame_hint_replay_controls'
+        site 0x49D8C8 ptrslot (ptr)
+0x49D9D0 ptrslot      'menu_ingame_hint_map'
+        site 0x49D8D0 ptrslot (ptr)
+0x49D9E8 ptrslot      'menu_ingame_hint_map_bino'
+        site 0x49D8D8 ptrslot (ptr)
+0x49DA08 ptrslot      'menu_ingame_hint_task'
+        site 0x49D8E0 ptrslot (ptr)
+0x49DA20 ptrslot      'menu_qte'
+        site 0x49D8E8 ptrslot (ptr)
+0x49DA30 ptrslot      'menu_qte_hold'
+        site 0x49D8F0 ptrslot (ptr)
+0x49DA40 ptrslot      'use_menu_hold'
+        site 0x49D8F8 ptrslot (ptr)
+0x49DA50 ptrslot      'menu_melee_kill_stun'
+        site 0x49D900 ptrslot (ptr)
+0x49DA68 ptrslot      'menu_ingame_hint_no_body'
+        site 0x49D908 ptrslot (ptr)
+0x49DA88 movsd        'hint_body_big'
+        site 0x8A97A movsd (lea-bucket)
+0x49DA98 movsd        'menu_3_warning'
+        site 0x8AA2D movsd (lea-bucket)
+0x49DAAA none         'L?'
+0x49DAB2 none         'HB'
+0x49DAC2 none         '/C'
+0x49DAF0 ptrslot      'mevr_description'
+        site 0x49DAE0 ptrslot (ptr)
+0x49DB20 lea          '{}: cannot set {}'
+        site 0x8D545 lea (lea-bucket)
+        site 0x8DBCC lea (lea-bucket)
+        site 0x8DC35 lea (lea-bucket)
+        site 0x8DC6C lea (lea-bucket)
+        site 0x8DC9E lea (lea-bucket)
+        site 0x8DCD0 lea (lea-bucket)
+        site 0x8DD02 lea (lea-bucket)
+        site 0x8DD34 lea (lea-bucket)
+        site 0x8DD66 lea (lea-bucket)
+        site 0x8DD98 lea (lea-bucket)
+        site 0x8DDCA lea (lea-bucket)
+        site 0x8DDFC lea (lea-bucket)
+        site 0x8DE2E lea (lea-bucket)
+        site 0x8E537 lea (lea-bucket)
+        site 0x8F56E lea (lea-bucket)
+        site 0x8FD9F lea (lea-bucket)
+        site 0x8FDD5 lea (lea-bucket)
+        site 0x8FE0B lea (lea-bucket)
+        site 0x8FE41 lea (lea-bucket)
+        site 0x8FE77 lea (lea-bucket)
+        site 0x8FEAD lea (lea-bucket)
+        site 0x910A3 lea (lea-bucket)
+        site 0x91124 lea (lea-bucket)
+        site 0x9115C lea (lea-bucket)
+        site 0x91194 lea (lea-bucket)
+        site 0x911CC lea (lea-bucket)
+        site 0x91205 lea (lea-bucket)
+        site 0x91241 lea (lea-bucket)
+        site 0x912BD lea (lea-bucket)
+        site 0x912FD lea (lea-bucket)
+        site 0x9133F lea (lea-bucket)
+        site 0x91381 lea (lea-bucket)
+        site 0x913FF lea (lea-bucket)
+        site 0x9287F lea (lea-bucket)
+        site 0x928B5 lea (lea-bucket)
+        site 0x928EB lea (lea-bucket)
+        site 0x92921 lea (lea-bucket)
+        site 0x92957 lea (lea-bucket)
+        site 0x9298D lea (lea-bucket)
+        site 0x929C3 lea (lea-bucket)
+        site 0x92A17 lea (lea-bucket)
+0x49DB34 lea          'type'
+        site 0x8DA18 lea (lea-bucket)
+        site 0x923C6 lea (lea-bucket)
+        site 0x2BAF87 lea (lea-bucket)
+        site 0x2BE0DC lea (lea-bucket)
+0x49DB40 lea          'group_name'
+        site 0x8D6A8 lea (lea-bucket)
+        site 0x8DF9F lea (lea-bucket)
+        site 0x8EC8E lea (lea-bucket)
+        site 0x908C6 lea (lea-bucket)
+        site 0x90957 lea (lea-bucket)
+        site 0x923ED lea (lea-bucket)
+        site 0x927BF lea (lea-bucket)
+0x49DB4C lea          'name'
+        site 0x8C20A lea (lea-bucket)
+        site 0x8D611 lea (lea-bucket)
+        site 0x8E0AE lea (lea-bucket)
+        site 0x8E165 lea (lea-bucket)
+        site 0x8ED2D lea (lea-bucket)
+        site 0x8EDE5 lea (lea-bucket)
+        site 0x8F8D1 lea (lea-bucket)
+        site 0x90042 lea (lea-bucket)
+        site 0x90A8D lea (lea-bucket)
+        site 0x91C19 lea (lea-bucket)
+        site 0x92712 lea (lea-bucket)
+        site 0x92A88 lea (lea-bucket)
+        site 0x92C99 lea (lea-bucket)
+        site 0x2BADE8 lea (lea-bucket)
+        site 0x2BB7B6 lea (lea-bucket)
+        site 0x2BC789 lea (lea-bucket)
+        site 0x2BC9B8 lea (lea-bucket)
+        site 0x2BCE18 lea (lea-bucket)
+        site 0x2BDB50 lea (lea-bucket)
+        site 0x2BDF9B lea (lea-bucket)
+        site 0x2BE508 lea (lea-bucket)
+        site 0x2BF886 lea (lea-bucket)
+        site 0x2C0188 lea (lea-bucket)
+        site 0x2C28C9 lea (lea-bucket)
+        site 0x2C2B99 lea (lea-bucket)
+        site 0x2C3079 lea (lea-bucket)
+        site 0x2C3782 lea (lea-bucket)
+        site 0x2C44C6 lea (lea-bucket)
+        site 0x3683F6 lea (lea-bucket)
+        site 0x368417 lea (lea-bucket)
+        site 0x3685D2 lea (lea-bucket)
+        site 0x36E3D8 lea (lea-bucket)
+        site 0x39C35E lea (lea-bucket)
+0x49DB58 lea          "the game has no menu '{}'"
+        site 0x8D4E8 lea (lea-bucket)
+        site 0x92B8F lea (lea-bucket)
+        site 0x92D36 lea (lea-bucket)
+        site 0x92F81 lea (lea-bucket)
+0x49DB78 lea          "new menu '{}' would replace a menu of the game"
+        site 0x8EB7F lea (lea-bucket)
+0x49DBA8 lea          "menu '{}' is declared twice"
+        site 0x8EB49 lea (lea-bucket)
+0x49DBC8 lea          'controls'
+        site 0x8CFA9 lea (lea-bucket)
+        site 0x8DF0B lea (lea-bucket)
+        site 0x8FFFC lea (lea-bucket)
+        site 0x91B68 lea (lea-bucket)
+        site 0x92C4C lea (lea-bucket)
+0x49DBD8 lea          "menu '{}' has no controls"
+        site 0x8D517 lea (lea-bucket)
+        site 0x8E599 lea (lea-bucket)
+        site 0x910E3 lea (lea-bucket)
+        site 0x91B9F lea (lea-bucket)
+0x49DBF8 lea          "menu '{}' has no control '{}'"
+        site 0x8D4B1 lea (lea-bucket)
+        site 0x8DC02 lea (lea-bucket)
+        site 0x8DE65 lea (lea-bucket)
+        site 0x9127D lea (lea-bucket)
+        site 0x913C1 lea (lea-bucket)
+        site 0x92D69 lea (lea-bucket)
+0x49DC18 lea          "menu '{}' already has a control '{}'"
+        site 0x8E5CB lea (lea-bucket)
+        site 0x8F5D7 lea (lea-bucket)
+        site 0x92B0A lea (lea-bucket)
+0x49DC40 lea          'on_click'
+        site 0x8F992 lea (lea-bucket)
+        site 0x9255E lea (lea-bucket)
+0x49DC50 lea          'open_menu_handler'
+        site 0x8F97D lea (lea-bucket)
+        site 0x9254B lea (lea-bucket)
+0x49DC68 lea          'on_click_args'
+        site 0x8FA03 lea (lea-bucket)
+        site 0x90B88 lea (lea-bucket)
+        site 0x925D2 lea (lea-bucket)
+0x49DC78 lea          'option'
+        site 0x926A3 lea (lea-bucket)
+0x49DC80 lea          'caption'
+        site 0x8D651 lea (lea-bucket)
+        site 0x8F928 lea (lea-bucket)
+        site 0x903B4 lea (lea-bucket)
+        site 0x90AFE lea (lea-bucket)
+        site 0x92767 lea (lea-bucket)
+0x49DC88 lea          'tab_index'
+        site 0x8D6F0 lea (lea-bucket)
+        site 0x8DF7D lea (lea-bucket)
+        site 0x8F72D lea (lea-bucket)
+        site 0x8F786 lea (lea-bucket)
+        site 0x8F7EF lea (lea-bucket)
+        site 0x8FA5A lea (lea-bucket)
+        site 0x90886 lea (lea-bucket)
+        site 0x90950 lea (lea-bucket)
+        site 0x90BF3 lea (lea-bucket)
+        site 0x92815 lea (lea-bucket)
+0x49DC94 lea          'count'
+        site 0x8D0EC lea (lea-bucket)
+        site 0x8E4B0 lea (lea-bucket)
+        site 0x8F39B lea (lea-bucket)
+        site 0x8FB92 lea (lea-bucket)
+        site 0x9069F lea (lea-bucket)
+        site 0x90DAB lea (lea-bucket)
+        site 0x999C1 lea (lea-bucket)
+        site 0x2BAF3F lea (lea-bucket)
+        site 0x2BB366 lea (lea-bucket)
+        site 0x2BFEBE lea (lea-bucket)
+0x49DCA0 lea          "page template '{}' has no option rows"
+        site 0x8F5A7 lea (lea-bucket)
+0x49DCC8 lea          'hint'
+        site 0x8EE6E lea (lea-bucket)
+        site 0x8EE9E lea (lea-bucket)
+        site 0x90442 lea (lea-bucket)
+0x49DCD0 lea          'align_screen'
+        site 0x8D736 lea (lea-bucket)
+0x49DCE0 lea          'h_alignment'
+        site 0x8D77E lea (lea-bucket)
+0x49DCF0 lea          'v_alignment'
+        site 0x8D7C4 lea (lea-bucket)
+0x49DD00 lea          'position_x'
+        site 0x8D80A lea (lea-bucket)
+0x49DD10 lea          'position_y'
+        site 0x8D851 lea (lea-bucket)
+0x49DD1C lea          'size_x'
+        site 0x8D898 lea (lea-bucket)
+0x49DD24 lea          'size_y'
+        site 0x8D8DF lea (lea-bucket)
+0x49DD30 lea          'hint_control_name'
+        site 0x8DA1F lea (lea-bucket)
+0x49DD48 lea          "page '{}' has no option rows"
+        site 0x8E56C lea (lea-bucket)
+0x49DD68 lea          'on_activate'
+        site 0x8FF92 lea (lea-bucket)
+0x49DD74 lea          'items'
+        site 0x900E5 lea (lea-bucket)
+0x49DD80 lea          "menu '{}' has no list '{}'"
+        site 0x91063 lea (lea-bucket)
+0x49DDA0 lea          "list '{}' has no items to clone"
+        site 0x91029 lea (lea-bucket)
+0x49DDC0 lea          'item_{:04}'
+        site 0x902EB lea (lea-bucket)
+0x49DDCC lea          'img'
+        site 0x904CD lea (lea-bucket)
+0x49DDD0 lea          'argument'
+        site 0x9055E lea (lea-bucket)
+0x49DDDC lea,ptrslot  'index'
+        site 0x905CE lea (lea-bucket)
+        site 0x26CFD9 lea (lea-bucket)
+        site 0x2C3F69 lea (lea-bucket)
+        site 0x4AABB8 ptrslot (ptr)
+0x49DDF8 lea,ptrslot  'content\\menu_handles_storage.bin'
+        site 0x95AD3 lea (lea-bucket)
+        site 0x49DDE8 ptrslot (ptr)
+0x49DE20 lea          '{}: {:.3f} ms'
+        site 0x951BC lea (lea-bucket)
+0x49DE30 lea          'IsReadable x{}: {:.3f} ms total, {:.1f} us each ({} readable)'
+        site 0x95A4D lea (lea-bucket)
+0x49DE70 movups       'RegisterVariables total'
+        site 0x9779F movups (lea-bucket)
+0x49DE88 lea          "[menus] game variable '{}' pinned to {}"
+        site 0x977EB lea (lea-bucket)
+0x49DEB0 lea          "[menus] game variable '{}' not pinned: {}"
+        site 0x977F2 lea (lea-bucket)
+0x49DEE0 lea          "[menus] game variable '{}' follows its condition"
+        site 0x9795D lea (lea-bucket)
+0x49DF18 lea          "[menus] game variable '{}' not shadowed: {}"
+        site 0x97964 lea (lea-bucket)
+        site 0x97A27 lea (lea-bucket)
+0x49DF50 lea          "[menus] game variable '{}' default skipped: preferences already loaded"
+        site 0x97B30 lea (lea-bucket)
+0x49DF98 lea          "[menus] game variable '{}' starts at {}"
+        site 0x97B37 lea (lea-bucket)
+0x49DFC0 lea          "[menus] game variable '{}' default not set: {}"
+        site 0x97BEF lea (lea-bucket)
+0x49DFF0 lea          "RegisterVariable('{}'): {:.3f} ms"
+        site 0x97DD4 lea (lea-bucket)
+0x49E018 lea          "[menus] setting '{}' not registered: {}"
+        site 0x97EA6 lea (lea-bucket)
+0x49E040 lea          '[menus] {} settings registered after the game first loaded its preferences; their saved values apply once the profile loads'
+        site 0x97F33 lea (lea-bucket)
+0x49E0C0 lea          '[menus] {} settings registered before the game loads its preferences'
+        site 0x97F52 lea (lea-bucket)
+0x49E108 movups       'RegisterSettings total'
+        site 0x9716B movups (lea-bucket)
+0x49E120 lea          "RegisterOption('{}'): {:.3f} ms"
+        site 0x972C0 lea (lea-bucket)
+0x49E140 lea          "[menus] setting '{}' has no option: {}"
+        site 0x97392 lea (lea-bucket)
+0x49E168 lea          "[menus] game option '{}' locked"
+        site 0x97467 lea (lea-bucket)
+0x49E188 lea          "[menus] game option '{}' not locked: {}"
+        site 0x9746E lea (lea-bucket)
+0x49E1B0 movsd        'BuildLayout'
+        site 0x9759B movsd (lea-bucket)
+0x49E1C0 lea          '[menus] {}'
+        site 0x96CA7 lea (lea-bucket)
+        site 0x97611 lea (lea-bucket)
+0x49E1D0 lea          '[menus] {} settings given options'
+        site 0x9767A lea (lea-bucket)
+0x49E1F8 lea          "ParseRecord('{}'): {:.3f} ms ({} bytes)"
+        site 0x95532 lea (lea-bucket)
+0x49E220 movups       'InjectMenus total'
+        site 0x95939 movups (lea-bucket)
+0x49E238 lea          'ReadGameFile total: {:.3f} ms'
+        site 0x95B3A lea (lea-bucket)
+0x49E258 lea          '[menus] {}; no menus added'
+        site 0x95C31 lea (lea-bucket)
+        site 0x962D0 lea (lea-bucket)
+0x49E278 lea          'ReadIndex: {:.3f} ms ({} records)'
+        site 0x95D4D lea (lea-bucket)
+0x49E2A0 lea          '[menus] {}: {}; no menus added'
+        site 0x95DE4 lea (lea-bucket)
+0x49E2C0 lea          'Build: {:.3f} ms, of which parsing {} records {:.3f} ms, cloning {:.3f} ms'
+        site 0x95FDA lea (lea-bucket)
+0x49E30C lea          ' - '
+        site 0x96035 lea (lea-bucket)
+0x49E310 lea          '[menus] {}{}{}; no menus added'
+        site 0x96062 lea (lea-bucket)
+0x49E330 lea          'Serialize: {:.3f} ms ({} records, {} bytes)'
+        site 0x961B9 lea (lea-bucket)
+0x49E360 lea          'LoadPackage total: {:.3f} ms'
+        site 0x96285 lea (lea-bucket)
+0x49E380 lea          'MakeCaptionLiteral({}/{}): {:.3f} ms'
+        site 0x963FC lea (lea-bucket)
+0x49E3A8 lea          '[menus] control {}/{} not found for its caption'
+        site 0x96499 lea (lea-bucket)
+0x49E3D8 lea          '[menus] list {}/{} not found for its text'
+        site 0x96512 lea (lea-bucket)
+0x49E408 lea          '[menus] row {}/{} not found for its description'
+        site 0x965AC lea (lea-bucket)
+0x49E438 lea          'captions total: {:.3f} ms ({} captions)'
+        site 0x966A7 lea (lea-bucket)
+0x49E460 lea          '[menus] {} menus loaded ({} replaced, {} new), {} captions set'
+        site 0x96735 lea (lea-bucket)
+0x49E4A0 movsd        'Step total'
+        site 0x98059 movsd (lea-bucket)
+0x49E4B0 movsd        'RootsCached'
+        site 0x9810E movsd (lea-bucket)
+0x49E4C0 lea          '[menus] the Options menus never reached the menu cache; no menus added'
+        site 0x98223 lea (lea-bucket)
+0x49E508 lea          '[menus] Options menus cached {:.1f} s after the first update'
+        site 0x98187 lea (lea-bucket)
+0x49E548 lea          '[menus] {}; menu setup stopped'
+        site 0x46B030 lea (lea-bucket)
+0x49E568 lea          '[menus] unknown error; menu setup stopped'
+        site 0x46B09D lea (lea-bucket)
+0x49E5A0 lea          "update #{}: menu setup {:.3f} ms, game's update {:.3f} ms, poll {:.3f} ms"
+        site 0x95808 lea (lea-bucket)
+0x49E5F0 movups       'executable checks'
+        site 0x96B6E movups (lea-bucket)
+0x49E610 lea          "[menus] unsupported executable; the mod's settings stay out of the game's menus"
+        site 0x96BB4 lea (lea-bucket)
+        site 0x96C01 lea (lea-bucket)
+0x49E660 lea          '[menus] menu hook installation failed, error={}'
+        site 0x96E56 lea (lea-bucket)
+0x49E690 lea          '[menus] menu hook installed'
+        site 0x96EE5 lea (lea-bucket)
+        site 0x96F30 lea (lea-bucket)
+0x49E6B0 lea          '[menus] {}; settings not registered'
+        site 0x46B223 lea (lea-bucket)
+0x49E6D8 lea          '[menus] unknown error; settings not registered'
+        site 0x46B28D lea (lea-bucket)
+0x49E746 none         'N@'
+0x49E74E none         'i@AVER'
+0x49E9F3 none         '&:'
+0x49EAB7 none         ':t'
+0x49ED2F none         '-u8'
+0x49ED34 ptrslot      's8'
+        site 0x49E778 ptrslot (ptr)
+0x49ED38 lea,movload,ptrslot 'bool'
+        site 0x3ADEE2 movload (lea-bucket)
+        site 0x420A60 lea (lea-bucket)
+        site 0x49E790 ptrslot (ptr)
+        site 0x6E6928 ptrslot (ptr)
+0x49ED40 ptrslot      'bool8'
+        site 0x49E7A8 ptrslot (ptr)
+0x49ED48 ptrslot      'u16'
+        site 0x49E7C0 ptrslot (ptr)
+0x49ED4C ptrslot      's16'
+        site 0x49E7D8 ptrslot (ptr)
+0x49ED50 lea,ptrslot  'u32'
+        site 0x999EE lea (lea-bucket)
+        site 0x49E7F0 ptrslot (ptr)
+0x49ED54 ptrslot      's32'
+        site 0x49E808 ptrslot (ptr)
+0x49ED58 ptrslot      'fp32'
+        site 0x49E820 ptrslot (ptr)
+0x49ED60 ptrslot      'color, u32'
+        site 0x49E838 ptrslot (ptr)
+0x49ED6C ptrslot      'u64'
+        site 0x49E850 ptrslot (ptr)
+0x49ED70 ptrslot      's64'
+        site 0x49E868 ptrslot (ptr)
+0x49ED74 ptrslot      'fp64'
+        site 0x49E880 ptrslot (ptr)
+0x49ED7C ptrslot      'vec2f'
+        site 0x49E898 ptrslot (ptr)
+0x49ED84 ptrslot      'vec3f'
+        site 0x49E8B0 ptrslot (ptr)
+0x49ED8C ptrslot      'vec4f'
+        site 0x49E8C8 ptrslot (ptr)
+0x49ED94 ptrslot      'vec2i'
+        site 0x49E8E0 ptrslot (ptr)
+0x49ED9C ptrslot      'vec3i'
+        site 0x49E8F8 ptrslot (ptr)
+0x49EDA4 ptrslot      'vec4i'
+        site 0x49E910 ptrslot (ptr)
+0x49EDC8 lea          '{} at offset 0x{:X}'
+        site 0x992AC lea (lea-bucket)
+0x49EDE0 lea          'truncated u32'
+        site 0x99F2E lea (lea-bucket)
+        site 0x9A06C lea (lea-bucket)
+        site 0x9A093 lea (lea-bucket)
+        site 0x9B19F lea (lea-bucket)
+        site 0x9B1C4 lea (lea-bucket)
+        site 0x9B2B4 lea (lea-bucket)
+        site 0x9B2D9 lea (lea-bucket)
+        site 0x9B8D6 lea (lea-bucket)
+        site 0x9B8FC lea (lea-bucket)
+        site 0x9B949 lea (lea-bucket)
+0x49EDF0 lea          'unterminated string'
+        site 0x99589 lea (lea-bucket)
+        site 0x99FA3 lea (lea-bucket)
+        site 0x99FCA lea (lea-bucket)
+        site 0x99FF1 lea (lea-bucket)
+        site 0x9B1E9 lea (lea-bucket)
+        site 0x9B351 lea (lea-bucket)
+        site 0x9B376 lea (lea-bucket)
+        site 0x9B8B0 lea (lea-bucket)
+0x49EE08 lea          'empty array'
+        site 0x99F7C lea (lea-bucket)
+0x49EE18 lea          'array without a u32 count'
+        site 0x99F55 lea (lea-bucket)
+0x49EE38 lea          'array element overruns its array'
+        site 0x9A045 lea (lea-bucket)
+0x49EE60 lea          'array does not end at its size'
+        site 0x9A01E lea (lea-bucket)
+0x49EE80 lea          'empty section'
+        site 0x9B173 lea (lea-bucket)
+0x49EE90 movload      '@section'
+        site 0x9A4CC movload (lea-bucket)
+0x49EE9C lea          'choose'
+        site 0x9AA42 lea (lea-bucket)
+0x49EEA8 lea          'stringz'
+        site 0x9AA7A lea (lea-bucket)
+0x49EEB0 lea          "truncated {} '{}'"
+        site 0x9B20E lea (lea-bucket)
+0x49EEC4 lea          'array'
+        site 0x9ABCD lea (lea-bucket)
+        site 0x9AC98 lea (lea-bucket)
+0x49EED0 lea          'section'
+        site 0x9ABF9 lea (lea-bucket)
+0x49EED8 lea          "{} '{}' overruns its section"
+        site 0x9B261 lea (lea-bucket)
+0x49EEF8 lea          "unknown type '{}' for '{}'"
+        site 0x9B2FE lea (lea-bucket)
+0x49EF18 lea          'section does not end at its size'
+        site 0x9B14E lea (lea-bucket)
+0x49EF40 lea          'not an AVER package'
+        site 0x9B972 lea (lea-bucket)
+0x49EF58 lea          'record overruns the package'
+        site 0x9B88A lea (lea-bucket)
+0x49EF78 lea          'bytes after the last record'
+        site 0x9B923 lea (lea-bucket)
+0x49EF94 lea          '{}: {}'
+        site 0x46B4D5 lea (lea-bucket)
+0x49EFA0 movups       'm3_main_options_menu'
+        site 0xA3F4F movups (lea-bucket)
+0x49EFB8 movups       'btn_game_options'
+        site 0xA3F93 movups (lea-bucket)
+        site 0xA453F movups (lea-bucket)
+0x49EFD0 lea,movups   'm3_main_gameplay_menu'
+        site 0xA2915 lea (lea-bucket)
+        site 0xA3FCE movups (lea-bucket)
+        site 0xA4016 movups (lea-bucket)
+        site 0xA40CA movups (lea-bucket)
+0x49EFE8 movups       'btn_checked_crosshair'
+        site 0xA4070 movups (lea-bucket)
+        site 0xA45FF movups (lea-bucket)
+0x49F000 movups       'btn_list_aim_mode'
+        site 0xA4124 movups (lea-bucket)
+        site 0xA46AA movups (lea-bucket)
+0x49F018 lea,movups   'm3_main_sound_menu'
+        site 0xA2905 lea (lea-bucket)
+        site 0xA417B movups (lea-bucket)
+0x49F030 movups       'btn_progress_music_volume'
+        site 0xA41D3 movups (lea-bucket)
+        site 0xA4744 movups (lea-bucket)
+0x49F050 movsd        'hint_version'
+        site 0xA420C movsd (lea-bucket)
+        site 0xA477C movsd (lea-bucket)
+0x49F060 movsd        'options_menu'
+        site 0xA44FA movsd (lea-bucket)
+0x49F070 lea,movsd    'gameplay_menu'
+        site 0xA290E lea (lea-bucket)
+        site 0xA4563 movsd (lea-bucket)
+        site 0xA459D movsd (lea-bucket)
+        site 0xA4639 movsd (lea-bucket)
+0x49F080 lea,movsd    'sound_menu'
+        site 0xA28FE lea (lea-bucket)
+        site 0xA46E1 movsd (lea-bucket)
+0x49F090 movsd        'random_hints'
+        site 0xA47E7 movsd (lea-bucket)
+0x49F0A0 movups       'random_hints_dlc1'
+        site 0xA4830 movups (lea-bucket)
+0x49F0B8 movups       'random_hints_dlc2'
+        site 0xA4882 movups (lea-bucket)
+0x49F0D0 lea          'm3_main_video_menu'
+        site 0xA28AF lea (lea-bucket)
+0x49F0E8 lea          'video_menu'
+        site 0xA28ED lea (lea-bucket)
+0x49F0F8 lea          'm3_main_accessibility_menu'
+        site 0xA28A8 lea (lea-bucket)
+0x49F118 lea          'accessibility_menu'
+        site 0xA28DC lea (lea-bucket)
+0x49F12C lea          'main'
+        site 0xA08C8 lea (lea-bucket)
+        site 0xA208E lea (lea-bucket)
+        site 0xD37C7 lea (lea-bucket)
+        site 0xDB18B lea (lea-bucket)
+        site 0xDB2FD lea (lea-bucket)
+        site 0xDB341 lea (lea-bucket)
+        site 0xDB36C lea (lea-bucket)
+        site 0xDB3B5 lea (lea-bucket)
+        site 0xDB3F7 lea (lea-bucket)
+        site 0xDB439 lea (lea-bucket)
+        site 0xDB47B lea (lea-bucket)
+        site 0xDB4BD lea (lea-bucket)
+        site 0xDB4FF lea (lea-bucket)
+        site 0xDB541 lea (lea-bucket)
+        site 0xDB57F lea (lea-bucket)
+        site 0xE1F03 lea (lea-bucket)
+        site 0xEF885 lea (lea-bucket)
+        site 0xEF8E5 lea (lea-bucket)
+        site 0x10EBDA lea (lea-bucket)
+        site 0x1118A6 lea (lea-bucket)
+        site 0x1119D6 lea (lea-bucket)
+        site 0x111BBA lea (lea-bucket)
+        site 0x13A484 lea (lea-bucket)
+        site 0x13FB3B lea (lea-bucket)
+        site 0x175C67 lea (lea-bucket)
+        site 0x29A7BD lea (lea-bucket)
+        site 0x2A21B6 lea (lea-bucket)
+        site 0x2A36F8 lea (lea-bucket)
+        site 0x2A3915 lea (lea-bucket)
+        site 0x2A3F60 lea (lea-bucket)
+        site 0x2A424E lea (lea-bucket)
+        site 0x2A7562 lea (lea-bucket)
+        site 0x2A83BF lea (lea-bucket)
+        site 0x2A8732 lea (lea-bucket)
+        site 0x2A8B04 lea (lea-bucket)
+        site 0x2B1D4A lea (lea-bucket)
+        site 0x2CDC46 lea (lea-bucket)
+        site 0x325788 lea (lea-bucket)
+        site 0x325992 lea (lea-bucket)
+0x49F138 lea          '{}_{}_menu'
+        site 0xA0915 lea (lea-bucket)
+        site 0xA2105 lea (lea-bucket)
+0x49F144 lea          '{}_{}'
+        site 0xA1B50 lea (lea-bucket)
+0x49F150 lea          "'{}' refused: {}"
+        site 0xA5133 lea (lea-bucket)
+0x49F168 lea          'declared after the menus were built'
+        site 0xA1754 lea (lea-bucket)
+        site 0xA2FAF lea (lea-bucket)
+0x49F190 lea          "ids use letters, digits and '_' (at most 63)"
+        site 0xA348F lea (lea-bucket)
+0x49F1C0 lea          'captions are printable ASCII (at most 127)'
+        site 0xA33CF lea (lea-bucket)
+0x49F1F0 lea          'declared twice'
+        site 0xA31AC lea (lea-bucket)
+0x49F200 lea          'lists need 2-255 printable ASCII labels'
+        site 0xA13AB lea (lea-bucket)
+0x49F228 lea          'sliders need min < max and 1-255 steps'
+        site 0xA114D lea (lea-bucket)
+0x49F250 lea          'page ids and captions follow the setting rules'
+        site 0xA18C9 lea (lea-bucket)
+0x49F280 lea          'page declared twice'
+        site 0xA1898 lea (lea-bucket)
+0x49F298 lea          'option locked after the menus were built'
+        site 0xA3D16 lea (lea-bucket)
+0x49F2C8 lea          'not an option key'
+        site 0xA3E14 lea (lea-bucket)
+0x49F2E0 lea          'variable pinned after the declarations ended'
+        site 0xA49B5 lea (lea-bucket)
+0x49F310 lea          'not a variable name'
+        site 0xA38A5 lea (lea-bucket)
+        site 0xA4BC0 lea (lea-bucket)
+0x49F328 lea          'variable suppressed after the declarations ended'
+        site 0xA58D3 lea (lea-bucket)
+0x49F360 lea          'needs a variable name and a condition'
+        site 0xA5B46 lea (lea-bucket)
+0x49F388 lea          'default set after the declarations ended'
+        site 0xA368E lea (lea-bucket)
+0x49F3B8 lea          "{}: link to page '{}', which is not in this menu"
+        site 0xA07CF lea (lea-bucket)
+0x49F3F0 lea          'btn_link_'
+        site 0xA087D lea (lea-bucket)
+0x49F400 lea          '{}: a row refers to a refused setting'
+        site 0xA0A82 lea (lea-bucket)
+0x49F428 lea          "{}: '{}' cannot be shown that way"
+        site 0xA0B84 lea (lea-bucket)
+0x49F44C lea,movload  'btn_'
+        site 0xA0C29 lea (lea-bucket)
+        site 0xA21B6 movload (lea-bucket)
+0x49F4ED none         'Ga='
+0x49F512 none         '#='
+0x49F53B none         'Afff?'
+0x49F556 none         'L?'
+0x49F56E none         '@A'
+0x49F586 none         ' B'
+0x49F5BB none         '\t>'
+0x49F64B none         ';1'
+0x49F650 movload      'NOT SET'
+        site 0xB9F0A movload (lea-bucket)
+0x49F658 lea          '{} CM'
+        site 0xB6E08 lea (lea-bucket)
+        site 0xB9A4D lea (lea-bucket)
+        site 0xB9FCD lea (lea-bucket)
+0x49F660 lea          '{}% (RECOMMENDED)'
+        site 0xBAF32 lea (lea-bucket)
+0x49F674 lea          '{}%'
+        site 0xB7082 lea (lea-bucket)
+        site 0xBA334 lea (lea-bucket)
+        site 0xBAD82 lea (lea-bucket)
+        site 0xBAF39 lea (lea-bucket)
+0x49F678 lea          '+{} CM'
+        site 0xB6E01 lea (lea-bucket)
+0x49F680 lea          '{} DEG'
+        site 0xB1BBA lea (lea-bucket)
+0x49F688 lea          '{:.2f} M'
+        site 0xB2849 lea (lea-bucket)
+0x49F694 movload      'PLAY'
+        site 0xBAC5E movload (lea-bucket)
+0x49F69C movload      'SKIP'
+        site 0xBAC8A movload (lea-bucket)
+0x49F6A8 movsd        'OFF (GAME TAA)'
+        site 0xBA7A1 movsd (lea-bucket)
+0x49F6B8 lea,movload  'FSR'
+        site 0xBA88B movload (lea-bucket)
+        site 0xBA8B2 lea (lea-bucket)
+        site 0x149B27 lea (lea-bucket)
+        site 0x149F2A lea (lea-bucket)
+        site 0x14A9FE lea (lea-bucket)
+        site 0x14F2C3 lea (lea-bucket)
+        site 0x2DF9C0 lea (lea-bucket)
+0x49F6BC lea,movload  'DLSS'
+        site 0xBA8EB movload (lea-bucket)
+        site 0xBA907 lea (lea-bucket)
+        site 0x149B2E lea (lea-bucket)
+        site 0x149C4A lea (lea-bucket)
+        site 0x149C73 lea (lea-bucket)
+        site 0x149C98 lea (lea-bucket)
+        site 0x149F41 lea (lea-bucket)
+        site 0x14AA0C lea (lea-bucket)
+        site 0x14F2D1 lea (lea-bucket)
+        site 0x2DCE80 lea (lea-bucket)
+0x49F6C4 lea,movload  'AUTO'
+        site 0xB18B3 lea (lea-bucket)
+        site 0xB22FB lea (lea-bucket)
+        site 0xB9CDB movload (lea-bucket)
+0x49F6CC movzx        'VR'
+        site 0xB8EB1 movzx (lea-bucket)
+        site 0xB9D07 movzx (lea-bucket)
+0x49F6D0 movsd        'VR NO TURN'
+        site 0xB9D34 movsd (lea-bucket)
+0x49F6DC movload      'CINEMA'
+        site 0xB9D72 movload (lea-bucket)
+0x49F6E8 movsd        'VR BODY TURN'
+        site 0xB9DA9 movsd (lea-bucket)
+0x49F6F8 lea          'mevr_turn_mode'
+        site 0xB0B95 lea (lea-bucket)
+0x49F708 lea          'TURN MODE'
+        site 0xB0BA7 lea (lea-bucket)
+0x49F714 lea,movload  'SNAP'
+        site 0xB0BDE movload (lea-bucket)
+        site 0xB3015 lea (lea-bucket)
+0x49F71C lea,movload  'SMOOTH'
+        site 0xB0C15 movload (lea-bucket)
+        site 0xB3036 lea (lea-bucket)
+0x49F728 lea          'mevr_snap_turn'
+        site 0xB0CE2 lea (lea-bucket)
+0x49F738 lea          'SNAP TURN ANGLE'
+        site 0xB0CF5 lea (lea-bucket)
+0x49F748 lea          '{:g} DEG'
+        site 0xB0D2B lea (lea-bucket)
+0x49F758 lea          'mevr_smooth_turn'
+        site 0xB0D75 lea (lea-bucket)
+0x49F770 lea          'SMOOTH TURN SPEED'
+        site 0xB0D8E lea (lea-bucket)
+0x49F788 lea          '{:g} DEG/S'
+        site 0xB0DCA lea (lea-bucket)
+0x49F798 lea,ptrslot  'mevr_move_direction'
+        site 0xB0E1A lea (lea-bucket)
+        site 0x4A1A20 ptrslot (ptr)
+0x49F7B0 lea          'MOVEMENT DIRECTION'
+        site 0xB0E33 lea (lea-bucket)
+0x49F7C4 movload      'HEAD'
+        site 0xB0E73 movload (lea-bucket)
+0x49F7CC lea,movload  'BODY'
+        site 0xB0EAA movload (lea-bucket)
+        site 0xB77F4 lea (lea-bucket)
+0x49F7D8 lea,movsd    'LEFT HAND'
+        site 0xB0EE4 movsd (lea-bucket)
+        site 0x22FFD4 lea (lea-bucket)
+0x49F7E8 lea,movsd    'RIGHT HAND'
+        site 0xB0F32 movsd (lea-bucket)
+        site 0x22FFDB lea (lea-bucket)
+0x49F7F8 lea,ptrslot  'mevr_crouch'
+        site 0xB1008 lea (lea-bucket)
+        site 0x4A1A40 ptrslot (ptr)
+0x49F808 lea          'CROUCH BUTTON'
+        site 0xB1021 lea (lea-bucket)
+0x49F818 lea,movload  'HOLD'
+        site 0xB1061 movload (lea-bucket)
+        site 0xB1D00 lea (lea-bucket)
+0x49F820 lea,movload  'TOGGLE'
+        site 0xB1098 movload (lea-bucket)
+        site 0xB1D21 lea (lea-bucket)
+0x49F828 lea,ptrslot  'mevr_auto_sprint'
+        site 0xB1168 lea (lea-bucket)
+        site 0x4A1A60 ptrslot (ptr)
+0x49F840 lea          'AUTO SPRINT'
+        site 0xB1181 lea (lea-bucket)
+0x49F850 lea,ptrslot  'mevr_move_deadzone'
+        site 0xB11A1 lea (lea-bucket)
+        site 0x4A1A80 ptrslot (ptr)
+0x49F868 lea          'MOVE STICK DEADZONE'
+        site 0xB11BA lea (lea-bucket)
+0x49F880 lea,ptrslot  'mevr_turn_deadzone'
+        site 0xB11E9 lea (lea-bucket)
+        site 0x4A1AA0 ptrslot (ptr)
+0x49F898 lea          'TURN STICK DEADZONE'
+        site 0xB1202 lea (lea-bucket)
+0x49F8B0 lea,ptrslot  'mevr_reduce_head_bob'
+        site 0xB1231 lea (lea-bucket)
+        site 0x4A1AC0 ptrslot (ptr)
+0x49F8C8 lea          'REDUCE HEAD BOB'
+        site 0xB124A lea (lea-bucket)
+0x49F8D8 lea,ptrslot  'mevr_popups_again'
+        site 0xB126A lea (lea-bucket)
+        site 0x4A1820 ptrslot (ptr)
+0x49F8F0 lea          'SHOW VR TIPS AGAIN'
+        site 0xB1283 lea (lea-bucket)
+0x49F908 lea,ptrslot  'mevr_play_mode'
+        site 0xB12A3 lea (lea-bucket)
+        site 0x4A1AE0 ptrslot (ptr)
+0x49F918 lea          'PLAY MODE'
+        site 0xB12BC lea (lea-bucket)
+0x49F928 movsd        'ROOM-SCALE'
+        site 0xB12FC movsd (lea-bucket)
+0x49F938 lea          'STANDING'
+        site 0xB1346 lea (lea-bucket)
+0x49F944 lea          'SEATED'
+        site 0xB137E lea (lea-bucket)
+0x49F950 lea,ptrslot  'mevr_player_height'
+        site 0xB1436 lea (lea-bucket)
+        site 0x4A1B00 ptrslot (ptr)
+0x49F968 lea          'PLAYER HEIGHT'
+        site 0xB144F lea (lea-bucket)
+0x49F978 lea,ptrslot  'mevr_world_scale'
+        site 0xB147B lea (lea-bucket)
+        site 0x4A1B20 ptrslot (ptr)
+0x49F990 lea          'WORLD SCALE'
+        site 0xB1494 lea (lea-bucket)
+0x49F9A0 lea,ptrslot  'mevr_body_turning'
+        site 0xB14C3 lea (lea-bucket)
+        site 0x4A1BA0 ptrslot (ptr)
+0x49F9B8 lea          'BODY TURNING'
+        site 0xB14DC lea (lea-bucket)
+0x49F9C8 lea          'FOLLOW HEAD'
+        site 0xB151A lea (lea-bucket)
+0x49F9D8 lea,ptrslot  'mevr_body_position'
+        site 0xB1618 lea (lea-bucket)
+        site 0x4A1BC0 ptrslot (ptr)
+0x49F9F0 lea          'BODY POSITION'
+        site 0xB1631 lea (lea-bucket)
+0x49FA00 lea          'FOLLOW'
+        site 0xB166F lea (lea-bucket)
+        site 0xB2747 lea (lea-bucket)
+0x49FA08 lea,ptrslot  'mevr_physical_crouch'
+        site 0xB1768 lea (lea-bucket)
+        site 0x4A1B40 ptrslot (ptr)
+0x49FA20 lea          'PHYSICAL CROUCH'
+        site 0xB1781 lea (lea-bucket)
+0x49FA30 lea,ptrslot  'mevr_belt_height'
+        site 0xB17A1 lea (lea-bucket)
+        site 0x4A1B60 ptrslot (ptr)
+0x49FA48 lea          'BELT HEIGHT'
+        site 0xB17BA lea (lea-bucket)
+0x49FA58 lea,ptrslot  'mevr_belt_crouch'
+        site 0xB17E9 lea (lea-bucket)
+        site 0x4A1B80 ptrslot (ptr)
+0x49FA70 lea          'BELT WHEN CROUCHING'
+        site 0xB1802 lea (lea-bucket)
+0x49FA88 lea          'STAY WITH YOU'
+        site 0xB1840 lea (lea-bucket)
+0x49FA98 lea          'FOLLOW BODY'
+        site 0xB1878 lea (lea-bucket)
+0x49FAA8 lea,ptrslot  'mevr_bhaptics'
+        site 0xB1975 lea (lea-bucket)
+        site 0x4A1BE0 ptrslot (ptr)
+0x49FAB8 lea          'BHAPTICS (EXPERIMENTAL)'
+        site 0xB198E lea (lea-bucket)
+0x49FAD0 lea          'mevr_bhaptics_strength'
+        site 0xB19AE lea (lea-bucket)
+0x49FAE8 lea          'BHAPTICS STRENGTH'
+        site 0xB19C7 lea (lea-bucket)
+0x49FB00 lea          'mevr_dominant_hand'
+        site 0xB1A05 lea (lea-bucket)
+0x49FB18 lea          'DOMINANT HAND'
+        site 0xB1A1E lea (lea-bucket)
+0x49FB28 lea          'RIGHT'
+        site 0xB1A5C lea (lea-bucket)
+        site 0xB233D lea (lea-bucket)
+0x49FB30 lea          'LEFT'
+        site 0xB1A97 lea (lea-bucket)
+        site 0xB231C lea (lea-bucket)
+0x49FB38 lea,ptrslot  'mevr_grip_angle'
+        site 0xB1B55 lea (lea-bucket)
+        site 0x4A1C00 ptrslot (ptr)
+0x49FB48 lea          'WEAPON GRIP ANGLE'
+        site 0xB1B6E lea (lea-bucket)
+0x49FB60 lea,ptrslot  'mevr_finger_tracking'
+        site 0xB1CAA lea (lea-bucket)
+        site 0x4A1C20 ptrslot (ptr)
+0x49FB78 lea          'FINGER TRACKING'
+        site 0xB1CBD lea (lea-bucket)
+0x49FB88 lea,ptrslot  'mevr_grab'
+        site 0xB1CD7 lea (lea-bucket)
+        site 0x4A1C40 ptrslot (ptr)
+0x49FB94 lea          'GRIP'
+        site 0xB1CEA lea (lea-bucket)
+0x49FBA0 lea,ptrslot  'mevr_vibration'
+        site 0xB1D8F lea (lea-bucket)
+        site 0x4A1C80 ptrslot (ptr)
+0x49FBB0 lea          'VIBRATION'
+        site 0xB1DA2 lea (lea-bucket)
+        site 0xB799F lea (lea-bucket)
+0x49FBC0 lea,ptrslot  'mevr_vibration_cues'
+        site 0xB1DDA lea (lea-bucket)
+        site 0x4A1CA0 ptrslot (ptr)
+0x49FBD8 lea          'HAND CUES'
+        site 0xB1DED lea (lea-bucket)
+0x49FBE8 lea,ptrslot  'mevr_vibration_weapons'
+        site 0xB1E25 lea (lea-bucket)
+        site 0x4A1CC0 ptrslot (ptr)
+0x49FC00 lea          'WEAPONS'
+        site 0xB1E38 lea (lea-bucket)
+        site 0xB7D27 lea (lea-bucket)
+0x49FC08 lea,ptrslot  'mevr_vibration_damage'
+        site 0xB1E70 lea (lea-bucket)
+        site 0x4A1CE0 ptrslot (ptr)
+0x49FC20 lea          'DAMAGE'
+        site 0xB1E83 lea (lea-bucket)
+0x49FC28 lea          'mevr_vibration_world'
+        site 0xB1EBB lea (lea-bucket)
+0x49FC40 lea          'EXPLOSIONS'
+        site 0xB1ECE lea (lea-bucket)
+0x49FC50 lea,ptrslot  'mevr_vibration_scenes'
+        site 0xB1F06 lea (lea-bucket)
+        site 0x4A1D00 ptrslot (ptr)
+0x49FC68 lea          'SCENES AND VEHICLES'
+        site 0xB1F19 lea (lea-bucket)
+0x49FC80 lea,ptrslot  'mevr_vibration_movement'
+        site 0xB1F51 lea (lea-bucket)
+        site 0x4A1D20 ptrslot (ptr)
+0x49FC98 lea          'MOVEMENT'
+        site 0xB1F64 lea (lea-bucket)
+        site 0xB756C lea (lea-bucket)
+0x49FCA8 lea,ptrslot  'mevr_use_by_looking'
+        site 0xB1F9C lea (lea-bucket)
+        site 0x4A1C60 ptrslot (ptr)
+0x49FCC0 lea          'USE BY LOOKING'
+        site 0xB1FAF lea (lea-bucket)
+0x49FCD0 lea,ptrslot  'mevr_weapon_weight'
+        site 0xB1FC9 lea (lea-bucket)
+        site 0x4A1D40 ptrslot (ptr)
+0x49FCE8 lea          'WEAPON WEIGHT'
+        site 0xB1FDC lea (lea-bucket)
+0x49FCF8 lea,ptrslot  'mevr_manual_reload'
+        site 0xB2005 lea (lea-bucket)
+        site 0x4A1D60 ptrslot (ptr)
+0x49FD10 lea          'MANUAL RELOADING'
+        site 0xB2018 lea (lea-bucket)
+0x49FD28 lea,ptrslot  'mevr_part_highlights'
+        site 0xB2032 lea (lea-bucket)
+        site 0x4A1D80 ptrslot (ptr)
+0x49FD40 lea          'PART HIGHLIGHTS'
+        site 0xB2045 lea (lea-bucket)
+0x49FD50 lea          'OFF'
+        site 0xB205B lea (lea-bucket)
+        site 0xB2167 lea (lea-bucket)
+        site 0xB2FF4 lea (lea-bucket)
+        site 0xB36F1 lea (lea-bucket)
+        site 0xB3912 lea (lea-bucket)
+        site 0xB3B12 lea (lea-bucket)
+        site 0xB3CD3 lea (lea-bucket)
+        site 0x17CFE6 lea (lea-bucket)
+0x49FD58 lea          'FIRST RELOADS'
+        site 0xB207C lea (lea-bucket)
+0x49FD68 lea          'ALWAYS'
+        site 0xB209D lea (lea-bucket)
+0x49FD70 lea,ptrslot  'mevr_part_highlights_reset'
+        site 0xB210E lea (lea-bucket)
+        site 0x4A1DA0 ptrslot (ptr)
+0x49FD90 lea          'RESET HIGHLIGHT COUNTS'
+        site 0xB2121 lea (lea-bucket)
+0x49FDA8 lea,ptrslot  'mevr_revolver_flick'
+        site 0xB213B lea (lea-bucket)
+        site 0x4A1DC0 ptrslot (ptr)
+0x49FDC0 lea          'WEAPON FLICK'
+        site 0xB214E lea (lea-bucket)
+0x49FDD0 lea          'GENTLE'
+        site 0xB2188 lea (lea-bucket)
+0x49FDD8 lea          'NORMAL'
+        site 0xB21A9 lea (lea-bucket)
+        site 0x2B1E1D lea (lea-bucket)
+        site 0x2BA8A8 lea (lea-bucket)
+0x49FDE0 lea          'HARD'
+        site 0xB21CA lea (lea-bucket)
+0x49FDE8 lea          'mevr_reload_pouch'
+        site 0xB223B lea (lea-bucket)
+0x49FE00 lea          'MAGAZINE POUCH'
+        site 0xB224E lea (lea-bucket)
+0x49FE10 lea          'HIP'
+        site 0xB2264 lea (lea-bucket)
+0x49FE18 lea,ptrslot  'mevr_sighting_eye'
+        site 0xB22D2 lea (lea-bucket)
+        site 0x4A1DE0 ptrslot (ptr)
+0x49FE30 lea          'SIGHTING EYE'
+        site 0xB22E5 lea (lea-bucket)
+0x49FE40 lea,ptrslot  'mevr_other_eye'
+        site 0xB23AB lea (lea-bucket)
+        site 0x4A1E00 ptrslot (ptr)
+0x49FE50 lea          'OTHER EYE WHILE SCOPED'
+        site 0xB23BE lea (lea-bucket)
+0x49FE68 lea          'VISIBLE'
+        site 0xB23D4 lea (lea-bucket)
+        site 0x24F758 lea (lea-bucket)
+0x49FE70 lea          'BLURRED'
+        site 0xB23F5 lea (lea-bucket)
+0x49FE78 lea          'BLACK'
+        site 0xB2416 lea (lea-bucket)
+0x49FE80 lea,ptrslot  'mevr_reticle'
+        site 0xB2487 lea (lea-bucket)
+        site 0x4A1E20 ptrslot (ptr)
+0x49FE90 lea          'RETICLE TILT'
+        site 0xB249A lea (lea-bucket)
+0x49FEA0 lea          'WITH WEAPON'
+        site 0xB24B0 lea (lea-bucket)
+0x49FEAC lea          'LEVEL'
+        site 0xB24D1 lea (lea-bucket)
+0x49FEB8 lea          'FIXED TO VIEW'
+        site 0xB24F2 lea (lea-bucket)
+0x49FEC8 lea,ptrslot  'mevr_scope_steering'
+        site 0xB2560 lea (lea-bucket)
+        site 0x4A1E40 ptrslot (ptr)
+0x49FEE0 lea          'SCOPE STEERING'
+        site 0xB2573 lea (lea-bucket)
+0x49FEF0 lea          'WEAPON'
+        site 0xB2589 lea (lea-bucket)
+0x49FEF8 lea          'WEAPON + HEAD'
+        site 0xB25AA lea (lea-bucket)
+0x49FF08 lea,ptrslot  'mevr_night_vision_tube'
+        site 0xB2618 lea (lea-bucket)
+        site 0x4A1E60 ptrslot (ptr)
+0x49FF20 lea          'REALISTIC NIGHT VISION'
+        site 0xB262B lea (lea-bucket)
+0x49FF38 lea,ptrslot  'mevr_hud_shape'
+        site 0xB2645 lea (lea-bucket)
+        site 0x4A1E80 ptrslot (ptr)
+0x49FF48 lea          'HUD SHAPE'
+        site 0xB2658 lea (lea-bucket)
+0x49FF54 lea          '16:9'
+        site 0xB266E lea (lea-bucket)
+        site 0xEA14D lea (lea-bucket)
+0x49FF5C lea          '4:3'
+        site 0xB268F lea (lea-bucket)
+        site 0xEA156 lea (lea-bucket)
+0x49FF60 lea,ptrslot  'mevr_hud_position'
+        site 0xB26FD lea (lea-bucket)
+        site 0x4A1EA0 ptrslot (ptr)
+0x49FF78 lea          'HUD POSITION'
+        site 0xB2710 lea (lea-bucket)
+0x49FF88 lea          'mevr_hud_distance'
+        site 0xB27B5 lea (lea-bucket)
+0x49FFA0 lea          'HUD DISTANCE'
+        site 0xB27C8 lea (lea-bucket)
+0x49FFB0 lea          'mevr_hud_size'
+        site 0xB27F1 lea (lea-bucket)
+0x49FFC0 lea          'HUD SIZE'
+        site 0xB2804 lea (lea-bucket)
+0x49FFD0 lea,ptrslot  'mevr_hud_height'
+        site 0xB2896 lea (lea-bucket)
+        site 0x4A1EC0 ptrslot (ptr)
+0x49FFE0 lea          'HUD HEIGHT'
+        site 0xB28A9 lea (lea-bucket)
+0x49FFF0 lea          '{:+.0f} DEG'
+        site 0xB28B5 lea (lea-bucket)
+0x4A0000 lea          'mevr_hud_opacity'
+        site 0xB2907 lea (lea-bucket)
+0x4A0018 lea          'HUD OPACITY'
+        site 0xB291A lea (lea-bucket)
+0x4A0028 lea,ptrslot  'mevr_hint_height'
+        site 0xB2952 lea (lea-bucket)
+        site 0x4A1EE0 ptrslot (ptr)
+0x4A0040 lea          'HINT HEIGHT'
+        site 0xB2965 lea (lea-bucket)
+0x4A0050 lea          '{:+.0f}'
+        site 0xB2971 lea (lea-bucket)
+0x4A0058 lea          'mevr_hint_size'
+        site 0xB29C3 lea (lea-bucket)
+0x4A0068 lea          'HINT SIZE'
+        site 0xB29D6 lea (lea-bucket)
+0x4A0078 lea          '{:.1f}X'
+        site 0xB29E2 lea (lea-bucket)
+0x4A0080 lea,ptrslot  'mevr_hint_time'
+        site 0xB2A34 lea (lea-bucket)
+        site 0x4A1F00 ptrslot (ptr)
+0x4A0090 lea          'HINT TIME'
+        site 0xB2A47 lea (lea-bucket)
+0x4A009C lea          '1.00X'
+        site 0xB2A60 lea (lea-bucket)
+0x4A00A4 lea          '1.25X'
+        site 0xB2A81 lea (lea-bucket)
+0x4A00AC lea          '1.50X'
+        site 0xB2AA2 lea (lea-bucket)
+0x4A00B4 lea          '2.00X'
+        site 0xB2AC3 lea (lea-bucket)
+0x4A00C0 lea,ptrslot  'mevr_prompt_size'
+        site 0xB2B34 lea (lea-bucket)
+        site 0x4A1F20 ptrslot (ptr)
+0x4A00D8 lea          'ACTION PROMPT SIZE'
+        site 0xB2B47 lea (lea-bucket)
+0x4A00F0 lea          '{:.2f}X'
+        site 0xB2B53 lea (lea-bucket)
+0x4A00F8 lea          'mevr_menu_distance'
+        site 0xB2BA5 lea (lea-bucket)
+0x4A0110 lea          'MENU DISTANCE'
+        site 0xB2BB8 lea (lea-bucket)
+0x4A0120 lea          'mevr_menu_size'
+        site 0xB2C0D lea (lea-bucket)
+0x4A0130 lea          'MENU SIZE'
+        site 0xB2C20 lea (lea-bucket)
+0x4A0140 lea          '{:.1f} M'
+        site 0xB2C2C lea (lea-bucket)
+0x4A0150 lea,ptrslot  'mevr_damage_effects'
+        site 0xB2C7E lea (lea-bucket)
+        site 0x4A1F40 ptrslot (ptr)
+0x4A0168 lea          'DAMAGE EFFECTS'
+        site 0xB2C91 lea (lea-bucket)
+0x4A0178 lea,ptrslot  'mevr_damage_size'
+        site 0xB2CAB lea (lea-bucket)
+        site 0x4A1F60 ptrslot (ptr)
+0x4A0190 lea          'DAMAGE EFFECT SIZE'
+        site 0xB2CBE lea (lea-bucket)
+0x4A01A4 lea          'SMALL'
+        site 0xB2CD7 lea (lea-bucket)
+0x4A01AC lea          'MEDIUM'
+        site 0xB2CF8 lea (lea-bucket)
+        site 0xB372D lea (lea-bucket)
+0x4A01B4 lea          'LARGE'
+        site 0xB2D19 lea (lea-bucket)
+0x4A01C0 lea,ptrslot  'mevr_hit_direction'
+        site 0xB2D8A lea (lea-bucket)
+        site 0x4A1F80 ptrslot (ptr)
+0x4A01D8 lea          'HIT DIRECTION'
+        site 0xB2D9D lea (lea-bucket)
+0x4A01E8 lea,ptrslot  'mevr_health_pulse'
+        site 0xB2DB7 lea (lea-bucket)
+        site 0x4A1FA0 ptrslot (ptr)
+0x4A0200 lea          'LOW-HEALTH PULSE'
+        site 0xB2DCA lea (lea-bucket)
+0x4A0218 lea,ptrslot  'mevr_debug_overlay'
+        site 0xB2DE4 lea (lea-bucket)
+        site 0x4A1FC0 ptrslot (ptr)
+0x4A0230 lea          'DEBUG OVERLAY'
+        site 0xB2DF7 lea (lea-bucket)
+0x4A0240 lea,ptrslot  'mevr_cinema_pointer'
+        site 0xB2E11 lea (lea-bucket)
+        site 0x4A1FE0 ptrslot (ptr)
+0x4A0258 lea          'CINEMA POINTER'
+        site 0xB2E24 lea (lea-bucket)
+0x4A0268 lea,ptrslot  'mevr_cinema_floor'
+        site 0xB2E3E lea (lea-bucket)
+        site 0x4A2000 ptrslot (ptr)
+0x4A0280 lea          'CINEMA FLOOR'
+        site 0xB2E51 lea (lea-bucket)
+0x4A0290 lea,ptrslot  'mevr_cinema_controllers'
+        site 0xB2E6B lea (lea-bucket)
+        site 0x4A2020 ptrslot (ptr)
+0x4A02A8 lea          'CINEMA CONTROLLERS'
+        site 0xB2E7E lea (lea-bucket)
+0x4A02C0 lea,ptrslot  'mevr_cinema_info'
+        site 0xB2E98 lea (lea-bucket)
+        site 0x4A2040 ptrslot (ptr)
+0x4A02D8 lea          'CINEMA INFO'
+        site 0xB2EAB lea (lea-bucket)
+0x4A02E8 lea,ptrslot  'mevr_cinema_links'
+        site 0xB2EC5 lea (lea-bucket)
+        site 0x4A2060 ptrslot (ptr)
+0x4A0300 lea          'CINEMA LINKS'
+        site 0xB2ED8 lea (lea-bucket)
+0x4A0310 lea,ptrslot  'mevr_camera_preset'
+        site 0xB2EF2 lea (lea-bucket)
+        site 0x4A2080 ptrslot (ptr)
+0x4A0328 lea          'CAMERA PRESET'
+        site 0xB2F05 lea (lea-bucket)
+0x4A0338 lea          'IMMERSIVE'
+        site 0xB2F1B lea (lea-bucket)
+0x4A0348 lea          'COMFORT'
+        site 0xB2F3C lea (lea-bucket)
+        site 0xB85E2 lea (lea-bucket)
+0x4A0350 lea          'CINEMATIC'
+        site 0xB2F5D lea (lea-bucket)
+0x4A0360 lea,ptrslot  'mevr_realign'
+        site 0xB2FCB lea (lea-bucket)
+        site 0x4A20A0 ptrslot (ptr)
+0x4A0370 lea          'RE-ALIGN AFTER SCENES'
+        site 0xB2FDE lea (lea-bucket)
+0x4A0388 lea          'mevr_cinema_distance'
+        site 0xB30A7 lea (lea-bucket)
+0x4A03A0 lea          'CINEMA SCREEN DISTANCE'
+        site 0xB30BA lea (lea-bucket)
+0x4A03B8 lea          'mevr_cinema_size'
+        site 0xB310C lea (lea-bucket)
+0x4A03D0 lea          'CINEMA SCREEN SIZE'
+        site 0xB311F lea (lea-bucket)
+0x4A03E8 lea,ptrslot  'mevr_camera_cinematic_track'
+        site 0xB3182 lea (lea-bucket)
+        site 0x4A20C0 ptrslot (ptr)
+0x4A0408 lea,ptrslot  'mevr_camera_attached'
+        site 0xB31D3 lea (lea-bucket)
+        site 0x4A20E0 ptrslot (ptr)
+0x4A0420 lea,ptrslot  'mevr_camera_third_person'
+        site 0xB3220 lea (lea-bucket)
+        site 0x4A2100 ptrslot (ptr)
+0x4A0440 lea          'FREE CAMERA'
+        site 0xB3255 lea (lea-bucket)
+0x4A0450 lea,ptrslot  'mevr_camera_free_cam'
+        site 0xB326D lea (lea-bucket)
+        site 0x4A2120 ptrslot (ptr)
+0x4A0468 lea,ptrslot  'mevr_camera_station'
+        site 0xB32BA lea (lea-bucket)
+        site 0x4A2140 ptrslot (ptr)
+0x4A0480 lea          'BONE ANGLES'
+        site 0xB32EF lea (lea-bucket)
+0x4A0490 lea,ptrslot  'mevr_camera_bone_angles'
+        site 0xB3307 lea (lea-bucket)
+        site 0x4A2160 ptrslot (ptr)
+0x4A04A8 lea          'SCRIPTED LOCK'
+        site 0xB333C lea (lea-bucket)
+0x4A04B8 lea,ptrslot  'mevr_camera_scripted_lock'
+        site 0xB3354 lea (lea-bucket)
+        site 0x4A2180 ptrslot (ptr)
+0x4A04D8 lea          'ANIMATION LOCK'
+        site 0xB3389 lea (lea-bucket)
+0x4A04E8 lea,ptrslot  'mevr_camera_animation_lock'
+        site 0xB33A1 lea (lea-bucket)
+        site 0x4A21A0 ptrslot (ptr)
+0x4A0508 lea          'AXIS LOCKED'
+        site 0xB33D6 lea (lea-bucket)
+0x4A0518 lea,ptrslot  'mevr_camera_axis_locked'
+        site 0xB33EE lea (lea-bucket)
+        site 0x4A21C0 ptrslot (ptr)
+0x4A0530 lea          'GAMEPLAY UI'
+        site 0xB3423 lea (lea-bucket)
+0x4A0540 lea,ptrslot  'mevr_camera_gameplay_ui'
+        site 0xB343E lea (lea-bucket)
+        site 0x4A21E0 ptrslot (ptr)
+0x4A0558 lea,ptrslot  'mevr_alternate_eye'
+        site 0xB347D lea (lea-bucket)
+        site 0x4A1840 ptrslot (ptr)
+0x4A0570 lea          'RENDER MODE'
+        site 0xB3490 lea (lea-bucket)
+0x4A057C lea          'STEREO'
+        site 0xB34A6 lea (lea-bucket)
+0x4A0588 lea          'PERFORMANCE (AER+)'
+        site 0xB34C4 lea (lea-bucket)
+0x4A05A0 lea,ptrslot  'mevr_render_scale'
+        site 0xB3532 lea (lea-bucket)
+        site 0x4A1860 ptrslot (ptr)
+0x4A05B8 lea          'RENDER SCALE (RESTART)'
+        site 0xB3545 lea (lea-bucket)
+0x4A05D0 lea,ptrslot  'mevr_upscaler'
+        site 0xB356E lea (lea-bucket)
+        site 0x4A1880 ptrslot (ptr)
+0x4A05E0 lea          'UPSCALER'
+        site 0xB3581 lea (lea-bucket)
+0x4A05F0 lea,ptrslot  'mevr_upscaling_mode'
+        site 0xB35B6 lea (lea-bucket)
+        site 0x4A18A0 ptrslot (ptr)
+0x4A0608 lea          'UPSCALING MODE'
+        site 0xB35C9 lea (lea-bucket)
+0x4A0618 lea          'NATIVE AA'
+        site 0xB35DF lea (lea-bucket)
+        site 0xB3A5D lea (lea-bucket)
+0x4A0628 lea          'QUALITY'
+        site 0xB35FD lea (lea-bucket)
+0x4A0630 lea          'BALANCED'
+        site 0xB361B lea (lea-bucket)
+        site 0xB3D0F lea (lea-bucket)
+0x4A0640 lea          'PERFORMANCE'
+        site 0xB3639 lea (lea-bucket)
+0x4A0650 lea          'ULTRA PERFORMANCE'
+        site 0xB3657 lea (lea-bucket)
+0x4A0668 lea          'mevr_fsr_sharpness'
+        site 0xB36C8 lea (lea-bucket)
+0x4A0680 lea          'FSR SHARPENING'
+        site 0xB36DB lea (lea-bucket)
+0x4A0690 lea          'LOW'
+        site 0xB370F lea (lea-bucket)
+0x4A0694 lea          'HIGH'
+        site 0xB374B lea (lea-bucket)
+        site 0xB3D2D lea (lea-bucket)
+0x4A06A0 lea,ptrslot  'mevr_dlss_model'
+        site 0xB37BC lea (lea-bucket)
+        site 0x4A18C0 ptrslot (ptr)
+0x4A06B0 lea          'DLSS MODEL'
+        site 0xB37CF lea (lea-bucket)
+0x4A06C0 lea          'AUTO (K)'
+        site 0xB37E5 lea (lea-bucket)
+0x4A06D0 lea          'K (DLSS 4)'
+        site 0xB3803 lea (lea-bucket)
+0x4A06E0 lea          'M (DLSS 4.5)'
+        site 0xB3821 lea (lea-bucket)
+0x4A06F0 lea          'L (DLSS 4.5)'
+        site 0xB383F lea (lea-bucket)
+0x4A0700 lea          'J (DLSS 4)'
+        site 0xB385D lea (lea-bucket)
+0x4A0710 lea          'E (DLSS 3)'
+        site 0xB387B lea (lea-bucket)
+0x4A0720 lea,ptrslot  'mevr_upscaling_fovea'
+        site 0xB38E9 lea (lea-bucket)
+        site 0x4A18E0 ptrslot (ptr)
+0x4A0738 lea          'FOVEATED UPSCALING'
+        site 0xB38FC lea (lea-bucket)
+0x4A0750 lea          'ON (45 DEG)'
+        site 0xB3930 lea (lea-bucket)
+0x4A0760 lea          'ON (40 DEG)'
+        site 0xB394E lea (lea-bucket)
+0x4A0770 lea          'ON (35 DEG)'
+        site 0xB396C lea (lea-bucket)
+0x4A0780 lea          'ON (30 DEG)'
+        site 0xB398A lea (lea-bucket)
+0x4A0790 lea          'ON (25 DEG)'
+        site 0xB39A8 lea (lea-bucket)
+0x4A07A0 lea          'ON (20 DEG)'
+        site 0xB39C6 lea (lea-bucket)
+0x4A07B0 lea,ptrslot  'mevr_upscaling_periphery'
+        site 0xB3A34 lea (lea-bucket)
+        site 0x4A1900 ptrslot (ptr)
+0x4A07D0 lea          'FOVEATED PERIPHERY'
+        site 0xB3A47 lea (lea-bucket)
+0x4A07E4 lea          'TAA'
+        site 0xB3A7B lea (lea-bucket)
+        site 0x14E8D0 lea (lea-bucket)
+0x4A07E8 lea,ptrslot  'mevr_mirror'
+        site 0xB3AE9 lea (lea-bucket)
+        site 0x4A1920 ptrslot (ptr)
+0x4A07F8 lea          'DESKTOP MIRROR'
+        site 0xB3AFC lea (lea-bucket)
+0x4A0808 lea          'LEFT EYE'
+        site 0xB3B33 lea (lea-bucket)
+0x4A0818 lea          'BOTH EYES'
+        site 0xB3B54 lea (lea-bucket)
+0x4A0828 lea          'mevr_mirror_window'
+        site 0xB3BC5 lea (lea-bucket)
+0x4A0840 lea          'MIRROR WINDOW'
+        site 0xB3BD8 lea (lea-bucket)
+0x4A0850 lea          'WINDOWED'
+        site 0xB3BEE lea (lea-bucket)
+0x4A0860 lea          'FULLSCREEN'
+        site 0xB3C0F lea (lea-bucket)
+0x4A0870 lea,ptrslot  'mevr_mirror_ui'
+        site 0xB3C7D lea (lea-bucket)
+        site 0x4A1940 ptrslot (ptr)
+0x4A0880 lea          'MIRROR HEADSET UI'
+        site 0xB3C90 lea (lea-bucket)
+0x4A0898 lea,ptrslot  'mevr_foveation'
+        site 0xB3CAA lea (lea-bucket)
+        site 0x4A1960 ptrslot (ptr)
+0x4A08A8 lea          'FOVEATED RENDERING'
+        site 0xB3CBD lea (lea-bucket)
+0x4A08BC lea          'LIGHT'
+        site 0xB3CF1 lea (lea-bucket)
+0x4A08C8 lea          'AGGRESSIVE'
+        site 0xB3D4B lea (lea-bucket)
+0x4A08D4 lea          'ULTRA'
+        site 0xB3D69 lea (lea-bucket)
+0x4A08E0 lea          'EXTREME'
+        site 0xB3D87 lea (lea-bucket)
+0x4A08E8 lea,ptrslot  'mevr_water_reflections'
+        site 0xB3DF5 lea (lea-bucket)
+        site 0x4A1980 ptrslot (ptr)
+0x4A0900 lea          'BETTER WATER REFLECTIONS'
+        site 0xB3E08 lea (lea-bucket)
+0x4A0920 lea,ptrslot  'mevr_disable_blur'
+        site 0xB3E22 lea (lea-bucket)
+        site 0x4A19A0 ptrslot (ptr)
+0x4A0938 lea          'DISABLE BLUR'
+        site 0xB3E35 lea (lea-bucket)
+0x4A0948 lea,ptrslot  'mevr_depth_of_field'
+        site 0xB3E4F lea (lea-bucket)
+        site 0x4A19C0 ptrslot (ptr)
+0x4A0960 lea          'DEPTH OF FIELD'
+        site 0xB3E62 lea (lea-bucket)
+0x4A0970 lea,ptrslot  'mevr_hud_resolution'
+        site 0xB3E9A lea (lea-bucket)
+        site 0x4A19E0 ptrslot (ptr)
+0x4A0988 lea          'HUD RESOLUTION (RESTART)'
+        site 0xB3EAD lea (lea-bucket)
+0x4A09A4 lea          '{}P'
+        site 0xB3ED7 lea (lea-bucket)
+0x4A09A8 lea,ptrslot  'mevr_depth_reprojection'
+        site 0xB3F2B lea (lea-bucket)
+        site 0x4A1A00 ptrslot (ptr)
+0x4A09C0 lea          'DEPTH REPROJECTION'
+        site 0xB3F3E lea (lea-bucket)
+0x4A09D8 lea          'LEGAL NOTICE VIDEO'
+        site 0xB3F51 lea (lea-bucket)
+0x4A09F0 lea          'mevr_video_legal'
+        site 0xB3F67 lea (lea-bucket)
+0x4A0A04 lea          'legal'
+        site 0xB3F87 lea (lea-bucket)
+0x4A0A10 lea          'CREDITS VIDEO'
+        site 0xB3FB9 lea (lea-bucket)
+0x4A0A20 lea          'mevr_video_credits'
+        site 0xB3FCC lea (lea-bucket)
+0x4A0A38 lea          'credits'
+        site 0xB3FE9 lea (lea-bucket)
+0x4A0A40 lea          'INTRO VIDEO'
+        site 0xB401B lea (lea-bucket)
+0x4A0A50 lea          'mevr_video_intro'
+        site 0xB402E lea (lea-bucket)
+0x4A0A64 lea          'intro'
+        site 0xB404B lea (lea-bucket)
+0x4A0A6C lea,movload  'light'
+        site 0xB968A movload (lea-bucket)
+        site 0x2C0745 lea (lea-bucket)
+0x4A0A78 lea,movload  'balanced'
+        site 0xB9701 movload (lea-bucket)
+        site 0x11FE60 lea (lea-bucket)
+        site 0x1AEA26 lea (lea-bucket)
+0x4A0A84 movload      'high'
+        site 0xB9770 movload (lea-bucket)
+0x4A0A90 movsd        'aggressive'
+        site 0xB97DD movsd (lea-bucket)
+0x4A0A9C movload      'ultra'
+        site 0xB9859 movload (lea-bucket)
+0x4A0AA8 movload      'extreme'
+        site 0xB98D0 movload (lea-bucket)
+0x4A0AB0 lea,movups   'btn_use_defaults'
+        site 0xB8EEA lea (lea-bucket)
+        site 0xBA58A movups (lea-bucket)
+0x4A0AC8 lea          'resolution'
+        site 0xB7218 lea (lea-bucket)
+0x4A0AD8 lea          'r_vsync'
+        site 0xB7236 lea (lea-bucket)
+0x4A0AE0 lea          'api'
+        site 0xB7254 lea (lea-bucket)
+0x4A0AE8 lea          'aim_assist'
+        site 0xB7272 lea (lea-bucket)
+0x4A0AF8 lea          'auto_aim_border'
+        site 0xB7280 lea (lea-bucket)
+0x4A0B08 lea          'g_show_crosshair'
+        site 0xB72EA lea (lea-bucket)
+0x4A0B20 lea          'g_show_hitmarks'
+        site 0xB72F8 lea (lea-bucket)
+0x4A0B30 lea          'g_qte_mode'
+        site 0xB7363 lea (lea-bucket)
+0x4A0B40 lea,movsd    'mevr_movement'
+        site 0xB7582 lea (lea-bucket)
+        site 0xB8FB8 movsd (lea-bucket)
+0x4A0B50 lea,movsd    'mevr_body'
+        site 0xB780A lea (lea-bucket)
+        site 0xB9009 movsd (lea-bucket)
+0x4A0B60 lea          'mevr_vibration_page'
+        site 0xB79B5 lea (lea-bucket)
+        site 0xB7A87 lea (lea-bucket)
+0x4A0B74 lea          'HANDS'
+        site 0xB7B04 lea (lea-bucket)
+0x4A0B80 lea,movsd    'mevr_hands'
+        site 0xB7B17 lea (lea-bucket)
+        site 0xB904C movsd (lea-bucket)
+0x4A0B90 lea,movsd    'mevr_weapons'
+        site 0xB7D3D lea (lea-bucket)
+        site 0xB9099 movsd (lea-bucket)
+0x4A0BA0 lea          'SCOPES'
+        site 0xB7E80 lea (lea-bucket)
+0x4A0BA8 lea,movsd    'mevr_scopes'
+        site 0xB7E96 lea (lea-bucket)
+        site 0xB90ED movsd (lea-bucket)
+0x4A0BB8 lea          'INTERFACE'
+        site 0xB820F lea (lea-bucket)
+0x4A0BC8 lea,movload  'mevr_hud'
+        site 0xB8225 lea (lea-bucket)
+        site 0xB9144 movload (lea-bucket)
+0x4A0BD8 lea          'CAMERA OVERRIDES'
+        site 0xB83A1 lea (lea-bucket)
+0x4A0BF0 lea          'mevr_camera_overrides'
+        site 0xB83CA lea (lea-bucket)
+        site 0xB8573 lea (lea-bucket)
+0x4A0C08 lea,movsd    'mevr_comfort'
+        site 0xB8611 lea (lea-bucket)
+        site 0xB9184 movsd (lea-bucket)
+0x4A0C18 movload      'GRAPHICS'
+        site 0xB8BBB movload (lea-bucket)
+0x4A0C28 lea,movsd    'mevr_graphics'
+        site 0xB8BCA lea (lea-bucket)
+        site 0xB8F6B movsd (lea-bucket)
+0x4A0C38 movload      'GAME'
+        site 0xB8DE5 movload (lea-bucket)
+0x4A0C40 movsd        'mevr_game'
+        site 0xB8E06 movsd (lea-bucket)
+        site 0xB8F1E movsd (lea-bucket)
+0x4A0C50 movload      'mevr_vr'
+        site 0xB8E65 movload (lea-bucket)
+0x4A0C58 lea          'nf'
+        site 0xAF5E8 lea (lea-bucket)
+0x4A0C5C lea          'inity'
+        site 0xAF638 lea (lea-bucket)
+0x4A0C64 lea          'an'
+        site 0xAFAFA lea (lea-bucket)
+0x4A0C68 lea          'ind'
+        site 0xAFBC1 lea (lea-bucket)
+0x4A0C6C lea          'snan'
+        site 0xAFBFB lea (lea-bucket)
+0x4A17F6 none         'L?'
+0x4A1802 none         'pA'
+0x4A180E none         '4B'
+0x4A1812 none         'pB'
+0x4A2200 lea,ptrslot  'Reset the VR tips you have already seen, as on a first playthrough.'
+        site 0xBDF49 lea (lea-bucket)
+        site 0x4A1830 ptrslot (ptr)
+0x4A2250 ptrslot      'STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion.'
+        site 0x4A1850 ptrslot (ptr)
+0x4A2300 ptrslot      'The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart.'
+        site 0x4A1870 ptrslot (ptr)
+0x4A2390 ptrslot      'Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards.'
+        site 0x4A1890 ptrslot (ptr)
+0x4A2410 ptrslot      'How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.'
+        site 0x4A18B0 ptrslot (ptr)
+0x4A24A0 ptrslot      'Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K.'
+        site 0x4A18D0 ptrslot (ptr)
+0x4A2500 ptrslot      "Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster."
+        site 0x4A18F0 ptrslot (ptr)
+0x4A2580 ptrslot      "How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry."
+        site 0x4A1910 ptrslot (ptr)
+0x4A2610 ptrslot      'What the desktop window shows while you play.'
+        site 0x4A1930 ptrslot (ptr)
+0x4A2640 ptrslot      'The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost.'
+        site 0x4A1950 ptrslot (ptr)
+0x4A26E0 ptrslot      'Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only.'
+        site 0x4A1970 ptrslot (ptr)
+0x4A2760 ptrslot      'More accurate reflections on water, reaching further. Small performance penalty.'
+        site 0x4A1990 ptrslot (ptr)
+0x4A27C0 ptrslot      "Turns off the game's motion blur, which can be uncomfortable in VR."
+        site 0x4A19B0 ptrslot (ptr)
+0x4A2810 ptrslot      "Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount."
+        site 0x4A19D0 ptrslot (ptr)
+0x4A2880 ptrslot      'How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart.'
+        site 0x4A19F0 ptrslot (ptr)
+0x4A28F0 ptrslot      'Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it.'
+        site 0x4A1A10 ptrslot (ptr)
+0x4A2970 ptrslot      'Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points.'
+        site 0x4A1A30 ptrslot (ptr)
+0x4A29F0 ptrslot      'HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next.'
+        site 0x4A1A50 ptrslot (ptr)
+0x4A2A60 ptrslot      'Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting.'
+        site 0x4A1A70 ptrslot (ptr)
+0x4A2AF0 ptrslot      'How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched.'
+        site 0x4A1A90 ptrslot (ptr)
+0x4A2B60 ptrslot      'How far the turn stick must be pushed before you turn. Raise it if you turn by accident.'
+        site 0x4A1AB0 ptrslot (ptr)
+0x4A2BC0 ptrslot      "Tones down the game's camera bob while walking and running, which can be uncomfortable in VR."
+        site 0x4A1AD0 ptrslot (ptr)
+0x4A2C20 ptrslot      'ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down.'
+        site 0x4A1AF0 ptrslot (ptr)
+0x4A2C90 ptrslot      'Your real height, so the game can tell when you crouch. NOT SET uses the headset alone.'
+        site 0x4A1B10 ptrslot (ptr)
+0x4A2CF0 ptrslot      'How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes.'
+        site 0x4A1B30 ptrslot (ptr)
+0x4A2D60 ptrslot      'Crouching in real life crouches in the game. Needs PLAYER HEIGHT.'
+        site 0x4A1B50 ptrslot (ptr)
+0x4A2DB0 ptrslot      'Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back.'
+        site 0x4A1B70 ptrslot (ptr)
+0x4A2E50 ptrslot      "STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM)."
+        site 0x4A1B90 ptrslot (ptr)
+0x4A2F20 ptrslot      'FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.'
+        site 0x4A1BB0 ptrslot (ptr)
+0x4A2FA0 ptrslot      'FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along.'
+        site 0x4A1BD0 ptrslot (ptr)
+0x4A3030 ptrslot      'Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps.'
+        site 0x4A1BF0 ptrslot (ptr)
+0x4A30D0 ptrslot      'Tilts weapons and items in your hand up or down, to match how you hold your controller.'
+        site 0x4A1C10 ptrslot (ptr)
+0x4A3130 ptrslot      'Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons.'
+        site 0x4A1C30 ptrslot (ptr)
+0x4A31B0 ptrslot      'HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken.'
+        site 0x4A1C50 ptrslot (ptr)
+0x4A3230 ptrslot      "With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach."
+        site 0x4A1C70 ptrslot (ptr)
+0x4A32C0 ptrslot      'How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off.'
+        site 0x4A1C90 ptrslot (ptr)
+0x4A3330 ptrslot      'Light ticks as your hand reaches a body slot, something to take, a weapon part or a device.'
+        site 0x4A1CB0 ptrslot (ptr)
+0x4A3390 ptrslot      "The kick of every shot in the hands holding the gun, and the weapons' own vibration."
+        site 0x4A1CD0 ptrslot (ptr)
+0x4A33E8 ptrslot      'Vibration when you are hit or hurt.'
+        site 0x4A1CF0 ptrslot (ptr)
+0x4A3410 ptrslot      'Vibration in scripted scenes and while riding vehicles.'
+        site 0x4A1D10 ptrslot (ptr)
+0x4A3448 ptrslot      'Light steps while running, and landings.'
+        site 0x4A1D30 ptrslot (ptr)
+0x4A3480 ptrslot      'How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake.'
+        site 0x4A1D50 ptrslot (ptr)
+0x4A3510 ptrslot      'Reload with your hands: work magazines, bolts, levers and pumps yourself.'
+        site 0x4A1D70 ptrslot (ptr)
+0x4A3560 ptrslot      'Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never.'
+        site 0x4A1D90 ptrslot (ptr)
+0x4A35D0 ptrslot      'Turn on to start the FIRST RELOADS count over, so the highlights show again.'
+        site 0x4A1DB0 ptrslot (ptr)
+0x4A3620 ptrslot      'Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be.'
+        site 0x4A1DD0 ptrslot (ptr)
+0x4A36A0 ptrslot      'Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on.'
+        site 0x4A1DF0 ptrslot (ptr)
+0x4A3700 ptrslot      'What your other eye sees while you look through a scope.'
+        site 0x4A1E10 ptrslot (ptr)
+0x4A3740 ptrslot      "How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view."
+        site 0x4A1E30 ptrslot (ptr)
+0x4A37A0 ptrslot      "WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view."
+        site 0x4A1E50 ptrslot (ptr)
+0x4A3830 ptrslot      'Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view.'
+        site 0x4A1E70 ptrslot (ptr)
+0x4A38A0 ptrslot      "The HUD's layout. 4:3 brings its edges closer to the middle of your view."
+        site 0x4A1E90 ptrslot (ptr)
+0x4A38F0 ptrslot      'LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away.'
+        site 0x4A1EB0 ptrslot (ptr)
+0x4A3968 ptrslot      'Moves the HUD above or below your line of sight.'
+        site 0x4A1ED0 ptrslot (ptr)
+0x4A39A0 ptrslot      "Moves the game's hint cards up or down."
+        site 0x4A1EF0 ptrslot (ptr)
+0x4A39C8 ptrslot      "How much longer the game's timed hints stay up."
+        site 0x4A1F10 ptrslot (ptr)
+0x4A3A00 ptrslot      'The size of the prompts in the middle of the view: quick-time events, use and melee.'
+        site 0x4A1F30 ptrslot (ptr)
+0x4A3A60 ptrslot      "Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects."
+        site 0x4A1F50 ptrslot (ptr)
+0x4A3AD0 ptrslot      'How far into your view the damage glow reaches.'
+        site 0x4A1F70 ptrslot (ptr)
+0x4A3B00 ptrslot      'Shows an arc toward whoever just hit you.'
+        site 0x4A1F90 ptrslot (ptr)
+0x4A3B30 ptrslot      'The edge of your view pulses while your health is low.'
+        site 0x4A1FB0 ptrslot (ptr)
+0x4A3B70 ptrslot      'Shows camera details in a corner of the view. Meant for testing.'
+        site 0x4A1FD0 ptrslot (ptr)
+0x4A3BC0 ptrslot      'On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse.'
+        site 0x4A1FF0 ptrslot (ptr)
+0x4A3C30 ptrslot      'A dim dotted floor under the Cinema screen, so you do not float in the dark.'
+        site 0x4A2010 ptrslot (ptr)
+0x4A3C80 ptrslot      'Shows your controllers while the Cinema screen is up.'
+        site 0x4A2030 ptrslot (ptr)
+0x4A3CC0 ptrslot      "In the main menu, a plaque under the Cinema screen with the mod's name and version."
+        site 0x4A2050 ptrslot (ptr)
+0x4A3D20 ptrslot      'In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game.'
+        site 0x4A2070 ptrslot (ptr)
+0x4A3DE0 ptrslot      'What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen.'
+        site 0x4A2090 ptrslot (ptr)
+0x4A3E80 ptrslot      'After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH).'
+        site 0x4A20B0 ptrslot (ptr)
+0x4A3F00 ptrslot      'Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET.'
+        site 0x4A20D0 ptrslot (ptr)
+0x4A3F50 ptrslot      'Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET.'
+        site 0x4A20F0 ptrslot (ptr)
+0x4A3FA8 ptrslot      'Third-person views. AUTO follows CAMERA PRESET.'
+        site 0x4A2110 ptrslot (ptr)
+0x4A3FD8 ptrslot      'Scenes with a free-flying camera. AUTO follows CAMERA PRESET.'
+        site 0x4A2130 ptrslot (ptr)
+0x4A4018 ptrslot      'Seats and mounted guns. AUTO follows CAMERA PRESET.'
+        site 0x4A2150 ptrslot (ptr)
+0x4A4050 ptrslot      'Scenes where an animation turns your view. AUTO follows CAMERA PRESET.'
+        site 0x4A2170 ptrslot (ptr)
+0x4A40A0 ptrslot      'Moments when the story locks the camera. AUTO follows CAMERA PRESET.'
+        site 0x4A2190 ptrslot (ptr)
+0x4A40F0 ptrslot      "Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET."
+        site 0x4A21B0 ptrslot (ptr)
+0x4A4150 ptrslot      'The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET.'
+        site 0x4A21D0 ptrslot (ptr)
+0x4A41B0 ptrslot      'Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET.'
+        site 0x4A21F0 ptrslot (ptr)
+0x4A4218 lea          'scene_cycle'
+        site 0xC10D7 lea (lea-bucket)
+0x4A4228 lea          'right_eye.replay'
+        site 0xC10E8 lea (lea-bucket)
+0x4A4240 lea          'right_eye.record'
+        site 0xC10F9 lea (lea-bucket)
+0x4A4258 lea          'left_eye.record'
+        site 0xC110A lea (lea-bucket)
+0x4A4268 lea          'drain.before_right_eye'
+        site 0xC111B lea (lea-bucket)
+0x4A4280 lea          'drain.after_right_eye'
+        site 0xC112C lea (lea-bucket)
+0x4A4298 lea          'drain.after_left_eye'
+        site 0xC113D lea (lea-bucket)
+0x4A42B0 lea          'drain.scene_tail'
+        site 0xC114E lea (lea-bucket)
+0x4A42C8 lea          'light.projection'
+        site 0xC115F lea (lea-bucket)
+0x4A42E0 lea          'light.grid_wait'
+        site 0xC1170 lea (lea-bucket)
+0x4A42F0 lea          'terrain.join'
+        site 0xC1181 lea (lea-bucket)
+0x4A4300 lea          'hiz.map_wait'
+        site 0xC1192 lea (lea-bucket)
+0x4A4310 lea          'present.preview'
+        site 0xC11A3 lea (lea-bucket)
+0x4A4320 lea          'present.stereo_pass'
+        site 0xC11B4 lea (lea-bucket)
+0x4A4338 lea          'debug.target_averages'
+        site 0xC11C5 lea (lea-bucket)
+0x4A4350 lea          'gpu.frame'
+        site 0xC11D6 lea (lea-bucket)
+0x4A4360 lea          'gpu.before_right_eye'
+        site 0xC11E7 lea (lea-bucket)
+0x4A4378 lea          'gpu.right_eye'
+        site 0xC11F8 lea (lea-bucket)
+0x4A4388 lea          'gpu.left_eye'
+        site 0xC1209 lea (lea-bucket)
+0x4A4398 lea          'gpu.tail'
+        site 0xC121A lea (lea-bucket)
+0x4A43A8 lea          'gpu.resolve_right'
+        site 0xC122B lea (lea-bucket)
+0x4A43C0 lea          'gpu.resolve_left'
+        site 0xC123C lea (lea-bucket)
+0x4A43D8 lea          'gpu.upscale.input'
+        site 0xC124D lea (lea-bucket)
+0x4A43F0 lea          'gpu.upscale.centre_inputs'
+        site 0xC125E lea (lea-bucket)
+0x4A4410 lea          'gpu.upscale.dlss'
+        site 0xC126F lea (lea-bucket)
+0x4A4428 lea          'gpu.upscale.periphery'
+        site 0xC1280 lea (lea-bucket)
+0x4A4440 lea          'gpu.upscale.ring'
+        site 0xC1291 lea (lea-bucket)
+0x4A4458 lea          'gpu.upscale.output'
+        site 0xC12A2 lea (lea-bucket)
+0x4A4470 lea          'aer.previous_transforms'
+        site 0xC12B3 lea (lea-bucket)
+0x4A4488 lea          'hands.player_update'
+        site 0xC19B3 lea (lea-bucket)
+0x4A44A0 lea          'hands.hand_target'
+        site 0xC19C4 lea (lea-bucket)
+0x4A44B8 lea          'hands.arm_pre_pass'
+        site 0xC19D5 lea (lea-bucket)
+0x4A44D0 lea          'hands.arm_finish'
+        site 0xC19E6 lea (lea-bucket)
+0x4A44E8 lea          'hands.between_weapons'
+        site 0xC19F7 lea (lea-bucket)
+0x4A4500 lea          'weapon.update'
+        site 0xC1A08 lea (lea-bucket)
+0x4A4530 lea          '[actions] {} - {}'
+        site 0xC5064 lea (lea-bucket)
+0x4A4548 movups       'Show/hide the ImGui overlay'
+        site 0xC3D9D movups (lea-bucket)
+0x4A4568 movsd        'toggle_overlay'
+        site 0xC3DCB movsd (lea-bucket)
+0x4A4578 movups       'Show/hide the 2nd-view preview window'
+        site 0xC3E54 movups (lea-bucket)
+0x4A45A0 movups       'toggle_second_window'
+        site 0xC3EA7 movups (lea-bucket)
+0x4A45B8 movups       'Show/hide the camera authority monitor window'
+        site 0xC3F26 movups (lea-bucket)
+0x4A45E8 movups       'toggle_camera_monitor'
+        site 0xC3F77 movups (lea-bucket)
+0x4A4600 movups       'Show/hide metrics graph'
+        site 0xC3FFA movups (lea-bucket)
+0x4A4618 movsd        'toggle_metrics'
+        site 0xC402A movsd (lea-bucket)
+0x4A4628 movups       'List available actions'
+        site 0xC40AF movups (lea-bucket)
+0x4A4640 movload      'help'
+        site 0xC40E1 movload (lea-bucket)
+0x4A4648 lea          'seated'
+        site 0xC0A4C lea (lea-bucket)
+        site 0x231B7F lea (lea-bucket)
+0x4A4650 lea          'mod.vr.body.player_height is not set'
+        site 0xC0A53 lea (lea-bucket)
+0x4A4680 lea          "[vr] standing play from the floor is off ({}); the view keeps its relative height and the body stays the game's"
+        site 0xC0A8B lea (lea-bucket)
+0x4A46F0 lea          '[vr] standing play from the floor: eye height {:.2f} m (a full crouch is {:.2f} m lower); needs the STAGE reference space'
+        site 0xC0BA1 lea (lea-bucket)
+0x4A47C8 lea          'primary swapchain replaced'
+        site 0xC3B89 lea (lea-bucket)
+0x4A47E8 lea          'swapchain resize'
+        site 0xC3BCF lea (lea-bucket)
+        site 0x1A894E lea (lea-bucket)
+        site 0x1A8AC4 lea (lea-bucket)
+0x4A4800 lea          'swapchain retired'
+        site 0xC3D03 lea (lea-bucket)
+0x4A4818 lea          'renderer shutdown'
+        site 0xC3C79 lea (lea-bucket)
+        site 0x1A6C61 lea (lea-bucket)
+        site 0x1A89EF lea (lea-bucket)
+0x4A4830 lea          'InteractionDesktopOverlay'
+        site 0xC3B20 lea (lea-bucket)
+0x4A4850 movaps       'Recenter: the screen and panels in front of the head, and in the world, the view back over the body'
+        site 0xC418D movaps (lea-bucket)
+0x4A48B8 movups       'Turn left by mod.vr.snap_turn_degrees'
+        site 0xC426C movups (lea-bucket)
+0x4A48E0 movups       'Turn right by mod.vr.snap_turn_degrees'
+        site 0xC433B movups (lea-bucket)
+0x4A4908 movups       'Switch to the next sun cascade update schedule'
+        site 0xC440B movups (lea-bucket)
+0x4A4938 movups       'sun_cascade_schedule_next'
+        site 0xC445C movups (lea-bucket)
+0x4A4960 movaps       "Compare: the game's TAA at the same render size as the chosen FSR or DLSS mode, and back"
+        site 0xC44D9 movaps (lea-bucket)
+0x4A49C0 movaps       "Switch to the next upscaling mode (the game's TAA, then FSR and DLSS each at native, quality, balanced, performance, ultra performance); not saved"
+        site 0xC45C6 movaps (lea-bucket)
+0x4A4A60 lea          'Development: take one upscaler input away (texture LOD bias, jitter) to see what an artefact depends on'
+        site 0xC46D2 lea (lea-bucket)
+0x4A4AD0 lea          'Switch foveated upscaling to its next size (off, auto, 45 down to 20 degrees); not saved'
+        site 0xC4755 lea (lea-bucket)
+0x4A4B30 lea          "Switch what anti-aliases the foveated periphery (the mod's TAA or the upscaler's native AA); not saved"
+        site 0xC47D8 lea (lea-bucket)
+0x4A4BA0 lea          'Switch to the next DLSS preset (auto, K, M, L, J, E); not saved'
+        site 0xC485B lea (lea-bucket)
+0x4A4BE0 lea          'Record 5 s of UI panel poses and frame timing to a CSV'
+        site 0xC48DE lea (lea-bucket)
+0x4A4C18 lea          'vr_ui_pose_trace'
+        site 0xC4904 lea (lea-bucket)
+0x4A4C30 lea          '[vr] hand hooks unavailable; the game keeps the hands and weapon'
+        site 0xC0181 lea (lea-bucket)
+        site 0xC01D2 lea (lea-bucket)
+0x4A4C78 lea          'on: weapons are taken from the body'
+        site 0xC032D lea (lea-bucket)
+0x4A4CA0 lea          'unavailable: the inventory hooks did not install'
+        site 0xC0334 lea (lea-bucket)
+0x4A4CD8 lea          '[vr] free hands {}'
+        site 0xC035C lea (lea-bucket)
+0x4A4CF0 lea          "[vr] weapon handling hooks unavailable; the game's own"
+        site 0xC0601 lea (lea-bucket)
+        site 0xC0656 lea (lea-bucket)
+0x4A4D30 lea          '[vr] weapon hooks unavailable; holster and aim stay on the buttons'
+        site 0xC06D0 lea (lea-bucket)
+        site 0xC0722 lea (lea-bucket)
+0x4A4D78 lea          '[vr] controllers drive the hands; the {} hand always holds'
+        site 0xC08C2 lea (lea-bucket)
+0x4A4DC0 lea          '[vr] the controllers cannot play the game; the keyboard and mouse still do'
+        site 0xC0C91 lea (lea-bucket)
+        site 0xC0CDF lea (lea-bucket)
+0x4A4E10 lea          "[vr] the game's aim assist could not be turned off"
+        site 0xC0DA0 lea (lea-bucket)
+0x4A4E48 lea          '[vr] world scale: {:.3f} world units per metre'
+        site 0xBFE0E lea (lea-bucket)
+0x4A4E80 lea          '[renderer] aim focus hook unavailable; scopes focus where the head looks'
+        site 0xC1C1C lea (lea-bucket)
+0x4A4ED0 lea          '[vr] production stereo camera integration is unavailable'
+        site 0xC277C lea (lea-bucket)
+0x4A4F10 lea          '[vr] production renderer path selected; OpenXR tracking camera integration active'
+        site 0xC3068 lea (lea-bucket)
+0x4A4F68 lea          '[renderer] stereo debug replay is unavailable'
+        site 0xC342D lea (lea-bucket)
+0x4A5510 lea          'interaction_debug.mutex'
+        site 0xBE234 lea (lea-bucket)
+0x4A5537 none         '>ts=0x{:08X} size=0x{:08X} sum=0x{:08X}'
+0x4A55A7 none         ')t$P'
+0x4A55D5 none         'X UH'
+0x4A55E7 none         'US'
+0x4A5603 none         'SAVAWH'
+0x4A5697 none         'SUVWAUAVAW'
+0x4A58C8 none         't.'
+0x4A58D1 none         'tH'
+0x4A599A none         'UWAV'
+0x4A5A05 none         'x '
+0x4A5A2B none         '@L'
+0x4A5A3A none         '0L'
+0x4A5C73 none         ' !"#'
+0x4A5FEF none         't$ '
+0x4A6059 none         't$ '
+0x4A60B7 none         'UVWAT'
+0x4A612F none         'L$0'
+0x4A642A none         'VW'
+0x4A6447 none         'l$ VWA'
+0x4A646D none         ')t$@'
+0x4A6484 none         'u '
+0x4A6A40 ptrslot      'token adapter destructor'
+        site 0x4A65E0 ptrslot (ptr)
+0x4A6A60 ptrslot      'token adapter apply'
+        site 0x4A6608 ptrslot (ptr)
+0x4A6A78 ptrslot      'token adapter display text'
+        site 0x4A6630 ptrslot (ptr)
+0x4A6A98 ptrslot      'token adapter value count'
+        site 0x4A6658 ptrslot (ptr)
+0x4A6AB8 ptrslot      'token adapter enabled'
+        site 0x4A6680 ptrslot (ptr)
+0x4A6AD0 ptrslot      'token adapter next'
+        site 0x4A66A8 ptrslot (ptr)
+0x4A6AE8 ptrslot      'token adapter prev'
+        site 0x4A66D0 ptrslot (ptr)
+0x4A6B00 ptrslot      'resolution adapter value count'
+        site 0x4A66F8 ptrslot (ptr)
+0x4A6B20 ptrslot      'resolution adapter enabled'
+        site 0x4A6720 ptrslot (ptr)
+0x4A6B40 ptrslot      'resolution adapter next'
+        site 0x4A6748 ptrslot (ptr)
+0x4A6B58 ptrslot      'resolution adapter prev'
+        site 0x4A6770 ptrslot (ptr)
+0x4A6B70 ptrslot      'api adapter value count'
+        site 0x4A6798 ptrslot (ptr)
+0x4A6B88 ptrslot      'api adapter enabled'
+        site 0x4A67C0 ptrslot (ptr)
+0x4A6BA0 ptrslot      'api adapter next'
+        site 0x4A67E8 ptrslot (ptr)
+0x4A6BB8 ptrslot      'api adapter prev'
+        site 0x4A6810 ptrslot (ptr)
+0x4A6BD0 ptrslot      'int cvar set'
+        site 0x4A6838 ptrslot (ptr)
+0x4A6BE0 ptrslot      'int cvar tokens'
+        site 0x4A6860 ptrslot (ptr)
+0x4A6BF0 ptrslot      'float cvar slot 0'
+        site 0x4A6888 ptrslot (ptr)
+0x4A6C08 ptrslot      'float cvar slot 1'
+        site 0x4A68B0 ptrslot (ptr)
+0x4A6C20 ptrslot      'console add'
+        site 0x4A68D8 ptrslot (ptr)
+0x4A6C30 ptrslot      'token adapter set index'
+        site 0x4A6900 ptrslot (ptr)
+0x4A6C48 ptrslot      'float adapter value count'
+        site 0x4A6928 ptrslot (ptr)
+0x4A6C68 ptrslot      'float adapter enabled'
+        site 0x4A6950 ptrslot (ptr)
+0x4A6C80 ptrslot      'float adapter next'
+        site 0x4A6978 ptrslot (ptr)
+0x4A6C98 ptrslot      'float adapter prev'
+        site 0x4A69A0 ptrslot (ptr)
+0x4A6CB0 ptrslot      'float adapter set index'
+        site 0x4A69C8 ptrslot (ptr)
+0x4A6CC8 ptrslot      'stock float cvar set'
+        site 0x4A69F0 ptrslot (ptr)
+0x4A6CE0 ptrslot      'console execute'
+        site 0x4A6A18 ptrslot (ptr)
+0x4A7240 ptrslot      'sun_fit'
+        site 0x4A6CF0 ptrslot (ptr)
+        site 0x4BB200 ptrslot (ptr)
+0x4A7248 ptrslot      'sun_cascade_fit'
+        site 0x4A6D18 ptrslot (ptr)
+0x4A7258 ptrslot      'early_depth'
+        site 0x4A6D40 ptrslot (ptr)
+        site 0x4BB210 ptrslot (ptr)
+0x4A7268 ptrslot      'gbuffer_start'
+        site 0x4A6D68 ptrslot (ptr)
+0x4A7278 ptrslot      'gbuffer_end'
+        site 0x4A6D90 ptrslot (ptr)
+0x4A7284 ptrslot      'decals'
+        site 0x4A6DB8 ptrslot (ptr)
+        site 0x4BB230 ptrslot (ptr)
+0x4A7290 ptrslot      'depth_mips'
+        site 0x4A6DE0 ptrslot (ptr)
+        site 0x4BB240 ptrslot (ptr)
+0x4A72A0 ptrslot      'depth_reduce'
+        site 0x4A6E08 ptrslot (ptr)
+        site 0x4BB250 ptrslot (ptr)
+0x4A72B0 ptrslot      'ao'
+        site 0x4A6E30 ptrslot (ptr)
+        site 0x4BB260 ptrslot (ptr)
+0x4A72B8 ptrslot      'lighting'
+        site 0x4A6E58 ptrslot (ptr)
+        site 0x4BB270 ptrslot (ptr)
+        site 0x4C3638 ptrslot (ptr)
+        site 0x6EEDD8 ptrslot (ptr)
+0x4A72C8 ptrslot      'atlas_region'
+        site 0x4A6E80 ptrslot (ptr)
+        site 0x4BB280 ptrslot (ptr)
+0x4A72D8 ptrslot      'ssr'
+        site 0x4A6EA8 ptrslot (ptr)
+        site 0x4BB290 ptrslot (ptr)
+0x4A72E0 ptrslot      'sun_shadows'
+        site 0x4A6ED0 ptrslot (ptr)
+        site 0x4BB2B0 ptrslot (ptr)
+0x4A72F0 ptrslot      'sun_clear'
+        site 0x4A6EF8 ptrslot (ptr)
+        site 0x4BB2C0 ptrslot (ptr)
+0x4A7300 ptrslot      'sun_cascade'
+        site 0x4A6F20 ptrslot (ptr)
+        site 0x4BB2D0 ptrslot (ptr)
+0x4A730C ptrslot      'sun_gi'
+        site 0x4A6F48 ptrslot (ptr)
+        site 0x4BB2E0 ptrslot (ptr)
+0x4A7318 ptrslot      'sun_gi_alt'
+        site 0x4A6F70 ptrslot (ptr)
+0x4A7328 ptrslot      'accumulation'
+        site 0x4A6F98 ptrslot (ptr)
+        site 0x4BB2F0 ptrslot (ptr)
+0x4A7338 ptrslot      'local_shadows'
+        site 0x4A6FC0 ptrslot (ptr)
+        site 0x4BB300 ptrslot (ptr)
+0x4A7348 ptrslot      'volumes'
+        site 0x4A6FE8 ptrslot (ptr)
+        site 0x4BB310 ptrslot (ptr)
+0x4A7350 ptrslot      'forward'
+        site 0x4A7010 ptrslot (ptr)
+        site 0x4BB320 ptrslot (ptr)
+0x4A7358 ptrslot      'exposure'
+        site 0x4A7038 ptrslot (ptr)
+        site 0x4BB330 ptrslot (ptr)
+0x4A7364 ptrslot      'water'
+        site 0x4A7060 ptrslot (ptr)
+        site 0x4BB340 ptrslot (ptr)
+        site 0x4C3640 ptrslot (ptr)
+        site 0x6EEDF0 ptrslot (ptr)
+0x4A7370 ptrslot      'combine'
+        site 0x4A7088 ptrslot (ptr)
+        site 0x4BB350 ptrslot (ptr)
+0x4A7378 ptrslot      'temporal'
+        site 0x4A70B0 ptrslot (ptr)
+        site 0x4BB360 ptrslot (ptr)
+        site 0x4BD0D0 ptrslot (ptr)
+0x4A7384 ptrslot      'bloom'
+        site 0x4A70D8 ptrslot (ptr)
+        site 0x4BB370 ptrslot (ptr)
+0x4A7390 ptrslot      'final_post'
+        site 0x4A7100 ptrslot (ptr)
+        site 0x4BB380 ptrslot (ptr)
+        site 0x4BD0D8 ptrslot (ptr)
+0x4A73A0 ptrslot      'output_resolve'
+        site 0x4A7128 ptrslot (ptr)
+        site 0x4BB390 ptrslot (ptr)
+0x4A73B0 ptrslot      'atlas_region_fit'
+        site 0x4A7150 ptrslot (ptr)
+0x4A73C8 ptrslot      'local_shadow_target'
+        site 0x4A7178 ptrslot (ptr)
+0x4A73DC ptrslot      'hair'
+        site 0x4A71A0 ptrslot (ptr)
+        site 0x4BB3A0 ptrslot (ptr)
+0x4A73E8 ptrslot      'impostors'
+        site 0x4A71C8 ptrslot (ptr)
+0x4A73F8 ptrslot      'impostors_alt'
+        site 0x4A71F0 ptrslot (ptr)
+0x4A7408 ptrslot      'impostors_sun'
+        site 0x4A7218 ptrslot (ptr)
+0x4A76F0 ptrslot      '2d7644be6a329746025fbdedc5d64f8f'
+        site 0x4A7420 ptrslot (ptr)
+0x4A7718 ptrslot      '2daebfc900f8b9193cf709850c9d04ec'
+        site 0x4A7438 ptrslot (ptr)
+0x4A7740 ptrslot      '33c22aa647817d6d05985a2bb41d6691'
+        site 0x4A7450 ptrslot (ptr)
+0x4A7768 ptrslot      '34c562d58d23c84c38fbfa157308bac4'
+        site 0x4A7468 ptrslot (ptr)
+0x4A7790 ptrslot      '4fb039630df262925e45dfaf9d746db3'
+        site 0x4A7480 ptrslot (ptr)
+0x4A77B8 ptrslot      '5859f3a9e4d9a3857270caf182aabefc'
+        site 0x4A7498 ptrslot (ptr)
+0x4A77E0 ptrslot      '7ebd04b09cc76168d2a5690c488e293e'
+        site 0x4A74B0 ptrslot (ptr)
+0x4A7808 ptrslot      '82e1ab68744b4c243a264fbccf119269'
+        site 0x4A74C8 ptrslot (ptr)
+0x4A7830 ptrslot      '8f77a2972d115f8d4cf2b165786bb79a'
+        site 0x4A74E0 ptrslot (ptr)
+0x4A7858 ptrslot      'ae5d857dd8e59fccb1fd7690f1b24db4'
+        site 0x4A74F8 ptrslot (ptr)
+0x4A7880 ptrslot      'b4c749ffaed9e15fe1da655e3ca40c29'
+        site 0x4A7510 ptrslot (ptr)
+0x4A78A8 ptrslot      'cbd35429ef95315612a6407ee1fb0cd1'
+        site 0x4A7528 ptrslot (ptr)
+0x4A78D0 ptrslot      'd625d9cc5301b0d8a049dfc6263ed2d5'
+        site 0x4A7540 ptrslot (ptr)
+0x4A78F8 ptrslot      'ee4b032fe1a20cc55b5501dec48a887b'
+        site 0x4A7558 ptrslot (ptr)
+0x4A7920 ptrslot      'f3628646d723427e6c1693ad2a736b03'
+        site 0x4A7570 ptrslot (ptr)
+0x4A7948 ptrslot      '4c3f2f3b6785c9d1174a33b95fedc96e'
+        site 0x4A7588 ptrslot (ptr)
+0x4A7970 ptrslot      '52b9d8695e3e6be3bcc2fbe704cef49f'
+        site 0x4A75A0 ptrslot (ptr)
+0x4A7998 ptrslot      '60a9017fa78cb0f0d29b7313ae19a7c0'
+        site 0x4A75B8 ptrslot (ptr)
+0x4A79C0 ptrslot      '62c2a50a1a6b92626f8f62e3e77a2ec7'
+        site 0x4A75D0 ptrslot (ptr)
+0x4A79E8 ptrslot      '6cfa2df8568b36ff906e7b14b96a6a4d'
+        site 0x4A75E8 ptrslot (ptr)
+0x4A7A10 ptrslot      '0c0ab3116e3e371bf5d5113eb5cdcb09'
+        site 0x4A7600 ptrslot (ptr)
+0x4A7A38 ptrslot      '2ee70882138b47767f1db17835dd358e'
+        site 0x4A7618 ptrslot (ptr)
+0x4A7A60 ptrslot      '5a20d6b336ee6a0eceb34d836426ff72'
+        site 0x4A7630 ptrslot (ptr)
+0x4A7A88 ptrslot      '787f4dec55c05b40de0686594b22f0ba'
+        site 0x4A7648 ptrslot (ptr)
+0x4A7AB0 ptrslot      '7fd046ef7d5d6729112075ab21a20521'
+        site 0x4A7660 ptrslot (ptr)
+0x4A7AD8 ptrslot      '8ed2857ab2bd76be45ae17f43af40012'
+        site 0x4A7678 ptrslot (ptr)
+0x4A7B00 ptrslot      'a2123395c80ae58029eacdf3a97c4092'
+        site 0x4A7690 ptrslot (ptr)
+0x4A7B28 ptrslot      'c5ed4a95f86d2c9d7c5ef2c088de1624'
+        site 0x4A76A8 ptrslot (ptr)
+0x4A7B50 ptrslot      'd07352b9c6b1a2538c679c02306f5199'
+        site 0x4A76C0 ptrslot (ptr)
+0x4A7B78 ptrslot      'ec03689c54f833ae94e67cdbc4ac5985'
+        site 0x4A76D8 ptrslot (ptr)
+0x4A7C39 none         'WC'
+0x4A7C81 none         'k6'
+0x4A7CB1 none         'g7'
+0x4A7D10 none         '`VC'
+0x4A7D18 none         '@Zn'
+0x4A7D30 none         'Pe>'
+0x4A7D49 none         '8>'
+0x4A7D51 none         '19'
+0x4A7D78 none         '@!N'
+0x4A7D80 none         'pMP'
+0x4A7D90 none         '0e>'
+0x4A7DC9 none         "'?"
+0x4A7DE1 none         'vK'
+0x4A7DF8 none         ' 7O'
+0x4A7E70 none         'p$K'
+0x4A7E89 none         '%7'
+0x4A7EA1 none         'MK'
+0x4A7ED1 none         'wO'
+0x4A7ED9 none         'vO'
+0x4A8158 none         '0*h'
+0x4A8198 none         '%;L'
+0x4A81C8 none         '%ag'
+0x4A81D9 none         'Yg'
+0x4A82F1 none         "'h"
+0x4A8348 none         '04&'
+0x4A8440 none         '17&'
+0x4A8C61 none         'z%'
+0x4A8CE8 none         'P>L'
+0x4A8E40 none         '@AL'
+0x4A8E71 none         ';O'
+0x4A8E89 none         ')D'
+0x4A8EA0 none         'PhL'
+0x4A8F49 none         '-O'
+0x4A8F50 none         ' .O'
+0x4A8F71 none         '*L'
+0x4A8FA9 none         '}S'
+0x4A8FB1 none         'wb'
+0x4A8FC0 none         '@Z6'
+0x4A9039 none         'tb'
+0x4A9081 none         '*7'
+0x4A90B1 none         'Oj'
+0x4A9138 none         'p[c'
+0x4A9151 none         'Qc'
+0x4A9168 none         '@bc'
+0x4A9220 none         '`#S'
+0x4A9269 none         'j>'
+0x4A9270 none         'pJ?'
+0x4A92C1 none         '1N'
+0x4A9380 none         '@HR'
+0x4A9429 none         '|F'
+0x4A9431 none         '>K'
+0x4A9439 none         'xO'
+0x4A9440 none         'j2>'
+0x4A9448 none         ' R>'
+0x4A9451 none         'R>'
+0x4A94C1 none         'X>'
+0x4A94D9 none         'P='
+0x4A95F9 none         '~>'
+0x4A9690 none         '`ZO'
+0x4A96B1 none         'v_'
+0x4A96C9 none         '<L'
+0x4A9710 none         '0lc'
+0x4A97E0 ptrslot      'Steam 1.0.0.7'
+        site 0x4A7BA0 ptrslot (ptr)
+0x4A97F0 ptrslot      'menu manager update'
+        site 0x4A7F08 ptrslot (ptr)
+0x4A9808 ptrslot      'menu package loader'
+        site 0x4A7F30 ptrslot (ptr)
+0x4A9820 ptrslot      'mask cvar constructor'
+        site 0x4A7F58 ptrslot (ptr)
+0x4A9838 ptrslot      'token adapter allocation'
+        site 0x4A7F80 ptrslot (ptr)
+0x4A9858 ptrslot      'token adapter constructor'
+        site 0x4A7FA8 ptrslot (ptr)
+0x4A9878 ptrslot      'float adapter allocation'
+        site 0x4A7FD0 ptrslot (ptr)
+0x4A9898 ptrslot      'float adapter constructor'
+        site 0x4A7FF8 ptrslot (ptr)
+0x4A98B8 ptrslot      'option registry insert'
+        site 0x4A8020 ptrslot (ptr)
+0x4A98D0 ptrslot      'VFS file open'
+        site 0x4A8048 ptrslot (ptr)
+0x4A98E8 lea          '[binary] {} recognized ({})'
+        site 0xC5993 lea (lea-bucket)
+        site 0xC5A84 lea (lea-bucket)
+0x4A9910 lea          '[binary] unrecognized game image ({}); using the {} tables, every hook still verifies its own code bytes'
+        site 0xC5ACE lea (lea-bucket)
+0x4A99AE none         'jA'
+0x4A99C0 lea          "[reflection-march] more than {} matching shaders; the rest keep the engine's march"
+        site 0xC890C lea (lea-bucket)
+0x4A9A18 lea          '[reflection-march] creating a finer twin failed hr={}'
+        site 0xC8AD4 lea (lea-bucket)
+0x4A9A50 lea          '[reflection-march] shader {} ({} bytes) got a {}-step twin; inspected {} shaders in {:.1f} ms so far'
+        site 0xC8A0D lea (lea-bucket)
+0x4A9AB8 lea          '[reflection-march] inspecting one shader took {:.1f} ms'
+        site 0xC8D2C lea (lea-bucket)
+0x4A9AF0 lea          'enabled'
+        site 0xC8FBB lea (lea-bucket)
+        site 0x2541F9 lea (lea-bucket)
+        site 0x3969E5 lea (lea-bucket)
+        site 0x396B8A lea (lea-bucket)
+        site 0x397EE0 lea (lea-bucket)
+        site 0x39824E lea (lea-bucket)
+        site 0x39AA55 lea (lea-bucket)
+        site 0x39B054 lea (lea-bucket)
+        site 0x39B85E lea (lea-bucket)
+0x4A9AF8 lea,movload  'disabled'
+        site 0xC8FC2 lea (lea-bucket)
+        site 0x3841D9 movload (lea-bucket)
+0x4A9B08 lea          '[reflection-march] shader hooks installed: {}-step march, {}'
+        site 0xC8FFD lea (lea-bucket)
+0x4A9B48 lea          '[reflection-march] hooking shader creation failed err={}'
+        site 0xC9056 lea (lea-bucket)
+0x4A9EDE none         'd@'
+0x4A9F04 lea          '{:02x}'
+        site 0x14110D lea (lea-bucket)
+        site 0x161950 lea (lea-bucket)
+0x4A9F90 lea          'CameraMonitorWindow'
+        site 0xCCBF0 lea (lea-bucket)
+0x4A9FA8 lea          '[camera-monitor] enabled={}'
+        site 0xCD26C lea (lea-bucket)
+        site 0xCD48F lea (lea-bucket)
+0x4A9FC8 lea          '[camera-monitor] device changed; recreating'
+        site 0xCCEB8 lea (lea-bucket)
+        site 0xCCF0C lea (lea-bucket)
+0x4A9FF8 lea          '[camera-monitor] RegisterClassEx failed err={}'
+        site 0xCB8F5 lea (lea-bucket)
+0x4AA04B none         '  '
+0x4AA090 lea          '[camera-monitor] CreateWindowEx failed err={}'
+        site 0xCBA8E lea (lea-bucket)
+0x4AA0C0 lea          '[camera-monitor] window created hwnd=0x{:X} at ({},{}) {}x{}'
+        site 0xCBB17 lea (lea-bucket)
+0x4AA100 lea          '[camera-monitor] no DXGI factory; cannot create window'
+        site 0xCC429 lea (lea-bucket)
+0x4AA138 lea          '[camera-monitor] CreateSwapChain failed hr={} ({}x{})'
+        site 0xCC624 lea (lea-bucket)
+0x4AA170 lea          '[camera-monitor] ResizeBuffers failed hr={}'
+        site 0xCC77C lea (lea-bucket)
+0x4AA1A0 lea          '[camera-monitor] backbuffer RTV setup failed hr={}/{}'
+        site 0xCC876 lea (lea-bucket)
+0x4AA1D8 lea          '1.92.8'
+        site 0xCC04F lea (lea-bucket)
+        site 0x114B1E lea (lea-bucket)
+        site 0x114E5A lea (lea-bucket)
+        site 0x28F98E lea (lea-bucket)
+        site 0x29ABD6 lea (lea-bucket)
+        site 0x2F6D62 lea (lea-bucket)
+        site 0x325C60 lea (lea-bucket)
+        site 0x340A70 lea (lea-bucket)
+0x4AA1E0 lea          '[camera-monitor] ImGui_ImplDX11_Init failed; monitor stays blank'
+        site 0xCC155 lea (lea-bucket)
+0x4AA228 lea          '[camera-monitor] imgui ready scale={:.2f}'
+        site 0xCC237 lea (lea-bucket)
+0x4AA258 lea          'Camera authority##monitor'
+        site 0xCBC69 lea (lea-bucket)
+0x4AA278 lea          '[camera-monitor] first frame presented ({}x{})'
+        site 0xCBDA2 lea (lea-bucket)
+0x4AA2A8 lea          '[camera-monitor] Present lost the device hr={}; recreating'
+        site 0xCBEF8 lea (lea-bucket)
+0x4AA2E8 lea          '[camera-monitor] Present failed hr={}'
+        site 0xCBE2A lea (lea-bucket)
+0x4AA312 none         'PA'
+0x4AA32F none         '?2'
+0x4AA338 lea          'owner '
+        site 0xCD5BD lea (lea-bucket)
+        site 0xCE2AF lea (lea-bucket)
+        site 0xCE2F0 lea (lea-bucket)
+0x4AA340 lea          'slot  '
+        site 0xCD5C6 lea (lea-bucket)
+        site 0xCE2F9 lea (lea-bucket)
+0x4AA348 lea          'lock  '
+        site 0xCD5CF lea (lea-bucket)
+        site 0xCE302 lea (lea-bucket)
+0x4AA350 lea          'attach'
+        site 0xCD5D8 lea (lea-bucket)
+        site 0xCE30B lea (lea-bucket)
+0x4AA358 lea          'riding'
+        site 0xCD5E1 lea (lea-bucket)
+        site 0xCE314 lea (lea-bucket)
+0x4AA360 lea          'track '
+        site 0xCD5EA lea (lea-bucket)
+        site 0xCE31D lea (lea-bucket)
+0x4AA368 lea          'writer'
+        site 0xCD5F3 lea (lea-bucket)
+        site 0xCE326 lea (lea-bucket)
+0x4AA370 lea          '?     '
+        site 0xCD5FC lea (lea-bucket)
+        site 0xCE32F lea (lea-bucket)
+0x4AA3A0 lea          'Camera tracking unavailable - see log.'
+        site 0xCD91E lea (lea-bucket)
+0x4AA3C8 lea          '  %s'
+        site 0xCD9E3 lea (lea-bucket)
+        site 0xD0720 lea (lea-bucket)
+0x4AA3D0 lea          'tracker %.1f us/frame (peak %.1f) | %.0f memory checks/s | %.0f view-angle calls/s'
+        site 0xCD9F7 lea (lea-bucket)
+0x4AA428 lea          'camera %.2f m above the root (%.2f m away) | fov %.1f'
+        site 0xCDA56 lea (lea-bucket)
+0x4AA460 lea          'State'
+        site 0xCDA8A lea (lea-bucket)
+0x4AA468 lea          'slot %d %s  [%s]'
+        site 0xCDAD7 lea (lea-bucket)
+0x4AA480 lea          'blending into it: %.2f at speed %.0f'
+        site 0xCDAFA lea (lea-bucket)
+0x4AA4A8 lea          ' (gameplay default)'
+        site 0xCDB1A lea (lea-bucket)
+0x4AA4C0 lea          'axis mode %u%s'
+        site 0xCDB2B lea (lea-bucket)
+0x4AA4D0 lea          "lock by '%s' | target %s | bone %u | flags 0x%02X/0x%02X"
+        site 0xCDB80 lea (lea-bucket)
+0x4AA510 lea          '  view copied from a bone every frame'
+        site 0xCDB92 lea (lea-bucket)
+0x4AA538 lea          '  spring pulling the view back'
+        site 0xCDBA4 lea (lea-bucket)
+0x4AA558 lea          ' (exclusive)'
+        site 0xCDBC0 lea (lea-bucket)
+0x4AA568 lea          'attached to %s, bone %u, weight %.2f%s'
+        site 0xCDC03 lea (lea-bucket)
+0x4AA590 lea          'third-person flag set'
+        site 0xCDC31 lea (lea-bucket)
+0x4AA5A8 lea          'camera system suppresses the viewer'
+        site 0xCDC46 lea (lea-bucket)
+0x4AA5D0 lea          "paused by '%s'"
+        site 0xCDC70 lea (lea-bucket)
+0x4AA5E0 lea          'view pitch %.1f yaw %.1f roll %.1f | body yaw %.1f'
+        site 0xCDC84 lea (lea-bucket)
+0x4AA618 lea          'View writers'
+        site 0xCDCEB lea (lea-bucket)
+        site 0xCDD01 lea (lea-bucket)
+0x4AA628 lea          '(none this window)'
+        site 0xCDD1D lea (lea-bucket)
+0x4AA640 lea          '%7.0f/s  %s'
+        site 0xCDD7C lea (lea-bucket)
+0x4AA650 lea          'Camera tracks'
+        site 0xCDDB2 lea (lea-bucket)
+        site 0xCDDC8 lea (lea-bucket)
+0x4AA660 lea          ' (finished)'
+        site 0xCDE0F lea (lea-bucket)
+0x4AA670 lea          'EXCLUSIVE'
+        site 0xCDE1B lea (lea-bucket)
+0x4AA680 lea          'REPLACES '
+        site 0xCDE7B lea (lea-bucket)
+0x4AA690 lea          '%s  %s%s'
+        site 0xCDE86 lea (lea-bucket)
+0x4AA6A0 lea          'additive   %s%s'
+        site 0xCDE4A lea (lea-bucket)
+0x4AA6B0 lea          'No viewer - menus or loading.'
+        site 0xCDEB9 lea (lea-bucket)
+0x4AA6D0 lea          'History'
+        site 0xCDF49 lea (lea-bucket)
+0x4AA6D8 lea          'hide footsteps'
+        site 0xCDF69 lea (lea-bucket)
+0x4AA6E8 lea          'hide tracks'
+        site 0xCDF84 lea (lea-bucket)
+0x4AA6F8 lea          'hide writers'
+        site 0xCDF9F lea (lea-bucket)
+0x4AA708 lea          'newest first'
+        site 0xCDFBA lea (lea-bucket)
+0x4AA718 lea          'Copy to clipboard'
+        site 0xCE0EA lea (lea-bucket)
+0x4AA72C lea          'Clear'
+        site 0xCE128 lea (lea-bucket)
+        site 0x3315E5 lea (lea-bucket)
+0x4AA738 lea          '%zu of %zu events shown; the log has all but footsteps'
+        site 0xCE1B9 lea (lea-bucket)
+0x4AA770 lea          'camera_history'
+        site 0xCE1F8 lea (lea-bucket)
+0x4AA780 lea          '%9.2fs  %s  %s'
+        site 0xCE2C2 lea (lea-bucket)
+        site 0xCE342 lea (lea-bucket)
+0x4AA790 lea          '%9.2fs  %s  '
+        site 0xCD614 lea (lea-bucket)
+0x4AA7A5 none         '.eB'
+0x4AA7B0 movdqa       '33s?'
+        site 0xCDD41 movdqa (lea-bucket)
+0x4AA80F none         '?333?333?333?'
+0x4AA826 none         '@?'
+0x4AA838 lea          'Left hand'
+        site 0xCEF6D lea (lea-bucket)
+0x4AA848 lea          'Right hand'
+        site 0xCEF77 lea (lea-bucket)
+0x4AA858 lea          'hand control'
+        site 0xCEB20 lea (lea-bucket)
+0x4AA868 lea          'Re-anchor to game'
+        site 0xCEC26 lea (lea-bucket)
+0x4AA880 lea          'The hooks could not be installed; see the log.'
+        site 0xCEC61 lea (lea-bucket)
+0x4AA8F3 none         'to move what the hand holds; untick grip to let go with that hand.'
+0x4AA938 lea          'grip'
+        site 0xCEF8B lea (lea-bucket)
+0x4AA940 lea          'move to grip'
+        site 0xCEFEC lea (lea-bucket)
+0x4AA950 lea          "Gripped away from the item's grip: bring the hand there and grip again."
+        site 0xCF017 lea (lea-bucket)
+0x4AA998 lea          '%.3f m'
+        site 0xCF02B lea (lea-bucket)
+0x4AA9A0 lea          'position'
+        site 0xCF03A lea (lea-bucket)
+0x4AA9B0 lea          '%.1f deg'
+        site 0xCF08B lea (lea-bucket)
+0x4AA9C0 lea          'pitch/yaw/roll'
+        site 0xCF078 lea (lea-bucket)
+0x4AA9D0 lea          'zero'
+        site 0xCF0BB lea (lea-bucket)
+0x4AA9D8 lea          'What the hands do'
+        site 0xCEDA8 lea (lea-bucket)
+0x4AA9F0 lea          'The hooks are installed the first time hand control is turned on.'
+        site 0xCEDBB lea (lea-bucket)
+0x4AAA34 lea          '%s: %s'
+        site 0xCEDF9 lea (lea-bucket)
+0x4AAA40 lea          '  no request from the game'
+        site 0xCEE16 lea (lea-bucket)
+0x4AAA5C lea          'item'
+        site 0xCEDDA lea (lea-bucket)
+        site 0x1C6DD3 lea (lea-bucket)
+0x4AAA68 lea          'body/world'
+        site 0xCEE3E lea (lea-bucket)
+0x4AAA78 lea          '  %s -> %s 0x%llX, weight %.2f'
+        site 0xCEE4F lea (lea-bucket)
+0x4AAA98 lea          '  stand-in %.3f m from the grip'
+        site 0xCEE79 lea (lea-bucket)
+0x4AAAB8 lea          'overrides: hands %llu | items %llu'
+        site 0xCEE9D lea (lea-bucket)
+0x4AAAE0 lea          'last grip away from a grip point: %s hand'
+        site 0xCEEBC lea (lea-bucket)
+0x4AAB10 lea          'Waiting for the camera.'
+        site 0xCEEDD lea (lea-bucket)
+0x4AAB70 lea          'weapon and hands'
+        site 0xCF920 lea (lea-bucket)
+0x4AAB88 lea          'Weapon and hands'
+        site 0xCF475 lea (lea-bucket)
+0x4AAB9C lea          'Hands'
+        site 0xCF48A lea (lea-bucket)
+0x4AABA8 lea          'Fingers'
+        site 0xCF4A5 lea (lea-bucket)
+0x4AABD8 ptrslot      'thumb'
+        site 0x4AABB0 ptrslot (ptr)
+0x4AABE0 ptrslot      'middle'
+        site 0x4AABC0 ptrslot (ptr)
+        site 0x4AAC00 ptrslot (ptr)
+0x4AABE8 ptrslot      'ring'
+        site 0x4AABC8 ptrslot (ptr)
+0x4AABF0 ptrslot      'little'
+        site 0x4AABD0 ptrslot (ptr)
+0x4AAC10 ptrslot      'proximal'
+        site 0x4AABF8 ptrslot (ptr)
+0x4AAC1C ptrslot      'distal'
+        site 0x4AAC08 ptrslot (ptr)
+0x4AAC28 lea          'override finger pose'
+        site 0xCF53C lea (lea-bucket)
+0x4AACCC none         'which is an open hand. Positive curls inwards; the hinge is local -Y.'
+0x4AAD18 lea          '%.0f deg'
+        site 0xCF5AB lea (lea-bucket)
+        site 0xCF660 lea (lea-bucket)
+        site 0xCF741 lea (lea-bucket)
+        site 0xCF7CD lea (lea-bucket)
+        site 0xCFAB2 lea (lea-bucket)
+0x4AAD28 lea          'curl all'
+        site 0xCF5C2 lea (lea-bucket)
+0x4AAD38 lea          'curl##all%d'
+        site 0xCF6A8 lea (lea-bucket)
+0x4AAD48 lea          '%s##f%dj%d'
+        site 0xCF752 lea (lea-bucket)
+0x4AAD58 lea          'Zero all angles'
+        site 0xCF7F3 lea (lea-bucket)
+0x4AAD68 lea          'waiting'
+        site 0xCF83F lea (lea-bucket)
+0x4AAD70 lea          'hook: %s | skeleton: %s | joints: %d | writes: %llu'
+        site 0xCF890 lea (lea-bucket)
+0x4AADB0 lea          'The left hand holds nothing, so it is posed as a free hand and these angles are ignored.'
+        site 0xCF8A1 lea (lea-bucket)
+0x4AAE10 lea          "Waiting for the player's skeleton."
+        site 0xCF8C4 lea (lea-bucket)
+0x4AAE36 none         'Q?'
+0x4AAE56 none         '@?'
+0x4AAE90 lea          'head and body'
+        site 0xCFF30 lea (lea-bucket)
+0x4AAEA0 lea          'Head and body'
+        site 0xCF9D2 lea (lea-bucket)
+0x4AAEB0 lea          'Separate head from body'
+        site 0xCFA2A lea (lea-bucket)
+0x4AAEC8 lea          'Stable view orientation'
+        site 0xCFA3E lea (lea-bucket)
+0x4AAEE0 lea          'Stable camera origin'
+        site 0xCFA52 lea (lea-bucket)
+0x4AAEF8 lea          'Follow head'
+        site 0xCFA6F lea (lea-bucket)
+0x4AAF04 none         'Locked to head'
+0x4AAF18 lea          'Body rotation'
+        site 0xCFA7B lea (lea-bucket)
+0x4AAF28 lea          'Follow starts'
+        site 0xCFAD3 lea (lea-bucket)
+0x4AAF38 lea          'Follow stops'
+        site 0xCFAFF lea (lea-bucket)
+0x4AAF48 lea          '%.0f deg/s'
+        site 0xCFB16 lea (lea-bucket)
+0x4AAF58 lea          'Follow speed'
+        site 0xCFB37 lea (lea-bucket)
+0x4AAF68 lea          'Maximum twist'
+        site 0xCFB68 lea (lea-bucket)
+0x4AAF78 lea          'Physical translation debug'
+        site 0xCFB7A lea (lea-bucket)
+0x4AAF98 lea          'Enable head translation'
+        site 0xCFB8B lea (lea-bucket)
+0x4AAFB0 lea          '%.2f m/rad'
+        site 0xCFBAF lea (lea-bucket)
+0x4AAFC0 lea          'Mouse translation scale'
+        site 0xCFBD0 lea (lea-bucket)
+0x4AAFD8 lea          '%.2f m'
+        site 0xCFBE7 lea (lea-bucket)
+0x4AAFE0 lea          'Maximum debug offset'
+        site 0xCFC0B lea (lea-bucket)
+0x4AAFF8 lea          'Horizontal leash'
+        site 0xCFC3C lea (lea-bucket)
+0x4AB010 lea          '%.2f m/s'
+        site 0xCFC53 lea (lea-bucket)
+0x4AB020 lea          'Catch-up speed'
+        site 0xCFC6F lea (lea-bucket)
+0x4AB030 lea          '%.1f /s'
+        site 0xCFC86 lea (lea-bucket)
+0x4AB038 lea          'Catch-up gain'
+        site 0xCFCA6 lea (lea-bucket)
+0x4AB048 lea          'Recenter from current pose'
+        site 0xCFCED lea (lea-bucket)
+0x4AB068 lea          'Head/body hooks unavailable - see log.'
+        site 0xCFD1A lea (lea-bucket)
+0x4AB090 lea          'head yaw %.1f | body yaw %.1f | difference %.1f'
+        site 0xCFD71 lea (lea-bucket)
+0x4AB0C0 lea          'camera anchor %.3f %.3f %.3f'
+        site 0xCFDA4 lea (lea-bucket)
+0x4AB0E0 lea          'head offset %.3f %.3f %.3f'
+        site 0xCFDD7 lea (lea-bucket)
+0x4AB100 lea          'body offset %.3f %.3f %.3f'
+        site 0xCFE0A lea (lea-bucket)
+0x4AB120 lea          'head/body residual %.3f %.3f %.3f | catch-up %.2f m/s'
+        site 0xCFE4B lea (lea-bucket)
+0x4AB158 lea          'Horizontal translation gesture active'
+        site 0xCFE6A lea (lea-bucket)
+0x4AB180 lea          'Vertical translation gesture active'
+        site 0xCFE86 lea (lea-bucket)
+0x4AB1B0 lea          'body %llu | angles %llu | origin %llu | limits %llu | move %llu | catch-up %llu'
+        site 0xCFEBE lea (lea-bucket)
+0x4AB200 lea          'Mouse look acts as the debug head direction. WASD remains relative to that direction. Hold XButton1 and move the mouse horizontally or vertically to move the head on its horizontal plane. Hold the middle mouse button and move vertically to change head height. Release keeps the offset. Recenter after teleports, stance changes, or to clear it.'
+        site 0xCFECF lea (lea-bucket)
+0x4AB35A none         ' B'
+0x4AB363 none         '>fff?'
+0x4AB36F none         '?render other eye in 2nd window (F1)'
+0x4AB398 lea          'preparing...'
+        site 0xCFFF6 lea (lea-bucket)
+0x4AB3A8 lea          'Second view'
+        site 0xD0016 lea (lea-bucket)
+0x4AB3B4 lea,ptrslot  '%.3f'
+        site 0xD0046 lea (lea-bucket)
+        site 0x6E68F0 ptrslot (ptr)
+0x4AB3C0 lea          '2nd view offset (m)'
+        site 0xD006E lea (lea-bucket)
+0x4AB3D8 lea          'main view offset (m)'
+        site 0xD00C2 lea (lea-bucket)
+0x4AB3F0 lea          '0##mainoff'
+        site 0xD00F6 lea (lea-bucket)
+0x4AB400 lea          'eye camera for world-space UI (notebook screens)'
+        site 0xD0130 lea (lea-bucket)
+0x4AB438 lea          'main view in 2nd view when none is rendered (loading)'
+        site 0xD015E lea (lea-bucket)
+0x4AB470 lea          'Stereo correctness'
+        site 0xD018F lea (lea-bucket)
+0x4AB488 lea          'all validated - defaults are correct'
+        site 0xD01A3 lea (lea-bucket)
+0x4AB4B0 lea          'engine TAA'
+        site 0xD01C0 lea (lea-bucket)
+0x4AB4C0 lea          'viewmodel parallax (gun / wrist gear)'
+        site 0xD01EE lea (lea-bucket)
+0x4AB4E8 lea          'headset drives the native camera (scripted too)'
+        site 0xD021C lea (lea-bucket)
+0x4AB61A none         'following the mouse. Toggle while looking at water to compare.'
+0x4AB660 lea          "leave the engine's camera block to its effects"
+        site 0xD0261 lea (lea-bucket)
+0x4AB7CC none         'shaking. Ride a boat or jump to compare.'
+0x4AB7F8 lea          'ripples: simulate once per frame'
+        site 0xD02A6 lea (lea-bucket)
+0x4AB920 none         'once per frame, as mono does. Shoot water to compare.'
+0x4AB958 lea          'footprints: step once per frame'
+        site 0xD02EB lea (lea-bucket)
+0x4ABA7B none         'where the grass shaders look it up. Walk through tall grass.'
+0x4ABAB8 lea          'pause menu: blur without smearing'
+        site 0xD0330 lea (lea-bucket)
+0x4ABBE1 none         'blurs without trailing. Turn the head in the pause menu.'
+0x4ABC20 lea          'water: let view 2 past the per-frame memo'
+        site 0xD0375 lea (lea-bucket)
+0x4ABC50 lea          'isolate render-target writes'
+        site 0xD03A3 lea (lea-bucket)
+0x4ABC70 lea          'view-boundary decode fence'
+        site 0xD03D1 lea (lea-bucket)
+0x4ABC90 lea          'per-view light system reset'
+        site 0xD03FF lea (lea-bucket)
+0x4ABCB0 lea          '  ! fence and light reset must both be on'
+        site 0xD042F lea (lea-bucket)
+0x4ABCE0 lea          'per-eye TAA history'
+        site 0xD0456 lea (lea-bucket)
+0x4ABCF8 lea          'per-eye occlusion Hi-Z'
+        site 0xD0484 lea (lea-bucket)
+0x4ABD10 lea          'per-eye gather pass id'
+        site 0xD04B2 lea (lea-bucket)
+0x4ABD28 lea          'suppress duplicate history rollover'
+        site 0xD04E0 lea (lea-bucket)
+0x4ABD50 lea          'Replay mechanism'
+        site 0xD04FF lea (lea-bucket)
+0x4ABD68 lea          'world-level replay'
+        site 0xD0524 lea (lea-bucket)
+0x4ABD80 lea          'decode-side view marker'
+        site 0xD0552 lea (lea-bucket)
+0x4ABD98 lea          'record-time redirect'
+        site 0xD0580 lea (lea-bucket)
+0x4ABDB0 lea          'Experimental'
+        site 0xD059F lea (lea-bucket)
+0x4ABDC0 lea          'per-view light occlusion deadline'
+        site 0xD05C0 lea (lea-bucket)
+0x4ABDE8 lea          'Diagnostics'
+        site 0xD05DF lea (lea-bucket)
+0x4ABDF4 lea,ptrslot  '%d'
+        site 0xD0603 lea (lea-bucket)
+        site 0x2F6FC2 lea (lea-bucket)
+        site 0x42C029 lea (lea-bucket)
+        site 0x6E67F0 ptrslot (ptr)
+        site 0x6E67F8 ptrslot (ptr)
+        site 0x6E6830 ptrslot (ptr)
+        site 0x6E6838 ptrslot (ptr)
+        site 0x6E6870 ptrslot (ptr)
+        site 0x6E6878 ptrslot (ptr)
+        site 0x6E6930 ptrslot (ptr)
+        site 0x6E6938 ptrslot (ptr)
+0x4ABDF8 lea          'dispatch input slot (-1 = off)'
+        site 0xD0629 lea (lea-bucket)
+0x4ABE18 lea          'PRIMARY'
+        site 0xD067C lea (lea-bucket)
+0x4ABE20 lea          'DUPLICATE'
+        site 0xD0683 lea (lea-bucket)
+        site 0x196D88 lea (lea-bucket)
+        site 0x197153 lea (lea-bucket)
+        site 0x198368 lea (lea-bucket)
+        site 0x1983D9 lea (lea-bucket)
+0x4ABE30 lea          '  %s  (%s)'
+        site 0xD0693 lea (lea-bucket)
+0x4ABE40 lea          '  (no per-eye targets adopted yet)'
+        site 0xD06B9 lea (lea-bucket)
+0x4ABE68 lea          'buffer (-1 = final output)'
+        site 0xD06E0 lea (lea-bucket)
+0x4ABE88 lea          'show PRIMARY (else DUPLICATE)'
+        site 0xD073D lea (lea-bucket)
+0x4ABEA8 lea          'capture dispatch graph (one-shot)'
+        site 0xD076C lea (lea-bucket)
+0x4ABED0 lea          'disable occlusion culling entirely'
+        site 0xD0795 lea (lea-bucket)
+0x4ABF0A none         'L>'
+0x4ABF40 lea          'camera authority'
+        site 0xD0910 lea (lea-bucket)
+0x4ABF58 lea          'Camera authority'
+        site 0xD084F lea (lea-bucket)
+0x4ABF70 lea          'show in a separate window'
+        site 0xD0873 lea (lea-bucket)
+0x4ABF90 lea          '(stays up with the overlay closed)'
+        site 0xD08A1 lea (lea-bucket)
+0x4ABFD0 lea          '[xr-depth] the main depth is {}x{} format={} samples={} array={} bind=0x{:X}; not submitting depth'
+        site 0xD2A89 lea (lea-bucket)
+0x4AC038 lea          '[xr-depth] reading the main depth {}x{} format={}'
+        site 0xD2C02 lea (lea-bucket)
+0x4AC070 lea          '[xr-depth] dumped {} eye depth {}x{} format={} to {}'
+        site 0xD1DF2 lea (lea-bucket)
+0x4AC0A8 lea          'xr depth capture'
+        site 0xD25E0 lea (lea-bucket)
+0x4AC0C0 lea          "[xr-depth] the viewmodel's depth range {}..{} differs from the eye's {}..{}; the foreground's submitted depth is approximate"
+        site 0xD21E1 lea (lea-bucket)
+0x4AC4F0 lea          'vs_5_0'
+        site 0xD37B4 lea (lea-bucket)
+        site 0xDB184 lea (lea-bucket)
+        site 0xEF870 lea (lea-bucket)
+        site 0x10EBC7 lea (lea-bucket)
+        site 0x111891 lea (lea-bucket)
+        site 0x13A471 lea (lea-bucket)
+        site 0x13FB28 lea (lea-bucket)
+        site 0x29A7A8 lea (lea-bucket)
+        site 0x2A36E3 lea (lea-bucket)
+        site 0x2A83DF lea (lea-bucket)
+        site 0x2B1D35 lea (lea-bucket)
+        site 0x2CDC31 lea (lea-bucket)
+0x4AC4F8 lea          'ps_5_0'
+        site 0xD3806 lea (lea-bucket)
+        site 0xD8B31 lea (lea-bucket)
+        site 0xEF8D0 lea (lea-bucket)
+        site 0x10EC20 lea (lea-bucket)
+        site 0x1119C1 lea (lea-bucket)
+        site 0x111BA5 lea (lea-bucket)
+        site 0x13FB81 lea (lea-bucket)
+        site 0x29A822 lea (lea-bucket)
+        site 0x2A21A3 lea (lea-bucket)
+        site 0x2A3902 lea (lea-bucket)
+        site 0x2A4239 lea (lea-bucket)
+        site 0x2A754F lea (lea-bucket)
+        site 0x2A871D lea (lea-bucket)
+        site 0x2A8AF1 lea (lea-bucket)
+        site 0x2B1D8D lea (lea-bucket)
+        site 0x2CDC8D lea (lea-bucket)
+0x4AC500 lea          '[highlight] shaders failed to compile: {}{}'
+        site 0xD393E lea (lea-bucket)
+0x4AC530 lea          "[highlight] could not create the outline's objects"
+        site 0xD4AB1 lea (lea-bucket)
+0x4AC568 lea          "[highlight] {}:{}: a draw of {} indices is not the part's"
+        site 0xD4F7D lea (lea-bucket)
+0x4AC5A8 lea          '[highlight] drawn: {}:{}, {} runs of a {}-index sub-mesh'
+        site 0xD53EC lea (lea-bucket)
+0x4AC5E8 lea          '[highlight] could not register for the final postprocess'
+        site 0xD3A98 lea (lea-bucket)
+0x4AC628 lea          '[highlight] hooking failed err={}'
+        site 0xD4DAB lea (lea-bucket)
+0x4AC652 none         'aE'

@@ -152,6 +152,14 @@ If you need help or would like to provide feedback about the mod, check out:
   * be sure to check out [#how-to-play channel](https://discord.com/channels/1562224649474023444/1562995572745437334)
 * [**mod's thread**](https://discord.com/channels/747967102895390741/1555645599767068672) in [Flat2VR Discord server](https://discord.gg/hEgHvT3PQp)
 
+## Russian translation
+
+This fork adds a Russian translation of the in-game menus, VR settings, hints
+and popups. It patches `MetroExodusVR.dll` without touching the game's own files
+and pins the mod version so an automatic update cannot replace the translated
+DLL. See [`ru/README.md`](ru/README.md) for installation and update
+instructions (in Russian).
+
 ## Uninstallation
 
 To uninstall simply remove the files you extracted during the installation.

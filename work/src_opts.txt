@@ -1,0 +1,237 @@
+### opts slottitle=0x004a1820 title=0x0049f8d8 body=0x004a2200
+T	mevr_popups_again
+B	Reset the VR tips you have already seen, as on a first playthrough.
+### opts slottitle=0x004a1840 title=0x004a0558 body=0x004a2250
+T	mevr_alternate_eye
+B	STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion.
+### opts slottitle=0x004a1860 title=0x004a05a0 body=0x004a2300
+T	mevr_render_scale
+B	The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart.
+### opts slottitle=0x004a1880 title=0x004a05d0 body=0x004a2390
+T	mevr_upscaler
+B	Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards.
+### opts slottitle=0x004a18a0 title=0x004a05f0 body=0x004a2410
+T	mevr_upscaling_mode
+B	How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.
+### opts slottitle=0x004a18c0 title=0x004a06a0 body=0x004a24a0
+T	mevr_dlss_model
+B	Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K.
+### opts slottitle=0x004a18e0 title=0x004a0720 body=0x004a2500
+T	mevr_upscaling_fovea
+B	Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster.
+### opts slottitle=0x004a1900 title=0x004a07b0 body=0x004a2580
+T	mevr_upscaling_periphery
+B	How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry.
+### opts slottitle=0x004a1920 title=0x004a07e8 body=0x004a2610
+T	mevr_mirror
+B	What the desktop window shows while you play.
+### opts slottitle=0x004a1940 title=0x004a0870 body=0x004a2640
+T	mevr_mirror_ui
+B	The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost.
+### opts slottitle=0x004a1960 title=0x004a0898 body=0x004a26e0
+T	mevr_foveation
+B	Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only.
+### opts slottitle=0x004a1980 title=0x004a08e8 body=0x004a2760
+T	mevr_water_reflections
+B	More accurate reflections on water, reaching further. Small performance penalty.
+### opts slottitle=0x004a19a0 title=0x004a0920 body=0x004a27c0
+T	mevr_disable_blur
+B	Turns off the game's motion blur, which can be uncomfortable in VR.
+### opts slottitle=0x004a19c0 title=0x004a0948 body=0x004a2810
+T	mevr_depth_of_field
+B	Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount.
+### opts slottitle=0x004a19e0 title=0x004a0970 body=0x004a2880
+T	mevr_hud_resolution
+B	How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart.
+### opts slottitle=0x004a1a00 title=0x004a09a8 body=0x004a28f0
+T	mevr_depth_reprojection
+B	Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it.
+### opts slottitle=0x004a1a20 title=0x0049f798 body=0x004a2970
+T	mevr_move_direction
+B	Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points.
+### opts slottitle=0x004a1a40 title=0x0049f7f8 body=0x004a29f0
+T	mevr_crouch
+B	HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next.
+### opts slottitle=0x004a1a60 title=0x0049f828 body=0x004a2a60
+T	mevr_auto_sprint
+B	Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting.
+### opts slottitle=0x004a1a80 title=0x0049f850 body=0x004a2af0
+T	mevr_move_deadzone
+B	How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched.
+### opts slottitle=0x004a1aa0 title=0x0049f880 body=0x004a2b60
+T	mevr_turn_deadzone
+B	How far the turn stick must be pushed before you turn. Raise it if you turn by accident.
+### opts slottitle=0x004a1ac0 title=0x0049f8b0 body=0x004a2bc0
+T	mevr_reduce_head_bob
+B	Tones down the game's camera bob while walking and running, which can be uncomfortable in VR.
+### opts slottitle=0x004a1ae0 title=0x0049f908 body=0x004a2c20
+T	mevr_play_mode
+B	ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down.
+### opts slottitle=0x004a1b00 title=0x0049f950 body=0x004a2c90
+T	mevr_player_height
+B	Your real height, so the game can tell when you crouch. NOT SET uses the headset alone.
+### opts slottitle=0x004a1b20 title=0x0049f978 body=0x004a2cf0
+T	mevr_world_scale
+B	How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes.
+### opts slottitle=0x004a1b40 title=0x0049fa08 body=0x004a2d60
+T	mevr_physical_crouch
+B	Crouching in real life crouches in the game. Needs PLAYER HEIGHT.
+### opts slottitle=0x004a1b60 title=0x0049fa30 body=0x004a2db0
+T	mevr_belt_height
+B	Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back.
+### opts slottitle=0x004a1b80 title=0x0049fa58 body=0x004a2e50
+T	mevr_belt_crouch
+B	STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM).
+### opts slottitle=0x004a1ba0 title=0x0049f9a0 body=0x004a2f20
+T	mevr_body_turning
+B	FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.
+### opts slottitle=0x004a1bc0 title=0x0049f9d8 body=0x004a2fa0
+T	mevr_body_position
+B	FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along.
+### opts slottitle=0x004a1be0 title=0x0049faa8 body=0x004a3030
+T	mevr_bhaptics
+B	Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps.
+### opts slottitle=0x004a1c00 title=0x0049fb38 body=0x004a30d0
+T	mevr_grip_angle
+B	Tilts weapons and items in your hand up or down, to match how you hold your controller.
+### opts slottitle=0x004a1c20 title=0x0049fb60 body=0x004a3130
+T	mevr_finger_tracking
+B	Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons.
+### opts slottitle=0x004a1c40 title=0x0049fb88 body=0x004a31b0
+T	mevr_grab
+B	HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken.
+### opts slottitle=0x004a1c60 title=0x0049fca8 body=0x004a3230
+T	mevr_use_by_looking
+B	With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach.
+### opts slottitle=0x004a1c80 title=0x0049fba0 body=0x004a32c0
+T	mevr_vibration
+B	How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off.
+### opts slottitle=0x004a1ca0 title=0x0049fbc0 body=0x004a3330
+T	mevr_vibration_cues
+B	Light ticks as your hand reaches a body slot, something to take, a weapon part or a device.
+### opts slottitle=0x004a1cc0 title=0x0049fbe8 body=0x004a3390
+T	mevr_vibration_weapons
+B	The kick of every shot in the hands holding the gun, and the weapons' own vibration.
+### opts slottitle=0x004a1ce0 title=0x0049fc08 body=0x004a33e8
+T	mevr_vibration_damage
+B	Vibration when you are hit or hurt.
+### opts slottitle=0x004a1d00 title=0x0049fc50 body=0x004a3410
+T	mevr_vibration_scenes
+B	Vibration in scripted scenes and while riding vehicles.
+### opts slottitle=0x004a1d20 title=0x0049fc80 body=0x004a3448
+T	mevr_vibration_movement
+B	Light steps while running, and landings.
+### opts slottitle=0x004a1d40 title=0x0049fcd0 body=0x004a3480
+T	mevr_weapon_weight
+B	How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake.
+### opts slottitle=0x004a1d60 title=0x0049fcf8 body=0x004a3510
+T	mevr_manual_reload
+B	Reload with your hands: work magazines, bolts, levers and pumps yourself.
+### opts slottitle=0x004a1d80 title=0x0049fd28 body=0x004a3560
+T	mevr_part_highlights
+B	Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never.
+### opts slottitle=0x004a1da0 title=0x0049fd70 body=0x004a35d0
+T	mevr_part_highlights_reset
+B	Turn on to start the FIRST RELOADS count over, so the highlights show again.
+### opts slottitle=0x004a1dc0 title=0x0049fda8 body=0x004a3620
+T	mevr_revolver_flick
+B	Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be.
+### opts slottitle=0x004a1de0 title=0x0049fe18 body=0x004a36a0
+T	mevr_sighting_eye
+B	Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on.
+### opts slottitle=0x004a1e00 title=0x0049fe40 body=0x004a3700
+T	mevr_other_eye
+B	What your other eye sees while you look through a scope.
+### opts slottitle=0x004a1e20 title=0x0049fe80 body=0x004a3740
+T	mevr_reticle
+B	How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view.
+### opts slottitle=0x004a1e40 title=0x0049fec8 body=0x004a37a0
+T	mevr_scope_steering
+B	WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view.
+### opts slottitle=0x004a1e60 title=0x0049ff08 body=0x004a3830
+T	mevr_night_vision_tube
+B	Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view.
+### opts slottitle=0x004a1e80 title=0x0049ff38 body=0x004a38a0
+T	mevr_hud_shape
+B	The HUD's layout. 4:3 brings its edges closer to the middle of your view.
+### opts slottitle=0x004a1ea0 title=0x0049ff60 body=0x004a38f0
+T	mevr_hud_position
+B	LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away.
+### opts slottitle=0x004a1ec0 title=0x0049ffd0 body=0x004a3968
+T	mevr_hud_height
+B	Moves the HUD above or below your line of sight.
+### opts slottitle=0x004a1ee0 title=0x004a0028 body=0x004a39a0
+T	mevr_hint_height
+B	Moves the game's hint cards up or down.
+### opts slottitle=0x004a1f00 title=0x004a0080 body=0x004a39c8
+T	mevr_hint_time
+B	How much longer the game's timed hints stay up.
+### opts slottitle=0x004a1f20 title=0x004a00c0 body=0x004a3a00
+T	mevr_prompt_size
+B	The size of the prompts in the middle of the view: quick-time events, use and melee.
+### opts slottitle=0x004a1f40 title=0x004a0150 body=0x004a3a60
+T	mevr_damage_effects
+B	Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects.
+### opts slottitle=0x004a1f60 title=0x004a0178 body=0x004a3ad0
+T	mevr_damage_size
+B	How far into your view the damage glow reaches.
+### opts slottitle=0x004a1f80 title=0x004a01c0 body=0x004a3b00
+T	mevr_hit_direction
+B	Shows an arc toward whoever just hit you.
+### opts slottitle=0x004a1fa0 title=0x004a01e8 body=0x004a3b30
+T	mevr_health_pulse
+B	The edge of your view pulses while your health is low.
+### opts slottitle=0x004a1fc0 title=0x004a0218 body=0x004a3b70
+T	mevr_debug_overlay
+B	Shows camera details in a corner of the view. Meant for testing.
+### opts slottitle=0x004a1fe0 title=0x004a0240 body=0x004a3bc0
+T	mevr_cinema_pointer
+B	On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse.
+### opts slottitle=0x004a2000 title=0x004a0268 body=0x004a3c30
+T	mevr_cinema_floor
+B	A dim dotted floor under the Cinema screen, so you do not float in the dark.
+### opts slottitle=0x004a2020 title=0x004a0290 body=0x004a3c80
+T	mevr_cinema_controllers
+B	Shows your controllers while the Cinema screen is up.
+### opts slottitle=0x004a2040 title=0x004a02c0 body=0x004a3cc0
+T	mevr_cinema_info
+B	In the main menu, a plaque under the Cinema screen with the mod's name and version.
+### opts slottitle=0x004a2060 title=0x004a02e8 body=0x004a3d20
+T	mevr_cinema_links
+B	In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game.
+### opts slottitle=0x004a2080 title=0x004a0310 body=0x004a3de0
+T	mevr_camera_preset
+B	What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen.
+### opts slottitle=0x004a20a0 title=0x004a0360 body=0x004a3e80
+T	mevr_realign
+B	After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH).
+### opts slottitle=0x004a20c0 title=0x004a03e8 body=0x004a3f00
+T	mevr_camera_cinematic_track
+B	Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a20e0 title=0x004a0408 body=0x004a3f50
+T	mevr_camera_attached
+B	Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a2100 title=0x004a0420 body=0x004a3fa8
+T	mevr_camera_third_person
+B	Third-person views. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a2120 title=0x004a0450 body=0x004a3fd8
+T	mevr_camera_free_cam
+B	Scenes with a free-flying camera. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a2140 title=0x004a0468 body=0x004a4018
+T	mevr_camera_station
+B	Seats and mounted guns. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a2160 title=0x004a0490 body=0x004a4050
+T	mevr_camera_bone_angles
+B	Scenes where an animation turns your view. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a2180 title=0x004a04b8 body=0x004a40a0
+T	mevr_camera_scripted_lock
+B	Moments when the story locks the camera. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a21a0 title=0x004a04e8 body=0x004a40f0
+T	mevr_camera_animation_lock
+B	Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a21c0 title=0x004a0518 body=0x004a4150
+T	mevr_camera_axis_locked
+B	The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET.
+### opts slottitle=0x004a21e0 title=0x004a0540 body=0x004a41b0
+T	mevr_camera_gameplay_ui
+B	Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET.

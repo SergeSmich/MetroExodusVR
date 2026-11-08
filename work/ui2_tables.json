@@ -1,0 +1,2162 @@
+{
+ "popups": [
+  {
+   "i": 0,
+   "addr": 4833088,
+   "title": {
+    "slot": 4833088,
+    "str_rva": 4834656,
+    "len": 7,
+    "text": "welcome"
+   },
+   "body": {
+    "slot": 4833104,
+    "str_rva": 4834672,
+    "len": 148,
+    "text": "WELCOME\n\nThank you for playing Metro Exodus VR!\n\nBefore you start I'd like to point out few things worth\nchecking that will improve your experience."
+   }
+  },
+  {
+   "i": 1,
+   "addr": 4833200,
+   "title": {
+    "slot": 4833200,
+    "str_rva": 4834824,
+    "len": 14,
+    "text": "check_settings"
+   },
+   "body": {
+    "slot": 4833216,
+    "str_rva": 4834848,
+    "len": 251,
+    "text": "VR OPTIONS\n\nBefore starting your journey please check out VR tab in the\nOptions menu and familiarize yourself with what's available,\nhow it's configured and what you can change.\n\nAll of these options are also available from Pause Menu\nwhile playing.\n\n"
+   }
+  },
+  {
+   "i": 2,
+   "addr": 4833312,
+   "title": {
+    "slot": 4833312,
+    "str_rva": 4835104,
+    "len": 11,
+    "text": "check_hints"
+   },
+   "body": {
+    "slot": 4833328,
+    "str_rva": 4835120,
+    "len": 192,
+    "text": "VR HINTS\n\nWhile playing you will also have access to VR HINTS tab in the Pause Menu which cover VR-specific mechanics and interactions.\n\nCheck it out if you feel lost or unsure how to proceed."
+   }
+  },
+  {
+   "i": 3,
+   "addr": 4833424,
+   "title": {
+    "slot": 4833424,
+    "str_rva": 4835320,
+    "len": 19,
+    "text": "ask_part_highlights"
+   },
+   "body": {
+    "slot": 4833440,
+    "str_rva": 4835344,
+    "len": 290,
+    "text": "MANUAL RELOADING\n\nTo help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.\n\nYou can configure this option later in Options / VR / Weapons.\n\nWould you like to enable it for first few reloads of each weapon now?\n\n"
+   }
+  },
+  {
+   "i": 4,
+   "addr": 4833536,
+   "title": {
+    "slot": 4833536,
+    "str_rva": 4835640,
+    "len": 14,
+    "text": "pause_recenter"
+   },
+   "body": {
+    "slot": 4833552,
+    "str_rva": 4835664,
+    "len": 155,
+    "text": "PAUSE MENU\n\nTo enter pause menu press <start>.\nHold the same button to recenter.\n\nEverything about VR controls is in the Pause Menu under VR HINTS section."
+   }
+  },
+  {
+   "i": 5,
+   "addr": 4833648,
+   "title": {
+    "slot": 4833648,
+    "str_rva": 4835856,
+    "len": 4,
+    "text": "gear"
+   },
+   "body": {
+    "slot": 4833664,
+    "str_rva": 4835872,
+    "len": 189,
+    "text": "YOUR GEAR IS ON YOUR BODY\n\nReach for the item/place and grip with <grip_dominant> or <grip_nondominant>.\n\nYou can find details of where each device is located in Pause Menu in VR HINTS tab."
+   }
+  },
+  {
+   "i": 6,
+   "addr": 4833760,
+   "title": {
+    "slot": 4833760,
+    "str_rva": 4836064,
+    "len": 7,
+    "text": "weapons"
+   },
+   "body": {
+    "slot": 4833776,
+    "str_rva": 4836080,
+    "len": 180,
+    "text": "WEAPONS\n\nTake a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.\n\nPointing a gun down holsters it and aiming down sight stabilizes it."
+   }
+  },
+  {
+   "i": 7,
+   "addr": 4833872,
+   "title": {
+    "slot": 4833872,
+    "str_rva": 4836264,
+    "len": 9,
+    "text": "reloading"
+   },
+   "body": {
+    "slot": 4833888,
+    "str_rva": 4836288,
+    "len": 212,
+    "text": "RELOADING\n\nYou reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.\n\nTo reload with a button, turn Manual Reloading off in\nOptions / VR / Weapons."
+   }
+  },
+  {
+   "i": 8,
+   "addr": 4833984,
+   "title": {
+    "slot": 4833984,
+    "str_rva": 4836504,
+    "len": 3,
+    "text": "qte"
+   },
+   "body": {
+    "slot": 4834000,
+    "str_rva": 4836512,
+    "len": 163,
+    "text": "ACTION PROMPTS\n\nSome scripted QTEs ask for quick button presses. Do as the prompt shows: tap, press or hold <rui>.\n\nYou can change the QTEs mode in game's options."
+   }
+  },
+  {
+   "i": 9,
+   "addr": 4834096,
+   "title": {
+    "slot": 4834096,
+    "str_rva": 4836680,
+    "len": 8,
+    "text": "gas_mask"
+   },
+   "body": {
+    "slot": 4834112,
+    "str_rva": 4836704,
+    "len": 404,
+    "text": "GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor."
+   }
+  },
+  {
+   "i": 10,
+   "addr": 4834208,
+   "title": {
+    "slot": 4834208,
+    "str_rva": 4837136,
+    "len": 8,
+    "text": "backpack"
+   },
+   "body": {
+    "slot": 4834224,
+    "str_rva": 4837152,
+    "len": 181,
+    "text": "BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>]."
+   }
+  },
+  {
+   "i": 11,
+   "addr": 4834320,
+   "title": {
+    "slot": 4834320,
+    "str_rva": 4812512,
+    "len": 3,
+    "text": "map"
+   },
+   "body": {
+    "slot": 4834336,
+    "str_rva": 4837360,
+    "len": 78,
+    "text": "MAP\n\nTo equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].\n"
+   }
+  },
+  {
+   "i": 12,
+   "addr": 4834432,
+   "title": {
+    "slot": 4834432,
+    "str_rva": 4837440,
+    "len": 11,
+    "text": "tikhar_ammo"
+   },
+   "body": {
+    "slot": 4834448,
+    "str_rva": 4837456,
+    "len": 254,
+    "text": "TIKHAR AMMUNITION\n\nTikhar can fire Incendiary Ammunition.\n\nWith Tikhar in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammo.\n\nThen reload as usual. Do the same to switch back."
+   }
+  },
+  {
+   "i": 13,
+   "addr": 4834544,
+   "title": {
+    "slot": 4834544,
+    "str_rva": 4837728,
+    "len": 12,
+    "text": "helsing_ammo"
+   },
+   "body": {
+    "slot": 4834560,
+    "str_rva": 4837744,
+    "len": 213,
+    "text": "HELSING AMMUNITION\n\nHelsing can fire explosive bolts.\n\nWith Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back."
+   }
+  }
+ ],
+ "options": [
+  {
+   "i": 0,
+   "addr": 4855840,
+   "title": {
+    "slot": 4855840,
+    "str_rva": 4847832,
+    "len": 17,
+    "text": "mevr_popups_again"
+   },
+   "body": {
+    "slot": 4855856,
+    "str_rva": 4858368,
+    "len": 67,
+    "text": "Reset the VR tips you have already seen, as on a first playthrough."
+   }
+  },
+  {
+   "i": 1,
+   "addr": 4855872,
+   "title": {
+    "slot": 4855872,
+    "str_rva": 4851032,
+    "len": 18,
+    "text": "mevr_alternate_eye"
+   },
+   "body": {
+    "slot": 4855888,
+    "str_rva": 4858448,
+    "len": 170,
+    "text": "STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion."
+   }
+  },
+  {
+   "i": 2,
+   "addr": 4855904,
+   "title": {
+    "slot": 4855904,
+    "str_rva": 4851104,
+    "len": 17,
+    "text": "mevr_render_scale"
+   },
+   "body": {
+    "slot": 4855920,
+    "str_rva": 4858624,
+    "len": 129,
+    "text": "The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart."
+   }
+  },
+  {
+   "i": 3,
+   "addr": 4855936,
+   "title": {
+    "slot": 4855936,
+    "str_rva": 4851152,
+    "len": 13,
+    "text": "mevr_upscaler"
+   },
+   "body": {
+    "slot": 4855952,
+    "str_rva": 4858768,
+    "len": 125,
+    "text": "Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards."
+   }
+  },
+  {
+   "i": 4,
+   "addr": 4855968,
+   "title": {
+    "slot": 4855968,
+    "str_rva": 4851184,
+    "len": 19,
+    "text": "mevr_upscaling_mode"
+   },
+   "body": {
+    "slot": 4855984,
+    "str_rva": 4858896,
+    "len": 132,
+    "text": "How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp."
+   }
+  },
+  {
+   "i": 5,
+   "addr": 4856000,
+   "title": {
+    "slot": 4856000,
+    "str_rva": 4851360,
+    "len": 15,
+    "text": "mevr_dlss_model"
+   },
+   "body": {
+    "slot": 4856016,
+    "str_rva": 4859040,
+    "len": 88,
+    "text": "Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K."
+   }
+  },
+  {
+   "i": 6,
+   "addr": 4856032,
+   "title": {
+    "slot": 4856032,
+    "str_rva": 4851488,
+    "len": 20,
+    "text": "mevr_upscaling_fovea"
+   },
+   "body": {
+    "slot": 4856048,
+    "str_rva": 4859136,
+    "len": 116,
+    "text": "Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster."
+   }
+  },
+  {
+   "i": 7,
+   "addr": 4856064,
+   "title": {
+    "slot": 4856064,
+    "str_rva": 4851632,
+    "len": 24,
+    "text": "mevr_upscaling_periphery"
+   },
+   "body": {
+    "slot": 4856080,
+    "str_rva": 4859264,
+    "len": 139,
+    "text": "How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry."
+   }
+  },
+  {
+   "i": 8,
+   "addr": 4856096,
+   "title": {
+    "slot": 4856096,
+    "str_rva": 4851688,
+    "len": 11,
+    "text": "mevr_mirror"
+   },
+   "body": {
+    "slot": 4856112,
+    "str_rva": 4859408,
+    "len": 45,
+    "text": "What the desktop window shows while you play."
+   }
+  },
+  {
+   "i": 9,
+   "addr": 4856128,
+   "title": {
+    "slot": 4856128,
+    "str_rva": 4851824,
+    "len": 14,
+    "text": "mevr_mirror_ui"
+   },
+   "body": {
+    "slot": 4856144,
+    "str_rva": 4859456,
+    "len": 157,
+    "text": "The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost."
+   }
+  },
+  {
+   "i": 10,
+   "addr": 4856160,
+   "title": {
+    "slot": 4856160,
+    "str_rva": 4851864,
+    "len": 14,
+    "text": "mevr_foveation"
+   },
+   "body": {
+    "slot": 4856176,
+    "str_rva": 4859616,
+    "len": 113,
+    "text": "Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only."
+   }
+  },
+  {
+   "i": 11,
+   "addr": 4856192,
+   "title": {
+    "slot": 4856192,
+    "str_rva": 4851944,
+    "len": 22,
+    "text": "mevr_water_reflections"
+   },
+   "body": {
+    "slot": 4856208,
+    "str_rva": 4859744,
+    "len": 80,
+    "text": "More accurate reflections on water, reaching further. Small performance penalty."
+   }
+  },
+  {
+   "i": 12,
+   "addr": 4856224,
+   "title": {
+    "slot": 4856224,
+    "str_rva": 4852000,
+    "len": 17,
+    "text": "mevr_disable_blur"
+   },
+   "body": {
+    "slot": 4856240,
+    "str_rva": 4859840,
+    "len": 67,
+    "text": "Turns off the game's motion blur, which can be uncomfortable in VR."
+   }
+  },
+  {
+   "i": 13,
+   "addr": 4856256,
+   "title": {
+    "slot": 4856256,
+    "str_rva": 4852040,
+    "len": 19,
+    "text": "mevr_depth_of_field"
+   },
+   "body": {
+    "slot": 4856272,
+    "str_rva": 4859920,
+    "len": 100,
+    "text": "Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount."
+   }
+  },
+  {
+   "i": 14,
+   "addr": 4856288,
+   "title": {
+    "slot": 4856288,
+    "str_rva": 4852080,
+    "len": 19,
+    "text": "mevr_hud_resolution"
+   },
+   "body": {
+    "slot": 4856304,
+    "str_rva": 4860032,
+    "len": 105,
+    "text": "How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart."
+   }
+  },
+  {
+   "i": 15,
+   "addr": 4856320,
+   "title": {
+    "slot": 4856320,
+    "str_rva": 4852136,
+    "len": 23,
+    "text": "mevr_depth_reprojection"
+   },
+   "body": {
+    "slot": 4856336,
+    "str_rva": 4860144,
+    "len": 121,
+    "text": "Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it."
+   }
+  },
+  {
+   "i": 16,
+   "addr": 4856352,
+   "title": {
+    "slot": 4856352,
+    "str_rva": 4847512,
+    "len": 19,
+    "text": "mevr_move_direction"
+   },
+   "body": {
+    "slot": 4856368,
+    "str_rva": 4860272,
+    "len": 120,
+    "text": "Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points."
+   }
+  },
+  {
+   "i": 17,
+   "addr": 4856384,
+   "title": {
+    "slot": 4856384,
+    "str_rva": 4847608,
+    "len": 11,
+    "text": "mevr_crouch"
+   },
+   "body": {
+    "slot": 4856400,
+    "str_rva": 4860400,
+    "len": 99,
+    "text": "HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next."
+   }
+  },
+  {
+   "i": 18,
+   "addr": 4856416,
+   "title": {
+    "slot": 4856416,
+    "str_rva": 4847656,
+    "len": 16,
+    "text": "mevr_auto_sprint"
+   },
+   "body": {
+    "slot": 4856432,
+    "str_rva": 4860512,
+    "len": 130,
+    "text": "Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting."
+   }
+  },
+  {
+   "i": 19,
+   "addr": 4856448,
+   "title": {
+    "slot": 4856448,
+    "str_rva": 4847696,
+    "len": 18,
+    "text": "mevr_move_deadzone"
+   },
+   "body": {
+    "slot": 4856464,
+    "str_rva": 4860656,
+    "len": 102,
+    "text": "How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched."
+   }
+  },
+  {
+   "i": 20,
+   "addr": 4856480,
+   "title": {
+    "slot": 4856480,
+    "str_rva": 4847744,
+    "len": 18,
+    "text": "mevr_turn_deadzone"
+   },
+   "body": {
+    "slot": 4856496,
+    "str_rva": 4860768,
+    "len": 88,
+    "text": "How far the turn stick must be pushed before you turn. Raise it if you turn by accident."
+   }
+  },
+  {
+   "i": 21,
+   "addr": 4856512,
+   "title": {
+    "slot": 4856512,
+    "str_rva": 4847792,
+    "len": 20,
+    "text": "mevr_reduce_head_bob"
+   },
+   "body": {
+    "slot": 4856528,
+    "str_rva": 4860864,
+    "len": 93,
+    "text": "Tones down the game's camera bob while walking and running, which can be uncomfortable in VR."
+   }
+  },
+  {
+   "i": 22,
+   "addr": 4856544,
+   "title": {
+    "slot": 4856544,
+    "str_rva": 4847880,
+    "len": 14,
+    "text": "mevr_play_mode"
+   },
+   "body": {
+    "slot": 4856560,
+    "str_rva": 4860960,
+    "len": 111,
+    "text": "ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down."
+   }
+  },
+  {
+   "i": 23,
+   "addr": 4856576,
+   "title": {
+    "slot": 4856576,
+    "str_rva": 4847952,
+    "len": 18,
+    "text": "mevr_player_height"
+   },
+   "body": {
+    "slot": 4856592,
+    "str_rva": 4861072,
+    "len": 87,
+    "text": "Your real height, so the game can tell when you crouch. NOT SET uses the headset alone."
+   }
+  },
+  {
+   "i": 24,
+   "addr": 4856608,
+   "title": {
+    "slot": 4856608,
+    "str_rva": 4847992,
+    "len": 16,
+    "text": "mevr_world_scale"
+   },
+   "body": {
+    "slot": 4856624,
+    "str_rva": 4861168,
+    "len": 109,
+    "text": "How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes."
+   }
+  },
+  {
+   "i": 25,
+   "addr": 4856640,
+   "title": {
+    "slot": 4856640,
+    "str_rva": 4848136,
+    "len": 20,
+    "text": "mevr_physical_crouch"
+   },
+   "body": {
+    "slot": 4856656,
+    "str_rva": 4861280,
+    "len": 65,
+    "text": "Crouching in real life crouches in the game. Needs PLAYER HEIGHT."
+   }
+  },
+  {
+   "i": 26,
+   "addr": 4856672,
+   "title": {
+    "slot": 4856672,
+    "str_rva": 4848176,
+    "len": 16,
+    "text": "mevr_belt_height"
+   },
+   "body": {
+    "slot": 4856688,
+    "str_rva": 4861360,
+    "len": 149,
+    "text": "Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back."
+   }
+  },
+  {
+   "i": 27,
+   "addr": 4856704,
+   "title": {
+    "slot": 4856704,
+    "str_rva": 4848216,
+    "len": 16,
+    "text": "mevr_belt_crouch"
+   },
+   "body": {
+    "slot": 4856720,
+    "str_rva": 4861520,
+    "len": 193,
+    "text": "STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM)."
+   }
+  },
+  {
+   "i": 28,
+   "addr": 4856736,
+   "title": {
+    "slot": 4856736,
+    "str_rva": 4848032,
+    "len": 17,
+    "text": "mevr_body_turning"
+   },
+   "body": {
+    "slot": 4856752,
+    "str_rva": 4861728,
+    "len": 123,
+    "text": "FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick."
+   }
+  },
+  {
+   "i": 29,
+   "addr": 4856768,
+   "title": {
+    "slot": 4856768,
+    "str_rva": 4848088,
+    "len": 18,
+    "text": "mevr_body_position"
+   },
+   "body": {
+    "slot": 4856784,
+    "str_rva": 4861856,
+    "len": 139,
+    "text": "FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along."
+   }
+  },
+  {
+   "i": 30,
+   "addr": 4856800,
+   "title": {
+    "slot": 4856800,
+    "str_rva": 4848296,
+    "len": 13,
+    "text": "mevr_bhaptics"
+   },
+   "body": {
+    "slot": 4856816,
+    "str_rva": 4862000,
+    "len": 158,
+    "text": "Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps."
+   }
+  },
+  {
+   "i": 31,
+   "addr": 4856832,
+   "title": {
+    "slot": 4856832,
+    "str_rva": 4848440,
+    "len": 15,
+    "text": "mevr_grip_angle"
+   },
+   "body": {
+    "slot": 4856848,
+    "str_rva": 4862160,
+    "len": 87,
+    "text": "Tilts weapons and items in your hand up or down, to match how you hold your controller."
+   }
+  },
+  {
+   "i": 32,
+   "addr": 4856864,
+   "title": {
+    "slot": 4856864,
+    "str_rva": 4848480,
+    "len": 20,
+    "text": "mevr_finger_tracking"
+   },
+   "body": {
+    "slot": 4856880,
+    "str_rva": 4862256,
+    "len": 116,
+    "text": "Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons."
+   }
+  },
+  {
+   "i": 33,
+   "addr": 4856896,
+   "title": {
+    "slot": 4856896,
+    "str_rva": 4848520,
+    "len": 9,
+    "text": "mevr_grab"
+   },
+   "body": {
+    "slot": 4856912,
+    "str_rva": 4862384,
+    "len": 127,
+    "text": "HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken."
+   }
+  },
+  {
+   "i": 34,
+   "addr": 4856928,
+   "title": {
+    "slot": 4856928,
+    "str_rva": 4848808,
+    "len": 19,
+    "text": "mevr_use_by_looking"
+   },
+   "body": {
+    "slot": 4856944,
+    "str_rva": 4862512,
+    "len": 132,
+    "text": "With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach."
+   }
+  },
+  {
+   "i": 35,
+   "addr": 4856960,
+   "title": {
+    "slot": 4856960,
+    "str_rva": 4848544,
+    "len": 14,
+    "text": "mevr_vibration"
+   },
+   "body": {
+    "slot": 4856976,
+    "str_rva": 4862656,
+    "len": 110,
+    "text": "How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off."
+   }
+  },
+  {
+   "i": 36,
+   "addr": 4856992,
+   "title": {
+    "slot": 4856992,
+    "str_rva": 4848576,
+    "len": 19,
+    "text": "mevr_vibration_cues"
+   },
+   "body": {
+    "slot": 4857008,
+    "str_rva": 4862768,
+    "len": 91,
+    "text": "Light ticks as your hand reaches a body slot, something to take, a weapon part or a device."
+   }
+  },
+  {
+   "i": 37,
+   "addr": 4857024,
+   "title": {
+    "slot": 4857024,
+    "str_rva": 4848616,
+    "len": 22,
+    "text": "mevr_vibration_weapons"
+   },
+   "body": {
+    "slot": 4857040,
+    "str_rva": 4862864,
+    "len": 84,
+    "text": "The kick of every shot in the hands holding the gun, and the weapons' own vibration."
+   }
+  },
+  {
+   "i": 38,
+   "addr": 4857056,
+   "title": {
+    "slot": 4857056,
+    "str_rva": 4848648,
+    "len": 21,
+    "text": "mevr_vibration_damage"
+   },
+   "body": {
+    "slot": 4857072,
+    "str_rva": 4862952,
+    "len": 35,
+    "text": "Vibration when you are hit or hurt."
+   }
+  },
+  {
+   "i": 39,
+   "addr": 4857088,
+   "title": {
+    "slot": 4857088,
+    "str_rva": 4848720,
+    "len": 21,
+    "text": "mevr_vibration_scenes"
+   },
+   "body": {
+    "slot": 4857104,
+    "str_rva": 4862992,
+    "len": 55,
+    "text": "Vibration in scripted scenes and while riding vehicles."
+   }
+  },
+  {
+   "i": 40,
+   "addr": 4857120,
+   "title": {
+    "slot": 4857120,
+    "str_rva": 4848768,
+    "len": 23,
+    "text": "mevr_vibration_movement"
+   },
+   "body": {
+    "slot": 4857136,
+    "str_rva": 4863048,
+    "len": 40,
+    "text": "Light steps while running, and landings."
+   }
+  },
+  {
+   "i": 41,
+   "addr": 4857152,
+   "title": {
+    "slot": 4857152,
+    "str_rva": 4848848,
+    "len": 18,
+    "text": "mevr_weapon_weight"
+   },
+   "body": {
+    "slot": 4857168,
+    "str_rva": 4863104,
+    "len": 143,
+    "text": "How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake."
+   }
+  },
+  {
+   "i": 42,
+   "addr": 4857184,
+   "title": {
+    "slot": 4857184,
+    "str_rva": 4848888,
+    "len": 18,
+    "text": "mevr_manual_reload"
+   },
+   "body": {
+    "slot": 4857200,
+    "str_rva": 4863248,
+    "len": 73,
+    "text": "Reload with your hands: work magazines, bolts, levers and pumps yourself."
+   }
+  },
+  {
+   "i": 43,
+   "addr": 4857216,
+   "title": {
+    "slot": 4857216,
+    "str_rva": 4848936,
+    "len": 20,
+    "text": "mevr_part_highlights"
+   },
+   "body": {
+    "slot": 4857232,
+    "str_rva": 4863328,
+    "len": 105,
+    "text": "Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never."
+   }
+  },
+  {
+   "i": 44,
+   "addr": 4857248,
+   "title": {
+    "slot": 4857248,
+    "str_rva": 4849008,
+    "len": 26,
+    "text": "mevr_part_highlights_reset"
+   },
+   "body": {
+    "slot": 4857264,
+    "str_rva": 4863440,
+    "len": 76,
+    "text": "Turn on to start the FIRST RELOADS count over, so the highlights show again."
+   }
+  },
+  {
+   "i": 45,
+   "addr": 4857280,
+   "title": {
+    "slot": 4857280,
+    "str_rva": 4849064,
+    "len": 19,
+    "text": "mevr_revolver_flick"
+   },
+   "body": {
+    "slot": 4857296,
+    "str_rva": 4863520,
+    "len": 126,
+    "text": "Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be."
+   }
+  },
+  {
+   "i": 46,
+   "addr": 4857312,
+   "title": {
+    "slot": 4857312,
+    "str_rva": 4849176,
+    "len": 17,
+    "text": "mevr_sighting_eye"
+   },
+   "body": {
+    "slot": 4857328,
+    "str_rva": 4863648,
+    "len": 91,
+    "text": "Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on."
+   }
+  },
+  {
+   "i": 47,
+   "addr": 4857344,
+   "title": {
+    "slot": 4857344,
+    "str_rva": 4849216,
+    "len": 14,
+    "text": "mevr_other_eye"
+   },
+   "body": {
+    "slot": 4857360,
+    "str_rva": 4863744,
+    "len": 56,
+    "text": "What your other eye sees while you look through a scope."
+   }
+  },
+  {
+   "i": 48,
+   "addr": 4857376,
+   "title": {
+    "slot": 4857376,
+    "str_rva": 4849280,
+    "len": 12,
+    "text": "mevr_reticle"
+   },
+   "body": {
+    "slot": 4857392,
+    "str_rva": 4863808,
+    "len": 94,
+    "text": "How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view."
+   }
+  },
+  {
+   "i": 49,
+   "addr": 4857408,
+   "title": {
+    "slot": 4857408,
+    "str_rva": 4849352,
+    "len": 19,
+    "text": "mevr_scope_steering"
+   },
+   "body": {
+    "slot": 4857424,
+    "str_rva": 4863904,
+    "len": 139,
+    "text": "WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view."
+   }
+  },
+  {
+   "i": 50,
+   "addr": 4857440,
+   "title": {
+    "slot": 4857440,
+    "str_rva": 4849416,
+    "len": 22,
+    "text": "mevr_night_vision_tube"
+   },
+   "body": {
+    "slot": 4857456,
+    "str_rva": 4864048,
+    "len": 105,
+    "text": "Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view."
+   }
+  },
+  {
+   "i": 51,
+   "addr": 4857472,
+   "title": {
+    "slot": 4857472,
+    "str_rva": 4849464,
+    "len": 14,
+    "text": "mevr_hud_shape"
+   },
+   "body": {
+    "slot": 4857488,
+    "str_rva": 4864160,
+    "len": 73,
+    "text": "The HUD's layout. 4:3 brings its edges closer to the middle of your view."
+   }
+  },
+  {
+   "i": 52,
+   "addr": 4857504,
+   "title": {
+    "slot": 4857504,
+    "str_rva": 4849504,
+    "len": 17,
+    "text": "mevr_hud_position"
+   },
+   "body": {
+    "slot": 4857520,
+    "str_rva": 4864240,
+    "len": 114,
+    "text": "LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away."
+   }
+  },
+  {
+   "i": 53,
+   "addr": 4857536,
+   "title": {
+    "slot": 4857536,
+    "str_rva": 4849616,
+    "len": 15,
+    "text": "mevr_hud_height"
+   },
+   "body": {
+    "slot": 4857552,
+    "str_rva": 4864360,
+    "len": 48,
+    "text": "Moves the HUD above or below your line of sight."
+   }
+  },
+  {
+   "i": 54,
+   "addr": 4857568,
+   "title": {
+    "slot": 4857568,
+    "str_rva": 4849704,
+    "len": 16,
+    "text": "mevr_hint_height"
+   },
+   "body": {
+    "slot": 4857584,
+    "str_rva": 4864416,
+    "len": 39,
+    "text": "Moves the game's hint cards up or down."
+   }
+  },
+  {
+   "i": 55,
+   "addr": 4857600,
+   "title": {
+    "slot": 4857600,
+    "str_rva": 4849792,
+    "len": 14,
+    "text": "mevr_hint_time"
+   },
+   "body": {
+    "slot": 4857616,
+    "str_rva": 4864456,
+    "len": 47,
+    "text": "How much longer the game's timed hints stay up."
+   }
+  },
+  {
+   "i": 56,
+   "addr": 4857632,
+   "title": {
+    "slot": 4857632,
+    "str_rva": 4849856,
+    "len": 16,
+    "text": "mevr_prompt_size"
+   },
+   "body": {
+    "slot": 4857648,
+    "str_rva": 4864512,
+    "len": 84,
+    "text": "The size of the prompts in the middle of the view: quick-time events, use and melee."
+   }
+  },
+  {
+   "i": 57,
+   "addr": 4857664,
+   "title": {
+    "slot": 4857664,
+    "str_rva": 4850000,
+    "len": 19,
+    "text": "mevr_damage_effects"
+   },
+   "body": {
+    "slot": 4857680,
+    "str_rva": 4864608,
+    "len": 109,
+    "text": "Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects."
+   }
+  },
+  {
+   "i": 58,
+   "addr": 4857696,
+   "title": {
+    "slot": 4857696,
+    "str_rva": 4850040,
+    "len": 16,
+    "text": "mevr_damage_size"
+   },
+   "body": {
+    "slot": 4857712,
+    "str_rva": 4864720,
+    "len": 47,
+    "text": "How far into your view the damage glow reaches."
+   }
+  },
+  {
+   "i": 59,
+   "addr": 4857728,
+   "title": {
+    "slot": 4857728,
+    "str_rva": 4850112,
+    "len": 18,
+    "text": "mevr_hit_direction"
+   },
+   "body": {
+    "slot": 4857744,
+    "str_rva": 4864768,
+    "len": 41,
+    "text": "Shows an arc toward whoever just hit you."
+   }
+  },
+  {
+   "i": 60,
+   "addr": 4857760,
+   "title": {
+    "slot": 4857760,
+    "str_rva": 4850152,
+    "len": 17,
+    "text": "mevr_health_pulse"
+   },
+   "body": {
+    "slot": 4857776,
+    "str_rva": 4864816,
+    "len": 54,
+    "text": "The edge of your view pulses while your health is low."
+   }
+  },
+  {
+   "i": 61,
+   "addr": 4857792,
+   "title": {
+    "slot": 4857792,
+    "str_rva": 4850200,
+    "len": 18,
+    "text": "mevr_debug_overlay"
+   },
+   "body": {
+    "slot": 4857808,
+    "str_rva": 4864880,
+    "len": 64,
+    "text": "Shows camera details in a corner of the view. Meant for testing."
+   }
+  },
+  {
+   "i": 62,
+   "addr": 4857824,
+   "title": {
+    "slot": 4857824,
+    "str_rva": 4850240,
+    "len": 19,
+    "text": "mevr_cinema_pointer"
+   },
+   "body": {
+    "slot": 4857840,
+    "str_rva": 4864960,
+    "len": 102,
+    "text": "On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse."
+   }
+  },
+  {
+   "i": 63,
+   "addr": 4857856,
+   "title": {
+    "slot": 4857856,
+    "str_rva": 4850280,
+    "len": 17,
+    "text": "mevr_cinema_floor"
+   },
+   "body": {
+    "slot": 4857872,
+    "str_rva": 4865072,
+    "len": 76,
+    "text": "A dim dotted floor under the Cinema screen, so you do not float in the dark."
+   }
+  },
+  {
+   "i": 64,
+   "addr": 4857888,
+   "title": {
+    "slot": 4857888,
+    "str_rva": 4850320,
+    "len": 23,
+    "text": "mevr_cinema_controllers"
+   },
+   "body": {
+    "slot": 4857904,
+    "str_rva": 4865152,
+    "len": 53,
+    "text": "Shows your controllers while the Cinema screen is up."
+   }
+  },
+  {
+   "i": 65,
+   "addr": 4857920,
+   "title": {
+    "slot": 4857920,
+    "str_rva": 4850368,
+    "len": 16,
+    "text": "mevr_cinema_info"
+   },
+   "body": {
+    "slot": 4857936,
+    "str_rva": 4865216,
+    "len": 83,
+    "text": "In the main menu, a plaque under the Cinema screen with the mod's name and version."
+   }
+  },
+  {
+   "i": 66,
+   "addr": 4857952,
+   "title": {
+    "slot": 4857952,
+    "str_rva": 4850408,
+    "len": 17,
+    "text": "mevr_cinema_links"
+   },
+   "body": {
+    "slot": 4857968,
+    "str_rva": 4865312,
+    "len": 180,
+    "text": "In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game."
+   }
+  },
+  {
+   "i": 67,
+   "addr": 4857984,
+   "title": {
+    "slot": 4857984,
+    "str_rva": 4850448,
+    "len": 18,
+    "text": "mevr_camera_preset"
+   },
+   "body": {
+    "slot": 4858000,
+    "str_rva": 4865504,
+    "len": 149,
+    "text": "What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen."
+   }
+  },
+  {
+   "i": 68,
+   "addr": 4858016,
+   "title": {
+    "slot": 4858016,
+    "str_rva": 4850528,
+    "len": 12,
+    "text": "mevr_realign"
+   },
+   "body": {
+    "slot": 4858032,
+    "str_rva": 4865664,
+    "len": 115,
+    "text": "After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH)."
+   }
+  },
+  {
+   "i": 69,
+   "addr": 4858048,
+   "title": {
+    "slot": 4858048,
+    "str_rva": 4850664,
+    "len": 27,
+    "text": "mevr_camera_cinematic_track"
+   },
+   "body": {
+    "slot": 4858064,
+    "str_rva": 4865792,
+    "len": 76,
+    "text": "Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 70,
+   "addr": 4858080,
+   "title": {
+    "slot": 4858080,
+    "str_rva": 4850696,
+    "len": 20,
+    "text": "mevr_camera_attached"
+   },
+   "body": {
+    "slot": 4858096,
+    "str_rva": 4865872,
+    "len": 87,
+    "text": "Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 71,
+   "addr": 4858112,
+   "title": {
+    "slot": 4858112,
+    "str_rva": 4850720,
+    "len": 24,
+    "text": "mevr_camera_third_person"
+   },
+   "body": {
+    "slot": 4858128,
+    "str_rva": 4865960,
+    "len": 47,
+    "text": "Third-person views. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 72,
+   "addr": 4858144,
+   "title": {
+    "slot": 4858144,
+    "str_rva": 4850768,
+    "len": 20,
+    "text": "mevr_camera_free_cam"
+   },
+   "body": {
+    "slot": 4858160,
+    "str_rva": 4866008,
+    "len": 61,
+    "text": "Scenes with a free-flying camera. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 73,
+   "addr": 4858176,
+   "title": {
+    "slot": 4858176,
+    "str_rva": 4850792,
+    "len": 19,
+    "text": "mevr_camera_station"
+   },
+   "body": {
+    "slot": 4858192,
+    "str_rva": 4866072,
+    "len": 51,
+    "text": "Seats and mounted guns. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 74,
+   "addr": 4858208,
+   "title": {
+    "slot": 4858208,
+    "str_rva": 4850832,
+    "len": 23,
+    "text": "mevr_camera_bone_angles"
+   },
+   "body": {
+    "slot": 4858224,
+    "str_rva": 4866128,
+    "len": 70,
+    "text": "Scenes where an animation turns your view. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 75,
+   "addr": 4858240,
+   "title": {
+    "slot": 4858240,
+    "str_rva": 4850872,
+    "len": 25,
+    "text": "mevr_camera_scripted_lock"
+   },
+   "body": {
+    "slot": 4858256,
+    "str_rva": 4866208,
+    "len": 68,
+    "text": "Moments when the story locks the camera. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 76,
+   "addr": 4858272,
+   "title": {
+    "slot": 4858272,
+    "str_rva": 4850920,
+    "len": 26,
+    "text": "mevr_camera_animation_lock"
+   },
+   "body": {
+    "slot": 4858288,
+    "str_rva": 4866288,
+    "len": 89,
+    "text": "Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 77,
+   "addr": 4858304,
+   "title": {
+    "slot": 4858304,
+    "str_rva": 4850968,
+    "len": 23,
+    "text": "mevr_camera_axis_locked"
+   },
+   "body": {
+    "slot": 4858320,
+    "str_rva": 4866384,
+    "len": 93,
+    "text": "The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET."
+   }
+  },
+  {
+   "i": 78,
+   "addr": 4858336,
+   "title": {
+    "slot": 4858336,
+    "str_rva": 4851008,
+    "len": 23,
+    "text": "mevr_camera_gameplay_ui"
+   },
+   "body": {
+    "slot": 4858352,
+    "str_rva": 4866480,
+    "len": 77,
+    "text": "Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET."
+   }
+  }
+ ],
+ "hints": [
+  {
+   "i": 0,
+   "addr": 4816384,
+   "key": "$reload_easy_hint",
+   "body": null
+  },
+  {
+   "i": 1,
+   "addr": 4816416,
+   "key": "m3_bagpack_hint_popup",
+   "body": null
+  },
+  {
+   "i": 2,
+   "addr": 4816448,
+   "key": "m3_boat_hint",
+   "body": null
+  },
+  {
+   "i": 3,
+   "addr": 4816480,
+   "key": "m3_car_drive_hint",
+   "body": null
+  },
+  {
+   "i": 4,
+   "addr": 4816512,
+   "key": "m3_motorboat_drive_hint",
+   "body": null
+  },
+  {
+   "i": 5,
+   "addr": 4816544,
+   "key": "m3_radio_act_hint",
+   "body": null
+  },
+  {
+   "i": 6,
+   "addr": 4816576,
+   "key": "m3_radio_hint",
+   "body": null
+  },
+  {
+   "i": 7,
+   "addr": 4816608,
+   "key": "m3_special_slot_crossbow",
+   "body": null
+  },
+  {
+   "i": 8,
+   "addr": 4816640,
+   "key": "m3_vent_move_hint",
+   "body": null
+  },
+  {
+   "i": 9,
+   "addr": 4816672,
+   "key": "m3_weapon_fast_hint",
+   "body": null
+  },
+  {
+   "i": 10,
+   "addr": 4816704,
+   "key": "m3_weapon_special_slot",
+   "body": null
+  },
+  {
+   "i": 11,
+   "addr": 4816736,
+   "key": "m3_trolley_hint",
+   "body": {
+    "slot": 4816752,
+    "str_rva": 4818768,
+    "len": 0,
+    "text": "Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit."
+   }
+  },
+  {
+   "i": 12,
+   "addr": 4816768,
+   "key": "m3_map_hint",
+   "body": {
+    "slot": 4816784,
+    "str_rva": 4818928,
+    "len": 0,
+    "text": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]"
+   }
+  },
+  {
+   "i": 13,
+   "addr": 4816800,
+   "key": "m3_map_updated_hint",
+   "body": {
+    "slot": 4816816,
+    "str_rva": 4818928,
+    "len": 0,
+    "text": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]"
+   }
+  },
+  {
+   "i": 14,
+   "addr": 4816832,
+   "key": "m3_map_second_hint",
+   "body": {
+    "slot": 4816848,
+    "str_rva": 4819056,
+    "len": 0,
+    "text": "Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]"
+   }
+  },
+  {
+   "i": 15,
+   "addr": 4816864,
+   "key": "m3_bagpack_hint",
+   "body": {
+    "slot": 4816880,
+    "str_rva": 4819168,
+    "len": 47,
+    "text": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]"
+   }
+  },
+  {
+   "i": 16,
+   "addr": 4816896,
+   "key": "m3_bagpack_hint_upd",
+   "body": {
+    "slot": 4816912,
+    "str_rva": 4819168,
+    "len": 47,
+    "text": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]"
+   }
+  },
+  {
+   "i": 17,
+   "addr": 4816928,
+   "key": "m3_weapon_popup_hint",
+   "body": {
+    "slot": 4816944,
+    "str_rva": 4819312,
+    "len": 24,
+    "text": "Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]"
+   }
+  },
+  {
+   "i": 18,
+   "addr": 4816960,
+   "key": "m3_pheumatics_upd",
+   "body": {
+    "slot": 4816976,
+    "str_rva": 4819440,
+    "len": 0,
+    "text": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>"
+   }
+  },
+  {
+   "i": 19,
+   "addr": 4816992,
+   "key": "m3_pheumatics_upd_light",
+   "body": {
+    "slot": 4817008,
+    "str_rva": 4819600,
+    "len": 0,
+    "text": "Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>"
+   }
+  },
+  {
+   "i": 20,
+   "addr": 4817024,
+   "key": "m3_flamethrower_upd",
+   "body": {
+    "slot": 4817040,
+    "str_rva": 4819440,
+    "len": 0,
+    "text": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>"
+   }
+  },
+  {
+   "i": 21,
+   "addr": 4817056,
+   "key": "m3_flamethrower_upd_light",
+   "body": {
+    "slot": 4817072,
+    "str_rva": 4819600,
+    "len": 0,
+    "text": "Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>"
+   }
+  },
+  {
+   "i": 22,
+   "addr": 4817088,
+   "key": "m3_wpn_down_hint",
+   "body": {
+    "slot": 4817104,
+    "str_rva": 4819752,
+    "len": 0,
+    "text": "Point your weapon down to lower it"
+   }
+  },
+  {
+   "i": 23,
+   "addr": 4817120,
+   "key": "m3_wpn_down_hint_light",
+   "body": {
+    "slot": 4817136,
+    "str_rva": 4819816,
+    "len": 0,
+    "text": "Point your weapon down"
+   }
+  },
+  {
+   "i": 24,
+   "addr": 4817152,
+   "key": "m3_wpn_down_sprint_hint",
+   "body": {
+    "slot": 4817168,
+    "str_rva": 4819864,
+    "len": 0,
+    "text": "To sprint further, point your weapon down"
+   }
+  },
+  {
+   "i": 25,
+   "addr": 4817184,
+   "key": "m3_crouch_hint",
+   "body": {
+    "slot": 4817200,
+    "str_rva": 4819928,
+    "len": 0,
+    "text": "<Press:crouch_toggle> to crouch"
+   }
+  },
+  {
+   "i": 26,
+   "addr": 4817216,
+   "key": "m3_weapon_jammed",
+   "body": {
+    "slot": 4817232,
+    "str_rva": 4819984,
+    "len": 0,
+    "text": "Weapon jammed! Pull the bolt[ or <press:rui>]"
+   }
+  },
+  {
+   "i": 27,
+   "addr": 4817248,
+   "key": "m3_special_ammo_hint",
+   "body": {
+    "slot": 4817264,
+    "str_rva": 4820064,
+    "len": 0,
+    "text": "Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time"
+   }
+  },
+  {
+   "i": 28,
+   "addr": 4817280,
+   "key": "m3_special_ammo_hint_popup",
+   "body": {
+    "slot": 4817296,
+    "str_rva": 4820192,
+    "len": 0,
+    "text": "Holding <popup_equipment>, press <rui>: your next reload loads the other ammo"
+   }
+  },
+  {
+   "i": 29,
+   "addr": 4817312,
+   "key": "m3_special_ammo_hint_2",
+   "body": {
+    "slot": 4817328,
+    "str_rva": 4820304,
+    "len": 0,
+    "text": "Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time"
+   }
+  },
+  {
+   "i": 30,
+   "addr": 4817344,
+   "key": "m3_secondary_hint_flame",
+   "body": {
+    "slot": 4817360,
+    "str_rva": 4820432,
+    "len": 56,
+    "text": "You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+   }
+  },
+  {
+   "i": 31,
+   "addr": 4817376,
+   "key": "m3_secondary_hint_dynamite",
+   "body": {
+    "slot": 4817392,
+    "str_rva": 4820576,
+    "len": 56,
+    "text": "You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+   }
+  },
+  {
+   "i": 32,
+   "addr": 4817408,
+   "key": "m3_secondary_hint_knife",
+   "body": {
+    "slot": 4817424,
+    "str_rva": 4820704,
+    "len": 56,
+    "text": "You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+   }
+  },
+  {
+   "i": 33,
+   "addr": 4817440,
+   "key": "m3_secondary_hint",
+   "body": {
+    "slot": 4817456,
+    "str_rva": 4820832,
+    "len": 56,
+    "text": "Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]"
+   }
+  },
+  {
+   "i": 34,
+   "addr": 4817472,
+   "key": "m3_decoy_hint",
+   "body": {
+    "slot": 4817488,
+    "str_rva": 4820944,
+    "len": 56,
+    "text": "You found a decoy. Grab <grip_dominant> from the front of your belt"
+   }
+  },
+  {
+   "i": 35,
+   "addr": 4817504,
+   "key": "m3_secondary_choose_hint",
+   "body": {
+    "slot": 4817520,
+    "str_rva": 4820944,
+    "len": 56,
+    "text": "You found a decoy. Grab <grip_dominant> from the front of your belt"
+   }
+  },
+  {
+   "i": 36,
+   "addr": 4817536,
+   "key": "bino_on_off",
+   "body": {
+    "slot": 4817552,
+    "str_rva": 4821072,
+    "len": 81,
+    "text": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]"
+   }
+  },
+  {
+   "i": 37,
+   "addr": 4817568,
+   "key": "bino_on_off_popup",
+   "body": {
+    "slot": 4817584,
+    "str_rva": 4821072,
+    "len": 81,
+    "text": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]"
+   }
+  },
+  {
+   "i": 38,
+   "addr": 4817600,
+   "key": "$nightvision",
+   "body": {
+    "slot": 4817616,
+    "str_rva": 4821216,
+    "len": 0,
+    "text": "Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]"
+   }
+  },
+  {
+   "i": 39,
+   "addr": 4817632,
+   "key": "$nightvision_popup",
+   "body": {
+    "slot": 4817648,
+    "str_rva": 4821216,
+    "len": 0,
+    "text": "Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]"
+   }
+  },
+  {
+   "i": 40,
+   "addr": 4817664,
+   "key": "m3_flashlight_hint",
+   "body": {
+    "slot": 4817680,
+    "str_rva": 4821360,
+    "len": 0,
+    "text": "Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]"
+   }
+  },
+  {
+   "i": 41,
+   "addr": 4817696,
+   "key": "m3_charger_hint_2_upd",
+   "body": {
+    "slot": 4817712,
+    "str_rva": 4821472,
+    "len": 78,
+    "text": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]"
+   }
+  },
+  {
+   "i": 42,
+   "addr": 4817728,
+   "key": "m3_charger_hint_2_popup",
+   "body": {
+    "slot": 4817744,
+    "str_rva": 4821472,
+    "len": 78,
+    "text": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]"
+   }
+  },
+  {
+   "i": 43,
+   "addr": 4817760,
+   "key": "m3_charger_hint_2_upd_light",
+   "body": {
+    "slot": 4817776,
+    "str_rva": 4821472,
+    "len": 78,
+    "text": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]"
+   }
+  },
+  {
+   "i": 44,
+   "addr": 4817792,
+   "key": "m3_lighter_hint",
+   "body": {
+    "slot": 4817808,
+    "str_rva": 4821632,
+    "len": 0,
+    "text": "Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]"
+   }
+  },
+  {
+   "i": 45,
+   "addr": 4817824,
+   "key": "m3_lighter_hint_popup",
+   "body": {
+    "slot": 4817840,
+    "str_rva": 4821760,
+    "len": 0,
+    "text": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]"
+   }
+  },
+  {
+   "i": 46,
+   "addr": 4817856,
+   "key": "m3_lighter_hint_easy",
+   "body": {
+    "slot": 4817872,
+    "str_rva": 4821760,
+    "len": 0,
+    "text": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]"
+   }
+  },
+  {
+   "i": 47,
+   "addr": 4817888,
+   "key": "m3_lighter_hint_popup_easy",
+   "body": {
+    "slot": 4817904,
+    "str_rva": 4821760,
+    "len": 0,
+    "text": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]"
+   }
+  },
+  {
+   "i": 48,
+   "addr": 4817920,
+   "key": "$medkit_easy_hint",
+   "body": {
+    "slot": 4817936,
+    "str_rva": 4821920,
+    "len": 0,
+    "text": "Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]"
+   }
+  },
+  {
+   "i": 49,
+   "addr": 4817952,
+   "key": "m3_rad_watch_hint",
+   "body": {
+    "slot": 4817968,
+    "str_rva": 4822064,
+    "len": 0,
+    "text": "Check the radiation detector on your left wrist"
+   }
+  },
+  {
+   "i": 50,
+   "addr": 4817984,
+   "key": "m3_rad_watch_hint_light",
+   "body": {
+    "slot": 4818000,
+    "str_rva": 4822136,
+    "len": 0,
+    "text": "Radiation detector: check your left wrist"
+   }
+  },
+  {
+   "i": 51,
+   "addr": 4818016,
+   "key": "m3_gasmask_hint_upd",
+   "body": {
+    "slot": 4818032,
+    "str_rva": 4822208,
+    "len": 0,
+    "text": "Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]"
+   }
+  },
+  {
+   "i": 52,
+   "addr": 4818048,
+   "key": "m3_hint_ingame_gasmask_filter_easy",
+   "body": {
+    "slot": 4818064,
+    "str_rva": 4822368,
+    "len": 127,
+    "text": "Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]"
+   }
+  },
+  {
+   "i": 53,
+   "addr": 4818080,
+   "key": "m3_hint_ingame_gasmask_filter_upd",
+   "body": {
+    "slot": 4818096,
+    "str_rva": 4822496,
+    "len": 127,
+    "text": "Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]"
+   }
+  },
+  {
+   "i": 54,
+   "addr": 4818112,
+   "key": "m3_gasmask_wipe_hint",
+   "body": {
+    "slot": 4818128,
+    "str_rva": 4822608,
+    "len": 0,
+    "text": "Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]"
+   }
+  },
+  {
+   "i": 55,
+   "addr": 4818144,
+   "key": "m3_gasmask_wipe_hint_light",
+   "body": {
+    "slot": 4818160,
+    "str_rva": 4822712,
+    "len": 0,
+    "text": "Wipe: rub the visor with an open hand[, or <press:facepalm>]"
+   }
+  },
+  {
+   "i": 56,
+   "addr": 4818176,
+   "key": "m3_gasmask_quick_repair",
+   "body": {
+    "slot": 4818192,
+    "str_rva": 4822800,
+    "len": 0,
+    "text": "Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]"
+   }
+  },
+  {
+   "i": 57,
+   "addr": 4818208,
+   "key": "m3_gasmask_quick_repair_easy",
+   "body": {
+    "slot": 4818224,
+    "str_rva": 4822960,
+    "len": 0,
+    "text": "Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]"
+   }
+  },
+  {
+   "i": 58,
+   "addr": 4818240,
+   "key": "diary_open_hint",
+   "body": {
+    "slot": 4818256,
+    "str_rva": 4823072,
+    "len": 0,
+    "text": "New note - read it in the pause menu"
+   }
+  },
+  {
+   "i": 59,
+   "addr": 4818272,
+   "key": "diary_open_hint_xbox",
+   "body": {
+    "slot": 4818288,
+    "str_rva": 4823072,
+    "len": 0,
+    "text": "New note - read it in the pause menu"
+   }
+  },
+  {
+   "i": 60,
+   "addr": 4818304,
+   "key": "postcard_open_hint",
+   "body": {
+    "slot": 4818320,
+    "str_rva": 4823160,
+    "len": 0,
+    "text": "New postcard - watch it in the pause menu"
+   }
+  },
+  {
+   "i": 61,
+   "addr": 4818336,
+   "key": "postcard_open_hint_xbox",
+   "body": {
+    "slot": 4818352,
+    "str_rva": 4823160,
+    "len": 0,
+    "text": "New postcard - watch it in the pause menu"
+   }
+  },
+  {
+   "i": 62,
+   "addr": 4818368,
+   "key": "m3_photo_mode_hint",
+   "body": null
+  },
+  {
+   "i": 63,
+   "addr": 4818400,
+   "key": "m3_charger_pump",
+   "body": {
+    "slot": 4818416,
+    "str_rva": 4823272,
+    "len": 0,
+    "text": "Pump the charger: <wpn_fire>"
+   }
+  },
+  {
+   "i": 64,
+   "addr": 4818432,
+   "key": "m3_melee_hint",
+   "body": {
+    "slot": 4818448,
+    "str_rva": 4823320,
+    "len": 0,
+    "text": "Melee attack: <wpn_fast_knife>"
+   }
+  },
+  {
+   "i": 65,
+   "addr": 4818464,
+   "key": "m3_melee_hint_light",
+   "body": {
+    "slot": 4818480,
+    "str_rva": 4823376,
+    "len": 0,
+    "text": "Melee: <wpn_fast_knife>"
+   }
+  }
+ ]
+}

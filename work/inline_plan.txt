@@ -1,0 +1,1060 @@
+
+########## 0xb9f0a movload -> 0x49f650 'NOT SET' (len 7) ##########
+  0x0b9eaa  488bc1                     mov rax, rcx
+  0x0b9ead  c3                         ret 
+  0x0b9eae  cc                         int3 
+  0x0b9eaf  cc                         int3 
+  0x0b9eb0  488bc4                     mov rax, rsp
+  0x0b9eb3  48895810                   mov qword ptr [rax + 0x10], rbx
+  0x0b9eb7  48897018                   mov qword ptr [rax + 0x18], rsi
+  0x0b9ebb  55                         push rbp
+  0x0b9ebc  57                         push rdi
+  0x0b9ebd  4154                       push r12
+  0x0b9ebf  4156                       push r14
+  0x0b9ec1  4157                       push r15
+  0x0b9ec3  488d68a1                   lea rbp, [rax - 0x5f]
+  0x0b9ec7  4881ecf0000000             sub rsp, 0xf0
+  0x0b9ece  0f2970c8                   movaps xmmword ptr [rax - 0x38], xmm6
+  0x0b9ed2  0f2978b8                   movaps xmmword ptr [rax - 0x48], xmm7
+  0x0b9ed6  488b05a3aa7300             mov rax, qword ptr [rip + 0x73aaa3]  -> 0x7f4980 '2¢ß-\x99+'
+  0x0b9edd  4833c4                     xor rax, rsp
+  0x0b9ee0  48894507                   mov qword ptr [rbp + 7], rax
+  0x0b9ee4  488bf1                     mov rsi, rcx
+  0x0b9ee7  48894da7                   mov qword ptr [rbp - 0x59], rcx
+  0x0b9eeb  4533f6                     xor r14d, r14d
+  0x0b9eee  4489742420                 mov dword ptr [rsp + 0x20], r14d
+  0x0b9ef3  0f57c0                     xorps xmm0, xmm0
+  0x0b9ef6  0f1145cf                   movups xmmword ptr [rbp - 0x31], xmm0
+  0x0b9efa  48c745df07000000           mov qword ptr [rbp - 0x21], 7
+  0x0b9f02  48c745e70f000000           mov qword ptr [rbp - 0x19], 0xf
+  0x0b9f0a  488b053f573e00             mov rax, qword ptr [rip + 0x3e573f]  -> 0x49f650 'NOT SET'  <<<< SITE
+  0x0b9f11  8945cf                     mov dword ptr [rbp - 0x31], eax
+  0x0b9f14  0fb70539573e00             movzx eax, word ptr [rip + 0x3e5739]  -> 0x49f654 'SET'
+  0x0b9f1b  668945d3                   mov word ptr [rbp - 0x2d], ax
+  0x0b9f1f  0fb60530573e00             movzx eax, byte ptr [rip + 0x3e5730]  -> 0x49f656 'T'
+  0x0b9f26  8845d5                     mov byte ptr [rbp - 0x2b], al
+  0x0b9f29  448875d6                   mov byte ptr [rbp - 0x2a], r14b
+  0x0b9f2d  448875f3                   mov byte ptr [rbp - 0xd], r14b
+  0x0b9f31  4c8931                     mov qword ptr [rcx], r14
+  0x0b9f34  4c897108                   mov qword ptr [rcx + 8], r14
+  0x0b9f38  4c897110                   mov qword ptr [rcx + 0x10], r14
+  0x0b9f3c  b928000000                 mov ecx, 0x28
+  0x0b9f41  e85a923500                 call 0x4131a0
+  0x0b9f46  488bd8                     mov rbx, rax
+  0x0b9f49  488906                     mov qword ptr [rsi], rax
+  0x0b9f4c  48894608                   mov qword ptr [rsi + 8], rax
+  0x0b9f50  4883c028                   add rax, 0x28
+  0x0b9f54  48894610                   mov qword ptr [rsi + 0x10], rax
+  0x0b9f58  4889742428                 mov qword ptr [rsp + 0x28], rsi
+
+########## 0xbac5e movload -> 0x49f694 'PLAY' (len 4) ##########
+  0x0babfe  cc                         int3 
+  0x0babff  cc                         int3 
+  0x0bac00  4c8bdc                     mov r11, rsp
+  0x0bac03  53                         push rbx
+  0x0bac04  4881ecb0000000             sub rsp, 0xb0
+  0x0bac0b  488b056e9d7300             mov rax, qword ptr [rip + 0x739d6e]  -> 0x7f4980 '2¢ß-\x99+'
+  0x0bac12  4833c4                     xor rax, rsp
+  0x0bac15  48898424a0000000           mov qword ptr [rsp + 0xa0], rax
+  0x0bac1d  488bd9                     mov rbx, rcx
+  0x0bac20  49894b88                   mov qword ptr [r11 - 0x78], rcx
+  0x0bac24  c744242400000000           mov dword ptr [rsp + 0x24], 0
+  0x0bac2c  0f1002                     movups xmm0, xmmword ptr [rdx]
+  0x0bac2f  0f1101                     movups xmmword ptr [rcx], xmm0
+  0x0bac32  410f1000                   movups xmm0, xmmword ptr [r8]
+  0x0bac36  0f114110                   movups xmmword ptr [rcx + 0x10], xmm0
+  0x0bac3a  410f1001                   movups xmm0, xmmword ptr [r9]
+  0x0bac3e  0f114120                   movups xmmword ptr [rcx + 0x20], xmm0
+  0x0bac42  4883c130                   add rcx, 0x30
+  0x0bac46  0f57c9                     xorps xmm1, xmm1
+  0x0bac49  0f114c2450                 movups xmmword ptr [rsp + 0x50], xmm1
+  0x0bac4e  49c743a804000000           mov qword ptr [r11 - 0x58], 4
+  0x0bac56  49c743b00f000000           mov qword ptr [r11 - 0x50], 0xf
+  0x0bac5e  8b05304a3e00               mov eax, dword ptr [rip + 0x3e4a30]  -> 0x49f694 'PLAY'  <<<< SITE
+  0x0bac64  89442450                   mov dword ptr [rsp + 0x50], eax
+  0x0bac68  c644245400                 mov byte ptr [rsp + 0x54], 0
+  0x0bac6d  c644247000                 mov byte ptr [rsp + 0x70], 0
+  0x0bac72  0f57c0                     xorps xmm0, xmm0
+  0x0bac75  0f11442478                 movups xmmword ptr [rsp + 0x78], xmm0
+  0x0bac7a  49c743d004000000           mov qword ptr [r11 - 0x30], 4
+  0x0bac82  49c743d80f000000           mov qword ptr [r11 - 0x28], 0xf
+  0x0bac8a  8b050c4a3e00               mov eax, dword ptr [rip + 0x3e4a0c]  -> 0x49f69c 'SKIP'
+  0x0bac90  89442478                   mov dword ptr [rsp + 0x78], eax
+  0x0bac94  c644247c00                 mov byte ptr [rsp + 0x7c], 0
+  0x0bac99  41c643e001                 mov byte ptr [r11 - 0x20], 1
+  0x0bac9e  498d4398                   lea rax, [r11 - 0x68]
+  0x0baca2  4889442430                 mov qword ptr [rsp + 0x30], rax
+  0x0baca7  498d43e8                   lea rax, [r11 - 0x18]
+  0x0bacab  49894380                   mov qword ptr [r11 - 0x80], rax
+  0x0bacaf  4c8d442420                 lea r8, [rsp + 0x20]
+  0x0bacb4  488d542430                 lea rdx, [rsp + 0x30]
+  0x0bacb9  e8625bffff                 call 0xb0820
+  0x0bacbe  c7434800000000             mov dword ptr [rbx + 0x48], 0
+  0x0bacc5  c744242401000000           mov dword ptr [rsp + 0x24], 1
+  0x0baccd  4c8d0d5ceaf4ff             lea r9, [rip - 0xb15a4]  -> 0x9730 'é\x8b\x0f'
+  0x0bacd4  ba28000000                 mov edx, 0x28
+  0x0bacd9  41b802000000               mov r8d, 2
+
+########## 0xbac8a movload -> 0x49f69c 'SKIP' (len 4) ##########
+  0x0bac2a  0000                       add byte ptr [rax], al
+  0x0bac2c  0f1002                     movups xmm0, xmmword ptr [rdx]
+  0x0bac2f  0f1101                     movups xmmword ptr [rcx], xmm0
+  0x0bac32  410f1000                   movups xmm0, xmmword ptr [r8]
+  0x0bac36  0f114110                   movups xmmword ptr [rcx + 0x10], xmm0
+  0x0bac3a  410f1001                   movups xmm0, xmmword ptr [r9]
+  0x0bac3e  0f114120                   movups xmmword ptr [rcx + 0x20], xmm0
+  0x0bac42  4883c130                   add rcx, 0x30
+  0x0bac46  0f57c9                     xorps xmm1, xmm1
+  0x0bac49  0f114c2450                 movups xmmword ptr [rsp + 0x50], xmm1
+  0x0bac4e  49c743a804000000           mov qword ptr [r11 - 0x58], 4
+  0x0bac56  49c743b00f000000           mov qword ptr [r11 - 0x50], 0xf
+  0x0bac5e  8b05304a3e00               mov eax, dword ptr [rip + 0x3e4a30]  -> 0x49f694 'PLAY'
+  0x0bac64  89442450                   mov dword ptr [rsp + 0x50], eax
+  0x0bac68  c644245400                 mov byte ptr [rsp + 0x54], 0
+  0x0bac6d  c644247000                 mov byte ptr [rsp + 0x70], 0
+  0x0bac72  0f57c0                     xorps xmm0, xmm0
+  0x0bac75  0f11442478                 movups xmmword ptr [rsp + 0x78], xmm0
+  0x0bac7a  49c743d004000000           mov qword ptr [r11 - 0x30], 4
+  0x0bac82  49c743d80f000000           mov qword ptr [r11 - 0x28], 0xf
+  0x0bac8a  8b050c4a3e00               mov eax, dword ptr [rip + 0x3e4a0c]  -> 0x49f69c 'SKIP'  <<<< SITE
+  0x0bac90  89442478                   mov dword ptr [rsp + 0x78], eax
+  0x0bac94  c644247c00                 mov byte ptr [rsp + 0x7c], 0
+  0x0bac99  41c643e001                 mov byte ptr [r11 - 0x20], 1
+  0x0bac9e  498d4398                   lea rax, [r11 - 0x68]
+  0x0baca2  4889442430                 mov qword ptr [rsp + 0x30], rax
+  0x0baca7  498d43e8                   lea rax, [r11 - 0x18]
+  0x0bacab  49894380                   mov qword ptr [r11 - 0x80], rax
+  0x0bacaf  4c8d442420                 lea r8, [rsp + 0x20]
+  0x0bacb4  488d542430                 lea rdx, [rsp + 0x30]
+  0x0bacb9  e8625bffff                 call 0xb0820
+  0x0bacbe  c7434800000000             mov dword ptr [rbx + 0x48], 0
+  0x0bacc5  c744242401000000           mov dword ptr [rsp + 0x24], 1
+  0x0baccd  4c8d0d5ceaf4ff             lea r9, [rip - 0xb15a4]  -> 0x9730 'é\x8b\x0f'
+  0x0bacd4  ba28000000                 mov edx, 0x28
+  0x0bacd9  41b802000000               mov r8d, 2
+  0x0bacdf  488d4c2450                 lea rcx, [rsp + 0x50]
+  0x0bace4  e8d78c3500                 call 0x4139c0
+  0x0bace9  488bc3                     mov rax, rbx
+  0x0bacec  488b8c24a0000000           mov rcx, qword ptr [rsp + 0xa0]
+  0x0bacf4  4833cc                     xor rcx, rsp
+  0x0bacf7  e8748c3500                 call 0x413970
+  0x0bacfc  4881c4b0000000             add rsp, 0xb0
+  0x0bad03  5b                         pop rbx
+  0x0bad04  c3                         ret 
+  0x0bad05  cc                         int3 
+
+########## 0xba7a1 movsd -> 0x49f6a8 'OFF (GAME TAA)' (len 14) ##########
+  0x0ba741  415e                       pop r14
+  0x0ba743  5f                         pop rdi
+  0x0ba744  5e                         pop rsi
+  0x0ba745  5d                         pop rbp
+  0x0ba746  5b                         pop rbx
+  0x0ba747  c3                         ret 
+  0x0ba748  cc                         int3 
+  0x0ba749  cc                         int3 
+  0x0ba74a  cc                         int3 
+  0x0ba74b  cc                         int3 
+  0x0ba74c  cc                         int3 
+  0x0ba74d  cc                         int3 
+  0x0ba74e  cc                         int3 
+  0x0ba74f  cc                         int3 
+  0x0ba750  48895c2410                 mov qword ptr [rsp + 0x10], rbx
+  0x0ba755  48896c2418                 mov qword ptr [rsp + 0x18], rbp
+  0x0ba75a  56                         push rsi
+  0x0ba75b  57                         push rdi
+  0x0ba75c  4156                       push r14
+  0x0ba75e  4881ec80000000             sub rsp, 0x80
+  0x0ba765  488b0514a27300             mov rax, qword ptr [rip + 0x73a214]  -> 0x7f4980 '2¢ß-\x99+'
+  0x0ba76c  4833c4                     xor rax, rsp
+  0x0ba76f  4889442478                 mov qword ptr [rsp + 0x78], rax
+  0x0ba774  410fb6e8                   movzx ebp, r8b
+  0x0ba778  440fb6f2                   movzx r14d, dl
+  0x0ba77c  488bf9                     mov rdi, rcx
+  0x0ba77f  48894c2440                 mov qword ptr [rsp + 0x40], rcx
+  0x0ba784  33c9                       xor ecx, ecx
+  0x0ba786  894c2424                   mov dword ptr [rsp + 0x24], ecx
+  0x0ba78a  66894c245e                 mov word ptr [rsp + 0x5e], cx
+  0x0ba78f  48c74424600e000000         mov qword ptr [rsp + 0x60], 0xe
+  0x0ba798  48c74424680f000000         mov qword ptr [rsp + 0x68], 0xf
+  0x0ba7a1  f20f1005ff4e3e00           movsd xmm0, qword ptr [rip + 0x3e4eff]  -> 0x49f6a8 'OFF (GAME TAA)'  <<<< SITE
+  0x0ba7a9  f20f11442450               movsd qword ptr [rsp + 0x50], xmm0
+  0x0ba7af  8b05fb4e3e00               mov eax, dword ptr [rip + 0x3e4efb]  -> 0x49f6b0 'E TAA)'
+  0x0ba7b5  89442458                   mov dword ptr [rsp + 0x58], eax
+  0x0ba7b9  0fb705f44e3e00             movzx eax, word ptr [rip + 0x3e4ef4]  -> 0x49f6b4 'A)'
+  0x0ba7c0  668944245c                 mov word ptr [rsp + 0x5c], ax
+  0x0ba7c5  884c245e                   mov byte ptr [rsp + 0x5e], cl
+  0x0ba7c9  884c2470                   mov byte ptr [rsp + 0x70], cl
+  0x0ba7cd  48890f                     mov qword ptr [rdi], rcx
+  0x0ba7d0  48894f08                   mov qword ptr [rdi + 8], rcx
+  0x0ba7d4  48894f10                   mov qword ptr [rdi + 0x10], rcx
+  0x0ba7d8  b928000000                 mov ecx, 0x28
+  0x0ba7dd  e8be893500                 call 0x4131a0
+  0x0ba7e2  488bd8                     mov rbx, rax
+
+########## 0xba88b movload -> 0x49f6b8 'FSR' (len 3) ##########
+  0x0ba82b  4883c628                   add rsi, 0x28
+  0x0ba82f  488d442478                 lea rax, [rsp + 0x78]
+  0x0ba834  483bf0                     cmp rsi, rax
+  0x0ba837  75d7                       jne 0xba810
+  0x0ba839  48895f08                   mov qword ptr [rdi + 8], rbx
+  0x0ba83d  c744242401000000           mov dword ptr [rsp + 0x24], 1
+  0x0ba845  4c8d0de4eef4ff             lea r9, [rip - 0xb111c]  -> 0x9730 'é\x8b\x0f'
+  0x0ba84c  ba28000000                 mov edx, 0x28
+  0x0ba851  41b801000000               mov r8d, 1
+  0x0ba857  488d4c2450                 lea rcx, [rsp + 0x50]
+  0x0ba85c  e85f913500                 call 0x4139c0
+  0x0ba861  4584f6                     test r14b, r14b
+  0x0ba864  745b                       je 0xba8c1
+  0x0ba866  c644242002                 mov byte ptr [rsp + 0x20], 2
+  0x0ba86b  488b5708                   mov rdx, qword ptr [rdi + 8]
+  0x0ba86f  483b5710                   cmp rdx, qword ptr [rdi + 0x10]
+  0x0ba873  7438                       je 0xba8ad
+  0x0ba875  0f57c0                     xorps xmm0, xmm0
+  0x0ba878  0f1102                     movups xmmword ptr [rdx], xmm0
+  0x0ba87b  48c7421003000000           mov qword ptr [rdx + 0x10], 3
+  0x0ba883  48c742180f000000           mov qword ptr [rdx + 0x18], 0xf
+  0x0ba88b  8b05274e3e00               mov eax, dword ptr [rip + 0x3e4e27]  -> 0x49f6b8 'FSR'  <<<< SITE
+  0x0ba891  668902                     mov word ptr [rdx], ax
+  0x0ba894  0fb6051f4e3e00             movzx eax, byte ptr [rip + 0x3e4e1f]  -> 0x49f6ba 'R'
+  0x0ba89b  884202                     mov byte ptr [rdx + 2], al
+  0x0ba89e  c6420300                   mov byte ptr [rdx + 3], 0
+  0x0ba8a2  c6422002                   mov byte ptr [rdx + 0x20], 2
+  0x0ba8a6  4883470828                 add qword ptr [rdi + 8], 0x28
+  0x0ba8ab  eb14                       jmp 0xba8c1
+  0x0ba8ad  4c8d4c2420                 lea r9, [rsp + 0x20]
+  0x0ba8b2  4c8d05ff4d3e00             lea r8, [rip + 0x3e4dff]  -> 0x49f6b8 'FSR'
+  0x0ba8b9  488bcf                     mov rcx, rdi
+  0x0ba8bc  e83f3cffff                 call 0xae500
+  0x0ba8c1  4084ed                     test bpl, bpl
+  0x0ba8c4  7450                       je 0xba916
+  0x0ba8c6  c644242001                 mov byte ptr [rsp + 0x20], 1
+  0x0ba8cb  488b5708                   mov rdx, qword ptr [rdi + 8]
+  0x0ba8cf  483b5710                   cmp rdx, qword ptr [rdi + 0x10]
+  0x0ba8d3  742d                       je 0xba902
+  0x0ba8d5  0f57c0                     xorps xmm0, xmm0
+  0x0ba8d8  0f1102                     movups xmmword ptr [rdx], xmm0
+  0x0ba8db  48c7421004000000           mov qword ptr [rdx + 0x10], 4
+  0x0ba8e3  48c742180f000000           mov qword ptr [rdx + 0x18], 0xf
+  0x0ba8eb  8b0dcb4d3e00               mov ecx, dword ptr [rip + 0x3e4dcb]  -> 0x49f6bc 'DLSS'
+  0x0ba8f1  890a                       mov dword ptr [rdx], ecx
+  0x0ba8f3  c6420400                   mov byte ptr [rdx + 4], 0
+
+########## 0xba8eb movload -> 0x49f6bc 'DLSS' (len 4) ##########
+  0x0ba88b  8b05274e3e00               mov eax, dword ptr [rip + 0x3e4e27]  -> 0x49f6b8 'FSR'
+  0x0ba891  668902                     mov word ptr [rdx], ax
+  0x0ba894  0fb6051f4e3e00             movzx eax, byte ptr [rip + 0x3e4e1f]  -> 0x49f6ba 'R'
+  0x0ba89b  884202                     mov byte ptr [rdx + 2], al
+  0x0ba89e  c6420300                   mov byte ptr [rdx + 3], 0
+  0x0ba8a2  c6422002                   mov byte ptr [rdx + 0x20], 2
+  0x0ba8a6  4883470828                 add qword ptr [rdi + 8], 0x28
+  0x0ba8ab  eb14                       jmp 0xba8c1
+  0x0ba8ad  4c8d4c2420                 lea r9, [rsp + 0x20]
+  0x0ba8b2  4c8d05ff4d3e00             lea r8, [rip + 0x3e4dff]  -> 0x49f6b8 'FSR'
+  0x0ba8b9  488bcf                     mov rcx, rdi
+  0x0ba8bc  e83f3cffff                 call 0xae500
+  0x0ba8c1  4084ed                     test bpl, bpl
+  0x0ba8c4  7450                       je 0xba916
+  0x0ba8c6  c644242001                 mov byte ptr [rsp + 0x20], 1
+  0x0ba8cb  488b5708                   mov rdx, qword ptr [rdi + 8]
+  0x0ba8cf  483b5710                   cmp rdx, qword ptr [rdi + 0x10]
+  0x0ba8d3  742d                       je 0xba902
+  0x0ba8d5  0f57c0                     xorps xmm0, xmm0
+  0x0ba8d8  0f1102                     movups xmmword ptr [rdx], xmm0
+  0x0ba8db  48c7421004000000           mov qword ptr [rdx + 0x10], 4
+  0x0ba8e3  48c742180f000000           mov qword ptr [rdx + 0x18], 0xf
+  0x0ba8eb  8b0dcb4d3e00               mov ecx, dword ptr [rip + 0x3e4dcb]  -> 0x49f6bc 'DLSS'  <<<< SITE
+  0x0ba8f1  890a                       mov dword ptr [rdx], ecx
+  0x0ba8f3  c6420400                   mov byte ptr [rdx + 4], 0
+  0x0ba8f7  c6422001                   mov byte ptr [rdx + 0x20], 1
+  0x0ba8fb  4883470828                 add qword ptr [rdi + 8], 0x28
+  0x0ba900  eb14                       jmp 0xba916
+  0x0ba902  4c8d4c2420                 lea r9, [rsp + 0x20]
+  0x0ba907  4c8d05ae4d3e00             lea r8, [rip + 0x3e4dae]  -> 0x49f6bc 'DLSS'
+  0x0ba90e  488bcf                     mov rcx, rdi
+  0x0ba911  e8ea3bffff                 call 0xae500
+  0x0ba916  488bc7                     mov rax, rdi
+  0x0ba919  488b4c2478                 mov rcx, qword ptr [rsp + 0x78]
+  0x0ba91e  4833cc                     xor rcx, rsp
+  0x0ba921  e84a903500                 call 0x413970
+  0x0ba926  4c8d9c2480000000           lea r11, [rsp + 0x80]
+  0x0ba92e  498b5b28                   mov rbx, qword ptr [r11 + 0x28]
+  0x0ba932  498b6b30                   mov rbp, qword ptr [r11 + 0x30]
+  0x0ba936  498be3                     mov rsp, r11
+  0x0ba939  415e                       pop r14
+  0x0ba93b  5f                         pop rdi
+  0x0ba93c  5e                         pop rsi
+  0x0ba93d  c3                         ret 
+  0x0ba93e  cc                         int3 
+  0x0ba93f  cc                         int3 
+
+########## 0xb9cdb movload -> 0x49f6c4 'AUTO' (len 4) ##########
+  0x0b9c7b  57                         push rdi
+  0x0b9c7c  4154                       push r12
+  0x0b9c7e  4156                       push r14
+  0x0b9c80  4157                       push r15
+  0x0b9c82  488d6c24d0                 lea rbp, [rsp - 0x30]
+  0x0b9c87  4881ec30010000             sub rsp, 0x130
+  0x0b9c8e  488b05ebac7300             mov rax, qword ptr [rip + 0x73aceb]  -> 0x7f4980 '2¢ß-\x99+'
+  0x0b9c95  4833c4                     xor rax, rsp
+  0x0b9c98  48894520                   mov qword ptr [rbp + 0x20], rax
+  0x0b9c9c  458bf9                     mov r15d, r9d
+  0x0b9c9f  488bf1                     mov rsi, rcx
+  0x0b9ca2  48894c2440                 mov qword ptr [rsp + 0x40], rcx
+  0x0b9ca7  4533e4                     xor r12d, r12d
+  0x0b9caa  4489642420                 mov dword ptr [rsp + 0x20], r12d
+  0x0b9caf  0f1002                     movups xmm0, xmmword ptr [rdx]
+  0x0b9cb2  0f1101                     movups xmmword ptr [rcx], xmm0
+  0x0b9cb5  410f1000                   movups xmm0, xmmword ptr [r8]
+  0x0b9cb9  0f114110                   movups xmmword ptr [rcx + 0x10], xmm0
+  0x0b9cbd  4c8d7120                   lea r14, [rcx + 0x20]
+  0x0b9cc1  0f57c9                     xorps xmm1, xmm1
+  0x0b9cc4  0f114c2450                 movups xmmword ptr [rsp + 0x50], xmm1
+  0x0b9cc9  48c744246004000000         mov qword ptr [rsp + 0x60], 4
+  0x0b9cd2  48c74424680f000000         mov qword ptr [rsp + 0x68], 0xf
+  0x0b9cdb  8b05e3593e00               mov eax, dword ptr [rip + 0x3e59e3]  -> 0x49f6c4 'AUTO'  <<<< SITE
+  0x0b9ce1  89442450                   mov dword ptr [rsp + 0x50], eax
+  0x0b9ce5  4488642454                 mov byte ptr [rsp + 0x54], r12b
+  0x0b9cea  4488642474                 mov byte ptr [rsp + 0x74], r12b
+  0x0b9cef  0f57c0                     xorps xmm0, xmm0
+  0x0b9cf2  0f11442478                 movups xmmword ptr [rsp + 0x78], xmm0
+  0x0b9cf7  48c7458802000000           mov qword ptr [rbp - 0x78], 2
+  0x0b9cff  48c745900f000000           mov qword ptr [rbp - 0x70], 0xf
+  0x0b9d07  0fb705be593e00             movzx eax, word ptr [rip + 0x3e59be]  -> 0x49f6cc 'VR'
+  0x0b9d0e  6689442478                 mov word ptr [rsp + 0x78], ax
+  0x0b9d13  448864247a                 mov byte ptr [rsp + 0x7a], r12b
+  0x0b9d18  44896598                   mov dword ptr [rbp - 0x68], r12d
+  0x0b9d1c  c6459c01                   mov byte ptr [rbp - 0x64], 1
+  0x0b9d20  0f1145a0                   movups xmmword ptr [rbp - 0x60], xmm0
+  0x0b9d24  48c745b00a000000           mov qword ptr [rbp - 0x50], 0xa
+  0x0b9d2c  48c745b80f000000           mov qword ptr [rbp - 0x48], 0xf
+  0x0b9d34  f20f100594593e00           movsd xmm0, qword ptr [rip + 0x3e5994]  -> 0x49f6d0 'VR NO TURN'
+  0x0b9d3c  f20f1145a0                 movsd qword ptr [rbp - 0x60], xmm0
+  0x0b9d41  0fb70590593e00             movzx eax, word ptr [rip + 0x3e5990]  -> 0x49f6d8 'RN'
+  0x0b9d48  668945a8                   mov word ptr [rbp - 0x58], ax
+  0x0b9d4c  448865aa                   mov byte ptr [rbp - 0x56], r12b
+  0x0b9d50  c745c001000000             mov dword ptr [rbp - 0x40], 1
+  0x0b9d57  c645c401                   mov byte ptr [rbp - 0x3c], 1
+
+########## 0xb8eb1 movzx -> 0x49f6cc 'VR' (len 2) ##########
+  0x0b8e51  857002                     test dword ptr [rax + 2], esi
+  0x0b8e54  0000                       add byte ptr [rax], al
+
+########## 0xb9d07 movzx -> 0x49f6cc 'VR' (len 2) ##########
+  0x0b9ca7  4533e4                     xor r12d, r12d
+  0x0b9caa  4489642420                 mov dword ptr [rsp + 0x20], r12d
+  0x0b9caf  0f1002                     movups xmm0, xmmword ptr [rdx]
+  0x0b9cb2  0f1101                     movups xmmword ptr [rcx], xmm0
+  0x0b9cb5  410f1000                   movups xmm0, xmmword ptr [r8]
+  0x0b9cb9  0f114110                   movups xmmword ptr [rcx + 0x10], xmm0
+  0x0b9cbd  4c8d7120                   lea r14, [rcx + 0x20]
+  0x0b9cc1  0f57c9                     xorps xmm1, xmm1
+  0x0b9cc4  0f114c2450                 movups xmmword ptr [rsp + 0x50], xmm1
+  0x0b9cc9  48c744246004000000         mov qword ptr [rsp + 0x60], 4
+  0x0b9cd2  48c74424680f000000         mov qword ptr [rsp + 0x68], 0xf
+  0x0b9cdb  8b05e3593e00               mov eax, dword ptr [rip + 0x3e59e3]  -> 0x49f6c4 'AUTO'
+  0x0b9ce1  89442450                   mov dword ptr [rsp + 0x50], eax
+  0x0b9ce5  4488642454                 mov byte ptr [rsp + 0x54], r12b
+  0x0b9cea  4488642474                 mov byte ptr [rsp + 0x74], r12b
+  0x0b9cef  0f57c0                     xorps xmm0, xmm0
+  0x0b9cf2  0f11442478                 movups xmmword ptr [rsp + 0x78], xmm0
+  0x0b9cf7  48c7458802000000           mov qword ptr [rbp - 0x78], 2
+  0x0b9cff  48c745900f000000           mov qword ptr [rbp - 0x70], 0xf
+  0x0b9d07  0fb705be593e00             movzx eax, word ptr [rip + 0x3e59be]  -> 0x49f6cc 'VR'  <<<< SITE
+  0x0b9d0e  6689442478                 mov word ptr [rsp + 0x78], ax
+  0x0b9d13  448864247a                 mov byte ptr [rsp + 0x7a], r12b
+  0x0b9d18  44896598                   mov dword ptr [rbp - 0x68], r12d
+  0x0b9d1c  c6459c01                   mov byte ptr [rbp - 0x64], 1
+  0x0b9d20  0f1145a0                   movups xmmword ptr [rbp - 0x60], xmm0
+  0x0b9d24  48c745b00a000000           mov qword ptr [rbp - 0x50], 0xa
+  0x0b9d2c  48c745b80f000000           mov qword ptr [rbp - 0x48], 0xf
+  0x0b9d34  f20f100594593e00           movsd xmm0, qword ptr [rip + 0x3e5994]  -> 0x49f6d0 'VR NO TURN'
+  0x0b9d3c  f20f1145a0                 movsd qword ptr [rbp - 0x60], xmm0
+  0x0b9d41  0fb70590593e00             movzx eax, word ptr [rip + 0x3e5990]  -> 0x49f6d8 'RN'
+  0x0b9d48  668945a8                   mov word ptr [rbp - 0x58], ax
+  0x0b9d4c  448865aa                   mov byte ptr [rbp - 0x56], r12b
+  0x0b9d50  c745c001000000             mov dword ptr [rbp - 0x40], 1
+  0x0b9d57  c645c401                   mov byte ptr [rbp - 0x3c], 1
+  0x0b9d5b  0f57c0                     xorps xmm0, xmm0
+  0x0b9d5e  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b9d62  48c745d806000000           mov qword ptr [rbp - 0x28], 6
+  0x0b9d6a  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b9d72  8b0564593e00               mov eax, dword ptr [rip + 0x3e5964]  -> 0x49f6dc 'CINEMA'
+  0x0b9d78  8945c8                     mov dword ptr [rbp - 0x38], eax
+  0x0b9d7b  0fb7055e593e00             movzx eax, word ptr [rip + 0x3e595e]  -> 0x49f6e0 'MA'
+  0x0b9d82  668945cc                   mov word ptr [rbp - 0x34], ax
+  0x0b9d86  448865ce                   mov byte ptr [rbp - 0x32], r12b
+  0x0b9d8a  c745e802000000             mov dword ptr [rbp - 0x18], 2
+  0x0b9d91  c645ec01                   mov byte ptr [rbp - 0x14], 1
+  0x0b9d95  448965fc                   mov dword ptr [rbp - 4], r12d
+
+########## 0xb9d34 movsd -> 0x49f6d0 'VR NO TURN' (len 10) ##########
+  0x0b9cd4  442468                     and al, 0x68
+  0x0b9cd7  0f0000                     sldt word ptr [rax]
+  0x0b9cda  008b05e3593e               add byte ptr [rbx + 0x3e59e305], cl
+  0x0b9ce0  008944245044               add byte ptr [rcx + 0x44502444], cl
+  0x0b9ce6  88642454                   mov byte ptr [rsp + 0x54], ah
+  0x0b9cea  4488642474                 mov byte ptr [rsp + 0x74], r12b
+  0x0b9cef  0f57c0                     xorps xmm0, xmm0
+  0x0b9cf2  0f11442478                 movups xmmword ptr [rsp + 0x78], xmm0
+  0x0b9cf7  48c7458802000000           mov qword ptr [rbp - 0x78], 2
+  0x0b9cff  48c745900f000000           mov qword ptr [rbp - 0x70], 0xf
+  0x0b9d07  0fb705be593e00             movzx eax, word ptr [rip + 0x3e59be]  -> 0x49f6cc 'VR'
+  0x0b9d0e  6689442478                 mov word ptr [rsp + 0x78], ax
+  0x0b9d13  448864247a                 mov byte ptr [rsp + 0x7a], r12b
+  0x0b9d18  44896598                   mov dword ptr [rbp - 0x68], r12d
+  0x0b9d1c  c6459c01                   mov byte ptr [rbp - 0x64], 1
+  0x0b9d20  0f1145a0                   movups xmmword ptr [rbp - 0x60], xmm0
+  0x0b9d24  48c745b00a000000           mov qword ptr [rbp - 0x50], 0xa
+  0x0b9d2c  48c745b80f000000           mov qword ptr [rbp - 0x48], 0xf
+  0x0b9d34  f20f100594593e00           movsd xmm0, qword ptr [rip + 0x3e5994]  -> 0x49f6d0 'VR NO TURN'  <<<< SITE
+  0x0b9d3c  f20f1145a0                 movsd qword ptr [rbp - 0x60], xmm0
+  0x0b9d41  0fb70590593e00             movzx eax, word ptr [rip + 0x3e5990]  -> 0x49f6d8 'RN'
+  0x0b9d48  668945a8                   mov word ptr [rbp - 0x58], ax
+  0x0b9d4c  448865aa                   mov byte ptr [rbp - 0x56], r12b
+  0x0b9d50  c745c001000000             mov dword ptr [rbp - 0x40], 1
+  0x0b9d57  c645c401                   mov byte ptr [rbp - 0x3c], 1
+  0x0b9d5b  0f57c0                     xorps xmm0, xmm0
+  0x0b9d5e  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b9d62  48c745d806000000           mov qword ptr [rbp - 0x28], 6
+  0x0b9d6a  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b9d72  8b0564593e00               mov eax, dword ptr [rip + 0x3e5964]  -> 0x49f6dc 'CINEMA'
+  0x0b9d78  8945c8                     mov dword ptr [rbp - 0x38], eax
+  0x0b9d7b  0fb7055e593e00             movzx eax, word ptr [rip + 0x3e595e]  -> 0x49f6e0 'MA'
+  0x0b9d82  668945cc                   mov word ptr [rbp - 0x34], ax
+  0x0b9d86  448865ce                   mov byte ptr [rbp - 0x32], r12b
+  0x0b9d8a  c745e802000000             mov dword ptr [rbp - 0x18], 2
+  0x0b9d91  c645ec01                   mov byte ptr [rbp - 0x14], 1
+  0x0b9d95  448965fc                   mov dword ptr [rbp - 4], r12d
+  0x0b9d99  48c745000c000000           mov qword ptr [rbp], 0xc
+  0x0b9da1  48c745080f000000           mov qword ptr [rbp + 8], 0xf
+  0x0b9da9  f20f100537593e00           movsd xmm0, qword ptr [rip + 0x3e5937]  -> 0x49f6e8 'VR BODY TURN'
+  0x0b9db1  f20f1145f0                 movsd qword ptr [rbp - 0x10], xmm0
+  0x0b9db6  8b0534593e00               mov eax, dword ptr [rip + 0x3e5934]  -> 0x49f6f0 'TURN'
+  0x0b9dbc  8945f8                     mov dword ptr [rbp - 8], eax
+  0x0b9dbf  448865fc                   mov byte ptr [rbp - 4], r12b
+  0x0b9dc3  c7451003000000             mov dword ptr [rbp + 0x10], 3
+  0x0b9dca  c6451401                   mov byte ptr [rbp + 0x14], 1
+
+########## 0xb9d72 movload -> 0x49f6dc 'CINEMA' (len 6) ##########
+  0x0b9d12  7844                       js 0xb9d58
+  0x0b9d14  8864247a                   mov byte ptr [rsp + 0x7a], ah
+  0x0b9d18  44896598                   mov dword ptr [rbp - 0x68], r12d
+  0x0b9d1c  c6459c01                   mov byte ptr [rbp - 0x64], 1
+  0x0b9d20  0f1145a0                   movups xmmword ptr [rbp - 0x60], xmm0
+  0x0b9d24  48c745b00a000000           mov qword ptr [rbp - 0x50], 0xa
+  0x0b9d2c  48c745b80f000000           mov qword ptr [rbp - 0x48], 0xf
+  0x0b9d34  f20f100594593e00           movsd xmm0, qword ptr [rip + 0x3e5994]  -> 0x49f6d0 'VR NO TURN'
+  0x0b9d3c  f20f1145a0                 movsd qword ptr [rbp - 0x60], xmm0
+  0x0b9d41  0fb70590593e00             movzx eax, word ptr [rip + 0x3e5990]  -> 0x49f6d8 'RN'
+  0x0b9d48  668945a8                   mov word ptr [rbp - 0x58], ax
+  0x0b9d4c  448865aa                   mov byte ptr [rbp - 0x56], r12b
+  0x0b9d50  c745c001000000             mov dword ptr [rbp - 0x40], 1
+  0x0b9d57  c645c401                   mov byte ptr [rbp - 0x3c], 1
+  0x0b9d5b  0f57c0                     xorps xmm0, xmm0
+  0x0b9d5e  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b9d62  48c745d806000000           mov qword ptr [rbp - 0x28], 6
+  0x0b9d6a  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b9d72  8b0564593e00               mov eax, dword ptr [rip + 0x3e5964]  -> 0x49f6dc 'CINEMA'  <<<< SITE
+  0x0b9d78  8945c8                     mov dword ptr [rbp - 0x38], eax
+  0x0b9d7b  0fb7055e593e00             movzx eax, word ptr [rip + 0x3e595e]  -> 0x49f6e0 'MA'
+  0x0b9d82  668945cc                   mov word ptr [rbp - 0x34], ax
+  0x0b9d86  448865ce                   mov byte ptr [rbp - 0x32], r12b
+  0x0b9d8a  c745e802000000             mov dword ptr [rbp - 0x18], 2
+  0x0b9d91  c645ec01                   mov byte ptr [rbp - 0x14], 1
+  0x0b9d95  448965fc                   mov dword ptr [rbp - 4], r12d
+  0x0b9d99  48c745000c000000           mov qword ptr [rbp], 0xc
+  0x0b9da1  48c745080f000000           mov qword ptr [rbp + 8], 0xf
+  0x0b9da9  f20f100537593e00           movsd xmm0, qword ptr [rip + 0x3e5937]  -> 0x49f6e8 'VR BODY TURN'
+  0x0b9db1  f20f1145f0                 movsd qword ptr [rbp - 0x10], xmm0
+  0x0b9db6  8b0534593e00               mov eax, dword ptr [rip + 0x3e5934]  -> 0x49f6f0 'TURN'
+  0x0b9dbc  8945f8                     mov dword ptr [rbp - 8], eax
+  0x0b9dbf  448865fc                   mov byte ptr [rbp - 4], r12b
+  0x0b9dc3  c7451003000000             mov dword ptr [rbp + 0x10], 3
+  0x0b9dca  c6451401                   mov byte ptr [rbp + 0x14], 1
+  0x0b9dce  4d8926                     mov qword ptr [r14], r12
+  0x0b9dd1  4d896608                   mov qword ptr [r14 + 8], r12
+  0x0b9dd5  4d896610                   mov qword ptr [r14 + 0x10], r12
+  0x0b9dd9  b9c8000000                 mov ecx, 0xc8
+  0x0b9dde  e8bd933500                 call 0x4131a0
+  0x0b9de3  498906                     mov qword ptr [r14], rax
+  0x0b9de6  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b9dea  4805c8000000               add rax, 0xc8
+  0x0b9df0  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b9df4  4c89742448                 mov qword ptr [rsp + 0x48], r14
+  0x0b9df9  498b1e                     mov rbx, qword ptr [r14]
+
+########## 0xb9da9 movsd -> 0x49f6e8 'VR BODY TURN' (len 12) ##########
+  0x0b9d49  8945a8                     mov dword ptr [rbp - 0x58], eax
+  0x0b9d4c  448865aa                   mov byte ptr [rbp - 0x56], r12b
+  0x0b9d50  c745c001000000             mov dword ptr [rbp - 0x40], 1
+  0x0b9d57  c645c401                   mov byte ptr [rbp - 0x3c], 1
+  0x0b9d5b  0f57c0                     xorps xmm0, xmm0
+  0x0b9d5e  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b9d62  48c745d806000000           mov qword ptr [rbp - 0x28], 6
+  0x0b9d6a  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b9d72  8b0564593e00               mov eax, dword ptr [rip + 0x3e5964]  -> 0x49f6dc 'CINEMA'
+  0x0b9d78  8945c8                     mov dword ptr [rbp - 0x38], eax
+  0x0b9d7b  0fb7055e593e00             movzx eax, word ptr [rip + 0x3e595e]  -> 0x49f6e0 'MA'
+  0x0b9d82  668945cc                   mov word ptr [rbp - 0x34], ax
+  0x0b9d86  448865ce                   mov byte ptr [rbp - 0x32], r12b
+  0x0b9d8a  c745e802000000             mov dword ptr [rbp - 0x18], 2
+  0x0b9d91  c645ec01                   mov byte ptr [rbp - 0x14], 1
+  0x0b9d95  448965fc                   mov dword ptr [rbp - 4], r12d
+  0x0b9d99  48c745000c000000           mov qword ptr [rbp], 0xc
+  0x0b9da1  48c745080f000000           mov qword ptr [rbp + 8], 0xf
+  0x0b9da9  f20f100537593e00           movsd xmm0, qword ptr [rip + 0x3e5937]  -> 0x49f6e8 'VR BODY TURN'  <<<< SITE
+  0x0b9db1  f20f1145f0                 movsd qword ptr [rbp - 0x10], xmm0
+  0x0b9db6  8b0534593e00               mov eax, dword ptr [rip + 0x3e5934]  -> 0x49f6f0 'TURN'
+  0x0b9dbc  8945f8                     mov dword ptr [rbp - 8], eax
+  0x0b9dbf  448865fc                   mov byte ptr [rbp - 4], r12b
+  0x0b9dc3  c7451003000000             mov dword ptr [rbp + 0x10], 3
+  0x0b9dca  c6451401                   mov byte ptr [rbp + 0x14], 1
+  0x0b9dce  4d8926                     mov qword ptr [r14], r12
+  0x0b9dd1  4d896608                   mov qword ptr [r14 + 8], r12
+  0x0b9dd5  4d896610                   mov qword ptr [r14 + 0x10], r12
+  0x0b9dd9  b9c8000000                 mov ecx, 0xc8
+  0x0b9dde  e8bd933500                 call 0x4131a0
+  0x0b9de3  498906                     mov qword ptr [r14], rax
+  0x0b9de6  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b9dea  4805c8000000               add rax, 0xc8
+  0x0b9df0  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b9df4  4c89742448                 mov qword ptr [rsp + 0x48], r14
+  0x0b9df9  498b1e                     mov rbx, qword ptr [r14]
+  0x0b9dfc  488d7c2450                 lea rdi, [rsp + 0x50]
+  0x0b9e01  48895c2428                 mov qword ptr [rsp + 0x28], rbx
+  0x0b9e06  48895c2430                 mov qword ptr [rsp + 0x30], rbx
+  0x0b9e0b  4c89742438                 mov qword ptr [rsp + 0x38], r14
+  0x0b9e10  488bd7                     mov rdx, rdi
+  0x0b9e13  488bcb                     mov rcx, rbx
+  0x0b9e16  e855f6f4ff                 call 0x9470
+  0x0b9e1b  488b4720                   mov rax, qword ptr [rdi + 0x20]
+  0x0b9e1f  48894320                   mov qword ptr [rbx + 0x20], rax
+  0x0b9e23  4883c328                   add rbx, 0x28
+
+########## 0xb0bde movload -> 0x49f714 'SNAP' (len 4) ##########
+  0x0b0b7e  48898570060000             mov qword ptr [rbp + 0x670], rax
+  0x0b0b85  488bf9                     mov rdi, rcx
+  0x0b0b88  48894c2478                 mov qword ptr [rsp + 0x78], rcx
+  0x0b0b8d  4533ff                     xor r15d, r15d
+  0x0b0b90  44897c2470                 mov dword ptr [rsp + 0x70], r15d
+  0x0b0b95  488d055ceb3e00             lea rax, [rip + 0x3eeb5c]  -> 0x49f6f8 'mevr_turn_mode'
+  0x0b0b9c  488901                     mov qword ptr [rcx], rax
+  0x0b0b9f  48c741080e000000           mov qword ptr [rcx + 8], 0xe
+  0x0b0ba7  488d055aeb3e00             lea rax, [rip + 0x3eeb5a]  -> 0x49f708 'TURN MODE'
+  0x0b0bae  48894110                   mov qword ptr [rcx + 0x10], rax
+  0x0b0bb2  48c7411809000000           mov qword ptr [rcx + 0x18], 9
+  0x0b0bba  4c8d7120                   lea r14, [rcx + 0x20]
+  0x0b0bbe  0f57c0                     xorps xmm0, xmm0
+  0x0b0bc1  0f118520020000             movups xmmword ptr [rbp + 0x220], xmm0
+  0x0b0bc8  48c7853002000004000000     mov qword ptr [rbp + 0x230], 4
+  0x0b0bd3  48c785380200000f000000     mov qword ptr [rbp + 0x238], 0xf
+  0x0b0bde  8b0530eb3e00               mov eax, dword ptr [rip + 0x3eeb30]  -> 0x49f714 'SNAP'  <<<< SITE
+  0x0b0be4  898520020000               mov dword ptr [rbp + 0x220], eax
+  0x0b0bea  4488bd24020000             mov byte ptr [rbp + 0x224], r15b
+  0x0b0bf1  4489bd40020000             mov dword ptr [rbp + 0x240], r15d
+  0x0b0bf8  0f118548020000             movups xmmword ptr [rbp + 0x248], xmm0
+  0x0b0bff  48c7855802000006000000     mov qword ptr [rbp + 0x258], 6
+  0x0b0c0a  48c785600200000f000000     mov qword ptr [rbp + 0x260], 0xf
+  0x0b0c15  8b0501eb3e00               mov eax, dword ptr [rip + 0x3eeb01]  -> 0x49f71c 'SMOOTH'
+  0x0b0c1b  898548020000               mov dword ptr [rbp + 0x248], eax
+  0x0b0c21  0fb705f8ea3e00             movzx eax, word ptr [rip + 0x3eeaf8]  -> 0x49f720 'TH'
+  0x0b0c28  6689854c020000             mov word ptr [rbp + 0x24c], ax
+  0x0b0c2f  4488bd4e020000             mov byte ptr [rbp + 0x24e], r15b
+  0x0b0c36  c7856802000001000000       mov dword ptr [rbp + 0x268], 1
+  0x0b0c40  4d893e                     mov qword ptr [r14], r15
+  0x0b0c43  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b0c47  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b0c4b  b950000000                 mov ecx, 0x50
+  0x0b0c50  e84b253600                 call 0x4131a0
+  0x0b0c55  498906                     mov qword ptr [r14], rax
+  0x0b0c58  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b0c5c  4883c050                   add rax, 0x50
+  0x0b0c60  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b0c64  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b0c69  498b1e                     mov rbx, qword ptr [r14]
+  0x0b0c6c  488db520020000             lea rsi, [rbp + 0x220]
+  0x0b0c73  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b0c7a  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b0c81  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b0c88  0f1f840000000000           nop dword ptr [rax + rax]
+  0x0b0c90  488bd6                     mov rdx, rsi
+
+########## 0xb0c15 movload -> 0x49f71c 'SMOOTH' (len 6) ##########
+  0x0b0bb5  1809                       sbb byte ptr [rcx], cl
+  0x0b0bb7  0000                       add byte ptr [rax], al
+  0x0b0bb9  004c8d71                   add byte ptr [rbp + rcx*4 + 0x71], cl
+  0x0b0bbd  200f                       and byte ptr [rdi], cl
+  0x0b0bbf  57                         push rdi
+  0x0b0bc0  c00f11                     ror byte ptr [rdi], 0x11
+  0x0b0bc3  8520                       test dword ptr [rax], esp
+  0x0b0bc5  0200                       add al, byte ptr [rax]
+  0x0b0bc7  0048c7                     add byte ptr [rax - 0x39], cl
+  0x0b0bca  8530                       test dword ptr [rax], esi
+  0x0b0bcc  0200                       add al, byte ptr [rax]
+  0x0b0bce  000400                     add byte ptr [rax + rax], al
+  0x0b0bd1  0000                       add byte ptr [rax], al
+  0x0b0bd3  48c785380200000f000000     mov qword ptr [rbp + 0x238], 0xf
+  0x0b0bde  8b0530eb3e00               mov eax, dword ptr [rip + 0x3eeb30]  -> 0x49f714 'SNAP'
+  0x0b0be4  898520020000               mov dword ptr [rbp + 0x220], eax
+  0x0b0bea  4488bd24020000             mov byte ptr [rbp + 0x224], r15b
+  0x0b0bf1  4489bd40020000             mov dword ptr [rbp + 0x240], r15d
+  0x0b0bf8  0f118548020000             movups xmmword ptr [rbp + 0x248], xmm0
+  0x0b0bff  48c7855802000006000000     mov qword ptr [rbp + 0x258], 6
+  0x0b0c0a  48c785600200000f000000     mov qword ptr [rbp + 0x260], 0xf
+  0x0b0c15  8b0501eb3e00               mov eax, dword ptr [rip + 0x3eeb01]  -> 0x49f71c 'SMOOTH'  <<<< SITE
+  0x0b0c1b  898548020000               mov dword ptr [rbp + 0x248], eax
+  0x0b0c21  0fb705f8ea3e00             movzx eax, word ptr [rip + 0x3eeaf8]  -> 0x49f720 'TH'
+  0x0b0c28  6689854c020000             mov word ptr [rbp + 0x24c], ax
+  0x0b0c2f  4488bd4e020000             mov byte ptr [rbp + 0x24e], r15b
+  0x0b0c36  c7856802000001000000       mov dword ptr [rbp + 0x268], 1
+  0x0b0c40  4d893e                     mov qword ptr [r14], r15
+  0x0b0c43  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b0c47  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b0c4b  b950000000                 mov ecx, 0x50
+  0x0b0c50  e84b253600                 call 0x4131a0
+  0x0b0c55  498906                     mov qword ptr [r14], rax
+  0x0b0c58  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b0c5c  4883c050                   add rax, 0x50
+  0x0b0c60  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b0c64  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b0c69  498b1e                     mov rbx, qword ptr [r14]
+  0x0b0c6c  488db520020000             lea rsi, [rbp + 0x220]
+  0x0b0c73  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b0c7a  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b0c81  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b0c88  0f1f840000000000           nop dword ptr [rax + rax]
+  0x0b0c90  488bd6                     mov rdx, rsi
+  0x0b0c93  488bcb                     mov rcx, rbx
+  0x0b0c96  e8d587f5ff                 call 0x9470
+
+########## 0xb0e73 movload -> 0x49f7c4 'HEAD' (len 4) ##########
+  0x0b0e13  0000                       add byte ptr [rax], al
+  0x0b0e15  0002                       add byte ptr [rdx], al
+  0x0b0e17  0000                       add byte ptr [rax], al
+  0x0b0e19  00488d                     add byte ptr [rax - 0x73], cl
+  0x0b0e1c  0577e93e00                 add eax, 0x3ee977
+  0x0b0e21  488987c0000000             mov qword ptr [rdi + 0xc0], rax
+  0x0b0e28  48c787c800000013000000     mov qword ptr [rdi + 0xc8], 0x13
+  0x0b0e33  488d0576e93e00             lea rax, [rip + 0x3ee976]  -> 0x49f7b0 'MOVEMENT DIRECTION'
+  0x0b0e3a  488987d0000000             mov qword ptr [rdi + 0xd0], rax
+  0x0b0e41  48c787d800000012000000     mov qword ptr [rdi + 0xd8], 0x12
+  0x0b0e4c  4c8db7e0000000             lea r14, [rdi + 0xe0]
+  0x0b0e53  0f57c0                     xorps xmm0, xmm0
+  0x0b0e56  0f1185c0020000             movups xmmword ptr [rbp + 0x2c0], xmm0
+  0x0b0e5d  48c785d002000004000000     mov qword ptr [rbp + 0x2d0], 4
+  0x0b0e68  48c785d80200000f000000     mov qword ptr [rbp + 0x2d8], 0xf
+  0x0b0e73  8b054be93e00               mov eax, dword ptr [rip + 0x3ee94b]  -> 0x49f7c4 'HEAD'  <<<< SITE
+  0x0b0e79  8985c0020000               mov dword ptr [rbp + 0x2c0], eax
+  0x0b0e7f  c685c402000000             mov byte ptr [rbp + 0x2c4], 0
+  0x0b0e86  4489bde0020000             mov dword ptr [rbp + 0x2e0], r15d
+  0x0b0e8d  0f1185e8020000             movups xmmword ptr [rbp + 0x2e8], xmm0
+  0x0b0e94  48c785f802000004000000     mov qword ptr [rbp + 0x2f8], 4
+  0x0b0e9f  48c785000300000f000000     mov qword ptr [rbp + 0x300], 0xf
+  0x0b0eaa  8b051ce93e00               mov eax, dword ptr [rip + 0x3ee91c]  -> 0x49f7cc 'BODY'
+  0x0b0eb0  8985e8020000               mov dword ptr [rbp + 0x2e8], eax
+  0x0b0eb6  c685ec02000000             mov byte ptr [rbp + 0x2ec], 0
+  0x0b0ebd  c7850803000001000000       mov dword ptr [rbp + 0x308], 1
+  0x0b0ec7  0f118510030000             movups xmmword ptr [rbp + 0x310], xmm0
+  0x0b0ece  48c7852003000009000000     mov qword ptr [rbp + 0x320], 9
+  0x0b0ed9  48c785280300000f000000     mov qword ptr [rbp + 0x328], 0xf
+  0x0b0ee4  f20f1005ece83e00           movsd xmm0, qword ptr [rip + 0x3ee8ec]  -> 0x49f7d8 'LEFT HAND'
+  0x0b0eec  f20f118510030000           movsd qword ptr [rbp + 0x310], xmm0
+  0x0b0ef4  0fb605e5e83e00             movzx eax, byte ptr [rip + 0x3ee8e5]  -> 0x49f7e0 'D'
+  0x0b0efb  888518030000               mov byte ptr [rbp + 0x318], al
+  0x0b0f01  c6851903000000             mov byte ptr [rbp + 0x319], 0
+  0x0b0f08  c7853003000002000000       mov dword ptr [rbp + 0x330], 2
+  0x0b0f12  0f57c0                     xorps xmm0, xmm0
+  0x0b0f15  0f118538030000             movups xmmword ptr [rbp + 0x338], xmm0
+  0x0b0f1c  48c785480300000a000000     mov qword ptr [rbp + 0x348], 0xa
+  0x0b0f27  48c785500300000f000000     mov qword ptr [rbp + 0x350], 0xf
+  0x0b0f32  f20f1005aee83e00           movsd xmm0, qword ptr [rip + 0x3ee8ae]  -> 0x49f7e8 'RIGHT HAND'
+  0x0b0f3a  f20f118538030000           movsd qword ptr [rbp + 0x338], xmm0
+  0x0b0f42  0fb705a7e83e00             movzx eax, word ptr [rip + 0x3ee8a7]  -> 0x49f7f0 'ND'
+  0x0b0f49  66898540030000             mov word ptr [rbp + 0x340], ax
+  0x0b0f50  c6854203000000             mov byte ptr [rbp + 0x342], 0
+  0x0b0f57  c7855803000003000000       mov dword ptr [rbp + 0x358], 3
+  0x0b0f61  4d893e                     mov qword ptr [r14], r15
+
+########## 0xb0eaa movload -> 0x49f7cc 'BODY' (len 4) ##########
+  0x0b0e4a  0000                       add byte ptr [rax], al
+  0x0b0e4c  4c8db7e0000000             lea r14, [rdi + 0xe0]
+  0x0b0e53  0f57c0                     xorps xmm0, xmm0
+  0x0b0e56  0f1185c0020000             movups xmmword ptr [rbp + 0x2c0], xmm0
+  0x0b0e5d  48c785d002000004000000     mov qword ptr [rbp + 0x2d0], 4
+  0x0b0e68  48c785d80200000f000000     mov qword ptr [rbp + 0x2d8], 0xf
+  0x0b0e73  8b054be93e00               mov eax, dword ptr [rip + 0x3ee94b]  -> 0x49f7c4 'HEAD'
+  0x0b0e79  8985c0020000               mov dword ptr [rbp + 0x2c0], eax
+  0x0b0e7f  c685c402000000             mov byte ptr [rbp + 0x2c4], 0
+  0x0b0e86  4489bde0020000             mov dword ptr [rbp + 0x2e0], r15d
+  0x0b0e8d  0f1185e8020000             movups xmmword ptr [rbp + 0x2e8], xmm0
+  0x0b0e94  48c785f802000004000000     mov qword ptr [rbp + 0x2f8], 4
+  0x0b0e9f  48c785000300000f000000     mov qword ptr [rbp + 0x300], 0xf
+  0x0b0eaa  8b051ce93e00               mov eax, dword ptr [rip + 0x3ee91c]  -> 0x49f7cc 'BODY'  <<<< SITE
+  0x0b0eb0  8985e8020000               mov dword ptr [rbp + 0x2e8], eax
+  0x0b0eb6  c685ec02000000             mov byte ptr [rbp + 0x2ec], 0
+  0x0b0ebd  c7850803000001000000       mov dword ptr [rbp + 0x308], 1
+  0x0b0ec7  0f118510030000             movups xmmword ptr [rbp + 0x310], xmm0
+  0x0b0ece  48c7852003000009000000     mov qword ptr [rbp + 0x320], 9
+  0x0b0ed9  48c785280300000f000000     mov qword ptr [rbp + 0x328], 0xf
+  0x0b0ee4  f20f1005ece83e00           movsd xmm0, qword ptr [rip + 0x3ee8ec]  -> 0x49f7d8 'LEFT HAND'
+  0x0b0eec  f20f118510030000           movsd qword ptr [rbp + 0x310], xmm0
+  0x0b0ef4  0fb605e5e83e00             movzx eax, byte ptr [rip + 0x3ee8e5]  -> 0x49f7e0 'D'
+  0x0b0efb  888518030000               mov byte ptr [rbp + 0x318], al
+  0x0b0f01  c6851903000000             mov byte ptr [rbp + 0x319], 0
+  0x0b0f08  c7853003000002000000       mov dword ptr [rbp + 0x330], 2
+  0x0b0f12  0f57c0                     xorps xmm0, xmm0
+  0x0b0f15  0f118538030000             movups xmmword ptr [rbp + 0x338], xmm0
+  0x0b0f1c  48c785480300000a000000     mov qword ptr [rbp + 0x348], 0xa
+  0x0b0f27  48c785500300000f000000     mov qword ptr [rbp + 0x350], 0xf
+  0x0b0f32  f20f1005aee83e00           movsd xmm0, qword ptr [rip + 0x3ee8ae]  -> 0x49f7e8 'RIGHT HAND'
+  0x0b0f3a  f20f118538030000           movsd qword ptr [rbp + 0x338], xmm0
+  0x0b0f42  0fb705a7e83e00             movzx eax, word ptr [rip + 0x3ee8a7]  -> 0x49f7f0 'ND'
+  0x0b0f49  66898540030000             mov word ptr [rbp + 0x340], ax
+  0x0b0f50  c6854203000000             mov byte ptr [rbp + 0x342], 0
+  0x0b0f57  c7855803000003000000       mov dword ptr [rbp + 0x358], 3
+  0x0b0f61  4d893e                     mov qword ptr [r14], r15
+  0x0b0f64  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b0f68  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b0f6c  b9a0000000                 mov ecx, 0xa0
+  0x0b0f71  e8ba9ff9ff                 call 0x4af30
+  0x0b0f76  498906                     mov qword ptr [r14], rax
+  0x0b0f79  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b0f7d  4805a0000000               add rax, 0xa0
+  0x0b0f83  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b0f87  4c89742450                 mov qword ptr [rsp + 0x50], r14
+
+########## 0xb0ee4 movsd -> 0x49f7d8 'LEFT HAND' (len 9) ##########
+  0x0b0e84  0000                       add byte ptr [rax], al
+  0x0b0e86  4489bde0020000             mov dword ptr [rbp + 0x2e0], r15d
+  0x0b0e8d  0f1185e8020000             movups xmmword ptr [rbp + 0x2e8], xmm0
+  0x0b0e94  48c785f802000004000000     mov qword ptr [rbp + 0x2f8], 4
+  0x0b0e9f  48c785000300000f000000     mov qword ptr [rbp + 0x300], 0xf
+  0x0b0eaa  8b051ce93e00               mov eax, dword ptr [rip + 0x3ee91c]  -> 0x49f7cc 'BODY'
+  0x0b0eb0  8985e8020000               mov dword ptr [rbp + 0x2e8], eax
+  0x0b0eb6  c685ec02000000             mov byte ptr [rbp + 0x2ec], 0
+  0x0b0ebd  c7850803000001000000       mov dword ptr [rbp + 0x308], 1
+  0x0b0ec7  0f118510030000             movups xmmword ptr [rbp + 0x310], xmm0
+  0x0b0ece  48c7852003000009000000     mov qword ptr [rbp + 0x320], 9
+  0x0b0ed9  48c785280300000f000000     mov qword ptr [rbp + 0x328], 0xf
+  0x0b0ee4  f20f1005ece83e00           movsd xmm0, qword ptr [rip + 0x3ee8ec]  -> 0x49f7d8 'LEFT HAND'  <<<< SITE
+  0x0b0eec  f20f118510030000           movsd qword ptr [rbp + 0x310], xmm0
+  0x0b0ef4  0fb605e5e83e00             movzx eax, byte ptr [rip + 0x3ee8e5]  -> 0x49f7e0 'D'
+  0x0b0efb  888518030000               mov byte ptr [rbp + 0x318], al
+  0x0b0f01  c6851903000000             mov byte ptr [rbp + 0x319], 0
+  0x0b0f08  c7853003000002000000       mov dword ptr [rbp + 0x330], 2
+  0x0b0f12  0f57c0                     xorps xmm0, xmm0
+  0x0b0f15  0f118538030000             movups xmmword ptr [rbp + 0x338], xmm0
+  0x0b0f1c  48c785480300000a000000     mov qword ptr [rbp + 0x348], 0xa
+  0x0b0f27  48c785500300000f000000     mov qword ptr [rbp + 0x350], 0xf
+  0x0b0f32  f20f1005aee83e00           movsd xmm0, qword ptr [rip + 0x3ee8ae]  -> 0x49f7e8 'RIGHT HAND'
+  0x0b0f3a  f20f118538030000           movsd qword ptr [rbp + 0x338], xmm0
+  0x0b0f42  0fb705a7e83e00             movzx eax, word ptr [rip + 0x3ee8a7]  -> 0x49f7f0 'ND'
+  0x0b0f49  66898540030000             mov word ptr [rbp + 0x340], ax
+  0x0b0f50  c6854203000000             mov byte ptr [rbp + 0x342], 0
+  0x0b0f57  c7855803000003000000       mov dword ptr [rbp + 0x358], 3
+  0x0b0f61  4d893e                     mov qword ptr [r14], r15
+  0x0b0f64  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b0f68  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b0f6c  b9a0000000                 mov ecx, 0xa0
+  0x0b0f71  e8ba9ff9ff                 call 0x4af30
+  0x0b0f76  498906                     mov qword ptr [r14], rax
+  0x0b0f79  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b0f7d  4805a0000000               add rax, 0xa0
+  0x0b0f83  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b0f87  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b0f8c  498b1e                     mov rbx, qword ptr [r14]
+  0x0b0f8f  488db5c0020000             lea rsi, [rbp + 0x2c0]
+  0x0b0f96  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b0f9d  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b0fa4  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b0fab  0f1f440000                 nop dword ptr [rax + rax]
+  0x0b0fb0  488bd6                     mov rdx, rsi
+  0x0b0fb3  488bcb                     mov rcx, rbx
+
+########## 0xb0f32 movsd -> 0x49f7e8 'RIGHT HAND' (len 10) ##########
+  0x0b0ed2  0300                       add eax, dword ptr [rax]
+  0x0b0ed4  0009                       add byte ptr [rcx], cl
+  0x0b0ed6  0000                       add byte ptr [rax], al
+  0x0b0ed8  0048c7                     add byte ptr [rax - 0x39], cl
+  0x0b0edb  8528                       test dword ptr [rax], ebp
+  0x0b0edd  0300                       add eax, dword ptr [rax]
+  0x0b0edf  000f                       add byte ptr [rdi], cl
+  0x0b0ee1  0000                       add byte ptr [rax], al
+  0x0b0ee3  00f2                       add dl, dh
+  0x0b0ee5  0f1005ece83e00             movups xmm0, xmmword ptr [rip + 0x3ee8ec]  -> 0x49f7d8 'LEFT HAND'
+  0x0b0eec  f20f118510030000           movsd qword ptr [rbp + 0x310], xmm0
+  0x0b0ef4  0fb605e5e83e00             movzx eax, byte ptr [rip + 0x3ee8e5]  -> 0x49f7e0 'D'
+  0x0b0efb  888518030000               mov byte ptr [rbp + 0x318], al
+  0x0b0f01  c6851903000000             mov byte ptr [rbp + 0x319], 0
+  0x0b0f08  c7853003000002000000       mov dword ptr [rbp + 0x330], 2
+  0x0b0f12  0f57c0                     xorps xmm0, xmm0
+  0x0b0f15  0f118538030000             movups xmmword ptr [rbp + 0x338], xmm0
+  0x0b0f1c  48c785480300000a000000     mov qword ptr [rbp + 0x348], 0xa
+  0x0b0f27  48c785500300000f000000     mov qword ptr [rbp + 0x350], 0xf
+  0x0b0f32  f20f1005aee83e00           movsd xmm0, qword ptr [rip + 0x3ee8ae]  -> 0x49f7e8 'RIGHT HAND'  <<<< SITE
+  0x0b0f3a  f20f118538030000           movsd qword ptr [rbp + 0x338], xmm0
+  0x0b0f42  0fb705a7e83e00             movzx eax, word ptr [rip + 0x3ee8a7]  -> 0x49f7f0 'ND'
+  0x0b0f49  66898540030000             mov word ptr [rbp + 0x340], ax
+  0x0b0f50  c6854203000000             mov byte ptr [rbp + 0x342], 0
+  0x0b0f57  c7855803000003000000       mov dword ptr [rbp + 0x358], 3
+  0x0b0f61  4d893e                     mov qword ptr [r14], r15
+  0x0b0f64  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b0f68  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b0f6c  b9a0000000                 mov ecx, 0xa0
+  0x0b0f71  e8ba9ff9ff                 call 0x4af30
+  0x0b0f76  498906                     mov qword ptr [r14], rax
+  0x0b0f79  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b0f7d  4805a0000000               add rax, 0xa0
+  0x0b0f83  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b0f87  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b0f8c  498b1e                     mov rbx, qword ptr [r14]
+  0x0b0f8f  488db5c0020000             lea rsi, [rbp + 0x2c0]
+  0x0b0f96  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b0f9d  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b0fa4  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b0fab  0f1f440000                 nop dword ptr [rax + rax]
+  0x0b0fb0  488bd6                     mov rdx, rsi
+  0x0b0fb3  488bcb                     mov rcx, rbx
+  0x0b0fb6  e8b584f5ff                 call 0x9470
+  0x0b0fbb  8b4620                     mov eax, dword ptr [rsi + 0x20]
+  0x0b0fbe  894320                     mov dword ptr [rbx + 0x20], eax
+
+########## 0xb1061 movload -> 0x49f818 'HOLD' (len 4) ##########
+  0x0b1001  0000                       add byte ptr [rax], al
+  0x0b1003  e8b8293600                 call 0x4139c0
+  0x0b1008  488d05e9e73e00             lea rax, [rip + 0x3ee7e9]  -> 0x49f7f8 'mevr_crouch'
+  0x0b100f  48898700010000             mov qword ptr [rdi + 0x100], rax
+  0x0b1016  48c787080100000b000000     mov qword ptr [rdi + 0x108], 0xb
+  0x0b1021  488d05e0e73e00             lea rax, [rip + 0x3ee7e0]  -> 0x49f808 'CROUCH BUTTON'
+  0x0b1028  48898710010000             mov qword ptr [rdi + 0x110], rax
+  0x0b102f  48c787180100000d000000     mov qword ptr [rdi + 0x118], 0xd
+  0x0b103a  4c8db720010000             lea r14, [rdi + 0x120]
+  0x0b1041  0f57c0                     xorps xmm0, xmm0
+  0x0b1044  0f118570020000             movups xmmword ptr [rbp + 0x270], xmm0
+  0x0b104b  48c7858002000004000000     mov qword ptr [rbp + 0x280], 4
+  0x0b1056  48c785880200000f000000     mov qword ptr [rbp + 0x288], 0xf
+  0x0b1061  8b05b1e73e00               mov eax, dword ptr [rip + 0x3ee7b1]  -> 0x49f818 'HOLD'  <<<< SITE
+  0x0b1067  898570020000               mov dword ptr [rbp + 0x270], eax
+  0x0b106d  c6857402000000             mov byte ptr [rbp + 0x274], 0
+  0x0b1074  4489bd90020000             mov dword ptr [rbp + 0x290], r15d
+  0x0b107b  0f118598020000             movups xmmword ptr [rbp + 0x298], xmm0
+  0x0b1082  48c785a802000006000000     mov qword ptr [rbp + 0x2a8], 6
+  0x0b108d  48c785b00200000f000000     mov qword ptr [rbp + 0x2b0], 0xf
+  0x0b1098  8b0582e73e00               mov eax, dword ptr [rip + 0x3ee782]  -> 0x49f820 'TOGGLE'
+  0x0b109e  898598020000               mov dword ptr [rbp + 0x298], eax
+  0x0b10a4  0fb70579e73e00             movzx eax, word ptr [rip + 0x3ee779]  -> 0x49f824 'LE'
+  0x0b10ab  6689859c020000             mov word ptr [rbp + 0x29c], ax
+  0x0b10b2  c6859e02000000             mov byte ptr [rbp + 0x29e], 0
+  0x0b10b9  c785b802000001000000       mov dword ptr [rbp + 0x2b8], 1
+  0x0b10c3  4d893e                     mov qword ptr [r14], r15
+  0x0b10c6  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b10ca  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b10ce  b950000000                 mov ecx, 0x50
+  0x0b10d3  e8589ef9ff                 call 0x4af30
+  0x0b10d8  498906                     mov qword ptr [r14], rax
+  0x0b10db  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b10df  4883c050                   add rax, 0x50
+  0x0b10e3  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b10e7  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b10ec  498b1e                     mov rbx, qword ptr [r14]
+  0x0b10ef  488db570020000             lea rsi, [rbp + 0x270]
+  0x0b10f6  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b10fd  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b1104  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b110b  0f1f440000                 nop dword ptr [rax + rax]
+  0x0b1110  488bd6                     mov rdx, rsi
+  0x0b1113  488bcb                     mov rcx, rbx
+  0x0b1116  e85583f5ff                 call 0x9470
+  0x0b111b  8b4620                     mov eax, dword ptr [rsi + 0x20]
+
+########## 0xb1098 movload -> 0x49f820 'TOGGLE' (len 6) ##########
+  0x0b1038  0000                       add byte ptr [rax], al
+  0x0b103a  4c8db720010000             lea r14, [rdi + 0x120]
+  0x0b1041  0f57c0                     xorps xmm0, xmm0
+  0x0b1044  0f118570020000             movups xmmword ptr [rbp + 0x270], xmm0
+  0x0b104b  48c7858002000004000000     mov qword ptr [rbp + 0x280], 4
+  0x0b1056  48c785880200000f000000     mov qword ptr [rbp + 0x288], 0xf
+  0x0b1061  8b05b1e73e00               mov eax, dword ptr [rip + 0x3ee7b1]  -> 0x49f818 'HOLD'
+  0x0b1067  898570020000               mov dword ptr [rbp + 0x270], eax
+  0x0b106d  c6857402000000             mov byte ptr [rbp + 0x274], 0
+  0x0b1074  4489bd90020000             mov dword ptr [rbp + 0x290], r15d
+  0x0b107b  0f118598020000             movups xmmword ptr [rbp + 0x298], xmm0
+  0x0b1082  48c785a802000006000000     mov qword ptr [rbp + 0x2a8], 6
+  0x0b108d  48c785b00200000f000000     mov qword ptr [rbp + 0x2b0], 0xf
+  0x0b1098  8b0582e73e00               mov eax, dword ptr [rip + 0x3ee782]  -> 0x49f820 'TOGGLE'  <<<< SITE
+  0x0b109e  898598020000               mov dword ptr [rbp + 0x298], eax
+  0x0b10a4  0fb70579e73e00             movzx eax, word ptr [rip + 0x3ee779]  -> 0x49f824 'LE'
+  0x0b10ab  6689859c020000             mov word ptr [rbp + 0x29c], ax
+  0x0b10b2  c6859e02000000             mov byte ptr [rbp + 0x29e], 0
+  0x0b10b9  c785b802000001000000       mov dword ptr [rbp + 0x2b8], 1
+  0x0b10c3  4d893e                     mov qword ptr [r14], r15
+  0x0b10c6  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b10ca  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b10ce  b950000000                 mov ecx, 0x50
+  0x0b10d3  e8589ef9ff                 call 0x4af30
+  0x0b10d8  498906                     mov qword ptr [r14], rax
+  0x0b10db  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b10df  4883c050                   add rax, 0x50
+  0x0b10e3  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b10e7  4c89742450                 mov qword ptr [rsp + 0x50], r14
+  0x0b10ec  498b1e                     mov rbx, qword ptr [r14]
+  0x0b10ef  488db570020000             lea rsi, [rbp + 0x270]
+  0x0b10f6  48899d90000000             mov qword ptr [rbp + 0x90], rbx
+  0x0b10fd  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b1104  4c89b5a0000000             mov qword ptr [rbp + 0xa0], r14
+  0x0b110b  0f1f440000                 nop dword ptr [rax + rax]
+  0x0b1110  488bd6                     mov rdx, rsi
+  0x0b1113  488bcb                     mov rcx, rbx
+  0x0b1116  e85583f5ff                 call 0x9470
+  0x0b111b  8b4620                     mov eax, dword ptr [rsi + 0x20]
+  0x0b111e  894320                     mov dword ptr [rbx + 0x20], eax
+  0x0b1121  4883c328                   add rbx, 0x28
+  0x0b1125  48899d98000000             mov qword ptr [rbp + 0x98], rbx
+  0x0b112c  4883c628                   add rsi, 0x28
+  0x0b1130  488d85c0020000             lea rax, [rbp + 0x2c0]
+  0x0b1137  483bf0                     cmp rsi, rax
+  0x0b113a  75d4                       jne 0xb1110
+
+########## 0xb12fc movsd -> 0x49f928 'ROOM-SCALE' (len 10) ##########
+  0x0b129c  c6873002000000             mov byte ptr [rdi + 0x230], 0
+  0x0b12a3  488d055ee63e00             lea rax, [rip + 0x3ee65e]  -> 0x49f908 'mevr_play_mode'
+  0x0b12aa  48898738020000             mov qword ptr [rdi + 0x238], rax
+  0x0b12b1  48c787400200000e000000     mov qword ptr [rdi + 0x240], 0xe
+  0x0b12bc  488d0555e63e00             lea rax, [rip + 0x3ee655]  -> 0x49f918 'PLAY MODE'
+  0x0b12c3  48898748020000             mov qword ptr [rdi + 0x248], rax
+  0x0b12ca  48c7875002000009000000     mov qword ptr [rdi + 0x250], 9
+  0x0b12d5  4c8db758020000             lea r14, [rdi + 0x258]
+  0x0b12dc  0f57c0                     xorps xmm0, xmm0
+  0x0b12df  0f118560030000             movups xmmword ptr [rbp + 0x360], xmm0
+  0x0b12e6  48c785700300000a000000     mov qword ptr [rbp + 0x370], 0xa
+  0x0b12f1  48c785780300000f000000     mov qword ptr [rbp + 0x378], 0xf
+  0x0b12fc  f20f100524e63e00           movsd xmm0, qword ptr [rip + 0x3ee624]  -> 0x49f928 'ROOM-SCALE'  <<<< SITE
+  0x0b1304  f20f118560030000           movsd qword ptr [rbp + 0x360], xmm0
+  0x0b130c  0fb7051de63e00             movzx eax, word ptr [rip + 0x3ee61d]  -> 0x49f930 'LE'
+  0x0b1313  66898568030000             mov word ptr [rbp + 0x368], ax
+  0x0b131a  c6856a03000000             mov byte ptr [rbp + 0x36a], 0
+  0x0b1321  c6858003000000             mov byte ptr [rbp + 0x380], 0
+  0x0b1328  0f57c0                     xorps xmm0, xmm0
+  0x0b132b  0f118588030000             movups xmmword ptr [rbp + 0x388], xmm0
+  0x0b1332  4c89bd98030000             mov qword ptr [rbp + 0x398], r15
+  0x0b1339  4c89bda0030000             mov qword ptr [rbp + 0x3a0], r15
+  0x0b1340  41b808000000               mov r8d, 8
+  0x0b1346  488d15ebe53e00             lea rdx, [rip + 0x3ee5eb]  -> 0x49f938 'STANDING'
+  0x0b134d  488d8d88030000             lea rcx, [rbp + 0x388]
+  0x0b1354  e8777af5ff                 call 0x8dd0
+  0x0b1359  c685a803000001             mov byte ptr [rbp + 0x3a8], 1
+  0x0b1360  0f57c0                     xorps xmm0, xmm0
+  0x0b1363  0f1185b0030000             movups xmmword ptr [rbp + 0x3b0], xmm0
+  0x0b136a  4c89bdc0030000             mov qword ptr [rbp + 0x3c0], r15
+  0x0b1371  4c89bdc8030000             mov qword ptr [rbp + 0x3c8], r15
+  0x0b1378  41b806000000               mov r8d, 6
+  0x0b137e  488d15bfe53e00             lea rdx, [rip + 0x3ee5bf]  -> 0x49f944 'SEATED'
+  0x0b1385  488d8db0030000             lea rcx, [rbp + 0x3b0]
+  0x0b138c  e83f7af5ff                 call 0x8dd0
+  0x0b1391  c685d003000002             mov byte ptr [rbp + 0x3d0], 2
+  0x0b1398  4d893e                     mov qword ptr [r14], r15
+  0x0b139b  4d897e08                   mov qword ptr [r14 + 8], r15
+  0x0b139f  4d897e10                   mov qword ptr [r14 + 0x10], r15
+  0x0b13a3  b978000000                 mov ecx, 0x78
+  0x0b13a8  e8839bf9ff                 call 0x4af30
+  0x0b13ad  498906                     mov qword ptr [r14], rax
+  0x0b13b0  49894608                   mov qword ptr [r14 + 8], rax
+  0x0b13b4  4883c078                   add rax, 0x78
+  0x0b13b8  49894610                   mov qword ptr [r14 + 0x10], rax
+  0x0b13bc  4c89742450                 mov qword ptr [rsp + 0x50], r14
+
+########## 0xb8bbb movload -> 0x4a0c18 'GRAPHICS' (len 8) ##########
+  0x0b8b5b  50                         push rax
+  0x0b8b5c  0000                       add byte ptr [rax], al
+  0x0b8b5e  90                         nop 
+  0x0b8b5f  4c8d0d4a00fcff             lea r9, [rip - 0x3ffb6]  -> 0x78bb0 'H\x83Á\x10é\x07\x1bùÿÌÌÌÌÌÌÌH\x89\\$\x10H\x89l$\x18WH\x83ì H\x8d¹p¥\x02'
+  0x0b8b66  ba30000000                 mov edx, 0x30
+  0x0b8b6b  41b809000000               mov r8d, 9
+  0x0b8b71  488d8d60020000             lea rcx, [rbp + 0x260]
+  0x0b8b78  e843ae3500                 call 0x4139c0
+  0x0b8b7d  488d4530                   lea rax, [rbp + 0x30]
+  0x0b8b81  4889442460                 mov qword ptr [rsp + 0x60], rax
+  0x0b8b86  488d95c0000000             lea rdx, [rbp + 0xc0]
+  0x0b8b8d  488d4d30                   lea rcx, [rbp + 0x30]
+  0x0b8b91  e84a7effff                 call 0xb09e0
+  0x0b8b96  488bd8                     mov rbx, rax
+  0x0b8b99  488d45c8                   lea rax, [rbp - 0x38]
+  0x0b8b9d  48898588000000             mov qword ptr [rbp + 0x88], rax
+  0x0b8ba4  0f57c0                     xorps xmm0, xmm0
+  0x0b8ba7  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b8bab  48c745d808000000           mov qword ptr [rbp - 0x28], 8
+  0x0b8bb3  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b8bbb  488b0d56803e00             mov rcx, qword ptr [rip + 0x3e8056]  -> 0x4a0c18 'GRAPHICS'  <<<< SITE
+  0x0b8bc2  48894dc8                   mov qword ptr [rbp - 0x38], rcx
+  0x0b8bc6  c645d000                   mov byte ptr [rbp - 0x30], 0
+  0x0b8bca  488d1557803e00             lea rdx, [rip + 0x3e8057]  -> 0x4a0c28 'mevr_graphics'
+  0x0b8bd1  488d8d20020000             lea rcx, [rbp + 0x220]
+  0x0b8bd8  e8a309f5ff                 call 0x9580
+  0x0b8bdd  488bd0                     mov rdx, rax
+  0x0b8be0  4c8bcb                     mov r9, rbx
+  0x0b8be3  4c8d45c8                   lea r8, [rbp - 0x38]
+  0x0b8be7  488d8dd8000000             lea rcx, [rbp + 0xd8]
+  0x0b8bee  e8cd180000                 call 0xba4c0
+  0x0b8bf3  488bd0                     mov rdx, rax
+  0x0b8bf6  488bce                     mov rcx, rsi
+  0x0b8bf9  e8f28afeff                 call 0xa16f0
+  0x0b8bfe  0f57c0                     xorps xmm0, xmm0
+  0x0b8c01  f30f7f4598                 movdqu xmmword ptr [rbp - 0x68], xmm0
+  0x0b8c06  4c8965a8                   mov qword ptr [rbp - 0x58], r12
+  0x0b8c0a  ba04000000                 mov edx, 4
+  0x0b8c0f  488d4d98                   lea rcx, [rbp - 0x68]
+  0x0b8c13  e8a8510000                 call 0xbddc0
+  0x0b8c18  4d8d8610020000             lea r8, [r14 + 0x210]
+  0x0b8c1f  488bd6                     mov rdx, rsi
+  0x0b8c22  488d4c2440                 lea rcx, [rsp + 0x40]
+  0x0b8c27  e8c4bbffff                 call 0xb47f0
+  0x0b8c2c  488b08                     mov rcx, qword ptr [rax]
+  0x0b8c2f  48890d9a5f7500             mov qword ptr [rip + 0x755f9a], rcx  -> 0x80ebd0
+
+########## 0xb8de5 movload -> 0x4a0c38 'GAME' (len 4) ##########
+  0x0b8d85  f5                         cmc 
+  0x0b8d86  ff4883                     dec dword ptr [rax - 0x7d]
+  0x0b8d89  c3                         ret 
+  0x0b8d8a  50                         push rax
+  0x0b8d8b  483bdf                     cmp rbx, rdi
+  0x0b8d8e  0f853cffffff               jne 0xb8cd0
+  0x0b8d94  488d442460                 lea rax, [rsp + 0x60]
+  0x0b8d99  4889442440                 mov qword ptr [rsp + 0x40], rax
+  0x0b8d9e  488b55a8                   mov rdx, qword ptr [rbp - 0x58]
+  0x0b8da2  4c8965a8                   mov qword ptr [rbp - 0x58], r12
+  0x0b8da6  488b4da0                   mov rcx, qword ptr [rbp - 0x60]
+  0x0b8daa  4c8965a0                   mov qword ptr [rbp - 0x60], r12
+  0x0b8dae  488b4598                   mov rax, qword ptr [rbp - 0x68]
+  0x0b8db2  4c896598                   mov qword ptr [rbp - 0x68], r12
+  0x0b8db6  4889442460                 mov qword ptr [rsp + 0x60], rax
+  0x0b8dbb  48894c2468                 mov qword ptr [rsp + 0x68], rcx
+  0x0b8dc0  4889542470                 mov qword ptr [rsp + 0x70], rdx
+  0x0b8dc5  488d45c8                   lea rax, [rbp - 0x38]
+  0x0b8dc9  4889442440                 mov qword ptr [rsp + 0x40], rax
+  0x0b8dce  0f57c0                     xorps xmm0, xmm0
+  0x0b8dd1  0f1145c8                   movups xmmword ptr [rbp - 0x38], xmm0
+  0x0b8dd5  48c745d804000000           mov qword ptr [rbp - 0x28], 4
+  0x0b8ddd  48c745e00f000000           mov qword ptr [rbp - 0x20], 0xf
+  0x0b8de5  8b054d7e3e00               mov eax, dword ptr [rip + 0x3e7e4d]  -> 0x4a0c38 'GAME'  <<<< SITE
+  0x0b8deb  8945c8                     mov dword ptr [rbp - 0x38], eax
+  0x0b8dee  c645cc00                   mov byte ptr [rbp - 0x34], 0
+  0x0b8df2  0f114530                   movups xmmword ptr [rbp + 0x30], xmm0
+  0x0b8df6  48c7454009000000           mov qword ptr [rbp + 0x40], 9
+  0x0b8dfe  48c745480f000000           mov qword ptr [rbp + 0x48], 0xf
+  0x0b8e06  f20f1005327e3e00           movsd xmm0, qword ptr [rip + 0x3e7e32]  -> 0x4a0c40 'mevr_game'
+  0x0b8e0e  f20f114530                 movsd qword ptr [rbp + 0x30], xmm0
+  0x0b8e13  0fb6052e7e3e00             movzx eax, byte ptr [rip + 0x3e7e2e]  -> 0x4a0c48 'e'
+  0x0b8e1a  884538                     mov byte ptr [rbp + 0x38], al
+  0x0b8e1d  c6453900                   mov byte ptr [rbp + 0x39], 0
+  0x0b8e21  4c8d4c2460                 lea r9, [rsp + 0x60]
+  0x0b8e26  4c8d45c8                   lea r8, [rbp - 0x38]
+  0x0b8e2a  488d5530                   lea rdx, [rbp + 0x30]
+  0x0b8e2e  488d8dd8000000             lea rcx, [rbp + 0xd8]
+  0x0b8e35  e886160000                 call 0xba4c0
+  0x0b8e3a  488bd0                     mov rdx, rax
+  0x0b8e3d  488bce                     mov rcx, rsi
+  0x0b8e40  e8ab88feff                 call 0xa16f0
+  0x0b8e45  0f57c0                     xorps xmm0, xmm0
+  0x0b8e48  0f118560020000             movups xmmword ptr [rbp + 0x260], xmm0
+  0x0b8e4f  48c7857002000007000000     mov qword ptr [rbp + 0x270], 7
+  0x0b8e5a  48c785780200000f000000     mov qword ptr [rbp + 0x278], 0xf

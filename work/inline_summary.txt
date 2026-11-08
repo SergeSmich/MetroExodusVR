@@ -1,0 +1,128 @@
+
+=== 0x49f650 'NOT SET' len=7
+  site 0xb9f0a
+    +0x00 w=8 @0xb9f0a d=0x0 mov rax, qword ptr [rip + 0x3e573f]
+    +0x04 w=2 @0xb9f14 d=-0xa movzx eax, word ptr [rip + 0x3e5739]
+    +0x06 w=1 @0xb9f1f d=-0x15 movzx eax, byte ptr [rip + 0x3e5730]
+    total=8 lenconst={'insn': 761594, 'imm': 7, 'desc': 'mov qword ptr [rbp - 0x21], 7', 'imm_off': 761598} cap={'insn': 761602, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x19], 0xf'}
+
+=== 0x49f694 'PLAY' len=4
+  site 0xbac5e
+    +0x00 w=4 @0xbac5e d=0x0 mov eax, dword ptr [rip + 0x3e4a30]
+    total=4 lenconst={'insn': 765006, 'imm': 4, 'desc': 'mov qword ptr [r11 - 0x58], 4', 'imm_off': 765010} cap={'insn': 765014, 'imm': 15, 'desc': 'mov qword ptr [r11 - 0x50], 0xf'}
+
+=== 0x49f69c 'SKIP' len=4
+  site 0xbac8a
+    +0x00 w=4 @0xbac8a d=0x0 mov eax, dword ptr [rip + 0x3e4a0c]
+    total=4 lenconst={'insn': 765050, 'imm': 4, 'desc': 'mov qword ptr [r11 - 0x30], 4', 'imm_off': 765054} cap={'insn': 765058, 'imm': 15, 'desc': 'mov qword ptr [r11 - 0x28], 0xf'}
+
+=== 0x49f6a8 'OFF (GAME TAA)' len=14
+  site 0xba7a1
+    +0x00 w=8 @0xba7a1 d=0x0 movsd xmm0, qword ptr [rip + 0x3e4eff]
+    +0x08 w=4 @0xba7af d=-0xe mov eax, dword ptr [rip + 0x3e4efb]
+    +0x0c w=2 @0xba7b9 d=-0x18 movzx eax, word ptr [rip + 0x3e4ef4]
+    total=14 lenconst={'insn': 763791, 'imm': 14, 'desc': 'mov qword ptr [rsp + 0x60], 0xe', 'imm_off': 763796} cap={'insn': 763800, 'imm': 15, 'desc': 'mov qword ptr [rsp + 0x68], 0xf'}
+
+=== 0x49f6b8 'FSR' len=3
+  site 0xba88b
+    +0x00 w=4 @0xba88b d=0x0 mov eax, dword ptr [rip + 0x3e4e27]
+    +0x02 w=1 @0xba894 d=-0x9 movzx eax, byte ptr [rip + 0x3e4e1f]
+    +0x00 w=8 @0xba8b2 d=-0x27 lea r8, [rip + 0x3e4dff]
+    total=8 lenconst={'insn': 764027, 'imm': 3, 'desc': 'mov qword ptr [rdx + 0x10], 3', 'imm_off': 764031} cap={'insn': 764035, 'imm': 15, 'desc': 'mov qword ptr [rdx + 0x18], 0xf'}
+
+=== 0x49f6bc 'DLSS' len=4
+  site 0xba8eb
+    +0x00 w=4 @0xba8eb d=0x0 mov ecx, dword ptr [rip + 0x3e4dcb]
+    +0x00 w=8 @0xba907 d=-0x1c lea r8, [rip + 0x3e4dae]
+    total=8 lenconst={'insn': 764123, 'imm': 4, 'desc': 'mov qword ptr [rdx + 0x10], 4', 'imm_off': 764127} cap={'insn': 764131, 'imm': 15, 'desc': 'mov qword ptr [rdx + 0x18], 0xf'}
+
+=== 0x49f6c4 'AUTO' len=4
+  site 0xb9cdb
+    +0x00 w=4 @0xb9cdb d=0x0 mov eax, dword ptr [rip + 0x3e59e3]
+    total=4 lenconst={'insn': 761033, 'imm': 4, 'desc': 'mov qword ptr [rsp + 0x60], 4', 'imm_off': 761038} cap={'insn': 761042, 'imm': 15, 'desc': 'mov qword ptr [rsp + 0x68], 0xf'}
+
+=== 0x49f6cc 'VR' len=2
+  site 0xb8eb1
+    +0x00 w=2 @0xb8eb1 d=0x0 movzx eax, word ptr [rip + 0x3e6814]
+    total=2 lenconst={'insn': 757403, 'imm': 2, 'desc': 'mov qword ptr [rbp + 0x290], 2', 'imm_off': 757410} cap={'insn': 757414, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x298], 0xf'}
+  site 0xb9d07
+    +0x00 w=2 @0xb9d07 d=0x0 movzx eax, word ptr [rip + 0x3e59be]
+    total=2 lenconst={'insn': 761079, 'imm': 2, 'desc': 'mov qword ptr [rbp - 0x78], 2', 'imm_off': 761083} cap={'insn': 761087, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x70], 0xf'}
+
+=== 0x49f6d0 'VR NO TURN' len=10
+  site 0xb9d34
+    +0x00 w=8 @0xb9d34 d=0x0 movsd xmm0, qword ptr [rip + 0x3e5994]
+    +0x08 w=2 @0xb9d41 d=-0xd movzx eax, word ptr [rip + 0x3e5990]
+    total=10 lenconst={'insn': 761124, 'imm': 10, 'desc': 'mov qword ptr [rbp - 0x50], 0xa', 'imm_off': 761128} cap={'insn': 761132, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x48], 0xf'}
+
+=== 0x49f6dc 'CINEMA' len=6
+  site 0xb9d72
+    +0x00 w=4 @0xb9d72 d=0x0 mov eax, dword ptr [rip + 0x3e5964]
+    +0x04 w=2 @0xb9d7b d=-0x9 movzx eax, word ptr [rip + 0x3e595e]
+    total=6 lenconst={'insn': 761186, 'imm': 6, 'desc': 'mov qword ptr [rbp - 0x28], 6', 'imm_off': 761190} cap={'insn': 761194, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x20], 0xf'}
+
+=== 0x49f6e8 'VR BODY TURN' len=12
+  site 0xb9da9
+    +0x00 w=8 @0xb9da9 d=0x0 movsd xmm0, qword ptr [rip + 0x3e5937]
+    +0x08 w=4 @0xb9db6 d=-0xd mov eax, dword ptr [rip + 0x3e5934]
+    total=12 lenconst={'insn': 761241, 'imm': 12, 'desc': 'mov qword ptr [rbp], 0xc', 'imm_off': 761245} cap={'insn': 761249, 'imm': 15, 'desc': 'mov qword ptr [rbp + 8], 0xf'}
+
+=== 0x49f714 'SNAP' len=4
+  site 0xb0bde
+    +0x00 w=4 @0xb0bde d=0x0 mov eax, dword ptr [rip + 0x3eeb30]
+    total=4 lenconst={'insn': 723912, 'imm': 4, 'desc': 'mov qword ptr [rbp + 0x230], 4', 'imm_off': 723919} cap={'insn': 723923, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x238], 0xf'}
+
+=== 0x49f71c 'SMOOTH' len=6
+  site 0xb0c15
+    +0x00 w=4 @0xb0c15 d=0x0 mov eax, dword ptr [rip + 0x3eeb01]
+    +0x04 w=2 @0xb0c21 d=-0xc movzx eax, word ptr [rip + 0x3eeaf8]
+    total=6 lenconst={'insn': 723967, 'imm': 6, 'desc': 'mov qword ptr [rbp + 0x258], 6', 'imm_off': 723974} cap={'insn': 723978, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x260], 0xf'}
+
+=== 0x49f7c4 'HEAD' len=4
+  site 0xb0e73
+    +0x00 w=4 @0xb0e73 d=0x0 mov eax, dword ptr [rip + 0x3ee94b]
+    total=4 lenconst={'insn': 724573, 'imm': 4, 'desc': 'mov qword ptr [rbp + 0x2d0], 4', 'imm_off': 724580} cap={'insn': 724584, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x2d8], 0xf'}
+
+=== 0x49f7cc 'BODY' len=4
+  site 0xb0eaa
+    +0x00 w=4 @0xb0eaa d=0x0 mov eax, dword ptr [rip + 0x3ee91c]
+    total=4 lenconst={'insn': 724628, 'imm': 4, 'desc': 'mov qword ptr [rbp + 0x2f8], 4', 'imm_off': 724635} cap={'insn': 724639, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x300], 0xf'}
+
+=== 0x49f7d8 'LEFT HAND' len=9
+  site 0xb0ee4
+    +0x00 w=8 @0xb0ee4 d=0x0 movsd xmm0, qword ptr [rip + 0x3ee8ec]
+    +0x08 w=1 @0xb0ef4 d=-0x10 movzx eax, byte ptr [rip + 0x3ee8e5]
+    total=9 lenconst={'insn': 724686, 'imm': 9, 'desc': 'mov qword ptr [rbp + 0x320], 9', 'imm_off': 724693} cap={'insn': 724697, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x328], 0xf'}
+
+=== 0x49f7e8 'RIGHT HAND' len=10
+  site 0xb0f32
+    +0x00 w=8 @0xb0f32 d=0x0 movsd xmm0, qword ptr [rip + 0x3ee8ae]
+    +0x08 w=2 @0xb0f42 d=-0x10 movzx eax, word ptr [rip + 0x3ee8a7]
+    total=10 lenconst={'insn': 724764, 'imm': 10, 'desc': 'mov qword ptr [rbp + 0x348], 0xa', 'imm_off': 724771} cap={'insn': 724775, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x350], 0xf'}
+
+=== 0x49f818 'HOLD' len=4
+  site 0xb1061
+    +0x00 w=4 @0xb1061 d=0x0 mov eax, dword ptr [rip + 0x3ee7b1]
+    total=4 lenconst={'insn': 725067, 'imm': 4, 'desc': 'mov qword ptr [rbp + 0x280], 4', 'imm_off': 725074} cap={'insn': 725078, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x288], 0xf'}
+
+=== 0x49f820 'TOGGLE' len=6
+  site 0xb1098
+    +0x00 w=4 @0xb1098 d=0x0 mov eax, dword ptr [rip + 0x3ee782]
+    +0x04 w=2 @0xb10a4 d=-0xc movzx eax, word ptr [rip + 0x3ee779]
+    total=6 lenconst={'insn': 725122, 'imm': 6, 'desc': 'mov qword ptr [rbp + 0x2a8], 6', 'imm_off': 725129} cap={'insn': 725133, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x2b0], 0xf'}
+
+=== 0x49f928 'ROOM-SCALE' len=10
+  site 0xb12fc
+    +0x00 w=8 @0xb12fc d=0x0 movsd xmm0, qword ptr [rip + 0x3ee624]
+    +0x08 w=2 @0xb130c d=-0x10 movzx eax, word ptr [rip + 0x3ee61d]
+    total=10 lenconst={'insn': 725734, 'imm': 10, 'desc': 'mov qword ptr [rbp + 0x370], 0xa', 'imm_off': 725741} cap={'insn': 725745, 'imm': 15, 'desc': 'mov qword ptr [rbp + 0x378], 0xf'}
+
+=== 0x4a0c18 'GRAPHICS' len=8
+  site 0xb8bbb
+    +0x00 w=8 @0xb8bbb d=0x0 mov rcx, qword ptr [rip + 0x3e8056]
+    total=8 lenconst={'insn': 756651, 'imm': 8, 'desc': 'mov qword ptr [rbp - 0x28], 8', 'imm_off': 756655} cap={'insn': 756659, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x20], 0xf'}
+
+=== 0x4a0c38 'GAME' len=4
+  site 0xb8de5
+    +0x00 w=4 @0xb8de5 d=0x0 mov eax, dword ptr [rip + 0x3e7e4d]
+    total=4 lenconst={'insn': 757205, 'imm': 4, 'desc': 'mov qword ptr [rbp - 0x28], 4', 'imm_off': 757209} cap={'insn': 757213, 'imm': 15, 'desc': 'mov qword ptr [rbp - 0x20], 0xf'}

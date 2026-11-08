@@ -1,0 +1,334 @@
+0x49f650 movload 'NOT SET' | 0xb9f0a:movload
+0x49f658 lea '{} CM' | 0xb6e08:lea 0xb9a4d:lea 0xb9fcd:lea
+0x49f660 lea '{}% (RECOMMENDED)' | 0xbaf32:lea
+0x49f674 lea '{}%' | 0xb7082:lea 0xba334:lea 0xbad82:lea 0xbaf39:lea
+0x49f678 lea '+{} CM' | 0xb6e01:lea
+0x49f680 lea '{} DEG' | 0xb1bba:lea
+0x49f688 lea '{:.2f} M' | 0xb2849:lea
+0x49f694 movload 'PLAY' | 0xbac5e:movload
+0x49f69c movload 'SKIP' | 0xbac8a:movload
+0x49f6a8 movsd 'OFF (GAME TAA)' | 0xba7a1:movsd
+0x49f6b8 lea,movload 'FSR' | 0xba88b:movload 0xba8b2:lea 0x149b27:lea 0x149f2a:lea 0x14a9fe:lea 0x14f2c3:lea 0x2df9c0:lea
+0x49f6bc lea,movload 'DLSS' | 0xba8eb:movload 0xba907:lea 0x149b2e:lea 0x149c4a:lea 0x149c73:lea 0x149c98:lea 0x149f41:lea 0x14aa0c:lea 0x14f2d1:lea 0x2dce80:lea
+0x49f6c4 lea,movload 'AUTO' | 0xb18b3:lea 0xb22fb:lea 0xb9cdb:movload
+0x49f6cc movzx 'VR' | 0xb8eb1:movzx 0xb9d07:movzx
+0x49f6d0 movsd 'VR NO TURN' | 0xb9d34:movsd
+0x49f6dc movload 'CINEMA' | 0xb9d72:movload
+0x49f6e8 movsd 'VR BODY TURN' | 0xb9da9:movsd
+0x49f6f8 lea 'mevr_turn_mode' | 0xb0b95:lea
+0x49f708 lea 'TURN MODE' | 0xb0ba7:lea
+0x49f714 lea,movload 'SNAP' | 0xb0bde:movload 0xb3015:lea
+0x49f71c lea,movload 'SMOOTH' | 0xb0c15:movload 0xb3036:lea
+0x49f728 lea 'mevr_snap_turn' | 0xb0ce2:lea
+0x49f738 lea 'SNAP TURN ANGLE' | 0xb0cf5:lea
+0x49f748 lea '{:g} DEG' | 0xb0d2b:lea
+0x49f758 lea 'mevr_smooth_turn' | 0xb0d75:lea
+0x49f770 lea 'SMOOTH TURN SPEED' | 0xb0d8e:lea
+0x49f788 lea '{:g} DEG/S' | 0xb0dca:lea
+0x49f798 lea,ptrslot 'mevr_move_direction' | 0xb0e1a:lea 0x4a1a20:ptrslot
+0x49f7b0 lea 'MOVEMENT DIRECTION' | 0xb0e33:lea
+0x49f7c4 movload 'HEAD' | 0xb0e73:movload
+0x49f7cc lea,movload 'BODY' | 0xb0eaa:movload 0xb77f4:lea
+0x49f7d8 lea,movsd 'LEFT HAND' | 0xb0ee4:movsd 0x22ffd4:lea
+0x49f7e8 lea,movsd 'RIGHT HAND' | 0xb0f32:movsd 0x22ffdb:lea
+0x49f7f8 lea,ptrslot 'mevr_crouch' | 0xb1008:lea 0x4a1a40:ptrslot
+0x49f808 lea 'CROUCH BUTTON' | 0xb1021:lea
+0x49f818 lea,movload 'HOLD' | 0xb1061:movload 0xb1d00:lea
+0x49f820 lea,movload 'TOGGLE' | 0xb1098:movload 0xb1d21:lea
+0x49f828 lea,ptrslot 'mevr_auto_sprint' | 0xb1168:lea 0x4a1a60:ptrslot
+0x49f840 lea 'AUTO SPRINT' | 0xb1181:lea
+0x49f850 lea,ptrslot 'mevr_move_deadzone' | 0xb11a1:lea 0x4a1a80:ptrslot
+0x49f868 lea 'MOVE STICK DEADZONE' | 0xb11ba:lea
+0x49f880 lea,ptrslot 'mevr_turn_deadzone' | 0xb11e9:lea 0x4a1aa0:ptrslot
+0x49f898 lea 'TURN STICK DEADZONE' | 0xb1202:lea
+0x49f8b0 lea,ptrslot 'mevr_reduce_head_bob' | 0xb1231:lea 0x4a1ac0:ptrslot
+0x49f8c8 lea 'REDUCE HEAD BOB' | 0xb124a:lea
+0x49f8d8 lea,ptrslot 'mevr_popups_again' | 0xb126a:lea 0x4a1820:ptrslot
+0x49f8f0 lea 'SHOW VR TIPS AGAIN' | 0xb1283:lea
+0x49f908 lea,ptrslot 'mevr_play_mode' | 0xb12a3:lea 0x4a1ae0:ptrslot
+0x49f918 lea 'PLAY MODE' | 0xb12bc:lea
+0x49f928 movsd 'ROOM-SCALE' | 0xb12fc:movsd
+0x49f938 lea 'STANDING' | 0xb1346:lea
+0x49f944 lea 'SEATED' | 0xb137e:lea
+0x49f950 lea,ptrslot 'mevr_player_height' | 0xb1436:lea 0x4a1b00:ptrslot
+0x49f968 lea 'PLAYER HEIGHT' | 0xb144f:lea
+0x49f978 lea,ptrslot 'mevr_world_scale' | 0xb147b:lea 0x4a1b20:ptrslot
+0x49f990 lea 'WORLD SCALE' | 0xb1494:lea
+0x49f9a0 lea,ptrslot 'mevr_body_turning' | 0xb14c3:lea 0x4a1ba0:ptrslot
+0x49f9b8 lea 'BODY TURNING' | 0xb14dc:lea
+0x49f9c8 lea 'FOLLOW HEAD' | 0xb151a:lea
+0x49f9d8 lea,ptrslot 'mevr_body_position' | 0xb1618:lea 0x4a1bc0:ptrslot
+0x49f9f0 lea 'BODY POSITION' | 0xb1631:lea
+0x49fa00 lea 'FOLLOW' | 0xb166f:lea 0xb2747:lea
+0x49fa08 lea,ptrslot 'mevr_physical_crouch' | 0xb1768:lea 0x4a1b40:ptrslot
+0x49fa20 lea 'PHYSICAL CROUCH' | 0xb1781:lea
+0x49fa30 lea,ptrslot 'mevr_belt_height' | 0xb17a1:lea 0x4a1b60:ptrslot
+0x49fa48 lea 'BELT HEIGHT' | 0xb17ba:lea
+0x49fa58 lea,ptrslot 'mevr_belt_crouch' | 0xb17e9:lea 0x4a1b80:ptrslot
+0x49fa70 lea 'BELT WHEN CROUCHING' | 0xb1802:lea
+0x49fa88 lea 'STAY WITH YOU' | 0xb1840:lea
+0x49fa98 lea 'FOLLOW BODY' | 0xb1878:lea
+0x49faa8 lea,ptrslot 'mevr_bhaptics' | 0xb1975:lea 0x4a1be0:ptrslot
+0x49fab8 lea 'BHAPTICS (EXPERIMENTAL)' | 0xb198e:lea
+0x49fad0 lea 'mevr_bhaptics_strength' | 0xb19ae:lea
+0x49fae8 lea 'BHAPTICS STRENGTH' | 0xb19c7:lea
+0x49fb00 lea 'mevr_dominant_hand' | 0xb1a05:lea
+0x49fb18 lea 'DOMINANT HAND' | 0xb1a1e:lea
+0x49fb28 lea 'RIGHT' | 0xb1a5c:lea 0xb233d:lea
+0x49fb30 lea 'LEFT' | 0xb1a97:lea 0xb231c:lea
+0x49fb38 lea,ptrslot 'mevr_grip_angle' | 0xb1b55:lea 0x4a1c00:ptrslot
+0x49fb48 lea 'WEAPON GRIP ANGLE' | 0xb1b6e:lea
+0x49fb60 lea,ptrslot 'mevr_finger_tracking' | 0xb1caa:lea 0x4a1c20:ptrslot
+0x49fb78 lea 'FINGER TRACKING' | 0xb1cbd:lea
+0x49fb88 lea,ptrslot 'mevr_grab' | 0xb1cd7:lea 0x4a1c40:ptrslot
+0x49fb94 lea 'GRIP' | 0xb1cea:lea
+0x49fba0 lea,ptrslot 'mevr_vibration' | 0xb1d8f:lea 0x4a1c80:ptrslot
+0x49fbb0 lea 'VIBRATION' | 0xb1da2:lea 0xb799f:lea
+0x49fbc0 lea,ptrslot 'mevr_vibration_cues' | 0xb1dda:lea 0x4a1ca0:ptrslot
+0x49fbd8 lea 'HAND CUES' | 0xb1ded:lea
+0x49fbe8 lea,ptrslot 'mevr_vibration_weapons' | 0xb1e25:lea 0x4a1cc0:ptrslot
+0x49fc00 lea 'WEAPONS' | 0xb1e38:lea 0xb7d27:lea
+0x49fc08 lea,ptrslot 'mevr_vibration_damage' | 0xb1e70:lea 0x4a1ce0:ptrslot
+0x49fc20 lea 'DAMAGE' | 0xb1e83:lea
+0x49fc28 lea 'mevr_vibration_world' | 0xb1ebb:lea
+0x49fc40 lea 'EXPLOSIONS' | 0xb1ece:lea
+0x49fc50 lea,ptrslot 'mevr_vibration_scenes' | 0xb1f06:lea 0x4a1d00:ptrslot
+0x49fc68 lea 'SCENES AND VEHICLES' | 0xb1f19:lea
+0x49fc80 lea,ptrslot 'mevr_vibration_movement' | 0xb1f51:lea 0x4a1d20:ptrslot
+0x49fc98 lea 'MOVEMENT' | 0xb1f64:lea 0xb756c:lea
+0x49fca8 lea,ptrslot 'mevr_use_by_looking' | 0xb1f9c:lea 0x4a1c60:ptrslot
+0x49fcc0 lea 'USE BY LOOKING' | 0xb1faf:lea
+0x49fcd0 lea,ptrslot 'mevr_weapon_weight' | 0xb1fc9:lea 0x4a1d40:ptrslot
+0x49fce8 lea 'WEAPON WEIGHT' | 0xb1fdc:lea
+0x49fcf8 lea,ptrslot 'mevr_manual_reload' | 0xb2005:lea 0x4a1d60:ptrslot
+0x49fd10 lea 'MANUAL RELOADING' | 0xb2018:lea
+0x49fd28 lea,ptrslot 'mevr_part_highlights' | 0xb2032:lea 0x4a1d80:ptrslot
+0x49fd40 lea 'PART HIGHLIGHTS' | 0xb2045:lea
+0x49fd50 lea 'OFF' | 0xb205b:lea 0xb2167:lea 0xb2ff4:lea 0xb36f1:lea 0xb3912:lea 0xb3b12:lea 0xb3cd3:lea 0x17cfe6:lea
+0x49fd58 lea 'FIRST RELOADS' | 0xb207c:lea
+0x49fd68 lea 'ALWAYS' | 0xb209d:lea
+0x49fd70 lea,ptrslot 'mevr_part_highlights_reset' | 0xb210e:lea 0x4a1da0:ptrslot
+0x49fd90 lea 'RESET HIGHLIGHT COUNTS' | 0xb2121:lea
+0x49fda8 lea,ptrslot 'mevr_revolver_flick' | 0xb213b:lea 0x4a1dc0:ptrslot
+0x49fdc0 lea 'WEAPON FLICK' | 0xb214e:lea
+0x49fdd0 lea 'GENTLE' | 0xb2188:lea
+0x49fdd8 lea 'NORMAL' | 0xb21a9:lea 0x2b1e1d:lea 0x2ba8a8:lea
+0x49fde0 lea 'HARD' | 0xb21ca:lea
+0x49fde8 lea 'mevr_reload_pouch' | 0xb223b:lea
+0x49fe00 lea 'MAGAZINE POUCH' | 0xb224e:lea
+0x49fe10 lea 'HIP' | 0xb2264:lea
+0x49fe18 lea,ptrslot 'mevr_sighting_eye' | 0xb22d2:lea 0x4a1de0:ptrslot
+0x49fe30 lea 'SIGHTING EYE' | 0xb22e5:lea
+0x49fe40 lea,ptrslot 'mevr_other_eye' | 0xb23ab:lea 0x4a1e00:ptrslot
+0x49fe50 lea 'OTHER EYE WHILE SCOPED' | 0xb23be:lea
+0x49fe68 lea 'VISIBLE' | 0xb23d4:lea 0x24f758:lea
+0x49fe70 lea 'BLURRED' | 0xb23f5:lea
+0x49fe78 lea 'BLACK' | 0xb2416:lea
+0x49fe80 lea,ptrslot 'mevr_reticle' | 0xb2487:lea 0x4a1e20:ptrslot
+0x49fe90 lea 'RETICLE TILT' | 0xb249a:lea
+0x49fea0 lea 'WITH WEAPON' | 0xb24b0:lea
+0x49feac lea 'LEVEL' | 0xb24d1:lea
+0x49feb8 lea 'FIXED TO VIEW' | 0xb24f2:lea
+0x49fec8 lea,ptrslot 'mevr_scope_steering' | 0xb2560:lea 0x4a1e40:ptrslot
+0x49fee0 lea 'SCOPE STEERING' | 0xb2573:lea
+0x49fef0 lea 'WEAPON' | 0xb2589:lea
+0x49fef8 lea 'WEAPON + HEAD' | 0xb25aa:lea
+0x49ff08 lea,ptrslot 'mevr_night_vision_tube' | 0xb2618:lea 0x4a1e60:ptrslot
+0x49ff20 lea 'REALISTIC NIGHT VISION' | 0xb262b:lea
+0x49ff38 lea,ptrslot 'mevr_hud_shape' | 0xb2645:lea 0x4a1e80:ptrslot
+0x49ff48 lea 'HUD SHAPE' | 0xb2658:lea
+0x49ff54 lea '16:9' | 0xb266e:lea 0xea14d:lea
+0x49ff5c lea '4:3' | 0xb268f:lea 0xea156:lea
+0x49ff60 lea,ptrslot 'mevr_hud_position' | 0xb26fd:lea 0x4a1ea0:ptrslot
+0x49ff78 lea 'HUD POSITION' | 0xb2710:lea
+0x49ff88 lea 'mevr_hud_distance' | 0xb27b5:lea
+0x49ffa0 lea 'HUD DISTANCE' | 0xb27c8:lea
+0x49ffb0 lea 'mevr_hud_size' | 0xb27f1:lea
+0x49ffc0 lea 'HUD SIZE' | 0xb2804:lea
+0x49ffd0 lea,ptrslot 'mevr_hud_height' | 0xb2896:lea 0x4a1ec0:ptrslot
+0x49ffe0 lea 'HUD HEIGHT' | 0xb28a9:lea
+0x49fff0 lea '{:+.0f} DEG' | 0xb28b5:lea
+0x4a0000 lea 'mevr_hud_opacity' | 0xb2907:lea
+0x4a0018 lea 'HUD OPACITY' | 0xb291a:lea
+0x4a0028 lea,ptrslot 'mevr_hint_height' | 0xb2952:lea 0x4a1ee0:ptrslot
+0x4a0040 lea 'HINT HEIGHT' | 0xb2965:lea
+0x4a0050 lea '{:+.0f}' | 0xb2971:lea
+0x4a0058 lea 'mevr_hint_size' | 0xb29c3:lea
+0x4a0068 lea 'HINT SIZE' | 0xb29d6:lea
+0x4a0078 lea '{:.1f}X' | 0xb29e2:lea
+0x4a0080 lea,ptrslot 'mevr_hint_time' | 0xb2a34:lea 0x4a1f00:ptrslot
+0x4a0090 lea 'HINT TIME' | 0xb2a47:lea
+0x4a009c lea '1.00X' | 0xb2a60:lea
+0x4a00a4 lea '1.25X' | 0xb2a81:lea
+0x4a00ac lea '1.50X' | 0xb2aa2:lea
+0x4a00b4 lea '2.00X' | 0xb2ac3:lea
+0x4a00c0 lea,ptrslot 'mevr_prompt_size' | 0xb2b34:lea 0x4a1f20:ptrslot
+0x4a00d8 lea 'ACTION PROMPT SIZE' | 0xb2b47:lea
+0x4a00f0 lea '{:.2f}X' | 0xb2b53:lea
+0x4a00f8 lea 'mevr_menu_distance' | 0xb2ba5:lea
+0x4a0110 lea 'MENU DISTANCE' | 0xb2bb8:lea
+0x4a0120 lea 'mevr_menu_size' | 0xb2c0d:lea
+0x4a0130 lea 'MENU SIZE' | 0xb2c20:lea
+0x4a0140 lea '{:.1f} M' | 0xb2c2c:lea
+0x4a0150 lea,ptrslot 'mevr_damage_effects' | 0xb2c7e:lea 0x4a1f40:ptrslot
+0x4a0168 lea 'DAMAGE EFFECTS' | 0xb2c91:lea
+0x4a0178 lea,ptrslot 'mevr_damage_size' | 0xb2cab:lea 0x4a1f60:ptrslot
+0x4a0190 lea 'DAMAGE EFFECT SIZE' | 0xb2cbe:lea
+0x4a01a4 lea 'SMALL' | 0xb2cd7:lea
+0x4a01ac lea 'MEDIUM' | 0xb2cf8:lea 0xb372d:lea
+0x4a01b4 lea 'LARGE' | 0xb2d19:lea
+0x4a01c0 lea,ptrslot 'mevr_hit_direction' | 0xb2d8a:lea 0x4a1f80:ptrslot
+0x4a01d8 lea 'HIT DIRECTION' | 0xb2d9d:lea
+0x4a01e8 lea,ptrslot 'mevr_health_pulse' | 0xb2db7:lea 0x4a1fa0:ptrslot
+0x4a0200 lea 'LOW-HEALTH PULSE' | 0xb2dca:lea
+0x4a0218 lea,ptrslot 'mevr_debug_overlay' | 0xb2de4:lea 0x4a1fc0:ptrslot
+0x4a0230 lea 'DEBUG OVERLAY' | 0xb2df7:lea
+0x4a0240 lea,ptrslot 'mevr_cinema_pointer' | 0xb2e11:lea 0x4a1fe0:ptrslot
+0x4a0258 lea 'CINEMA POINTER' | 0xb2e24:lea
+0x4a0268 lea,ptrslot 'mevr_cinema_floor' | 0xb2e3e:lea 0x4a2000:ptrslot
+0x4a0280 lea 'CINEMA FLOOR' | 0xb2e51:lea
+0x4a0290 lea,ptrslot 'mevr_cinema_controllers' | 0xb2e6b:lea 0x4a2020:ptrslot
+0x4a02a8 lea 'CINEMA CONTROLLERS' | 0xb2e7e:lea
+0x4a02c0 lea,ptrslot 'mevr_cinema_info' | 0xb2e98:lea 0x4a2040:ptrslot
+0x4a02d8 lea 'CINEMA INFO' | 0xb2eab:lea
+0x4a02e8 lea,ptrslot 'mevr_cinema_links' | 0xb2ec5:lea 0x4a2060:ptrslot
+0x4a0300 lea 'CINEMA LINKS' | 0xb2ed8:lea
+0x4a0310 lea,ptrslot 'mevr_camera_preset' | 0xb2ef2:lea 0x4a2080:ptrslot
+0x4a0328 lea 'CAMERA PRESET' | 0xb2f05:lea
+0x4a0338 lea 'IMMERSIVE' | 0xb2f1b:lea
+0x4a0348 lea 'COMFORT' | 0xb2f3c:lea 0xb85e2:lea
+0x4a0350 lea 'CINEMATIC' | 0xb2f5d:lea
+0x4a0360 lea,ptrslot 'mevr_realign' | 0xb2fcb:lea 0x4a20a0:ptrslot
+0x4a0370 lea 'RE-ALIGN AFTER SCENES' | 0xb2fde:lea
+0x4a0388 lea 'mevr_cinema_distance' | 0xb30a7:lea
+0x4a03a0 lea 'CINEMA SCREEN DISTANCE' | 0xb30ba:lea
+0x4a03b8 lea 'mevr_cinema_size' | 0xb310c:lea
+0x4a03d0 lea 'CINEMA SCREEN SIZE' | 0xb311f:lea
+0x4a03e8 lea,ptrslot 'mevr_camera_cinematic_track' | 0xb3182:lea 0x4a20c0:ptrslot
+0x4a0408 lea,ptrslot 'mevr_camera_attached' | 0xb31d3:lea 0x4a20e0:ptrslot
+0x4a0420 lea,ptrslot 'mevr_camera_third_person' | 0xb3220:lea 0x4a2100:ptrslot
+0x4a0440 lea 'FREE CAMERA' | 0xb3255:lea
+0x4a0450 lea,ptrslot 'mevr_camera_free_cam' | 0xb326d:lea 0x4a2120:ptrslot
+0x4a0468 lea,ptrslot 'mevr_camera_station' | 0xb32ba:lea 0x4a2140:ptrslot
+0x4a0480 lea 'BONE ANGLES' | 0xb32ef:lea
+0x4a0490 lea,ptrslot 'mevr_camera_bone_angles' | 0xb3307:lea 0x4a2160:ptrslot
+0x4a04a8 lea 'SCRIPTED LOCK' | 0xb333c:lea
+0x4a04b8 lea,ptrslot 'mevr_camera_scripted_lock' | 0xb3354:lea 0x4a2180:ptrslot
+0x4a04d8 lea 'ANIMATION LOCK' | 0xb3389:lea
+0x4a04e8 lea,ptrslot 'mevr_camera_animation_lock' | 0xb33a1:lea 0x4a21a0:ptrslot
+0x4a0508 lea 'AXIS LOCKED' | 0xb33d6:lea
+0x4a0518 lea,ptrslot 'mevr_camera_axis_locked' | 0xb33ee:lea 0x4a21c0:ptrslot
+0x4a0530 lea 'GAMEPLAY UI' | 0xb3423:lea
+0x4a0540 lea,ptrslot 'mevr_camera_gameplay_ui' | 0xb343e:lea 0x4a21e0:ptrslot
+0x4a0558 lea,ptrslot 'mevr_alternate_eye' | 0xb347d:lea 0x4a1840:ptrslot
+0x4a0570 lea 'RENDER MODE' | 0xb3490:lea
+0x4a057c lea 'STEREO' | 0xb34a6:lea
+0x4a0588 lea 'PERFORMANCE (AER+)' | 0xb34c4:lea
+0x4a05a0 lea,ptrslot 'mevr_render_scale' | 0xb3532:lea 0x4a1860:ptrslot
+0x4a05b8 lea 'RENDER SCALE (RESTART)' | 0xb3545:lea
+0x4a05d0 lea,ptrslot 'mevr_upscaler' | 0xb356e:lea 0x4a1880:ptrslot
+0x4a05e0 lea 'UPSCALER' | 0xb3581:lea
+0x4a05f0 lea,ptrslot 'mevr_upscaling_mode' | 0xb35b6:lea 0x4a18a0:ptrslot
+0x4a0608 lea 'UPSCALING MODE' | 0xb35c9:lea
+0x4a0618 lea 'NATIVE AA' | 0xb35df:lea 0xb3a5d:lea
+0x4a0628 lea 'QUALITY' | 0xb35fd:lea
+0x4a0630 lea 'BALANCED' | 0xb361b:lea 0xb3d0f:lea
+0x4a0640 lea 'PERFORMANCE' | 0xb3639:lea
+0x4a0650 lea 'ULTRA PERFORMANCE' | 0xb3657:lea
+0x4a0668 lea 'mevr_fsr_sharpness' | 0xb36c8:lea
+0x4a0680 lea 'FSR SHARPENING' | 0xb36db:lea
+0x4a0690 lea 'LOW' | 0xb370f:lea
+0x4a0694 lea 'HIGH' | 0xb374b:lea 0xb3d2d:lea
+0x4a06a0 lea,ptrslot 'mevr_dlss_model' | 0xb37bc:lea 0x4a18c0:ptrslot
+0x4a06b0 lea 'DLSS MODEL' | 0xb37cf:lea
+0x4a06c0 lea 'AUTO (K)' | 0xb37e5:lea
+0x4a06d0 lea 'K (DLSS 4)' | 0xb3803:lea
+0x4a06e0 lea 'M (DLSS 4.5)' | 0xb3821:lea
+0x4a06f0 lea 'L (DLSS 4.5)' | 0xb383f:lea
+0x4a0700 lea 'J (DLSS 4)' | 0xb385d:lea
+0x4a0710 lea 'E (DLSS 3)' | 0xb387b:lea
+0x4a0720 lea,ptrslot 'mevr_upscaling_fovea' | 0xb38e9:lea 0x4a18e0:ptrslot
+0x4a0738 lea 'FOVEATED UPSCALING' | 0xb38fc:lea
+0x4a0750 lea 'ON (45 DEG)' | 0xb3930:lea
+0x4a0760 lea 'ON (40 DEG)' | 0xb394e:lea
+0x4a0770 lea 'ON (35 DEG)' | 0xb396c:lea
+0x4a0780 lea 'ON (30 DEG)' | 0xb398a:lea
+0x4a0790 lea 'ON (25 DEG)' | 0xb39a8:lea
+0x4a07a0 lea 'ON (20 DEG)' | 0xb39c6:lea
+0x4a07b0 lea,ptrslot 'mevr_upscaling_periphery' | 0xb3a34:lea 0x4a1900:ptrslot
+0x4a07d0 lea 'FOVEATED PERIPHERY' | 0xb3a47:lea
+0x4a07e4 lea 'TAA' | 0xb3a7b:lea 0x14e8d0:lea
+0x4a07e8 lea,ptrslot 'mevr_mirror' | 0xb3ae9:lea 0x4a1920:ptrslot
+0x4a07f8 lea 'DESKTOP MIRROR' | 0xb3afc:lea
+0x4a0808 lea 'LEFT EYE' | 0xb3b33:lea
+0x4a0818 lea 'BOTH EYES' | 0xb3b54:lea
+0x4a0828 lea 'mevr_mirror_window' | 0xb3bc5:lea
+0x4a0840 lea 'MIRROR WINDOW' | 0xb3bd8:lea
+0x4a0850 lea 'WINDOWED' | 0xb3bee:lea
+0x4a0860 lea 'FULLSCREEN' | 0xb3c0f:lea
+0x4a0870 lea,ptrslot 'mevr_mirror_ui' | 0xb3c7d:lea 0x4a1940:ptrslot
+0x4a0880 lea 'MIRROR HEADSET UI' | 0xb3c90:lea
+0x4a0898 lea,ptrslot 'mevr_foveation' | 0xb3caa:lea 0x4a1960:ptrslot
+0x4a08a8 lea 'FOVEATED RENDERING' | 0xb3cbd:lea
+0x4a08bc lea 'LIGHT' | 0xb3cf1:lea
+0x4a08c8 lea 'AGGRESSIVE' | 0xb3d4b:lea
+0x4a08d4 lea 'ULTRA' | 0xb3d69:lea
+0x4a08e0 lea 'EXTREME' | 0xb3d87:lea
+0x4a08e8 lea,ptrslot 'mevr_water_reflections' | 0xb3df5:lea 0x4a1980:ptrslot
+0x4a0900 lea 'BETTER WATER REFLECTIONS' | 0xb3e08:lea
+0x4a0920 lea,ptrslot 'mevr_disable_blur' | 0xb3e22:lea 0x4a19a0:ptrslot
+0x4a0938 lea 'DISABLE BLUR' | 0xb3e35:lea
+0x4a0948 lea,ptrslot 'mevr_depth_of_field' | 0xb3e4f:lea 0x4a19c0:ptrslot
+0x4a0960 lea 'DEPTH OF FIELD' | 0xb3e62:lea
+0x4a0970 lea,ptrslot 'mevr_hud_resolution' | 0xb3e9a:lea 0x4a19e0:ptrslot
+0x4a0988 lea 'HUD RESOLUTION (RESTART)' | 0xb3ead:lea
+0x4a09a4 lea '{}P' | 0xb3ed7:lea
+0x4a09a8 lea,ptrslot 'mevr_depth_reprojection' | 0xb3f2b:lea 0x4a1a00:ptrslot
+0x4a09c0 lea 'DEPTH REPROJECTION' | 0xb3f3e:lea
+0x4a09d8 lea 'LEGAL NOTICE VIDEO' | 0xb3f51:lea
+0x4a09f0 lea 'mevr_video_legal' | 0xb3f67:lea
+0x4a0a04 lea 'legal' | 0xb3f87:lea
+0x4a0a10 lea 'CREDITS VIDEO' | 0xb3fb9:lea
+0x4a0a20 lea 'mevr_video_credits' | 0xb3fcc:lea
+0x4a0a38 lea 'credits' | 0xb3fe9:lea
+0x4a0a40 lea 'INTRO VIDEO' | 0xb401b:lea
+0x4a0a50 lea 'mevr_video_intro' | 0xb402e:lea
+0x4a0a64 lea 'intro' | 0xb404b:lea
+0x4a0a6c lea,movload 'light' | 0xb968a:movload 0x2c0745:lea
+0x4a0a78 lea,movload 'balanced' | 0xb9701:movload 0x11fe60:lea 0x1aea26:lea
+0x4a0a84 movload 'high' | 0xb9770:movload
+0x4a0a90 movsd 'aggressive' | 0xb97dd:movsd
+0x4a0a9c movload 'ultra' | 0xb9859:movload
+0x4a0aa8 movload 'extreme' | 0xb98d0:movload
+0x4a0ab0 lea,movups 'btn_use_defaults' | 0xb8eea:lea 0xba58a:movups
+0x4a0ac8 lea 'resolution' | 0xb7218:lea
+0x4a0ad8 lea 'r_vsync' | 0xb7236:lea
+0x4a0ae0 lea 'api' | 0xb7254:lea
+0x4a0ae8 lea 'aim_assist' | 0xb7272:lea
+0x4a0af8 lea 'auto_aim_border' | 0xb7280:lea
+0x4a0b08 lea 'g_show_crosshair' | 0xb72ea:lea
+0x4a0b20 lea 'g_show_hitmarks' | 0xb72f8:lea
+0x4a0b30 lea 'g_qte_mode' | 0xb7363:lea
+0x4a0b40 lea,movsd 'mevr_movement' | 0xb7582:lea 0xb8fb8:movsd
+0x4a0b50 lea,movsd 'mevr_body' | 0xb780a:lea 0xb9009:movsd
+0x4a0b60 lea 'mevr_vibration_page' | 0xb79b5:lea 0xb7a87:lea
+0x4a0b74 lea 'HANDS' | 0xb7b04:lea
+0x4a0b80 lea,movsd 'mevr_hands' | 0xb7b17:lea 0xb904c:movsd
+0x4a0b90 lea,movsd 'mevr_weapons' | 0xb7d3d:lea 0xb9099:movsd
+0x4a0ba0 lea 'SCOPES' | 0xb7e80:lea
+0x4a0ba8 lea,movsd 'mevr_scopes' | 0xb7e96:lea 0xb90ed:movsd
+0x4a0bb8 lea 'INTERFACE' | 0xb820f:lea
+0x4a0bc8 lea,movload 'mevr_hud' | 0xb8225:lea 0xb9144:movload
+0x4a0bd8 lea 'CAMERA OVERRIDES' | 0xb83a1:lea
+0x4a0bf0 lea 'mevr_camera_overrides' | 0xb83ca:lea 0xb8573:lea
+0x4a0c08 lea,movsd 'mevr_comfort' | 0xb8611:lea 0xb9184:movsd
+0x4a0c18 movload 'GRAPHICS' | 0xb8bbb:movload
+0x4a0c28 lea,movsd 'mevr_graphics' | 0xb8bca:lea 0xb8f6b:movsd
+0x4a0c38 movload 'GAME' | 0xb8de5:movload
+0x4a0c40 movsd 'mevr_game' | 0xb8e06:movsd 0xb8f1e:movsd
+0x4a0c50 movload 'mevr_vr' | 0xb8e65:movload
+0x4a0c58 lea 'nf' | 0xaf5e8:lea
+0x4a0c5c lea 'inity' | 0xaf638:lea
+0x4a0c64 lea 'an' | 0xafafa:lea
+0x4a0c68 lea 'ind' | 0xafbc1:lea
+0x4a0c6c lea 'snan' | 0xafbfb:lea

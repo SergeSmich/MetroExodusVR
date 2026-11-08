@@ -1,0 +1,42 @@
+### popup slot=0x0049bf40 title=0x0049c560 body=0x0049c570
+T	welcome
+B	WELCOME\n\nThank you for playing Metro Exodus VR!\n\nBefore you start I'd like to point out few things worth\nchecking that will improve your experience.
+### popup slot=0x0049bfb0 title=0x0049c608 body=0x0049c620
+T	check_settings
+B	VR OPTIONS\n\nBefore starting your journey please check out VR tab in the\nOptions menu and familiarize yourself with what's available,\nhow it's configured and what you can change.\n\nAll of these options are also available from Pause Menu\nwhile playing.\n\n
+### popup slot=0x0049c020 title=0x0049c720 body=0x0049c730
+T	check_hints
+B	VR HINTS\n\nWhile playing you will also have access to VR HINTS tab in the Pause Menu which cover VR-specific mechanics and interactions.\n\nCheck it out if you feel lost or unsure how to proceed.
+### popup slot=0x0049c090 title=0x0049c7f8 body=0x0049c810
+T	ask_part_highlights
+B	MANUAL RELOADING\n\nTo help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.\n\nYou can configure this option later in Options / VR / Weapons.\n\nWould you like to enable it for first few reloads of each weapon now?\n\n
+### popup slot=0x0049c100 title=0x0049c938 body=0x0049c950
+T	pause_recenter
+B	PAUSE MENU\n\nTo enter pause menu press <start>.\nHold the same button to recenter.\n\nEverything about VR controls is in the Pause Menu under VR HINTS section.
+### popup slot=0x0049c170 title=0x0049ca10 body=0x0049ca20
+T	gear
+B	YOUR GEAR IS ON YOUR BODY\n\nReach for the item/place and grip with <grip_dominant> or <grip_nondominant>.\n\nYou can find details of where each device is located in Pause Menu in VR HINTS tab.
+### popup slot=0x0049c1e0 title=0x0049cae0 body=0x0049caf0
+T	weapons
+B	WEAPONS\n\nTake a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.\n\nPointing a gun down holsters it and aiming down sight stabilizes it.
+### popup slot=0x0049c250 title=0x0049cba8 body=0x0049cbc0
+T	reloading
+B	RELOADING\n\nYou reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.\n\nTo reload with a button, turn Manual Reloading off in\nOptions / VR / Weapons.
+### popup slot=0x0049c2c0 title=0x0049cc98 body=0x0049cca0
+T	qte
+B	ACTION PROMPTS\n\nSome scripted QTEs ask for quick button presses. Do as the prompt shows: tap, press or hold <rui>.\n\nYou can change the QTEs mode in game's options.
+### popup slot=0x0049c330 title=0x0049cd48 body=0x0049cd60
+T	gas_mask
+B	GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.
+### popup slot=0x0049c3a0 title=0x0049cf10 body=0x0049cf20
+T	backpack
+B	BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>].
+### popup slot=0x0049c410 title=0x00496ee0 body=0x0049cff0
+T	map
+B	MAP\n\nTo equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].\n
+### popup slot=0x0049c480 title=0x0049d040 body=0x0049d050
+T	tikhar_ammo
+B	TIKHAR AMMUNITION\n\nTikhar can fire Incendiary Ammunition.\n\nWith Tikhar in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammo.\n\nThen reload as usual. Do the same to switch back.
+### popup slot=0x0049c4f0 title=0x0049d160 body=0x0049d170
+T	helsing_ammo
+B	HELSING AMMUNITION\n\nHelsing can fire explosive bolts.\n\nWith Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back.

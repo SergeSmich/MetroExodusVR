@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ruff_cache/
+
+# Locally extracted mod release and generated DLL (reproducible from the release
+# archive with tools/apply_ru.py).
+work/0.9.0/
+build/
+
+# Scratch analysis scripts generated while reverse-engineering the DLL.
+tools/tmp_*.py

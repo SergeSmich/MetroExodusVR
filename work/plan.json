@@ -1,0 +1,3075 @@
+[
+ {
+  "addr": 4847184,
+  "text": "NOT SET",
+  "orig_len": 7,
+  "sites": [
+   [
+    761610,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 761610,
+    "chunks": [
+     {
+      "insn": 761610,
+      "target": 4847184,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 761613,
+      "desc": "mov rax, qword ptr [rip + 0x3e573f]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 761620,
+      "target": 4847188,
+      "str_off": 4,
+      "width": 2,
+      "disp_off": 761623,
+      "desc": "movzx eax, word ptr [rip + 0x3e5739]",
+      "delta_to_site": -10
+     },
+     {
+      "insn": 761631,
+      "target": 4847190,
+      "str_off": 6,
+      "width": 1,
+      "disp_off": 761634,
+      "desc": "movzx eax, byte ptr [rip + 0x3e5730]",
+      "delta_to_site": -21
+     }
+    ],
+    "len_const": {
+     "insn": 761594,
+     "imm": 7,
+     "desc": "mov qword ptr [rbp - 0x21], 7",
+     "imm_off": 761598
+    },
+    "cap_const": {
+     "insn": 761602,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x19], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847192,
+  "text": "{} CM",
+  "orig_len": 5,
+  "sites": [
+   [
+    749064,
+    "lea"
+   ],
+   [
+    760397,
+    "lea"
+   ],
+   [
+    761805,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847200,
+  "text": "{}% (RECOMMENDED)",
+  "orig_len": 17,
+  "sites": [
+   [
+    765746,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847224,
+  "text": "+{} CM",
+  "orig_len": 6,
+  "sites": [
+   [
+    749057,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847232,
+  "text": "{} DEG",
+  "orig_len": 6,
+  "sites": [
+   [
+    727994,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847240,
+  "text": "{:.2f} M",
+  "orig_len": 8,
+  "sites": [
+   [
+    731209,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847252,
+  "text": "PLAY",
+  "orig_len": 4,
+  "sites": [
+   [
+    765022,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 765022,
+    "chunks": [
+     {
+      "insn": 765022,
+      "target": 4847252,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 765024,
+      "desc": "mov eax, dword ptr [rip + 0x3e4a30]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 765006,
+     "imm": 4,
+     "desc": "mov qword ptr [r11 - 0x58], 4",
+     "imm_off": 765010
+    },
+    "cap_const": {
+     "insn": 765014,
+     "imm": 15,
+     "desc": "mov qword ptr [r11 - 0x50], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847260,
+  "text": "SKIP",
+  "orig_len": 4,
+  "sites": [
+   [
+    765066,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 765066,
+    "chunks": [
+     {
+      "insn": 765066,
+      "target": 4847260,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 765068,
+      "desc": "mov eax, dword ptr [rip + 0x3e4a0c]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 765050,
+     "imm": 4,
+     "desc": "mov qword ptr [r11 - 0x30], 4",
+     "imm_off": 765054
+    },
+    "cap_const": {
+     "insn": 765058,
+     "imm": 15,
+     "desc": "mov qword ptr [r11 - 0x28], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847272,
+  "text": "OFF (GAME TAA)",
+  "orig_len": 14,
+  "sites": [
+   [
+    763809,
+    "movsd"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 763809,
+    "chunks": [
+     {
+      "insn": 763809,
+      "target": 4847272,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 763813,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3e4eff]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 763823,
+      "target": 4847280,
+      "str_off": 8,
+      "width": 4,
+      "disp_off": 763825,
+      "desc": "mov eax, dword ptr [rip + 0x3e4efb]",
+      "delta_to_site": -14
+     },
+     {
+      "insn": 763833,
+      "target": 4847284,
+      "str_off": 12,
+      "width": 2,
+      "disp_off": 763836,
+      "desc": "movzx eax, word ptr [rip + 0x3e4ef4]",
+      "delta_to_site": -24
+     }
+    ],
+    "len_const": {
+     "insn": 763791,
+     "imm": 14,
+     "desc": "mov qword ptr [rsp + 0x60], 0xe",
+     "imm_off": 763796
+    },
+    "cap_const": {
+     "insn": 763800,
+     "imm": 15,
+     "desc": "mov qword ptr [rsp + 0x68], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847288,
+  "text": "FSR",
+  "orig_len": 3,
+  "sites": [
+   [
+    764043,
+    "movload"
+   ],
+   [
+    764082,
+    "lea"
+   ],
+   [
+    1350439,
+    "lea"
+   ],
+   [
+    1351466,
+    "lea"
+   ],
+   [
+    1354238,
+    "lea"
+   ],
+   [
+    1372867,
+    "lea"
+   ],
+   [
+    3013056,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 764043,
+    "chunks": [
+     {
+      "insn": 764043,
+      "target": 4847288,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 764045,
+      "desc": "mov eax, dword ptr [rip + 0x3e4e27]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 764052,
+      "target": 4847290,
+      "str_off": 2,
+      "width": 1,
+      "disp_off": 764055,
+      "desc": "movzx eax, byte ptr [rip + 0x3e4e1f]",
+      "delta_to_site": -9
+     },
+     {
+      "insn": 764082,
+      "target": 4847288,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 764085,
+      "desc": "lea r8, [rip + 0x3e4dff]",
+      "delta_to_site": -39
+     }
+    ],
+    "len_const": {
+     "insn": 764027,
+     "imm": 3,
+     "desc": "mov qword ptr [rdx + 0x10], 3",
+     "imm_off": 764031
+    },
+    "cap_const": {
+     "insn": 764035,
+     "imm": 15,
+     "desc": "mov qword ptr [rdx + 0x18], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847292,
+  "text": "DLSS",
+  "orig_len": 4,
+  "sites": [
+   [
+    764139,
+    "movload"
+   ],
+   [
+    764167,
+    "lea"
+   ],
+   [
+    1350446,
+    "lea"
+   ],
+   [
+    1350730,
+    "lea"
+   ],
+   [
+    1350771,
+    "lea"
+   ],
+   [
+    1350808,
+    "lea"
+   ],
+   [
+    1351489,
+    "lea"
+   ],
+   [
+    1354252,
+    "lea"
+   ],
+   [
+    1372881,
+    "lea"
+   ],
+   [
+    3001984,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 764139,
+    "chunks": [
+     {
+      "insn": 764139,
+      "target": 4847292,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 764141,
+      "desc": "mov ecx, dword ptr [rip + 0x3e4dcb]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 764167,
+      "target": 4847292,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 764170,
+      "desc": "lea r8, [rip + 0x3e4dae]",
+      "delta_to_site": -28
+     }
+    ],
+    "len_const": {
+     "insn": 764123,
+     "imm": 4,
+     "desc": "mov qword ptr [rdx + 0x10], 4",
+     "imm_off": 764127
+    },
+    "cap_const": {
+     "insn": 764131,
+     "imm": 15,
+     "desc": "mov qword ptr [rdx + 0x18], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847300,
+  "text": "AUTO",
+  "orig_len": 4,
+  "sites": [
+   [
+    727219,
+    "lea"
+   ],
+   [
+    729851,
+    "lea"
+   ],
+   [
+    761051,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 761051,
+    "chunks": [
+     {
+      "insn": 761051,
+      "target": 4847300,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 761053,
+      "desc": "mov eax, dword ptr [rip + 0x3e59e3]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 761033,
+     "imm": 4,
+     "desc": "mov qword ptr [rsp + 0x60], 4",
+     "imm_off": 761038
+    },
+    "cap_const": {
+     "insn": 761042,
+     "imm": 15,
+     "desc": "mov qword ptr [rsp + 0x68], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847308,
+  "text": "VR",
+  "orig_len": 2,
+  "sites": [
+   [
+    757425,
+    "movzx"
+   ],
+   [
+    761095,
+    "movzx"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 757425,
+    "chunks": [
+     {
+      "insn": 757425,
+      "target": 4847308,
+      "str_off": 0,
+      "width": 2,
+      "disp_off": 757428,
+      "desc": "movzx eax, word ptr [rip + 0x3e6814]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 757403,
+     "imm": 2,
+     "desc": "mov qword ptr [rbp + 0x290], 2",
+     "imm_off": 757410
+    },
+    "cap_const": {
+     "insn": 757414,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x298], 0xf"
+    }
+   },
+   {
+    "site": 761095,
+    "chunks": [
+     {
+      "insn": 761095,
+      "target": 4847308,
+      "str_off": 0,
+      "width": 2,
+      "disp_off": 761098,
+      "desc": "movzx eax, word ptr [rip + 0x3e59be]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 761079,
+     "imm": 2,
+     "desc": "mov qword ptr [rbp - 0x78], 2",
+     "imm_off": 761083
+    },
+    "cap_const": {
+     "insn": 761087,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x70], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847312,
+  "text": "VR NO TURN",
+  "orig_len": 10,
+  "sites": [
+   [
+    761140,
+    "movsd"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 761140,
+    "chunks": [
+     {
+      "insn": 761140,
+      "target": 4847312,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 761144,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3e5994]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 761153,
+      "target": 4847320,
+      "str_off": 8,
+      "width": 2,
+      "disp_off": 761156,
+      "desc": "movzx eax, word ptr [rip + 0x3e5990]",
+      "delta_to_site": -13
+     }
+    ],
+    "len_const": {
+     "insn": 761124,
+     "imm": 10,
+     "desc": "mov qword ptr [rbp - 0x50], 0xa",
+     "imm_off": 761128
+    },
+    "cap_const": {
+     "insn": 761132,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x48], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847324,
+  "text": "CINEMA",
+  "orig_len": 6,
+  "sites": [
+   [
+    761202,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 761202,
+    "chunks": [
+     {
+      "insn": 761202,
+      "target": 4847324,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 761204,
+      "desc": "mov eax, dword ptr [rip + 0x3e5964]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 761211,
+      "target": 4847328,
+      "str_off": 4,
+      "width": 2,
+      "disp_off": 761214,
+      "desc": "movzx eax, word ptr [rip + 0x3e595e]",
+      "delta_to_site": -9
+     }
+    ],
+    "len_const": {
+     "insn": 761186,
+     "imm": 6,
+     "desc": "mov qword ptr [rbp - 0x28], 6",
+     "imm_off": 761190
+    },
+    "cap_const": {
+     "insn": 761194,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x20], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847336,
+  "text": "VR BODY TURN",
+  "orig_len": 12,
+  "sites": [
+   [
+    761257,
+    "movsd"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 761257,
+    "chunks": [
+     {
+      "insn": 761257,
+      "target": 4847336,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 761261,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3e5937]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 761270,
+      "target": 4847344,
+      "str_off": 8,
+      "width": 4,
+      "disp_off": 761272,
+      "desc": "mov eax, dword ptr [rip + 0x3e5934]",
+      "delta_to_site": -13
+     }
+    ],
+    "len_const": {
+     "insn": 761241,
+     "imm": 12,
+     "desc": "mov qword ptr [rbp], 0xc",
+     "imm_off": 761245
+    },
+    "cap_const": {
+     "insn": 761249,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 8], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847368,
+  "text": "TURN MODE",
+  "orig_len": 9,
+  "sites": [
+   [
+    723879,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847380,
+  "text": "SNAP",
+  "orig_len": 4,
+  "sites": [
+   [
+    723934,
+    "movload"
+   ],
+   [
+    733205,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 723934,
+    "chunks": [
+     {
+      "insn": 723934,
+      "target": 4847380,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 723936,
+      "desc": "mov eax, dword ptr [rip + 0x3eeb30]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 723912,
+     "imm": 4,
+     "desc": "mov qword ptr [rbp + 0x230], 4",
+     "imm_off": 723919
+    },
+    "cap_const": {
+     "insn": 723923,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x238], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847388,
+  "text": "SMOOTH",
+  "orig_len": 6,
+  "sites": [
+   [
+    723989,
+    "movload"
+   ],
+   [
+    733238,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 723989,
+    "chunks": [
+     {
+      "insn": 723989,
+      "target": 4847388,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 723991,
+      "desc": "mov eax, dword ptr [rip + 0x3eeb01]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 724001,
+      "target": 4847392,
+      "str_off": 4,
+      "width": 2,
+      "disp_off": 724004,
+      "desc": "movzx eax, word ptr [rip + 0x3eeaf8]",
+      "delta_to_site": -12
+     }
+    ],
+    "len_const": {
+     "insn": 723967,
+     "imm": 6,
+     "desc": "mov qword ptr [rbp + 0x258], 6",
+     "imm_off": 723974
+    },
+    "cap_const": {
+     "insn": 723978,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x260], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847416,
+  "text": "SNAP TURN ANGLE",
+  "orig_len": 15,
+  "sites": [
+   [
+    724213,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847432,
+  "text": "{:g} DEG",
+  "orig_len": 8,
+  "sites": [
+   [
+    724267,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847472,
+  "text": "SMOOTH TURN SPEED",
+  "orig_len": 17,
+  "sites": [
+   [
+    724366,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847496,
+  "text": "{:g} DEG/S",
+  "orig_len": 10,
+  "sites": [
+   [
+    724426,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847536,
+  "text": "MOVEMENT DIRECTION",
+  "orig_len": 18,
+  "sites": [
+   [
+    724531,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847556,
+  "text": "HEAD",
+  "orig_len": 4,
+  "sites": [
+   [
+    724595,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 724595,
+    "chunks": [
+     {
+      "insn": 724595,
+      "target": 4847556,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 724597,
+      "desc": "mov eax, dword ptr [rip + 0x3ee94b]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 724573,
+     "imm": 4,
+     "desc": "mov qword ptr [rbp + 0x2d0], 4",
+     "imm_off": 724580
+    },
+    "cap_const": {
+     "insn": 724584,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x2d8], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847564,
+  "text": "BODY",
+  "orig_len": 4,
+  "sites": [
+   [
+    724650,
+    "movload"
+   ],
+   [
+    751604,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 724650,
+    "chunks": [
+     {
+      "insn": 724650,
+      "target": 4847564,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 724652,
+      "desc": "mov eax, dword ptr [rip + 0x3ee91c]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 724628,
+     "imm": 4,
+     "desc": "mov qword ptr [rbp + 0x2f8], 4",
+     "imm_off": 724635
+    },
+    "cap_const": {
+     "insn": 724639,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x300], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847576,
+  "text": "LEFT HAND",
+  "orig_len": 9,
+  "sites": [
+   [
+    724708,
+    "movsd"
+   ],
+   [
+    2293716,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 724708,
+    "chunks": [
+     {
+      "insn": 724708,
+      "target": 4847576,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 724712,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3ee8ec]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 724724,
+      "target": 4847584,
+      "str_off": 8,
+      "width": 1,
+      "disp_off": 724727,
+      "desc": "movzx eax, byte ptr [rip + 0x3ee8e5]",
+      "delta_to_site": -16
+     }
+    ],
+    "len_const": {
+     "insn": 724686,
+     "imm": 9,
+     "desc": "mov qword ptr [rbp + 0x320], 9",
+     "imm_off": 724693
+    },
+    "cap_const": {
+     "insn": 724697,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x328], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847592,
+  "text": "RIGHT HAND",
+  "orig_len": 10,
+  "sites": [
+   [
+    724786,
+    "movsd"
+   ],
+   [
+    2293723,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 724786,
+    "chunks": [
+     {
+      "insn": 724786,
+      "target": 4847592,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 724790,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3ee8ae]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 724802,
+      "target": 4847600,
+      "str_off": 8,
+      "width": 2,
+      "disp_off": 724805,
+      "desc": "movzx eax, word ptr [rip + 0x3ee8a7]",
+      "delta_to_site": -16
+     }
+    ],
+    "len_const": {
+     "insn": 724764,
+     "imm": 10,
+     "desc": "mov qword ptr [rbp + 0x348], 0xa",
+     "imm_off": 724771
+    },
+    "cap_const": {
+     "insn": 724775,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x350], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847624,
+  "text": "CROUCH BUTTON",
+  "orig_len": 13,
+  "sites": [
+   [
+    725025,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847640,
+  "text": "HOLD",
+  "orig_len": 4,
+  "sites": [
+   [
+    725089,
+    "movload"
+   ],
+   [
+    728320,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 725089,
+    "chunks": [
+     {
+      "insn": 725089,
+      "target": 4847640,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 725091,
+      "desc": "mov eax, dword ptr [rip + 0x3ee7b1]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 725067,
+     "imm": 4,
+     "desc": "mov qword ptr [rbp + 0x280], 4",
+     "imm_off": 725074
+    },
+    "cap_const": {
+     "insn": 725078,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x288], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847648,
+  "text": "TOGGLE",
+  "orig_len": 6,
+  "sites": [
+   [
+    725144,
+    "movload"
+   ],
+   [
+    728353,
+    "lea"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 725144,
+    "chunks": [
+     {
+      "insn": 725144,
+      "target": 4847648,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 725146,
+      "desc": "mov eax, dword ptr [rip + 0x3ee782]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 725156,
+      "target": 4847652,
+      "str_off": 4,
+      "width": 2,
+      "disp_off": 725159,
+      "desc": "movzx eax, word ptr [rip + 0x3ee779]",
+      "delta_to_site": -12
+     }
+    ],
+    "len_const": {
+     "insn": 725122,
+     "imm": 6,
+     "desc": "mov qword ptr [rbp + 0x2a8], 6",
+     "imm_off": 725129
+    },
+    "cap_const": {
+     "insn": 725133,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x2b0], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847680,
+  "text": "AUTO SPRINT",
+  "orig_len": 11,
+  "sites": [
+   [
+    725377,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847720,
+  "text": "MOVE STICK DEADZONE",
+  "orig_len": 19,
+  "sites": [
+   [
+    725434,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847768,
+  "text": "TURN STICK DEADZONE",
+  "orig_len": 19,
+  "sites": [
+   [
+    725506,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847816,
+  "text": "REDUCE HEAD BOB",
+  "orig_len": 15,
+  "sites": [
+   [
+    725578,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847856,
+  "text": "SHOW VR TIPS AGAIN",
+  "orig_len": 18,
+  "sites": [
+   [
+    725635,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847896,
+  "text": "PLAY MODE",
+  "orig_len": 9,
+  "sites": [
+   [
+    725692,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847912,
+  "text": "ROOM-SCALE",
+  "orig_len": 10,
+  "sites": [
+   [
+    725756,
+    "movsd"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 725756,
+    "chunks": [
+     {
+      "insn": 725756,
+      "target": 4847912,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 725760,
+      "desc": "movsd xmm0, qword ptr [rip + 0x3ee624]",
+      "delta_to_site": 0
+     },
+     {
+      "insn": 725772,
+      "target": 4847920,
+      "str_off": 8,
+      "width": 2,
+      "disp_off": 725775,
+      "desc": "movzx eax, word ptr [rip + 0x3ee61d]",
+      "delta_to_site": -16
+     }
+    ],
+    "len_const": {
+     "insn": 725734,
+     "imm": 10,
+     "desc": "mov qword ptr [rbp + 0x370], 0xa",
+     "imm_off": 725741
+    },
+    "cap_const": {
+     "insn": 725745,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp + 0x378], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4847928,
+  "text": "STANDING",
+  "orig_len": 8,
+  "sites": [
+   [
+    725830,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847940,
+  "text": "SEATED",
+  "orig_len": 6,
+  "sites": [
+   [
+    725886,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4847976,
+  "text": "PLAYER HEIGHT",
+  "orig_len": 13,
+  "sites": [
+   [
+    726095,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848016,
+  "text": "WORLD SCALE",
+  "orig_len": 11,
+  "sites": [
+   [
+    726164,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848056,
+  "text": "BODY TURNING",
+  "orig_len": 12,
+  "sites": [
+   [
+    726236,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848072,
+  "text": "FOLLOW HEAD",
+  "orig_len": 11,
+  "sites": [
+   [
+    726298,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848112,
+  "text": "BODY POSITION",
+  "orig_len": 13,
+  "sites": [
+   [
+    726577,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848128,
+  "text": "FOLLOW",
+  "orig_len": 6,
+  "sites": [
+   [
+    726639,
+    "lea"
+   ],
+   [
+    730951,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848160,
+  "text": "PHYSICAL CROUCH",
+  "orig_len": 15,
+  "sites": [
+   [
+    726913,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848200,
+  "text": "BELT HEIGHT",
+  "orig_len": 11,
+  "sites": [
+   [
+    726970,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848240,
+  "text": "BELT WHEN CROUCHING",
+  "orig_len": 19,
+  "sites": [
+   [
+    727042,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848264,
+  "text": "STAY WITH YOU",
+  "orig_len": 13,
+  "sites": [
+   [
+    727104,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848280,
+  "text": "FOLLOW BODY",
+  "orig_len": 11,
+  "sites": [
+   [
+    727160,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848312,
+  "text": "BHAPTICS (EXPERIMENTAL)",
+  "orig_len": 23,
+  "sites": [
+   [
+    727438,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848360,
+  "text": "BHAPTICS STRENGTH",
+  "orig_len": 17,
+  "sites": [
+   [
+    727495,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848408,
+  "text": "DOMINANT HAND",
+  "orig_len": 13,
+  "sites": [
+   [
+    727582,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848424,
+  "text": "RIGHT",
+  "orig_len": 5,
+  "sites": [
+   [
+    727644,
+    "lea"
+   ],
+   [
+    729917,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848432,
+  "text": "LEFT",
+  "orig_len": 4,
+  "sites": [
+   [
+    727703,
+    "lea"
+   ],
+   [
+    729884,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848456,
+  "text": "WEAPON GRIP ANGLE",
+  "orig_len": 17,
+  "sites": [
+   [
+    727918,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848504,
+  "text": "FINGER TRACKING",
+  "orig_len": 15,
+  "sites": [
+   [
+    728253,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848532,
+  "text": "GRIP",
+  "orig_len": 4,
+  "sites": [
+   [
+    728298,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848560,
+  "text": "VIBRATION",
+  "orig_len": 9,
+  "sites": [
+   [
+    728482,
+    "lea"
+   ],
+   [
+    752031,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848600,
+  "text": "HAND CUES",
+  "orig_len": 9,
+  "sites": [
+   [
+    728557,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848640,
+  "text": "WEAPONS",
+  "orig_len": 7,
+  "sites": [
+   [
+    728632,
+    "lea"
+   ],
+   [
+    752935,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848672,
+  "text": "DAMAGE",
+  "orig_len": 6,
+  "sites": [
+   [
+    728707,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848704,
+  "text": "EXPLOSIONS",
+  "orig_len": 10,
+  "sites": [
+   [
+    728782,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848744,
+  "text": "SCENES AND VEHICLES",
+  "orig_len": 19,
+  "sites": [
+   [
+    728857,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848792,
+  "text": "MOVEMENT",
+  "orig_len": 8,
+  "sites": [
+   [
+    728932,
+    "lea"
+   ],
+   [
+    750956,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848832,
+  "text": "USE BY LOOKING",
+  "orig_len": 14,
+  "sites": [
+   [
+    729007,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848872,
+  "text": "WEAPON WEIGHT",
+  "orig_len": 13,
+  "sites": [
+   [
+    729052,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848912,
+  "text": "MANUAL RELOADING",
+  "orig_len": 16,
+  "sites": [
+   [
+    729112,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848960,
+  "text": "PART HIGHLIGHTS",
+  "orig_len": 15,
+  "sites": [
+   [
+    729157,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848976,
+  "text": "OFF",
+  "orig_len": 3,
+  "sites": [
+   [
+    729179,
+    "lea"
+   ],
+   [
+    729447,
+    "lea"
+   ],
+   [
+    733172,
+    "lea"
+   ],
+   [
+    734961,
+    "lea"
+   ],
+   [
+    735506,
+    "lea"
+   ],
+   [
+    736018,
+    "lea"
+   ],
+   [
+    736467,
+    "lea"
+   ],
+   [
+    1560550,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4848984,
+  "text": "FIRST RELOADS",
+  "orig_len": 13,
+  "sites": [
+   [
+    729212,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849000,
+  "text": "ALWAYS",
+  "orig_len": 6,
+  "sites": [
+   [
+    729245,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849040,
+  "text": "RESET HIGHLIGHT COUNTS",
+  "orig_len": 22,
+  "sites": [
+   [
+    729377,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849088,
+  "text": "WEAPON FLICK",
+  "orig_len": 12,
+  "sites": [
+   [
+    729422,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849104,
+  "text": "GENTLE",
+  "orig_len": 6,
+  "sites": [
+   [
+    729480,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849112,
+  "text": "NORMAL",
+  "orig_len": 6,
+  "sites": [
+   [
+    729513,
+    "lea"
+   ],
+   [
+    2825757,
+    "lea"
+   ],
+   [
+    2861224,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849120,
+  "text": "HARD",
+  "orig_len": 4,
+  "sites": [
+   [
+    729546,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849152,
+  "text": "MAGAZINE POUCH",
+  "orig_len": 14,
+  "sites": [
+   [
+    729678,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849168,
+  "text": "HIP",
+  "orig_len": 3,
+  "sites": [
+   [
+    729700,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849200,
+  "text": "SIGHTING EYE",
+  "orig_len": 12,
+  "sites": [
+   [
+    729829,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849232,
+  "text": "OTHER EYE WHILE SCOPED",
+  "orig_len": 22,
+  "sites": [
+   [
+    730046,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849256,
+  "text": "VISIBLE",
+  "orig_len": 7,
+  "sites": [
+   [
+    730068,
+    "lea"
+   ],
+   [
+    2422616,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849264,
+  "text": "BLURRED",
+  "orig_len": 7,
+  "sites": [
+   [
+    730101,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849272,
+  "text": "BLACK",
+  "orig_len": 5,
+  "sites": [
+   [
+    730134,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849296,
+  "text": "RETICLE TILT",
+  "orig_len": 12,
+  "sites": [
+   [
+    730266,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849312,
+  "text": "WITH WEAPON",
+  "orig_len": 11,
+  "sites": [
+   [
+    730288,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849324,
+  "text": "LEVEL",
+  "orig_len": 5,
+  "sites": [
+   [
+    730321,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849336,
+  "text": "FIXED TO VIEW",
+  "orig_len": 13,
+  "sites": [
+   [
+    730354,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849376,
+  "text": "SCOPE STEERING",
+  "orig_len": 14,
+  "sites": [
+   [
+    730483,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849392,
+  "text": "WEAPON",
+  "orig_len": 6,
+  "sites": [
+   [
+    730505,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849400,
+  "text": "WEAPON + HEAD",
+  "orig_len": 13,
+  "sites": [
+   [
+    730538,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849440,
+  "text": "REALISTIC NIGHT VISION",
+  "orig_len": 22,
+  "sites": [
+   [
+    730667,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849480,
+  "text": "HUD SHAPE",
+  "orig_len": 9,
+  "sites": [
+   [
+    730712,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849528,
+  "text": "HUD POSITION",
+  "orig_len": 12,
+  "sites": [
+   [
+    730896,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849568,
+  "text": "HUD DISTANCE",
+  "orig_len": 12,
+  "sites": [
+   [
+    731080,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849600,
+  "text": "HUD SIZE",
+  "orig_len": 8,
+  "sites": [
+   [
+    731140,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849632,
+  "text": "HUD HEIGHT",
+  "orig_len": 10,
+  "sites": [
+   [
+    731305,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849648,
+  "text": "{:+.0f} DEG",
+  "orig_len": 11,
+  "sites": [
+   [
+    731317,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849688,
+  "text": "HUD OPACITY",
+  "orig_len": 11,
+  "sites": [
+   [
+    731418,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849728,
+  "text": "HINT HEIGHT",
+  "orig_len": 11,
+  "sites": [
+   [
+    731493,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849768,
+  "text": "HINT SIZE",
+  "orig_len": 9,
+  "sites": [
+   [
+    731606,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849808,
+  "text": "HINT TIME",
+  "orig_len": 9,
+  "sites": [
+   [
+    731719,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849820,
+  "text": "1.00X",
+  "orig_len": 5,
+  "sites": [
+   [
+    731744,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849828,
+  "text": "1.25X",
+  "orig_len": 5,
+  "sites": [
+   [
+    731777,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849836,
+  "text": "1.50X",
+  "orig_len": 5,
+  "sites": [
+   [
+    731810,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849844,
+  "text": "2.00X",
+  "orig_len": 5,
+  "sites": [
+   [
+    731843,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849880,
+  "text": "ACTION PROMPT SIZE",
+  "orig_len": 18,
+  "sites": [
+   [
+    731975,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849936,
+  "text": "MENU DISTANCE",
+  "orig_len": 13,
+  "sites": [
+   [
+    732088,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849968,
+  "text": "MENU SIZE",
+  "orig_len": 9,
+  "sites": [
+   [
+    732192,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4849984,
+  "text": "{:.1f} M",
+  "orig_len": 8,
+  "sites": [
+   [
+    732204,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850024,
+  "text": "DAMAGE EFFECTS",
+  "orig_len": 14,
+  "sites": [
+   [
+    732305,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850064,
+  "text": "DAMAGE EFFECT SIZE",
+  "orig_len": 18,
+  "sites": [
+   [
+    732350,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850084,
+  "text": "SMALL",
+  "orig_len": 5,
+  "sites": [
+   [
+    732375,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850092,
+  "text": "MEDIUM",
+  "orig_len": 6,
+  "sites": [
+   [
+    732408,
+    "lea"
+   ],
+   [
+    735021,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850100,
+  "text": "LARGE",
+  "orig_len": 5,
+  "sites": [
+   [
+    732441,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850136,
+  "text": "HIT DIRECTION",
+  "orig_len": 13,
+  "sites": [
+   [
+    732573,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850176,
+  "text": "LOW-HEALTH PULSE",
+  "orig_len": 16,
+  "sites": [
+   [
+    732618,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850224,
+  "text": "DEBUG OVERLAY",
+  "orig_len": 13,
+  "sites": [
+   [
+    732663,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850264,
+  "text": "CINEMA POINTER",
+  "orig_len": 14,
+  "sites": [
+   [
+    732708,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850304,
+  "text": "CINEMA FLOOR",
+  "orig_len": 12,
+  "sites": [
+   [
+    732753,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850344,
+  "text": "CINEMA CONTROLLERS",
+  "orig_len": 18,
+  "sites": [
+   [
+    732798,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850392,
+  "text": "CINEMA INFO",
+  "orig_len": 11,
+  "sites": [
+   [
+    732843,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850432,
+  "text": "CINEMA LINKS",
+  "orig_len": 12,
+  "sites": [
+   [
+    732888,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850472,
+  "text": "CAMERA PRESET",
+  "orig_len": 13,
+  "sites": [
+   [
+    732933,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850488,
+  "text": "IMMERSIVE",
+  "orig_len": 9,
+  "sites": [
+   [
+    732955,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850504,
+  "text": "COMFORT",
+  "orig_len": 7,
+  "sites": [
+   [
+    732988,
+    "lea"
+   ],
+   [
+    755170,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850512,
+  "text": "CINEMATIC",
+  "orig_len": 9,
+  "sites": [
+   [
+    733021,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850544,
+  "text": "RE-ALIGN AFTER SCENES",
+  "orig_len": 21,
+  "sites": [
+   [
+    733150,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850592,
+  "text": "CINEMA SCREEN DISTANCE",
+  "orig_len": 22,
+  "sites": [
+   [
+    733370,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850640,
+  "text": "CINEMA SCREEN SIZE",
+  "orig_len": 18,
+  "sites": [
+   [
+    733471,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850752,
+  "text": "FREE CAMERA",
+  "orig_len": 11,
+  "sites": [
+   [
+    733781,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850816,
+  "text": "BONE ANGLES",
+  "orig_len": 11,
+  "sites": [
+   [
+    733935,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850856,
+  "text": "SCRIPTED LOCK",
+  "orig_len": 13,
+  "sites": [
+   [
+    734012,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850904,
+  "text": "ANIMATION LOCK",
+  "orig_len": 14,
+  "sites": [
+   [
+    734089,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850952,
+  "text": "AXIS LOCKED",
+  "orig_len": 11,
+  "sites": [
+   [
+    734166,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4850992,
+  "text": "GAMEPLAY UI",
+  "orig_len": 11,
+  "sites": [
+   [
+    734243,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851056,
+  "text": "RENDER MODE",
+  "orig_len": 11,
+  "sites": [
+   [
+    734352,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851068,
+  "text": "STEREO",
+  "orig_len": 6,
+  "sites": [
+   [
+    734374,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851080,
+  "text": "PERFORMANCE (AER+)",
+  "orig_len": 18,
+  "sites": [
+   [
+    734404,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851128,
+  "text": "RENDER SCALE (RESTART)",
+  "orig_len": 22,
+  "sites": [
+   [
+    734533,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851168,
+  "text": "UPSCALER",
+  "orig_len": 8,
+  "sites": [
+   [
+    734593,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851208,
+  "text": "UPSCALING MODE",
+  "orig_len": 14,
+  "sites": [
+   [
+    734665,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851224,
+  "text": "NATIVE AA",
+  "orig_len": 9,
+  "sites": [
+   [
+    734687,
+    "lea"
+   ],
+   [
+    735837,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851240,
+  "text": "QUALITY",
+  "orig_len": 7,
+  "sites": [
+   [
+    734717,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851248,
+  "text": "BALANCED",
+  "orig_len": 8,
+  "sites": [
+   [
+    734747,
+    "lea"
+   ],
+   [
+    736527,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851264,
+  "text": "PERFORMANCE",
+  "orig_len": 11,
+  "sites": [
+   [
+    734777,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851280,
+  "text": "ULTRA PERFORMANCE",
+  "orig_len": 17,
+  "sites": [
+   [
+    734807,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851328,
+  "text": "FSR SHARPENING",
+  "orig_len": 14,
+  "sites": [
+   [
+    734939,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851344,
+  "text": "LOW",
+  "orig_len": 3,
+  "sites": [
+   [
+    734991,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851348,
+  "text": "HIGH",
+  "orig_len": 4,
+  "sites": [
+   [
+    735051,
+    "lea"
+   ],
+   [
+    736557,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851376,
+  "text": "DLSS MODEL",
+  "orig_len": 10,
+  "sites": [
+   [
+    735183,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851392,
+  "text": "AUTO (K)",
+  "orig_len": 8,
+  "sites": [
+   [
+    735205,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851408,
+  "text": "K (DLSS 4)",
+  "orig_len": 10,
+  "sites": [
+   [
+    735235,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851424,
+  "text": "M (DLSS 4.5)",
+  "orig_len": 12,
+  "sites": [
+   [
+    735265,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851440,
+  "text": "L (DLSS 4.5)",
+  "orig_len": 12,
+  "sites": [
+   [
+    735295,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851456,
+  "text": "J (DLSS 4)",
+  "orig_len": 10,
+  "sites": [
+   [
+    735325,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851472,
+  "text": "E (DLSS 3)",
+  "orig_len": 10,
+  "sites": [
+   [
+    735355,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851512,
+  "text": "FOVEATED UPSCALING",
+  "orig_len": 18,
+  "sites": [
+   [
+    735484,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851536,
+  "text": "ON (45 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735536,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851552,
+  "text": "ON (40 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735566,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851568,
+  "text": "ON (35 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735596,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851584,
+  "text": "ON (30 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735626,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851600,
+  "text": "ON (25 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735656,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851616,
+  "text": "ON (20 DEG)",
+  "orig_len": 11,
+  "sites": [
+   [
+    735686,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851664,
+  "text": "FOVEATED PERIPHERY",
+  "orig_len": 18,
+  "sites": [
+   [
+    735815,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851684,
+  "text": "TAA",
+  "orig_len": 3,
+  "sites": [
+   [
+    735867,
+    "lea"
+   ],
+   [
+    1370320,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851704,
+  "text": "DESKTOP MIRROR",
+  "orig_len": 14,
+  "sites": [
+   [
+    735996,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851720,
+  "text": "LEFT EYE",
+  "orig_len": 8,
+  "sites": [
+   [
+    736051,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851736,
+  "text": "BOTH EYES",
+  "orig_len": 9,
+  "sites": [
+   [
+    736084,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851776,
+  "text": "MIRROR WINDOW",
+  "orig_len": 13,
+  "sites": [
+   [
+    736216,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851792,
+  "text": "WINDOWED",
+  "orig_len": 8,
+  "sites": [
+   [
+    736238,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851808,
+  "text": "FULLSCREEN",
+  "orig_len": 10,
+  "sites": [
+   [
+    736271,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851840,
+  "text": "MIRROR HEADSET UI",
+  "orig_len": 17,
+  "sites": [
+   [
+    736400,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851880,
+  "text": "FOVEATED RENDERING",
+  "orig_len": 18,
+  "sites": [
+   [
+    736445,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851900,
+  "text": "LIGHT",
+  "orig_len": 5,
+  "sites": [
+   [
+    736497,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851912,
+  "text": "AGGRESSIVE",
+  "orig_len": 10,
+  "sites": [
+   [
+    736587,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851924,
+  "text": "ULTRA",
+  "orig_len": 5,
+  "sites": [
+   [
+    736617,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851936,
+  "text": "EXTREME",
+  "orig_len": 7,
+  "sites": [
+   [
+    736647,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4851968,
+  "text": "BETTER WATER REFLECTIONS",
+  "orig_len": 24,
+  "sites": [
+   [
+    736776,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852024,
+  "text": "DISABLE BLUR",
+  "orig_len": 12,
+  "sites": [
+   [
+    736821,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852064,
+  "text": "DEPTH OF FIELD",
+  "orig_len": 14,
+  "sites": [
+   [
+    736866,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852104,
+  "text": "HUD RESOLUTION (RESTART)",
+  "orig_len": 24,
+  "sites": [
+   [
+    736941,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852160,
+  "text": "DEPTH REPROJECTION",
+  "orig_len": 18,
+  "sites": [
+   [
+    737086,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852184,
+  "text": "LEGAL NOTICE VIDEO",
+  "orig_len": 18,
+  "sites": [
+   [
+    737105,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852240,
+  "text": "CREDITS VIDEO",
+  "orig_len": 13,
+  "sites": [
+   [
+    737209,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852288,
+  "text": "INTRO VIDEO",
+  "orig_len": 11,
+  "sites": [
+   [
+    737307,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852596,
+  "text": "HANDS",
+  "orig_len": 5,
+  "sites": [
+   [
+    752388,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852640,
+  "text": "SCOPES",
+  "orig_len": 6,
+  "sites": [
+   [
+    753280,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852664,
+  "text": "INTERFACE",
+  "orig_len": 9,
+  "sites": [
+   [
+    754191,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852696,
+  "text": "CAMERA OVERRIDES",
+  "orig_len": 16,
+  "sites": [
+   [
+    754593,
+    "lea"
+   ]
+  ]
+ },
+ {
+  "addr": 4852760,
+  "text": "GRAPHICS",
+  "orig_len": 8,
+  "sites": [
+   [
+    756667,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 756667,
+    "chunks": [
+     {
+      "insn": 756667,
+      "target": 4852760,
+      "str_off": 0,
+      "width": 8,
+      "disp_off": 756670,
+      "desc": "mov rcx, qword ptr [rip + 0x3e8056]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 756651,
+     "imm": 8,
+     "desc": "mov qword ptr [rbp - 0x28], 8",
+     "imm_off": 756655
+    },
+    "cap_const": {
+     "insn": 756659,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x20], 0xf"
+    }
+   }
+  ]
+ },
+ {
+  "addr": 4852792,
+  "text": "GAME",
+  "orig_len": 4,
+  "sites": [
+   [
+    757221,
+    "movload"
+   ]
+  ],
+  "inline": [
+   {
+    "site": 757221,
+    "chunks": [
+     {
+      "insn": 757221,
+      "target": 4852792,
+      "str_off": 0,
+      "width": 4,
+      "disp_off": 757223,
+      "desc": "mov eax, dword ptr [rip + 0x3e7e4d]",
+      "delta_to_site": 0
+     }
+    ],
+    "len_const": {
+     "insn": 757205,
+     "imm": 4,
+     "desc": "mov qword ptr [rbp - 0x28], 4",
+     "imm_off": 757209
+    },
+    "cap_const": {
+     "insn": 757213,
+     "imm": 15,
+     "desc": "mov qword ptr [rbp - 0x20], 0xf"
+    }
+   }
+  ]
+ }
+]

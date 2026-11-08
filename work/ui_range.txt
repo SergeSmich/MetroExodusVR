@@ -1,0 +1,1453 @@
+0x00496000	m3\14_outro
+0x00496010	[preview] level {} is not in the preview: refused
+0x00496048	preview level gate
+0x00496060	[preview] only the main menu and the main campaign can load; the DLC levels are refused
+0x004960C0	[preview] level gate unavailable; every level can load in this preview build
+0x00496118	virtual_gamepad.mutex
+0x00496130	xinput9_1_0.dll
+0x00496140	[input] the controllers play the game as its gamepad
+0x00496178	[input] the gamepad is the game's own again
+0x004961A8	XInputGetState
+0x004961B8	XInputSetState
+0x004961C8	[input] the game does not import XInput as expected
+0x00496200	[input] could not redirect XInputGetState
+0x00496230	[input] could not redirect XInputSetState
+0x00496260	while held
+0x00496270	toggles
+0x00496280	[input] virtual gamepad installed (XInputGetState slot +0x{:X}); crouching {}
+0x004962F0	[input] GetCursorPos could not be hooked ({}); the menu pointer is unavailable
+0x00496340	[input] menu pointer attached to the mouse device
+0x00496380	[input] the mouse device could not be hooked ({}); the menu pointer is unavailable
+0x004963D8	hint_router.mutex
+0x004963EC	_xbox
+0x004963F8	[hints] {} not shown: the mask is off
+0x00496420	[hints] show {}
+0x00496430	[hints] closed by its action
+0x00496450	hint show
+0x00496460	[hints] hint show hook unavailable; hints keep their text
+0x004964A0	hint hide
+0x004964B0	delay fire
+0x004964C0	[hints] hint hide hooks unavailable; hints keep their time
+0x00496588	HnI
+0x004965B8	lnI
+0x004965D0	0nI
+0x00496600	 nI
+0x00496698	(}I
+0x004966A8	8}I
+0x004966B8	H}I
+0x004966C8	<press:
+0x004966D0	gasmask
+0x004966D8	popup_equipment
+0x004966E8	charger
+0x004966F0	<xpad_guide_button>
+0x00496708	<xpad_guide_button_empty>
+0x00496728	<wpn_fire>
+0x00496738	<wpn_aim>
+0x00496748	<Press:
+0x00496750	Tap
+0x00496754	tap
+0x00496758	Hold
+0x00496760	hold
+0x00496768	Press
+0x00496770	press
+0x00496780	<grip_dominant>
+0x00496790	<grip_nondominant>
+0x004967A8	<trigger_dominant>
+0x004967C0	<trigger_nondominant>
+0x004967D8	<nondominant>
+0x004967E8	<dominant>
+0x00497040	$reload_easy_hint
+0x00497058	m3_bagpack_hint_popup
+0x00497070	m3_boat_hint
+0x00497080	m3_car_drive_hint
+0x00497098	m3_motorboat_drive_hint
+0x004970B0	m3_radio_act_hint
+0x004970C8	m3_radio_hint
+0x004970D8	m3_special_slot_crossbow
+0x004970F8	m3_vent_move_hint
+0x00497110	m3_weapon_fast_hint
+0x00497128	m3_weapon_special_slot
+0x00497140	m3_trolley_hint
+0x00497150	Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit.
+0x004971D8	m3_map_hint
+0x004971F0	Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]
+0x00497240	m3_map_updated_hint
+0x00497258	m3_map_second_hint
+0x00497270	Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]
+0x004972D0	m3_bagpack_hint
+0x004972E0	Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]
+0x00497340	m3_bagpack_hint_upd
+0x00497358	m3_weapon_popup_hint
+0x00497370	Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]
+0x004973D8	m3_pheumatics_upd
+0x004973F0	Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>
+0x00497470	m3_pheumatics_upd_light
+0x00497490	Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>
+0x004974D8	m3_flamethrower_upd
+0x004974F0	m3_flamethrower_upd_light
+0x00497510	m3_wpn_down_hint
+0x00497528	Point your weapon down to lower it
+0x00497550	m3_wpn_down_hint_light
+0x00497568	Point your weapon down
+0x00497580	m3_wpn_down_sprint_hint
+0x00497598	To sprint further, point your weapon down
+0x004975C8	m3_crouch_hint
+0x004975D8	<Press:crouch_toggle> to crouch
+0x004975F8	m3_weapon_jammed
+0x00497610	Weapon jammed! Pull the bolt[ or <press:rui>]
+0x00497640	m3_special_ammo_hint
+0x00497660	Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time
+0x004976C0	m3_special_ammo_hint_popup
+0x004976E0	Holding <popup_equipment>, press <rui>: your next reload loads the other ammo
+0x00497730	m3_special_ammo_hint_2
+0x00497750	Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time
+0x004977B0	m3_secondary_hint_flame
+0x004977D0	You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]
+0x00497838	m3_secondary_hint_dynamite
+0x00497860	You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]
+0x004978C8	m3_secondary_hint_knife
+0x004978E0	You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]
+0x00497948	m3_secondary_hint
+0x00497960	Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]
+0x004979B8	m3_decoy_hint
+0x004979D0	You found a decoy. Grab <grip_dominant> from the front of your belt
+0x00497A18	m3_secondary_choose_hint
+0x00497A38	bino_on_off
+0x00497A50	Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]
+0x00497AB8	bino_on_off_popup
+0x00497AD0	$nightvision
+0x00497AE0	Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]
+0x00497B40	$nightvision_popup
+0x00497B58	m3_flashlight_hint
+0x00497B70	Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]
+0x00497BC0	m3_charger_hint_2_upd
+0x00497BE0	Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]
+0x00497C38	m3_charger_hint_2_popup
+0x00497C50	m3_charger_hint_2_upd_light
+0x00497C70	m3_lighter_hint
+0x00497C80	Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]
+0x00497CE8	m3_lighter_hint_popup
+0x00497D00	Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]
+0x00497D50	m3_lighter_hint_easy
+0x00497D68	m3_lighter_hint_popup_easy
+0x00497D88	$medkit_easy_hint
+0x00497DA0	Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]
+0x00497E18	m3_rad_watch_hint
+0x00497E30	Check the radiation detector on your left wrist
+0x00497E60	m3_rad_watch_hint_light
+0x00497E78	Radiation detector: check your left wrist
+0x00497EA8	m3_gasmask_hint_upd
+0x00497EC0	Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]
+0x00497F30	m3_hint_ingame_gasmask_filter_easy
+0x00497F60	Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]
+0x00497FB0	m3_hint_ingame_gasmask_filter_upd
+0x00497FE0	Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]
+0x00498038	m3_gasmask_wipe_hint
+0x00498050	Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]
+0x00498098	m3_gasmask_wipe_hint_light
+0x004980B8	Wipe: rub the visor with an open hand[, or <press:facepalm>]
+0x004980F8	m3_gasmask_quick_repair
+0x00498110	Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]
+0x00498190	m3_gasmask_quick_repair_easy
+0x004981B0	Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]
+0x00498210	diary_open_hint
+0x00498220	New note - read it in the pause menu
+0x00498248	diary_open_hint_xbox
+0x00498260	postcard_open_hint
+0x00498278	New postcard - watch it in the pause menu
+0x004982A8	postcard_open_hint_xbox
+0x004982C0	m3_photo_mode_hint
+0x004982D8	m3_charger_pump
+0x004982E8	Pump the charger: <wpn_fire>
+0x00498308	m3_melee_hint
+0x00498318	Melee attack: <wpn_fast_knife>
+0x00498338	m3_melee_hint_light
+0x00498350	Melee: <wpn_fast_knife>
+0x00498368	mevr_vr_hints_menu
+0x00498380	list_box
+0x00498390	hints_menu
+0x004983A0	diary_menu
+0x004983B0	default
+0x004983B8	btn_hints
+0x004983C8	btn_mevr_vr_hints
+0x004983E0	VR HINTS
+0x004983F0	btn_photomode
+0x004985C0	Basics
+0x004985D0	PAUSE MENU
+0x004985DC	<tab>Press the menu button or right trackpad.
+0x0049860B	RECENTER
+0x00498615	<tab>Hold the menu button.
+0x00498631	VR SETTINGS
+0x0049863E	<tab>In the main or pause menu, click Options, then VR. Allows configuring VR-specific settings and the mod's behavior.
+0x004986B8	Movement
+0x004986D0	WALKING
+0x004986D9	<tab>Move your left thumbstick (<stick_left>) in the direction you want to go.
+0x00498729	TURNING
+0x00498732	<tab>Press or hold <xpad_right_thumb_left> or <xpad_right_thumb_right> to turn in the desired direction. You can switch between snap and smooth turning in Options - VR - Movement.
+0x004987E7	RUNNING
+0x004987F0	<tab>Double-tap <sprint> and keep holding it.
+0x0049881F	JUMPING
+0x00498828	<tab>To jump, press <jump>.
+0x00498845	CROUCHING
+0x00498850	<tab><Press:crouch_toggle>, or crouch in real life. You can change crouching options in Options - VR - Movement.
+0x004988C8	Interactions
+0x004988E0	INTERACTIONS
+0x004988EE	<tab>To interact with world objects (e.g. doors, ladders) or perform an action (e.g. take loot, grab/swap weapon), reach out with either hand and grip (<grip_dominant> or <grip_nondominant>).
+0x004989AF	<tab>In some cases you will be offered a choice (e.g. lethal vs non-lethal takedowns, take/swap weapon or just take its parts) - in such cases you can choose by either gripping with that hand (<grip_dominant> or <grip_nondominant>) or pressing/holding a trigger (<trigger_dominant> or <trigger_nondominant>).
+0x00498AE5	QTEs
+0x00498AEB	<tab>Throughout the game you will encounter quick-time events. During them - depending on your game's settings - you will have to press, hold or quickly tap the <rui> button.
+0x00498BA0	Weapons
+0x00498BB0	STORAGE
+0x00498BB9	<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:
+0x00498C17	* main weapon - over <dominant> shoulder
+0x00498C40	* secondary weapon - <dominant> hip
+0x00498C64	* special weapon - over <nondominant> shoulder
+0x00498C94	EQUIPPING
+0x00498C9F	<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.
+0x00498D83	MODES / POSES
+0x00498D92	<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.
+0x00498E8C	THROWABLES
+0x00498E98	<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you. Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]
+0x00498F9C	WEAPONS AND AMMO
+0x00498FAE	<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).
+0x0049905F	MELEE
+0x00499066	<tab>Press <wpn_fast_knife>.
+0x00499088	Manual reloading
+0x004990A0	MANUAL RELOADING
+0x004990B2	<tab>Most weapons will require you to perform these actions with <trigger_nondominant>:
+0x0049910B	* remove old magazine
+0x00499121	* grab a new magazine from the pouch (<nondominant> hip or chest) and insert it
+0x00499171	* optionally pull the bolt
+0x0049918D	Some weapons might have special needs such as:
+0x004991BD	* pushing the magazine through the weapon before you can take it out
+0x00499202	* pulling a lever to release the magazine or chamber a new slug
+0x00499242	* drawing the bow before inserting an arrow
+0x0049926E	* pumping the pneumatic system (see below)
+0x0049929A	<tab>If you're unsure what to do, enable PART HIGHLIGHTS in Options - VR - Weapons. It highlights the next part you need to work to reload the weapon.
+0x00499332	PNEUMATIC WEAPONS
+0x00499345	<tab>Tikhar, Helsing and Gatling need pressure. Pump manually with your <nondominant> hand: take the pump handle with <trigger_nondominant> and pump it back and forth; it lets go by itself when full. Or hold <rui> and tap <wpn_fire>.
+0x00499430	SPECIAL AMMUNITION
+0x00499444	<tab>Tikhar can fire Incendiary Ammunition and Helsing explosive bolts. With the weapon in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammunition; reload by hand as usual. Do it again to cancel, or later to switch back. The single-arrow Helsing switches at once, with the game's own reload.
+0x004995B8	JAMMING
+0x004995C1	<tab>Weapons in Metro Exodus can get jammed. Their condition affects how often that happens. To reduce the jamming rate, find a Workbench and clean your weapons. To unjam your weapon operate the bolt.
+0x0049968B	AUTOMATIC RELOADS
+0x0049969E	<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead.
+0x00499708	Items and devices
+0x00499720	EQUIPPING GEAR
+0x00499730	<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.
+0x00499802	GEAR AREAS
+0x0049980E	* chest:
+0x00499817	  * <dominant> - map
+0x0049982C	  * <nondominant> - lighter
+0x00499848	* shoulders:
+0x00499855	  * over <dominant> - main weapon (<grip_dominant>)
+0x00499889	  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>)
+0x004998E4	  * on <dominant> - medkit (<grip_nondominant>)
+0x00499914	* hips:
+0x0049991C	  * <dominant> - secondary weapon (<grip_dominant>)
+0x00499950	  * <nondominant> - mask (<grip_nondominant>) or new ammo (<trigger_nondominant>)
+0x004999A2	* lower back:
+0x004999B0	  * <dominant> - charger (<grip_dominant>)
+0x004999DB	  * <nondominant> - binoculars (<grip_nondominant>)
+0x00499A0F	* belt:
+0x00499A17	  * front - throwables
+0x00499A2E	* forehead:
+0x00499A3A	  * flashlight (<trigger_nondominant>)
+0x00499A61	  * night vision (<grip_dominant> - pull up or down)
+0x00499A98	Gas mask
+0x00499AB0	GAS MASK
+0x00499ABA	<tab>The gas mask is usually located on your <nondominant> hip. To put it on you have to grab it (<grip_nondominant>) and bring it to your face. To take it off you have to grab it from your face (<grip_nondominant>), move it away and let it go.
+0x00499BB0	FILTERS
+0x00499BB9	<tab>When the mask is equipped and your filters can be changed, a new filter will be available for grabbing (<grip_nondominant>) at your <nondominant> hip. Once grabbed, move it close to where it sits on the mask and it will be replaced automatically.[ Alternatively <press:filter>.]
+0x00499CD6	WIPING
+0x00499CDE	<tab>Rub the visor with an open hand to wipe rain, blood or dirt off it.[ Alternatively <press:facepalm>.]
+0x00499D4A	FIXING CRACKS
+0x00499D59	<tab>When your mask is cracked, a piece of tape will be available for grabbing (<grip_nondominant>) at your <nondominant> hip, in place of the filter. Once grabbed, bring it to the front of your visor and the cracks will be sealed. Let go of it anywhere else to put it back.[ Alternatively <press:facepalm>.]
+0x00499E90	Medkit
+0x00499EA0	HEALING
+0x00499EA9	<tab>When you're hurt you will hear specific audio cues and see a red overlay around your field of view. To heal yourself (assuming you have any medkits left):
+0x00499F4A	1. grip and hold (<grip_nondominant>) at your <dominant> shoulder
+0x00499F8C	2. move it away from your body until you feel a pulse
+0x00499FC2	3. bring it back to your body - anywhere from above your shoulder down to your stomach - to inject
+0x0049A026	<tab>Letting go before that puts it back unused.[ Alternatively <press:medkit>.]
+0x0049A080	Flashlight and charger
+0x0049A0A0	FLASHLIGHT
+0x0049A0AC	<tab>To toggle the flashlight, press <trigger_nondominant> at your forehead[, or <press:wpn_light>].
+0x0049A112	CHARGER
+0x0049A11B	<tab>To charge your batteries, grip (<grip_dominant>) at the <dominant> side of your lower back[, or <press:charger>]. Once equipped, pump it with <wpn_fire>.
+0x0049A1C0	Map / journal
+0x0049A1D0	MAP
+0x0049A1D5	<tab>To equip the map, simply grip it (<grip_dominant>) at the <dominant> side of your chest[, or <press:map>].
+0x0049A246	JOURNAL
+0x0049A24F	<tab>Once the map is equipped, flip the map over with your hands, or press <wpn_fire> to switch sides.
+0x0049A2B8	Backpack / inventory
+0x0049A2D0	OPENING BACKPACK
+0x0049A2E2	<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder[, or <press:inventory>]. Once opened you can craft consumables/throwables and modify your weapons. Standard UI navigation rules apply - either use your controller's pointer and triggers or point away and press buttons as shown on screen.
+0x0049A430	Binoculars and NV
+0x0049A450	BINOCULARS
+0x0049A45C	<tab>Once you have binoculars, grip (<grip_nondominant>) at the <nondominant> side of your lower back[, or <press:binoculars>]. You can pass them between hands. To use them, bring them to your eyes. Zoom in with <wpn_fire> and out with <aim>.
+0x0049A550	NIGHT VISION
+0x0049A55E	<tab>To equip night vision, grip (<grip_dominant>) above your forehead and pull them down in front of your eyes[, or <press:nightvision>]. To take them off, grip (<grip_dominant>) in front of your eyes and pull them back up[, or <press:nightvision> again].
+0x0049A668	Weapon scopes
+0x0049A680	<tab>To use weapon scopes simply bring them to your eye. You can configure related options in Options - VR - Scopes.
+0x0049A6F8	Workbenches
+0x0049A710	<tab>To use a workbench, reach out to it and grip (<grip_dominant> or <grip_nondominant>). Once in the workbench view use your controller's pointer and triggers or the buttons shown on screen to navigate the view.
+0x0049A7E8	mevr_popup_menu
+0x0049A7F8	message_menu
+0x0049A808	message
+0x0049A810	[popups] {}: {}
+0x0049A820	btn_ok
+0x0049A828	[popups] scene ended: '{}' on {}
+0x0049A850	restart_warning
+0x0049A860	btn_cancel
+0x0049A870	mevr_popup_
+0x0049A880	[popups] shown: {}
+0x0049A8D0	'v"?
+0x0049A8E8	mevr_reloads_{:x}
+0x0049AF60	welcome
+0x0049AF70	WELCOME
+0x0049AF79	Thank you for playing Metro Exodus VR!
+0x0049AFA1	Before you start I'd like to point out few things worth
+0x0049AFD9	checking that will improve your experience.
+0x0049B008	check_settings
+0x0049B020	VR OPTIONS
+0x0049B02C	Before starting your journey please check out VR tab in the
+0x0049B068	Options menu and familiarize yourself with what's available,
+0x0049B0A5	how it's configured and what you can change.
+0x0049B0D3	All of these options are also available from Pause Menu
+0x0049B10B	while playing.
+0x0049B120	check_hints
+0x0049B130	VR HINTS
+0x0049B13A	While playing you will also have access to VR HINTS tab in the Pause Menu which cover VR-specific mechanics and interactions.
+0x0049B1B9	Check it out if you feel lost or unsure how to proceed.
+0x0049B1F8	ask_part_highlights
+0x0049B210	MANUAL RELOADING
+0x0049B222	To help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.
+0x0049B2AB	You can configure this option later in Options / VR / Weapons.
+0x0049B2EB	Would you like to enable it for first few reloads of each weapon now?
+0x0049B338	pause_recenter
+0x0049B350	PAUSE MENU
+0x0049B35C	To enter pause menu press <start>.
+0x0049B37F	Hold the same button to recenter.
+0x0049B3A2	Everything about VR controls is in the Pause Menu under VR HINTS section.
+0x0049B3F0	vs_intro
+0x0049B400	01_dead_moscow
+0x0049B410	gear
+0x0049B420	YOUR GEAR IS ON YOUR BODY
+0x0049B43B	Reach for the item/place and grip with <grip_dominant> or <grip_nondominant>.
+0x0049B48A	You can find details of where each device is located in Pause Menu in VR HINTS tab.
+0x0049B4E0	weapons
+0x0049B4F0	WEAPONS
+0x0049B4F9	Take a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.
+0x0049B560	Pointing a gun down holsters it and aiming down sight stabilizes it.
+0x0049B5A8	reloading
+0x0049B5C0	RELOADING
+0x0049B5CB	You reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.
+0x0049B647	To reload with a button, turn Manual Reloading off in
+0x0049B67D	Options / VR / Weapons.
+0x0049B698	qte
+0x0049B6A0	ACTION PROMPTS
+0x0049B6B0	Some scripted QTEs ask for quick button presses. Do as the prompt shows: tap, press or hold <rui>.
+0x0049B714	You can change the QTEs mode in game's options.
+0x0049B748	gas_mask
+0x0049B760	GAS MASK
+0x0049B76A	Put on: <grip_nondominant> at <nondominant> hip and bring it to your face.
+0x0049B7B5	Take off: grip it on your face and pull it away.
+0x0049B7E7	Filter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.
+0x0049B84C	Wipe: rub the visor with an open hand.
+0x0049B874	Fix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.
+0x0049B8F8	dm_roof_radio_cs
+0x0049B910	backpack
+0x0049B920	BACKPACK
+0x0049B92A	You can craft consumables and throwables or modify your weapons in your backpack / inventory.
+0x0049B989	Grip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>].
+0x0049B9D8	06_bridge
+0x0049B9F0	MAP
+0x0049B9F5	To equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].
+0x0049BA40	tikhar_ammo
+0x0049BA50	TIKHAR AMMUNITION
+0x0049BA63	Tikhar can fire Incendiary Ammunition.
+0x0049BA8B	With Tikhar in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammo.
+0x0049BB1D	Then reload as usual. Do the same to switch back.
+0x0049BB50	08_desert
+0x0049BB60	helsing_ammo
+0x0049BB70	HELSING AMMUNITION
+0x0049BB84	Helsing can fire explosive bolts.
+0x0049BBA7	With Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back.
+0x0049BC70	m3_popup_vs_left
+0x0049BC88	m3_popup_vs_left_mouse
+0x0049BCA0	m3_popup_secondary
+0x0049BCB8	m3_popup_devices_l_3
+0x0049BCD0	m3_popup_devices_l_3_1
+0x0049BCE8	menu_3_popup_pad_dpad_xbox
+0x0049BD08	menu open
+0x0049BD18	menu activate
+0x0049BD30	[hints] menu open hook unavailable; d-pad menus keep the d-pad picture
+0x0049BD88	[debug_menu] {}
+0x0049BD98	g_subtitles_size
+0x0049BDAC	found
+0x0049BDB8	not found
+0x0049BDC8	FindMenu('{}'): {} of {} menus compared, {}, {:.3f} ms
+0x0049BE00	[menus] {} at RVA 0x{:X} does not match this executable
+0x0049BE40	[menus] {} (vtable 0x{:X} slot {}) does not match this executable
+0x0049BE88	the console does not exist yet
+0x0049BEA8	the console already has a command of that name
+0x0049BEE0	RegisterVariable('{}') parts: console lookup {:.3f} ms ({} commands), create {:.3f} ms
+0x0049BF38	the menu manager does not exist yet
+0x0049BF60	it has no console variable
+0x0049BF80	the game did not allocate an option adapter
+0x0049BFB0	the option adapter did not find its variable
+0x0049BFE0	RegisterOption('{}') parts: create {:.3f} ms, registry insert {:.3f} ms
+0x0049C028	its option adapter is of an unknown class
+0x0049C058	the game has no option of that name
+0x0049C080	the game has no variable of that name
+0x0049C0A8	its variable is of an unknown class
+0x0049C0D0	{} is outside its range [{}, {}]
+0x0049C0F8	too many pinned variables
+0x0049C118	too many shadowed variables
+0x0049C138	it has no storage
+0x0049C150	{} is not one of its values
+0x0049C170	cannot open {}
+0x0049C180	ReadGameFile('{}'): engine open {:.3f} ms, copy {:.3f} ms, {} bytes
+0x0049C1D0	LoadPackage: engine load {:.3f} ms ({} -> {} menus, {} bytes), slot fix-up {:.3f} ms ({} menus now)
+0x0049C238	control '{}' in '{}': {} of {} controls compared, {:.3f} ms
+0x0049C310	menu_ingame_hint
+0x0049C328	menu_ingame_hint__appearence_fade_in
+0x0049C350	menu_ingame_hint_left
+0x0049C368	menu_ingame_hint_kill_stun_1
+0x0049C388	menu_ingame_hint_kill_stun_2
+0x0049C3A8	menu_ingame_hint_replay_controls
+0x0049C3D0	menu_ingame_hint_map
+0x0049C3E8	menu_ingame_hint_map_bino
+0x0049C408	menu_ingame_hint_task
+0x0049C420	menu_qte
+0x0049C430	menu_qte_hold
+0x0049C440	use_menu_hold
+0x0049C450	menu_melee_kill_stun
+0x0049C468	menu_ingame_hint_no_body
+0x0049C488	hint_body_big
+0x0049C498	menu_3_warning
+0x0049C4F0	mevr_description
+0x0049C520	{}: cannot set {}
+0x0049C534	type
+0x0049C540	group_name
+0x0049C54C	name
+0x0049C558	the game has no menu '{}'
+0x0049C578	new menu '{}' would replace a menu of the game
+0x0049C5A8	menu '{}' is declared twice
+0x0049C5C8	controls
+0x0049C5D8	menu '{}' has no controls
+0x0049C5F8	menu '{}' has no control '{}'
+0x0049C618	menu '{}' already has a control '{}'
+0x0049C640	on_click
+0x0049C650	open_menu_handler
+0x0049C668	on_click_args
+0x0049C678	option
+0x0049C680	caption
+0x0049C688	tab_index
+0x0049C694	count
+0x0049C6A0	page template '{}' has no option rows
+0x0049C6C8	hint
+0x0049C6D0	align_screen
+0x0049C6E0	h_alignment
+0x0049C6F0	v_alignment
+0x0049C700	position_x
+0x0049C710	position_y
+0x0049C71C	size_x
+0x0049C724	size_y
+0x0049C730	hint_control_name
+0x0049C748	page '{}' has no option rows
+0x0049C768	on_activate
+0x0049C774	items
+0x0049C780	menu '{}' has no list '{}'
+0x0049C7A0	list '{}' has no items to clone
+0x0049C7C0	item_{:04}
+0x0049C7CC	img
+0x0049C7D0	argument
+0x0049C7DC	index
+0x0049C7F8	content\menu_handles_storage.bin
+0x0049C820	{}: {:.3f} ms
+0x0049C830	IsReadable x{}: {:.3f} ms total, {:.1f} us each ({} readable)
+0x0049C870	RegisterVariables total
+0x0049C888	[menus] game variable '{}' pinned to {}
+0x0049C8B0	[menus] game variable '{}' not pinned: {}
+0x0049C8E0	[menus] game variable '{}' follows its condition
+0x0049C918	[menus] game variable '{}' not shadowed: {}
+0x0049C950	[menus] game variable '{}' default skipped: preferences already loaded
+0x0049C998	[menus] game variable '{}' starts at {}
+0x0049C9C0	[menus] game variable '{}' default not set: {}
+0x0049C9F0	RegisterVariable('{}'): {:.3f} ms
+0x0049CA18	[menus] setting '{}' not registered: {}
+0x0049CA40	[menus] {} settings registered after the game first loaded its preferences; their saved values apply once the profile loads
+0x0049CAC0	[menus] {} settings registered before the game loads its preferences
+0x0049CB08	RegisterSettings total
+0x0049CB20	RegisterOption('{}'): {:.3f} ms
+0x0049CB40	[menus] setting '{}' has no option: {}
+0x0049CB68	[menus] game option '{}' locked
+0x0049CB88	[menus] game option '{}' not locked: {}
+0x0049CBB0	BuildLayout
+0x0049CBC0	[menus] {}
+0x0049CBD0	[menus] {} settings given options
+0x0049CBF8	ParseRecord('{}'): {:.3f} ms ({} bytes)
+0x0049CC20	InjectMenus total
+0x0049CC38	ReadGameFile total: {:.3f} ms
+0x0049CC58	[menus] {}; no menus added
+0x0049CC78	ReadIndex: {:.3f} ms ({} records)
+0x0049CCA0	[menus] {}: {}; no menus added
+0x0049CCC0	Build: {:.3f} ms, of which parsing {} records {:.3f} ms, cloning {:.3f} ms
+0x0049CD0C	 - 
+0x0049CD10	[menus] {}{}{}; no menus added
+0x0049CD30	Serialize: {:.3f} ms ({} records, {} bytes)
+0x0049CD60	LoadPackage total: {:.3f} ms
+0x0049CD80	MakeCaptionLiteral({}/{}): {:.3f} ms
+0x0049CDA8	[menus] control {}/{} not found for its caption
+0x0049CDD8	[menus] list {}/{} not found for its text
+0x0049CE08	[menus] row {}/{} not found for its description
+0x0049CE38	captions total: {:.3f} ms ({} captions)
+0x0049CE60	[menus] {} menus loaded ({} replaced, {} new), {} captions set
+0x0049CEA0	Step total
+0x0049CEB0	RootsCached
+0x0049CEC0	[menus] the Options menus never reached the menu cache; no menus added
+0x0049CF08	[menus] Options menus cached {:.1f} s after the first update
+0x0049CF48	[menus] {}; menu setup stopped
+0x0049CF68	[menus] unknown error; menu setup stopped
+0x0049CFA0	update #{}: menu setup {:.3f} ms, game's update {:.3f} ms, poll {:.3f} ms
+0x0049CFF0	executable checks
+0x0049D010	[menus] unsupported executable; the mod's settings stay out of the game's menus
+0x0049D060	[menus] menu hook installation failed, error={}
+0x0049D090	[menus] menu hook installed
+0x0049D0B0	[menus] {}; settings not registered
+0x0049D0D8	[menus] unknown error; settings not registered
+0x0049D14E	i@AVER
+0x0049D337	w,a
+0x0049D346	jp5
+0x0049D377	jHq
+0x0049D396	kdz
+0x0049D3A7	cc=
+0x0049D3B1	 n;^
+0x0049D3BC	rqg
+0x0049D3E3	2u\
+0x0049D421	|o/
+0x0049D425	LhX
+0x0049D42C	=-f
+0x0049D464	-=m
+0x0049D471	Qkkbal
+0x0049D4A3	bI-
+0x0049D4D6	n4F
+0x0049D4E7	3_L
+0x0049D527	.;\
+0x0049D53F	t9G
+0x0049D558	>jm
+0x0049D55D	Zjz
+0x0049D57F	i]Wb
+0x0049D588	q6l
+0x0049D58E	knv
+0x0049D5CB	?K6
+0x0049D5DB	6`z
+0x0049D5EA	n1y
+0x0049D5FA	o%6
+0x0049D60B	"/&
+0x0049D68B	owG
+0x0049D6AA	kaE
+0x0049D6BF	9a&g
+0x0049D6C8	MGiI
+0x0049D6CD	wn>Jj
+0x0049D70F	#.zf
+0x0049D71D	+o*7
+0x0049D72F	-u8
+0x0049D738	bool
+0x0049D740	bool8
+0x0049D748	u16
+0x0049D74C	s16
+0x0049D750	u32
+0x0049D754	s32
+0x0049D758	fp32
+0x0049D760	color, u32
+0x0049D76C	u64
+0x0049D770	s64
+0x0049D774	fp64
+0x0049D77C	vec2f
+0x0049D784	vec3f
+0x0049D78C	vec4f
+0x0049D794	vec2i
+0x0049D79C	vec3i
+0x0049D7A4	vec4i
+0x0049D7C8	{} at offset 0x{:X}
+0x0049D7E0	truncated u32
+0x0049D7F0	unterminated string
+0x0049D808	empty array
+0x0049D818	array without a u32 count
+0x0049D838	array element overruns its array
+0x0049D860	array does not end at its size
+0x0049D880	empty section
+0x0049D890	@section
+0x0049D89C	choose
+0x0049D8A8	stringz
+0x0049D8B0	truncated {} '{}'
+0x0049D8C4	array
+0x0049D8D0	section
+0x0049D8D8	{} '{}' overruns its section
+0x0049D8F8	unknown type '{}' for '{}'
+0x0049D918	section does not end at its size
+0x0049D940	not an AVER package
+0x0049D958	record overruns the package
+0x0049D978	bytes after the last record
+0x0049D994	{}: {}
+0x0049D9A0	m3_main_options_menu
+0x0049D9B8	btn_game_options
+0x0049D9D0	m3_main_gameplay_menu
+0x0049D9E8	btn_checked_crosshair
+0x0049DA00	btn_list_aim_mode
+0x0049DA18	m3_main_sound_menu
+0x0049DA30	btn_progress_music_volume
+0x0049DA50	hint_version
+0x0049DA60	options_menu
+0x0049DA70	gameplay_menu
+0x0049DA80	sound_menu
+0x0049DA90	random_hints
+0x0049DAA0	random_hints_dlc1
+0x0049DAB8	random_hints_dlc2
+0x0049DAD0	m3_main_video_menu
+0x0049DAE8	video_menu
+0x0049DAF8	m3_main_accessibility_menu
+0x0049DB18	accessibility_menu
+0x0049DB2C	main
+0x0049DB38	{}_{}_menu
+0x0049DB44	{}_{}
+0x0049DB50	'{}' refused: {}
+0x0049DB68	declared after the menus were built
+0x0049DB90	ids use letters, digits and '_' (at most 63)
+0x0049DBC0	captions are printable ASCII (at most 127)
+0x0049DBF0	declared twice
+0x0049DC00	lists need 2-255 printable ASCII labels
+0x0049DC28	sliders need min < max and 1-255 steps
+0x0049DC50	page ids and captions follow the setting rules
+0x0049DC80	page declared twice
+0x0049DC98	option locked after the menus were built
+0x0049DCC8	not an option key
+0x0049DCE0	variable pinned after the declarations ended
+0x0049DD10	not a variable name
+0x0049DD28	variable suppressed after the declarations ended
+0x0049DD60	needs a variable name and a condition
+0x0049DD88	default set after the declarations ended
+0x0049DDB8	{}: link to page '{}', which is not in this menu
+0x0049DDF0	btn_link_
+0x0049DE00	{}: a row refers to a refused setting
+0x0049DE28	{}: '{}' cannot be shown that way
+0x0049DE4C	btn_
+0x0049DEE5	Ga>
+0x0049DEED	Ga=
+0x0049DEFB	=)\
+0x0049DEFF	>ff
+0x0049DF0B	@)\
+0x0049DF21	Q8?
+0x0049DF3B	Afff?
+0x0049DF4B	>ff
+0x0049DF7F	Aff
+0x0049E050	NOT SET
+0x0049E058	{} CM
+0x0049E060	{}% (RECOMMENDED)
+0x0049E074	{}%
+0x0049E078	+{} CM
+0x0049E080	{} DEG
+0x0049E088	{:.2f} M
+0x0049E094	PLAY
+0x0049E09C	SKIP
+0x0049E0A8	OFF (GAME TAA)
+0x0049E0B8	FSR
+0x0049E0BC	DLSS
+0x0049E0C4	AUTO
+0x0049E0D0	VR NO TURN
+0x0049E0DC	CINEMA
+0x0049E0E8	VR BODY TURN
+0x0049E0F8	mevr_turn_mode
+0x0049E108	TURN MODE
+0x0049E114	SNAP
+0x0049E11C	SMOOTH
+0x0049E128	mevr_snap_turn
+0x0049E138	SNAP TURN ANGLE
+0x0049E148	{:g} DEG
+0x0049E158	mevr_smooth_turn
+0x0049E170	SMOOTH TURN SPEED
+0x0049E188	{:g} DEG/S
+0x0049E198	mevr_move_direction
+0x0049E1B0	MOVEMENT DIRECTION
+0x0049E1C4	HEAD
+0x0049E1CC	BODY
+0x0049E1D8	LEFT HAND
+0x0049E1E8	RIGHT HAND
+0x0049E1F8	mevr_crouch
+0x0049E208	CROUCH BUTTON
+0x0049E218	HOLD
+0x0049E220	TOGGLE
+0x0049E228	mevr_auto_sprint
+0x0049E240	AUTO SPRINT
+0x0049E250	mevr_move_deadzone
+0x0049E268	MOVE STICK DEADZONE
+0x0049E280	mevr_turn_deadzone
+0x0049E298	TURN STICK DEADZONE
+0x0049E2B0	mevr_reduce_head_bob
+0x0049E2C8	REDUCE HEAD BOB
+0x0049E2D8	mevr_popups_again
+0x0049E2F0	SHOW VR TIPS AGAIN
+0x0049E308	mevr_play_mode
+0x0049E318	PLAY MODE
+0x0049E328	ROOM-SCALE
+0x0049E338	STANDING
+0x0049E344	SEATED
+0x0049E350	mevr_player_height
+0x0049E368	PLAYER HEIGHT
+0x0049E378	mevr_world_scale
+0x0049E390	WORLD SCALE
+0x0049E3A0	mevr_body_turning
+0x0049E3B8	BODY TURNING
+0x0049E3C8	FOLLOW HEAD
+0x0049E3D8	mevr_body_position
+0x0049E3F0	BODY POSITION
+0x0049E400	FOLLOW
+0x0049E408	mevr_physical_crouch
+0x0049E420	PHYSICAL CROUCH
+0x0049E430	mevr_belt_height
+0x0049E448	BELT HEIGHT
+0x0049E458	mevr_belt_crouch
+0x0049E470	BELT WHEN CROUCHING
+0x0049E488	STAY WITH YOU
+0x0049E498	FOLLOW BODY
+0x0049E4A8	mevr_bhaptics
+0x0049E4B8	BHAPTICS (EXPERIMENTAL)
+0x0049E4D0	mevr_bhaptics_strength
+0x0049E4E8	BHAPTICS STRENGTH
+0x0049E500	mevr_dominant_hand
+0x0049E518	DOMINANT HAND
+0x0049E528	RIGHT
+0x0049E530	LEFT
+0x0049E538	mevr_grip_angle
+0x0049E548	WEAPON GRIP ANGLE
+0x0049E560	mevr_finger_tracking
+0x0049E578	FINGER TRACKING
+0x0049E588	mevr_grab
+0x0049E594	GRIP
+0x0049E5A0	mevr_vibration
+0x0049E5B0	VIBRATION
+0x0049E5C0	mevr_vibration_cues
+0x0049E5D8	HAND CUES
+0x0049E5E8	mevr_vibration_weapons
+0x0049E600	WEAPONS
+0x0049E608	mevr_vibration_damage
+0x0049E620	DAMAGE
+0x0049E628	mevr_vibration_world
+0x0049E640	EXPLOSIONS
+0x0049E650	mevr_vibration_scenes
+0x0049E668	SCENES AND VEHICLES
+0x0049E680	mevr_vibration_movement
+0x0049E698	MOVEMENT
+0x0049E6A8	mevr_use_by_looking
+0x0049E6C0	USE BY LOOKING
+0x0049E6D0	mevr_weapon_weight
+0x0049E6E8	WEAPON WEIGHT
+0x0049E6F8	mevr_manual_reload
+0x0049E710	MANUAL RELOADING
+0x0049E728	mevr_part_highlights
+0x0049E740	PART HIGHLIGHTS
+0x0049E750	OFF
+0x0049E758	FIRST RELOADS
+0x0049E768	ALWAYS
+0x0049E770	mevr_part_highlights_reset
+0x0049E790	RESET HIGHLIGHT COUNTS
+0x0049E7A8	mevr_revolver_flick
+0x0049E7C0	WEAPON FLICK
+0x0049E7D0	GENTLE
+0x0049E7D8	NORMAL
+0x0049E7E0	HARD
+0x0049E7E8	mevr_reload_pouch
+0x0049E800	MAGAZINE POUCH
+0x0049E810	HIP
+0x0049E818	mevr_sighting_eye
+0x0049E830	SIGHTING EYE
+0x0049E840	mevr_other_eye
+0x0049E850	OTHER EYE WHILE SCOPED
+0x0049E868	VISIBLE
+0x0049E870	BLURRED
+0x0049E878	BLACK
+0x0049E880	mevr_reticle
+0x0049E890	RETICLE TILT
+0x0049E8A0	WITH WEAPON
+0x0049E8AC	LEVEL
+0x0049E8B8	FIXED TO VIEW
+0x0049E8C8	mevr_scope_steering
+0x0049E8E0	SCOPE STEERING
+0x0049E8F0	WEAPON
+0x0049E8F8	WEAPON + HEAD
+0x0049E908	mevr_night_vision_tube
+0x0049E920	REALISTIC NIGHT VISION
+0x0049E938	mevr_hud_shape
+0x0049E948	HUD SHAPE
+0x0049E954	16:9
+0x0049E95C	4:3
+0x0049E960	mevr_hud_position
+0x0049E978	HUD POSITION
+0x0049E988	mevr_hud_distance
+0x0049E9A0	HUD DISTANCE
+0x0049E9B0	mevr_hud_size
+0x0049E9C0	HUD SIZE
+0x0049E9D0	mevr_hud_height
+0x0049E9E0	HUD HEIGHT
+0x0049E9F0	{:+.0f} DEG
+0x0049EA00	mevr_hud_opacity
+0x0049EA18	HUD OPACITY
+0x0049EA28	mevr_hint_height
+0x0049EA40	HINT HEIGHT
+0x0049EA50	{:+.0f}
+0x0049EA58	mevr_hint_size
+0x0049EA68	HINT SIZE
+0x0049EA78	{:.1f}X
+0x0049EA80	mevr_hint_time
+0x0049EA90	HINT TIME
+0x0049EA9C	1.00X
+0x0049EAA4	1.25X
+0x0049EAAC	1.50X
+0x0049EAB4	2.00X
+0x0049EAC0	mevr_prompt_size
+0x0049EAD8	ACTION PROMPT SIZE
+0x0049EAF0	{:.2f}X
+0x0049EAF8	mevr_menu_distance
+0x0049EB10	MENU DISTANCE
+0x0049EB20	mevr_menu_size
+0x0049EB30	MENU SIZE
+0x0049EB40	{:.1f} M
+0x0049EB50	mevr_damage_effects
+0x0049EB68	DAMAGE EFFECTS
+0x0049EB78	mevr_damage_size
+0x0049EB90	DAMAGE EFFECT SIZE
+0x0049EBA4	SMALL
+0x0049EBAC	MEDIUM
+0x0049EBB4	LARGE
+0x0049EBC0	mevr_hit_direction
+0x0049EBD8	HIT DIRECTION
+0x0049EBE8	mevr_health_pulse
+0x0049EC00	LOW-HEALTH PULSE
+0x0049EC18	mevr_debug_overlay
+0x0049EC30	DEBUG OVERLAY
+0x0049EC40	mevr_cinema_pointer
+0x0049EC58	CINEMA POINTER
+0x0049EC68	mevr_cinema_floor
+0x0049EC80	CINEMA FLOOR
+0x0049EC90	mevr_cinema_controllers
+0x0049ECA8	CINEMA CONTROLLERS
+0x0049ECC0	mevr_cinema_info
+0x0049ECD8	CINEMA INFO
+0x0049ECE8	mevr_cinema_links
+0x0049ED00	CINEMA LINKS
+0x0049ED10	mevr_camera_preset
+0x0049ED28	CAMERA PRESET
+0x0049ED38	IMMERSIVE
+0x0049ED48	COMFORT
+0x0049ED50	CINEMATIC
+0x0049ED60	mevr_realign
+0x0049ED70	RE-ALIGN AFTER SCENES
+0x0049ED88	mevr_cinema_distance
+0x0049EDA0	CINEMA SCREEN DISTANCE
+0x0049EDB8	mevr_cinema_size
+0x0049EDD0	CINEMA SCREEN SIZE
+0x0049EDE8	mevr_camera_cinematic_track
+0x0049EE08	mevr_camera_attached
+0x0049EE20	mevr_camera_third_person
+0x0049EE40	FREE CAMERA
+0x0049EE50	mevr_camera_free_cam
+0x0049EE68	mevr_camera_station
+0x0049EE80	BONE ANGLES
+0x0049EE90	mevr_camera_bone_angles
+0x0049EEA8	SCRIPTED LOCK
+0x0049EEB8	mevr_camera_scripted_lock
+0x0049EED8	ANIMATION LOCK
+0x0049EEE8	mevr_camera_animation_lock
+0x0049EF08	AXIS LOCKED
+0x0049EF18	mevr_camera_axis_locked
+0x0049EF30	GAMEPLAY UI
+0x0049EF40	mevr_camera_gameplay_ui
+0x0049EF58	mevr_alternate_eye
+0x0049EF70	RENDER MODE
+0x0049EF7C	STEREO
+0x0049EF88	PERFORMANCE (AER+)
+0x0049EFA0	mevr_render_scale
+0x0049EFB8	RENDER SCALE (RESTART)
+0x0049EFD0	mevr_upscaler
+0x0049EFE0	UPSCALER
+0x0049EFF0	mevr_upscaling_mode
+0x0049F008	UPSCALING MODE
+0x0049F018	NATIVE AA
+0x0049F028	QUALITY
+0x0049F030	BALANCED
+0x0049F040	PERFORMANCE
+0x0049F050	ULTRA PERFORMANCE
+0x0049F068	mevr_fsr_sharpness
+0x0049F080	FSR SHARPENING
+0x0049F090	LOW
+0x0049F094	HIGH
+0x0049F0A0	mevr_dlss_model
+0x0049F0B0	DLSS MODEL
+0x0049F0C0	AUTO (K)
+0x0049F0D0	K (DLSS 4)
+0x0049F0E0	M (DLSS 4.5)
+0x0049F0F0	L (DLSS 4.5)
+0x0049F100	J (DLSS 4)
+0x0049F110	E (DLSS 3)
+0x0049F120	mevr_upscaling_fovea
+0x0049F138	FOVEATED UPSCALING
+0x0049F150	ON (45 DEG)
+0x0049F160	ON (40 DEG)
+0x0049F170	ON (35 DEG)
+0x0049F180	ON (30 DEG)
+0x0049F190	ON (25 DEG)
+0x0049F1A0	ON (20 DEG)
+0x0049F1B0	mevr_upscaling_periphery
+0x0049F1D0	FOVEATED PERIPHERY
+0x0049F1E4	TAA
+0x0049F1E8	mevr_mirror
+0x0049F1F8	DESKTOP MIRROR
+0x0049F208	LEFT EYE
+0x0049F218	BOTH EYES
+0x0049F228	mevr_mirror_window
+0x0049F240	MIRROR WINDOW
+0x0049F250	WINDOWED
+0x0049F260	FULLSCREEN
+0x0049F270	mevr_mirror_ui
+0x0049F280	MIRROR HEADSET UI
+0x0049F298	mevr_foveation
+0x0049F2A8	FOVEATED RENDERING
+0x0049F2BC	LIGHT
+0x0049F2C8	AGGRESSIVE
+0x0049F2D4	ULTRA
+0x0049F2E0	EXTREME
+0x0049F2E8	mevr_water_reflections
+0x0049F300	BETTER WATER REFLECTIONS
+0x0049F320	mevr_disable_blur
+0x0049F338	DISABLE BLUR
+0x0049F348	mevr_depth_of_field
+0x0049F360	DEPTH OF FIELD
+0x0049F370	mevr_hud_resolution
+0x0049F388	HUD RESOLUTION (RESTART)
+0x0049F3A4	{}P
+0x0049F3A8	mevr_depth_reprojection
+0x0049F3C0	DEPTH REPROJECTION
+0x0049F3D8	LEGAL NOTICE VIDEO
+0x0049F3F0	mevr_video_legal
+0x0049F404	legal
+0x0049F410	CREDITS VIDEO
+0x0049F420	mevr_video_credits
+0x0049F438	credits
+0x0049F440	INTRO VIDEO
+0x0049F450	mevr_video_intro
+0x0049F464	intro
+0x0049F46C	light
+0x0049F478	balanced
+0x0049F484	high
+0x0049F490	aggressive
+0x0049F49C	ultra
+0x0049F4A8	extreme
+0x0049F4B0	btn_use_defaults
+0x0049F4C8	resolution
+0x0049F4D8	r_vsync
+0x0049F4E0	api
+0x0049F4E8	aim_assist
+0x0049F4F8	auto_aim_border
+0x0049F508	g_show_crosshair
+0x0049F520	g_show_hitmarks
+0x0049F530	g_qte_mode
+0x0049F540	mevr_movement
+0x0049F550	mevr_body
+0x0049F560	mevr_vibration_page
+0x0049F574	HANDS
+0x0049F580	mevr_hands
+0x0049F590	mevr_weapons
+0x0049F5A0	SCOPES
+0x0049F5A8	mevr_scopes
+0x0049F5B8	INTERFACE
+0x0049F5C8	mevr_hud
+0x0049F5D8	CAMERA OVERRIDES
+0x0049F5F0	mevr_camera_overrides
+0x0049F608	mevr_comfort
+0x0049F618	GRAPHICS
+0x0049F628	mevr_graphics
+0x0049F638	GAME
+0x0049F640	mevr_game
+0x0049F650	mevr_vr
+0x0049F65C	inity
+0x0049F668	ind
+0x0049F66C	snan
+0x004A01EF	?333?
+0x004A0250	P"J
+0x004A0350	@&J
+0x004A0390	`'J
+0x004A0430	p)J
+0x004A0470	`*J
+0x004A04B0	`+J
+0x004A04F0	 ,J
+0x004A0550	`-J
+0x004A0590	P.J
+0x004A05B0	 /J
+0x004A05F0	00J
+0x004A0630	01J
+0x004A0670	02J
+0x004A06B0	03J
+0x004A0730	H4J
+0x004A0790	`5J
+0x004A07D0	 6J
+0x004A0830	@7J
+0x004A0870	08J
+0x004A08D0	h9J
+0x004A0950	`:J
+0x004A09B0	0;J
+0x004A09D0	p;J
+0x004A0A10	0<J
+0x004A0A70	 =J
+0x004A0AF0	P?J
+0x004A0B70	P@J
+0x004A0BD0	PAJ
+0x004A0C00	Reset the VR tips you have already seen, as on a first playthrough.
+0x004A0C50	STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion.
+0x004A0D00	The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart.
+0x004A0D90	Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards.
+0x004A0E10	How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.
+0x004A0EA0	Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K.
+0x004A0F00	Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster.
+0x004A0F80	How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry.
+0x004A1010	What the desktop window shows while you play.
+0x004A1040	The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost.
+0x004A10E0	Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only.
+0x004A1160	More accurate reflections on water, reaching further. Small performance penalty.
+0x004A11C0	Turns off the game's motion blur, which can be uncomfortable in VR.
+0x004A1210	Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount.
+0x004A1280	How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart.
+0x004A12F0	Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it.
+0x004A1370	Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points.
+0x004A13F0	HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next.
+0x004A1460	Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting.
+0x004A14F0	How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched.
+0x004A1560	How far the turn stick must be pushed before you turn. Raise it if you turn by accident.
+0x004A15C0	Tones down the game's camera bob while walking and running, which can be uncomfortable in VR.
+0x004A1620	ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down.
+0x004A1690	Your real height, so the game can tell when you crouch. NOT SET uses the headset alone.
+0x004A16F0	How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes.
+0x004A1760	Crouching in real life crouches in the game. Needs PLAYER HEIGHT.
+0x004A17B0	Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back.
+0x004A1850	STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM).
+0x004A1920	FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.
+0x004A19A0	FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along.
+0x004A1A30	Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps.
+0x004A1AD0	Tilts weapons and items in your hand up or down, to match how you hold your controller.
+0x004A1B30	Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons.
+0x004A1BB0	HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken.
+0x004A1C30	With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach.
+0x004A1CC0	How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off.
+0x004A1D30	Light ticks as your hand reaches a body slot, something to take, a weapon part or a device.
+0x004A1D90	The kick of every shot in the hands holding the gun, and the weapons' own vibration.
+0x004A1DE8	Vibration when you are hit or hurt.
+0x004A1E10	Vibration in scripted scenes and while riding vehicles.
+0x004A1E48	Light steps while running, and landings.
+0x004A1E80	How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake.
+0x004A1F10	Reload with your hands: work magazines, bolts, levers and pumps yourself.
+0x004A1F60	Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never.
+0x004A1FD0	Turn on to start the FIRST RELOADS count over, so the highlights show again.
+0x004A2020	Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be.
+0x004A20A0	Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on.
+0x004A2100	What your other eye sees while you look through a scope.
+0x004A2140	How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view.
+0x004A21A0	WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view.
+0x004A2230	Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view.
+0x004A22A0	The HUD's layout. 4:3 brings its edges closer to the middle of your view.
+0x004A22F0	LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away.
+0x004A2368	Moves the HUD above or below your line of sight.
+0x004A23A0	Moves the game's hint cards up or down.
+0x004A23C8	How much longer the game's timed hints stay up.
+0x004A2400	The size of the prompts in the middle of the view: quick-time events, use and melee.
+0x004A2460	Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects.
+0x004A24D0	How far into your view the damage glow reaches.
+0x004A2500	Shows an arc toward whoever just hit you.
+0x004A2530	The edge of your view pulses while your health is low.
+0x004A2570	Shows camera details in a corner of the view. Meant for testing.
+0x004A25C0	On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse.
+0x004A2630	A dim dotted floor under the Cinema screen, so you do not float in the dark.
+0x004A2680	Shows your controllers while the Cinema screen is up.
+0x004A26C0	In the main menu, a plaque under the Cinema screen with the mod's name and version.
+0x004A2720	In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game.
+0x004A27E0	What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen.
+0x004A2880	After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH).
+0x004A2900	Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET.
+0x004A2950	Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET.
+0x004A29A8	Third-person views. AUTO follows CAMERA PRESET.
+0x004A29D8	Scenes with a free-flying camera. AUTO follows CAMERA PRESET.
+0x004A2A18	Seats and mounted guns. AUTO follows CAMERA PRESET.
+0x004A2A50	Scenes where an animation turns your view. AUTO follows CAMERA PRESET.
+0x004A2AA0	Moments when the story locks the camera. AUTO follows CAMERA PRESET.
+0x004A2AF0	Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET.
+0x004A2B50	The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET.
+0x004A2BB0	Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET.
+0x004A2C18	scene_cycle
+0x004A2C28	right_eye.replay
+0x004A2C40	right_eye.record
+0x004A2C58	left_eye.record
+0x004A2C68	drain.before_right_eye
+0x004A2C80	drain.after_right_eye
+0x004A2C98	drain.after_left_eye
+0x004A2CB0	drain.scene_tail
+0x004A2CC8	light.projection
+0x004A2CE0	light.grid_wait
+0x004A2CF0	terrain.join
+0x004A2D00	hiz.map_wait
+0x004A2D10	present.preview
+0x004A2D20	present.stereo_pass
+0x004A2D38	debug.target_averages
+0x004A2D50	gpu.frame
+0x004A2D60	gpu.before_right_eye
+0x004A2D78	gpu.right_eye
+0x004A2D88	gpu.left_eye
+0x004A2D98	gpu.tail
+0x004A2DA8	gpu.resolve_right
+0x004A2DC0	gpu.resolve_left
+0x004A2DD8	gpu.upscale.input
+0x004A2DF0	gpu.upscale.centre_inputs
+0x004A2E10	gpu.upscale.dlss
+0x004A2E28	gpu.upscale.periphery
+0x004A2E40	gpu.upscale.ring
+0x004A2E58	gpu.upscale.output
+0x004A2E70	aer.previous_transforms
+0x004A2E88	hands.player_update
+0x004A2EA0	hands.hand_target
+0x004A2EB8	hands.arm_pre_pass
+0x004A2ED0	hands.arm_finish
+0x004A2EE8	hands.between_weapons
+0x004A2F00	weapon.update
+0x004A2F30	[actions] {} - {}
+0x004A2F48	Show/hide the ImGui overlay
+0x004A2F68	toggle_overlay
+0x004A2F78	Show/hide the 2nd-view preview window
+0x004A2FA0	toggle_second_window
+0x004A2FB8	Show/hide the camera authority monitor window
+0x004A2FE8	toggle_camera_monitor
+0x004A3000	Show/hide metrics graph
+0x004A3018	toggle_metrics
+0x004A3028	List available actions
+0x004A3040	help
+0x004A3048	seated
+0x004A3050	mod.vr.body.player_height is not set
+0x004A3080	[vr] standing play from the floor is off ({}); the view keeps its relative height and the body stays the game's
+0x004A30F0	[vr] standing play from the floor: eye height {:.2f} m (a full crouch is {:.2f} m lower); needs the STAGE reference space
+0x004A31C8	primary swapchain replaced
+0x004A31E8	swapchain resize
+0x004A3200	swapchain retired
+0x004A3218	renderer shutdown
+0x004A3230	InteractionDesktopOverlay
+0x004A3250	Recenter: the screen and panels in front of the head, and in the world, the view back over the body
+0x004A32B8	Turn left by mod.vr.snap_turn_degrees
+0x004A32E0	Turn right by mod.vr.snap_turn_degrees
+0x004A3308	Switch to the next sun cascade update schedule
+0x004A3338	sun_cascade_schedule_next
+0x004A3360	Compare: the game's TAA at the same render size as the chosen FSR or DLSS mode, and back
+0x004A33C0	Switch to the next upscaling mode (the game's TAA, then FSR and DLSS each at native, quality, balanced, performance, ultra performance); not saved
+0x004A3460	Development: take one upscaler input away (texture LOD bias, jitter) to see what an artefact depends on
+0x004A34D0	Switch foveated upscaling to its next size (off, auto, 45 down to 20 degrees); not saved
+0x004A3530	Switch what anti-aliases the foveated periphery (the mod's TAA or the upscaler's native AA); not saved
+0x004A35A0	Switch to the next DLSS preset (auto, K, M, L, J, E); not saved
+0x004A35E0	Record 5 s of UI panel poses and frame timing to a CSV
+0x004A3618	vr_ui_pose_trace
+0x004A3630	[vr] hand hooks unavailable; the game keeps the hands and weapon
+0x004A3678	on: weapons are taken from the body
+0x004A36A0	unavailable: the inventory hooks did not install
+0x004A36D8	[vr] free hands {}
+0x004A36F0	[vr] weapon handling hooks unavailable; the game's own
+0x004A3730	[vr] weapon hooks unavailable; holster and aim stay on the buttons
+0x004A3778	[vr] controllers drive the hands; the {} hand always holds
+0x004A37C0	[vr] the controllers cannot play the game; the keyboard and mouse still do
+0x004A3810	[vr] the game's aim assist could not be turned off
+0x004A3848	[vr] world scale: {:.3f} world units per metre
+0x004A3880	[renderer] aim focus hook unavailable; scopes focus where the head looks
+0x004A38D0	[vr] production stereo camera integration is unavailable
+0x004A3910	[vr] production renderer path selected; OpenXR tracking camera integration active
+0x004A3968	[renderer] stereo debug replay is unavailable
+0x004A3F10	interaction_debug.mutex
+0x004A3F31	Q8>
+0x004A3F37	>ts=0x{:08X} size=0x{:08X} sum=0x{:08X}
+0x004A3F6C	t$ WH
+0x004A3F80	@WAVAWH
+0x004A3F90	@VAVH
+0x004A3FA0	@SH
+0x004A3FA7	)t$P
+0x004A3FB0	@VH
+0x004A3FC3	USVH
+0x004A3FD5	X UH
+0x004A4003	SAVAWH
+0x004A4015	UWH
+0x004A4025	VWAVH
+0x004A403B	WATH
+0x004A404A	\$ WH
+0x004A4082	VWAVH
+0x004A4097	SUVWAUAVAW
+0x004A40B4	t$ WAVAWH
+0x004A40C3	USVH
+0x004A410A	L$ L
+0x004A4112	USVATAH
+0x004A411D	UVWH
+0x004A4127	3ATAVH
+0x004A4137	L@SH
+0x004A4147	u@SH
+0x004A4166	 3@SVH
+0x004A417B	UAWH
+0x004A4188	@WH
+0x004A419C	USVWAUAWH
+0x004A41A6	l$@SVWH
+0x004A41C0	UAVH
+0x004A41C8	@SVWH
+0x004A41DA	L$ H
+0x004A41EA	D$(H
+0x004A4207	H@SH
+0x004A423F	t$ L
+0x004A4247	W@SWH
+0x004A4258	@USVWATAVAWH
+0x004A4268	@WH
+0x004A4286	PH@VWH
+0x004A4296	L$@VAVH
+0x004A42AD	SUVWATAUAVA
+0x004A4308	@USVWAWH
+0x004A4335	9\$X
+0x004A4342	t$PL
+0x004A4347	|$`H
+0x004A434D	 A^A\_][
+0x004A435D	USVAVH
+0x004A4375	WAWH
+0x004A439A	UWAV
+0x004A43A0	@SWH
+0x004A43C4	USVWAUH
+0x004A4418	@USH
+0x004A4448	@UH
+0x004A4458	@UH
+0x004A44B0	@SH
+0x004A44D0	@UH
+0x004A4537	SATAVH
+0x004A454A	VWATAVH
+0x004A4557	USATH
+0x004A4563	USWH
+0x004A4570	@USVH
+0x004A458E	 H@USVAVH
+0x004A45A0	@UVWAVH
+0x004A45C8	@SH
+0x004A45D0	AhH
+0x004A45EF	UWH
+0x004A45FD	K E
+0x004A4607	S@SH
+0x004A461F	l$ WH
+0x004A4629	l$`I
+0x004A4641	$$$$
+0x004A4656	$$$$$$$$$$$$$$$$$$$$
+0x004A4673	 !"#
+0x004A467B	WATAVAWH
+0x004A4688	@USVWATAUAVH
+0x004A46B6	0HH
+0x004A46CB	UVWATAUAWH
+0x004A46DF	UATAUH
+0x004A46F3	VWAVH@UVAVH
+0x004A470D	UWAVH
+0x004A4738	@UVH
+0x004A474F	UVWH
+0x004A4768	@SVWH
+0x004A478D	UVWAVAWH
+0x004A4797	0@SAVH
+0x004A47BD	UVWATAUAVAWH
+0x004A47CB	USVATAUAVAWH
+0x004A47DD	USATH
+0x004A47EB	SUVWAUAVAWH
+0x004A4807	U@VH
+0x004A4818	@UWH
+0x004A482F	UVWAVAWH
+0x004A483B	UAWH
+0x004A484F	USVWATAUAH
+0x004A485B	USVWATH
+0x004A4868	@USH
+0x004A4878	@UH
+0x004A4898	@SAWH
+0x004A48A2	|$PH
+0x004A48F7	VWAVH
+0x004A4910	@SH
+0x004A491D	=]K
+0x004A492D	AVH
+0x004A4938	@UWAWH
+0x004A4958	@WH
+0x004A4987	t$ WH
+0x004A4999	H L
+0x004A49A0	@USWH
+0x004A49BF	l$ VATAUA@UVAUH
+0x004A49EF	t$ 
+0x004A4A1D	USVAVH
+0x004A4A33	SUVWH
+0x004A4A59	t$ 
+0x004A4A7A	L$ D
+0x004A4A92	L$ SUVWATAUH
+0x004A4AAF	L$ L
+0x004A4AB7	UVWAT
+0x004A4AC6	ArL
+0x004A4ACA	L$0L
+0x004A4ACF	@!L;
+0x004A4AD8	@WATAWH
+0x004A4B0D	USVWAVAWH
+0x004A4B20	@SH
+0x004A4B2B	QxH
+0x004A4B2F	L$0
+0x004A4B3B	USWATH
+0x004A4B50	@USVWATAUAVAWH
+0x004A4B73	UWAVH
+0x004A4B88	\$ VWAVH
+0x004A4BB9	UVWAVH
+0x004A4BE8	@VH
+0x004A4BFA	\$ WH
+0x004A4C08	@SH
+0x004A4C28	@SH
+0x004A4C38	@SH
+0x004A4C4A	\$ UVWAVAWH
+0x004A4C5A	L$ SVWATAWH
+0x004A4C6F	t$ WATAUAH
+0x004A4C86	0HH
+0x004A4CC8	@SH
+0x004A4CD8	@SH
+0x004A4CE0	@USWH
+0x004A4D10	@SH
+0x004A4D34	t$ WATAVH
+0x004A4D58	@SH
+0x004A4D98	@UAWH
+0x004A4DB7	l$ VWATAVAWH
+0x004A4DF0	@SH
+0x004A4E47	l$ VWA
+0x004A4E50	@UVWH
+0x004A4E60	@SH
+0x004A4E6D	)t$@
+0x004A4E78	@WH
+0x004A4E94	t$ WH
+0x004A4EB0	AWH
+0x004A4EC0	ATAUAWH
+0x004A4EDD	)t$ 
+0x004A4EF5	H L
+0x004A4F03	UWH
+0x004A4F3A	UVWATAH
+0x004A4F47	UVWATAUAVH
+0x004A4F57	t$ H
+0x004A4F87	|$ H
+0x004A4F95	UVWAVAWH
+0x004A4FAA	USAUH
+0x004A4FB5	UVWATH
+0x004A4FC5	UVATAWH
+0x004A4FDA	UVAVH
+0x004A4FE0	@jJ
+0x004A4FF0	xJJ
+0x004A5008	`jJ
+0x004A5018	xJJ
+0x004A5030	xjJ
+0x004A5040	xJJ
+0x004A5068	xJJ
+0x004A5090	xJJ
+0x004A50B8	xJJ
+0x004A50E0	xJJ
+0x004A5120	 kJ
+0x004A5148	@kJ
+0x004A5170	XkJ
+0x004A5198	pkJ
+0x004A51A8	HFJ
+0x004A51D0	HFJ
+0x004A51F8	HFJ
+0x004A5220	HFJ
+0x004A52D8	 lJ
+0x004A5300	0lJ
+0x004A5310	xJJ
+0x004A5328	HlJ
+0x004A5350	hlJ
+0x004A5440	token adapter destructor
+0x004A5460	token adapter apply
+0x004A5478	token adapter display text
+0x004A5498	token adapter value count
+0x004A54B8	token adapter enabled
+0x004A54D0	token adapter next
+0x004A54E8	token adapter prev
+0x004A5500	resolution adapter value count
+0x004A5520	resolution adapter enabled
+0x004A5540	resolution adapter next
+0x004A5558	resolution adapter prev
+0x004A5570	api adapter value count
+0x004A5588	api adapter enabled
+0x004A55A0	api adapter next
+0x004A55B8	api adapter prev
+0x004A55D0	int cvar set
+0x004A55E0	int cvar tokens
+0x004A55F0	float cvar slot 0
+0x004A5608	float cvar slot 1
+0x004A5620	console add
+0x004A5630	token adapter set index
+0x004A5648	float adapter value count
+0x004A5668	float adapter enabled
+0x004A5680	float adapter next
+0x004A5698	float adapter prev
+0x004A56B0	float adapter set index
+0x004A56C8	stock float cvar set
+0x004A56E0	console execute
+0x004A56F0	@rJ
+0x004A5718	HrJ
+0x004A5740	XrJ
+0x004A5768	hrJ
+0x004A5790	xrJ
+0x004A5820	(]J
+0x004A5848	8]J
+0x004A5870	H]J
+0x004A5898	X]J
+0x004A58C0	h]J
+0x004A58E8	x]J
+0x004A5998	(sJ
+0x004A59C0	8sJ
+0x004A59E8	HsJ
+0x004A5A10	PsJ
+0x004A5A38	XsJ
+0x004A5A60	dsJ
+0x004A5A88	psJ
+0x004A5AA0	(^J
+0x004A5AB0	xsJ
+0x004A5AC8	8^J
+0x004A5AF0	H^J
+0x004A5B18	X^J
+0x004A5B40	h^J
+0x004A5B68	x^J
+0x004A5C40	sun_fit
+0x004A5C48	sun_cascade_fit
+0x004A5C58	early_depth
+0x004A5C68	gbuffer_start
+0x004A5C78	gbuffer_end
+0x004A5C84	decals
+0x004A5C90	depth_mips
+0x004A5CA0	depth_reduce
+0x004A5CB8	lighting
+0x004A5CC8	atlas_region
+0x004A5CD8	ssr
+0x004A5CE0	sun_shadows
+0x004A5CF0	sun_clear
+0x004A5D00	sun_cascade
+0x004A5D0C	sun_gi
+0x004A5D18	sun_gi_alt
+0x004A5D28	accumulation
+0x004A5D38	local_shadows
+0x004A5D48	volumes
+0x004A5D50	forward
+0x004A5D58	exposure
+0x004A5D64	water
+0x004A5D70	combine
+0x004A5D78	temporal
+0x004A5D84	bloom
+0x004A5D90	final_post
+0x004A5DA0	output_resolve
+0x004A5DB0	atlas_region_fit
+0x004A5DC8	local_shadow_target
+0x004A5DDC	hair
+0x004A5DE8	impostors
+0x004A5DF8	impostors_alt
+0x004A5E08	impostors_sun
+0x004A5E50	@wJ
+0x004A5E68	hwJ
+0x004A5EE0	0xJ
+0x004A5EF8	XxJ
+0x004A5F70	 yJ
+0x004A5F88	HyJ
+0x004A5FA0	pyJ

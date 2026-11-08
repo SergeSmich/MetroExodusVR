@@ -1,0 +1,109 @@
+﻿--- [11] m3_trolley_hint  slot=0x497f70 str=0x498750 len=0
+'Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit.'
+--- [12] m3_map_hint  slot=0x497f90 str=0x4987f0 len=0
+'Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]'
+--- [13] m3_map_updated_hint  slot=0x497fb0 str=0x4987f0 len=0
+'Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]'
+--- [14] m3_map_second_hint  slot=0x497fd0 str=0x498870 len=0
+'Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]'
+--- [15] m3_bagpack_hint  slot=0x497ff0 str=0x4988e0 len=47
+'Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]'
+--- [16] m3_bagpack_hint_upd  slot=0x498010 str=0x4988e0 len=47
+'Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]'
+--- [17] m3_weapon_popup_hint  slot=0x498030 str=0x498970 len=24
+'Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]'
+--- [18] m3_pheumatics_upd  slot=0x498050 str=0x4989f0 len=0
+'Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>'
+--- [19] m3_pheumatics_upd_light  slot=0x498070 str=0x498a90 len=0
+'Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>'
+--- [20] m3_flamethrower_upd  slot=0x498090 str=0x4989f0 len=0
+'Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>'
+--- [21] m3_flamethrower_upd_light  slot=0x4980b0 str=0x498a90 len=0
+'Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>'
+--- [22] m3_wpn_down_hint  slot=0x4980d0 str=0x498b28 len=0
+'Point your weapon down to lower it'
+--- [23] m3_wpn_down_hint_light  slot=0x4980f0 str=0x498b68 len=0
+'Point your weapon down'
+--- [24] m3_wpn_down_sprint_hint  slot=0x498110 str=0x498b98 len=0
+'To sprint further, point your weapon down'
+--- [25] m3_crouch_hint  slot=0x498130 str=0x498bd8 len=0
+'<Press:crouch_toggle> to crouch'
+--- [26] m3_weapon_jammed  slot=0x498150 str=0x498c10 len=0
+'Weapon jammed! Pull the bolt[ or <press:rui>]'
+--- [27] m3_special_ammo_hint  slot=0x498170 str=0x498c60 len=0
+'Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time'
+--- [28] m3_special_ammo_hint_popup  slot=0x498190 str=0x498ce0 len=0
+'Holding <popup_equipment>, press <rui>: your next reload loads the other ammo'
+--- [29] m3_special_ammo_hint_2  slot=0x4981b0 str=0x498d50 len=0
+'Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time'
+--- [30] m3_secondary_hint_flame  slot=0x4981d0 str=0x498dd0 len=56
+'You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+--- [31] m3_secondary_hint_dynamite  slot=0x4981f0 str=0x498e60 len=56
+'You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+--- [32] m3_secondary_hint_knife  slot=0x498210 str=0x498ee0 len=56
+'You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+--- [33] m3_secondary_hint  slot=0x498230 str=0x498f60 len=56
+'Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]'
+--- [34] m3_decoy_hint  slot=0x498250 str=0x498fd0 len=56
+'You found a decoy. Grab <grip_dominant> from the front of your belt'
+--- [35] m3_secondary_choose_hint  slot=0x498270 str=0x498fd0 len=56
+'You found a decoy. Grab <grip_dominant> from the front of your belt'
+--- [36] bino_on_off  slot=0x498290 str=0x499050 len=81
+'Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]'
+--- [37] bino_on_off_popup  slot=0x4982b0 str=0x499050 len=81
+'Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]'
+--- [38] $nightvision  slot=0x4982d0 str=0x4990e0 len=0
+'Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]'
+--- [39] $nightvision_popup  slot=0x4982f0 str=0x4990e0 len=0
+'Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]'
+--- [40] m3_flashlight_hint  slot=0x498310 str=0x499170 len=0
+'Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]'
+--- [41] m3_charger_hint_2_upd  slot=0x498330 str=0x4991e0 len=78
+'Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]'
+--- [42] m3_charger_hint_2_popup  slot=0x498350 str=0x4991e0 len=78
+'Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]'
+--- [43] m3_charger_hint_2_upd_light  slot=0x498370 str=0x4991e0 len=78
+'Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]'
+--- [44] m3_lighter_hint  slot=0x498390 str=0x499280 len=0
+'Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]'
+--- [45] m3_lighter_hint_popup  slot=0x4983b0 str=0x499300 len=0
+'Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]'
+--- [46] m3_lighter_hint_easy  slot=0x4983d0 str=0x499300 len=0
+'Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]'
+--- [47] m3_lighter_hint_popup_easy  slot=0x4983f0 str=0x499300 len=0
+'Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]'
+--- [48] $medkit_easy_hint  slot=0x498410 str=0x4993a0 len=0
+'Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]'
+--- [49] m3_rad_watch_hint  slot=0x498430 str=0x499430 len=0
+'Check the radiation detector on your left wrist'
+--- [50] m3_rad_watch_hint_light  slot=0x498450 str=0x499478 len=0
+'Radiation detector: check your left wrist'
+--- [51] m3_gasmask_hint_upd  slot=0x498470 str=0x4994c0 len=0
+'Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]'
+--- [52] m3_hint_ingame_gasmask_filter_easy  slot=0x498490 str=0x499560 len=127
+'Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]'
+--- [53] m3_hint_ingame_gasmask_filter_upd  slot=0x4984b0 str=0x4995e0 len=127
+'Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]'
+--- [54] m3_gasmask_wipe_hint  slot=0x4984d0 str=0x499650 len=0
+'Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]'
+--- [55] m3_gasmask_wipe_hint_light  slot=0x4984f0 str=0x4996b8 len=0
+'Wipe: rub the visor with an open hand[, or <press:facepalm>]'
+--- [56] m3_gasmask_quick_repair  slot=0x498510 str=0x499710 len=0
+'Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]'
+--- [57] m3_gasmask_quick_repair_easy  slot=0x498530 str=0x4997b0 len=0
+'Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]'
+--- [58] diary_open_hint  slot=0x498550 str=0x499820 len=0
+'New note - read it in the pause menu'
+--- [59] diary_open_hint_xbox  slot=0x498570 str=0x499820 len=0
+'New note - read it in the pause menu'
+--- [60] postcard_open_hint  slot=0x498590 str=0x499878 len=0
+'New postcard - watch it in the pause menu'
+--- [61] postcard_open_hint_xbox  slot=0x4985b0 str=0x499878 len=0
+'New postcard - watch it in the pause menu'
+--- [63] m3_charger_pump  slot=0x4985f0 str=0x4998e8 len=0
+'Pump the charger: <wpn_fire>'
+--- [64] m3_melee_hint  slot=0x498610 str=0x499918 len=0
+'Melee attack: <wpn_fast_knife>'
+--- [65] m3_melee_hint_light  slot=0x498630 str=0x499950 len=0
+'Melee: <wpn_fast_knife>'
+total 54

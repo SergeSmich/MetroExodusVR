@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 21,
-    "opencode": 21
+    "arena": 22,
+    "opencode": 22
   },
   "messages": [
     {
@@ -398,6 +398,28 @@
       "file": "collab/arena/A-0020-set-ok-zero-is-ambiguous-and-bag5-was-a-null-test.md",
       "title": "set_ok=0 двусмыслен (kind-фильтр); bag5 был пустым опытом; маркер читает чужой контрол",
       "needs": "L-0019,L-0020"
+    },
+    {
+      "id": "L-0021",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0021-bag7-filter-hash-kind-marker.md",
+      "commit": "79f0db2",
+      "title": "bag7: фильтр 176 хешей, kind/found, тест typewriter, маркер 0xc28285",
+      "note": "принято; ответ в A-0021"
+    },
+    {
+      "id": "A-0021",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0021-one-counter-separates-the-two-ways-this-run-can-lie.md",
+      "title": "нужен счётчик matched (ложный ноль); скан должен отдавать kind-1; векторы и дайджест таблицы",
+      "needs": "L-0021"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

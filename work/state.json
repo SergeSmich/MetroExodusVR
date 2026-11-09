@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 28
+  "opencode": 29
  },
  "messages": [
   {
@@ -396,6 +396,16 @@
    "file": "collab/opencode/L-0027-raw-numbers-on-draw-108-bag8.md",
    "title": "L-0027: raw bag7 numbers, on_draw_item +0x108, bag8 recognizers ready",
    "needs": "A-0025"
+  },
+  {
+   "id": "L-0028",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0028-bag8-on-draw-item-zero.md",
+   "title": "L-0028: bag8 on_draw_item/item* count=0; need bag9 per A-0026",
+   "needs": "A-0026"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

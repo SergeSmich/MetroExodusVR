@@ -89,6 +89,13 @@ def main():
     ib_control = int.from_bytes(d[0x1938:0x1940], 'little')
     ib_nlen = int.from_bytes(d[0x1940:0x1944], 'little')
     ib_name = d[0x1958:0x1968]
+    of_count = int.from_bytes(d[0x1968:0x196c], 'little')
+    of_vlen = int.from_bytes(d[0x196c:0x1970], 'little')
+    of_control = int.from_bytes(d[0x1970:0x1978], 'little')
+    of_val = d[0x1978:0x1988]
+    curfn_len = int.from_bytes(d[0x1988:0x198c], 'little')
+    curfn_val = d[0x198c:0x1994]
+    first_vt = int.from_bytes(d[0x1998:0x19a0], 'little')
     control = int.from_bytes(d[8:16], "little")
     begin = int.from_bytes(d[0x10:0x18], "little")
     end = int.from_bytes(d[0x18:0x20], "little")
@@ -104,6 +111,10 @@ def main():
           f"vlen={od_vlen} value={od_val!r}")
     print(f"item*: count={ib_count} control={ib_control:#x} "
           f"nlen={ib_nlen} name={ib_name!r}")
+    print(f"override_font_name(game, c): count={of_count} control={of_control:#x} "
+          f"vlen={of_vlen} value={of_val!r}")
+    print(f"current font_name: len={curfn_len} bytes={curfn_val!r}")
+    print(f"first found-control vtable (+0x1998)={first_vt:#x}")
     print(f"gate [c+0xac]&1={gate} qword [c+0x60]={q60:#018x} (hi32={q60 >> 32:#x})")
     print(f"control={control:#x} begin={begin:#x} end={end:#x}")
     span = end - begin if end > begin else 0

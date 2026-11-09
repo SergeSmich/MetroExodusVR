@@ -1,0 +1,10 @@
+encoding: charmap
+  captions (string_view, 0x7e): 180 payloads, longest 28 bytes, 0 over 0x7e
+  table entries: 175 payloads, longest 1763 bytes, 50 over 0x7e
+  extras: 2 payloads, longest 10 bytes, 0 over 0x7e
+  inline std::string sites: 19 entries, 19 fit the 0xf byte SSO buffer
+wrote build\MetroExodusVR.bag8.dll (11206144 bytes)
+translated 180 strings (187 lea sites, 21 stubs)
+.ru section: RVA 0xbcc000, raw 0xa51e00, 384965 bytes
+caption font hook: RVA 0xc27d90 -> prop 'font_name' = font 'typewriter' (setter 0x9bc70 redirected, marker 0xc283c5)
+verify ok: 21 stubs, 560 byte patches

@@ -1,0 +1,22 @@
+0x90b47  84c0                     test al, al
+0x90b49  0f84ae070000             je 0x912fd
+0x90b4f  498bcc                   mov rcx, r12
+0x90b52  4883bf180100000f         cmp qword ptr [rdi + 0x118], 0xf
+0x90b5a  7604                     jbe 0x90b60
+0x90b5c  498b0c24                 mov rcx, qword ptr [r12]
+0x90b60  488b9710010000           mov rdx, qword ptr [rdi + 0x110]
+0x90b67  48837f180f               cmp qword ptr [rdi + 0x18], 0xf
+0x90b6c  7605                     jbe 0x90b73
+0x90b6e  488b07                   mov rax, qword ptr [rdi]
+0x90b71  eb03                     jmp 0x90b76
+0x90b73  488bc7                   mov rax, rdi
+0x90b76  48898570020000           mov qword ptr [rbp + 0x270], rax
+0x90b7d  488b4710                 mov rax, qword ptr [rdi + 0x10]
+0x90b81  48898578020000           mov qword ptr [rbp + 0x278], rax
+0x90b88  488d05d9d04000           lea rax, [rip + 0x40d0d9]   ; "on_click_args"
+0x90b8f  4889442420               mov qword ptr [rsp + 0x20], rax
+0x90b94  48c74424280d000000       mov qword ptr [rsp + 0x28], 0xd
+0x90b9d  48898d00030000           mov qword ptr [rbp + 0x300], rcx
+0x90ba4  .byte
+0x90ba5  .byte
+0x90ba6  95                       xchg ebp, eax

@@ -1,0 +1,23 @@
+0xbcf0c0  04c4                   add al, 0xc4
+0xbcf0c2  f0ff4c0808             lock dec dword ptr [rax + rcx + 8]
+0xbcf0c7  44897db7               mov dword ptr [rbp - 0x49], r15d
+0xbcf0cb  488b1e                 mov rbx, qword ptr [rsi]
+0xbcf0ce  f683ac00000001         test byte ptr [rbx + 0xac], 1
+0xbcf0d5  7418                   je 0xbcf0ef
+0xbcf0d7  4c8d0dfed68a00         lea r9, [rip + 0x8ad6fe]
+0xbcf0de  33d2                   xor edx, edx
+0xbcf0e0  4c8d0569fb8c00         lea r8, [rip + 0x8cfb69]
+0xbcf0e7  488bcb                 mov rcx, rbx
+0xbcf0ea  e851fc47ff             call 0x4ed40
+0xbcf0ef  4c8d0d5afb8c00         lea r9, [rip + 0x8cfb5a]
+0xbcf0f6  c644242000             mov byte ptr [rsp + 0x20], 0
+0xbcf0fb  4533c0                 xor r8d, r8d
+0xbcf0fe  488d55bb               lea rdx, [rbp - 0x45]
+0xbcf102  488bcb                 mov rcx, rbx
+0xbcf105  e8563c48ff             call 0x52d60
+0xbcf10a  8b55bb                 mov edx, dword ptr [rbp - 0x45]
+0xbcf10d  488d8f08010000         lea rcx, [rdi + 0x108]
+0xbcf114  e8f77347ff             call 0x46510
+0xbcf119  8b45bb                 mov eax, dword ptr [rbp - 0x45]
+0xbcf11c  85c0                   test eax, eax
+0xbcf11e  7419                   je 0xbcf139

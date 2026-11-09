@@ -1,0 +1,37 @@
+0xbce360  098d004c8964           or dword ptr [rbp + 0x64894c00], ecx
+0xbce366  2428                   and al, 0x28
+0xbce368  4c8d05f1088d00         lea r8, [rip + 0x8d08f1]
+0xbce36f  33d2                   xor edx, edx
+0xbce371  4889442420             mov qword ptr [rsp + 0x20], rax
+0xbce376  e8c54848ff             call 0x52c40
+0xbce37b  488b0b                 mov rcx, qword ptr [rbx]
+0xbce37e  488d8608010000         lea rax, [rsi + 0x108]
+0xbce385  c7442430ffffffff       mov dword ptr [rsp + 0x30], 0xffffffff
+0xbce38d  4c8d0d8c098d00         lea r9, [rip + 0x8d098c]
+0xbce394  4c89642428             mov qword ptr [rsp + 0x28], r12
+0xbce399  4c8d05b0088d00         lea r8, [rip + 0x8d08b0]
+0xbce3a0  33d2                   xor edx, edx
+0xbce3a2  4889442420             mov qword ptr [rsp + 0x20], rax
+0xbce3a7  e8944848ff             call 0x52c40
+0xbce3ac  0fb796ea000000         movzx edx, word ptr [rsi + 0xea]
+0xbce3b3  488b8ee0000000         mov rcx, qword ptr [rsi + 0xe0]
+0xbce3ba  e8d14b4eff             call 0xb2f90
+0xbce3bf  488bce                 mov rcx, rsi
+0xbce3c2  e829b547ff             call 0x498f0
+0xbce3c7  488bce                 mov rcx, rsi
+0xbce3ca  e821b547ff             call 0x498f0
+0xbce3cf  488b3b                 mov rdi, qword ptr [rbx]
+0xbce3d2  440fb786ea000000       movzx r8d, word ptr [rsi + 0xea]
+0xbce3da  48897d30               mov qword ptr [rbp + 0x30], rdi
+0xbce3de  4885ff                 test rdi, rdi
+0xbce3e1  7414                   je 0xbce3f7
+0xbce3e3  8b4f14                 mov ecx, dword ptr [rdi + 0x14]
+0xbce3e6  8d4101                 lea eax, [rcx + 1]
+0xbce3e9  894714                 mov dword ptr [rdi + 0x14], eax
+0xbce3ec  85c9                   test ecx, ecx
+0xbce3ee  7907                   jns 0xbce3f7
+0xbce3f0  4c896530               mov qword ptr [rbp + 0x30], r12
+0xbce3f4  498bfc                 mov rdi, r12
+0xbce3f7  41b101                 mov r9b, 1
+0xbce3fa  4488642420             mov byte ptr [rsp + 0x20], r12b
+0xbce3ff  33                     .byte

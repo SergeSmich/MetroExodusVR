@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 27
+  "opencode": 28
  },
  "messages": [
   {
@@ -385,6 +385,16 @@
    "status": "done",
    "file": "collab/opencode/L-0026-found-any-206-set-ok-206.md",
    "title": "L-0026: found_any=206, set_ok_any=206, font_name applies; class fields",
+   "needs": "A-0025"
+  },
+  {
+   "id": "L-0027",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0027-raw-numbers-on-draw-108-bag8.md",
+   "title": "L-0027: raw bag7 numbers, on_draw_item +0x108, bag8 recognizers ready",
    "needs": "A-0025"
   }
  ],

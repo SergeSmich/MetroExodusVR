@@ -30,7 +30,7 @@ build\MetroExodusVR.bag7.dll hook RVA 0xc27d90 -> file off 0xaadb90
 0xc27deb  lea rax, [rip + 0x4b3]
 0xc27df2  inc dword ptr [rax + 4]
 0xc27df5  mov rdx, qword ptr [rdi + 8]
-0xc27df9  mov dword ptr [rax + 0x38], edx
+0xc27df9  mov dword ptr [rax + 0x28], edx
 0xc27dfc  mov r9, qword ptr [rdi]
 0xc27dff  mov r10d, 8
 0xc27e05  cmp rdx, r10
@@ -66,7 +66,7 @@ build\MetroExodusVR.bag7.dll hook RVA 0xc27d90 -> file off 0xaadb90
 0xc27e70  inc dword ptr [rax + 0x2c]
 0xc27e73  mov byte ptr [rax + 0x27], 0
 0xc27e77  mov byte ptr [rax + 0x26], 0
-0xc27e7b  mov byte ptr [rax + 0x3c], 0
+0xc27e7b  mov byte ptr [rax + 0x23], 0
 0xc27e7f  mov rdx, qword ptr [rbx + 0x38]
 0xc27e83  mov r9, qword ptr [rbx + 0x40]
 0xc27e87  lea r10, [rip + 0x142]
@@ -92,7 +92,7 @@ build\MetroExodusVR.bag7.dll hook RVA 0xc27d90 -> file off 0xaadb90
 0xc27ecb  je 0xc27ed9
 0xc27ecd  cmp r8b, 2
 0xc27ed1  jne 0xc27ee3
-0xc27ed3  mov byte ptr [rax + 0x3c], 1
+0xc27ed3  mov byte ptr [rax + 0x23], 1
 0xc27ed7  jmp 0xc27ee3
 0xc27ed9  mov byte ptr [rax + 0x26], 1
 0xc27edd  mov byte ptr [rax + 0x27], 1
@@ -110,3 +110,65 @@ build\MetroExodusVR.bag7.dll hook RVA 0xc27d90 -> file off 0xaadb90
 0xc27f1c  lea r8, [rsp + 0x10]
 0xc27f21  call 0x9bc70
 0xc27f26  lea rcx, [rip + 0x378]
+0xc27f2d  mov byte ptr [rcx + 0x24], al
+0xc27f30  mov rax, qword ptr [rbx + 0x60]
+0xc27f34  mov qword ptr [rcx + 0x40], rax
+0xc27f38  movzx eax, byte ptr [rbx - 0x54]
+0xc27f3c  and al, 1
+0xc27f3e  mov byte ptr [rcx + 0x25], al
+0xc27f41  mov qword ptr [rcx + 8], rbx
+0xc27f45  mov rax, qword ptr [rbx + 0x38]
+0xc27f49  mov qword ptr [rcx + 0x10], rax
+0xc27f4d  mov rax, qword ptr [rbx + 0x40]
+0xc27f51  mov qword ptr [rcx + 0x18], rax
+0xc27f55  mov rax, qword ptr [rsp + 0x88]
+0xc27f5d  mov qword ptr [rcx + 0x38], rax
+0xc27f61  mov rax, qword ptr [rcx + 0x10]
+0xc27f65  mov rdx, qword ptr [rcx + 0x18]
+0xc27f69  lea rdi, [rcx + 0x48]
+0xc27f6d  xor r8d, r8d
+0xc27f70  cmp rax, rdx
+0xc27f73  jae 0xc27fa3
+0xc27f79  cmp r8d, 0x28
+0xc27f7d  jae 0xc27fa3
+0xc27f83  mov rsi, rax
+0xc27f86  mov qword ptr [rsp + 0x10], rcx
+0xc27f8b  cld 
+0xc27f8c  mov ecx, 0x98
+0xc27f91  rep movsb byte ptr [rdi], byte ptr [rsi]
+0xc27f93  mov rcx, qword ptr [rsp + 0x10]
+0xc27f98  mov rax, rsi
+0xc27f9b  inc r8d
+0xc27f9e  jmp 0xc27f70
+0xc27fa3  mov dword ptr [rcx + 0x20], r8d
+0xc27fa7  add rsp, 0x20
+0xc27fab  pop r11
+0xc27fad  pop r10
+0xc27faf  pop r9
+0xc27fb1  pop r8
+0xc27fb3  pop rsi
+0xc27fb4  pop rdx
+0xc27fb5  pop rcx
+0xc27fb6  pop rax
+0xc27fb7  pop r15
+0xc27fb9  pop r14
+0xc27fbb  pop rdi
+0xc27fbc  pop rbp
+0xc27fbd  pop rbx
+0xc27fbe  push rbx
+0xc27fbf  push rbp
+0xc27fc0  push rdi
+0xc27fc1  push r14
+0xc27fc3  jmp 0x9bc76
+0xc27fc8  int3 
+0xc27fc9  int3 
+0xc27fca  int3 
+0xc27fcb  int3 
+0xc27fcc  int3 
+0xc27fcd  int3 
+0xc27fce  int3 
+0xc27fcf  int3 
+0xc27fd0  outsw dx, word ptr [rsi]
+0xc27fd2  outsb dx, byte ptr [rsi]
+0xc27fd3  je 0xc28034
+0xc27fd5  outsb dx, byte ptr [rsi]

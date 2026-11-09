@@ -625,7 +625,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     mfx2 = len(code) - 4
     code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
     code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
-    code += b"\x89\x50\x38"  # mov [rax+0x38], edx  (len at +0x38)
+    code += b"\x89\x50\x28"  # mov [rax+0x28], edx  (caption len)
     code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (caption bytes)
     code += b"\x41\xba\x08\0\0\0"  # mov r10d, 8
     code += b"\x4c\x39\xd2"  # cmp rdx, r10
@@ -681,7 +681,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
     code += b"\xc6\x40\x27\x00"  # mov byte [rax+0x27], 0 (found = 0)
     code += b"\xc6\x40\x26\x00"  # mov byte [rax+0x26], 0 (body kind = 0)
-    code += b"\xc6\x40\x3c\x00"  # mov byte [rax+0x3c], 0 (has kind-2 = 0)
+    code += b"\xc6\x40\x23\x00"  # mov byte [rax+0x23], 0 (has kind-2 = 0)
     code += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38] (bag begin/cursor)
     code += b"\x4c\x8b\x4b\x40"  # mov r9, [rbx+0x40]  (bag end)
     code += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+prop_name]
@@ -724,7 +724,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x41\x80\xf8\x02"  # cmp r8b, 2
     sk_skip = len(code)
     code += b"\x75\0"  # jne scan_next (kinds 0/3/4 ignored, like setter)
-    code += b"\xc6\x40\x3c\x01"  # mov byte [rax+0x3c], 1 (kind-2 header seen)
+    code += b"\xc6\x40\x23\x01"  # mov byte [rax+0x23], 1 (kind-2 header seen)
     sk_h2 = len(code)
     code += b"\xeb\0"  # jmp scan_next
     sbody = len(code)
@@ -769,7 +769,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x89\x41\x18"  # mov [rcx+0x18], rax
     # return address of whoever set the property (13 pushes + 0x20 shadow)
     code += b"\x48\x8b\x84\x24\x88\0\0\0"  # mov rax, [rsp+0x88]
-    code += b"\x48\x89\x41\x28"  # mov [rcx+0x28], rax
+    code += b"\x48\x89\x41\x38"  # mov [rcx+0x38], rax (caller)
 
     # --- copy the record list into the marker, RAW ----------------------------
     # Each record is 0x98 bytes: kind @0, name as std::string {ptr @+8,

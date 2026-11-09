@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 23
+  "opencode": 24
  },
  "messages": [
   {
@@ -346,6 +346,16 @@
    "file": "collab/opencode/L-0022-vectors-ok-matched-counter-kind1-scan.md",
    "title": "L-0022: filter vectors OK, matched counter, kind-1 scan",
    "needs": "A-0021"
+  },
+  {
+   "id": "L-0023",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0023-marker-layout-fixed-bag7-installed.md",
+   "title": "L-0023: marker layout fixed per A-0022, bag7 installed",
+   "needs": "A-0022"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -5,8 +5,9 @@ Usage: python work/dump_bag.py <marker_rva_hex>
 Marker layout (see tools/apply_ru.py build_caption_font_hook, bag6+):
   header:
     +0x00 calls dword, +0x04 caption matches dword, +0x24 result of the set
-    +0x2c last caption len, +0x30..0x40 last caption sample (16 bytes)
-    +0x40 qword [control+0x60], +0x25 gate [control+0xac]&1
+    +0x28 dword caption len, +0x2c dword matched, +0x30..0x38 sample (8)
+    +0x38 Q caller, +0x40 Q [control+0x60], +0x25 gate
+    +0x23 has_kind2, +0x26 body kind, +0x27 found
     +0x48 raw records (stride 0x98, up to 40)
     +0x08 last control, +0x10 bag begin, +0x18 bag end, +0x20 record count
     +0x28 caller return address
@@ -68,17 +69,17 @@ def main():
     res = d[0x24]
     gate = d[0x25]
     q60 = int.from_bytes(d[0x40:0x48], 'little')
-    cap_len = int.from_bytes(d[0x38:0x3c], 'little')
+    cap_len = int.from_bytes(d[0x28:0x2c], 'little')
     cap_sample = d[0x30:0x38]
     kind_found = d[0x26]
     found = d[0x27]
     matched = int.from_bytes(d[0x2c:0x30], 'little')
-    has_kind2 = d[0x3c]
+    has_kind2 = d[0x23]
     control = int.from_bytes(d[8:16], "little")
     begin = int.from_bytes(d[0x10:0x18], "little")
     end = int.from_bytes(d[0x18:0x20], "little")
     count = int.from_bytes(d[0x20:0x24], "little")
-    caller = int.from_bytes(d[0x28:0x30], "little")
+    caller = int.from_bytes(d[0x38:0x40], "little")
     print(f"calls={calls} caption={caption} set_ok={res}")
     print(f"matched={matched} last caption len={cap_len} sample={cap_sample!r}")
     print(f"found={found} kind={kind_found} has_kind2={has_kind2}")

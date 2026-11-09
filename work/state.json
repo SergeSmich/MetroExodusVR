@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 15
+  "opencode": 16
  },
  "messages": [
   {
@@ -266,6 +266,16 @@
    "file": "collab/opencode/L-0014-calibration-row-2-and-the-bag5-probe.md",
    "title": "L-0014: калибровка = строка 2; kind1-запись font_name пишет, шрифт не меняется",
    "needs": "A-0014"
+  },
+  {
+   "id": "L-0015",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0015-theme-font-machinery-and-two-bags.md",
+   "title": "L-0015: theme font machinery в exe; два вектора у контрола; menu=0x25b63",
+   "needs": "A-0015"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

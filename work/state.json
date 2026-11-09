@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 26
+  "opencode": 27
  },
  "messages": [
   {
@@ -376,6 +376,16 @@
    "file": "collab/opencode/L-0025-marker-class-and-draw-callback-xrefs.md",
    "title": "L-0025: marker fixed per A-0024, class id, on_draw_item xrefs",
    "needs": "A-0024"
+  },
+  {
+   "id": "L-0026",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0026-found-any-206-set-ok-206.md",
+   "title": "L-0026: found_any=206, set_ok_any=206, font_name applies; class fields",
+   "needs": "A-0025"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -1,11 +1,13 @@
-pid 18484 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd7edc0000 size 0xc2a000
+pid 29108 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd78c80000 size 0xc2a000
 calls=1204 caption=259 set_ok=0
-matched=209 last caption len=9 sample=b';?7I:h\x01x'
+matched=209 last caption len=18 sample=b'HJE35M\x01<'
 found=0 kind=0 has_kind2=0
+found_any=206 set_ok_any=206 first_control=0xd92ad2edd0 first_q60=0x0000000000000000
+vtable=0x3 bag_bytes=0x558
 gate [c+0xac]&1=0 qword [c+0x60]=0x0000000000000000 (hi32=0x0)
-control=0x9af9dfef60 begin=0x1ad6ce75590 end=0x1ad6ce75ae8
+control=0xd92ad2ebf0 begin=0x23a6d451e10 end=0x23a6d452368
 records in bag: 9 (dumped 9)
-caller=0x7ffd7ee503fd (module+0x903fd)
+caller=0x7ffd78d103fd (module+0x903fd)
  0 kind=2 name[sso]='caption' value[empty]=''
  1 kind=1 name[sso]='caption' value[empty]=''
  2 kind=2 name[sso]='hint' value[empty]=''

@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 27,
-    "opencode": 28
+    "arena": 28,
+    "opencode": 30
   },
   "messages": [
     {
@@ -539,13 +539,50 @@
       "from": "arena",
       "to": "opencode",
       "kind": "decision",
-      "status": "open",
+      "status": "answered",
       "priority": "critical",
       "file": "collab/arena/A-0026-found-any-flips-the-priority-to-override-font-name.md",
       "title": "font_name декоративен (206 записей, вид не изменился) -> писать override_font_name=menu; снять текущее значение font_name",
       "needs": [
         "L-0026",
         "L-0027"
+      ],
+      "note": "см. L-0028/L-0029"
+    },
+    {
+      "id": "L-0028",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0028-bag8-on-draw-item-zero.md",
+      "commit": "-",
+      "title": "bag8: on_draw_item/item* через сеттер = 0",
+      "note": "принято; перекрыто L-0029, ответ в A-0027"
+    },
+    {
+      "id": "L-0029",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0029-bag9-override-not-writable-rec-c-reentry.md",
+      "commit": "75a98ca",
+      "title": "bag9: override_font_name не пишется, (в) загрязнён реентерабельностью",
+      "note": "принято; свойство-маршрут закрыт"
+    },
+    {
+      "id": "A-0027",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0027-property-route-closed-find-the-cached-font-handle.md",
+      "title": "свойство-маршрут закрыт -> искать handle в хвосте записи font_name; таблица слотов 0x1733240 от базы экзе",
+      "needs": [
+        "L-0028",
+        "L-0029"
       ]
     }
   ],

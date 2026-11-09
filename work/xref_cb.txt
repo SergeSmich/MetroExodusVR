@@ -1,0 +1,7 @@
+0xb32426  488d15d3979500         lea rdx, [rip + 0x9597d3]
+0xb3248f  488d1582979500         lea rdx, [rip + 0x959782]
+0xb324f8  488d15f9979500         lea rdx, [rip + 0x9597f9]
+0xb325ca  488d155f979500         lea rdx, [rip + 0x95975f]
+0xbce399  4c8d05b0088d00         lea r8, [rip + 0x8d08b0]
+0xbcf0e0  4c8d0569fb8c00         lea r8, [rip + 0x8cfb69]
+0xbcf0ef  4c8d0d5afb8c00         lea r9, [rip + 0x8cfb5a]

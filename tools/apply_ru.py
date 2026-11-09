@@ -624,25 +624,6 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     mfx2 = len(code) - 4
     code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
-    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
-    code += b"\x89\x50\x28"  # mov [rax+0x28], edx  (caption len)
-    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (caption bytes)
-    code += b"\x41\xba\x08\0\0\0"  # mov r10d, 8
-    code += b"\x4c\x39\xd2"  # cmp rdx, r10
-    ncclamp = len(code)
-    code += b"\x76\x03"  # jbe keep (count stays rdx)
-    code += b"\x44\x89\xd2"  # mov edx, r10d (count = 8)
-    code += b"\x45\x33\xdb"  # xor r11d, r11d
-    nsloop = len(code)
-    code += b"\x4c\x39\xda"  # cmp rdx, r11
-    nb1 = len(code)
-    code += b"\x74\0"  # je sample done
-    code += b"\x47\x0f\xb6\x04\x19"  # movzx r8d, byte [r9+r11]
-    code += b"\x46\x88\x44\x18\x30"  # mov [rax+r11+0x30], r8b (sample)
-    code += b"\x49\xff\xc3"  # inc r11
-    nb2 = len(code)
-    code += b"\xeb\0"  # jmp nsloop
-    nsdone = len(code)
 
     # --- positive filter: fnv1a32(caption value) must be in our table --------
     code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
@@ -679,6 +660,26 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     fixups.append((len(code) - 4, b"marker"))
     code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
+    # len + sample describe THIS matched call (A-0024 §1)
+    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
+    code += b"\x89\x50\x28"  # mov [rax+0x28], edx  (caption len)
+    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (caption bytes)
+    code += b"\x41\xba\x08\0\0\0"  # mov r10d, 8
+    code += b"\x4c\x39\xd2"  # cmp rdx, r10
+    ncclamp = len(code)
+    code += b"\x76\x03"  # jbe keep (count stays rdx)
+    code += b"\x44\x89\xd2"  # mov edx, r10d (count = 8)
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    nsloop = len(code)
+    code += b"\x4c\x39\xda"  # cmp rdx, r11
+    nb1 = len(code)
+    code += b"\x74\0"  # je sample done
+    code += b"\x47\x0f\xb6\x04\x19"  # movzx r8d, byte [r9+r11]
+    code += b"\x46\x88\x44\x18\x30"  # mov [rax+r11+0x30], r8b (sample)
+    code += b"\x49\xff\xc3"  # inc r11
+    nb2 = len(code)
+    code += b"\xeb\0"  # jmp nsloop
+    nsdone = len(code)
     code += b"\xc6\x40\x27\x00"  # mov byte [rax+0x27], 0 (found = 0)
     code += b"\xc6\x40\x26\x00"  # mov byte [rax+0x26], 0 (body kind = 0)
     code += b"\xc6\x40\x23\x00"  # mov byte [rax+0x23], 0 (has kind-2 = 0)
@@ -770,6 +771,12 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # return address of whoever set the property (13 pushes + 0x20 shadow)
     code += b"\x48\x8b\x84\x24\x88\0\0\0"  # mov rax, [rsp+0x88]
     code += b"\x48\x89\x41\x38"  # mov [rcx+0x38], rax (caller)
+    # class identity (A-0024 §5): vtable qword + bag byte size
+    code += b"\x48\x8b\x03"  # mov rax, [rbx] (vtable ptr)
+    code += b"\x48\x89\x81\x18\x19\0\0"  # mov [rcx+0x1918], rax
+    code += b"\x48\x8b\x41\x18"  # mov rax, [rcx+0x18] (bag end)
+    code += b"\x48\x2b\x41\x10"  # sub rax, [rcx+0x10] (begin)
+    code += b"\x89\x81\x20\x19\0\0"  # mov [rcx+0x1920], eax (bag bytes)
 
     # --- aggregate counters across matched controls (tail of the marker) --
     code += b"\x80\x79\x27\x00"  # cmp byte [rcx+0x27], 0 (found?)

@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 25
+  "opencode": 26
  },
  "messages": [
   {
@@ -366,6 +366,16 @@
    "file": "collab/opencode/L-0024-run-matched-209-no-font-name-record.md",
    "title": "L-0024: run matched=209, last control has no font_name; visuals confirm different fonts",
    "needs": "A-0023"
+  },
+  {
+   "id": "L-0025",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0025-marker-class-and-draw-callback-xrefs.md",
+   "title": "L-0025: marker fixed per A-0024, class id, on_draw_item xrefs",
+   "needs": "A-0024"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 17
+  "opencode": 18
  },
  "messages": [
   {
@@ -286,6 +286,16 @@
    "file": "collab/opencode/L-0016-bag6-override-font-name-hook.md",
    "title": "L-0016: bag6 built (override_font_name hook, raw-marker 0x1C00), variant B rejected",
    "needs": "A-0016"
+  },
+  {
+   "id": "L-0017",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0017-xref-override-font-name-and-marker-counters.md",
+   "title": "L-0017: xref override_font_name in exe; marker counters/sample; static work delegated to Arena",
+   "needs": "A-0017"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

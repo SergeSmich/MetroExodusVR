@@ -589,10 +589,10 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8b\xea"  # mov rbp, rdx  (name string_view)
     code += b"\x49\x8b\xf8"  # mov rdi, r8   (value string_view)
 
-    # --- debug marker: [0] calls seen, [1] caption matches, [2] last result --
+    # --- debug marker: [+0x00] calls dword, [+0x04] caption dword -------------
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     mfx1 = len(code) - 4
-    code += b"\xfe\x00"  # inc byte ptr [rax]
+    code += b"\xff\x40\x00"  # inc dword ptr [rax]      (calls seen)
 
     # --- name == "caption"? --------------------------------------------------
     code += b"\x48\x83\x7d\x08\x07"  # cmp qword ptr [rbp+8], 7
@@ -609,10 +609,30 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     jne4 = len(code)
     code += b"\x0f\x85\0\0\0\0"
 
-    # --- set font_name on the same control ----------------------------------
+    # --- caption matched: counter + sample of the caption bytes ---------------
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     mfx2 = len(code) - 4
-    code += b"\xc6\x40\x01\x01"  # mov byte ptr [rax+1], 1
+    code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
+    code += b"\x4c\x8b\x57\x08"  # mov r10, [rdi+8]     (caption len)
+    code += b"\x44\x89\x50\x2c"  # mov [rax+0x2c], r10d (caption len dword)
+    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]            (caption data ptr)
+    code += b"\x4c\x89\xd2"  # mov rdx, r10             (count)
+    code += b"\x41\xba\x10\0\0\0"  # mov r10d, 0x10
+    code += b"\x4c\x39\xd2"  # cmp rdx, r10
+    ncclamp = len(code)
+    code += b"\x76\x03"  # jbe keep (count stays rdx)
+    code += b"\x44\x89\xd2"  # mov edx, r10d (count = 0x10)
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    nsloop = len(code)
+    code += b"\x4c\x39\xda"  # cmp rdx, r11
+    nb1 = len(code)
+    code += b"\x74\0"  # je sample done
+    code += b"\x47\x0f\xb6\x04\x19"  # movzx r8d, byte [r9+r11]
+    code += b"\x46\x88\x44\x18\x30"  # mov [rax+r11+0x30], r8b (marker sample)
+    code += b"\x49\xff\xc3"  # inc r11
+    nb2 = len(code)
+    code += b"\xeb\0"  # jmp nsloop
+    nsdone = len(code)
     # --- set the font property on the same control ---------------------------
     prop = prop_name.encode("ascii")
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
@@ -630,7 +650,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\xe8\0\0\0\0"  # call site (the setter itself)
     code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
     mfx3 = len(code) - 4
-    code += b"\x88\x41\x02"  # mov byte ptr [rcx+2], al
+    code += b"\x88\x41\x24"  # mov byte ptr [rcx+0x24], al (set result)
     code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (last caption control)
     # record bag bounds, read the same way the setter does
     code += b"\x48\x8b\x43\x38"  # mov rax, [rbx+0x38]
@@ -676,6 +696,9 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     for pos, target in ((jae1, copied_done), (jae2, copied_done)):
         struct.pack_into("<i", code, pos + 2, target - (pos + 6))
     struct.pack_into("<i", code, jb11 + 1, loop_start - (jb11 + 5))
+    # caption-sample loop branches (short, 8-bit displacements)
+    for pos, target in ((nb1, nsdone), (nb2, nsloop)):
+        code[pos + 1] = (target - (pos + 2)) & 0xFF
 
     # --- epilogue ------------------------------------------------------------
     done = len(code)

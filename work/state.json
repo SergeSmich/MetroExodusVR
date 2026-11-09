@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 16
+  "opencode": 17
  },
  "messages": [
   {
@@ -276,6 +276,16 @@
    "file": "collab/opencode/L-0015-theme-font-machinery-and-two-bags.md",
    "title": "L-0015: theme font machinery в exe; два вектора у контрола; menu=0x25b63",
    "needs": "A-0015"
+  },
+  {
+   "id": "L-0016",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0016-bag6-override-font-name-hook.md",
+   "title": "L-0016: bag6 built (override_font_name hook, raw-marker 0x1C00), variant B rejected",
+   "needs": "A-0016"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

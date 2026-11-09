@@ -134,6 +134,12 @@ MENU_HI = 0xC0000
 # validator (runs before a menu page is applied, rejects non-ASCII).
 VALIDATORS = (0xA1816, 0xA30F6, 0xA12C8)
 
+# Generic control-property setter ``bool set(control, name_sv, value_sv)``.
+# Every caption goes through it, so it is the cheapest place to also assign a
+# font to the control (the mod itself never sets ``font_name``).
+SETPROP_RVA = 0x9BC70
+SETPROP_HEAD = b"\x40\x53\x55\x57\x41\x56"  # push rbx, rbp, rdi, r14
+
 # std::string SSO capacity used by all inline constructions in the menu code
 SSO_CAP = 0xF
 MAX_LEN = 0x7E  # caption length limit enforced by the page builder
@@ -557,6 +563,163 @@ def build_stub(base, disp, enc, string_rva, stub_rva, back_rva):
     return bytes(b)
 
 
+def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"):
+    """Code cave for the property setter ``site_rva``.
+
+    The mod sets the ``caption`` property of a control but never touches the
+    font, so the engine draws the caption with its default ``arial`` (ASCII
+    only).  This hook watches the setter and, whenever the property being set
+    is ``caption``, sets ``prop_name`` (a font property: ``font_name`` class
+    level or ``override_font_name`` control level, A-0016 §7.2) on the same
+    control first.  The nested call re-enters the site and the hook lets it
+    through.
+
+    The cave starts at ``blob_rva``; the caller maps the first six bytes of
+    ``site_rva`` to it.  Returns ``(blob, site_patch)``.
+    """
+    code = bytearray()
+    fixups = []
+
+    # --- save every register we clobber (5 callee-saved + 8 volatile) --------
+    code += b"\x53\x55\x57\x41\x56\x41\x57"  # push rbx, rbp, rdi, r14, r15
+    code += b"\x50\x51\x52\x56\x41\x50\x41\x51\x41\x52\x41\x53"  # rax..r11
+    code += b"\x48\x83\xec\x20"  # sub rsp, 0x20 (shadow space, keeps 16B align)
+
+    code += b"\x48\x8b\xd9"  # mov rbx, rcx  (control)
+    code += b"\x48\x8b\xea"  # mov rbp, rdx  (name string_view)
+    code += b"\x49\x8b\xf8"  # mov rdi, r8   (value string_view)
+
+    # --- debug marker: [0] calls seen, [1] caption matches, [2] last result --
+    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
+    mfx1 = len(code) - 4
+    code += b"\xfe\x00"  # inc byte ptr [rax]
+
+    # --- name == "caption"? --------------------------------------------------
+    code += b"\x48\x83\x7d\x08\x07"  # cmp qword ptr [rbp+8], 7
+    jne1 = len(code)
+    code += b"\x0f\x85\0\0\0\0"  # jne done
+    code += b"\x48\x8b\x45\x00"  # mov rax, [rbp]
+    code += b"\x81\x38" + b"capt"  # cmp dword ptr [rax], 'capt'
+    jne2 = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+    code += b"\x66\x81\x78\x04" + b"io"  # cmp word ptr [rax+4], 'io'
+    jne3 = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+    code += b"\x80\x78\x06" + b"n"  # cmp byte ptr [rax+6], 'n'
+    jne4 = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+
+    # --- set font_name on the same control ----------------------------------
+    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
+    mfx2 = len(code) - 4
+    code += b"\xc6\x40\x01\x01"  # mov byte ptr [rax+1], 1
+    # --- set the font property on the same control ---------------------------
+    prop = prop_name.encode("ascii")
+    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
+    fixups.append((len(code) - 4, b"prop_name"))
+    code += b"\x48\x89\x04\x24"  # mov [rsp], rax
+    code += b"\x48\xc7\x44\x24\x08" + struct.pack("<I", len(prop))  # name len
+    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+font_value]
+    fixups.append((len(code) - 4, b"font_value"))
+    code += b"\x48\x89\x44\x24\x10"  # mov [rsp+0x10], rax
+    code += b"\x48\xc7\x44\x24\x18" + struct.pack("<I", len(font_name))
+    code += b"\x48\x8b\xcb"  # mov rcx, rbx
+    code += b"\x48\x8d\x14\x24"  # lea rdx, [rsp]
+    code += b"\x4c\x8d\x44\x24\x10"  # lea r8, [rsp+0x10]
+    call_pos = len(code)
+    code += b"\xe8\0\0\0\0"  # call site (the setter itself)
+    code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mfx3 = len(code) - 4
+    code += b"\x88\x41\x02"  # mov byte ptr [rcx+2], al
+    code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (last caption control)
+    # record bag bounds, read the same way the setter does
+    code += b"\x48\x8b\x43\x38"  # mov rax, [rbx+0x38]
+    code += b"\x48\x89\x41\x10"  # mov [rcx+0x10], rax
+    code += b"\x48\x8b\x43\x40"  # mov rax, [rbx+0x40]
+    code += b"\x48\x89\x41\x18"  # mov [rcx+0x18], rax
+    # return address of whoever set the property (13 pushes + 0x20 shadow)
+    code += b"\x48\x8b\x84\x24\x88\0\0\0"  # mov rax, [rsp+0x88]
+    code += b"\x48\x89\x41\x28"  # mov [rcx+0x28], rax
+
+    # --- copy the record list into the marker, RAW ----------------------------
+    # Each record is 0x98 bytes: kind @0, name as std::string {ptr @+8,
+    # len @+0x18, cap @+0x20} and value at +0x60 {ptr, len @+0x70, cap
+    # @+0x78}.  We copy the records verbatim (40 max) at marker+0x40; the
+    # offline parser (work/dump_bag.py) reads SSO content directly and heap
+    # pointers only while they are still alive.  The stale 'glued names'
+    # artefact (L-0015 §2) came from the old 15-byte compact entries.
+    code += b"\x48\x8b\x41\x10"  # mov rax, [rcx+0x10]  (bag begin)
+    code += b"\x48\x8b\x51\x18"  # mov rdx, [rcx+0x18]  (bag end)
+    code += b"\x48\x8d\x79\x40"  # lea rdi, [rcx+0x40]  (out: raw records)
+    code += b"\x45\x33\xc0"  # xor r8d, r8d          (records copied)
+    loop_start = len(code)
+    code += b"\x48\x3b\xc2"  # cmp rax, rdx
+    jae1 = len(code)
+    code += b"\x0f\x83\0\0\0\0"  # jae done (near)
+    code += b"\x41\x83\xf8\x28"  # cmp r8d, 40
+    jae2 = len(code)
+    code += b"\x0f\x83\0\0\0\0"  # jae done (near)
+    code += b"\x48\x8b\xf0"  # mov rsi, rax           (src record)
+    code += b"\x48\x89\x4c\x24\x10"  # mov [rsp+0x10], rcx  (park marker)
+    code += b"\xfc"  # cld (rep movsb needs DF=0)
+    code += b"\xb9\x98\0\0\0"  # mov ecx, 0x98
+    code += b"\xf3\xa4"  # rep movsb              (record -> marker, raw)
+    code += b"\x48\x8b\x4c\x24\x10"  # mov rcx, [rsp+0x10]  (restore marker)
+    code += b"\x48\x89\xf0"  # mov rax, rsi           (rsi advanced by 0x98)
+    code += b"\x41\xff\xc0"  # inc r8d
+    jb11 = len(code)
+    code += b"\xe9\0\0\0\0"  # jmp loop_start (near)
+    copied_done = len(code)
+    code += b"\x44\x89\x41\x20"  # mov [rcx+0x20], r8d  (records copied)
+
+    # --- patch the record-loop branches -------------------------------------
+    for pos, target in ((jae1, copied_done), (jae2, copied_done)):
+        struct.pack_into("<i", code, pos + 2, target - (pos + 6))
+    struct.pack_into("<i", code, jb11 + 1, loop_start - (jb11 + 5))
+
+    # --- epilogue ------------------------------------------------------------
+    done = len(code)
+    for p in (jne1, jne2, jne3, jne4):
+        struct.pack_into("<i", code, p + 2, done - (p + 6))
+    code += b"\x48\x83\xc4\x20"  # add rsp, 0x20
+    code += b"\x41\x5b\x41\x5a\x41\x59\x41\x58\x5e\x5a\x59\x58"
+    code += b"\x41\x5f\x41\x5e\x5f\x5d\x5b"  # pop r11..rbx
+    code += b"\x53\x55\x57\x41\x56"  # displaced prologue: rbx, rbp, rdi, r14
+    jmp_pos = len(code)
+    code += b"\xe9\0\0\0\0"  # jmp site+6
+
+    # --- data ---------------------------------------------------------------
+    while len(code) % 16:
+        code.append(0xCC)
+    data_off = {}
+    for name, raw in (
+        (b"prop_name", prop + b"\0"),
+        (b"font_value", font_name.encode("ascii") + b"\0"),
+        (b"marker", b"\0" * 0x1C00),
+    ):
+        data_off[name] = (len(code), len(raw) - 1)
+        code += raw
+    for fx in (mfx1, mfx2, mfx3):
+        fixups.append((fx, b"marker"))
+    blob = bytes(code)
+
+    for disp_pos, name in fixups:
+        off, ln = data_off[name]
+        disp = (blob_rva + off) - (blob_rva + disp_pos + 4)
+        code = bytearray(blob)
+        struct.pack_into("<i", code, disp_pos, disp)
+        blob = bytes(code)
+
+    blob = bytearray(blob)
+    struct.pack_into("<i", blob, call_pos + 1, site_rva - (blob_rva + call_pos + 5))
+    struct.pack_into("<i", blob, jmp_pos + 1, (site_rva + 6) - (blob_rva + jmp_pos + 5))
+    return (
+        bytes(blob),
+        b"\xe9" + struct.pack("<i", blob_rva - (site_rva + 5)) + b"\x90",
+        data_off[b"marker"][0],
+    )
+
+
 def load_ui2(data, pe, errors):
     """Validate ru/ui2.json against the (ptr,len) tables in .rdata."""
     if not UI2_JSON.exists():
@@ -794,6 +957,26 @@ def main():
         help=(
             "JSON object {caption RVA hex: hex payload} that replaces the encoded "
             "bytes of those captions with arbitrary raw bytes (diagnostic builds)"
+        ),
+    )
+    ap.add_argument(
+        "--caption-font",
+        default=None,
+        metavar="NAME",
+        help=(
+            "assign this font (e.g. 'main_menu') to every control whose caption "
+            "the mod sets; without it captions fall back to the engine default "
+            "'arial', which has ASCII glyphs only"
+        ),
+    )
+    ap.add_argument(
+        "--caption-prop",
+        default="font_name",
+        metavar="PROP",
+        help=(
+            "which property receives --caption-font: the class-level "
+            "'font_name' (legacy) or the control-level 'override_font_name' "
+            "(A-0016 §7.2, preferred)"
         ),
     )
     args = ap.parse_args()
@@ -1076,8 +1259,37 @@ def main():
 
     payload = bytes(strings_blob) + bytes(stubs) + bytes(font_blob)
 
+    # ---- optional caption-font hook ------------------------------------------
+    hook_blob = b""
+    hook_rva = None
+    marker_rva = None
+    site_patch = None
+    hook_site_foff = None
+    if args.caption_font:
+        foff = pe.rva_to_off(SETPROP_RVA)
+        if foff is None:
+            errors.append(f"caption font: setter {SETPROP_RVA:#x} not mapped")
+        elif bytes(pe.data[foff : foff + 6]) != SETPROP_HEAD:
+            errors.append(
+                f"caption font: setter {SETPROP_RVA:#x} starts with "
+                f"{bytes(pe.data[foff : foff + 6]).hex()}, expected {SETPROP_HEAD.hex()}"
+            )
+        else:
+            pre = len(strings_blob) + len(stubs) + len(font_blob)
+            pad = (-pre) % 16
+            hook_rva = new_va + pre + pad
+            hook_blob, site_patch, marker_off = build_caption_font_hook(
+                hook_rva, SETPROP_RVA, args.caption_font, args.caption_prop
+            )
+            marker_rva = hook_rva + marker_off
+            hook_blob = b"\0" * pad + hook_blob
+            payload = payload + hook_blob
+            hook_site_foff = foff
+
     # ---- collect byte patches -------------------------------------------------
     patches = []
+    if site_patch is not None and hook_site_foff is not None:
+        patches.append((hook_site_foff, site_patch))
     for e in entries:
         if e["skip"]:
             continue
@@ -1191,6 +1403,14 @@ def main():
         print(f"validator patches: {len(VALIDATORS)}")
         print(f"new section .ru @ RVA {new_va:#x}, payload {len(payload)} bytes")
         print(f"strings {len(strings_blob)} bytes, stubs {len(stubs)} bytes")
+        if hook_rva is not None:
+            print(
+                f"caption font hook: RVA {hook_rva:#x}, setter {SETPROP_RVA:#x}, "
+                f"prop {args.caption_prop!r}, font {args.caption_font!r}, "
+                f"{len(hook_blob)} bytes, marker RVA {marker_rva:#x}"
+            )
+        else:
+            print("caption font hook: off")
         if fonts:
             print(
                 f"fonts: {len(fonts)} patched, "
@@ -1243,7 +1463,7 @@ def main():
         0,
         0,
         0,
-        0x60000040,  # CNT_INITIALIZED_DATA | MEM_EXECUTE | MEM_READ
+        0xE0000040,  # CNT_INITIALIZED_DATA | EXECUTE | READ | WRITE
     )
     struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
     new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)
@@ -1261,6 +1481,12 @@ def main():
         f"translated {total_strings} strings ({total_lea} lea sites, {len(stub_plans)} stubs)"
     )
     print(f".ru section: RVA {new_va:#x}, raw {raw_ptr:#x}, {len(payload)} bytes")
+    if hook_rva is not None:
+        print(
+            f"caption font hook: RVA {hook_rva:#x} -> prop {args.caption_prop!r} "
+            f"= font {args.caption_font!r} "
+            f"(setter {SETPROP_RVA:#x} redirected, marker {marker_rva:#x})"
+        )
 
     if args.verify:
         return verify(

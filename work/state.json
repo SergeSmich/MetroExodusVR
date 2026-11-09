@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 24
+  "opencode": 25
  },
  "messages": [
   {
@@ -356,6 +356,16 @@
    "file": "collab/opencode/L-0023-marker-layout-fixed-bag7-installed.md",
    "title": "L-0023: marker layout fixed per A-0022, bag7 installed",
    "needs": "A-0022"
+  },
+  {
+   "id": "L-0024",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0024-run-matched-209-no-font-name-record.md",
+   "title": "L-0024: run matched=209, last control has no font_name; visuals confirm different fonts",
+   "needs": "A-0023"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

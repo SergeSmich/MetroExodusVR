@@ -758,7 +758,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # probe fields the resolver cares about (A-0018 §1/§2/§6)
     code += b"\x48\x8b\x43\x60"  # mov rax, [rbx+0x60]  (override member)
     code += b"\x48\x89\x41\x40"  # mov [rcx+0x40], rax
-    code += b"\x0f\xb6\x43\xac"  # movzx eax, byte [rbx+0xac]
+    code += b"\x0f\xb6\x83\xac\0\0\0"  # movzx eax, byte [rbx+0xac] (disp32!)
     code += b"\x24\x01"  # and al, 1
     code += b"\x88\x41\x25"  # mov [rcx+0x25], al     (gate bit)
     code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (matched control)
@@ -770,6 +770,23 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # return address of whoever set the property (13 pushes + 0x20 shadow)
     code += b"\x48\x8b\x84\x24\x88\0\0\0"  # mov rax, [rsp+0x88]
     code += b"\x48\x89\x41\x38"  # mov [rcx+0x38], rax (caller)
+
+    # --- aggregate counters across matched controls (tail of the marker) --
+    code += b"\x80\x79\x27\x00"  # cmp byte [rcx+0x27], 0 (found?)
+    agg1 = len(code)
+    code += b"\x74\0"  # je agg_done
+    code += b"\xff\x81\x00\x19\0\0"  # inc dword [rcx+0x1900] (found_any)
+    code += b"\x80\x79\x24\x00"  # cmp byte [rcx+0x24], 0 (set ok?)
+    agg2 = len(code)
+    code += b"\x74\0"  # je agg_done
+    code += b"\xff\x81\x04\x19\0\0"  # inc dword [rcx+0x1904] (set_ok_any)
+    code += b"\x48\x83\xb9\x08\x19\0\0\x00"  # cmp qword [rcx+0x1908], 0
+    agg3 = len(code)
+    code += b"\x75\0"  # jne agg_done (keep first)
+    code += b"\x48\x89\x99\x08\x19\0\0"  # mov [rcx+0x1908], rbx (first control)
+    code += b"\x48\x8b\x43\x60"  # mov rax, [rbx+0x60]
+    code += b"\x48\x89\x81\x10\x19\0\0"  # mov [rcx+0x1910], rax (its q60)
+    agg_done = len(code)
 
     # --- copy the record list into the marker, RAW ----------------------------
     # Each record is 0x98 bytes: kind @0, name as std::string {ptr @+8,
@@ -826,6 +843,9 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         (sk_body, sbody),
         (sk_skip, scan_next),
         (sk_h2, scan_next),
+        (agg1, agg_done),
+        (agg2, agg_done),
+        (agg3, agg_done),
     ):
         code[pos + 1] = (target - (pos + 2)) & 0xFF
 

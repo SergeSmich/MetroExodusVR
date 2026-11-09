@@ -1,47 +1,17 @@
-pid 10356 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd78c80000 size 0xc2a000
-calls=1254 caption=259 set_ok=0
-last caption len=32765 sample=b';?7I:h\x01x_\x01<HDwIP'
+pid 18484 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd7edc0000 size 0xc2a000
+calls=1204 caption=259 set_ok=0
+matched=209 last caption len=9 sample=b';?7I:h\x01x'
+found=0 kind=0 has_kind2=0
 gate [c+0xac]&1=0 qword [c+0x60]=0x0000000000000000 (hi32=0x0)
-control=0x817eaeee80 begin=0x1d76b760920 end=0x1d76b7620e0
-records in bag: 40 (dumped 40)
-caller=0x7ffd78d10b47 (module+0x90b47)
- 0 kind=0 name[sso]='type' value[empty]=''
- 1 kind=1 name[sso]='name' value[heap]='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
- 2 kind=0 name[sso]='tab_index' value[empty]=''
- 3 kind=0 name[sso]='visible' value[empty]=''
- 4 kind=0 name[sso]='flags' value[empty]=''
- 5 kind=0 name[sso]='position_x' value[empty]=''
- 6 kind=0 name[sso]='position_y' value[empty]=''
- 7 kind=0 name[sso]='size_x' value[empty]=''
- 8 kind=0 name[sso]='size_y' value[empty]=''
- 9 kind=0 name[sso]='layer' value[empty]=''
-10 kind=0 name[sso]='h_alignment' value[empty]=''
-11 kind=0 name[sso]='v_alignment' value[empty]=''
-12 kind=0 name[sso]='style' value[empty]=''
-13 kind=1 name[sso]='command' value[empty]=''
-14 kind=2 name[sso]='level_specific' value[empty]=''
-15 kind=1 name[sso]='level_specific' value[empty]=''
-16 kind=0 name[sso]='color_scheme' value[empty]=''
-17 kind=0 name[sso]='align_screen' value[empty]=''
-18 kind=2 name[sso]='group_name' value[empty]=''
-19 kind=1 name[sso]='group_name' value[heap]='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-20 kind=3 name[sso]='tween_groups' value[empty]=''
-21 kind=0 name[sso]='render_mode' value[empty]=''
-22 kind=0 name[sso]='font_color' value[empty]=''
-23 kind=2 name[sso]='font_name' value[empty]=''
-24 kind=1 name[sso]='font_name' value[sso]='menu'
-25 kind=0 name[sso]='font_size' value[empty]=''
-26 kind=2 name[sso]='caption' value[empty]=''
-27 kind=1 name[sso]='caption' value[sso]='$hints'
-28 kind=0 name[sso]='dialog_result' value[empty]=''
-29 kind=0 name[sso]='draw_shortcut' value[empty]=''
-30 kind=2 name[sso]='hint' value[empty]=''
-31 kind=1 name[sso]='hint' value[empty]=''
-32 kind=0 name[sso]='font_sym_color' value[empty]=''
-33 kind=0 name[sso]='font_symt_color' value[empty]=''
-34 kind=0 name[sso]='font_sym_size' value[empty]=''
-35 kind=0 name[sso]='font_symt_size' value[empty]=''
-36 kind=2 name[sso]='on_click' value[empty]=''
-37 kind=1 name[sso]='on_click' value[heap]='ÿÿÿÿÿÿÿÿ\x00\x00\x00\x00\x00\x00\x00\x00ÿ'
-38 kind=1 name[sso]='on_click_args' value[sso]='hints_menu'
-39 kind=0 name[sso]='context_action' value[empty]=''
+control=0x9af9dfef60 begin=0x1ad6ce75590 end=0x1ad6ce75ae8
+records in bag: 9 (dumped 9)
+caller=0x7ffd7ee503fd (module+0x903fd)
+ 0 kind=2 name[sso]='caption' value[empty]=''
+ 1 kind=1 name[sso]='caption' value[empty]=''
+ 2 kind=2 name[sso]='hint' value[empty]=''
+ 3 kind=1 name[sso]='hint' value[empty]=''
+ 4 kind=2 name[sso]='img' value[empty]=''
+ 5 kind=1 name[sso]='img' value[empty]=''
+ 6 kind=0 name[sso]='img_coord' value[empty]=''
+ 7 kind=1 name[sso]='argument' value[heap]='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+ 8 kind=0 name[sso]='index' value[empty]=''

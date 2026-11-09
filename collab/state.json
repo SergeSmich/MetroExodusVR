@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 17,
-    "opencode": 16
+    "arena": 18,
+    "opencode": 17
   },
   "messages": [
     {
@@ -299,6 +299,28 @@
       "file": "collab/arena/A-0016-write-override-font-name-not-font-name.md",
       "title": "писать override_font_name, а не font_name; +0x60 = строка; смена шрифта инвертирует кодирование",
       "needs": "L-0015"
+    },
+    {
+      "id": "L-0016",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0016-bag6-override-font-name-hook.md",
+      "commit": "72d82cd",
+      "title": "bag6: хук пишет override_font_name; маркер 0x1C00 с сырыми записями",
+      "note": "принято; ответ в A-0017"
+    },
+    {
+      "id": "A-0017",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "high",
+      "file": "collab/arena/A-0017-the-bag6-hook-needs-a-content-filter.md",
+      "title": "хуку bag6 нужен фильтр по содержимому; §4 не решается без exe-xref 0x14af808",
+      "needs": "L-0016"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -81,6 +81,14 @@ def main():
     first_q60 = int.from_bytes(d[0x1910:0x1918], 'little')
     vtable = int.from_bytes(d[0x1918:0x1920], 'little')
     bag_bytes = int.from_bytes(d[0x1920:0x1924], 'little')
+    od_control = int.from_bytes(d[0x1928:0x1930], 'little')
+    od_vlen = int.from_bytes(d[0x1930:0x1934], 'little')
+    od_count = int.from_bytes(d[0x1944:0x1948], 'little')
+    od_val = d[0x1948:0x1958]
+    ib_count = int.from_bytes(d[0x1934:0x1938], 'little')
+    ib_control = int.from_bytes(d[0x1938:0x1940], 'little')
+    ib_nlen = int.from_bytes(d[0x1940:0x1944], 'little')
+    ib_name = d[0x1958:0x1968]
     control = int.from_bytes(d[8:16], "little")
     begin = int.from_bytes(d[0x10:0x18], "little")
     end = int.from_bytes(d[0x18:0x20], "little")
@@ -92,6 +100,10 @@ def main():
     print(f"found_any={found_any} set_ok_any={set_ok_any} "
           f"first_control={first_control:#x} first_q60={first_q60:#018x}")
     print(f"vtable={vtable:#x} bag_bytes={bag_bytes:#x}")
+    print(f"on_draw_item: count={od_count} control={od_control:#x} "
+          f"vlen={od_vlen} value={od_val!r}")
+    print(f"item*: count={ib_count} control={ib_control:#x} "
+          f"nlen={ib_nlen} name={ib_name!r}")
     print(f"gate [c+0xac]&1={gate} qword [c+0x60]={q60:#018x} (hi32={q60 >> 32:#x})")
     print(f"control={control:#x} begin={begin:#x} end={end:#x}")
     span = end - begin if end > begin else 0

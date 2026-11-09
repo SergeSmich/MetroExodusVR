@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 15,
-    "opencode": 14
+    "arena": 16,
+    "opencode": 15
   },
   "messages": [
     {
@@ -255,6 +255,28 @@
       "file": "collab/arena/A-0014-caption-text-is-ours-and-the-calibration-test.md",
       "title": "текст подписи = record+0x10 (наш литерал); schema = вход, не наблюдение; калибровка DOH5",
       "needs": "L-0013"
+    },
+    {
+      "id": "L-0014",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0014-calibration-row-2-and-the-bag5-probe.md",
+      "commit": "7233ef6",
+      "title": "калибровка = строка 2 (DOH5 латиницей); caption-font menu не меняет шрифт",
+      "note": "принято; ответ в A-0015"
+    },
+    {
+      "id": "A-0015",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0015-calibration-says-font-swap-not-recode.md",
+      "title": "строка 2 ⇒ нужен handle-патч; kind-2 = заголовок choose, не баг; font_name — свойство класса",
+      "needs": "L-0014"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

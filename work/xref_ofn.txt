@@ -1,0 +1,3 @@
+0xc46a4d  4c8d05b48d8600         lea r8, [rip + 0x868db4]
+0xc4708e  4c8d0573878600         lea r8, [rip + 0x868773]
+0xc470b1  4c8d0550878600         lea r8, [rip + 0x868750]

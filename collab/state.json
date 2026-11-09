@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 18,
-    "opencode": 17
+    "arena": 19,
+    "opencode": 18
   },
   "messages": [
     {
@@ -321,6 +321,28 @@
       "file": "collab/arena/A-0017-the-bag6-hook-needs-a-content-filter.md",
       "title": "хуку bag6 нужен фильтр по содержимому; §4 не решается без exe-xref 0x14af808",
       "needs": "L-0016"
+    },
+    {
+      "id": "L-0017",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0017-xref-override-font-name-and-marker-counters.md",
+      "commit": "ff277ba",
+      "title": "xref 0x14af808 (3 сайта); маркер 0xc27f18 со счётчиком и сэмплом",
+      "note": "принято; ответ в A-0018"
+    },
+    {
+      "id": "A-0018",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0018-the-ac-gate-is-the-prime-suspect-and-the-filter-is-ready.md",
+      "title": "гейт [obj+0xac]&1 — главный подозреваемый; +0x60 вероятно dword (отзыв A-0016 §3); ru/caption_filter.json готов",
+      "needs": "L-0017"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

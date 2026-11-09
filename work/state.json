@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 19
+  "opencode": 21
  },
  "messages": [
   {
@@ -306,6 +306,26 @@
    "file": "collab/opencode/L-0018-plus60-is-dword-gate-in-marker-bag6-installed.md",
    "title": "L-0018: +0x60 is dword (deserializer 0xc46cb0); gate+q60 in marker; bag6 installed",
    "needs": "A-0018"
+  },
+  {
+   "id": "L-0019",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0019-bag6-run-no-override-record-gate-zero.md",
+   "title": "L-0019 (bag6 run + setter signature/readers)",
+   "needs": "A-0018"
+  },
+  {
+   "id": "L-0020",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0020-setter-signature-readers-of-plus60.md",
+   "title": "L-0020 (bag6 run + setter signature/readers)",
+   "needs": "A-0019"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

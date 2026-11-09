@@ -1,0 +1,77 @@
+0x9bc70  4053                     push rbx
+0x9bc72  55                       push rbp
+0x9bc73  57                       push rdi
+0x9bc74  4156                     push r14
+0x9bc76  4157                     push r15
+0x9bc78  4883ec20                 sub rsp, 0x20
+0x9bc7c  488b5938                 mov rbx, qword ptr [rcx + 0x38]
+0x9bc80  4d8bf0                   mov r14, r8
+0x9bc83  488b6940                 mov rbp, qword ptr [rcx + 0x40]
+0x9bc87  4c8b3a                   mov r15, qword ptr [rdx]
+0x9bc8a  488b7a08                 mov rdi, qword ptr [rdx + 8]
+0x9bc8e  483bdd                   cmp rbx, rbp
+0x9bc91  743d                     je 0x9bcd0
+0x9bc93  0fb603                   movzx eax, byte ptr [rbx]
+0x9bc96  04fe                     add al, 0xfe
+0x9bc98  a8fd                     test al, 0xfd
+0x9bc9a  7428                     je 0x9bcc4
+0x9bc9c  48837b200f               cmp qword ptr [rbx + 0x20], 0xf
+0x9bca1  488d5308                 lea rdx, [rbx + 8]
+0x9bca5  7603                     jbe 0x9bcaa
+0x9bca7  488b12                   mov rdx, qword ptr [rdx]
+0x9bcaa  483b7b18                 cmp rdi, qword ptr [rbx + 0x18]
+0x9bcae  7514                     jne 0x9bcc4
+0x9bcb0  4885ff                   test rdi, rdi
+0x9bcb3  7429                     je 0x9bcde
+0x9bcb5  4c8bc7                   mov r8, rdi
+0x9bcb8  498bcf                   mov rcx, r15
+0x9bcbb  e8708c3c00               call 0x464930
+0x9bcc0  85c0                     test eax, eax
+0x9bcc2  741a                     je 0x9bcde
+0x9bcc4  4881c398000000           add rbx, 0x98
+0x9bccb  483bdd                   cmp rbx, rbp
+0x9bcce  75c3                     jne 0x9bc93
+0x9bcd0  32c0                     xor al, al
+0x9bcd2  4883c420                 add rsp, 0x20
+0x9bcd6  415f                     pop r15
+0x9bcd8  415e                     pop r14
+0x9bcda  5f                       pop rdi
+0x9bcdb  5d                       pop rbp
+0x9bcdc  5b                       pop rbx
+0x9bcdd  c3                       ret 
+0x9bcde  803b01                   cmp byte ptr [rbx], 1
+0x9bce1  75ed                     jne 0x9bcd0
+0x9bce3  4d8b4608                 mov r8, qword ptr [r14 + 8]
+0x9bce7  488d4b60                 lea rcx, [rbx + 0x60]
+0x9bceb  498b16                   mov rdx, qword ptr [r14]
+0x9bcee  e82d86fbff               call 0x54320
+0x9bcf3  b001                     mov al, 1
+0x9bcf5  4883c420                 add rsp, 0x20
+0x9bcf9  415f                     pop r15
+0x9bcfb  415e                     pop r14
+0x9bcfd  5f                       pop rdi
+0x9bcfe  5d                       pop rbp
+0x9bcff  5b                       pop rbx
+0x9bd00  c3                       ret 
+0x9bd01  cc                       int3 
+0x9bd02  cc                       int3 
+0x9bd03  cc                       int3 
+0x9bd04  cc                       int3 
+0x9bd05  cc                       int3 
+0x9bd06  cc                       int3 
+0x9bd07  cc                       int3 
+0x9bd08  cc                       int3 
+0x9bd09  cc                       int3 
+0x9bd0a  cc                       int3 
+0x9bd0b  cc                       int3 
+0x9bd0c  cc                       int3 
+0x9bd0d  cc                       int3 
+0x9bd0e  cc                       int3 
+0x9bd0f  cc                       int3 
+0x9bd10  4053                     push rbx
+0x9bd12  55                       push rbp
+0x9bd13  57                       push rdi
+0x9bd14  4156                     push r14
+0x9bd16  4157                     push r15
+0x9bd18  4883ec20                 sub rsp, 0x20
+0x9bd1c  488b5938                 mov rbx, qword ptr [rcx + 0x38]

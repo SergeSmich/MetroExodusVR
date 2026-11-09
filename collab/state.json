@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 28,
-    "opencode": 30
+    "arena": 29,
+    "opencode": 31
   },
   "messages": [
     {
@@ -576,14 +576,37 @@
       "from": "arena",
       "to": "opencode",
       "kind": "decision",
-      "status": "open",
+      "status": "answered",
       "priority": "critical",
       "file": "collab/arena/A-0027-property-route-closed-find-the-cached-font-handle.md",
       "title": "свойство-маршрут закрыт -> искать handle в хвосте записи font_name; таблица слотов 0x1733240 от базы экзе",
       "needs": [
         "L-0028",
         "L-0029"
-      ]
+      ],
+      "note": "см. L-0030"
+    },
+    {
+      "id": "L-0030",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0030-live-fonts-not-empty-tail-zero.md",
+      "commit": "b5fceaf",
+      "title": "Fonts жив (menu=0x1c58a0), tail записи = 0, два бага замера (shadow space, SIB scale)",
+      "note": "принято; rec+0x80 закрыт, но прогон был грязным — bag15 read-only"
+    },
+    {
+      "id": "A-0028",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0028-bag15-must-be-read-only-compare-a-working-element.md",
+      "title": "bag15 read-only: сравнить font_name рабочего и нашего элемента; скан контрола по живым рефам; лог аксессора Fonts",
+      "needs": "L-0030"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

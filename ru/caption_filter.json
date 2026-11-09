@@ -1,0 +1,1721 @@
+{
+ "purpose": "Positive filter for the bag6 caption-font hook: apply override_font_name only when the caption byte string is one of ours.",
+ "encoded_with": "tools/apply_ru.py encode_text (identical to the bytes the patcher writes)",
+ "hash": "fnv1a32, offset 0x811c9dc5, prime 0x01000193",
+ "applies_to": "the exact byte sequence the caption setter receives",
+ "counts": {
+  "translated": 180,
+  "unique": 176,
+  "skip_ascii": 13,
+  "max_len": 28
+ },
+ "match_rule": [
+  "take length from marker +0x2c, hash those bytes with fnv1a32",
+  "look the hash up in the table (sound because there are zero collisions)",
+  "on hit compare bytes exactly as a guard",
+  "apply the font only on an exact match; everything else, including all of skip_ascii, gets no override"
+ ],
+ "entries": [
+  {
+   "rva": "0x49f650",
+   "original": "NOT SET",
+   "ru": "НЕТ",
+   "len": 3,
+   "hash32": 1146168689,
+   "hash16": 9585,
+   "bytes_hex": "33 49 3a"
+  },
+  {
+   "rva": "0x49f658",
+   "original": "{} CM",
+   "ru": "{} СМ",
+   "len": 5,
+   "hash32": 3559834511,
+   "hash16": 50063,
+   "bytes_hex": "ac b1 01 3b 47"
+  },
+  {
+   "rva": "0x49f660",
+   "original": "{}% (RECOMMENDED)",
+   "ru": "{}% (РЕКОМЕНД.)",
+   "len": 15,
+   "hash32": 3334322755,
+   "hash16": 47683,
+   "bytes_hex": "ac b1 97 01 61 48 49 40 3f 47 49 33 43 08 5e"
+  },
+  {
+   "rva": "0x49f678",
+   "original": "+{} CM",
+   "ru": "+{} СМ",
+   "len": 6,
+   "hash32": 23726869,
+   "hash16": 2837,
+   "bytes_hex": "a0 ac b1 01 3b 47"
+  },
+  {
+   "rva": "0x49f680",
+   "original": "{} DEG",
+   "ru": "{} ГРАД",
+   "len": 7,
+   "hash32": 3850986938,
+   "hash16": 26042,
+   "bytes_hex": "ac b1 01 4f 48 35 43"
+  },
+  {
+   "rva": "0x49f688",
+   "original": "{:.2f} M",
+   "ru": "{:.2f} М",
+   "len": 8,
+   "hash32": 3756810533,
+   "hash16": 24869,
+   "bytes_hex": "ac 17 08 69 09 b1 01 47"
+  },
+  {
+   "rva": "0x49f694",
+   "original": "PLAY",
+   "ru": "ИГРА",
+   "len": 4,
+   "hash32": 2886967923,
+   "hash16": 41587,
+   "bytes_hex": "44 4f 48 35"
+  },
+  {
+   "rva": "0x49f69c",
+   "original": "SKIP",
+   "ru": "ПРОПУСК",
+   "len": 7,
+   "hash32": 940448963,
+   "hash16": 7363,
+   "bytes_hex": "3c 48 3f 3c 4a 3b 40"
+  },
+  {
+   "rva": "0x49f6a8",
+   "original": "OFF (GAME TAA)",
+   "ru": "ВЫКЛ (TAA)",
+   "len": 10,
+   "hash32": 4174595984,
+   "hash16": 18320,
+   "bytes_hex": "37 68 40 50 01 61 5a 54 54 5e"
+  },
+  {
+   "rva": "0x49f6c4",
+   "original": "AUTO",
+   "ru": "АВТО",
+   "len": 4,
+   "hash32": 2863662198,
+   "hash16": 1142,
+   "bytes_hex": "35 37 3a 3f"
+  },
+  {
+   "rva": "0x49f6d0",
+   "original": "VR NO TURN",
+   "ru": "VR: НЕТ",
+   "len": 7,
+   "hash32": 3062290954,
+   "hash16": 55818,
+   "bytes_hex": "78 5f 17 01 33 49 3a"
+  },
+  {
+   "rva": "0x49f6dc",
+   "original": "CINEMA",
+   "ru": "КИНО",
+   "len": 4,
+   "hash32": 2763503659,
+   "hash16": 47147,
+   "bytes_hex": "40 44 33 3f"
+  },
+  {
+   "rva": "0x49f6e8",
+   "original": "VR BODY TURN",
+   "ru": "ТЕЛО VR",
+   "len": 7,
+   "hash32": 3913680453,
+   "hash16": 1605,
+   "bytes_hex": "3a 49 50 3f 01 78 5f"
+  },
+  {
+   "rva": "0x49f708",
+   "original": "TURN MODE",
+   "ru": "РЕЖИМ ПОВОРОТА",
+   "len": 14,
+   "hash32": 2185544714,
+   "hash16": 50186,
+   "bytes_hex": "48 49 63 44 47 01 3c 3f 37 3f 48 3f 3a 35"
+  },
+  {
+   "rva": "0x49f714",
+   "original": "SNAP",
+   "ru": "РЕЗКО",
+   "len": 5,
+   "hash32": 873647675,
+   "hash16": 52795,
+   "bytes_hex": "48 49 4c 40 3f"
+  },
+  {
+   "rva": "0x49f71c",
+   "original": "SMOOTH",
+   "ru": "ПЛАВНО",
+   "len": 6,
+   "hash32": 4195762123,
+   "hash16": 16331,
+   "bytes_hex": "3c 50 35 37 33 3f"
+  },
+  {
+   "rva": "0x49f738",
+   "original": "SNAP TURN ANGLE",
+   "ru": "УГОЛ РЕЗКОГО ПОВОРОТА",
+   "len": 21,
+   "hash32": 2865309498,
+   "hash16": 10042,
+   "bytes_hex": "4a 4f 3f 50 01 48 49 4c 40 3f 4f 3f 01 3c 3f 37 3f 48 3f 3a 35"
+  },
+  {
+   "rva": "0x49f748",
+   "original": "{:g} DEG",
+   "ru": "{:g} ГРАД",
+   "len": 9,
+   "hash32": 2434734614,
+   "hash16": 6678,
+   "bytes_hex": "ac 17 29 b1 01 4f 48 35 43"
+  },
+  {
+   "rva": "0x49f770",
+   "original": "SMOOTH TURN SPEED",
+   "ru": "СКОРОСТЬ ПЛАВНОГО ПОВОРОТА",
+   "len": 26,
+   "hash32": 2240135212,
+   "hash16": 49196,
+   "bytes_hex": "3b 40 3f 48 3f 3b 3a 6c 01 3c 50 35 37 33 3f 4f 3f 01 3c 3f 37 3f 48 3f 3a 35"
+  },
+  {
+   "rva": "0x49f788",
+   "original": "{:g} DEG/S",
+   "ru": "{:g} ГРАД/С",
+   "len": 11,
+   "hash32": 3500698749,
+   "hash16": 27773,
+   "bytes_hex": "ac 17 29 b1 01 4f 48 35 43 8a 3b"
+  },
+  {
+   "rva": "0x49f7b0",
+   "original": "MOVEMENT DIRECTION",
+   "ru": "НАПРАВЛЕНИЕ ДВИЖЕНИЯ",
+   "len": 20,
+   "hash32": 3355889155,
+   "hash16": 52739,
+   "bytes_hex": "33 35 3c 48 35 37 50 49 33 44 49 01 43 37 44 63 49 33 44 4d"
+  },
+  {
+   "rva": "0x49f7c4",
+   "original": "HEAD",
+   "ru": "ГОЛОВА",
+   "len": 6,
+   "hash32": 1588719582,
+   "hash16": 61406,
+   "bytes_hex": "4f 3f 50 3f 37 35"
+  },
+  {
+   "rva": "0x49f7cc",
+   "original": "BODY",
+   "ru": "ТЕЛО",
+   "len": 4,
+   "hash32": 1033445073,
+   "hash16": 7889,
+   "bytes_hex": "3a 49 50 3f"
+  },
+  {
+   "rva": "0x49f7d8",
+   "original": "LEFT HAND",
+   "ru": "ЛЕВАЯ",
+   "len": 5,
+   "hash32": 1422012521,
+   "hash16": 12393,
+   "bytes_hex": "50 49 37 35 4d"
+  },
+  {
+   "rva": "0x49f7e8",
+   "original": "RIGHT HAND",
+   "ru": "ПРАВАЯ",
+   "len": 6,
+   "hash32": 3877246219,
+   "hash16": 5387,
+   "bytes_hex": "3c 48 35 37 35 4d"
+  },
+  {
+   "rva": "0x49f808",
+   "original": "CROUCH BUTTON",
+   "ru": "КНОПКА ПРИСЕДА",
+   "len": 14,
+   "hash32": 2207817413,
+   "hash16": 40645,
+   "bytes_hex": "40 33 3f 3c 40 35 01 3c 48 44 3b 49 43 35"
+  },
+  {
+   "rva": "0x49f818",
+   "original": "HOLD",
+   "ru": "УДЕРЖ.",
+   "len": 6,
+   "hash32": 529337224,
+   "hash16": 2952,
+   "bytes_hex": "4a 43 49 48 63 08"
+  },
+  {
+   "rva": "0x49f820",
+   "original": "TOGGLE",
+   "ru": "ПЕРЕКЛ.",
+   "len": 7,
+   "hash32": 3302872299,
+   "hash16": 54507,
+   "bytes_hex": "3c 49 48 49 40 50 08"
+  },
+  {
+   "rva": "0x49f840",
+   "original": "AUTO SPRINT",
+   "ru": "АВТОБЕГ",
+   "len": 7,
+   "hash32": 4010109791,
+   "hash16": 27487,
+   "bytes_hex": "35 37 3a 3f 4b 49 4f"
+  },
+  {
+   "rva": "0x49f868",
+   "original": "MOVE STICK DEADZONE",
+   "ru": "МЕРТВАЯ ЗОНА СТИКА",
+   "len": 18,
+   "hash32": 883126437,
+   "hash16": 28837,
+   "bytes_hex": "47 49 48 3a 37 35 4d 01 4c 3f 33 35 01 3b 3a 44 40 35"
+  },
+  {
+   "rva": "0x49f898",
+   "original": "TURN STICK DEADZONE",
+   "ru": "МЕРТВАЯ ЗОНА ПОВОРОТА",
+   "len": 21,
+   "hash32": 1838696876,
+   "hash16": 18860,
+   "bytes_hex": "47 49 48 3a 37 35 4d 01 4c 3f 33 35 01 3c 3f 37 3f 48 3f 3a 35"
+  },
+  {
+   "rva": "0x49f8c8",
+   "original": "REDUCE HEAD BOB",
+   "ru": "УМЕНЬШИТЬ КАЧАНИЕ",
+   "len": 17,
+   "hash32": 188418081,
+   "hash16": 2081,
+   "bytes_hex": "4a 47 49 33 6c 6d 44 3a 6c 01 40 35 45 35 33 44 49"
+  },
+  {
+   "rva": "0x49f8f0",
+   "original": "SHOW VR TIPS AGAIN",
+   "ru": "СНОВА ПОКАЗАТЬ СОВЕТЫ VR",
+   "len": 24,
+   "hash32": 2904213883,
+   "hash16": 51579,
+   "bytes_hex": "3b 33 3f 37 35 01 3c 3f 40 35 4c 35 3a 6c 01 3b 3f 37 49 3a 68 01 78 5f"
+  },
+  {
+   "rva": "0x49f918",
+   "original": "PLAY MODE",
+   "ru": "РЕЖИМ ИГРЫ",
+   "len": 10,
+   "hash32": 2224558668,
+   "hash16": 4684,
+   "bytes_hex": "48 49 63 44 47 01 44 4f 48 68"
+  },
+  {
+   "rva": "0x49f928",
+   "original": "ROOM-SCALE",
+   "ru": "МАСШТАБ",
+   "len": 7,
+   "hash32": 4126470325,
+   "hash16": 61621,
+   "bytes_hex": "47 35 3b 6d 3a 35 4b"
+  },
+  {
+   "rva": "0x49f938",
+   "original": "STANDING",
+   "ru": "СТОЯ",
+   "len": 4,
+   "hash32": 735395840,
+   "hash16": 16384,
+   "bytes_hex": "3b 3a 3f 4d"
+  },
+  {
+   "rva": "0x49f944",
+   "original": "SEATED",
+   "ru": "СИДЯ",
+   "len": 4,
+   "hash32": 2096737666,
+   "hash16": 44418,
+   "bytes_hex": "3b 44 43 4d"
+  },
+  {
+   "rva": "0x49f968",
+   "original": "PLAYER HEIGHT",
+   "ru": "РОСТ ИГРОКА",
+   "len": 11,
+   "hash32": 3395903491,
+   "hash16": 24579,
+   "bytes_hex": "48 3f 3b 3a 01 44 4f 48 3f 40 35"
+  },
+  {
+   "rva": "0x49f990",
+   "original": "WORLD SCALE",
+   "ru": "МАСШТАБ МИРА",
+   "len": 12,
+   "hash32": 4216804672,
+   "hash16": 21824,
+   "bytes_hex": "47 35 3b 6d 3a 35 4b 01 47 44 48 35"
+  },
+  {
+   "rva": "0x49f9b8",
+   "original": "BODY TURNING",
+   "ru": "ПОВОРОТ ТЕЛА",
+   "len": 12,
+   "hash32": 277200672,
+   "hash16": 48928,
+   "bytes_hex": "3c 3f 37 3f 48 3f 3a 01 3a 49 50 35"
+  },
+  {
+   "rva": "0x49f9c8",
+   "original": "FOLLOW HEAD",
+   "ru": "СЛЕДОВАТЬ ЗА ГОЛОВОЙ",
+   "len": 20,
+   "hash32": 1192251632,
+   "hash16": 20720,
+   "bytes_hex": "3b 50 49 43 3f 37 35 3a 6c 01 4c 35 01 4f 3f 50 3f 37 3f 6f"
+  },
+  {
+   "rva": "0x49f9f0",
+   "original": "BODY POSITION",
+   "ru": "ПОЛОЖЕНИЕ ТЕЛА",
+   "len": 14,
+   "hash32": 2883391846,
+   "hash16": 4454,
+   "bytes_hex": "3c 3f 50 3f 63 49 33 44 49 01 3a 49 50 35"
+  },
+  {
+   "rva": "0x49fa00",
+   "original": "FOLLOW",
+   "ru": "СЛЕДОВАТЬ",
+   "len": 9,
+   "hash32": 3818156265,
+   "hash16": 28905,
+   "bytes_hex": "3b 50 49 43 3f 37 35 3a 6c"
+  },
+  {
+   "rva": "0x49fa20",
+   "original": "PHYSICAL CROUCH",
+   "ru": "ФИЗИЧЕСКОЕ ПРИСЕДАНИЕ",
+   "len": 21,
+   "hash32": 1418367351,
+   "hash16": 37239,
+   "bytes_hex": "6e 44 4c 44 45 49 3b 40 3f 49 01 3c 48 44 3b 49 43 35 33 44 49"
+  },
+  {
+   "rva": "0x49fa48",
+   "original": "BELT HEIGHT",
+   "ru": "ВЫСОТА ПОЯСА",
+   "len": 12,
+   "hash32": 3194573924,
+   "hash16": 21604,
+   "bytes_hex": "37 68 3b 3f 3a 35 01 3c 3f 4d 3b 35"
+  },
+  {
+   "rva": "0x49fa70",
+   "original": "BELT WHEN CROUCHING",
+   "ru": "ПОЯС В ПРИСЕДЕ",
+   "len": 14,
+   "hash32": 1634153749,
+   "hash16": 13589,
+   "bytes_hex": "3c 3f 4d 3b 01 37 01 3c 48 44 3b 49 43 49"
+  },
+  {
+   "rva": "0x49fa88",
+   "original": "STAY WITH YOU",
+   "ru": "ОСТАВАТЬСЯ С ВАМИ",
+   "len": 17,
+   "hash32": 1236667336,
+   "hash16": 3016,
+   "bytes_hex": "3f 3b 3a 35 37 35 3a 6c 3b 4d 01 3b 01 37 35 47 44"
+  },
+  {
+   "rva": "0x49fa98",
+   "original": "FOLLOW BODY",
+   "ru": "СЛЕДОВАТЬ ЗА ТЕЛОМ",
+   "len": 18,
+   "hash32": 2775593555,
+   "hash16": 12883,
+   "bytes_hex": "3b 50 49 43 3f 37 35 3a 6c 01 4c 35 01 3a 49 50 3f 47"
+  },
+  {
+   "rva": "0x49fab8",
+   "original": "BHAPTICS (EXPERIMENTAL)",
+   "ru": "BHAPTICS (ЭКСПЕРИМ.)",
+   "len": 20,
+   "hash32": 2845552628,
+   "hash16": 45044,
+   "bytes_hex": "72 73 54 6b 5a 5b 64 57 01 61 46 40 3b 3c 49 48 44 47 08 5e"
+  },
+  {
+   "rva": "0x49fae8",
+   "original": "BHAPTICS STRENGTH",
+   "ru": "СИЛА BHAPTICS",
+   "len": 13,
+   "hash32": 2181646620,
+   "hash16": 18716,
+   "bytes_hex": "3b 44 50 35 01 72 73 54 6b 5a 5b 64 57"
+  },
+  {
+   "rva": "0x49fb18",
+   "original": "DOMINANT HAND",
+   "ru": "ОСНОВНАЯ РУКА",
+   "len": 13,
+   "hash32": 939422033,
+   "hash16": 29009,
+   "bytes_hex": "3f 3b 33 3f 37 33 35 4d 01 48 4a 40 35"
+  },
+  {
+   "rva": "0x49fb28",
+   "original": "RIGHT",
+   "ru": "ПРАВАЯ",
+   "len": 6,
+   "hash32": 3877246219,
+   "hash16": 5387,
+   "bytes_hex": "3c 48 35 37 35 4d"
+  },
+  {
+   "rva": "0x49fb30",
+   "original": "LEFT",
+   "ru": "ЛЕВАЯ",
+   "len": 5,
+   "hash32": 1422012521,
+   "hash16": 12393,
+   "bytes_hex": "50 49 37 35 4d"
+  },
+  {
+   "rva": "0x49fb48",
+   "original": "WEAPON GRIP ANGLE",
+   "ru": "УГОЛ ХВАТА ОРУЖИЯ",
+   "len": 17,
+   "hash32": 1739280969,
+   "hash16": 21065,
+   "bytes_hex": "4a 4f 3f 50 01 4e 37 35 3a 35 01 3f 48 4a 63 44 4d"
+  },
+  {
+   "rva": "0x49fb78",
+   "original": "FINGER TRACKING",
+   "ru": "ОТСЛЕЖИВАНИЕ ПАЛЬЦЕВ",
+   "len": 20,
+   "hash32": 1879127304,
+   "hash16": 13576,
+   "bytes_hex": "3f 3a 3b 50 49 63 44 37 35 33 44 49 01 3c 35 50 6c 77 49 37"
+  },
+  {
+   "rva": "0x49fb94",
+   "original": "GRIP",
+   "ru": "ХВАТ",
+   "len": 4,
+   "hash32": 1655726477,
+   "hash16": 24973,
+   "bytes_hex": "4e 37 35 3a"
+  },
+  {
+   "rva": "0x49fbb0",
+   "original": "VIBRATION",
+   "ru": "ВИБРАЦИЯ",
+   "len": 8,
+   "hash32": 1869530210,
+   "hash16": 50274,
+   "bytes_hex": "37 44 4b 48 35 77 44 4d"
+  },
+  {
+   "rva": "0x49fbd8",
+   "original": "HAND CUES",
+   "ru": "ПОДСКАЗКИ РУК",
+   "len": 13,
+   "hash32": 73664792,
+   "hash16": 2328,
+   "bytes_hex": "3c 3f 43 3b 40 35 4c 40 44 01 48 4a 40"
+  },
+  {
+   "rva": "0x49fc00",
+   "original": "WEAPONS",
+   "ru": "ОРУЖИЕ",
+   "len": 6,
+   "hash32": 2458997554,
+   "hash16": 21298,
+   "bytes_hex": "3f 48 4a 63 44 49"
+  },
+  {
+   "rva": "0x49fc20",
+   "original": "DAMAGE",
+   "ru": "УРОН",
+   "len": 4,
+   "hash32": 503956825,
+   "hash16": 50521,
+   "bytes_hex": "4a 48 3f 33"
+  },
+  {
+   "rva": "0x49fc40",
+   "original": "EXPLOSIONS",
+   "ru": "ВЗРЫВЫ",
+   "len": 6,
+   "hash32": 1500278281,
+   "hash16": 28169,
+   "bytes_hex": "37 4c 48 68 37 68"
+  },
+  {
+   "rva": "0x49fc68",
+   "original": "SCENES AND VEHICLES",
+   "ru": "СЦЕНЫ И ТРАНСПОРТ",
+   "len": 17,
+   "hash32": 2764222913,
+   "hash16": 45505,
+   "bytes_hex": "3b 77 49 33 68 01 44 01 3a 48 35 33 3b 3c 3f 48 3a"
+  },
+  {
+   "rva": "0x49fc98",
+   "original": "MOVEMENT",
+   "ru": "ДВИЖЕНИЕ",
+   "len": 8,
+   "hash32": 1600577369,
+   "hash16": 57177,
+   "bytes_hex": "43 37 44 63 49 33 44 49"
+  },
+  {
+   "rva": "0x49fcc0",
+   "original": "USE BY LOOKING",
+   "ru": "ИСПОЛЬЗОВАТЬ ВЗГЛЯДОМ",
+   "len": 21,
+   "hash32": 628927647,
+   "hash16": 44191,
+   "bytes_hex": "44 3b 3c 3f 50 6c 4c 3f 37 35 3a 6c 01 37 4c 4f 50 4d 43 3f 47"
+  },
+  {
+   "rva": "0x49fce8",
+   "original": "WEAPON WEIGHT",
+   "ru": "ВЕС ОРУЖИЯ",
+   "len": 10,
+   "hash32": 3841571874,
+   "hash16": 48162,
+   "bytes_hex": "37 49 3b 01 3f 48 4a 63 44 4d"
+  },
+  {
+   "rva": "0x49fd10",
+   "original": "MANUAL RELOADING",
+   "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА",
+   "len": 18,
+   "hash32": 1824759754,
+   "hash16": 40906,
+   "bytes_hex": "48 4a 45 33 35 4d 01 3c 49 48 49 4c 35 48 4d 43 40 35"
+  },
+  {
+   "rva": "0x49fd40",
+   "original": "PART HIGHLIGHTS",
+   "ru": "ПОДСВЕТКА ЧАСТЕЙ",
+   "len": 16,
+   "hash32": 700177573,
+   "hash16": 56485,
+   "bytes_hex": "3c 3f 43 3b 37 49 3a 40 35 01 45 35 3b 3a 49 6f"
+  },
+  {
+   "rva": "0x49fd50",
+   "original": "OFF",
+   "ru": "ВЫКЛ",
+   "len": 4,
+   "hash32": 2494464378,
+   "hash16": 33146,
+   "bytes_hex": "37 68 40 50"
+  },
+  {
+   "rva": "0x49fd58",
+   "original": "FIRST RELOADS",
+   "ru": "ПЕРВЫЕ ПЕРЕЗАРЯДКИ",
+   "len": 18,
+   "hash32": 2314574632,
+   "hash16": 39720,
+   "bytes_hex": "3c 49 48 37 68 49 01 3c 49 48 49 4c 35 48 4d 43 40 44"
+  },
+  {
+   "rva": "0x49fd68",
+   "original": "ALWAYS",
+   "ru": "ВСЕГДА",
+   "len": 6,
+   "hash32": 3447183299,
+   "hash16": 55235,
+   "bytes_hex": "37 3b 49 4f 43 35"
+  },
+  {
+   "rva": "0x49fd90",
+   "original": "RESET HIGHLIGHT COUNTS",
+   "ru": "СБРОСИТЬ СЧЕТЧИКИ ПОДСВЕТКИ",
+   "len": 27,
+   "hash32": 2100307122,
+   "hash16": 9394,
+   "bytes_hex": "3b 4b 48 3f 3b 44 3a 6c 01 3b 45 49 3a 45 44 40 44 01 3c 3f 43 3b 37 49 3a 40 44"
+  },
+  {
+   "rva": "0x49fdc0",
+   "original": "WEAPON FLICK",
+   "ru": "ВСТРЯХИВАНИЕ ОРУЖИЯ",
+   "len": 19,
+   "hash32": 3637542168,
+   "hash16": 32024,
+   "bytes_hex": "37 3b 3a 48 4d 4e 44 37 35 33 44 49 01 3f 48 4a 63 44 4d"
+  },
+  {
+   "rva": "0x49fdd0",
+   "original": "GENTLE",
+   "ru": "МЯГКО",
+   "len": 5,
+   "hash32": 199146563,
+   "hash16": 48195,
+   "bytes_hex": "47 4d 4f 40 3f"
+  },
+  {
+   "rva": "0x49fdd8",
+   "original": "NORMAL",
+   "ru": "ОБЫЧНО",
+   "len": 6,
+   "hash32": 2764820210,
+   "hash16": 52978,
+   "bytes_hex": "3f 4b 68 45 33 3f"
+  },
+  {
+   "rva": "0x49fde0",
+   "original": "HARD",
+   "ru": "СИЛЬНО",
+   "len": 6,
+   "hash32": 311591456,
+   "hash16": 33312,
+   "bytes_hex": "3b 44 50 6c 33 3f"
+  },
+  {
+   "rva": "0x49fe00",
+   "original": "MAGAZINE POUCH",
+   "ru": "ПОДСУМОК ДЛЯ МАГАЗИНОВ",
+   "len": 22,
+   "hash32": 748305339,
+   "hash16": 15291,
+   "bytes_hex": "3c 3f 43 3b 4a 47 3f 40 01 43 50 4d 01 47 35 4f 35 4c 44 33 3f 37"
+  },
+  {
+   "rva": "0x49fe10",
+   "original": "HIP",
+   "ru": "БЕДРО",
+   "len": 5,
+   "hash32": 1837213879,
+   "hash16": 43191,
+   "bytes_hex": "4b 49 43 48 3f"
+  },
+  {
+   "rva": "0x49fe30",
+   "original": "SIGHTING EYE",
+   "ru": "ГЛАЗ ПРИЦЕЛА",
+   "len": 12,
+   "hash32": 880688409,
+   "hash16": 15641,
+   "bytes_hex": "4f 50 35 4c 01 3c 48 44 77 49 50 35"
+  },
+  {
+   "rva": "0x49fe50",
+   "original": "OTHER EYE WHILE SCOPED",
+   "ru": "ВТОРОЙ ГЛАЗ В ПРИЦЕЛЕ",
+   "len": 21,
+   "hash32": 2082659544,
+   "hash16": 56536,
+   "bytes_hex": "37 3a 3f 48 3f 6f 01 4f 50 35 4c 01 37 01 3c 48 44 77 49 50 49"
+  },
+  {
+   "rva": "0x49fe68",
+   "original": "VISIBLE",
+   "ru": "ВИДИМО",
+   "len": 6,
+   "hash32": 126402567,
+   "hash16": 49159,
+   "bytes_hex": "37 44 43 44 47 3f"
+  },
+  {
+   "rva": "0x49fe70",
+   "original": "BLURRED",
+   "ru": "РАЗМЫТО",
+   "len": 7,
+   "hash32": 2305131458,
+   "hash16": 33730,
+   "bytes_hex": "48 35 4c 47 68 3a 3f"
+  },
+  {
+   "rva": "0x49fe78",
+   "original": "BLACK",
+   "ru": "ЧЕРНЫЙ",
+   "len": 6,
+   "hash32": 1052329559,
+   "hash16": 18007,
+   "bytes_hex": "45 49 48 33 68 6f"
+  },
+  {
+   "rva": "0x49fe90",
+   "original": "RETICLE TILT",
+   "ru": "НАКЛОН ПРИЦЕЛА",
+   "len": 14,
+   "hash32": 3892205749,
+   "hash16": 22709,
+   "bytes_hex": "33 35 40 50 3f 33 01 3c 48 44 77 49 50 35"
+  },
+  {
+   "rva": "0x49fea0",
+   "original": "WITH WEAPON",
+   "ru": "С ОРУЖИЕМ",
+   "len": 9,
+   "hash32": 503635451,
+   "hash16": 56827,
+   "bytes_hex": "3b 01 3f 48 4a 63 44 49 47"
+  },
+  {
+   "rva": "0x49feac",
+   "original": "LEVEL",
+   "ru": "УРОВЕНЬ",
+   "len": 7,
+   "hash32": 654033531,
+   "hash16": 49787,
+   "bytes_hex": "4a 48 3f 37 49 33 6c"
+  },
+  {
+   "rva": "0x49feb8",
+   "original": "FIXED TO VIEW",
+   "ru": "ФИКСИРОВАНО",
+   "len": 11,
+   "hash32": 1068456645,
+   "hash16": 23237,
+   "bytes_hex": "6e 44 40 3b 44 48 3f 37 35 33 3f"
+  },
+  {
+   "rva": "0x49fee0",
+   "original": "SCOPE STEERING",
+   "ru": "НАВЕДЕНИЕ ПРИЦЕЛА",
+   "len": 17,
+   "hash32": 2107647823,
+   "hash16": 10063,
+   "bytes_hex": "33 35 37 49 43 49 33 44 49 01 3c 48 44 77 49 50 35"
+  },
+  {
+   "rva": "0x49fef0",
+   "original": "WEAPON",
+   "ru": "ОРУЖИЕ",
+   "len": 6,
+   "hash32": 2458997554,
+   "hash16": 21298,
+   "bytes_hex": "3f 48 4a 63 44 49"
+  },
+  {
+   "rva": "0x49fef8",
+   "original": "WEAPON + HEAD",
+   "ru": "ОРУЖИЕ + ГОЛОВА",
+   "len": 15,
+   "hash32": 4240204093,
+   "hash16": 24893,
+   "bytes_hex": "3f 48 4a 63 44 49 01 a0 01 4f 3f 50 3f 37 35"
+  },
+  {
+   "rva": "0x49ff20",
+   "original": "REALISTIC NIGHT VISION",
+   "ru": "РЕАЛИСТИЧНОЕ НОЧНОЕ ВИДЕНИЕ",
+   "len": 27,
+   "hash32": 1911206087,
+   "hash16": 45255,
+   "bytes_hex": "48 49 35 50 44 3b 3a 44 45 33 3f 49 01 33 3f 45 33 3f 49 01 37 44 43 49 33 44 49"
+  },
+  {
+   "rva": "0x49ff48",
+   "original": "HUD SHAPE",
+   "ru": "ФОРМА HUD",
+   "len": 9,
+   "hash32": 900254454,
+   "hash16": 51958,
+   "bytes_hex": "6e 3f 48 47 35 01 73 7e 62"
+  },
+  {
+   "rva": "0x49ff78",
+   "original": "HUD POSITION",
+   "ru": "ПОЛОЖЕНИЕ HUD",
+   "len": 13,
+   "hash32": 3183678829,
+   "hash16": 5485,
+   "bytes_hex": "3c 3f 50 3f 63 49 33 44 49 01 73 7e 62"
+  },
+  {
+   "rva": "0x49ffa0",
+   "original": "HUD DISTANCE",
+   "ru": "РАССТОЯНИЕ HUD",
+   "len": 14,
+   "hash32": 1507383072,
+   "hash16": 55072,
+   "bytes_hex": "48 35 3b 3b 3a 3f 4d 33 44 49 01 73 7e 62"
+  },
+  {
+   "rva": "0x49ffc0",
+   "original": "HUD SIZE",
+   "ru": "РАЗМЕР HUD",
+   "len": 10,
+   "hash32": 3926431534,
+   "hash16": 38702,
+   "bytes_hex": "48 35 4c 47 49 48 01 73 7e 62"
+  },
+  {
+   "rva": "0x49ffe0",
+   "original": "HUD HEIGHT",
+   "ru": "ВЫСОТА HUD",
+   "len": 10,
+   "hash32": 918475385,
+   "hash16": 53881,
+   "bytes_hex": "37 68 3b 3f 3a 35 01 73 7e 62"
+  },
+  {
+   "rva": "0x49fff0",
+   "original": "{:+.0f} DEG",
+   "ru": "{:+.0f} ГРАД",
+   "len": 12,
+   "hash32": 2245989326,
+   "hash16": 5070,
+   "bytes_hex": "ac 17 a0 08 58 09 b1 01 4f 48 35 43"
+  },
+  {
+   "rva": "0x4a0018",
+   "original": "HUD OPACITY",
+   "ru": "ПРОЗРАЧНОСТЬ HUD",
+   "len": 16,
+   "hash32": 1059712941,
+   "hash16": 61357,
+   "bytes_hex": "3c 48 3f 4c 48 35 45 33 3f 3b 3a 6c 01 73 7e 62"
+  },
+  {
+   "rva": "0x4a0040",
+   "original": "HINT HEIGHT",
+   "ru": "ВЫСОТА ПОДСКАЗКИ",
+   "len": 16,
+   "hash32": 1724630892,
+   "hash16": 51052,
+   "bytes_hex": "37 68 3b 3f 3a 35 01 3c 3f 43 3b 40 35 4c 40 44"
+  },
+  {
+   "rva": "0x4a0068",
+   "original": "HINT SIZE",
+   "ru": "РАЗМЕР ПОДСКАЗКИ",
+   "len": 16,
+   "hash32": 1132151943,
+   "hash16": 17543,
+   "bytes_hex": "48 35 4c 47 49 48 01 3c 3f 43 3b 40 35 4c 40 44"
+  },
+  {
+   "rva": "0x4a0090",
+   "original": "HINT TIME",
+   "ru": "ВРЕМЯ ПОДСКАЗКИ",
+   "len": 15,
+   "hash32": 67993812,
+   "hash16": 32980,
+   "bytes_hex": "37 48 49 47 4d 01 3c 3f 43 3b 40 35 4c 40 44"
+  },
+  {
+   "rva": "0x4a00d8",
+   "original": "ACTION PROMPT SIZE",
+   "ru": "РАЗМЕР ПОДСКАЗКИ ДЕЙСТВИЯ",
+   "len": 25,
+   "hash32": 4071126120,
+   "hash16": 29800,
+   "bytes_hex": "48 35 4c 47 49 48 01 3c 3f 43 3b 40 35 4c 40 44 01 43 49 6f 3b 3a 37 44 4d"
+  },
+  {
+   "rva": "0x4a0110",
+   "original": "MENU DISTANCE",
+   "ru": "РАССТОЯНИЕ МЕНЮ",
+   "len": 15,
+   "hash32": 2836363520,
+   "hash16": 30976,
+   "bytes_hex": "48 35 3b 3b 3a 3f 4d 33 44 49 01 47 49 33 8c"
+  },
+  {
+   "rva": "0x4a0130",
+   "original": "MENU SIZE",
+   "ru": "РАЗМЕР МЕНЮ",
+   "len": 11,
+   "hash32": 1694696974,
+   "hash16": 1550,
+   "bytes_hex": "48 35 4c 47 49 48 01 47 49 33 8c"
+  },
+  {
+   "rva": "0x4a0140",
+   "original": "{:.1f} M",
+   "ru": "{:.1f} М",
+   "len": 8,
+   "hash32": 3534940164,
+   "hash16": 59396,
+   "bytes_hex": "ac 17 08 6a 09 b1 01 47"
+  },
+  {
+   "rva": "0x4a0168",
+   "original": "DAMAGE EFFECTS",
+   "ru": "ЭФФЕКТЫ УРОНА",
+   "len": 13,
+   "hash32": 2189598280,
+   "hash16": 40520,
+   "bytes_hex": "46 6e 6e 49 40 3a 68 01 4a 48 3f 33 35"
+  },
+  {
+   "rva": "0x4a0190",
+   "original": "DAMAGE EFFECT SIZE",
+   "ru": "РАЗМЕР ЭФФЕКТОВ УРОНА",
+   "len": 21,
+   "hash32": 559977642,
+   "hash16": 38058,
+   "bytes_hex": "48 35 4c 47 49 48 01 46 6e 6e 49 40 3a 3f 37 01 4a 48 3f 33 35"
+  },
+  {
+   "rva": "0x4a01a4",
+   "original": "SMALL",
+   "ru": "МАЛЫЙ",
+   "len": 5,
+   "hash32": 2197447474,
+   "hash16": 25394,
+   "bytes_hex": "47 35 50 68 6f"
+  },
+  {
+   "rva": "0x4a01ac",
+   "original": "MEDIUM",
+   "ru": "СРЕДНИЙ",
+   "len": 7,
+   "hash32": 1177372710,
+   "hash16": 18470,
+   "bytes_hex": "3b 48 49 43 33 44 6f"
+  },
+  {
+   "rva": "0x4a01b4",
+   "original": "LARGE",
+   "ru": "БОЛЬШОЙ",
+   "len": 7,
+   "hash32": 4169812464,
+   "hash16": 18928,
+   "bytes_hex": "4b 3f 50 6c 6d 3f 6f"
+  },
+  {
+   "rva": "0x4a01d8",
+   "original": "HIT DIRECTION",
+   "ru": "НАПРАВЛЕНИЕ УДАРА",
+   "len": 17,
+   "hash32": 2212918576,
+   "hash16": 30000,
+   "bytes_hex": "33 35 3c 48 35 37 50 49 33 44 49 01 4a 43 35 48 35"
+  },
+  {
+   "rva": "0x4a0200",
+   "original": "LOW-HEALTH PULSE",
+   "ru": "ПУЛЬС ПРИ РАНЕНИИ",
+   "len": 17,
+   "hash32": 1830970032,
+   "hash16": 25264,
+   "bytes_hex": "3c 4a 50 6c 3b 01 3c 48 44 01 48 35 33 49 33 44 44"
+  },
+  {
+   "rva": "0x4a0230",
+   "original": "DEBUG OVERLAY",
+   "ru": "ОТЛАДОЧНЫЙ ОВЕРЛЕЙ",
+   "len": 18,
+   "hash32": 1767328344,
+   "hash16": 19032,
+   "bytes_hex": "3f 3a 50 35 43 3f 45 33 68 6f 01 3f 37 49 48 50 49 6f"
+  },
+  {
+   "rva": "0x4a0258",
+   "original": "CINEMA POINTER",
+   "ru": "УКАЗАТЕЛЬ КИНО",
+   "len": 14,
+   "hash32": 1724342989,
+   "hash16": 25293,
+   "bytes_hex": "4a 40 35 4c 35 3a 49 50 6c 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a0280",
+   "original": "CINEMA FLOOR",
+   "ru": "ПОЛ КИНО",
+   "len": 8,
+   "hash32": 3875060549,
+   "hash16": 47941,
+   "bytes_hex": "3c 3f 50 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a02a8",
+   "original": "CINEMA CONTROLLERS",
+   "ru": "КОНТРОЛЛЕРЫ КИНО",
+   "len": 16,
+   "hash32": 1857116408,
+   "hash16": 22776,
+   "bytes_hex": "40 3f 33 3a 48 3f 50 50 49 48 68 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a02d8",
+   "original": "CINEMA INFO",
+   "ru": "ИНФО КИНО",
+   "len": 9,
+   "hash32": 3365116040,
+   "hash16": 39048,
+   "bytes_hex": "44 33 6e 3f 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a0300",
+   "original": "CINEMA LINKS",
+   "ru": "ССЫЛКИ КИНО",
+   "len": 11,
+   "hash32": 3648142240,
+   "hash16": 15264,
+   "bytes_hex": "3b 3b 68 50 40 44 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a0328",
+   "original": "CAMERA PRESET",
+   "ru": "ПРЕСЕТ КАМЕРЫ",
+   "len": 13,
+   "hash32": 2787213814,
+   "hash16": 33270,
+   "bytes_hex": "3c 48 49 3b 49 3a 01 40 35 47 49 48 68"
+  },
+  {
+   "rva": "0x4a0338",
+   "original": "IMMERSIVE",
+   "ru": "ИММЕРСИВНЫЙ",
+   "len": 11,
+   "hash32": 3407786508,
+   "hash16": 45580,
+   "bytes_hex": "44 47 47 49 48 3b 44 37 33 68 6f"
+  },
+  {
+   "rva": "0x4a0348",
+   "original": "COMFORT",
+   "ru": "КОМФОРТНЫЙ",
+   "len": 10,
+   "hash32": 3431922088,
+   "hash16": 63912,
+   "bytes_hex": "40 3f 47 6e 3f 48 3a 33 68 6f"
+  },
+  {
+   "rva": "0x4a0350",
+   "original": "CINEMATIC",
+   "ru": "КИНЕМАТОГРАФИЧНЫЙ",
+   "len": 17,
+   "hash32": 2978179051,
+   "hash16": 26603,
+   "bytes_hex": "40 44 33 49 47 35 3a 3f 4f 48 35 6e 44 45 33 68 6f"
+  },
+  {
+   "rva": "0x4a0370",
+   "original": "RE-ALIGN AFTER SCENES",
+   "ru": "ВЫРАВНИВАТЬ ПОСЛЕ СЦЕН",
+   "len": 22,
+   "hash32": 201067676,
+   "hash16": 3228,
+   "bytes_hex": "37 68 48 35 37 33 44 37 35 3a 6c 01 3c 3f 3b 50 49 01 3b 77 49 33"
+  },
+  {
+   "rva": "0x4a03a0",
+   "original": "CINEMA SCREEN DISTANCE",
+   "ru": "РАССТОЯНИЕ ЭКРАНА КИНО",
+   "len": 22,
+   "hash32": 3393649571,
+   "hash16": 64419,
+   "bytes_hex": "48 35 3b 3b 3a 3f 4d 33 44 49 01 46 40 48 35 33 35 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a03d0",
+   "original": "CINEMA SCREEN SIZE",
+   "ru": "РАЗМЕР ЭКРАНА КИНО",
+   "len": 18,
+   "hash32": 679949317,
+   "hash16": 13317,
+   "bytes_hex": "48 35 4c 47 49 48 01 46 40 48 35 33 35 01 40 44 33 3f"
+  },
+  {
+   "rva": "0x4a0440",
+   "original": "FREE CAMERA",
+   "ru": "СВОБОДНАЯ КАМЕРА",
+   "len": 16,
+   "hash32": 3961263293,
+   "hash16": 5309,
+   "bytes_hex": "3b 37 3f 4b 3f 43 33 35 4d 01 40 35 47 49 48 35"
+  },
+  {
+   "rva": "0x4a0480",
+   "original": "BONE ANGLES",
+   "ru": "УГЛЫ КОСТЕЙ",
+   "len": 11,
+   "hash32": 648443741,
+   "hash16": 30557,
+   "bytes_hex": "4a 4f 50 68 01 40 3f 3b 3a 49 6f"
+  },
+  {
+   "rva": "0x4a04a8",
+   "original": "SCRIPTED LOCK",
+   "ru": "БЛОКИРОВКА СКРИПТОМ",
+   "len": 19,
+   "hash32": 232244184,
+   "hash16": 50136,
+   "bytes_hex": "4b 50 3f 40 44 48 3f 37 40 35 01 3b 40 48 44 3c 3a 3f 47"
+  },
+  {
+   "rva": "0x4a04d8",
+   "original": "ANIMATION LOCK",
+   "ru": "БЛОКИРОВКА АНИМАЦИИ",
+   "len": 19,
+   "hash32": 1404682766,
+   "hash16": 49678,
+   "bytes_hex": "4b 50 3f 40 44 48 3f 37 40 35 01 35 33 44 47 35 77 44 44"
+  },
+  {
+   "rva": "0x4a0508",
+   "original": "AXIS LOCKED",
+   "ru": "ОСЬ ЗАБЛОКИРОВАНА",
+   "len": 17,
+   "hash32": 4278743952,
+   "hash16": 29584,
+   "bytes_hex": "3f 3b 6c 01 4c 35 4b 50 3f 40 44 48 3f 37 35 33 35"
+  },
+  {
+   "rva": "0x4a0530",
+   "original": "GAMEPLAY UI",
+   "ru": "ИГРОВОЙ ИНТЕРФЕЙС",
+   "len": 17,
+   "hash32": 3549479902,
+   "hash16": 50142,
+   "bytes_hex": "44 4f 48 3f 37 3f 6f 01 44 33 3a 49 48 6e 49 6f 3b"
+  },
+  {
+   "rva": "0x4a0570",
+   "original": "RENDER MODE",
+   "ru": "РЕЖИМ РЕНДЕРА",
+   "len": 13,
+   "hash32": 3446056964,
+   "hash16": 43012,
+   "bytes_hex": "48 49 63 44 47 01 48 49 33 43 49 48 35"
+  },
+  {
+   "rva": "0x4a057c",
+   "original": "STEREO",
+   "ru": "СТЕРЕО",
+   "len": 6,
+   "hash32": 3419109565,
+   "hash16": 30909,
+   "bytes_hex": "3b 3a 49 48 49 3f"
+  },
+  {
+   "rva": "0x4a0588",
+   "original": "PERFORMANCE (AER+)",
+   "ru": "ПРОИЗВОДИТЕЛЬНОСТЬ (AER+)",
+   "len": 25,
+   "hash32": 3231128104,
+   "hash16": 6696,
+   "bytes_hex": "3c 48 3f 44 4c 37 3f 43 44 3a 49 50 6c 33 3f 3b 3a 6c 01 61 54 5c 5f a0 5e"
+  },
+  {
+   "rva": "0x4a05b8",
+   "original": "RENDER SCALE (RESTART)",
+   "ru": "МАСШТАБ РЕНДЕРА (ПЕРЕЗАПУСК)",
+   "len": 28,
+   "hash32": 3397871803,
+   "hash16": 26811,
+   "bytes_hex": "47 35 3b 6d 3a 35 4b 01 48 49 33 43 49 48 35 01 61 3c 49 48 49 4c 35 3c 4a 3b 40 5e"
+  },
+  {
+   "rva": "0x4a05e0",
+   "original": "UPSCALER",
+   "ru": "АПСКЕЙЛЕР",
+   "len": 9,
+   "hash32": 3179245580,
+   "hash16": 28684,
+   "bytes_hex": "35 3c 3b 40 49 6f 50 49 48"
+  },
+  {
+   "rva": "0x4a0608",
+   "original": "UPSCALING MODE",
+   "ru": "РЕЖИМ АПСКЕЙЛА",
+   "len": 14,
+   "hash32": 2991961520,
+   "hash16": 46512,
+   "bytes_hex": "48 49 63 44 47 01 35 3c 3b 40 49 6f 50 35"
+  },
+  {
+   "rva": "0x4a0618",
+   "original": "NATIVE AA",
+   "ru": "НАТИВНОЕ СГЛАЖИВАНИЕ",
+   "len": 20,
+   "hash32": 268445304,
+   "hash16": 9848,
+   "bytes_hex": "33 35 3a 44 37 33 3f 49 01 3b 4f 50 35 63 44 37 35 33 44 49"
+  },
+  {
+   "rva": "0x4a0628",
+   "original": "QUALITY",
+   "ru": "КАЧЕСТВО",
+   "len": 8,
+   "hash32": 20400399,
+   "hash16": 18703,
+   "bytes_hex": "40 35 45 49 3b 3a 37 3f"
+  },
+  {
+   "rva": "0x4a0630",
+   "original": "BALANCED",
+   "ru": "СБАЛАНСИРОВАННЫЙ",
+   "len": 16,
+   "hash32": 3706107643,
+   "hash16": 46843,
+   "bytes_hex": "3b 4b 35 50 35 33 3b 44 48 3f 37 35 33 33 68 6f"
+  },
+  {
+   "rva": "0x4a0640",
+   "original": "PERFORMANCE",
+   "ru": "ПРОИЗВОДИТЕЛЬНОСТЬ",
+   "len": 18,
+   "hash32": 169649471,
+   "hash16": 42303,
+   "bytes_hex": "3c 48 3f 44 4c 37 3f 43 44 3a 49 50 6c 33 3f 3b 3a 6c"
+  },
+  {
+   "rva": "0x4a0650",
+   "original": "ULTRA PERFORMANCE",
+   "ru": "УЛЬТРА ПРОИЗВОДИТЕЛЬНОСТЬ",
+   "len": 25,
+   "hash32": 2774734811,
+   "hash16": 6107,
+   "bytes_hex": "4a 50 6c 3a 48 35 01 3c 48 3f 44 4c 37 3f 43 44 3a 49 50 6c 33 3f 3b 3a 6c"
+  },
+  {
+   "rva": "0x4a0680",
+   "original": "FSR SHARPENING",
+   "ru": "РЕЗКОСТЬ FSR",
+   "len": 12,
+   "hash32": 182102218,
+   "hash16": 43210,
+   "bytes_hex": "48 49 4c 40 3f 3b 3a 6c 01 71 57 5f"
+  },
+  {
+   "rva": "0x4a0690",
+   "original": "LOW",
+   "ru": "НИЗКО",
+   "len": 5,
+   "hash32": 1786299843,
+   "hash16": 50627,
+   "bytes_hex": "33 44 4c 40 3f"
+  },
+  {
+   "rva": "0x4a0694",
+   "original": "HIGH",
+   "ru": "ВЫСОКО",
+   "len": 6,
+   "hash32": 2183302665,
+   "hash16": 36361,
+   "bytes_hex": "37 68 3b 3f 40 3f"
+  },
+  {
+   "rva": "0x4a06b0",
+   "original": "DLSS MODEL",
+   "ru": "МОДЕЛЬ DLSS",
+   "len": 11,
+   "hash32": 3753710459,
+   "hash16": 4987,
+   "bytes_hex": "47 3f 43 49 50 6c 01 62 67 57 57"
+  },
+  {
+   "rva": "0x4a06c0",
+   "original": "AUTO (K)",
+   "ru": "АВТО (K)",
+   "len": 8,
+   "hash32": 1961595418,
+   "hash16": 37402,
+   "bytes_hex": "35 37 3a 3f 01 61 7c 5e"
+  },
+  {
+   "rva": "0x4a0738",
+   "original": "FOVEATED UPSCALING",
+   "ru": "ФОВЕАЛЬНЫЙ АПСКЕЙЛ",
+   "len": 18,
+   "hash32": 2255853260,
+   "hash16": 38604,
+   "bytes_hex": "6e 3f 37 49 35 50 6c 33 68 6f 01 35 3c 3b 40 49 6f 50"
+  },
+  {
+   "rva": "0x4a0750",
+   "original": "ON (45 DEG)",
+   "ru": "ВКЛ (45 ГРАД)",
+   "len": 13,
+   "hash32": 3618107214,
+   "hash16": 61262,
+   "bytes_hex": "37 40 50 01 61 76 7a 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a0760",
+   "original": "ON (40 DEG)",
+   "ru": "ВКЛ (40 ГРАД)",
+   "len": 13,
+   "hash32": 1733697704,
+   "hash16": 8360,
+   "bytes_hex": "37 40 50 01 61 76 58 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a0770",
+   "original": "ON (35 DEG)",
+   "ru": "ВКЛ (35 ГРАД)",
+   "len": 13,
+   "hash32": 1965226484,
+   "hash16": 63988,
+   "bytes_hex": "37 40 50 01 61 74 7a 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a0780",
+   "original": "ON (30 DEG)",
+   "ru": "ВКЛ (30 ГРАД)",
+   "len": 13,
+   "hash32": 2514168906,
+   "hash16": 11338,
+   "bytes_hex": "37 40 50 01 61 74 58 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a0790",
+   "original": "ON (25 DEG)",
+   "ru": "ВКЛ (25 ГРАД)",
+   "len": 13,
+   "hash32": 2116359877,
+   "hash16": 5829,
+   "bytes_hex": "37 40 50 01 61 69 7a 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a07a0",
+   "original": "ON (20 DEG)",
+   "ru": "ВКЛ (20 ГРАД)",
+   "len": 13,
+   "hash32": 1084145415,
+   "hash16": 48903,
+   "bytes_hex": "37 40 50 01 61 69 58 01 4f 48 35 43 5e"
+  },
+  {
+   "rva": "0x4a07d0",
+   "original": "FOVEATED PERIPHERY",
+   "ru": "ФОВЕАЛЬНАЯ ПЕРИФЕРИЯ",
+   "len": 20,
+   "hash32": 2339549876,
+   "hash16": 45748,
+   "bytes_hex": "6e 3f 37 49 35 50 6c 33 35 4d 01 3c 49 48 44 6e 49 48 44 4d"
+  },
+  {
+   "rva": "0x4a07f8",
+   "original": "DESKTOP MIRROR",
+   "ru": "ЗЕРКАЛО РАБОЧЕГО СТОЛА",
+   "len": 22,
+   "hash32": 1201533778,
+   "hash16": 62290,
+   "bytes_hex": "4c 49 48 40 35 50 3f 01 48 35 4b 3f 45 49 4f 3f 01 3b 3a 3f 50 35"
+  },
+  {
+   "rva": "0x4a0808",
+   "original": "LEFT EYE",
+   "ru": "ЛЕВЫЙ ГЛАЗ",
+   "len": 10,
+   "hash32": 1352123371,
+   "hash16": 50155,
+   "bytes_hex": "50 49 37 68 6f 01 4f 50 35 4c"
+  },
+  {
+   "rva": "0x4a0818",
+   "original": "BOTH EYES",
+   "ru": "ОБА ГЛАЗА",
+   "len": 9,
+   "hash32": 2212632106,
+   "hash16": 5674,
+   "bytes_hex": "3f 4b 35 01 4f 50 35 4c 35"
+  },
+  {
+   "rva": "0x4a0840",
+   "original": "MIRROR WINDOW",
+   "ru": "ОКНО ЗЕРКАЛА",
+   "len": 12,
+   "hash32": 634153272,
+   "hash16": 26936,
+   "bytes_hex": "3f 40 33 3f 01 4c 49 48 40 35 50 35"
+  },
+  {
+   "rva": "0x4a0850",
+   "original": "WINDOWED",
+   "ru": "В ОКНЕ",
+   "len": 6,
+   "hash32": 3954616390,
+   "hash16": 43078,
+   "bytes_hex": "37 01 3f 40 33 49"
+  },
+  {
+   "rva": "0x4a0860",
+   "original": "FULLSCREEN",
+   "ru": "ПОЛНЫЙ ЭКРАН",
+   "len": 12,
+   "hash32": 1900166623,
+   "hash16": 15839,
+   "bytes_hex": "3c 3f 50 33 68 6f 01 46 40 48 35 33"
+  },
+  {
+   "rva": "0x4a0880",
+   "original": "MIRROR HEADSET UI",
+   "ru": "ЗЕРКАЛИРОВАТЬ UI ШЛЕМА",
+   "len": 22,
+   "hash32": 3385779003,
+   "hash16": 58171,
+   "bytes_hex": "4c 49 48 40 35 50 44 48 3f 37 35 3a 6c 01 7e 5b 01 6d 50 49 47 35"
+  },
+  {
+   "rva": "0x4a08a8",
+   "original": "FOVEATED RENDERING",
+   "ru": "ФОВЕАЛЬНЫЙ РЕНДЕРИНГ",
+   "len": 20,
+   "hash32": 754390476,
+   "hash16": 5580,
+   "bytes_hex": "6e 3f 37 49 35 50 6c 33 68 6f 01 48 49 33 43 49 48 44 33 4f"
+  },
+  {
+   "rva": "0x4a08bc",
+   "original": "LIGHT",
+   "ru": "ЛЕГКИЙ",
+   "len": 6,
+   "hash32": 4062685044,
+   "hash16": 42868,
+   "bytes_hex": "50 49 4f 40 44 6f"
+  },
+  {
+   "rva": "0x4a08c8",
+   "original": "AGGRESSIVE",
+   "ru": "АГРЕССИВНЫЙ",
+   "len": 11,
+   "hash32": 286354639,
+   "hash16": 27855,
+   "bytes_hex": "35 4f 48 49 3b 3b 44 37 33 68 6f"
+  },
+  {
+   "rva": "0x4a08d4",
+   "original": "ULTRA",
+   "ru": "УЛЬТРА",
+   "len": 6,
+   "hash32": 4007848154,
+   "hash16": 59610,
+   "bytes_hex": "4a 50 6c 3a 48 35"
+  },
+  {
+   "rva": "0x4a08e0",
+   "original": "EXTREME",
+   "ru": "ЭКСТРИМ",
+   "len": 7,
+   "hash32": 1564384735,
+   "hash16": 40415,
+   "bytes_hex": "46 40 3b 3a 48 44 47"
+  },
+  {
+   "rva": "0x4a0900",
+   "original": "BETTER WATER REFLECTIONS",
+   "ru": "ЛУЧШИЕ ОТРАЖЕНИЯ ВОДЫ",
+   "len": 21,
+   "hash32": 928811763,
+   "hash16": 35571,
+   "bytes_hex": "50 4a 45 6d 44 49 01 3f 3a 48 35 63 49 33 44 4d 01 37 3f 43 68"
+  },
+  {
+   "rva": "0x4a0938",
+   "original": "DISABLE BLUR",
+   "ru": "ОТКЛЮЧИТЬ РАЗМЫТИЕ",
+   "len": 18,
+   "hash32": 2040075005,
+   "hash16": 4861,
+   "bytes_hex": "3f 3a 40 50 8c 45 44 3a 6c 01 48 35 4c 47 68 3a 44 49"
+  },
+  {
+   "rva": "0x4a0960",
+   "original": "DEPTH OF FIELD",
+   "ru": "ГЛУБИНА РЕЗКОСТИ",
+   "len": 16,
+   "hash32": 531647273,
+   "hash16": 19241,
+   "bytes_hex": "4f 50 4a 4b 44 33 35 01 48 49 4c 40 3f 3b 3a 44"
+  },
+  {
+   "rva": "0x4a0988",
+   "original": "HUD RESOLUTION (RESTART)",
+   "ru": "РАЗРЕШЕНИЕ HUD (ПЕРЕЗАПУСК)",
+   "len": 27,
+   "hash32": 935299435,
+   "hash16": 35179,
+   "bytes_hex": "48 35 4c 48 49 6d 49 33 44 49 01 73 7e 62 01 61 3c 49 48 49 4c 35 3c 4a 3b 40 5e"
+  },
+  {
+   "rva": "0x4a09c0",
+   "original": "DEPTH REPROJECTION",
+   "ru": "РЕПРОЕКЦИЯ ГЛУБИНЫ",
+   "len": 18,
+   "hash32": 494249138,
+   "hash16": 42162,
+   "bytes_hex": "48 49 3c 48 3f 49 40 77 44 4d 01 4f 50 4a 4b 44 33 68"
+  },
+  {
+   "rva": "0x4a09d8",
+   "original": "LEGAL NOTICE VIDEO",
+   "ru": "ВИДЕО ПРАВОВОЙ ИНФОРМАЦИИ",
+   "len": 25,
+   "hash32": 2483739106,
+   "hash16": 55778,
+   "bytes_hex": "37 44 43 49 3f 01 3c 48 35 37 3f 37 3f 6f 01 44 33 6e 3f 48 47 35 77 44 44"
+  },
+  {
+   "rva": "0x4a0a10",
+   "original": "CREDITS VIDEO",
+   "ru": "ВИДЕО ТИТРОВ",
+   "len": 12,
+   "hash32": 1828089684,
+   "hash16": 28500,
+   "bytes_hex": "37 44 43 49 3f 01 3a 44 3a 48 3f 37"
+  },
+  {
+   "rva": "0x4a0a40",
+   "original": "INTRO VIDEO",
+   "ru": "ВСТУПИТЕЛЬНОЕ ВИДЕО",
+   "len": 19,
+   "hash32": 1551244682,
+   "hash16": 7562,
+   "bytes_hex": "37 3b 3a 4a 3c 44 3a 49 50 6c 33 3f 49 01 37 44 43 49 3f"
+  },
+  {
+   "rva": "0x4a0b74",
+   "original": "HANDS",
+   "ru": "РУКИ",
+   "len": 4,
+   "hash32": 3191978387,
+   "hash16": 47507,
+   "bytes_hex": "48 4a 40 44"
+  },
+  {
+   "rva": "0x4a0ba0",
+   "original": "SCOPES",
+   "ru": "ПРИЦЕЛЫ",
+   "len": 7,
+   "hash32": 2464096427,
+   "hash16": 8363,
+   "bytes_hex": "3c 48 44 77 49 50 68"
+  },
+  {
+   "rva": "0x4a0bb8",
+   "original": "INTERFACE",
+   "ru": "ИНТЕРФЕЙС",
+   "len": 9,
+   "hash32": 2083657184,
+   "hash16": 5600,
+   "bytes_hex": "44 33 3a 49 48 6e 49 6f 3b"
+  },
+  {
+   "rva": "0x4a0bd8",
+   "original": "CAMERA OVERRIDES",
+   "ru": "ПЕРЕОПРЕДЕЛЕНИЯ КАМЕРЫ",
+   "len": 22,
+   "hash32": 1676964140,
+   "hash16": 28972,
+   "bytes_hex": "3c 49 48 49 3f 3c 48 49 43 49 50 49 33 44 4d 01 40 35 47 49 48 68"
+  },
+  {
+   "rva": "0x4a0c18",
+   "original": "GRAPHICS",
+   "ru": "ГРАФИКА",
+   "len": 7,
+   "hash32": 2466001928,
+   "hash16": 13320,
+   "bytes_hex": "4f 48 35 6e 44 40 35"
+  },
+  {
+   "rva": "0x4a0c38",
+   "original": "GAME",
+   "ru": "ИГРА",
+   "len": 4,
+   "hash32": 2886967923,
+   "hash16": 41587,
+   "bytes_hex": "44 4f 48 35"
+  }
+ ],
+ "skip_ascii": [
+  {
+   "rva": "0x49f6b8",
+   "text": "FSR",
+   "ascii_hex": "46 53 52",
+   "len": 3
+  },
+  {
+   "rva": "0x49f6bc",
+   "text": "DLSS",
+   "ascii_hex": "44 4c 53 53",
+   "len": 4
+  },
+  {
+   "rva": "0x49f6cc",
+   "text": "VR",
+   "ascii_hex": "56 52",
+   "len": 2
+  },
+  {
+   "rva": "0x4a009c",
+   "text": "1.00X",
+   "ascii_hex": "31 2e 30 30 58",
+   "len": 5
+  },
+  {
+   "rva": "0x4a00a4",
+   "text": "1.25X",
+   "ascii_hex": "31 2e 32 35 58",
+   "len": 5
+  },
+  {
+   "rva": "0x4a00ac",
+   "text": "1.50X",
+   "ascii_hex": "31 2e 35 30 58",
+   "len": 5
+  },
+  {
+   "rva": "0x4a00b4",
+   "text": "2.00X",
+   "ascii_hex": "32 2e 30 30 58",
+   "len": 5
+  },
+  {
+   "rva": "0x4a06d0",
+   "text": "K (DLSS 4)",
+   "ascii_hex": "4b 20 28 44 4c 53 53 20 34 29",
+   "len": 10
+  },
+  {
+   "rva": "0x4a06e0",
+   "text": "M (DLSS 4.5)",
+   "ascii_hex": "4d 20 28 44 4c 53 53 20 34 2e 35 29",
+   "len": 12
+  },
+  {
+   "rva": "0x4a06f0",
+   "text": "L (DLSS 4.5)",
+   "ascii_hex": "4c 20 28 44 4c 53 53 20 34 2e 35 29",
+   "len": 12
+  },
+  {
+   "rva": "0x4a0700",
+   "text": "J (DLSS 4)",
+   "ascii_hex": "4a 20 28 44 4c 53 53 20 34 29",
+   "len": 10
+  },
+  {
+   "rva": "0x4a0710",
+   "text": "E (DLSS 3)",
+   "ascii_hex": "45 20 28 44 4c 53 53 20 33 29",
+   "len": 10
+  },
+  {
+   "rva": "0x4a07e4",
+   "text": "TAA",
+   "ascii_hex": "54 41 41",
+   "len": 3
+  }
+ ],
+ "skip_note": "These 13 keep ASCII bytes at runtime because apply_ru.py skips identity translations. Listed for documentation and for the negative test; they must never receive the charmap font."
+}

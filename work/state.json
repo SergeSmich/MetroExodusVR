@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 21
+  "opencode": 22
  },
  "messages": [
   {
@@ -326,6 +326,16 @@
    "file": "collab/opencode/L-0020-setter-signature-readers-of-plus60.md",
    "title": "L-0020 (bag6 run + setter signature/readers)",
    "needs": "A-0019"
+  },
+  {
+   "id": "L-0021",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0021-bag7-filter-hash-kind-marker.md",
+   "title": "L-0021: bag7 filter by 176 hashes, kind/found, field layout fixed",
+   "needs": "A-0020"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

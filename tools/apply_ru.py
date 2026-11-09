@@ -580,6 +580,17 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code = bytearray()
     fixups = []
 
+    # --- positive caption filter (ru/caption_filter.json, A-0020 §7.1) -------
+    prop = prop_name.encode("ascii")
+    hashes = []
+    cf = Path(__file__).resolve().parent.parent / "ru" / "caption_filter.json"
+    if cf.exists():
+        doc = json.loads(cf.read_text(encoding="utf-8"))
+        hashes = sorted({int(e["hash32"]) & 0xFFFFFFFF for e in doc.get("entries", [])})
+    if not hashes:
+        hashes = [0xFFFFFFFF]
+    filter_count = len(hashes)
+
     # --- save every register we clobber (5 callee-saved + 8 volatile) --------
     code += b"\x53\x55\x57\x41\x56\x41\x57"  # push rbx, rbp, rdi, r14, r15
     code += b"\x50\x51\x52\x56\x41\x50\x41\x51\x41\x52\x41\x53"  # rax..r11
@@ -609,32 +620,113 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     jne4 = len(code)
     code += b"\x0f\x85\0\0\0\0"
 
-    # --- caption matched: counter + sample of the caption bytes ---------------
+    # --- caption matched: counter, len (+0x38), first 8 bytes (+0x30) --------
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     mfx2 = len(code) - 4
     code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
-    code += b"\x4c\x8b\x57\x08"  # mov r10, [rdi+8]     (caption len)
-    code += b"\x44\x89\x50\x2c"  # mov [rax+0x2c], r10d (caption len dword)
-    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]            (caption data ptr)
-    code += b"\x4c\x89\xd2"  # mov rdx, r10             (count)
-    code += b"\x41\xba\x10\0\0\0"  # mov r10d, 0x10
+    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
+    code += b"\x89\x50\x38"  # mov [rax+0x38], edx  (len at +0x38)
+    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (caption bytes)
+    code += b"\x41\xba\x08\0\0\0"  # mov r10d, 8
     code += b"\x4c\x39\xd2"  # cmp rdx, r10
     ncclamp = len(code)
     code += b"\x76\x03"  # jbe keep (count stays rdx)
-    code += b"\x44\x89\xd2"  # mov edx, r10d (count = 0x10)
+    code += b"\x44\x89\xd2"  # mov edx, r10d (count = 8)
     code += b"\x45\x33\xdb"  # xor r11d, r11d
     nsloop = len(code)
     code += b"\x4c\x39\xda"  # cmp rdx, r11
     nb1 = len(code)
     code += b"\x74\0"  # je sample done
     code += b"\x47\x0f\xb6\x04\x19"  # movzx r8d, byte [r9+r11]
-    code += b"\x46\x88\x44\x18\x30"  # mov [rax+r11+0x30], r8b (marker sample)
+    code += b"\x46\x88\x44\x18\x30"  # mov [rax+r11+0x30], r8b (sample)
     code += b"\x49\xff\xc3"  # inc r11
     nb2 = len(code)
     code += b"\xeb\0"  # jmp nsloop
     nsdone = len(code)
+
+    # --- positive filter: fnv1a32(caption value) must be in our table --------
+    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
+    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (value len)
+    code += b"\xb8\xc5\x9d\x1c\x81"  # mov eax, 0x811c9dc5
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    hash_loop = len(code)
+    code += b"\x4c\x39\xda"  # cmp rdx, r11
+    h1 = len(code)
+    code += b"\x76\0"  # jbe hash_done (r11 >= len)
+    code += b"\x47\x0f\xb6\x14\x19"  # movzx r10d, byte [r9+r11]
+    code += b"\x44\x31\xd0"  # xor eax, r10d
+    code += b"\x69\xc0\x93\x01\x00\x01"  # imul eax, eax, 0x01000193
+    code += b"\x49\xff\xc3"  # inc r11
+    h2 = len(code)
+    code += b"\xeb\0"  # jmp hash_loop
+    hash_done = len(code)
+    code += b"\x4c\x8d\x0d\0\0\0\0"  # lea r9, [rip+filter_table]
+    fixups.append((len(code) - 4, b"filter_table"))
+    code += b"\xb9" + struct.pack("<I", filter_count)  # mov ecx, count
+    search_loop = len(code)
+    code += b"\x41\x39\x01"  # cmp dword [r9], eax
+    s1 = len(code)
+    code += b"\x74\0"  # je hit
+    code += b"\x49\x83\xc1\x04"  # add r9, 4
+    code += b"\xff\xc9"  # dec ecx
+    s2 = len(code)
+    code += b"\x75\0"  # jnz search_loop
+    jmiss = len(code)
+    code += b"\xe9\0\0\0\0"  # jmp done (miss: not our caption)
+
+    # --- hit: record kind/found in the marker --------------------------------
+    hit = len(code)
+    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
+    fixups.append((len(code) - 4, b"marker"))
+    code += b"\xc6\x40\x27\x00"  # mov byte [rax+0x27], 0 (found = 0)
+    code += b"\xc6\x40\x26\x00"  # mov byte [rax+0x26], 0 (kind = 0)
+    code += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38] (bag begin/cursor)
+    code += b"\x4c\x8b\x4b\x40"  # mov r9, [rbx+0x40]  (bag end)
+    code += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+prop_name]
+    fixups.append((len(code) - 4, b"prop_name"))
+    scan_loop = len(code)
+    code += b"\x4c\x39\xca"  # cmp rdx, r9
+    sc1 = len(code)
+    code += b"\x73\0"  # jae scan_done
+    code += b"\x48\x83\x7a\x18" + struct.pack(
+        "<B", len(prop)
+    )  # cmp [rdx+0x18], len(prop)
+    sc2 = len(code)
+    code += b"\x75\0"  # jne scan_next
+    code += b"\x48\x83\x7a\x20\x0f"  # cmp qword [rdx+0x20], 0xf
+    sc3 = len(code)
+    code += b"\x76\0"  # jbe scan_inline
+    code += b"\x4c\x8b\x42\x08"  # mov r8, [rdx+8] (heap name)
+    sc4 = len(code)
+    code += b"\xeb\0"  # jmp cmp_start
+    scan_inline = len(code)
+    code += b"\x4c\x8d\x42\x08"  # lea r8, [rdx+8] (SSO name)
+    cmp_start = len(code)
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    cmploop = len(code)
+    code += b"\x49\x83\xfb" + struct.pack("<B", len(prop))  # cmp r11, len(prop)
+    sc6 = len(code)
+    code += b"\x73\0"  # jae match
+    code += b"\x43\x8a\x34\x18"  # mov sil, byte [r8+r11]
+    code += b"\x43\x3a\x34\x1a"  # cmp sil, byte [r10+r11]
+    sc7 = len(code)
+    code += b"\x75\0"  # jne scan_next
+    code += b"\x49\xff\xc3"  # inc r11
+    sc8 = len(code)
+    code += b"\xeb\0"  # jmp cmploop
+    smatch = len(code)
+    code += b"\x44\x0f\xb6\x02"  # movzx r8d, byte [rdx] (kind)
+    code += b"\x44\x88\x40\x26"  # mov [rax+0x26], r8b
+    code += b"\xc6\x40\x27\x01"  # mov byte [rax+0x27], 1 (found)
+    sc9 = len(code)
+    code += b"\xeb\0"  # jmp scan_done
+    scan_next = len(code)
+    code += b"\x48\x81\xc2\x98\0\0\0"  # add rdx, 0x98
+    sc10 = len(code)
+    code += b"\xeb\0"  # jmp scan_loop
+    scan_done = len(code)
+
     # --- set the font property on the same control ---------------------------
-    prop = prop_name.encode("ascii")
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
     fixups.append((len(code) - 4, b"prop_name"))
     code += b"\x48\x89\x04\x24"  # mov [rsp], rax
@@ -657,7 +749,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x0f\xb6\x43\xac"  # movzx eax, byte [rbx+0xac]
     code += b"\x24\x01"  # and al, 1
     code += b"\x88\x41\x25"  # mov [rcx+0x25], al     (gate bit)
-    code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (last caption control)
+    code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (matched control)
     # record bag bounds, read the same way the setter does
     code += b"\x48\x8b\x43\x38"  # mov rax, [rbx+0x38]
     code += b"\x48\x89\x41\x10"  # mov [rcx+0x10], rax
@@ -702,14 +794,31 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     for pos, target in ((jae1, copied_done), (jae2, copied_done)):
         struct.pack_into("<i", code, pos + 2, target - (pos + 6))
     struct.pack_into("<i", code, jb11 + 1, loop_start - (jb11 + 5))
-    # caption-sample loop branches (short, 8-bit displacements)
-    for pos, target in ((nb1, nsdone), (nb2, nsloop)):
+    # caption-sample / hash / search / scan branches (short, 8-bit)
+    for pos, target in (
+        (nb1, nsdone),
+        (nb2, nsloop),
+        (h1, hash_done),
+        (h2, hash_loop),
+        (s1, hit),
+        (s2, search_loop),
+        (sc1, scan_done),
+        (sc2, scan_next),
+        (sc3, scan_inline),
+        (sc4, cmp_start),
+        (sc6, smatch),
+        (sc7, scan_next),
+        (sc8, cmploop),
+        (sc9, scan_done),
+        (sc10, scan_loop),
+    ):
         code[pos + 1] = (target - (pos + 2)) & 0xFF
 
     # --- epilogue ------------------------------------------------------------
     done = len(code)
     for p in (jne1, jne2, jne3, jne4):
         struct.pack_into("<i", code, p + 2, done - (p + 6))
+    struct.pack_into("<i", code, jmiss + 1, done - (jmiss + 5))
     code += b"\x48\x83\xc4\x20"  # add rsp, 0x20
     code += b"\x41\x5b\x41\x5a\x41\x59\x41\x58\x5e\x5a\x59\x58"
     code += b"\x41\x5f\x41\x5e\x5f\x5d\x5b"  # pop r11..rbx
@@ -724,6 +833,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     for name, raw in (
         (b"prop_name", prop + b"\0"),
         (b"font_value", font_name.encode("ascii") + b"\0"),
+        (b"filter_table", struct.pack(f"<{len(hashes)}I", *hashes)),
         (b"marker", b"\0" * 0x1C00),
     ):
         data_off[name] = (len(code), len(raw) - 1)

@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 26,
-    "opencode": 26
+    "arena": 27,
+    "opencode": 28
   },
   "messages": [
     {
@@ -505,11 +505,48 @@
       "from": "arena",
       "to": "opencode",
       "kind": "decision",
-      "status": "open",
+      "status": "answered",
       "priority": "critical",
       "file": "collab/arena/A-0025-path-2-without-a-back-pointer.md",
       "title": "путь 2 без back-pointer: ловить сеттер по имени on_draw_item/item*; сначала прочитать vtable и caller",
-      "needs": "L-0025"
+      "needs": "L-0025",
+      "note": "см. L-0026/L-0027"
+    },
+    {
+      "id": "L-0026",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0026-found-any-206-set-ok-206.md",
+      "commit": "55c5d1e",
+      "title": "bag7: found_any=206, set_ok_any=206, vtable=0x3, caller=мод",
+      "note": "принято; переворачивает приоритет — см. A-0026"
+    },
+    {
+      "id": "L-0027",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0027-raw-numbers-on-draw-108-bag8.md",
+      "commit": "b0e1b8b",
+      "title": "сырые числа bag7, on_draw_item=+0x108, bag8 собран (маркер 0xc283c5)",
+      "note": "принято; сначала override_font_name, on_draw_item — в резерв"
+    },
+    {
+      "id": "A-0026",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0026-found-any-flips-the-priority-to-override-font-name.md",
+      "title": "font_name декоративен (206 записей, вид не изменился) -> писать override_font_name=menu; снять текущее значение font_name",
+      "needs": [
+        "L-0026",
+        "L-0027"
+      ]
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

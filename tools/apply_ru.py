@@ -678,8 +678,10 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     hit = len(code)
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     fixups.append((len(code) - 4, b"marker"))
+    code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
     code += b"\xc6\x40\x27\x00"  # mov byte [rax+0x27], 0 (found = 0)
-    code += b"\xc6\x40\x26\x00"  # mov byte [rax+0x26], 0 (kind = 0)
+    code += b"\xc6\x40\x26\x00"  # mov byte [rax+0x26], 0 (body kind = 0)
+    code += b"\xc6\x40\x3c\x00"  # mov byte [rax+0x3c], 0 (has kind-2 = 0)
     code += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38] (bag begin/cursor)
     code += b"\x4c\x8b\x4b\x40"  # mov r9, [rbx+0x40]  (bag end)
     code += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+prop_name]
@@ -716,7 +718,17 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\xeb\0"  # jmp cmploop
     smatch = len(code)
     code += b"\x44\x0f\xb6\x02"  # movzx r8d, byte [rdx] (kind)
-    code += b"\x44\x88\x40\x26"  # mov [rax+0x26], r8b
+    code += b"\x41\x80\xf8\x01"  # cmp r8b, 1
+    sk_body = len(code)
+    code += b"\x74\0"  # je body
+    code += b"\x41\x80\xf8\x02"  # cmp r8b, 2
+    sk_skip = len(code)
+    code += b"\x75\0"  # jne scan_next (kinds 0/3/4 ignored, like setter)
+    code += b"\xc6\x40\x3c\x01"  # mov byte [rax+0x3c], 1 (kind-2 header seen)
+    sk_h2 = len(code)
+    code += b"\xeb\0"  # jmp scan_next
+    sbody = len(code)
+    code += b"\xc6\x40\x26\x01"  # mov byte [rax+0x26], 1 (body kind = 1)
     code += b"\xc6\x40\x27\x01"  # mov byte [rax+0x27], 1 (found)
     sc9 = len(code)
     code += b"\xeb\0"  # jmp scan_done
@@ -811,6 +823,9 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         (sc8, cmploop),
         (sc9, scan_done),
         (sc10, scan_loop),
+        (sk_body, sbody),
+        (sk_skip, scan_next),
+        (sk_h2, scan_next),
     ):
         code[pos + 1] = (target - (pos + 2)) & 0xFF
 

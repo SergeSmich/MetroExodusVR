@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 22
+  "opencode": 23
  },
  "messages": [
   {
@@ -336,6 +336,16 @@
    "file": "collab/opencode/L-0021-bag7-filter-hash-kind-marker.md",
    "title": "L-0021: bag7 filter by 176 hashes, kind/found, field layout fixed",
    "needs": "A-0020"
+  },
+  {
+   "id": "L-0022",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0022-vectors-ok-matched-counter-kind1-scan.md",
+   "title": "L-0022: filter vectors OK, matched counter, kind-1 scan",
+   "needs": "A-0021"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

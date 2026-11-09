@@ -72,13 +72,16 @@ def main():
     cap_sample = d[0x30:0x38]
     kind_found = d[0x26]
     found = d[0x27]
+    matched = int.from_bytes(d[0x2c:0x30], 'little')
+    has_kind2 = d[0x3c]
     control = int.from_bytes(d[8:16], "little")
     begin = int.from_bytes(d[0x10:0x18], "little")
     end = int.from_bytes(d[0x18:0x20], "little")
     count = int.from_bytes(d[0x20:0x24], "little")
     caller = int.from_bytes(d[0x28:0x30], "little")
     print(f"calls={calls} caption={caption} set_ok={res}")
-    print(f"last caption len={cap_len} sample={cap_sample!r} found={found} kind={kind_found}")
+    print(f"matched={matched} last caption len={cap_len} sample={cap_sample!r}")
+    print(f"found={found} kind={kind_found} has_kind2={has_kind2}")
     print(f"gate [c+0xac]&1={gate} qword [c+0x60]={q60:#018x} (hi32={q60 >> 32:#x})")
     print(f"control={control:#x} begin={begin:#x} end={end:#x}")
     span = end - begin if end > begin else 0

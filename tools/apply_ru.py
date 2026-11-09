@@ -651,6 +651,12 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
     mfx3 = len(code) - 4
     code += b"\x88\x41\x24"  # mov byte ptr [rcx+0x24], al (set result)
+    # probe fields the resolver cares about (A-0018 §1/§2/§6)
+    code += b"\x48\x8b\x43\x60"  # mov rax, [rbx+0x60]  (override member)
+    code += b"\x48\x89\x41\x40"  # mov [rcx+0x40], rax
+    code += b"\x0f\xb6\x43\xac"  # movzx eax, byte [rbx+0xac]
+    code += b"\x24\x01"  # and al, 1
+    code += b"\x88\x41\x25"  # mov [rcx+0x25], al     (gate bit)
     code += b"\x48\x89\x59\x08"  # mov qword ptr [rcx+8], rbx (last caption control)
     # record bag bounds, read the same way the setter does
     code += b"\x48\x8b\x43\x38"  # mov rax, [rbx+0x38]
@@ -670,7 +676,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # artefact (L-0015 §2) came from the old 15-byte compact entries.
     code += b"\x48\x8b\x41\x10"  # mov rax, [rcx+0x10]  (bag begin)
     code += b"\x48\x8b\x51\x18"  # mov rdx, [rcx+0x18]  (bag end)
-    code += b"\x48\x8d\x79\x40"  # lea rdi, [rcx+0x40]  (out: raw records)
+    code += b"\x48\x8d\x79\x48"  # lea rdi, [rcx+0x48]  (out: raw records)
     code += b"\x45\x33\xc0"  # xor r8d, r8d          (records copied)
     loop_start = len(code)
     code += b"\x48\x3b\xc2"  # cmp rax, rdx

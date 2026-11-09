@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 18
+  "opencode": 19
  },
  "messages": [
   {
@@ -296,6 +296,16 @@
    "file": "collab/opencode/L-0017-xref-override-font-name-and-marker-counters.md",
    "title": "L-0017: xref override_font_name in exe; marker counters/sample; static work delegated to Arena",
    "needs": "A-0017"
+  },
+  {
+   "id": "L-0018",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0018-plus60-is-dword-gate-in-marker-bag6-installed.md",
+   "title": "L-0018: +0x60 is dword (deserializer 0xc46cb0); gate+q60 in marker; bag6 installed",
+   "needs": "A-0018"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

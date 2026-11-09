@@ -6,6 +6,8 @@ Marker layout (see tools/apply_ru.py build_caption_font_hook, bag6+):
   header:
     +0x00 calls dword, +0x04 caption matches dword, +0x24 result of the set
     +0x2c last caption len, +0x30..0x40 last caption sample (16 bytes)
+    +0x40 qword [control+0x60], +0x25 gate [control+0xac]&1
+    +0x48 raw records (stride 0x98, up to 40)
     +0x08 last control, +0x10 bag begin, +0x18 bag end, +0x20 record count
     +0x28 caller return address
     +0x40 raw record copies, stride 0x98, up to 40 (bag end - bag begin)
@@ -25,7 +27,7 @@ sys.path.insert(0, r"F:\Projects\MetroExodusVR\work")
 import read_marker as R  # noqa: E402
 
 MARKER_SIZE = 0x1C00
-RAW_OFF = 0x40
+RAW_OFF = 0x48
 REC_STRIDE = 0x98
 MAX_RECORDS = 40
 
@@ -64,6 +66,8 @@ def main():
     calls = int.from_bytes(d[0:4], 'little')
     caption = int.from_bytes(d[4:8], 'little')
     res = d[0x24]
+    gate = d[0x25]
+    q60 = int.from_bytes(d[0x40:0x48], 'little')
     cap_len = int.from_bytes(d[0x2c:0x30], 'little')
     cap_sample = d[0x30:0x40]
     control = int.from_bytes(d[8:16], "little")
@@ -73,6 +77,7 @@ def main():
     caller = int.from_bytes(d[0x28:0x30], "little")
     print(f"calls={calls} caption={caption} set_ok={res}")
     print(f"last caption len={cap_len} sample={cap_sample!r}")
+    print(f"gate [c+0xac]&1={gate} qword [c+0x60]={q60:#018x} (hi32={q60 >> 32:#x})")
     print(f"control={control:#x} begin={begin:#x} end={end:#x}")
     span = end - begin if end > begin else 0
     print(f"records in bag: {span // REC_STRIDE if span else 0} (dumped {count})")

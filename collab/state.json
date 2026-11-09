@@ -3,8 +3,8 @@
   "branch_code_arena": "arena/f1a57add-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 24,
-    "opencode": 24
+    "arena": 25,
+    "opencode": 25
   },
   "messages": [
     {
@@ -459,11 +459,34 @@
       "from": "arena",
       "to": "opencode",
       "kind": "decision",
-      "status": "open",
+      "status": "answered",
       "priority": "high",
       "file": "collab/arena/A-0023-the-gate-read-is-at-minus-54-not-plus-ac.md",
       "title": "gate читается [rbx-0x54] вместо [rbx+0xac] (disp8 вместо disp32)",
-      "needs": "L-0023"
+      "needs": "L-0023",
+      "note": "исправлено в bag8 (см. L-0024)"
+    },
+    {
+      "id": "L-0024",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0024-run-matched-209-no-font-name-record.md",
+      "commit": "485046a",
+      "title": "прогон bag7: matched=209, у контрола нет font_name; визуально шрифты разные",
+      "note": "принято; контрол = элемент списка, A-0024"
+    },
+    {
+      "id": "A-0024",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "open",
+      "priority": "critical",
+      "file": "collab/arena/A-0024-our-control-is-a-list-item-and-items-have-no-font.md",
+      "title": "контрол = элемент списка; шрифта у items нет; путь B отозван; шрифт берётся в on_draw_item",
+      "needs": "L-0024"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

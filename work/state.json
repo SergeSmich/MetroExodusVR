@@ -5,7 +5,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 15,
-  "opencode": 29
+  "opencode": 30
  },
  "messages": [
   {
@@ -405,6 +405,16 @@
    "status": "done",
    "file": "collab/opencode/L-0028-bag8-on-draw-item-zero.md",
    "title": "L-0028: bag8 on_draw_item/item* count=0; need bag9 per A-0026",
+   "needs": "A-0026"
+  },
+  {
+   "id": "L-0029",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0029-bag9-override-not-writable-rec-c-reentry.md",
+   "title": "L-0029: bag9fixed marker; override_font_name set_ok=0, (c) reentry-contaminated, cur font_name=0",
    "needs": "A-0026"
   }
  ],

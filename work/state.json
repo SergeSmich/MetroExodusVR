@@ -1,0 +1,272 @@
+{
+ "_comment": "Board index. Only the author of a message edits its entry. Files in collab/ are append-only: a clarification is a new message with 'needs:'. (opencode may edit its own message entries' note/status)",
+ "_note_opencode": "L-0014 добавлен вручную: скрипт, который пересчитывал поле state.json, придерживался старой модели без opencode-записей; запись ниже — прямая правка opencode.",
+ "branch_code_arena": "arena/f1a57add-metroexodusvr",
+ "branch_code_local": "local/opencode",
+ "next_ids": {
+  "arena": 15,
+  "opencode": 15
+ },
+ "messages": [
+  {
+   "id": "A-0001",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "task",
+   "status": "partial",
+   "file": "collab/arena/A-0001-collect-dumps.md",
+   "title": "Дампы с машины пользователя",
+   "note": "п.1 закрыт таблицей ресурсов из L-0001; п.2-3 перенесены в A-0004"
+  },
+  {
+   "id": "A-0002",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "task",
+   "status": "answered",
+   "file": "collab/arena/A-0002-font-name-hunt.md",
+   "title": "Имя шрифта модской страницы",
+   "note": "ответ в L-0001; вывод оспорен в A-0003"
+  },
+  {
+   "id": "A-0003",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "file": "collab/arena/A-0003-review-L-0001.md",
+   "title": "Ревью L-0001: плашка != меню, эксперимент из двух сборок",
+   "needs": "L-0001"
+  },
+  {
+   "id": "A-0004",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "task",
+   "status": "open",
+   "file": "collab/arena/A-0004-remaining-dumps.md",
+   "title": "Остаток A-0001: fonts_ru/us.bin, stable_us.lng, tcmap сверка",
+   "priority": "low"
+  },
+  {
+   "id": "A-0005",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "task",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0005-utf8-flag-patch.md",
+   "title": "Готовый diff для --encoding utf8 (файл остаётся у opencode)",
+   "needs": "A-0003"
+  },
+  {
+   "id": "L-0002",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0002-font-name.md",
+   "commit": "ee57a3f",
+   "title": "шрифт подписей: charmap/меню-модель",
+   "note": "§4 (menu сломан в RU) опровергнут в A-0007"
+  },
+  {
+   "id": "L-0005",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "accepted",
+   "file": "collab/opencode/L-0005-utf8-flag.md",
+   "commit": "dc814a8",
+   "title": "--encoding utf8 + --probe-json",
+   "note": "принято"
+  },
+  {
+   "id": "L-0006",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0006-en-locale-run.md",
+   "commit": "ee57a3f",
+   "title": "EN-прогон: подписи локаль-независимы",
+   "note": "принято; объяснение в A-0007"
+  },
+  {
+   "id": "A-0007",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0007-font-name-arial.md",
+   "title": "font_name не задан -> exe ставит arial; патч = menu в парсере 0x9b3a0",
+   "needs": "L-0002, L-0006"
+  },
+  {
+   "id": "L-0007",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0007-menu-handles-storage-bin-font-name-defau.md",
+   "commit": "32c530c",
+   "title": "menu_handles_storage.bin + merge",
+   "note": "разобран в A-0008; дефолт menu, arial не встречается"
+  },
+  {
+   "id": "A-0008",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0008-menu-handles-parsed.md",
+   "title": "Файл = таблица схем (1063 блока), дефолт menu; нужен дамп записи 0x1e8",
+   "needs": "L-0007"
+  },
+  {
+   "id": "L-0008",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0008-memory-map-no-font-field-1e8-is-schema.md",
+   "commit": "0afa63d",
+   "title": "карта памяти: у мода нет поля шрифта",
+   "note": "принято, кроме вывода про пустой font_name — см. A-0009"
+  },
+  {
+   "id": "A-0009",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0009-class-table.md",
+   "title": "таблица классов: 813 блоков, пустой font_name у 51; патч — в exe-функции выбора шрифта",
+   "needs": "L-0008"
+  },
+  {
+   "id": "L-0009",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0009-exe-alias-table-font-is-a-handle.md",
+   "commit": "04cf8cd",
+   "title": "алиасы exe, шрифт = handle, мод не задаёт шрифт",
+   "note": "принято полностью; ответ в A-0010"
+  },
+  {
+   "id": "A-0010",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0010-slots-and-dollar-test.md",
+   "title": "167/4162 — заголовок; элемент {f32 size; u32 handle}; тест $ не различает ASCII",
+   "needs": "L-0009"
+  },
+  {
+   "id": "L-0010",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0010-arial-is-dead-second-font-set-has-no-arial.md",
+   "commit": "98bdea3",
+   "title": "arial мёртв (1 xref), второй набор 0xb290e0 без arial",
+   "note": "принято; ответ в A-0011"
+  },
+  {
+   "id": "A-0011",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0011-control-font-and-the-dollar-test-is-confounded.md",
+   "title": "пустой font_name = шрифт контрола, не класса; тест $ на TURN MODE ничего не различает; override_font_name",
+   "needs": "L-0010"
+  },
+  {
+   "id": "L-0011",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0011-lng-keys-keep-dollar-glyph-counts-override-font-name.md",
+   "commit": "7790a1e",
+   "title": "ключи .lng с $; глифы 256 у восьми; override_font_name +0x60",
+   "note": "принято; ответ в A-0012"
+  },
+  {
+   "id": "A-0012",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0012-makecaptionliteral-is-three-loops-and-length-is-the-blocker.md",
+   "title": "MakeCaptionLiteral = 3 цикла поиска; probe пишет charmap вместо ASCII; $back vs back",
+   "needs": "L-0011"
+  },
+  {
+   "id": "L-0012",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0012-addresses-are-rva-record-is-menu-plus-control-first-loop-makes-literal.md",
+   "commit": "7dd88cb",
+   "title": "адреса = RVA (я ошибался); запись = (меню, контрол); 3 цикла ставят флаг 4 в +0xd4",
+   "note": "принято; ответ в A-0013"
+  },
+  {
+   "id": "A-0013",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0013-i-was-wrong-on-addresses-the-mod-writes-caption-not-font.md",
+   "title": "признаю 3 ошибки; мод ПИШЕТ caption, но ни одного из 3 шрифтовых имён",
+   "needs": "L-0012"
+  },
+  {
+   "id": "L-0013",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "answered",
+   "file": "collab/opencode/L-0013-flag-d4-is-write-only-and-no-font-names-anywhere.md",
+   "commit": "041ec96",
+   "title": "+0xd4 write-only (85 refs, 1 writer, 0 readers); шрифтовых имён в DLL нет",
+   "note": "принято; ответ в A-0014"
+  },
+  {
+   "id": "A-0014",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "decision",
+   "status": "open",
+   "priority": "high",
+   "file": "collab/arena/A-0014-caption-text-is-ours-and-the-calibration-test.md",
+   "title": "текст подписи = record+0x10 (наш литерал); schema = вход, не наблюдение; калибровка DOH5",
+   "needs": "L-0013"
+  },
+  {
+   "id": "L-0014",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "done",
+   "file": "collab/opencode/L-0014-calibration-row-2-and-the-bag5-probe.md",
+   "title": "L-0014: калибровка = строка 2; kind1-запись font_name пишет, шрифт не меняется",
+   "needs": "A-0014"
+  }
+ ],
+ "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"
+}

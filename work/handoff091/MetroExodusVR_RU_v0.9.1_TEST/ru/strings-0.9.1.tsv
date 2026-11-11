@@ -1,0 +1,196 @@
+# Metro Exodus VR v0.9.1 - Russian translations for native menu captions.
+# Columns: address(hex RVA) <TAB> original(English) <TAB> translation(Russian)
+# Addresses regenerated from the official v0.9.1 DLL; verify exact DLL hash before use.
+0x4be4d0	NOT SET	НЕТ
+0x4be4d8	{} CM	{} СМ
+0x4be4e0	{}% (RECOMMENDED)	{}% (РЕКОМЕНД.)
+0x4be4f8	+{} CM	+{} СМ
+0x4be500	{} DEG	{} ГРАД
+0x4be508	{:.2f} M	{:.2f} М
+0x4be514	PLAY	ИГРА
+0x4be51c	SKIP	ПРОПУСК
+0x4be528	OFF (GAME TAA)	ВЫКЛ (TAA)
+0x4be538	FSR	FSR
+0x4be53c	DLSS	DLSS
+0x4be544	AUTO	АВТО
+0x4be54c	VR	VR
+0x4be550	VR NO TURN	VR: НЕТ
+0x4be55c	CINEMA	КИНО
+0x4be568	VR BODY TURN	ТЕЛО VR
+0x4be588	TURN MODE	РЕЖИМ ПОВОРОТА
+0x4be594	SNAP	РЕЗКО
+0x4be59c	SMOOTH	ПЛАВНО
+0x4be5b8	SNAP TURN ANGLE	УГОЛ РЕЗКОГО ПОВОРОТА
+0x4be5c8	{:g} DEG	{:g} ГРАД
+0x4be5f0	SMOOTH TURN SPEED	СКОРОСТЬ ПЛАВНОГО ПОВОРОТА
+0x4be608	{:g} DEG/S	{:g} ГРАД/С
+0x4be630	MOVEMENT DIRECTION	НАПРАВЛЕНИЕ ДВИЖЕНИЯ
+0x4be644	HEAD	ГОЛОВА
+0x4be64c	BODY	ТЕЛО
+0x4be658	LEFT HAND	ЛЕВАЯ
+0x4be668	RIGHT HAND	ПРАВАЯ
+0x4be688	CROUCH BUTTON	КНОПКА ПРИСЕДА
+0x4be698	HOLD	УДЕРЖ.
+0x4be6a0	TOGGLE	ПЕРЕКЛ.
+0x4be6c0	AUTO SPRINT	АВТОБЕГ
+0x4be6e8	MOVE STICK DEADZONE	МЕРТВАЯ ЗОНА СТИКА
+0x4be718	TURN STICK DEADZONE	МЕРТВАЯ ЗОНА ПОВОРОТА
+0x4be748	REDUCE HEAD BOB	УМЕНЬШИТЬ КАЧАНИЕ
+0x4be770	SHOW VR TIPS AGAIN	СНОВА ПОКАЗАТЬ СОВЕТЫ VR
+0x4be798	PLAY MODE	РЕЖИМ ИГРЫ
+0x4be7a8	ROOM-SCALE	МАСШТАБ
+0x4be7b8	STANDING	СТОЯ
+0x4be7c4	SEATED	СИДЯ
+0x4be7e8	PLAYER HEIGHT	РОСТ ИГРОКА
+0x4be810	WORLD SCALE	МАСШТАБ МИРА
+0x4be838	BODY TURNING	ПОВОРОТ ТЕЛА
+0x4be848	FOLLOW HEAD	СЛЕДОВАТЬ ЗА ГОЛОВОЙ
+0x4be870	BODY POSITION	ПОЛОЖЕНИЕ ТЕЛА
+0x4be880	FOLLOW	СЛЕДОВАТЬ
+0x4be8a0	PHYSICAL CROUCH	ФИЗИЧЕСКОЕ ПРИСЕДАНИЕ
+0x4be8c8	BELT HEIGHT	ВЫСОТА ПОЯСА
+0x4be8f0	BELT WHEN CROUCHING	ПОЯС В ПРИСЕДЕ
+0x4be908	STAY WITH YOU	ОСТАВАТЬСЯ С ВАМИ
+0x4be918	FOLLOW BODY	СЛЕДОВАТЬ ЗА ТЕЛОМ
+0x4be938	BHAPTICS (EXPERIMENTAL)	BHAPTICS (ЭКСПЕРИМ.)
+0x4be968	BHAPTICS STRENGTH	СИЛА BHAPTICS
+0x4be998	DOMINANT HAND	ОСНОВНАЯ РУКА
+0x4be9a8	RIGHT	ПРАВАЯ
+0x4be9b0	LEFT	ЛЕВАЯ
+0x4be9c8	WEAPON GRIP ANGLE	УГОЛ ХВАТА ОРУЖИЯ
+0x4be9f8	FINGER TRACKING	ОТСЛЕЖИВАНИЕ ПАЛЬЦЕВ
+0x4bea14	GRIP	ХВАТ
+0x4bea30	VIBRATION	ВИБРАЦИЯ
+0x4bea58	HAND CUES	ПОДСКАЗКИ РУК
+0x4bea80	WEAPONS	ОРУЖИЕ
+0x4beaa0	DAMAGE	УРОН
+0x4beac0	EXPLOSIONS	ВЗРЫВЫ
+0x4beae8	SCENES AND VEHICLES	СЦЕНЫ И ТРАНСПОРТ
+0x4beb18	MOVEMENT	ДВИЖЕНИЕ
+0x4beb40	USE BY LOOKING	ИСПОЛЬЗОВАТЬ ВЗГЛЯДОМ
+0x4beb68	WEAPON WEIGHT	ВЕС ОРУЖИЯ
+0x4beb90	MANUAL RELOADING	РУЧНАЯ ПЕРЕЗАРЯДКА
+0x4bebc0	PART HIGHLIGHTS	ПОДСВЕТКА ЧАСТЕЙ
+0x4bebd0	OFF	ВЫКЛ
+0x4bebd8	FIRST RELOADS	ПЕРВЫЕ ПЕРЕЗАРЯДКИ
+0x4bebe8	ALWAYS	ВСЕГДА
+0x4bec10	RESET HIGHLIGHT COUNTS	СБРОСИТЬ СЧЕТЧИКИ ПОДСВЕТКИ
+0x4bec40	WEAPON FLICK	ВСТРЯХИВАНИЕ ОРУЖИЯ
+0x4bec50	GENTLE	МЯГКО
+0x4bec58	NORMAL	ОБЫЧНО
+0x4bec60	HARD	СИЛЬНО
+0x4bec80	MAGAZINE POUCH	ПОДСУМОК ДЛЯ МАГАЗИНОВ
+0x4bec90	HIP	БЕДРО
+0x4becb0	SIGHTING EYE	ГЛАЗ ПРИЦЕЛА
+0x4becd0	OTHER EYE WHILE SCOPED	ВТОРОЙ ГЛАЗ В ПРИЦЕЛЕ
+0x4bece8	VISIBLE	ВИДИМО
+0x4becf0	BLURRED	РАЗМЫТО
+0x4becf8	BLACK	ЧЕРНЫЙ
+0x4bed10	RETICLE TILT	НАКЛОН ПРИЦЕЛА
+0x4bed20	WITH WEAPON	С ОРУЖИЕМ
+0x4bed2c	LEVEL	УРОВЕНЬ
+0x4bed38	FIXED TO VIEW	ФИКСИРОВАНО
+0x4bed60	SCOPE STEERING	НАВЕДЕНИЕ ПРИЦЕЛА
+0x4bed70	WEAPON	ОРУЖИЕ
+0x4bed78	WEAPON + HEAD	ОРУЖИЕ + ГОЛОВА
+0x4beda0	REALISTIC NIGHT VISION	РЕАЛИСТИЧНОЕ НОЧНОЕ ВИДЕНИЕ
+0x4bedc8	HUD SHAPE	ФОРМА HUD
+0x4bedf8	HUD POSITION	ПОЛОЖЕНИЕ HUD
+0x4bee20	HUD DISTANCE	РАССТОЯНИЕ HUD
+0x4bee40	HUD SIZE	РАЗМЕР HUD
+0x4bee60	HUD HEIGHT	ВЫСОТА HUD
+0x4bee70	{:+.0f} DEG	{:+.0f} ГРАД
+0x4bee98	HUD OPACITY	ПРОЗРАЧНОСТЬ HUD
+0x4beec0	HINT HEIGHT	ВЫСОТА ПОДСКАЗКИ
+0x4beee8	HINT SIZE	РАЗМЕР ПОДСКАЗКИ
+0x4bef10	HINT TIME	ВРЕМЯ ПОДСКАЗКИ
+0x4bef1c	1.00X	1.00X
+0x4bef24	1.25X	1.25X
+0x4bef2c	1.50X	1.50X
+0x4bef34	2.00X	2.00X
+0x4bef58	ACTION PROMPT SIZE	РАЗМЕР ПОДСКАЗКИ ДЕЙСТВИЯ
+0x4bef90	MENU DISTANCE	РАССТОЯНИЕ МЕНЮ
+0x4befb0	MENU SIZE	РАЗМЕР МЕНЮ
+0x4befc0	{:.1f} M	{:.1f} М
+0x4befe8	DAMAGE EFFECTS	ЭФФЕКТЫ УРОНА
+0x4bf010	DAMAGE EFFECT SIZE	РАЗМЕР ЭФФЕКТОВ УРОНА
+0x4bf024	SMALL	МАЛЫЙ
+0x4bf02c	MEDIUM	СРЕДНИЙ
+0x4bf034	LARGE	БОЛЬШОЙ
+0x4bf058	HIT DIRECTION	НАПРАВЛЕНИЕ УДАРА
+0x4bf080	LOW-HEALTH PULSE	ПУЛЬС ПРИ РАНЕНИИ
+0x4bf0b0	DEBUG OVERLAY	ОТЛАДОЧНЫЙ ОВЕРЛЕЙ
+0x4bf0d8	CINEMA POINTER	УКАЗАТЕЛЬ КИНО
+0x4bf100	CINEMA FLOOR	ПОЛ КИНО
+0x4bf128	CINEMA CONTROLLERS	КОНТРОЛЛЕРЫ КИНО
+0x4bf158	CINEMA INFO	ИНФО КИНО
+0x4bf180	CINEMA LINKS	ССЫЛКИ КИНО
+0x4bf1a8	CAMERA PRESET	ПРЕСЕТ КАМЕРЫ
+0x4bf1b8	IMMERSIVE	ИММЕРСИВНЫЙ
+0x4bf1c8	COMFORT	КОМФОРТНЫЙ
+0x4bf1d0	CINEMATIC	КИНЕМАТОГРАФИЧНЫЙ
+0x4bf1f0	RE-ALIGN AFTER SCENES	ВЫРАВНИВАТЬ ПОСЛЕ СЦЕН
+0x4bf220	CINEMA SCREEN DISTANCE	РАССТОЯНИЕ ЭКРАНА КИНО
+0x4bf250	CINEMA SCREEN SIZE	РАЗМЕР ЭКРАНА КИНО
+0x4bf2c0	FREE CAMERA	СВОБОДНАЯ КАМЕРА
+0x4bf300	BONE ANGLES	УГЛЫ КОСТЕЙ
+0x4bf328	SCRIPTED LOCK	БЛОКИРОВКА СКРИПТОМ
+0x4bf358	ANIMATION LOCK	БЛОКИРОВКА АНИМАЦИИ
+0x4bf388	AXIS LOCKED	ОСЬ ЗАБЛОКИРОВАНА
+0x4bf3b0	GAMEPLAY UI	ИГРОВОЙ ИНТЕРФЕЙС
+0x4bf3f0	RENDER MODE	РЕЖИМ РЕНДЕРА
+0x4bf3fc	STEREO	СТЕРЕО
+0x4bf408	PERFORMANCE (AER+)	ПРОИЗВОДИТЕЛЬНОСТЬ (AER+)
+0x4bf438	RENDER SCALE (RESTART)	МАСШТАБ РЕНДЕРА (ПЕРЕЗАПУСК)
+0x4bf460	UPSCALER	АПСКЕЙЛЕР
+0x4bf488	UPSCALING MODE	РЕЖИМ АПСКЕЙЛА
+0x4bf498	NATIVE AA	НАТИВНОЕ СГЛАЖИВАНИЕ
+0x4bf4a8	QUALITY	КАЧЕСТВО
+0x4bf4b0	BALANCED	СБАЛАНСИРОВАННЫЙ
+0x4bf4c0	PERFORMANCE	ПРОИЗВОДИТЕЛЬНОСТЬ
+0x4bf4d0	ULTRA PERFORMANCE	УЛЬТРА ПРОИЗВОДИТЕЛЬНОСТЬ
+0x4bf500	FSR SHARPENING	РЕЗКОСТЬ FSR
+0x4bf510	LOW	НИЗКО
+0x4bf514	HIGH	ВЫСОКО
+0x4bf530	DLSS MODEL	МОДЕЛЬ DLSS
+0x4bf540	AUTO (K)	АВТО (K)
+0x4bf550	K (DLSS 4)	K (DLSS 4)
+0x4bf560	M (DLSS 4.5)	M (DLSS 4.5)
+0x4bf570	L (DLSS 4.5)	L (DLSS 4.5)
+0x4bf580	J (DLSS 4)	J (DLSS 4)
+0x4bf590	E (DLSS 3)	E (DLSS 3)
+0x4bf5b8	FOVEATED UPSCALING	ФОВЕАЛЬНЫЙ АПСКЕЙЛ
+0x4bf5d0	ON (45 DEG)	ВКЛ (45 ГРАД)
+0x4bf5e0	ON (40 DEG)	ВКЛ (40 ГРАД)
+0x4bf5f0	ON (35 DEG)	ВКЛ (35 ГРАД)
+0x4bf600	ON (30 DEG)	ВКЛ (30 ГРАД)
+0x4bf610	ON (25 DEG)	ВКЛ (25 ГРАД)
+0x4bf620	ON (20 DEG)	ВКЛ (20 ГРАД)
+0x4bf650	FOVEATED PERIPHERY	ФОВЕАЛЬНАЯ ПЕРИФЕРИЯ
+0x4bf664	TAA	TAA
+0x4bf678	DESKTOP MIRROR	ЗЕРКАЛО РАБОЧЕГО СТОЛА
+0x4bf688	LEFT EYE	ЛЕВЫЙ ГЛАЗ
+0x4bf698	BOTH EYES	ОБА ГЛАЗА
+0x4bf6c0	MIRROR WINDOW	ОКНО ЗЕРКАЛА
+0x4bf6d0	WINDOWED	В ОКНЕ
+0x4bf6e0	FULLSCREEN	ПОЛНЫЙ ЭКРАН
+0x4bf700	MIRROR HEADSET UI	ЗЕРКАЛИРОВАТЬ UI ШЛЕМА
+0x4bf728	FOVEATED RENDERING	ФОВЕАЛЬНЫЙ РЕНДЕРИНГ
+0x4bf73c	LIGHT	ЛЕГКИЙ
+0x4bf748	AGGRESSIVE	АГРЕССИВНЫЙ
+0x4bf754	ULTRA	УЛЬТРА
+0x4bf760	EXTREME	ЭКСТРИМ
+0x4bf780	BETTER WATER REFLECTIONS	ЛУЧШИЕ ОТРАЖЕНИЯ ВОДЫ
+0x4bf7b8	DISABLE BLUR	ОТКЛЮЧИТЬ РАЗМЫТИЕ
+0x4bf7e0	DEPTH OF FIELD	ГЛУБИНА РЕЗКОСТИ
+0x4bf808	HUD RESOLUTION (RESTART)	РАЗРЕШЕНИЕ HUD (ПЕРЕЗАПУСК)
+0x4bf840	DEPTH REPROJECTION	РЕПРОЕКЦИЯ ГЛУБИНЫ
+0x4bf858	LEGAL NOTICE VIDEO	ВИДЕО ПРАВОВОЙ ИНФОРМАЦИИ
+0x4bf890	CREDITS VIDEO	ВИДЕО ТИТРОВ
+0x4bf8c0	INTRO VIDEO	ВСТУПИТЕЛЬНОЕ ВИДЕО
+0x4bf9fc	HANDS	РУКИ
+0x4bfa28	SCOPES	ПРИЦЕЛЫ
+0x4bfa40	INTERFACE	ИНТЕРФЕЙС
+0x4bfa60	CAMERA OVERRIDES	ПЕРЕОПРЕДЕЛЕНИЯ КАМЕРЫ
+0x4bfaa0	GRAPHICS	ГРАФИКА
+0x4bfac0	GAME	ИГРА

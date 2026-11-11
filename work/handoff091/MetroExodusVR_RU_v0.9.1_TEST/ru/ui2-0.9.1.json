@@ -1,0 +1,838 @@
+{
+ "popups": [
+  {
+   "index": 0,
+   "orig": "WELCOME\n\nThank you for playing Metro Exodus VR!\n\nBefore you start I'd like to point out few things worth\nchecking that will improve your experience.",
+   "ru": "ДОБРО ПОЖАЛОВАТЬ\n\nСпасибо, что играете в Metro Exodus VR!\n\nПеред началом я хотел бы отметить несколько вещей,\nкоторые стоит проверить, чтобы улучшить ваши впечатления."
+  },
+  {
+   "index": 1,
+   "orig": "VR OPTIONS\n\nBefore starting your journey please check out VR tab in the\nOptions menu and familiarize yourself with what's available,\nhow it's configured and what you can change.\n\nAll of these options are also available from Pause Menu\nwhile playing.\n\n",
+   "ru": "НАСТРОЙКИ VR\n\nПеред началом путешествия загляните на вкладку VR в меню\nнастроек и ознакомьтесь с тем, что доступно,\nкак это устроено и что можно изменить.\n\nВсе эти настройки также доступны в меню паузы\nво время игры.\n\n"
+  },
+  {
+   "index": 2,
+   "orig": "VR HINTS\n\nWhile playing you will also have access to VR HINTS tab in the Pause Menu which cover VR-specific mechanics and interactions.\n\nCheck it out if you feel lost or unsure how to proceed.",
+   "ru": "СОВЕТЫ VR\n\nВо время игры вам также будет доступна вкладка СОВЕТЫ VR в меню паузы, где описаны механики и взаимодействия, специфичные для VR.\n\nЗагляните туда, если потеряетесь или не будете знать, что делать."
+  },
+  {
+   "index": 3,
+   "orig": "MANUAL RELOADING\n\nTo help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.\n\nYou can configure this option later in Options / VR / Weapons.\n\nWould you like to enable it for first few reloads of each weapon now?\n\n",
+   "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\nЧтобы упростить ручную перезарядку, мод может подсвечивать следующую часть оружия, с которой нужно взаимодействовать, чтобы завершить перезарядку.\n\nНастроить это можно позже в Настройки / VR / Оружие.\n\nВключить подсветку для первых нескольких перезарядок каждого оружия?\n\n"
+  },
+  {
+   "index": 4,
+   "orig": "CHOOSING AN OPTION\n\nWhen icons appear around a thumbstick symbol in the corner of your view, push <stick_left> towards an icon and keep holding until the choice completes.",
+   "ru": "ВЫБОР ВАРИАНТА\n\nКогда в углу обзора вокруг значка стика появляются значки, наклоните <stick_left> в сторону нужного значка и удерживайте стик, пока выбор не завершится."
+  },
+  {
+   "index": 5,
+   "orig": "PAUSE MENU\n\nTo enter pause menu press <start>, or hold the left trigger and press <xpad_y>.\nHold the same buttons to recenter.\n\nEverything about VR controls is in the Pause Menu under VR HINTS section.",
+   "ru": "МЕНЮ ПАУЗЫ\n\nЧтобы открыть меню паузы, нажмите <start> или удерживайте левый триггер и нажмите <xpad_y>.\nДля повторного центрирования удерживайте те же кнопки.\n\nВсе об управлении в VR описано в меню паузы, в разделе СОВЕТЫ VR."
+  },
+  {
+   "index": 6,
+   "orig": "YOUR GEAR IS ON YOUR BODY\n\nReach for the item/place and grip with <grip_dominant> or <grip_nondominant>.\n\nYou can find details of where each device is located in Pause Menu in VR HINTS tab.",
+   "ru": "СНАРЯЖЕНИЕ НА ВАШЕМ ТЕЛЕ\n\nПотянитесь к предмету или месту и схватите с помощью <grip_dominant> или <grip_nondominant>.\n\nГде находятся все устройства, описано в меню паузы на вкладке СОВЕТЫ VR."
+  },
+  {
+   "index": 7,
+   "orig": "WEAPONS\n\nTake a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.\n\nPointing a gun down holsters it and aiming down sight stabilizes it.",
+   "ru": "ОРУЖИЕ\n\nВозьмите оружие с помощью <grip_dominant> из-за плеча или с <dominant> бедра. Отпустите, чтобы убрать его.\n\nЕсли направить оружие вниз, оно убирается, а при прицеливании стабилизируется."
+  },
+  {
+   "index": 8,
+   "orig": "RELOADING\n\nYou reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.\n\nTo reload with a button, turn Manual Reloading off in\nOptions / VR / Weapons.",
+   "ru": "ПЕРЕЗАРЯДКА\n\nПерезарядка ручная: выньте старый магазин, достаньте новый с <dominant> бедра, вставьте его, затем передерните затвор.\n\nЧтобы перезаряжаться кнопкой, отключите ручную перезарядку в\nНастройки / VR / Оружие."
+  },
+  {
+   "index": 9,
+   "orig": "ACTION PROMPTS\n\nSome scripted QTEs ask for quick button presses. Do as the prompt shows: tap, press or hold <rui>.\n\nYou can change the QTEs mode in game's options.",
+   "ru": "ПОДСКАЗКИ ДЕЙСТВИЙ\n\nВ некоторых сценах QTE требуют быстрых нажатий. Делайте так, как показано в подсказке: коснитесь, нажмите или удерживайте <rui>.\n\nРежим QTE можно изменить в настройках игры."
+  },
+  {
+   "index": 10,
+   "orig": "GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.",
+   "ru": "ПРОТИВОГАЗ\n\nНадеть: <grip_nondominant> у <nondominant> бедра и поднесите к лицу.\nСнять: схватите его на лице и отведите в сторону.\n\nФильтр: (когда маска надета) <grip_nondominant> у <nondominant> бедра и поднесите к лицу.\n\nПротереть: потрите стекло открытой ладонью.\n\nЗаделать трещину: (когда маска надета и треснула) <grip_nondominant> скотч с <nondominant> бедра и поднесите к треснувшему стеклу."
+  },
+  {
+   "index": 11,
+   "orig": "BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder[, or <press:inventory>].",
+   "ru": "РЮКЗАК\n\nВ рюкзаке или инвентаре можно создавать расходники и метательные предметы, а также улучшать оружие.\n\nСхватите <grip_nondominant> над <nondominant> плечом[, или <press:inventory>]."
+  },
+  {
+   "index": 12,
+   "orig": "MAP\n\nTo equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].\n",
+   "ru": "КАРТА\n\nЧтобы взять карту, схватите <grip_dominant> у <dominant> груди[, или <press:map>].\n"
+  },
+  {
+   "index": 13,
+   "orig": "TIKHAR AMMUNITION\n\nTikhar can fire Incendiary Ammunition.\n\nWith Tikhar in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammo.\n\nThen reload as usual. Do the same to switch back.",
+   "ru": "БОЕПРИПАСЫ ТИХАР\n\nТихар может стрелять зажигательными боеприпасами.\n\nДержа Тихар в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>. Импульс подтвердит, что при следующей перезарядке зарядятся другие боеприпасы.\n\nЗатем перезаряжайтесь как обычно. Повторите, чтобы переключиться обратно."
+  },
+  {
+   "index": 14,
+   "orig": "HELSING AMMUNITION\n\nHelsing can fire explosive bolts.\n\nWith Helsing in your hands, hold <popup_equipment> and press <rui> at the same time to switch between regular and explosive bolts. Do the same to switch back.",
+   "ru": "БОЕПРИПАСЫ ХЕЛЬСИНГ\n\nХельсинг может стрелять разрывными болтами.\n\nДержа Хельсинг в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>, чтобы переключаться между обычными и разрывными болтами. Повторите, чтобы переключиться обратно."
+  }
+ ],
+ "options": [
+  {
+   "index": 0,
+   "orig": "Reset the VR tips you have already seen, as on a first playthrough.",
+   "ru": "Сбрасывает уже показанные советы VR, как при первом прохождении."
+  },
+  {
+   "index": 1,
+   "orig": "STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion.",
+   "ru": "СТЕРЕО рендерит оба глаза каждый кадр. ПРОИЗВОДИТЕЛЬНОСТЬ рендерит по одному глазу за кадр по очереди и восстанавливает второй: намного быстрее при очень небольшой потере качества в быстром движении."
+  },
+  {
+   "index": 2,
+   "orig": "The rendering resolution against what your VR runtime asks for. Higher is sharper, lower is faster. Takes effect after a restart.",
+   "ru": "Разрешение рендеринга относительно запрошенного вашей средой VR. Выше – четче, ниже – быстрее. Применяется после перезапуска."
+  },
+  {
+   "index": 3,
+   "orig": "Renders the game at a lower resolution and upscales it, for more performance. FSR works on any GPU, DLSS on NVIDIA RTX cards.",
+   "ru": "Рендерит игру в более низком разрешении и масштабирует изображение для большей производительности. FSR работает на любых GPU, DLSS – на картах NVIDIA RTX."
+  },
+  {
+   "index": 4,
+   "orig": "How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.",
+   "ru": "Насколько низко рендерит апскейлер. НАТИВНОЕ СГЛАЖИВАНИЕ сохраняет полное разрешение и только сглаживает края; более низкие режимы быстрее, но менее четкие."
+  },
+  {
+   "index": 5,
+   "orig": "Which DLSS model upscales. The DLSS 4.5 models look best but cost the most; AUTO uses K.",
+   "ru": "Какая модель DLSS масштабирует. Модели DLSS 4.5 выглядят лучше всего, но требуют больше всего ресурсов; АВТО использует K."
+  },
+  {
+   "index": 6,
+   "orig": "Upscales only the middle of each eye's view, where you look, and keeps the edges simpler. Smaller angles are faster.",
+   "ru": "Масштабирует только середину обзора каждого глаза, куда вы смотрите, а края оставляет проще. Меньшие углы быстрее."
+  },
+  {
+   "index": 7,
+   "orig": "How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry.",
+   "ru": "Как сглаживаются края за пределами средней области ФОВЕАЛЬНОГО АПСКЕЙЛА. НАТИВНОЕ (FSR/FSR) четче, но медленнее, TAA быстрее и более размыто."
+  },
+  {
+   "index": 8,
+   "orig": "What the desktop window shows while you play.",
+   "ru": "Что показывает окно на рабочем столе во время игры."
+  },
+  {
+   "index": 9,
+   "orig": "The mirror also shows the HUD, menus and use prompts where the headset shows them, so it matches the headset exactly. For recording; slight performance cost.",
+   "ru": "Зеркало также показывает HUD, меню и подсказки использования там, где их показывает шлем, поэтому точно совпадает со шлемом. Для записи; небольшое снижение производительности."
+  },
+  {
+   "index": 10,
+   "orig": "Renders the edges of your view in less detail, where you notice it least, for more performance. NVIDIA GPUs only.",
+   "ru": "Рендерит края обзора с меньшей детализацией, там, где вы это меньше всего замечаете, для большей производительности. Только GPU NVIDIA."
+  },
+  {
+   "index": 11,
+   "orig": "More accurate reflections on water, reaching further. Small performance penalty.",
+   "ru": "Более точные отражения на воде, простирающиеся дальше. Небольшое снижение производительности."
+  },
+  {
+   "index": 12,
+   "orig": "Turns off the game's motion blur, which can be uncomfortable in VR.",
+   "ru": "Отключает размытие движения в игре, которое может быть некомфортным в VR."
+  },
+  {
+   "index": 13,
+   "orig": "Controls game's Depth of Field which may look weird/blurry in VR. All bars is the game's own amount.",
+   "ru": "Управляет глубиной резкости игры, которая в VR может выглядеть странно или размыто. Все ползунки – собственное значение игры."
+  },
+  {
+   "index": 14,
+   "orig": "How sharp the HUD and menus are. Higher is crisper and costs a little more. Takes effect after a restart.",
+   "ru": "Насколько четкие HUD и меню. Выше – четче и немного затратнее. Применяется после перезапуска."
+  },
+  {
+   "index": 15,
+   "orig": "Gives the VR runtime the depth of each frame, so a late frame is shown steadier. Used only where the headset supports it.",
+   "ru": "Передает среде VR глубину каждого кадра, чтобы запоздавший кадр отображался стабильнее. Используется только там, где шлем это поддерживает."
+  },
+  {
+   "index": 16,
+   "orig": "Which way pushing the move stick forward takes you: where you look, where your body faces, or where a controller points.",
+   "ru": "Куда ведет наклон стика движения вперед: туда, куда вы смотрите, куда повернуто тело или куда указывает контроллер."
+  },
+  {
+   "index": 17,
+   "orig": "HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next.",
+   "ru": "УДЕРЖ. приседает, пока кнопка удерживается. ПЕРЕКЛ. приседает одним нажатием и встает следующим."
+  },
+  {
+   "index": 18,
+   "orig": "Sprint without a button: flick the move stick fully forward, let go, then push it fully forward again and hold to start sprinting.",
+   "ru": "Бег без кнопки: резко отклоните стик движения до упора вперед, отпустите, затем снова отклоните до упора вперед и удерживайте, чтобы начать бег."
+  },
+  {
+   "index": 19,
+   "orig": "How far the move stick must be pushed before you move. Raise it if you drift with the stick untouched.",
+   "ru": "Насколько далеко нужно отклонить стик движения, прежде чем вы начнете двигаться. Увеличьте, если вас сносит при нетронутом стике."
+  },
+  {
+   "index": 20,
+   "orig": "How far the turn stick must be pushed before you turn. Raise it if you turn by accident.",
+   "ru": "Насколько далеко нужно отклонить стик поворота, прежде чем вы начнете поворачиваться. Увеличьте, если поворачиваетесь случайно."
+  },
+  {
+   "index": 21,
+   "orig": "Tones down the game's camera bob while walking and running, which can be uncomfortable in VR.",
+   "ru": "Уменьшает качание камеры в игре при ходьбе и беге, которое может быть некомфортным в VR."
+  },
+  {
+   "index": 22,
+   "orig": "ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down.",
+   "ru": "МАСШТАБ позволяет ходить по комнате. СТОЯ удерживает вас на одном месте. СИДЯ предназначен для игры сидя."
+  },
+  {
+   "index": 23,
+   "orig": "Your real height, so the game can tell when you crouch. NOT SET uses the headset alone.",
+   "ru": "Ваш реальный рост, чтобы игра определяла, когда вы приседаете. НЕТ использует только данные шлема."
+  },
+  {
+   "index": 24,
+   "orig": "How big the world looks. The game assets are built larger than in real life; 94% looks closest to real sizes.",
+   "ru": "Насколько большим выглядит мир. Игровые модели построены крупнее, чем в реальности; 94% выглядит ближе всего к реальным размерам."
+  },
+  {
+   "index": 25,
+   "orig": "Crouching in real life crouches in the game. Needs PLAYER HEIGHT.",
+   "ru": "Приседание в реальной жизни приседает в игре. Требуется РОСТ ИГРОКА."
+  },
+  {
+   "index": 26,
+   "orig": "Moves everything worn on the belt up or down: the holster, the magazine pouch, the gas mask, throwables, and the binoculars and charger on your back.",
+   "ru": "Двигает вверх или вниз все, что носится на поясе: кобуру, подсумок для магазинов, противогаз, метательные предметы, а также бинокль и зарядное устройство на спине."
+  },
+  {
+   "index": 27,
+   "orig": "STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM).",
+   "ru": "ОСТАВАТЬСЯ С ВАМИ сохраняет пояс там, где ваш собственный, когда вы приседаете. СЛЕДОВАТЬ ЗА ТЕЛОМ двигает его вместе с телом персонажа. АВТО следует за приседанием в реальной жизни; укажите РОСТ ИГРОКА (НЕТ: 178 СМ)."
+  },
+  {
+   "index": 28,
+   "orig": "FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.",
+   "ru": "СЛЕДОВАТЬ ЗА ГОЛОВОЙ поворачивает тело за головой, когда вы достаточно далеко посмотрите в сторону. ЗАБЛОКИРОВАНО поворачивает его только стиком поворота."
+  },
+  {
+   "index": 29,
+   "orig": "FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along.",
+   "ru": "СЛЕДОВАТЬ позволяет свободно наклоняться и шагать, тело идет за вами. ЗАБЛОКИРОВАНО удерживает взгляд над телом, а реальные шаги двигают тело вперед."
+  },
+  {
+   "index": 30,
+   "orig": "Experimental: enables support for bHaptics. Requires the bHaptics Player to be installed. You feel shots, hits, explosions, the heartbeat, landings and steps.",
+   "ru": "Экспериментально: включает поддержку bHaptics. Требуется установленный bHaptics Player. Вы чувствуете выстрелы, удары, взрывы, сердцебиение, приземления и шаги."
+  },
+  {
+   "index": 31,
+   "orig": "Tilts weapons and items in your hand up or down, to match how you hold your controller.",
+   "ru": "Наклоняет оружие и предметы в руке вверх или вниз, чтобы соответствовать тому, как вы держите контроллер."
+  },
+  {
+   "index": 32,
+   "orig": "Your fingers follow your real ones where the controllers sense them. Off, they follow the trigger, grip and buttons.",
+   "ru": "Ваши пальцы следуют за реальными там, где контроллеры их распознают. Если выключено, они следуют за триггером, хватом и кнопками."
+  },
+  {
+   "index": 33,
+   "orig": "HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken.",
+   "ru": "УДЕРЖ. держит взятое, пока удерживается хват. ПЕРЕКЛ. берет одним хватом и возвращает хватом туда, откуда взяли."
+  },
+  {
+   "index": 34,
+   "orig": "With nothing in your hand's reach, the use button uses what you look at, as in the flat game. Helps with things a hand cannot reach.",
+   "ru": "Когда в пределах досягаемости руки ничего нет, кнопка использования применяет то, на что вы смотрите, как в обычной игре. Помогает с предметами, до которых рука не достает."
+  },
+  {
+   "index": 35,
+   "orig": "How strongly the controllers vibrate. 50% is as the game made it, 100% twice that; 0% turns all vibration off.",
+   "ru": "Насколько сильно вибрируют контроллеры. 50% – как задумано игрой, 100% – вдвое сильнее; 0% отключает всю вибрацию."
+  },
+  {
+   "index": 36,
+   "orig": "Light ticks as your hand reaches a body slot, something to take, a weapon part or a device.",
+   "ru": "Легкие толчки, когда рука достигает ячейки на теле, предмета, части оружия или устройства."
+  },
+  {
+   "index": 37,
+   "orig": "The kick of every shot in the hands holding the gun, and the weapons' own vibration.",
+   "ru": "Отдача каждого выстрела в руках, держащих оружие, и собственная вибрация оружия."
+  },
+  {
+   "index": 38,
+   "orig": "Vibration when you are hit or hurt.",
+   "ru": "Вибрация, когда вас ударяют или ранят."
+  },
+  {
+   "index": 39,
+   "orig": "Vibration in scripted scenes and while riding vehicles.",
+   "ru": "Вибрация в сюжетных сценах и при езде на транспорте."
+  },
+  {
+   "index": 40,
+   "orig": "Light steps while running, and landings.",
+   "ru": "Легкие шаги при беге и приземления."
+  },
+  {
+   "index": 41,
+   "orig": "How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake.",
+   "ru": "Насколько тяжелым ощущается оружие. Быстрые взмахи следуют за рукой и затухают; медленное прицеливание остается точным. Легче при удержании двумя руками. 0% только стабилизирует дрожание рук."
+  },
+  {
+   "index": 42,
+   "orig": "Reload with your hands: work magazines, bolts, levers and pumps yourself.",
+   "ru": "Перезаряжайте руками: самостоятельно управляйтесь с магазинами, затворами, рычагами и помпами."
+  },
+  {
+   "index": 43,
+   "orig": "Outlines the next weapon part to work while reloading: always, only for your first few reloads, or never.",
+   "ru": "Обводит следующую часть оружия, с которой нужно работать при перезарядке: всегда, только для первых нескольких перезарядок или никогда."
+  },
+  {
+   "index": 44,
+   "orig": "Turn on to start the FIRST RELOADS count over, so the highlights show again.",
+   "ru": "Включите, чтобы начать счет ПЕРВЫХ ПЕРЕЗАРЯДОК заново, и подсветка снова показывалась."
+  },
+  {
+   "index": 45,
+   "orig": "Flick your wrist to swing a revolver or the Ashot open (to the left) and shut (to the right). Sets how hard the flick must be.",
+   "ru": "Встряхните кистью, чтобы открыть револьвер или Ашот (влево) и закрыть (вправо). Задает силу, с которой нужно встряхивать."
+  },
+  {
+   "index": 46,
+   "orig": "Which eye looks through scopes. AUTO uses the eye on the side of your head the scope is on.",
+   "ru": "Какой глаз смотрит через прицелы. АВТО использует глаз с той стороны головы, с которой находится прицел."
+  },
+  {
+   "index": 47,
+   "orig": "What your other eye sees while you look through a scope.",
+   "ru": "Что видит второй глаз, пока вы смотрите через прицел."
+  },
+  {
+   "index": 48,
+   "orig": "How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view.",
+   "ru": "Как наклоняется сетка прицела: вместе с оружием, по горизонту или фиксировано в вашем обзоре."
+  },
+  {
+   "index": 49,
+   "orig": "WEAPON: the scope's view follows the gun alone. WEAPON + HEAD: your head helps too, keeping the scope's picture in the middle of your view.",
+   "ru": "ОРУЖИЕ: вид в прицеле следует только за оружием. ОРУЖИЕ + ГОЛОВА: голова тоже помогает, удерживая изображение прицела в середине обзора."
+  },
+  {
+   "index": 50,
+   "orig": "Night vision is seen through a tube, dark around it, as with real goggles. Off, it fills your whole view.",
+   "ru": "Ночное видение видно через трубку, вокруг темно, как в настоящих очках. Если выключено, оно заполняет весь обзор."
+  },
+  {
+   "index": 51,
+   "orig": "The HUD's layout. 4:3 brings its edges closer to the middle of your view.",
+   "ru": "Раскладка HUD. 4:3 приближает его края к середине обзора."
+  },
+  {
+   "index": 52,
+   "orig": "LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away.",
+   "ru": "ЗАБЛОКИРОВАНО фиксирует HUD перед глазами. СЛЕДОВАТЬ оставляет его на месте и возвращает, когда вы отводите взгляд."
+  },
+  {
+   "index": 53,
+   "orig": "Moves the HUD above or below your line of sight.",
+   "ru": "Двигает HUD выше или ниже линии взгляда."
+  },
+  {
+   "index": 54,
+   "orig": "Moves the game's hint cards up or down.",
+   "ru": "Двигает подсказки игры вверх или вниз."
+  },
+  {
+   "index": 55,
+   "orig": "How much longer the game's timed hints stay up.",
+   "ru": "Насколько дольше остаются подсказки игры с таймером."
+  },
+  {
+   "index": 56,
+   "orig": "The size of the prompts in the middle of the view: quick-time events, use and melee.",
+   "ru": "Размер подсказок в середине обзора: быстрых событий, использования и ближнего боя."
+  },
+  {
+   "index": 57,
+   "orig": "Shows hits and low health as a glow around the edge of your view, in place of the game's flat screen effects.",
+   "ru": "Показывает попадания и низкое здоровье свечением по краю обзора вместо плоских экранных эффектов игры."
+  },
+  {
+   "index": 58,
+   "orig": "How far into your view the damage glow reaches.",
+   "ru": "Насколько далеко в обзор проникает свечение урона."
+  },
+  {
+   "index": 59,
+   "orig": "Shows an arc toward whoever just hit you.",
+   "ru": "Показывает дугу в сторону того, кто вас только что ударил."
+  },
+  {
+   "index": 60,
+   "orig": "The edge of your view pulses while your health is low.",
+   "ru": "Край обзора пульсирует, пока здоровье низкое."
+  },
+  {
+   "index": 61,
+   "orig": "Shows camera details in a corner of the view. Meant for testing.",
+   "ru": "Показывает данные камеры в углу обзора. Предназначено для тестирования."
+  },
+  {
+   "index": 62,
+   "orig": "On the Cinema screen (main menu, workbench), point a controller at the screen and click, like a mouse.",
+   "ru": "На экране кино (главное меню, верстак) наведите контроллер на экран и щелкните, как мышью."
+  },
+  {
+   "index": 63,
+   "orig": "A dim dotted floor under the Cinema screen, so you do not float in the dark.",
+   "ru": "Тусклый точечный пол под экраном кино, чтобы вы не парили в темноте."
+  },
+  {
+   "index": 64,
+   "orig": "Shows your controllers while the Cinema screen is up.",
+   "ru": "Показывает ваши контроллеры, пока открыт экран кино."
+  },
+  {
+   "index": 65,
+   "orig": "In the main menu, a plaque under the Cinema screen with the mod's name and version.",
+   "ru": "В главном меню – табличка под экраном кино с названием и версией мода."
+  },
+  {
+   "index": 66,
+   "orig": "In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game.",
+   "ru": "В главном меню – ссылки под экраном кино (Buy Me a Coffee, Ko-fi, GitHub). Наведите на табличку, чтобы показать их; щелчок открывает страницу в браузере на рабочем столе, за игрой."
+  },
+  {
+   "index": 67,
+   "orig": "What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen.",
+   "ru": "Что воспроизводится в VR, а что на плоском экране кино. ИММЕРСИВНЫЙ: все в VR. КОМФОРТНЫЙ: катсцены на экране. КИНЕМАТОГРАФИЧНЫЙ: все, кроме геймплея, на экране."
+  },
+  {
+   "index": 68,
+   "orig": "After a scene moves your view, lines it back up with where the game expects it: at once (SNAP) or gliding (SMOOTH).",
+   "ru": "После того как сцена сместит ваш взгляд, выравнивает его с тем, что ожидает игра: сразу (РЕЗКО) или плавно (ПЛАВНО)."
+  },
+  {
+   "index": 69,
+   "orig": "Scenes where the camera follows a scripted path. AUTO follows CAMERA PRESET.",
+   "ru": "Сцены, где камера следует по заданному пути. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 70,
+   "orig": "Scenes where the camera rides on someone or something else. AUTO follows CAMERA PRESET.",
+   "ru": "Сцены, где камера закреплена на ком-то или чем-то другом. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 71,
+   "orig": "Third-person views. AUTO follows CAMERA PRESET.",
+   "ru": "Вид от третьего лица. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 72,
+   "orig": "Scenes with a free-flying camera. AUTO follows CAMERA PRESET.",
+   "ru": "Сцены со свободно летающей камерой. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 73,
+   "orig": "Seats and mounted guns. AUTO follows CAMERA PRESET.",
+   "ru": "Сиденья и станковые орудия. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 74,
+   "orig": "Scenes where an animation turns your view. AUTO follows CAMERA PRESET.",
+   "ru": "Сцены, где анимация поворачивает ваш взгляд. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 75,
+   "orig": "Moments when the story locks the camera. AUTO follows CAMERA PRESET.",
+   "ru": "Моменты, когда сюжет блокирует камеру. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 76,
+   "orig": "Moments when your character's own animation holds the camera. AUTO follows CAMERA PRESET.",
+   "ru": "Моменты, когда камеру удерживает анимация вашего персонажа. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 77,
+   "orig": "The short gaps between two locked moments of one scripted action. AUTO follows CAMERA PRESET.",
+   "ru": "Короткие промежутки между двумя заблокированными моментами одного скриптового действия. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  },
+  {
+   "index": 78,
+   "orig": "Game screens over gameplay, such as the backpack. AUTO follows CAMERA PRESET.",
+   "ru": "Игровые экраны поверх геймплея, например рюкзак. АВТО следует ПРЕСЕТУ КАМЕРЫ."
+  }
+ ],
+ "hints": [
+  {
+   "index": 0,
+   "orig": "Use <wpn_fire> to accelerate and <wpn_aim> to brake. Press <jump> to rotate the seat in the opposite direction. <Press:rui> to exit.",
+   "ru": "Используйте <wpn_fire> для ускорения и <wpn_aim> для торможения. Нажмите <jump>, чтобы развернуть сиденье в противоположную сторону. <Press:rui>, чтобы выйти."
+  },
+  {
+   "index": 1,
+   "orig": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+   "ru": "Карта: схватите <grip_dominant> с <dominant> стороны груди[, или <press:map>]"
+  },
+  {
+   "index": 2,
+   "orig": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+   "ru": "Карта: схватите <grip_dominant> с <dominant> стороны груди[, или <press:map>]"
+  },
+  {
+   "index": 3,
+   "orig": "Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+   "ru": "Проверьте журнал. Карта: схватите <grip_dominant> с <dominant> стороны груди[, или <press:map>]"
+  },
+  {
+   "index": 4,
+   "orig": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]",
+   "ru": "Рюкзак: схватите <grip_nondominant> над <nondominant> плечом[, или <press:inventory>]"
+  },
+  {
+   "index": 5,
+   "orig": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder[, or <press:inventory>]",
+   "ru": "Рюкзак: схватите <grip_nondominant> над <nondominant> плечом[, или <press:inventory>]"
+  },
+  {
+   "index": 6,
+   "orig": "Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]",
+   "ru": "Оружие: схватите <grip_dominant> из-за плеча или с <dominant> бедра[, или <press:popup_equipment>]"
+  },
+  {
+   "index": 7,
+   "orig": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
+   "ru": "Качайте вручную <nondominant> рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
+  },
+  {
+   "index": 8,
+   "orig": "Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>",
+   "ru": "Качайте вручную (<trigger_nondominant>) или удерживайте <rui> и нажимайте <wpn_fire>"
+  },
+  {
+   "index": 9,
+   "orig": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
+   "ru": "Качайте вручную <nondominant> рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
+  },
+  {
+   "index": 10,
+   "orig": "Pump manually (<trigger_nondominant>) or hold <rui> and tap <wpn_fire>",
+   "ru": "Качайте вручную (<trigger_nondominant>) или удерживайте <rui> и нажимайте <wpn_fire>"
+  },
+  {
+   "index": 11,
+   "orig": "Point your weapon down to lower it",
+   "ru": "Направьте оружие вниз, чтобы опустить его"
+  },
+  {
+   "index": 12,
+   "orig": "Point your weapon down",
+   "ru": "Направьте оружие вниз"
+  },
+  {
+   "index": 13,
+   "orig": "To sprint further, point your weapon down",
+   "ru": "Чтобы бежать дальше, направьте оружие вниз"
+  },
+  {
+   "index": 14,
+   "orig": "<Press:crouch_toggle> to crouch",
+   "ru": "<Press:crouch_toggle>, чтобы присесть"
+  },
+  {
+   "index": 15,
+   "orig": "Weapon jammed! Pull the bolt[ or <press:rui>]",
+   "ru": "Оружие заклинило! Передерните затвор[ или <press:rui>]"
+  },
+  {
+   "index": 16,
+   "orig": "Incendiary ammo: with Tikhar in hand, hold <popup_equipment> and press <rui> at the same time",
+   "ru": "Зажигательные боеприпасы: держа Тихар в руке, удерживайте <popup_equipment> и одновременно нажмите <rui>"
+  },
+  {
+   "index": 17,
+   "orig": "Holding <popup_equipment>, press <rui>: your next reload loads the other ammo",
+   "ru": "Удерживая <popup_equipment>, нажмите <rui>: при следующей перезарядке зарядятся другие боеприпасы"
+  },
+  {
+   "index": 18,
+   "orig": "Explosive bolts: with Helsing in hand, hold <popup_equipment> and press <rui> at the same time",
+   "ru": "Разрывные болты: держа Хельсинг в руке, удерживайте <popup_equipment> и одновременно нажмите <rui>"
+  },
+  {
+   "index": 19,
+   "orig": "You found a Molotov. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]",
+   "ru": "Вы нашли коктейль Молотова. Схватите <grip_dominant> спереди на поясе[, или <press:wpn_dynamite>]"
+  },
+  {
+   "index": 20,
+   "orig": "You found a grenade. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]",
+   "ru": "Вы нашли гранату. Схватите <grip_dominant> спереди на поясе[, или <press:wpn_dynamite>]"
+  },
+  {
+   "index": 21,
+   "orig": "You found a throwing knife. Grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]",
+   "ru": "Вы нашли метательный нож. Схватите <grip_dominant> спереди на поясе[, или <press:wpn_dynamite>]"
+  },
+  {
+   "index": 22,
+   "orig": "Throw: grab <grip_dominant> from the front of your belt[, or <press:wpn_dynamite>]",
+   "ru": "Бросок: схватите <grip_dominant> спереди на поясе[, или <press:wpn_dynamite>]"
+  },
+  {
+   "index": 23,
+   "orig": "You found a decoy. Grab <grip_dominant> from the front of your belt",
+   "ru": "Вы нашли приманку. Схватите <grip_dominant> спереди на поясе"
+  },
+  {
+   "index": 24,
+   "orig": "You found a decoy. Grab <grip_dominant> from the front of your belt",
+   "ru": "Вы нашли приманку. Схватите <grip_dominant> спереди на поясе"
+  },
+  {
+   "index": 25,
+   "orig": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]",
+   "ru": "Бинокль: схватите <grip_nondominant> с <nondominant> стороны поясницы[, или <press:binoculars>]"
+  },
+  {
+   "index": 26,
+   "orig": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back[, or <press:binoculars>]",
+   "ru": "Бинокль: схватите <grip_nondominant> с <nondominant> стороны поясницы[, или <press:binoculars>]"
+  },
+  {
+   "index": 27,
+   "orig": "Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]",
+   "ru": "Ночное видение: схватите <grip_dominant> над лбом, потяните вниз[, или <press:nightvision>]"
+  },
+  {
+   "index": 28,
+   "orig": "Night vision: grab <grip_dominant> above your forehead, pull down[, or <press:nightvision>]",
+   "ru": "Ночное видение: схватите <grip_dominant> над лбом, потяните вниз[, или <press:nightvision>]"
+  },
+  {
+   "index": 29,
+   "orig": "Flashlight: <trigger_nondominant> at your forehead[, or <press:wpn_light>]",
+   "ru": "Фонарь: <trigger_nondominant> у лба[, или <press:wpn_light>]"
+  },
+  {
+   "index": 30,
+   "orig": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]",
+   "ru": "Зарядное устройство: схватите <grip_dominant> с <dominant> стороны поясницы[, или <press:charger>]"
+  },
+  {
+   "index": 31,
+   "orig": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]",
+   "ru": "Зарядное устройство: схватите <grip_dominant> с <dominant> стороны поясницы[, или <press:charger>]"
+  },
+  {
+   "index": 32,
+   "orig": "Charger: grab <grip_dominant> from <dominant> side of lower back[, or <press:charger>]",
+   "ru": "Зарядное устройство: схватите <grip_dominant> с <dominant> стороны поясницы[, или <press:charger>]"
+  },
+  {
+   "index": 33,
+   "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]",
+   "ru": "Зажигалка: схватите <grip_nondominant> у <nondominant> груди, затем подожгите паутину[, или <press:lighter>]"
+  },
+  {
+   "index": 34,
+   "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+   "ru": "Зажигалка: схватите <grip_nondominant> у <nondominant> груди[, или <press:lighter>]"
+  },
+  {
+   "index": 35,
+   "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+   "ru": "Зажигалка: схватите <grip_nondominant> у <nondominant> груди[, или <press:lighter>]"
+  },
+  {
+   "index": 36,
+   "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+   "ru": "Зажигалка: схватите <grip_nondominant> у <nondominant> груди[, или <press:lighter>]"
+  },
+  {
+   "index": 37,
+   "orig": "Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]",
+   "ru": "Аптечка: схватите <grip_nondominant> у <dominant> плеча, отведите, затем верните к телу[, или <press:medkit>]"
+  },
+  {
+   "index": 38,
+   "orig": "Badly hurt: use a medkit. Grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]",
+   "ru": "Сильно ранены: используйте аптечку. Схватите <grip_nondominant> у <dominant> плеча, отведите от тела и верните обратно[, или <press:medkit>]"
+  },
+  {
+   "index": 39,
+   "orig": "Check the radiation detector on your left wrist",
+   "ru": "Проверьте дозиметр на левом запястье"
+  },
+  {
+   "index": 40,
+   "orig": "Radiation detector: check your left wrist",
+   "ru": "Дозиметр: проверьте левое запястье"
+  },
+  {
+   "index": 41,
+   "orig": "Gas mask: grab <grip_nondominant> from <nondominant> hip and bring it to your face[, or <press:gasmask>]",
+   "ru": "Противогаз: схватите <grip_nondominant> у <nondominant> бедра и поднесите к лицу[, или <press:gasmask>]"
+  },
+  {
+   "index": 42,
+   "orig": "Filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]",
+   "ru": "Фильтр: схватите <grip_nondominant> у <nondominant> бедра[, или <press:filter>]"
+  },
+  {
+   "index": 43,
+   "orig": "Swap filter: grab <grip_nondominant> from <nondominant> hip[, or <press:filter>]",
+   "ru": "Сменить фильтр: схватите <grip_nondominant> у <nondominant> бедра[, или <press:filter>]"
+  },
+  {
+   "index": 44,
+   "orig": "Wipe your mask: rub the visor with an open hand[, or <press:facepalm>]",
+   "ru": "Протрите маску: потрите стекло открытой ладонью[, или <press:facepalm>]"
+  },
+  {
+   "index": 45,
+   "orig": "Wipe: rub the visor with an open hand[, or <press:facepalm>]",
+   "ru": "Протрите: потрите стекло открытой ладонью[, или <press:facepalm>]"
+  },
+  {
+   "index": 46,
+   "orig": "Seal your mask: grab <grip_nondominant> the tape from <nondominant> hip and bring it to your visor[, or <press:facepalm>]",
+   "ru": "Заделайте маску: схватите <grip_nondominant> скотч с <nondominant> бедра и поднесите к стеклу[, или <press:facepalm>]"
+  },
+  {
+   "index": 47,
+   "orig": "Seal: tape from <nondominant> hip <grip_nondominant> to the visor[, or <press:facepalm>]",
+   "ru": "Заделать: скотч с <nondominant> бедра <grip_nondominant> к стеклу[, или <press:facepalm>]"
+  },
+  {
+   "index": 48,
+   "orig": "New note - read it in the pause menu",
+   "ru": "Новая заметка – прочитайте ее в меню паузы"
+  },
+  {
+   "index": 49,
+   "orig": "New note - read it in the pause menu",
+   "ru": "Новая заметка – прочитайте ее в меню паузы"
+  },
+  {
+   "index": 50,
+   "orig": "New postcard - watch it in the pause menu",
+   "ru": "Новая открытка – посмотрите ее в меню паузы"
+  },
+  {
+   "index": 51,
+   "orig": "New postcard - watch it in the pause menu",
+   "ru": "Новая открытка – посмотрите ее в меню паузы"
+  }
+ ],
+ "hintpages": [
+  {
+   "index": 0,
+   "orig_title": "Basics",
+   "ru_title": "ОСНОВЫ",
+   "orig": "PAUSE MENU\n\n<tab>Press the menu button or right trackpad. If your headset's software keeps that button for itself, hold the left trigger and press <xpad_y>.\n\nRECENTER\n\n<tab>Hold the menu button or right trackpad, or the left trigger and <xpad_y> together.\n\nVR SETTINGS\n\n<tab>In the main or pause menu, click Options, then VR. Allows configuring VR-specific settings and the mod's behavior.\n\n",
+   "ru": "МЕНЮ ПАУЗЫ\n\n<tab>Нажмите кнопку меню или правый тачпад. Если программное обеспечение шлема перехватывает эту кнопку, удерживайте левый триггер и нажмите <xpad_y>.\n\nПОВТОРНОЕ ЦЕНТРИРОВАНИЕ\n\n<tab>Удерживайте кнопку меню или правый тачпад либо одновременно левый триггер и <xpad_y>.\n\nНАСТРОЙКИ VR\n\n<tab>В главном меню или меню паузы откройте «Настройки», затем VR. Здесь можно настроить параметры VR и поведение мода.\n\n"
+  },
+  {
+   "index": 1,
+   "orig_title": "Movement",
+   "ru_title": "ДВИЖЕНИЕ",
+   "orig": "WALKING\n\n<tab>Move your left thumbstick (<stick_left>) in the direction you want to go.\n\nTURNING\n\n<tab>Press or hold <xpad_right_thumb_left> or <xpad_right_thumb_right> to turn in the desired direction. You can switch between snap and smooth turning in Options - VR - Movement.\n\nRUNNING\n\n<tab>Double-tap <sprint> and keep holding it.\n\nJUMPING\n\n<tab>To jump, press <jump>.\n\nCROUCHING\n\n<tab><Press:crouch_toggle>, or crouch in real life. You can change crouching options in Options - VR - Movement.\n\n",
+   "ru": "ХОДЬБА\n\n<tab>Отклоняйте левый стик (<stick_left>) в нужную сторону.\n\nПОВОРОТЫ\n\n<tab>Нажимайте или удерживайте <xpad_right_thumb_left> или <xpad_right_thumb_right>, чтобы поворачиваться в нужную сторону. Переключение между резким и плавным поворотом – в Настройки – VR – Движение.\n\nБЕГ\n\n<tab>Дважды нажмите <sprint> и продолжайте удерживать.\n\nПРЫЖКИ\n\n<tab>Чтобы прыгнуть, нажмите <jump>.\n\nПРИСЕДАНИЕ\n\n<tab><Press:crouch_toggle> или присядьте в реальной жизни. Настройки приседания – в Настройки – VR – Движение.\n\n"
+  },
+  {
+   "index": 2,
+   "orig_title": "Interactions",
+   "ru_title": "ВЗАИМОДЕЙСТВИЯ",
+   "orig": "INTERACTIONS\n\n<tab>To interact with world objects (e.g. doors, ladders) or perform an action (e.g. take loot, grab/swap weapon), reach out with either hand and grip (<grip_dominant> or <grip_nondominant>).\n\n<tab>In some cases you will be offered a choice (e.g. lethal vs non-lethal takedowns, take/swap weapon or just take its parts) - in such cases you can choose by either gripping with that hand (<grip_dominant> or <grip_nondominant>) or pressing/holding a trigger (<trigger_dominant> or <trigger_nondominant>).\n\nQTEs\n\n<tab>Throughout the game you will encounter quick-time events. During them - depending on your game's settings - you will have to press, hold or quickly tap the <rui> button.\n\n",
+   "ru": "ВЗАИМОДЕЙСТВИЯ\n\n<tab>Чтобы взаимодействовать с объектами мира (например, дверями, лестницами) или выполнить действие (взять добычу, схватить или сменить оружие), потянитесь любой рукой и схватите (<grip_dominant> или <grip_nondominant>).\n\n<tab>Иногда вам предложат выбор (например, смертельное или несмертельное устранение, взять или сменить оружие либо забрать только его части) – в таких случаях выбирайте хватом (<grip_dominant> или <grip_nondominant>) либо нажатием или удержанием триггера (<trigger_dominant> или <trigger_nondominant>).\n\nБЫСТРЫЕ СОБЫТИЯ\n\n<tab>По ходу игры вам будут встречаться быстрые события. В зависимости от настроек игры в них нужно нажимать, удерживать или быстро многократно нажимать кнопку <rui>.\n\n"
+  },
+  {
+   "index": 3,
+   "orig_title": "Weapons",
+   "ru_title": "ОРУЖИЕ",
+   "orig": "STORAGE\n\n<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:\n\n* main weapon - over <dominant> shoulder\n* secondary weapon - <dominant> hip\n* special weapon - over <nondominant> shoulder\n\nEQUIPPING\n\n<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.\n\nMODES / POSES\n\n<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.\n\nTHROWABLES\n\n<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you. Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]\n\nWEAPONS AND AMMO\n\n<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).\n\nMELEE\n\n<tab>Press <wpn_fast_knife>.\n\n",
+   "ru": "ХРАНЕНИЕ\n\n<tab>Носимое оружие можно достать из-за плеча и с <dominant> бедра:\n\n* основное оружие – из-за <dominant> плеча\n* запасное оружие – с <dominant> бедра\n* особое оружие – из-за <nondominant> плеча\n\nЭКИПИРОВКА\n\n<tab>Чтобы взять оружие, схватите область кобуры <dominant> рукой (<grip_dominant>). Взяв его, можно взяться <nondominant> рукой за основную рукоять или цевье для стабилизации и более удобного прицеливания.\n\nРЕЖИМЫ И ПОЛОЖЕНИЯ\n\n<tab>В зависимости от того, как вы держите оружие, мод переключает его между обычным режимом, прицеливанием (ADS, для более точной стрельбы) и убранным положением (например, для быстрого бега). Опустите оружие, чтобы убрать его, или поднесите к глазам, чтобы прицелиться.\n\nМЕТАТЕЛЬНЫЕ ПРЕДМЕТЫ\n\n<tab>Найденные или созданные метательные предметы (приманки, ножи, коктейли Молотова, гранаты) крепятся на поясе спереди. Переключайтесь между ними с помощью <trigger_nondominant> или берите их <grip_dominant> либо <grip_nondominant>.[ <Press:wpn_dynamite>, чтобы бросить выбранный.]\n\nОРУЖИЕ И БОЕПРИПАСЫ\n\n<tab>Удерживайте <popup_equipment>, чтобы увидеть оружие и боеприпасы. Удерживая ее, нажмите <rui>, чтобы сменить тип боеприпасов оружия в руках (см. Ручная перезарядка).\n\nБЛИЖНИЙ БОЙ\n\n<tab>Нажмите <wpn_fast_knife>.\n\n"
+  },
+  {
+   "index": 4,
+   "orig_title": "Manual reloading",
+   "ru_title": "РУЧНАЯ ПЕРЕЗАРЯДКА",
+   "orig": "MANUAL RELOADING\n\n<tab>Most weapons will require you to perform these actions with <trigger_nondominant>:\n\n* remove old magazine\n* grab a new magazine from the pouch (<nondominant> hip or chest) and insert it\n* optionally pull the bolt\n\nSome weapons might have special needs such as:\n\n* pushing the magazine through the weapon before you can take it out\n* pulling a lever to release the magazine or chamber a new slug\n* drawing the bow before inserting an arrow\n* pumping the pneumatic system (see below)\n\n<tab>If you're unsure what to do, enable PART HIGHLIGHTS in Options - VR - Weapons. It highlights the next part you need to work to reload the weapon.\n\nPNEUMATIC WEAPONS\n\n<tab>Tikhar, Helsing and Gatling need pressure. Pump manually with your <nondominant> hand: take the pump handle with <trigger_nondominant> and pump it back and forth; it lets go by itself when full. Or hold <rui> and tap <wpn_fire>.\n\nSPECIAL AMMUNITION\n\n<tab>Tikhar can fire Incendiary Ammunition and Helsing explosive bolts. With the weapon in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammunition; reload by hand as usual. Do it again to cancel, or later to switch back. The single-arrow Helsing switches at once, with the game's own reload.\n\nJAMMING\n\n<tab>Weapons in Metro Exodus can get jammed. Their condition affects how often that happens. To reduce the jamming rate, find a Workbench and clean your weapons. To unjam your weapon operate the bolt.\n\nAUTOMATIC RELOADS\n\n<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead.",
+   "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\n<tab>Для большинства оружий потребуется выполнять эти действия с помощью <trigger_nondominant>:\n\n* вынуть старый магазин\n* достать новый магазин из подсумка (<nondominant> бедро или грудь) и вставить его\n* при необходимости передернуть затвор\n\nУ некоторых оружий есть особые требования:\n\n* протолкнуть магазин через оружие, прежде чем его можно будет вынуть\n* потянуть рычаг, чтобы освободить магазин или дослать новый патрон\n* натянуть лук перед вставкой стрелы\n* накачать пневматическую систему (см. ниже)\n\n<tab>Если не знаете, что делать, включите ПОДСВЕТКУ ЧАСТЕЙ в Настройки – VR – Оружие. Она подсветит следующую часть, с которой нужно работать для перезарядки.\n\nПНЕВМАТИЧЕСКОЕ ОРУЖИЕ\n\n<tab>Тихару, Хельсингу и Гатлингу нужно давление. Качайте вручную <nondominant> рукой: возьмите рукоятку помпы с помощью <trigger_nondominant> и качайте вперед-назад; при полной накачке она отпустится сама. Либо удерживайте <rui> и нажимайте <wpn_fire>.\n\nОСОБЫЕ БОЕПРИПАСЫ\n\n<tab>Тихар может стрелять зажигательными боеприпасами, а Хельсинг – разрывными болтами. Держа оружие в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>. Импульс подтвердит, что при следующей перезарядке зарядятся другие боеприпасы; перезаряжайтесь вручную как обычно. Повторите, чтобы отменить, или позже, чтобы переключиться обратно. Однострельный Хельсинг переключается сразу, при перезарядке самой игры.\n\nЗАКЛИНИВАНИЕ\n\n<tab>Оружие в Metro Exodus может заклинивать. Его состояние влияет на частоту заклиниваний. Чтобы снизить вероятность, найдите верстак и почистите оружие. Чтобы устранить заклинивание, передерните затвор.\n\nАВТОМАТИЧЕСКАЯ ПЕРЕЗАРЯДКА\n\n<tab>Также можно отключить ручную перезарядку в Настройки – VR – Оружие и перезаряжаться нажатием <rui>."
+  },
+  {
+   "index": 5,
+   "orig_title": "Items and devices",
+   "ru_title": "ПРЕДМЕТЫ И УСТРОЙСТВА",
+   "orig": "EQUIPPING GEAR\n\n<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.\n\nGEAR AREAS\n\n* chest:\n  * <dominant> - map\n  * <nondominant> - lighter\n* shoulders:\n  * over <dominant> - main weapon (<grip_dominant>)\n  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>)\n  * on <dominant> - medkit (<grip_nondominant>)\n* hips:\n  * <dominant> - secondary weapon (<grip_dominant>)\n  * <nondominant> - mask (<grip_nondominant>) or new ammo (<trigger_nondominant>)\n* lower back:\n  * <dominant> - charger (<grip_dominant>)\n  * <nondominant> - binoculars (<grip_nondominant>)\n* belt:\n  * front - throwables\n* forehead:\n  * flashlight (<trigger_nondominant>)\n  * night vision (<grip_dominant> - pull up or down)\n\n",
+   "ru": "ЭКИПИРОВКА СНАРЯЖЕНИЯ\n\n<tab>Большинство снаряжения доступно прямо на теле: поднесите руку к нужной области и схватите предмет с помощью <grip_dominant> или <grip_nondominant>. Некоторое снаряжение можно взять только определенной рукой.\n\nЗОНЫ СНАРЯЖЕНИЯ\n\n* грудь:\n  * <dominant> – карта\n  * <nondominant> – зажигалка\n* плечи:\n  * из-за <dominant> – основное оружие (<grip_dominant>)\n  * из-за <nondominant> – особое оружие (<grip_dominant>) или рюкзак (<grip_nondominant>)\n  * на <dominant> – аптечка (<grip_nondominant>)\n* бедра:\n  * <dominant> – запасное оружие (<grip_dominant>)\n  * <nondominant> – маска (<grip_nondominant>) или новые боеприпасы (<trigger_nondominant>)\n* поясница:\n  * <dominant> – зарядное устройство (<grip_dominant>)\n  * <nondominant> – бинокль (<grip_nondominant>)\n* пояс:\n  * спереди – метательные предметы\n* лоб:\n  * фонарь (<trigger_nondominant>)\n  * ночное видение (<grip_dominant> – потяните вверх или вниз)\n\n"
+  },
+  {
+   "index": 6,
+   "orig_title": "Gas mask",
+   "ru_title": "ПРОТИВОГАЗ",
+   "orig": "GAS MASK\n\n<tab>The gas mask is usually located on your <nondominant> hip. To put it on you have to grab it (<grip_nondominant>) and bring it to your face. To take it off you have to grab it from your face (<grip_nondominant>), move it away and let it go.\n\nFILTERS\n\n<tab>When the mask is equipped and your filters can be changed, a new filter will be available for grabbing (<grip_nondominant>) at your <nondominant> hip. Once grabbed, move it close to where it sits on the mask and it will be replaced automatically.[ Alternatively <press:filter>.]\n\nWIPING\n\n<tab>Rub the visor with an open hand to wipe rain, blood or dirt off it.[ Alternatively <press:facepalm>.]\n\nFIXING CRACKS\n\n<tab>When your mask is cracked, a piece of tape will be available for grabbing (<grip_nondominant>) at your <nondominant> hip, in place of the filter. Once grabbed, bring it to the front of your visor and the cracks will be sealed. Let go of it anywhere else to put it back.[ Alternatively <press:facepalm>.]\n\n",
+   "ru": "ПРОТИВОГАЗ\n\n<tab>Противогаз обычно висит на <nondominant> бедре. Чтобы надеть его, схватите (<grip_nondominant>) и поднесите к лицу. Чтобы снять, схватите его на лице (<grip_nondominant>), отведите в сторону и отпустите.\n\nФИЛЬТРЫ\n\n<tab>Когда маска надета и фильтры можно менять, новый фильтр появится на <nondominant> бедре и его можно будет схватить (<grip_nondominant>). Схватив, поднесите его к месту установки на маске – он заменится автоматически.[ Либо <press:filter>.]\n\nПРОТИРАНИЕ\n\n<tab>Потрите стекло открытой ладонью, чтобы стереть дождь, кровь или грязь.[ Либо <press:facepalm>.]\n\nУСТРАНЕНИЕ ТРЕЩИН\n\n<tab>Когда маска треснула, на <nondominant> бедре появляется кусок скотча, который можно схватить (<grip_nondominant>) вместо фильтра. Схватив, поднесите его к передней части стекла, и трещины заделаются. Отпустите его в любом другом месте, чтобы вернуть.[ Либо <press:facepalm>.]\n\n"
+  },
+  {
+   "index": 7,
+   "orig_title": "Medkit",
+   "ru_title": "АПТЕЧКА",
+   "orig": "HEALING\n\n<tab>When you're hurt you will hear specific audio cues and see a red overlay around your field of view. To heal yourself (assuming you have any medkits left):\n\n1. grip and hold (<grip_nondominant>) at your <dominant> shoulder\n2. move it away from your body until you feel a pulse\n3. bring it back to your body - anywhere from above your shoulder down to your stomach - to inject\n\n<tab>Letting go before that puts it back unused.[ Alternatively <press:medkit>.]\n\n",
+   "ru": "ЛЕЧЕНИЕ\n\n<tab>Когда вы ранены, вы услышите характерные звуки и увидите красную рамку по краям обзора. Чтобы вылечиться (если остались аптечки):\n\n1. схватите и удерживайте (<grip_nondominant>) у <dominant> плеча\n2. отведите от тела, пока не почувствуете импульс\n3. верните к телу – от уровня выше плеча до живота – чтобы сделать укол\n\n<tab>Если отпустить раньше, аптечка вернется неиспользованной.[ Либо <press:medkit>.]\n\n"
+  },
+  {
+   "index": 8,
+   "orig_title": "Flashlight and charger",
+   "ru_title": "ФОНАРЬ И ЗАРЯДКА",
+   "orig": "FLASHLIGHT\n\n<tab>To toggle the flashlight, press <trigger_nondominant> at your forehead[, or <press:wpn_light>].\n\nCHARGER\n\n<tab>To charge your batteries, grip (<grip_dominant>) at the <dominant> side of your lower back[, or <press:charger>]. Once equipped, pump it with <wpn_fire>.\n\n",
+   "ru": "ФОНАРЬ\n\n<tab>Чтобы включить или выключить фонарь, нажмите <trigger_nondominant> у лба[, или <press:wpn_light>].\n\nЗАРЯДНОЕ УСТРОЙСТВО\n\n<tab>Чтобы зарядить аккумуляторы, схватите (<grip_dominant>) устройство с <dominant> стороны поясницы[, или <press:charger>]. Взяв его, качайте с помощью <wpn_fire>.\n\n"
+  },
+  {
+   "index": 9,
+   "orig_title": "Map / journal",
+   "ru_title": "КАРТА И ЖУРНАЛ",
+   "orig": "MAP\n\n<tab>To equip the map, simply grip it (<grip_dominant>) at the <dominant> side of your chest[, or <press:map>].\n\nJOURNAL\n\n<tab>Once the map is equipped, flip the map over with your hands, or press <wpn_fire> to switch sides.\n\n",
+   "ru": "КАРТА\n\n<tab>Чтобы взять карту, просто схватите ее (<grip_dominant>) у <dominant> стороны груди[, или <press:map>].\n\nЖУРНАЛ\n\n<tab>Взяв карту, переверните ее руками или нажмите <wpn_fire>, чтобы сменить сторону.\n\n"
+  },
+  {
+   "index": 10,
+   "orig_title": "Backpack / inventory",
+   "ru_title": "РЮКЗАК И ИНВЕНТАРЬ",
+   "orig": "OPENING BACKPACK\n\n<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder[, or <press:inventory>]. Once opened you can craft consumables/throwables and modify your weapons. Standard UI navigation rules apply - either use your controller's pointer and triggers or point away and press buttons as shown on screen.\n\n",
+   "ru": "ОТКРЫТИЕ РЮКЗАКА\n\n<tab>Чтобы открыть инвентарь, схватите (<grip_nondominant>) над <nondominant> плечом[, или <press:inventory>]. В нем можно создавать расходники и метательные предметы, а также улучшать оружие. Действуют обычные правила навигации: используйте указатель контроллера и триггеры либо отведите взгляд и нажимайте кнопки, показанные на экране.\n\n"
+  },
+  {
+   "index": 11,
+   "orig_title": "Binoculars and NV",
+   "ru_title": "БИНОКЛЬ И НОЧНОЕ ВИДЕНИЕ",
+   "orig": "BINOCULARS\n\n<tab>Once you have binoculars, grip (<grip_nondominant>) at the <nondominant> side of your lower back[, or <press:binoculars>]. You can pass them between hands. To use them, bring them to your eyes. Zoom in with <wpn_fire> and out with <aim>.\n\nNIGHT VISION\n\n<tab>To equip night vision, grip (<grip_dominant>) above your forehead and pull them down in front of your eyes[, or <press:nightvision>]. To take them off, grip (<grip_dominant>) in front of your eyes and pull them back up[, or <press:nightvision> again].\n\n",
+   "ru": "БИНОКЛЬ\n\n<tab>Получив бинокль, схватите (<grip_nondominant>) его с <nondominant> стороны поясницы[, или <press:binoculars>]. Его можно передавать между руками. Чтобы использовать, поднесите к глазам. Приближайте с помощью <wpn_fire>, отдаляйте с помощью <aim>.\n\nНОЧНОЕ ВИДЕНИЕ\n\n<tab>Чтобы надеть ночное видение, схватите (<grip_dominant>) над лбом и потяните вниз перед глазами[, или <press:nightvision>]. Чтобы снять, схватите (<grip_dominant>) перед глазами и потяните вверх[, или снова <press:nightvision>].\n\n"
+  },
+  {
+   "index": 12,
+   "orig_title": "Weapon scopes",
+   "ru_title": "ОРУЖЕЙНЫЕ ПРИЦЕЛЫ",
+   "orig": "<tab>To use weapon scopes simply bring them to your eye. You can configure related options in Options - VR - Scopes.\n\n",
+   "ru": "<tab>Чтобы использовать прицел, просто поднесите его к глазу. Связанные настройки – в Настройки – VR – Прицелы.\n\n"
+  },
+  {
+   "index": 13,
+   "orig_title": "Workbenches",
+   "ru_title": "ВЕРСТАКИ",
+   "orig": "<tab>To use a workbench, reach out to it and grip (<grip_dominant> or <grip_nondominant>). Once in the workbench view use your controller's pointer and triggers or the buttons shown on screen to navigate the view.\n\n",
+   "ru": "<tab>Чтобы воспользоваться верстаком, потянитесь к нему и схватите (<grip_dominant> или <grip_nondominant>). В режиме верстака используйте указатель контроллера и триггеры либо кнопки на экране для навигации.\n\n"
+  }
+ ]
+}

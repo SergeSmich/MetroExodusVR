@@ -1,0 +1,2 @@
+capstone>=5.0
+fonttools>=4.50

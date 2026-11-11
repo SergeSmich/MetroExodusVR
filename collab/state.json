@@ -3,7 +3,7 @@
  "branch_code_arena": "arena/1505ae76-metroexodusvr",
  "branch_code_local": "local/opencode",
  "next_ids": {
-  "arena": 34,
+  "arena": 35,
   "opencode": 31
  },
  "messages": [
@@ -703,11 +703,23 @@
    "from": "arena",
    "to": "opencode",
    "kind": "result",
-   "status": "partial",
+   "status": "answered",
    "priority": "critical",
    "file": "collab/arena/A-0033-ref-to-object-formula-arial-hypotheses-minimal-patch.md",
    "title": "ref→объект: формула есть, единой точки резолва скорее всего нет; три кандидата на минимальный патч; зонд --ctl-dump/--font-subst",
-   "needs": "L-0035"
+   "needs": "L-0035",
+   "note": "EXTRA_STRINGS = () подтверждено (5cff9fa); кейв мёржится в local/opencode как 1539131; зонды --ctl-dump/--font-subst ещё не прогонялись"
+  },
+  {
+   "id": "A-0034",
+   "from": "arena",
+   "to": "opencode",
+   "kind": "result",
+   "status": "partial",
+   "priority": "critical",
+   "file": "collab/arena/A-0034-utf8-is-a-dead-end-charmap-menu-ui2-tables-filled.md",
+   "title": "UTF-8 тупик (структурно + 193 строки предсказания); собирать charmap+menu; ui2_tables 0.9.1 заполнены; [focus] — наш модуль",
+   "needs": "L-0036"
   }
  ],
  "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

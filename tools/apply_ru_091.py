@@ -4,22 +4,44 @@
 A port of ``tools/apply_ru.py`` to the 0.9.1 release.  Two things differ from
 the 0.9.0 path, and both are why this is a separate file:
 
-1. **The encoding is settled.**  0.9.1's test kit only offered
-   ``--experimental-cp1251`` and refused to build otherwise, because the
-   encoding question was still open when it was made.  It is not open any
-   more: A-0029 proved that a caption's bytes are *indices into the drawing
-   font's own glyph table*, and for the game's fonts that table is the
-   localization charmap of ``stable_ru.lng``.  L-0032 confirmed it in VR on
-   0.9.1 (CP1251 captions blank, values correct).  So ``charmap`` is the
-   default here and ``--experimental-cp1251`` is only kept so the old command
-   lines still work.
+1. **The encoding is the localization charmap, not UTF-8 (A-0034).**  A-0029
+   says a caption's bytes are *indices into the drawing font's glyph table*,
+   and the tables settle it: every Cyrillic-capable font carries exactly
+   ``len(charmap)`` = 271 entries, i.e. entry ``i`` is the glyph of
+   ``charmap[i]``, while the ASCII-only ones carry 256 and are the identity
+   over Latin-1.  A codepoint cannot index a 271-entry table -- ``U+0420`` is
+   1056 -- so the byte is an index and there is no decoder on this path.
+
+   That makes UTF-8 a dead end, and the two live runs agree.  With
+   ``tools/predict_captions.py`` over all 193 rows of the kit translation:
+
+       charmap + menu     193 / 193 correct
+       charmap + regular  193 / 193 correct
+       charmap + arial      0 / 193   ('3I:', '{}% (aHI@?GI3C.)')
+       utf-8   + menu       0 / 193   (wrong Cyrillic)
+       utf-8   + arial     13 / 193   ('{}% (...........)') -- the 13
+                                      ASCII-only rows survive
+
+   The last line is L-0036 §1 exactly: "the captions are empty, but the
+   values render" -- ``{}% (`` and ``)`` are ASCII and stay, the Cyrillic
+   between them has no ink.  And ``charmap + arial`` reproduces L-0035's
+   screenshot character for character: "ПЛАВНО" comes out as ``<P573?``.
+   Because every Cyrillic-capable font is charmap-baked, **no** (encoding,
+   font) pair involving UTF-8 can ever produce Cyrillic.
+
+   The main menu being in Cyrillic is the game's own ``.lng`` (charmap
+   indices + a Cyrillic font), not evidence about the mod's caption path --
+   L-0036 §2 says the same.  ``charmap`` is the default again; ``utf8`` is
+   kept, with a warning, for reproducing L-0036.
 
 2. **The captions need a font, not different bytes.**  The mod never sets a
    font property, so the engine draws every caption with ``arial``, whose glyph
-   table is ASCII only.  ``--caption-font menu`` installs a code cave over the
-   generic property setter (0x9F0D0) that writes the font on exactly those
-   captions that our translation replaced (positive FNV-1a filter).  See
-   ``tools/caption_font_hook.py``.
+   table is Latin-1 with only 95 inked cells (0x20..0x7e); no byte stream can
+   coax Cyrillic out of it.  ``--caption-font menu`` installs a code cave over
+   the generic property setter (0x9F0D0) that writes the font on exactly those
+   captions our translation replaced (positive FNV-1a filter); the A-0033
+   probes (``--ctl-dump``, ``--font-subst``, ``--swap-sticky-slot``) cover the
+   case where writing the property turns out not to be enough.
 
 Everything version specific is in ``ADDRS`` below.  The source DLL is pinned by
 SHA-256; passing a different file needs ``--allow-unknown-source``.
@@ -33,6 +55,7 @@ Usage:
 
 import argparse
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -79,15 +102,21 @@ ADDRS = dict(
     menu_lo=0xA0000,
     menu_hi=0xC0000,
     # Second-layer table bases (popups/options/hints/hintpages), 0.9.1 counts
-    # are 15/79/52/14.  UNKNOWN: fill from the kit's tables before building.
-    ui2_tables=None,
+    # are 15/79/52/14.  Filled from kit091/tools/apply_ru.py in A-0034; the
+    # 0.9.0 values in UI2_TABLES below are only a fallback now.
+    ui2_tables={
+        "popups": (0x4BABC0, 0x70, 0x10, True, None),
+        "options": (0x4C06A0, 0x20, 0x10, True, None),
+        "hints": (0x4B6768, 0x28, 0x10, False, None),
+        "hintpages": (0x4B85E0, 0x20, 0x10, True, 0x00),
+    },
     # Inline-built extras such as "VR HINTS".  UNKNOWN for 0.9.1.
     extra_strings=(),
 )
 DEFAULT_SRC = re_paths.DLL
 DEFAULT_OUT = ROOT / "build" / "MetroExodusVR.dll"
-STRINGS_TSV = ROOT / "ru" / "strings.tsv"
-UI2_JSON = ROOT / "ru" / "ui2.json"
+STRINGS_TSV = ROOT / "kit091" / "ru" / "strings-0.9.1.tsv"
+UI2_JSON = ROOT / "kit091" / "ru" / "ui2-0.9.1.json"
 
 # Embedded font resources that have to carry Cyrillic before the strings can be
 # displayed.  The files are produced by tools/merge_cyrillic.py.
@@ -108,34 +137,25 @@ FILE_ALIGN = 0x200
 # (table base RVA, entry stride, body slot offset, body has an explicit length,
 # title slot offset or None).
 UI2_TABLES = {
-    "popups": (0x49BF40, 0x70, 0x10, True, None),
-    "options": (0x4A1820, 0x20, 0x10, True, None),
-    "hints": (0x497E00, 0x20, 0x10, False, None),
-    "hintpages": (0x499A00, 0x20, 0x10, True, 0x00),
+    "popups": (0x4BABC0, 0x70, 0x10, True, None),
+    "options": (0x4C06A0, 0x20, 0x10, True, None),
+    "hints": (0x4B6768, 0x28, 0x10, False, None),
+    "hintpages": (0x4B85E0, 0x20, 0x10, True, 0x00),
 }
+# 0.9.0 for reference: popups 0x49BF40, options 0x4A1820, hints 0x497E00
+# (stride 0x20, not 0x28), hintpages 0x499A00.
 
 # Literals that are neither captions nor table entries but still show up in the
 # UI.  They are built inline, so they get the same copy-stub treatment.
-EXTRA_STRINGS = (
-    dict(
-        orig="VR HINTS",
-        ru="СОВЕТЫ VR",
-        lit=0x4999E0,
-        site=0x8181C,
-        lit_len=8,
-        cap=0xF,
-        allow_heap=False,
-    ),
-    dict(
-        orig="VR GAMEPAD LAYOUT",
-        ru="ГЕЙМПАД VR",
-        lit=0x497100,
-        site=0x79A1C,
-        lit_len=0x11,
-        cap=None,
-        allow_heap=True,
-    ),
-)
+#
+# 0.9.1: empty.  The two literals from 0.9.0 ("VR HINTS" @0x4999E0 and
+# "VR GAMEPAD LAYOUT" @0x497100) have neither a rip-relative `lea` nor an
+# absolute pointer in the 0.9.1 .text: at the kit's sites 0x8181C / 0x79A1C
+# the bytes are unrelated, and the address check fails before any write.
+# opencode verified this on the release DLL; Arena has to confirm or refute
+# in A-0034.  Leaving the tuple empty keeps the build from writing stubs at
+# sites that do not hold those literals in this build.
+EXTRA_STRINGS = ()
 
 # Only the mod's own menu/page-building code is redirected.
 MENU_LO = 0xB0000
@@ -166,13 +186,11 @@ HEAP_BASES = {
 
 CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-# The 4A engine adds no code-page step to its UI text path: a caption's bytes
-# are used directly as glyph indices of the font that draws it, and for the
-# game's own font that mapping is exactly the localization charmap of
-# ``stable_<locale>.lng`` (271 entries for RU).  So the mod's captions carry
-# *charmap indices* -- the same bytes the game's ``.lng`` strings are stored
-# as -- not CP1251 and not UTF-8.  ``--encoding cp1251`` rebuilds the old way
-# for comparison.
+# A-0034: a caption's bytes are glyph-table indices, never codepoints, so the
+# only encoding any Cyrillic-capable font can read is the one those fonts were
+# baked from -- the localization charmap.  UTF-8 indices select unrelated
+# glyphs in a 271-entry table and empty cells in ``arial``; see the module
+# docstring and ``tools/predict_captions.py --all`` for the 193-row numbers.
 ENCODING = "charmap"
 
 
@@ -206,6 +224,12 @@ def encode_text(s):
     the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
     ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
     """
+    if ENCODING == "utf8":
+        enc = s.encode("utf-8")
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
     if ENCODING == "cp1251":
         try:
             enc = s.encode("cp1251")
@@ -241,6 +265,10 @@ def encode_text(s):
 
 def decode_text(enc):
     """Inverse of encode_text (used by the self-check)."""
+    if ENCODING == "utf8":
+        return enc.decode("utf-8")
+    if ENCODING == "cp1251":
+        return enc.decode("cp1251")
     cps = charmap()
     out = []
     i = 0
@@ -695,7 +723,9 @@ def check_encodings(entries, ui2, extras):
         try:
             back = decode_text(enc)
         except (IndexError, ValueError) as exc:
-            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
+            errors.append(
+                f"{label}: encoded bytes are not valid charmap indices ({exc})"
+            )
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
@@ -724,7 +754,10 @@ def check_encodings(entries, ui2, extras):
 def report_limits(entries, ui2, extras):
     """Print how close the encoded payloads come to the engine's limits."""
     groups = (
-        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
+        (
+            f"captions (string_view, {MAX_LEN:#x})",
+            [e for e in entries if not e["skip"]],
+        ),
         ("table entries", [p for it in ui2 for p in it["parts"]]),
         ("extras", extras),
     )
@@ -897,8 +930,42 @@ def build_filter(strings_path, out_path):
     return 0
 
 
+def filter_encoding(path=None):
+    """The encoding the filter file was generated with (None if unknown)."""
+    p = Path(path) if path else FILTER_JSON
+    if not p.is_file():
+        return None
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    m = re.search(r"encoding:\s*([a-z0-9]+)", doc.get("encoded_with", ""))
+    return m.group(1) if m else None
+
+
+def check_encoding():
+    """Fail loud on the one encoding that provably cannot work (A-0034)."""
+    if ENCODING != "utf8":
+        return
+    print(
+        "WARN --encoding utf8: a caption's bytes are glyph-table indices, and\n"
+        "     every Cyrillic-capable font is charmap-baked (271 entries), so\n"
+        "     UTF-8 indices select unrelated glyphs; in `arial` (identity, 95\n"
+        "     inked cells) they select nothing at all.  Of the 193 kit rows,\n"
+        "     utf-8 + arial renders 13 (the ASCII-only ones) and charmap +\n"
+        "     menu renders 193 -- see tools/predict_captions.py --all.\n"
+        "     Building anyway; use --encoding charmap for a readable DLL."
+    )
+
+
 def check_filter(strings_path, label="filter"):
     """Warn when translated captions would not be recognised by the cave."""
+    built_with = filter_encoding()
+    if built_with is not None and built_with != ENCODING:
+        print(
+            f"WARN {label}: {FILTER_JSON.name} was built with encoding "
+            f"{built_with!r}, the current one is {ENCODING!r}; the table only "
+            f"matters for builds without --caption-all, rebuild it with "
+            f"--build-filter if you need that path"
+        )
+        return 0
     want = set()
     for addr, orig, ru in parse_tsv(Path(strings_path)):
         if ru != orig:
@@ -932,11 +999,12 @@ def self_test():
     for addr, orig, ru in rows:
         enc = encode_text(ru)
         if decode_text(enc) != ru:
-            print(f"FAIL {addr:#x}: {ru!r} does not survive the charmap round trip")
+            print(f"FAIL {addr:#x}: {ru!r} does not survive the {ENCODING} round trip")
             bad += 1
+    extra = f"{len(cm)} charmap entries" if ENCODING == "charmap" else "no charmap"
     print(
-        f"{'ok  ' if not bad else 'FAIL'} charmap round trip: {len(rows)} rows "
-        f"from {STRINGS_TSV.name}, {bad} mismatch(es), {len(cm)} entries"
+        f"{'ok  ' if not bad else 'FAIL'} {ENCODING} round trip: {len(rows)} rows "
+        f"from {STRINGS_TSV.name}, {bad} mismatch(es), {extra}"
     )
     ok = ok and not bad
     ok = check_filter(STRINGS_TSV, "self-test filter") == 0 and ok
@@ -945,6 +1013,8 @@ def self_test():
 
 
 def main():
+    global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
+    global VALIDATORS, STRINGS_TSV
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(DEFAULT_SRC))
     ap.add_argument("--out", default=str(DEFAULT_OUT))
@@ -952,12 +1022,12 @@ def main():
     ap.add_argument("--verify", action="store_true", help="verify the patched output")
     ap.add_argument(
         "--strings",
-        default=str(ROOT / "ru" / "strings-0.9.1.tsv"),
+        default=str(STRINGS_TSV),
         help="translation table: RVA<TAB>english<TAB>russian (0.9.1 RVAs)",
     )
     ap.add_argument(
         "--ui2",
-        default=str(ROOT / "ru" / "ui2-0.9.1.json"),
+        default=str(UI2_JSON),
         help="second-layer UI table for 0.9.1 (popups/options/hints/hintpages)",
     )
     ap.add_argument(
@@ -1081,12 +1151,14 @@ def main():
     )
     ap.add_argument(
         "--encoding",
-        choices=("charmap", "cp1251"),
+        choices=("charmap", "utf8", "cp1251"),
         default="charmap",
         help=(
-            "'charmap' (default) writes localization charmap indices, the "
-            "mapping the engine's glyph lookup uses (A-0029); 'cp1251' "
-            "rebuilds the diagnostic build of the 0.9.1 kit"
+            "'charmap' (default) writes localization charmap indices, the only "
+            "encoding any Cyrillic-capable font can read (A-0034); 'utf8' "
+            "reproduces the L-0036 build, which came out empty because the "
+            "caption font has no ink above 0x7e; 'cp1251' rebuilds the 0.9.1 "
+            "kit's diagnostic"
         ),
     )
     ap.add_argument(
@@ -1144,9 +1216,8 @@ def main():
     if args.experimental_cp1251:
         args.encoding = "cp1251"
 
-    global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
-    global VALIDATORS, STRINGS_TSV
     ENCODING = args.encoding
+    check_encoding()
     STRINGS_TSV = Path(args.strings)
     if args.build_filter:
         if not STRINGS_TSV.is_file():
@@ -1447,9 +1518,7 @@ def main():
                 sticky_slot = 0x08
             if args.swap_sticky_slot:
                 sticky_slot = int(args.swap_sticky_slot, 16)
-            subst_off = (
-                int(args.subst_offset, 16) if args.subst_offset else None
-            )
+            subst_off = int(args.subst_offset, 16) if args.subst_offset else None
             hook_blob, site_patch, marker_off, hook_dlen, _ = (
                 cfh.build_caption_font_hook(
                     hook_rva,
@@ -1631,7 +1700,7 @@ def main():
         0,
         0,
         0,
-        0x60000040,  # CNT_INITIALIZED_DATA | MEM_EXECUTE | MEM_READ
+        0xE0000040,  # MEM_WRITE | MEM_EXECUTE | MEM_READ | CNT_INITIALIZED_DATA
     )
     struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
     new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)
@@ -1702,18 +1771,21 @@ def verify_hook(path, hook_rva, setter_rva, dlen, md):
     ins = list(md.disasm(bytes(pe.data[start : start + 0x4000]), hook_rva))
     total = 0
     orphans = 0
+    tail = setter_rva + dlen
     for i in ins:
-        total += i.size
-        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
-            orphans += 1
-        if i.mnemonic == "jmp" and i.operands[0].type == X86_OP_IMM:
-            if i.operands[0].imm == setter_rva + dlen:
+        # the cave has internal `jmp rel32` too; only the one that lands on
+        # the displaced setter body is the tail
+        if i.mnemonic == "jmp" and i.operands and i.operands[0].type == X86_OP_IMM:
+            if i.operands[0].imm == tail:
                 print(
                     f"hook ok: {total} bytes of code, {orphans} orphan "
                     f"`00 00`, tail jmp -> {i.operands[0].imm:#x}"
                 )
                 return 0 if orphans == 0 else 1
-            break
+            continue
+        total += i.size
+        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
+            orphans += 1
     print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
     return 1
 

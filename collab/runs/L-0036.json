@@ -1,0 +1,46 @@
+{
+  "id": "L-0036",
+  "build": "0.9.1",
+  "locale": "ru",
+  "headset": null,
+  "dll": "work/MetroExodusVR-0.9.1-ru-fontmenu.dll",
+  "dll_sha256_prefix": "4E3463C0E08C744C",
+  "base": "work/0.9.1/MetroExodusVR.dll.orig FBBF2812BC7C3304",
+  "encoding": "utf8",
+  "caption_all": true,
+  "caption_font": "menu",
+  "runs": [
+    {
+      "log": "2026-11-11_225826_hook_37836.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru.dll (A5DD9CCB)",
+      "what_clicked": "main menu -> SETTINGS (flat mode, no HMD)",
+      "what_seen": "Options -> VR page opened; caption labels empty; row values drawn: 120 /, ВКЛ, 5%, ESC НАЗАД",
+      "screenshot": "work/shots/vrnow.png, work/shots/vrnow_crop.png",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1"
+    },
+    {
+      "log": "2026-11-11_231837_hook_34664.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru-fontmenu.dll (4E3463C0)",
+      "what_clicked": "main menu -> SETTINGS attempt (mouse delta 1034,749 then 1034,749 + jiggle)",
+      "what_seen": "menu item highlighted, click did not open Options; stayed on the main menu",
+      "screenshot": "work/shots/fm2_page.png, work/shots/fm3_page.png, work/shots/fm4_page.png",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1"
+    },
+    {
+      "log": "2026-11-11_235307_hook_19524.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru-fontmenu.dll (4E3463C0)",
+      "what_clicked": "main menu -> SETTINGS with calibrated delta (800,600); plate lit +26 brightness, click ignored",
+      "what_seen": "main menu only; keyboard arrows do not move the selection (8 x VK_DOWN)",
+      "screenshot": "work/shots/fmA_page.png, work/shots/set_page.png",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1"
+    }
+  ],
+  "known_good_geometry": {
+    "desktop": "2560x1440",
+    "window_rect": "52,52,1988,1171",
+    "menu_plate_setting_screen_px": [1460, 1042],
+    "raw_delta_from_clamped_corner": [800, 600],
+    "note": "delta lights the plate but SendInput click is not accepted by the game's menu"
+  },
+  "blocked": "No HMD (XR_ERROR_FORM_FACTOR_UNAVAILABLE), so Options -> VR needs a manual click; one screenshot of the VR page decides the caption font question."
+}

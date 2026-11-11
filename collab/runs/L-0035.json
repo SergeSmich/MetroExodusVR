@@ -1,0 +1,92 @@
+{
+  "id": "L-0035",
+  "from": "opencode",
+  "to": "arena",
+  "kind": "run-report",
+  "created": "2026-11-11",
+  "purpose": "Four VR runs on 0.9.1 that try to give the Options -> VR controls a Cyrillic font: caption-all, caption-font menu/main_menu/nixie, and the A-0027 section 5 binary slot swap [Fonts+0x08] = [Fonts+0x0c].",
+  "game": {
+    "title": "Metro Exodus",
+    "version": "0.9.1 (official release, kit091 full patch)",
+    "install": "versions\\0.9.1, updater.json pinned_version=0.9.1",
+    "locale": "ru",
+    "headset": "Quest 3 / Virtual Desktop, VirtualDesktopXR 1.1.0",
+    "pc": "Windows, Steam, no SteamVR"
+  },
+  "builds_under_test": [
+    {
+      "name": "full091-menu",
+      "file": "work/tmp-full091-menu.dll",
+      "sha256_prefix": "7DAF064D5031BD44",
+      "options": "--strings kit091/ru/strings-0.9.1.tsv --caption-font menu",
+      "encoding": "charmap (ru/charmap.txt)",
+      "result": "ASCII glyphs nDLDEI;@?7<HD:IC53DI on Options -> VR, values on the right also garbled"
+    },
+    {
+      "name": "full091-mainmenu",
+      "file": "work/tmp-full091-mainmenu.dll",
+      "sha256_prefix": "B7E938921CD7072C",
+      "options": "--caption-font main_menu",
+      "result": "same ASCII glyphs"
+    },
+    {
+      "name": "full091 (nixie)",
+      "file": "work/tmp-full091.dll",
+      "sha256_prefix": "54D091CEAB600A34",
+      "options": "--caption-font nixie / --caption-all",
+      "result": "same ASCII glyphs; nixie is not a Cyrillic font"
+    },
+    {
+      "name": "full091-swap2",
+      "file": "work/tmp-full091-swap2.dll",
+      "sha256": "3B80FE88CF1BD4EF69A4071A76F96526234F3CE1F3145E16A4E92E5B72E5B929",
+      "options": "--swap-arial-slot (cave writes [Fonts+0x08] = [Fonts+0x0c] once)",
+      "result": "swap applied, game alive, same ASCII glyphs"
+    }
+  ],
+  "protocol": "Original 0.9.1 DLL replaced by the candidate, one launch per candidate via MetroExodusVR-launcher.exe, VR session started, Options -> VR page opened, screenshot taken with work/nav.py shot.",
+  "what_was_pressed": [
+    "Stop-Process MetroExodus, copy candidate over versions\\0.9.1\\MetroExodusVR.dll",
+    "start MetroExodusVR-launcher.exe, wait ~110-115 s for the menu",
+    "Options -> VR, look at the TURN MODE row and the value column"
+  ],
+  "what_was_seen": {
+    "page_captions": "ASCII glyphs nDLDEI;@?7<HD:IC53DI (bytes decode to ФИЗИЧЕСКОЕ ВРАЩЕНИЕ through ru/charmap.txt, so the buffer is right, the font is not)",
+    "value_column": "garbled too: <P573? / JCINc / BKJI (OFF / HIGH / LOW)",
+    "loading_screen_hint": "ESC НАЗАД renders as proper Cyrillic",
+    "conclusion": "the whole VR Options page is drawn with a font that has no Cyrillic, not just the mod captions",
+    "crash": "none in any of the four runs"
+  },
+  "marker_swap2": {
+    "marker_rva": "0xBF4D8C",
+    "swap_done_1c80": 1,
+    "swap_old_1c84": "0x17056F20",
+    "swap_new_1c88": "0x001C58B0"
+  },
+  "fonts_live_after_swap": {
+    "address": "MetroExodus.exe + 0x1733240",
+    "plus_04_regular": "0x00000000",
+    "plus_08_arial": "0x17056E28",
+    "plus_0c_menu": "0x001C58B0",
+    "plus_10_console": "0x001C58B0",
+    "reading": "the registry was rebuilt after our one-shot write: menu moved to 0x001C58B0 and a fresh arial ref 0x17056E28 replaced the old one"
+  },
+  "screenshots": [
+    "work/shots/swap2.png",
+    "work/shots/zoom_swap2.png",
+    "work/shots/full091_menu_font.png",
+    "work/shots/full091_menu.png",
+    "work/shots/full091_mainmenu.png",
+    "work/shots/nixie_all_menu.png",
+    "work/shots/filter_menu.png"
+  ],
+  "log": {
+    "file": "versions\\0.9.1\\logs\\2026-11-11_211750_hook_37304.log",
+    "key_lines": [
+      "[menus] menu hook installed",
+      "[menus] Options menus cached 0.0 s after the first update",
+      "[menus] 29 menus loaded (3 replaced, 26 new), 221 captions set",
+      "[menus] 'mevr_reload_pouch' refused: lists need 2-255 printable ASCII labels"
+    ]
+  }
+}

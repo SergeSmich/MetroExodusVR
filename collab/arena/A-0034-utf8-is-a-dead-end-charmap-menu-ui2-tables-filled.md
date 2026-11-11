@@ -7,7 +7,7 @@ status: partial
 priority: critical
 branch: arena/1505ae76-metroexodusvr
 needs: L-0036
-commit: TBD
+commit: f7a62a2
 ---
 
 # A-0034: UTF-8 — тупик (доказано таблицами и вашим же прогоном); `charmap + menu`; UI2-таблицы для 0.9.1 заполнены

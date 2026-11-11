@@ -39,7 +39,7 @@ SITES = [
     (0x4BC10D, b"\x48\x8d\x50\x04", 3),
 ]
 # untouched reference site: already `lea rdx,[rax+0xc]`
-KEEP = (0x4BC126, b"\x48\x8d\x50\x0c")
+KEEP = (0x4BC12A, b"\x48\x8d\x50\x0c")
 NEW_DISP = 0x0C
 
 PROCESS_NAME = "metroexodus.exe"
@@ -187,16 +187,23 @@ def write(h, addr, blob, page_mask=True):
         raise OSError(ctypes.get_last_error(), f"WriteProcessMemory {addr:#x}")
 
 
-def check_sites(h, base, expect_new):
+def check_sites(h, base):
     report = []
     for rva, orig, _idx in SITES:
-        cur = read(h, base + rva, 4)
-        want = orig[:3] + bytes([NEW_DISP]) if expect_new else orig
-        report.append((rva, cur, want, cur == want))
-    rva, orig = KEEP
-    cur = read(h, base + rva, 4)
-    report.append((rva, cur, orig, cur == orig))
+        report.append((rva, read(h, base + rva, 4), orig))
     return report
+
+
+def check_after(h, base):
+    report = []
+    for rva, orig, _idx in SITES:
+        report.append((rva, read(h, base + rva, 4), orig[:3] + bytes([NEW_DISP])))
+    return report
+
+
+def check_keep(h, base):
+    rva, orig = KEEP
+    return rva, read(h, base + rva, 4), orig
 
 
 def main(argv):

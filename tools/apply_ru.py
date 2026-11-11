@@ -610,8 +610,11 @@ def emit_font_scan(out_len, out_bytes, base, fixups):
     b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
     mark()
     b += b"\xc7\x81" + struct.pack("<I", out_len) + b"\xff\xff\xff\xff"
-    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes) + b"\0" * 8
-    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes + 8) + b"\0" * 8
+    # `mov qword [reg+disp32], imm32` is 11 bytes: opcode + disp32 + imm32.
+    # Eight zero bytes here made the CPU execute `00 00` (`add [rax], al`)
+    # right after it; that is the VR crash "write to 0000000000000065".
+    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes) + b"\0" * 4
+    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes + 8) + b"\0" * 4
     b += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+font_name_lit]
     lit()
     b += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38] (bag begin)
@@ -960,8 +963,8 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x89\x99" + struct.pack("<I", 0x1C08)  # val_ctl = control
     code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (local_text len)
     code += b"\x89\x91" + struct.pack("<I", 0x1C60)  # val_text_len
-    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C64) + b"\0" * 8
-    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C6C) + b"\0" * 8
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C64) + b"\0" * 4
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C6C) + b"\0" * 4
     code += b"\x4c\x8b\x0f"  # mov r9, [rdi]
     code += b"\x41\xba\x10\0\0\0"  # mov r10d, 16
     code += b"\x4c\x39\xd2"  # cmp rdx, r10
@@ -1121,8 +1124,8 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     j_cap = len(code)
     code += b"\x0f\x85\0\0\0\0"  # jne cap_ready
     code += b"\xc7\x80" + struct.pack("<I", 0x1C24) + b"\xff\xff\xff\xff"
-    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C28) + b"\0" * 8
-    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C30) + b"\0" * 8
+    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C28) + b"\0" * 4
+    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C30) + b"\0" * 4
     code += b"\xc7\x80" + struct.pack("<I", 0x1C48) + b"\x01\0\0\0"
     cap_ready = len(code)
     struct.pack_into("<i", code, j_cap + 2, cap_ready - (j_cap + 6))
@@ -1256,8 +1259,8 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     j_capfn = len(code)
     code += b"\x0f\x85\0\0\0\0"  # jne cap_fn_done
     code += b"\x44\x89\x81" + struct.pack("<I", 0x1C24)  # cap_fn_len
-    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C28) + b"\0" * 8
-    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C30) + b"\0" * 8
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C28) + b"\0" * 4
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C30) + b"\0" * 4
     code += b"\xc7\x81" + struct.pack("<I", 0x1C4C) + b"\x01\0\0\0"
     cap_fn_done = len(code)
     struct.pack_into("<i", code, j_capfn + 2, cap_fn_done - (j_capfn + 6))

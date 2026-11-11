@@ -7,7 +7,7 @@ status: partial
 priority: critical
 branch: arena/1505ae76-metroexodusvr
 needs: L-0035
-commit: 1232269
+commit: c625874
 ---
 
 # A-0033: ref → объект: формула есть, «точки резолва» скорее всего нет; три кандидата на минимальный патч

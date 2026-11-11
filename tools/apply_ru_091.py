@@ -983,18 +983,101 @@ def main():
     ap.add_argument(
         "--caption-prop",
         default="font_name",
-        choices=("font_name", "override_font_name"),
+        choices=(
+            "font_name",
+            "override_font_name",
+            "text_font",
+            "alt_font_name",
+        ),
         help=(
             "property that receives --caption-font. 'font_name' (default) is "
             "the only one L-0026 saw succeed: the record exists on 206/209 "
             "matched controls and the setter returned success; L-0029 showed "
-            "override_font_name has no record at all, so the setter fails"
+            "override_font_name has no record at all, so the setter fails. "
+            "'text_font'/'alt_font_name' are the other font properties the "
+            "0.9.1 image carries (opencode, L-0035: font_name did not change "
+            "the menu)"
         ),
     )
     ap.add_argument(
         "--hook-only",
         action="store_true",
         help="install the caption-font cave only; leave every string as shipped",
+    )
+    ap.add_argument(
+        "--caption-all",
+        action="store_true",
+        help=(
+            "L-0035: skip the ru/caption_filter.json table and run the cave "
+            "on EVERY 'caption' property. Menu labels go through the same "
+            "setter but are mostly not in the table, so the VR Options page "
+            "is only reachable with this flag (opencode, L-0035 runlog)"
+        ),
+    )
+    ap.add_argument(
+        "--swap-arial-slot",
+        action="store_true",
+        help=(
+            "L-0035 binary test: the cave writes [Fonts+0x08] = [Fonts+0x0c] "
+            "(arial <- menu) once per process, keeping old/new in the marker "
+            "(+0x1C80 swapped, +0x1C84 old, +0x1C88 new)"
+        ),
+    )
+    ap.add_argument(
+        "--swap-arial-sticky",
+        action="store_true",
+        help=(
+            "L-0035: like --swap-arial-slot, but the registry pointer is "
+            "re-read from exe+0x1733260 and the store is re-applied on EVERY "
+            "setter call, because Fonts::Fonts rebuilds the slots after a "
+            "one-shot write (runlog L-0035: arial came back as 0x17056E28). "
+            "Counts the passes that really changed the slot at marker "
+            "+0x2198"
+        ),
+    )
+    ap.add_argument(
+        "--swap-sticky-slot",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: sticky swap of a chosen Fonts slot instead of arial: "
+            "0x04 regular, 0x08 arial (default), 0x0c menu, 0x10 console. "
+            "The live dump in the runlog has regular = 0 while the page "
+            "draws arial, so regular is the slot worth trying next"
+        ),
+    )
+    ap.add_argument(
+        "--ctl-dump",
+        action="store_true",
+        help=(
+            "L-0035: dump the font registry (Fonts inline + dereferenced, the "
+            "32 bank bases, the four resolved nodes with names) and the first "
+            "0x100 bytes of the matched caption control and of the first "
+            "local_text control into the marker"
+        ),
+    )
+    ap.add_argument(
+        "--font-subst",
+        choices=("off", "dry", "write"),
+        default="off",
+        help=(
+            "L-0035: in every control that reaches the cave, replace each "
+            "dword in [control, control+0x100) equal to the current `arial` "
+            "ref by the `menu` ref. 'dry' only counts matches and records "
+            "offsets (+0x2184 found, +0x2188 first, +0x218C last); 'write' "
+            "also substitutes and bumps the menu node refcount"
+        ),
+    )
+    ap.add_argument(
+        "--subst-offset",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: with --font-subst, also store the `menu` ref at "
+            "[control+HEX] on every pass. Probe for the case where the "
+            "control carries an empty ref and arial is substituted at draw "
+            "time; pick HEX from the control dump"
+        ),
     )
     ap.add_argument(
         "--encoding",
@@ -1333,7 +1416,14 @@ def main():
     marker_rva = None
     site_patch = None
     hook_dlen = 0
-    if args.caption_font:
+    probe_only = bool(
+        args.ctl_dump
+        or args.font_subst != "off"
+        or args.swap_arial_slot
+        or args.swap_arial_sticky
+        or args.swap_sticky_slot
+    )
+    if args.caption_font or probe_only:
         setter = ADDRS["setter"]
         foff = pe.rva_to_off(setter)
         if foff is None:
@@ -1352,14 +1442,28 @@ def main():
             pre = len(payload)
             pad = (-pre) % 16
             hook_rva = new_va + pre + pad
+            sticky_slot = False
+            if args.swap_arial_sticky:
+                sticky_slot = 0x08
+            if args.swap_sticky_slot:
+                sticky_slot = int(args.swap_sticky_slot, 16)
+            subst_off = (
+                int(args.subst_offset, 16) if args.subst_offset else None
+            )
             hook_blob, site_patch, marker_off, hook_dlen, _ = (
                 cfh.build_caption_font_hook(
                     hook_rva,
                     setter,
-                    args.caption_font,
+                    args.caption_font or "menu",
                     args.caption_prop,
-                    write=True,
+                    write=bool(args.caption_font),
                     displaced=disp,
+                    accept_all=args.caption_all,
+                    swap_arial=args.swap_arial_slot,
+                    swap_sticky=sticky_slot,
+                    ctl_dump=args.ctl_dump,
+                    font_subst=args.font_subst,
+                    subst_offset=subst_off,
                 )
             )
             marker_rva = hook_rva + marker_off

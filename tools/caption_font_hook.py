@@ -30,7 +30,7 @@ Which property to write -- the whole point of L-0034 -- is settled by two runs:
 ``font_name`` is therefore the default.  ``override_font_name`` stays available
 through ``--caption-prop`` for a control class that does carry the record.
 
-Marker fields added by the write arm (the marker is 0x2000 bytes, so these are
+Marker fields added by the write arm (the marker is MARKER_SIZE bytes, so these are
 far past the last field of bag15 at +0x1C6C):
 
     +0x1C70  set_calls   how many times we called the setter
@@ -69,7 +69,32 @@ SETPROP_RVA_091 = 0x9F0D0
 DEFAULT_DISPLACED_090 = b"\x40\x53\x55\x57\x41\x56"
 DEFAULT_DISPLACED_091 = b"\x40\x53\x55\x57\x41\x56\x41\x57"
 
-MARKER_SIZE = 0x2000
+MARKER_SIZE = 0x2400
+
+# --- L-0035: where a font ref becomes an object, and what to dump ------------
+# Offsets below 0x1D00 are taken by the existing marker fields (see the map at
+# the top of this file); the dumps live above them.  The marker grew from
+# 0x2000 to 0x2400 bytes for them.
+EXE_FONTS_INLINE = 0x1733240  # L-0035: the `Fonts` array quoted in the runlog
+EXE_FONTS_PTR = 0x1733260  # what the swap block writes through
+EXE_BANKS = 0x175F140  # 32 qword bank bases (work/resolve_fonts.py)
+
+CTL_CAP_DUMP = 0x1D00  # 0x100 bytes of the matched caption control
+CTL_VAL_DUMP = 0x1E00  # 0x100 bytes of the first local_text control
+FONTS_INLINE = 0x1F00  # 0x20 bytes: [exe+0x1733240]
+FONTS_DEREF = 0x1F20  # 0x20 bytes: *[exe+0x1733260]
+FONTS_PTR = 0x1F40  # qword: the pointer [exe+0x1733260] itself
+BANKS = 0x1F80  # 0x100 bytes: the 32 bank bases
+NODE_REC = 0x2080  # 4 x 0x40: {node@0, refcount@8, nlen@0xc, name[32]@0x10}
+SUBST_CTLS = 0x2180  # controls that reached the substitution block
+SUBST_FOUND = 0x2184  # dwords equal to the arial ref
+SUBST_FIRST = 0x2188  # lowest offset that matched (-1 = none)
+SUBST_LAST = 0x218C  # highest offset that matched
+SUBST_WRITES = 0x2190  # dwords actually stored
+SUBST_NOREF = 0x2194  # passes where the arial or menu ref was still empty
+SWAP_FIXES = 0x2198  # sticky swap: passes that really changed the slot
+STATIC_DONE = 0x219C  # the one-off registry dump has run
+CTL_FLAGS = 0x21A0  # bit0 caption control dumped, bit1 local_text dumped
 WRITE_CALLS = 0x1C70
 WRITE_OK = 0x1C74
 WRITE_FAIL = 0x1C78
@@ -79,8 +104,14 @@ CAPTION_FILTER = ROOT / "ru" / "caption_filter.json"
 
 # pop opcode for rax..rdi; r8..r15 need a 0x41 REX.B prefix
 _POP64 = {
-    "rax": 0x58, "rcx": 0x59, "rdx": 0x5A, "rbx": 0x5B,
-    "rsp": 0x5C, "rbp": 0x5D, "rsi": 0x5E, "rdi": 0x5F,
+    "rax": 0x58,
+    "rcx": 0x59,
+    "rdx": 0x5A,
+    "rbx": 0x5B,
+    "rsp": 0x5C,
+    "rbp": 0x5D,
+    "rsi": 0x5E,
+    "rdi": 0x5F,
 }
 
 
@@ -118,8 +149,7 @@ def check_displaced(b):
         ops = i.operands
         if len(ops) != 1 or ops[0].type != X86_OP_REG:
             raise SystemExit(
-                f"caption_font_hook: `{i.mnemonic} {i.op_str}` is not a "
-                "register push"
+                f"caption_font_hook: `{i.mnemonic} {i.op_str}` is not a register push"
             )
         if i.reg_name(ops[0].reg) == "rsp":
             raise SystemExit("caption_font_hook: cannot replay `push rsp`")
@@ -145,18 +175,21 @@ def derive_displaced(data, file_off, max_len=8):
     """Read the displaced prologue straight out of the DLL.
 
     Preferred over a hardcoded constant: disassemble the setter entry and take
-    the shortest run of whole instructions that is at least 5 bytes long.  A
-    caller that passes ``--site-head`` bypasses this.
+    the whole run of leading ``push reg`` instructions, up to ``max_len``.
+    The run has to cover the *complete* prologue: the write arm replays it and
+    calls the body behind it, so cutting it in the middle (0.9.1: 6 of 8 bytes
+    = 4 of 5 pushes) left the body 8 bytes off its 16-byte stack alignment and
+    crashed inside the setter on the first caption write (bag15 never called
+    the setter, so this path was new in L-0034).  A caller that passes
+    ``--site-head`` bypasses this.
     """
     ins = _disasm(data[file_off : file_off + max_len + 16], 0)
     total = 0
-    taken = []
     for i in ins:
-        taken.append(i)
-        total += i.size
-        if total >= 5:
+        if i.mnemonic != "push" or total + i.size > max_len:
             break
-    if total < 5 or total > max_len:
+        total += i.size
+    if total < 5:
         raise SystemExit(
             f"caption_font_hook: cannot displace {total} bytes at the setter "
             f"(need 5..{max_len}); pass --site-head with the real bytes"
@@ -381,6 +414,289 @@ def emit_ctrl_scan(out_off, out_slot, base, fixups):
     return bytes(b)
 
 
+def _check_swap_encoding(code, slot=0x08):
+    """Assert the slot swap block really moves r11d, not r10d.
+
+    The first version had ModRM 0x91/0x50 with REX.R set, i.e. both stores
+    used r10d (the *old* arial ref): the swap silently wrote the old handle
+    back into the arial slot and only the marker showed the new value.
+    Encoding is not reviewable by eye, so the block is disassembled at build
+    time and the three memory operations are pinned here.  ``slot`` is the
+    offset inside ``Fonts``: 0x04 regular, 0x08 arial, 0x0c menu, 0x10 console.
+    """
+    a = str(slot) if slot < 10 else hex(slot)  # match capstone's rendering
+    want = [
+        f"mov r10d, dword ptr [rax + {a}]",
+        "mov r11d, dword ptr [rax + 0xc]",
+        "mov dword ptr [rcx + 0x1c84], r10d",
+        "mov dword ptr [rcx + 0x1c88], r11d",
+        f"mov dword ptr [rax + {a}], r11d",
+    ]
+    got = [f"{i.mnemonic} {i.op_str}" for i in _disasm(code)]
+    missing = [w for w in want if w not in got]
+    if missing:
+        raise AssertionError(
+            "swap block encoding wrong, expected "
+            + "; ".join(missing)
+            + " in "
+            + " | ".join(got)
+        )
+
+
+def emit_mem_dump(src, out_off, size, base, fixups):
+    """Copy ``size`` bytes from ``[rsi]`` (set by ``src``) to marker+out_off.
+
+    ``src`` is a byte string that loads ``rsi`` and must not touch ``rcx``.
+    rdi/rsi are saved, the marker is parked in the caller's shadow space for
+    the duration of ``rep movsb`` (which clobbers rcx).
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    b += src  # rsi = source
+    b += b"\x57"  # push rdi
+    b += b"\x56"  # push rsi
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\x48\x89\x4c\x24\x10"  # mov [rsp+0x10], rcx  (park marker)
+    b += b"\x48\x8d\xb9" + struct.pack("<i", out_off)  # lea rdi, [rcx+out]
+    b += b"\xb9" + struct.pack("<I", size)  # mov ecx, size
+    b += b"\xfc"  # cld
+    b += b"\xf3\xa4"  # rep movsb
+    b += b"\x48\x8b\x4c\x24\x10"  # mov rcx, [rsp+0x10]  (restore marker)
+    b += b"\x5e"  # pop rsi
+    b += b"\x5f"  # pop rdi
+    return bytes(b)
+
+
+def emit_fonts_refresh(base, fixups):
+    """Refresh the two views of the ``Fonts`` registry on every call.
+
+    Cheap (two 0x20-byte copies) and done every time on purpose: L-0035 shows
+    ``Fonts::Fonts`` rebuilds the slots, so the arial and menu refs the
+    substitution compares against must be current, not a snapshot taken on
+    the first call.
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\x48\x8b\x81\x1c\x1a\0\0"  # mov rax, [rcx+0x1a1c] (exe base)
+    b += b"\x48\x85\xc0"  # test rax, rax
+    j = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je fr_done
+    b += emit_mem_dump(
+        b"\x48\x8d\xb0" + struct.pack("<i", EXE_FONTS_INLINE),
+        FONTS_INLINE,
+        0x20,
+        base + len(b),
+        fixups,
+    )  # lea rsi, [rax+0x1733240]
+    b += emit_mem_dump(
+        b"\x48\x8b\xb0" + struct.pack("<i", EXE_FONTS_PTR),
+        FONTS_DEREF,
+        0x20,
+        base + len(b),
+        fixups,
+    )  # mov rsi, [rax+0x1733260]
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\x48\x8b\x81\x1c\x1a\0\0"  # mov rax, [rcx+0x1a1c] (exe base)
+    b += b"\x48\x8b\x80" + struct.pack("<i", EXE_FONTS_PTR)
+    b += b"\x48\x89\x81" + struct.pack("<I", FONTS_PTR)  # [rcx+fptr] = rax
+    fr_done = len(b)
+    struct.pack_into("<i", b, j + 2, fr_done - (j + 6))
+    return bytes(b)
+
+
+def emit_static_dump(base, fixups):
+    """One-off dump of the ref->node path: banks and the four resolved nodes.
+
+    Retries on every call until both the arial and the menu slot are
+    non-zero, so the dump never freezes an empty registry.  If the four names
+    come out ``regular/arial/menu/console`` the resolver from
+    ``work/resolve_fonts.py`` is confirmed inside the game.
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\x83\xb9" + struct.pack("<I", STATIC_DONE) + b"\x00"
+    j1 = len(b)
+    b += b"\x0f\x85\0\0\0\0"  # jne sd_done (once per run)
+    b += b"\x48\x8b\x81\x1c\x1a\0\0"  # mov rax, [rcx+0x1a1c] (exe base)
+    b += b"\x48\x85\xc0"  # test rax, rax
+    j2 = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je sd_done
+    b += b"\x83\xb9" + struct.pack("<I", FONTS_INLINE + 0x08) + b"\x00"
+    j3 = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je sd_done (arial slot still empty)
+    b += b"\x83\xb9" + struct.pack("<I", FONTS_INLINE + 0x0C) + b"\x00"
+    j4 = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je sd_done (menu slot still empty)
+    b += emit_mem_dump(
+        b"\x48\x8d\xb0" + struct.pack("<i", EXE_BANKS),
+        BANKS,
+        0x100,
+        base + len(b),
+        fixups,
+    )  # lea rsi, [rax+0x175f140]
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    # ---- resolve the four refs: node = banks[ref>>24] + (ref & 0xffffff) ----
+    for slot in (1, 2, 3, 4):  # regular, arial, menu, console
+        rec = NODE_REC + (slot - 1) * 0x40
+        b += b"\x44\x8b\x91" + struct.pack("<I", FONTS_INLINE + slot * 4)
+        b += b"\x45\x85\xd2"  # test r10d, r10d
+        jz = len(b)
+        b += b"\x0f\x84\0\0\0\0"  # je next (empty ref, near)
+        b += b"\x44\x89\xd0"  # mov eax, r10d   (REX.R selects r10)
+        b += b"\xc1\xe8\x18"  # shr eax, 0x18      (bank)
+        b += b"\x41\x81\xe2\xff\xff\xff\x00"  # and r10d, 0xffffff  (off)
+        b += b"\x4c\x8b\x9c\xc1" + struct.pack("<I", BANKS)
+        # mov r11, [rcx + rax*8 + banks]
+        b += b"\x4d\x01\xd3"  # add r11, r10        (node; REX.W|R|B)
+        b += b"\x4c\x89\x99" + struct.pack("<I", rec)  # mov [rcx+rec], r11
+        b += b"\x43\x8b\x43\x08"  # mov eax, [r11+8] (refcount)
+        b += b"\x89\x81" + struct.pack("<I", rec + 8)
+        b += b"\x41\x0f\xb7\x43\x10"  # movzx eax, word [r11+0x10] (nlen)
+        b += b"\x89\x81" + struct.pack("<I", rec + 0x0C)
+        b += emit_mem_dump(
+            b"\x49\x8d\x73\x14",  # lea rsi, [r11+0x14]
+            rec + 0x10,
+            0x20,
+            base + len(b),
+            fixups,
+        )
+        b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+        mark()
+        struct.pack_into("<i", b, jz + 2, len(b) - (jz + 6))
+    b += b"\xc7\x81" + struct.pack("<I", SUBST_FIRST) + b"\xff\xff\xff\xff"
+    b += b"\xc7\x81" + struct.pack("<I", STATIC_DONE) + b"\x01\x00\x00\x00"
+    sd_done = len(b)
+    for pos in (j1, j2, j3, j4):
+        struct.pack_into("<i", b, pos + 2, sd_done - (pos + 6))
+    return bytes(b)
+
+
+def emit_ctl_dump(out_off, flag_off, flag_bit, base, fixups):
+    """Dump the first 0x100 bytes of the control in ``rbx``, once."""
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\xf6\x81" + struct.pack("<I", flag_off) + bytes([flag_bit])
+    # test byte [rcx+flag_off], flag_bit
+    j = len(b)
+    b += b"\x75\0"  # jne cd_done
+    b += b"\x80\x89" + struct.pack("<I", flag_off) + bytes([flag_bit])
+    # or byte [rcx+flag_off], flag_bit
+    b += emit_mem_dump(b"\x48\x89\xde", out_off, 0x100, base + len(b), fixups)
+    # mov rsi, rbx
+    cd_done = len(b)
+    struct.pack_into("<b", b, j + 1, cd_done - (j + 2))
+    return bytes(b)
+
+
+def emit_ref_subst(write, base, fixups, force_off=None):
+    """Replace the `arial` ref by the `menu` ref inside the live control.
+
+    No offset is assumed: every dword in ``[rbx, rbx+0x100)`` equal to the
+    current ``arial`` ref becomes the ``menu`` ref.  Idempotent by
+    construction -- after the write the slot no longer matches -- and it
+    needs no knowledge of which field the draw code reads.  The menu node's
+    refcount is bumped with a ``lock inc``, the same way the exe's own
+    setters do it; the arial node is left alone (it is a singleton).
+
+    ``force_off`` additionally stores the menu ref at ``[rbx+force_off]`` on
+    every pass.  That is the probe for the case where the control carries an
+    *empty* ref and the arial substitution happens at draw time: pick the
+    offset from the control dump and see whether the glyphs change.
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\xff\x81" + struct.pack("<I", SUBST_CTLS)  # inc controls seen
+    b += b"\x8b\x91" + struct.pack("<I", FONTS_INLINE + 0x08)  # arial ref
+    b += b"\x85\xd2"  # test edx, edx
+    j1 = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je rs_noref
+    b += b"\x44\x8b\x81" + struct.pack("<I", FONTS_INLINE + 0x0C)  # menu ref
+    b += b"\x45\x85\xc0"  # test r8d, r8d
+    j2 = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je rs_noref
+    b += b"\x45\x33\xc9"  # xor r9d, r9d          (offset)
+    rs_loop = len(b)
+    b += b"\x41\x81\xf9\x00\x01\x00\x00"  # cmp r9d, 0x100
+    j3 = len(b)
+    b += b"\x0f\x83\0\0\0\0"  # jae rs_scan_done
+    b += b"\x42\x8b\x04\x0b"  # mov eax, [rbx+r9*1]  (dword at offset r9)
+    b += b"\x39\xd0"  # cmp eax, edx
+    j4 = len(b)
+    b += b"\x75\0"  # jne rs_next
+    b += b"\xff\x81" + struct.pack("<I", SUBST_FOUND)  # inc found
+    b += b"\x83\xb9" + struct.pack("<I", SUBST_FIRST) + b"\xff"
+    # cmp dword [rcx+first], -1
+    j5 = len(b)
+    b += b"\x75\0"  # jne rs_have_first
+    b += b"\x44\x89\x89" + struct.pack("<I", SUBST_FIRST)  # mov [rcx+first], r9d
+    rs_have_first = len(b)
+    struct.pack_into("<b", b, j5 + 1, rs_have_first - (j5 + 2))
+    b += b"\x44\x89\x89" + struct.pack("<I", SUBST_LAST)  # mov [rcx+last], r9d
+    if write:
+        b += b"\x46\x89\x04\x0b"  # mov [rbx+r9*1], r8d  (the substitution)
+        b += b"\x48\x8b\x91" + struct.pack("<I", NODE_REC + 2 * 0x40)  # menu
+        b += b"\x48\x85\xd2"  # test rdx, rdx
+        j6 = len(b)
+        b += b"\x74\0"  # je rs_next (no node -> do not touch a refcount)
+        b += b"\xf0\xff\x42\x08"  # lock inc dword [rdx+8]
+        b += b"\xff\x81" + struct.pack("<I", SUBST_WRITES)  # inc writes
+        struct.pack_into("<b", b, j6 + 1, len(b) - (j6 + 2))
+    rs_next = len(b)
+    b += b"\x41\x83\xc1\x04"  # add r9d, 4
+    j7 = len(b)
+    b += b"\xe9\0\0\0\0"  # jmp rs_loop
+    rs_noref = len(b)
+    b += b"\xff\x81" + struct.pack("<I", SUBST_NOREF)  # inc [rcx+noref]
+    rs_scan_done = len(b)
+    for pos in (j1, j2, j3):
+        struct.pack_into("<i", b, pos + 2, rs_scan_done - (pos + 6))
+    struct.pack_into("<i", b, j7 + 1, rs_loop - (j7 + 5))
+    struct.pack_into("<b", b, j4 + 1, rs_next - (j4 + 2))
+    if force_off is None:
+        return bytes(b)
+    # --- force: store the menu ref at a fixed offset of the control ---------
+    b += b"\x44\x8b\x81" + struct.pack("<I", FONTS_INLINE + 0x0C)  # menu ref
+    b += b"\x45\x85\xc0"  # test r8d, r8d
+    jf = len(b)
+    b += b"\x0f\x84\0\0\0\0"  # je rs_done
+    b += b"\x44\x89\x83" + struct.pack("<i", force_off)  # mov [rbx+off], r8d
+    b += b"\x48\x8b\x91" + struct.pack("<I", NODE_REC + 2 * 0x40)  # menu node
+    b += b"\x48\x85\xd2"  # test rdx, rdx
+    jg = len(b)
+    b += b"\x74\0"  # je rs_done
+    b += b"\xf0\xff\x42\x08"  # lock inc dword [rdx+8]
+    b += b"\xff\x81" + struct.pack("<I", SUBST_WRITES)  # inc writes
+    struct.pack_into("<b", b, jg + 1, len(b) - (jg + 2))
+    rs_done = len(b)
+    struct.pack_into("<i", b, jf + 2, rs_done - (jf + 6))
+    return bytes(b)
+
 
 def build_caption_font_hook(
     blob_rva,
@@ -389,6 +705,12 @@ def build_caption_font_hook(
     prop_name="font_name",
     write=True,
     displaced=None,
+    accept_all=False,
+    swap_arial=False,
+    swap_sticky=False,  # False | slot offset into Fonts (0x04/0x08/0x0c/0x10)
+    ctl_dump=False,
+    font_subst="off",
+    subst_offset=None,
 ):
     """Code cave for the property setter ``site_rva``.
 
@@ -417,9 +739,12 @@ def build_caption_font_hook(
     displaced = bytes(displaced)
     check_displaced(displaced)
     dlen = len(displaced)
-    pop_bytes = pops_for(displaced)
 
     # --- positive caption filter (ru/caption_filter.json, A-0020 §7.1) -------
+    # ``accept_all`` (L-0035 experiment) skips the hash test and writes the font
+    # on every ``caption`` property: the menu labels go through the same
+    # property but only ~half of them are in the table, so this answers whether
+    # the same write can also fix the menu without a UI2 table.
     prop = prop_name.encode("ascii")
     hashes = []
     cf = Path(__file__).resolve().parent.parent / "ru" / "caption_filter.json"
@@ -429,6 +754,9 @@ def build_caption_font_hook(
     if not hashes:
         hashes = [0xFFFFFFFF]
     filter_count = len(hashes)
+    # labels of the branches that only exist in the filtered build
+    hash_loop = hash_done = search_loop = jmiss = h1 = h2 = s1 = s2 = None
+    accept_j = None
 
     # --- save every register we clobber (5 callee-saved + 8 volatile) --------
     code += b"\x53\x55\x57\x41\x56\x41\x57"  # push rbx, rbp, rdi, r14, r15
@@ -483,6 +811,100 @@ def build_caption_font_hook(
     fz3 = len(code)
     code += b"\x72\0"  # jb floop
     fonts_done = len(code)
+
+    # --- L-0035: one-off dump of the font registry and of the ref->node path
+    if ctl_dump or font_subst != "off":
+        code += emit_fonts_refresh(len(code), fixups)
+        code += emit_static_dump(len(code), fixups)
+
+    # --- L-0035: one-time arial -> menu slot swap ----------------------------
+    # A-0027 §5 / A-0030 §4.4 / A-0031 §3: the only remaining binary test for
+    # "our captions are drawn with `arial`".  The mod never sets a font, the
+    # exe falls back to the `arial` slot of the live `Fonts` object; the menu
+    # labels go through the same caption property.  If the captions turn
+    # Cyrillic after this write, the font is taken from the slot and the fix
+    # is one dword.  If nothing changes, the font is pinned per class.
+    #
+    # `Fonts` is a heap object (lazy singleton at exe+0x1733260), so the slot
+    # write needs no VirtualProtect.  Slot layout (L-0030 §2.1):
+    #   +0x04 regular, +0x08 arial, +0x0c menu, +0x10 console
+    # Do it once per process, only when the `menu` handle is already resolved;
+    # otherwise retry on the next setter call.  Never write a zero handle.
+    swap_done = None
+    swap_start = len(code)
+    if swap_arial:
+        code += b"\x48\x8b\x81\x2c\x1a\0\0"  # mov rax, [rcx+0x1a2c] (Fonts*)
+        code += b"\x48\x85\xc0"  # test rax, rax
+        sw1 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je swap_done
+        code += b"\x83\xb9\x80\x1c\0\0\x00"  # cmp dword [rcx+0x1c80], 0
+        sw2 = len(code)
+        code += b"\x0f\x85\0\0\0\0"  # jne swap_done (already swapped)
+        code += b"\x44\x8b\x50\x08"  # mov r10d, [rax+0x08] (old arial ref)
+        code += b"\x44\x8b\x58\x0c"  # mov r11d, [rax+0x0c] (menu ref)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        sw3 = len(code)
+        code += b"\x75\0"  # jne swap_have (slot already resolved)
+        code += b"\x44\x8b\x99\xe4\x1b\0\0"  # mov r11d, [rcx+0x1be4] probe
+        swap_have = len(code)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        sw4 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je swap_done (no menu handle yet)
+        code += b"\x44\x89\x91\x84\x1c\0\0"  # mov [rcx+0x1c84], r10d (old)
+        code += b"\x44\x89\x99\x88\x1c\0\0"  # mov [rcx+0x1c88], r11d (new)
+        code += b"\x44\x89\x58\x08"  # mov [rax+0x08], r11d (arial <- menu)
+        code += b"\xc7\x81\x80\x1c\0\0\x01\0\0\0"  # mov dword [rcx+0x1c80], 1
+        swap_done = len(code)
+        struct.pack_into("<i", code, sw1 + 2, swap_done - (sw1 + 6))
+        struct.pack_into("<i", code, sw2 + 2, swap_done - (sw2 + 6))
+        struct.pack_into("<i", code, sw4 + 2, swap_done - (sw4 + 6))
+        struct.pack_into("<b", code, sw3 + 1, swap_have - (sw3 + 2))
+        _check_swap_encoding(bytes(code[swap_start:swap_done]))
+    if swap_sticky is not False:
+        # Same store, but (a) the registry pointer is re-read from the exe
+        # every call, so a rebuilt registry is found, (b) there is no
+        # once-guard, so the slot is corrected after every rebuild, and (c)
+        # the target slot is a parameter: L-0035's live dump has
+        # [Fonts+0x04] regular = 0 while the page draws arial, so the slot
+        # worth overwriting may be `regular`, not `arial`.
+        slot = 0x08 if swap_sticky is True else int(swap_sticky)
+        st_start = len(code)
+        code += b"\x48\x8b\x81\x1c\x1a\0\0"  # mov rax,[rcx+0x1a1c]
+        code += b"\x48\x85\xc0"  # test rax, rax
+        st1 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je st_done
+        code += b"\x48\x8b\x80" + struct.pack("<i", EXE_FONTS_PTR)
+        # mov rax, [rax+0x1733260]
+        code += b"\x48\x85\xc0"  # test rax, rax
+        st2 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je st_done
+        code += b"\x48\x89\x81" + struct.pack("<I", FONTS_PTR)
+        # mov [rcx+FONTS_PTR], rax  (what we are about to patch)
+        code += b"\x44\x8b\x50" + bytes([slot])  # mov r10d, [rax+slot]
+        code += b"\x44\x8b\x58\x0c"  # mov r11d, [rax+0x0c] (menu ref)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        st3 = len(code)
+        code += b"\x75\0"  # jne st_have (slot already resolved)
+        code += b"\x44\x8b\x99\xe4\x1b\0\0"  # mov r11d, [rcx+0x1be4]
+        st_have = len(code)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        st4 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je st_done (no menu handle yet)
+        code += b"\x45\x39\xda"  # cmp r10d, r11d
+        st5 = len(code)
+        code += b"\x74\0"  # je st_store (slot already holds the menu ref)
+        code += b"\xff\x81" + struct.pack("<I", SWAP_FIXES)  # inc fixes
+        st_store = len(code)
+        struct.pack_into("<b", code, st5 + 1, st_store - (st5 + 2))
+        code += b"\x44\x89\x91\x84\x1c\0\0"  # mov [rcx+0x1c84], r10d
+        code += b"\x44\x89\x99\x88\x1c\0\0"  # mov [rcx+0x1c88], r11d
+        code += b"\x44\x89\x58" + bytes([slot])  # mov [rax+slot], r11d
+        code += b"\xc7\x81\x80\x1c\0\0\x01\0\0\0"  # [rcx+0x1c80] = 1
+        st_done = len(code)
+        for pos in (st1, st2, st4):
+            struct.pack_into("<i", code, pos + 2, st_done - (pos + 6))
+        struct.pack_into("<b", code, st3 + 1, st_have - (st3 + 2))
+        _check_swap_encoding(bytes(code[st_start:st_done]), slot)
 
     # --- bag12: probe the exe font manager -----------------------------------
     # Fonts::Fonts (exe 0x39b5f0) resolves regular/arial/menu/console once at
@@ -585,6 +1007,8 @@ def build_caption_font_hook(
     lt_e = len(code)
     code += b"\x0f\x85\0\0\0\0"  # jne lt_done (only the first call)
     code += b"\x48\x89\x99" + struct.pack("<I", 0x1C08)  # val_ctl = control
+    if ctl_dump:
+        code += emit_ctl_dump(CTL_VAL_DUMP, CTL_FLAGS, 0x02, len(code), fixups)
     code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (local_text len)
     code += b"\x89\x91" + struct.pack("<I", 0x1C60)  # val_text_len
     code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C64) + b"\0" * 4
@@ -707,37 +1131,45 @@ def build_caption_font_hook(
     code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
 
     # --- positive filter: fnv1a32(caption value) must be in our table --------
-    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
-    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (value len)
-    code += b"\xb8\xc5\x9d\x1c\x81"  # mov eax, 0x811c9dc5
-    code += b"\x45\x33\xdb"  # xor r11d, r11d
-    hash_loop = len(code)
-    code += b"\x4c\x39\xda"  # cmp rdx, r11
-    h1 = len(code)
-    code += b"\x76\0"  # jbe hash_done (r11 >= len)
-    code += b"\x47\x0f\xb6\x14\x19"  # movzx r10d, byte [r9+r11]
-    code += b"\x44\x31\xd0"  # xor eax, r10d
-    code += b"\x69\xc0\x93\x01\x00\x01"  # imul eax, eax, 0x01000193
-    code += b"\x49\xff\xc3"  # inc r11
-    h2 = len(code)
-    code += b"\xeb\0"  # jmp hash_loop
-    hash_done = len(code)
-    code += b"\x4c\x8d\x0d\0\0\0\0"  # lea r9, [rip+filter_table]
-    fixups.append((len(code) - 4, b"filter_table"))
-    code += b"\xb9" + struct.pack("<I", filter_count)  # mov ecx, count
-    search_loop = len(code)
-    code += b"\x41\x39\x01"  # cmp dword [r9], eax
-    s1 = len(code)
-    code += b"\x74\0"  # je hit
-    code += b"\x49\x83\xc1\x04"  # add r9, 4
-    code += b"\xff\xc9"  # dec ecx
-    s2 = len(code)
-    code += b"\x75\0"  # jnz search_loop
-    jmiss = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp done (miss: not our caption)
+    if accept_all:
+        # Every caption is ours: jump straight to the hit arm.  The filter
+        # table stays in the data section (harmless, keeps offsets stable).
+        accept_j = len(code)
+        code += b"\xe9\0\0\0\0"  # jmp hit (patched once hit is known)
+    else:
+        code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
+        code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (value len)
+        code += b"\xb8\xc5\x9d\x1c\x81"  # mov eax, 0x811c9dc5
+        code += b"\x45\x33\xdb"  # xor r11d, r11d
+        hash_loop = len(code)
+        code += b"\x4c\x39\xda"  # cmp rdx, r11
+        h1 = len(code)
+        code += b"\x76\0"  # jbe hash_done (r11 >= len)
+        code += b"\x47\x0f\xb6\x14\x19"  # movzx r10d, byte [r9+r11]
+        code += b"\x44\x31\xd0"  # xor eax, r10d
+        code += b"\x69\xc0\x93\x01\x00\x01"  # imul eax, eax, 0x01000193
+        code += b"\x49\xff\xc3"  # inc r11
+        h2 = len(code)
+        code += b"\xeb\0"  # jmp hash_loop
+        hash_done = len(code)
+        code += b"\x4c\x8d\x0d\0\0\0\0"  # lea r9, [rip+filter_table]
+        fixups.append((len(code) - 4, b"filter_table"))
+        code += b"\xb9" + struct.pack("<I", filter_count)  # mov ecx, count
+        search_loop = len(code)
+        code += b"\x41\x39\x01"  # cmp dword [r9], eax
+        s1 = len(code)
+        code += b"\x74\0"  # je hit
+        code += b"\x49\x83\xc1\x04"  # add r9, 4
+        code += b"\xff\xc9"  # dec ecx
+        s2 = len(code)
+        code += b"\x75\0"  # jnz search_loop
+        jmiss = len(code)
+        code += b"\xe9\0\0\0\0"  # jmp done (miss: not our caption)
 
     # --- hit: record kind/found in the marker --------------------------------
     hit = len(code)
+    if accept_j is not None:
+        struct.pack_into("<i", code, accept_j + 1, hit - (accept_j + 5))
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     fixups.append((len(code) - 4, b"marker"))
     code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
@@ -753,6 +1185,8 @@ def build_caption_font_hook(
     code += b"\xc7\x80" + struct.pack("<I", 0x1C48) + b"\x01\0\0\0"
     cap_ready = len(code)
     struct.pack_into("<i", code, j_cap + 2, cap_ready - (j_cap + 6))
+    if ctl_dump:
+        code += emit_ctl_dump(CTL_CAP_DUMP, CTL_FLAGS, 0x01, len(code), fixups)
     # len + sample describe THIS matched call (A-0024 §1)
     code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
     code += b"\x89\x50\x28"  # mov [rax+0x28], edx  (caption len)
@@ -1126,6 +1560,8 @@ def build_caption_font_hook(
         (fz4, floop_next),
         (g1, not_reentry),
     ):
+        if pos is None:
+            continue  # branch does not exist in --caption-all builds
         disp = target - (pos + 2)
         if not -128 <= disp <= 127:
             raise SystemExit(
@@ -1133,6 +1569,12 @@ def build_caption_font_hook(
                 f"{disp:+d} bytes; use a near jump instead (A-0027 §6)"
             )
         code[pos + 1] = disp & 0xFF
+
+    # --- L-0035: arial ref -> menu ref inside the live control ---------------
+    if font_subst != "off":
+        code += emit_ref_subst(
+            font_subst == "write", len(code), fixups, subst_offset
+        )
 
     # --- write arm: set(control, &name_sv, &value_sv) -------------------------
     # L-0034 asks for the write; these are the two facts that pick the arm:
@@ -1145,44 +1587,62 @@ def build_caption_font_hook(
     # arm available for a control that does have the record.
     #
     # Two ABI details, each of which cost a run before:
+    # Two more ABI details, each of which cost a run:
     #   * the callee spills into its caller's 32-byte shadow space (bag12,
-    #     L-0031), so the two string_views live ABOVE it, at +0x20 and +0x30;
-    #   * we call ``site_rva + dlen`` -- the setter body -- instead of
-    #     ``site_rva``, which is our own hook entry.  bag6..bag9 called the
-    #     entry, so every nested write re-entered the hook and polluted the
-    #     ``override_font_name`` counter (L-0029 section 3).  Calling the body
-    #     means replaying the displaced prologue and popping it afterwards,
-    #     and it leaves ``reentries`` at 0.
+    #     L-0031), so the two string_views live in our own 32-byte slot;
+    #   * we never call ``site_rva`` itself -- that is our hook entry, and
+    #     bag6..bag9 re-entered the hook on every nested write (L-0029 §3).
     if write:
         prop_len = len(prop)
         font_len = len(font_name.encode("ascii"))
-        # keep rsp 16-aligned at the call: (dlen + sub_x) % 16 == 0
-        sub_x = 0x30 + ((16 - (dlen % 16)) % 16)
+        # ``site+dlen`` (the setter body) is NOT a function: the five pushes at
+        # ``site`` are its prologue and its epilogue pops them right before
+        # ``ret``.  So the body must see the original frame:
+        #     [ret] [saved r15] [saved r14] [saved rdi] [saved rbp] [saved rbx]
+        # A ``call`` would push the return address BELOW the replayed saves,
+        # the body's first ``pop r15`` would eat it and ``ret`` would land in
+        # our data (0xC0000096 at cave+code_len, L-0034b).  Hence: replay the
+        # prologue, push a return address, ``jmp`` -- and the body's ``ret``
+        # pops it with the five saves still on top.  Stack alignment matches
+        # the original exactly (rsp % 16 == 0 at the body entry).
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
         fixups.append((len(code) - 4, b"marker"))
         code += b"\xff\x80" + struct.pack("<I", 0x1C70)  # inc [rax+0x1c70] calls
-        code += displaced  # replayed prologue: push rbx..r15
-        code += b"\x48\x83\xec" + struct.pack("<B", sub_x)  # sub rsp, sub_x
+        # string_views: {ptr,len} at [rsp] and [rsp+0x10].  That is the cave's
+        # own 32-byte slot, above everything the body touches (its frame sits
+        # below the return address pushed further down).
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
         fixups.append((len(code) - 4, b"prop_name"))
-        code += b"\x48\x89\x44\x24\x20"  # mov [rsp+0x20], rax   (name ptr)
-        code += b"\x48\xc7\x44\x24\x28" + struct.pack(
+        code += b"\x48\x89\x04\x24"  # mov [rsp], rax        (name ptr)
+        code += b"\x48\xc7\x44\x24\x08" + struct.pack(
             "<I", prop_len
-        )  # mov qword [rsp+0x28], len
+        )  # mov qword [rsp+8], len
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+font_value]
         fixups.append((len(code) - 4, b"font_value"))
-        code += b"\x48\x89\x44\x24\x30"  # mov [rsp+0x30], rax   (value ptr)
-        code += b"\x48\xc7\x44\x24\x38" + struct.pack(
+        code += b"\x48\x89\x44\x24\x10"  # mov [rsp+0x10], rax   (value ptr)
+        code += b"\x48\xc7\x44\x24\x18" + struct.pack(
             "<I", font_len
-        )  # mov qword [rsp+0x38], len
+        )  # mov qword [rsp+0x18], len
         code += b"\x48\x8b\xcb"  # mov rcx, rbx          (control)
-        code += b"\x48\x8d\x54\x24\x20"  # lea rdx, [rsp+0x20]  (&name_sv)
-        code += b"\x4c\x8d\x44\x24\x30"  # lea r8, [rsp+0x30]   (&value_sv)
+        code += b"\x48\x8d\x14\x24"  # lea rdx, [rsp]        (&name_sv)
+        code += b"\x4c\x8d\x44\x24\x10"  # lea r8, [rsp+0x10]   (&value_sv)
+        # rsp is Q here and the two views sit at [Q, Q+0x20).  Reserve 8 bytes
+        # below them first: the replayed prologue then lands at Q-0x40..Q-8
+        # with the return address in the last slot above it, i.e. the original
+        # frame `[ret][saved rbx]..[saved r15]`.  Body entry rsp == Q-0x40 is
+        # 16-aligned, as it was after the real prologue.
+        code += b"\x48\x83\xec\x08"  # sub rsp, 8
+        code += displaced  # replay the entry prologue (saved regs)
+        code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+cont]
+        cont_fix = len(code) - 4
+        code += b"\x48\x89\x44\x24\x28"  # mov [rsp+0x28], rax (return address)
         code += b"\x4c\x8d\x1d\0\0\0\0"  # lea r11, [rip+site_body]
         fixups.append((len(code) - 4, b"site_body"))
-        code += b"\x41\xff\xd3"  # call r11
-        code += b"\x48\x83\xc4" + struct.pack("<B", sub_x)  # add rsp, sub_x
-        code += pop_bytes  # pop r15..rbx (reverse of the replayed prologue)
+        code += b"\x41\xff\xe3"  # jmp r11
+        struct.pack_into("<i", code, cont_fix, len(code) - (cont_fix + 4))
+        # cont: the body's epilogue popped the five saves and its `ret` popped
+        # our address, so rsp is Q again -- exactly where the read path leaves
+        # it, ready for the marker counters and the shared epilogue.
         code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
         fixups.append((len(code) - 4, b"marker"))
         code += b"\x88\x81" + struct.pack("<I", 0x1C7C)  # mov [rcx+0x1c7c], al
@@ -1200,7 +1660,8 @@ def build_caption_font_hook(
     code += b"\xff\x88\x14\x1a\0\0"  # dec dword [rax+0x1a14]
     for p in (jne1, jne2, jne3, jne4):
         struct.pack_into("<i", code, p + 2, done - (p + 6))
-    struct.pack_into("<i", code, jmiss + 1, done - (jmiss + 5))
+    if jmiss is not None:
+        struct.pack_into("<i", code, jmiss + 1, done - (jmiss + 5))
     struct.pack_into("<i", code, g2 + 1, done - (g2 + 5))
     code += b"\x48\x83\xc4\x20"  # add rsp, 0x20
     code += b"\x41\x5b\x41\x5a\x41\x59\x41\x58\x5e\x5a\x59\x58"
@@ -1222,7 +1683,7 @@ def build_caption_font_hook(
         (b"res_arial", b"arial\0"),
         (b"res_regular", b"regular\0"),
         (b"filter_table", struct.pack(f"<{len(hashes)}I", *hashes)),
-        (b"marker", b"\0" * 0x2000),
+        (b"marker", b"\0" * MARKER_SIZE),
     ):
         data_off[name] = (len(code), len(raw) - 1)
         code += raw
@@ -1246,9 +1707,7 @@ def build_caption_font_hook(
         "<i", blob, jmp_pos + 1, (site_rva + dlen) - (blob_rva + jmp_pos + 5)
     )
     site_patch = (
-        b"\xe9"
-        + struct.pack("<i", blob_rva - (site_rva + 5))
-        + b"\x90" * (dlen - 5)
+        b"\xe9" + struct.pack("<i", blob_rva - (site_rva + 5)) + b"\x90" * (dlen - 5)
     )
     return (bytes(blob), site_patch, data_off[b"marker"][0], dlen, code_len)
 
@@ -1303,11 +1762,41 @@ def self_test(verbose=True):
     ):
         blob_rva = 0xBF3000
         for prop in ("font_name", "override_font_name"):
-            for write in (True, False):
+            for write, accept, swap, stick, dump, subst, off in (
+                (True, False, False, False, False, "off", None),
+                (True, True, False, False, False, "off", None),
+                (False, False, False, False, False, "off", None),
+                (False, True, False, False, False, "off", None),
+                (False, False, True, False, False, "off", None),
+                (True, False, True, False, False, "off", None),
+                (False, False, False, True, False, "off", None),
+                (False, True, False, True, False, "off", None),
+                (False, True, False, 0x04, False, "off", None),
+                (False, True, False, 0x10, False, "off", None),
+                (False, True, False, False, True, "off", None),
+                (False, True, False, False, True, "dry", None),
+                (False, True, False, False, True, "write", None),
+                (False, True, False, False, True, "write", 0x60),
+            ):
                 blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
-                    blob_rva, site, "menu", prop, write=write, displaced=disp
+                    blob_rva,
+                    site,
+                    "menu",
+                    prop,
+                    write=write,
+                    displaced=disp,
+                    accept_all=accept,
+                    swap_arial=swap,
+                    swap_sticky=stick,
+                    ctl_dump=dump,
+                    font_subst=subst,
+                    subst_offset=off,
                 )
-                tag = f"{label} {prop} write={int(write)}"
+                tag = (
+                    f"{label} {prop} write={int(write)} all={int(accept)} "
+                    f"swap={int(swap)} sticky={int(stick)} dump={int(dump)} "
+                    f"subst={subst} off={off}"
+                )
                 problems = audit(blob, code_len, site, dlen, blob_rva)
                 if len(patch) != len(disp):
                     problems.append(
@@ -1320,7 +1809,19 @@ def self_test(verbose=True):
                     problems.append(f"site patch jumps to {jmp_tgt:#x}, not the cave")
                 if not (0 <= marker_off < len(blob)):
                     problems.append("marker offset outside the blob")
-                for field in (WRITE_CALLS, WRITE_OK, WRITE_FAIL, WRITE_LAST):
+                for field in (
+                    WRITE_CALLS,
+                    WRITE_OK,
+                    WRITE_FAIL,
+                    WRITE_LAST,
+                    SUBST_WRITES,
+                    SWAP_FIXES,
+                    STATIC_DONE,
+                    CTL_FLAGS,
+                    NODE_REC + 4 * 0x40 - 1,
+                    BANKS + 0x100 - 1,
+                    CTL_VAL_DUMP + 0x100 - 1,
+                ):
                     if field >= MARKER_SIZE:
                         problems.append(f"marker field {field:#x} outside the marker")
                 if b"\0" * MARKER_SIZE not in blob:
@@ -1356,6 +1857,65 @@ def main():
     )
     ap.add_argument("--no-write", action="store_true", help="read-only probe (bag15)")
     ap.add_argument(
+        "--swap-arial-slot",
+        action="store_true",
+        help="L-0035: one-time [Fonts+0x08] = [Fonts+0x0c] (arial <- menu)",
+    )
+    ap.add_argument(
+        "--ctl-dump",
+        action="store_true",
+        help=(
+            "L-0035: dump the font registry (Fonts inline and dereferenced, "
+            "the 32 bank bases, the four resolved nodes with their names) "
+            "and the first 0x100 bytes of the matched caption control and of "
+            "the first local_text control into the marker"
+        ),
+    )
+    ap.add_argument(
+        "--font-subst",
+        choices=("off", "dry", "write"),
+        default="off",
+        help=(
+            "L-0035: in every control that passes the caption filter, "
+            "replace each dword in [control, control+0x100) equal to the "
+            "current `arial` ref by the `menu` ref. 'dry' only counts "
+            "matches and records their offsets; 'write' also substitutes "
+            "and bumps the menu node refcount"
+        ),
+    )
+    ap.add_argument(
+        "--subst-offset",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: with --font-subst, also store the `menu` ref at "
+            "[control+HEX] on every pass. Probe for the case where the "
+            "control carries an empty ref and arial is substituted at draw "
+            "time; pick HEX from the control dump"
+        ),
+    )
+    ap.add_argument(
+        "--swap-arial-sticky",
+        action="store_true",
+        help=(
+            "L-0035: like --swap-arial-slot, but the registry pointer is "
+            "re-read from exe+0x1733260 and the store is re-applied on "
+            "every setter call, because Fonts::Fonts rebuilds the slots "
+            "after a one-shot write"
+        ),
+    )
+    ap.add_argument(
+        "--swap-sticky-slot",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: sticky swap of a chosen Fonts slot instead of arial: "
+            "0x04 regular, 0x08 arial (default), 0x0c menu, 0x10 console. "
+            "The live dump in the L-0035 runlog has regular = 0, so the slot "
+            "the UI actually falls back from may be regular"
+        ),
+    )
+    ap.add_argument(
         "--site-head",
         default=None,
         metavar="HEX",
@@ -1366,14 +1926,32 @@ def main():
     site = int(args.setter_rva, 16)
     blob_rva = int(args.blob_rva, 16)
     disp = bytes.fromhex(args.site_head) if args.site_head else DEFAULT_DISPLACED_091
+    s_off = int(args.subst_offset, 16) if args.subst_offset else None
+    sticky_slot = False
+    if args.swap_arial_sticky:
+        sticky_slot = 0x08
+    if args.swap_sticky_slot:
+        sticky_slot = int(args.swap_sticky_slot, 16)
     blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
-        blob_rva, site, args.font, args.prop,
-        write=not args.no_write, displaced=disp,
+        blob_rva,
+        site,
+        args.font,
+        args.prop,
+        write=not args.no_write,
+        displaced=disp,
+        swap_arial=args.swap_arial_slot,
+        swap_sticky=sticky_slot,
+        ctl_dump=args.ctl_dump,
+        font_subst=args.font_subst,
+        subst_offset=s_off,
     )
     if args.dump_asm:
         lines = [
             f"; setter {site:#x} -> cave {blob_rva:#x}, displaced {dlen} B, "
-            f"prop {args.prop!r} = {args.font!r}, write={not args.no_write}",
+            f"prop {args.prop!r} = {args.font!r}, write={not args.no_write}, "
+            f"swap={args.swap_arial_slot}, sticky={sticky_slot}, "
+            f"dump={args.ctl_dump}, subst={args.font_subst}, "
+            f"off={args.subst_offset}",
             f"; site patch: {patch.hex()}",
             "",
         ]

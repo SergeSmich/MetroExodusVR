@@ -107,15 +107,39 @@ def foreground(title="4A Engine"):
 
 
 if __name__ == "__main__":
-    tag = sys.argv[1] if len(sys.argv) > 1 else "vr"
+    # usage: tmp_goto_vr.py <tag> [dx dy] [--noclamp]
+    # dx/dy are relative to the clamped corner; if a target screen point was
+    # measured on a screenshot, pass it with `--at X Y` and the delta from the
+    # client origin is computed here.
+    args = [a for a in sys.argv[1:]]
+    tag = args.pop(0) if args and not args[0].startswith("-") else "vr"
+    at = None
+    if "--at" in args:
+        i = args.index("--at")
+        at = (int(args[i + 1]), int(args[i + 2]))
+        del args[i : i + 3]
+    dx, dy = (int(args[0]), int(args[1])) if len(args) >= 2 else (1153, 874)
+
     hwnd = foreground()
     r = RECT()
     u32.GetWindowRect(hwnd, ctypes.byref(r))
     print("window", r.left, r.top, r.right, r.bottom)
+
+    if at is not None:
+
+        class POINT(ctypes.Structure):
+            _fields_ = [("x", wintypes.LONG), ("y", wintypes.LONG)]
+
+        org = POINT(0, 0)
+        u32.ClientToScreen(hwnd, ctypes.byref(org))
+        print("client origin", org.x, org.y)
+        dx, dy = at[0] - org.x, at[1] - org.y
+    print("delta", dx, dy)
+
     shot(f"{tag}_front")
     move(-2400, -2400)
     time.sleep(0.4)
-    move(1153, 874)  # main menu -> НАСТРОЙКИ
+    move(dx, dy)
     time.sleep(0.8)
     shot(f"{tag}_hover")
     click()

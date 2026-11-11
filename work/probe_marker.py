@@ -163,6 +163,24 @@ def main(argv):
             f"name {name!r}"
         )
 
+    def node_name(ref):
+        """Decode (bank << 24) | off into the name stored at bank + off."""
+        idx, delta = ref >> 24, ref & 0xFFFFFF
+        if idx > 31:
+            return None
+        bank = int.from_bytes(banks[idx * 8 : idx * 8 + 8], "little")
+        if not bank:
+            return None
+        blob = rd(bank + delta, 0x40)
+        if len(blob) < 0x34:
+            return None
+        name = blob[0x14:0x34].split(b"\x00")[0]
+        if not name or len(name) > 24:
+            return None
+        if not all(0x20 <= b < 0x7F for b in name):
+            return None
+        return name.decode("ascii")
+
     for off, label in ((0x1D00, "caption control"), (0x1E00, "local_text control")):
         blob = rd(dll + rva + off, 0x100)
         print(f"  {label} ({len(blob)} B):")
@@ -173,6 +191,26 @@ def main(argv):
                 for i in range(0, 16, 4)
             )
             print(f"    +{row:03x}  {chunk.hex(' '):<48} {words}")
+        print(f"  {label}: ref-like dwords")
+        for row in range(0, 0x100, 4):
+            ref = int.from_bytes(blob[row : row + 4], "little")
+            if ref == 0:
+                continue
+            name = node_name(ref) if ref else None
+            if name:
+                print(f"    +{row:03x} {ref:#010x} -> node {name!r}")
+
+    print("  slots decoded:")
+    for base in (0x1F00, 0x1F20):
+        for slot_off, slot in (
+            (0x04, "regular"),
+            (0x08, "arial"),
+            (0x0C, "menu"),
+            (0x10, "console"),
+        ):
+            ref = int.from_bytes(rd(dll + rva + base + slot_off, 4), "little")
+            name = node_name(ref) if ref else None
+            print(f"    copy {base:#06x} {slot:<8} {ref:#010x} -> {name!r}")
     return 0
 
 

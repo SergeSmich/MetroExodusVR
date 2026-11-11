@@ -1,0 +1,78 @@
+{
+  "id": "L-0037",
+  "build": "0.9.1",
+  "locale": "ru",
+  "headset": null,
+  "base": "work/0.9.1/MetroExodusVR.dll.orig FBBF2812BC7C3304",
+  "encoding": "charmap",
+  "caption_all": true,
+  "runs": [
+    {
+      "log": "2026-11-12_003828_hook_36804.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru-charmapmenu.dll (279F55BD)",
+      "dll_sha256_prefix": "279F55BD790693E1",
+      "marker": "0xBFB05C",
+      "what_clicked": "main menu -> SETTINGS -> Options -> VR page (flat mode, no HMD)",
+      "what_seen": "six VR page list rows drawn with Latin/ASCII garbage instead of Cyrillic: DOH5 / OH5nD@5 / C7Dcl3DI / JP? / HI@D / ?HJcDI (reverse charmap of GAME / GRAPHICS / MOVEMENT / UL... / REC... / WEAPONS). Engine's own strings next to them are Cyrillic (ESC НАЗАД, category column).",
+      "screenshot": "work/shots/vr_open.png",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1",
+      "marker_values": {
+        "set_calls": 259,
+        "set_ok": 245,
+        "set_fail": 0,
+        "set_last": 1,
+        "static_done": 1
+      },
+      "verdict": "font_name='menu' accepted 245 times, rendering unchanged -> no-op"
+    },
+    {
+      "log": "2026-11-12_005935_hook_37552.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru-swap.dll (238F69DB)",
+      "dll_sha256_prefix": "238F69DB173A1C69",
+      "marker": "0xBFB08C",
+      "what_clicked": "main menu -> SETTINGS -> Options -> VR page (flat mode, no HMD)",
+      "what_seen": "VR page identical to run 1: same six Latin rows, same Cyrillic engine strings",
+      "screenshot": "work/shots/sw2_vr.png",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1",
+      "marker_values": {
+        "swap_fixes": 1,
+        "set_calls": 0
+      },
+      "verdict": "Fonts slot +0x08 really rewritten arial -> menu, rendering unchanged -> font is resolved before the frame, slot is not read"
+    },
+    {
+      "log": "2026-11-12_011823_hook_31156.log",
+      "dll": "work/MetroExodusVR-0.9.1-ru-probe.dll (B84402FE)",
+      "dll_sha256_prefix": "B84402FEAAE5AE2B",
+      "marker": "0xBFB43C",
+      "what_clicked": "menu load only, no page navigation needed (--font-subst write --ctl-dump)",
+      "what_seen": "no font reference found in any container field; dumped container is an SSO std::string property bag (\"mevr_vr\", len 0x0b, cap 0x0f), not a UI control",
+      "log_line": "29 menus loaded (3 replaced, 26 new), 221 captions set; refused: mevr_reload_pouch x1",
+      "marker_values": {
+        "set_calls": 259,
+        "set_ok": 245,
+        "subst_ctls": 259,
+        "subst_found": 0,
+        "static_done": 1,
+        "ctl_flags": 1
+      },
+      "verdict": "no dword in [control, control+0x100) points at the arial node; local_text bit never set -> no working sample of the setter"
+    }
+  ],
+  "font_registry": {
+    "fonts_ptr": "0x7ff7ad1e3240",
+    "nodes": {
+      "regular": "0x20ded2ce118 rc=365 nlen=7",
+      "arial": "0x20ded2ce210 rc=2 nlen=5",
+      "menu": "0x20de39e0c30 rc=1469 nlen=4",
+      "console": "0x20decdeaa08 rc=332 nlen=7"
+    },
+    "scan": "full loaded image scanned for pointers to the four nodes: only marker+0x2080 hits (our own saved copies), no DLL global caches a node"
+  },
+  "data_facts": {
+    "caption_pool": "file 0x4be600..0x4be8e0 (MOVEMENT ... mevr_vr, caption/id pairs)",
+    "mod_class_names": "file 0x4bccf0..0x4bcf00 (m3_main_*)",
+    "arial_literal_in_dll": 0
+  },
+  "blocked": "No HMD (XR_ERROR_FORM_FACTOR_UNAVAILABLE); the mod retries every ~5 s and stalls the UI thread for 2 s, so the VR page needs manual navigation. Open question to Arena (L-0037 Q1-Q4): where does the list-item draw path get its font, and can it be reached from DLL data?"
+}

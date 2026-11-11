@@ -108,45 +108,18 @@ def find_game():
     return None
 
 
-def base_via_toolhelp(pid):
-    """Module base through TH32CS_SNAPMODULE (no extra dependency)."""
-    TH32CS_SNAPMODULE = 0x00000008
-    TH32CS_SNAPMODULE32 = 0x00000010
-    INVALID_HANDLE_VALUE = ctypes.c_void_p(-1).value
-
-    class MODULEENTRY32W(ctypes.Structure):
-        _fields_ = [
-            ("dwSize", wintypes.DWORD),
-            ("th32ModuleID", wintypes.DWORD),
-            ("th32ProcessID", wintypes.DWORD),
-            ("GlblcntUsage", wintypes.DWORD),
-            ("ProccntUsage", wintypes.DWORD),
-            ("modBaseAddr", ctypes.c_void_p),
-            ("modBaseSize", wintypes.DWORD),
-            ("hModule", wintypes.HMODULE),
-            ("szModule", wintypes.WCHAR * 256),
-            ("szExePath", wintypes.WCHAR * 260),
-        ]
-
-    k32.CreateToolhelp32Snapshot.restype = wintypes.HANDLE
-    k32.CreateToolhelp32Snapshot.argtypes = [wintypes.DWORD, wintypes.DWORD]
-    k32.Module32FirstW.argtypes = [wintypes.HANDLE, ctypes.POINTER(MODULEENTRY32W)]
-    k32.Module32NextW.argtypes = [wintypes.HANDLE, ctypes.POINTER(MODULEENTRY32W)]
-
-    snap = k32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)
-    if snap == INVALID_HANDLE_VALUE or not snap:
-        raise OSError(ctypes.get_last_error(), "CreateToolhelp32Snapshot")
-    try:
-        me = MODULEENTRY32W()
-        me.dwSize = ctypes.sizeof(MODULEENTRY32W)
-        ok = k32.Module32FirstW(snap, ctypes.byref(me))
-        while ok:
-            if me.szModule.lower() == MODULE_NAME:
-                return int(me.modBaseAddr or 0), me.modBaseSize
-            ok = k32.Module32NextW(snap, ctypes.byref(me))
-    finally:
-        k32.CloseHandle(snap)
-    return None, 0
+def base_via_psapi(h):
+    """Main module base via K32EnumProcessModulesEx (module 0 is the exe)."""
+    LIST_MODULES_ALL = 0x03
+    arr = (wintypes.HMODULE * 1024)()
+    need = wintypes.DWORD()
+    if not k32.K32EnumProcessModulesEx(
+        h, arr, ctypes.sizeof(arr), ctypes.byref(need), LIST_MODULES_ALL
+    ):
+        raise OSError(ctypes.get_last_error(), "K32EnumProcessModulesEx")
+    if not need.value:
+        return 0
+    return int(arr[0] or 0)
 
 
 def read(h, addr, n):
@@ -227,22 +200,32 @@ def main(argv):
     pid = proc.pid
     log(f"pid {pid} appeared after {time.time() - t0:.2f}s")
 
-    base = None
-    while base is None and time.time() - t0 < timeout:
-        try:
-            base, size = base_via_toolhelp(pid)
-        except OSError as exc:
-            log(f"module list not ready: {exc}")
-            base = None
-            time.sleep(0.05)
-    if base is None:
-        log("module base not found")
-        return 3
-
-    h = k32.OpenProcess(ACCESS, False, pid)
+    h = None
+    while not h and time.time() - t0 < timeout:
+        h = k32.OpenProcess(ACCESS, False, pid)
+        if not h:
+            time.sleep(0.03)
     if not h:
         log(f"OpenProcess failed {ctypes.get_last_error()}")
         return 4
+
+    base = 0
+    tries = 0
+    while not base and time.time() - t0 < timeout:
+        tries += 1
+        try:
+            base = base_via_psapi(h)
+        except OSError as exc:
+            if tries % 20 == 1:
+                log(f"module list not ready ({tries}): {exc}")
+            base = 0
+        if not base:
+            time.sleep(0.03)
+    if not base:
+        log("module base not found")
+        k32.CloseHandle(h)
+        return 3
+
     try:
         # Wait until the .text page holds the expected bytes (image mapped but
         # still being relocated) - usually instant after the module appears.
@@ -255,17 +238,23 @@ def main(argv):
                 break
             time.sleep(0.02)
 
-        before = check_sites(h, base, expect_new=False)
-        log(f"exe base {base:#x}  size {size:#x}")
-        for rva, cur, want, ok in before:
+        before = check_sites(h, base)
+        log(f"exe base {base:#x}")
+        for rva, cur, want in before:
             log(
-                f"  {rva:#08x} {cur.hex(' ')} (want {want.hex(' ')}) {'ok' if ok else 'MISMATCH'}"
+                f"  {rva:#08x} {cur.hex(' ')} (want {want.hex(' ')}) "
+                f"{'ok' if cur == want else 'MISMATCH'}"
             )
+        keep_rva, keep_cur, keep_want = check_keep(h, base)
+        log(
+            f"  {keep_rva:#08x} {keep_cur.hex(' ')} (want {keep_want.hex(' ')}) "
+            f"{'ok' if keep_cur == keep_want else 'note: reference site differs'}"
+        )
 
         if verify_only:
             return 0
 
-        if not all(ok for _rva, _cur, _want, ok in before):
+        if not all(cur == want for _rva, cur, want in before):
             log("unexpected bytes, refusing to patch")
             return 5
 
@@ -273,11 +262,12 @@ def main(argv):
             write(h, base + rva + idx, bytes([NEW_DISP]))
             log(f"patched {rva:#08x}+{idx}: {orig[idx]:#04x} -> {NEW_DISP:#04x}")
 
-        after = check_sites(h, base, expect_new=True)
-        good = all(ok for _rva, _cur, _want, ok in after)
-        for rva, cur, want, ok in after:
+        after = check_after(h, base)
+        good = all(cur == want for _rva, cur, want in after)
+        for rva, cur, want in after:
             log(
-                f"  {rva:#08x} {cur.hex(' ')} (want {want.hex(' ')}) {'ok' if ok else 'FAIL'}"
+                f"  {rva:#08x} {cur.hex(' ')} (want {want.hex(' ')}) "
+                f"{'ok' if cur == want else 'FAIL'}"
             )
         log("result " + ("PATCHED" if good else "VERIFY FAILED"))
         return 0 if good else 6

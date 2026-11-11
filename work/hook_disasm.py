@@ -25,5 +25,5 @@ n = 0
 for ins in md.disasm(code, RVA):
     print(f"{ins.address:#x}  {ins.mnemonic} {ins.op_str}")
     n += 1
-    if ins.mnemonic == "ret" or n > 110:
+    if ins.mnemonic == "ret" or n > 200:
         break

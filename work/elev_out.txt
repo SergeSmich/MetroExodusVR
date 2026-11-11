@@ -1,13 +1,18 @@
-pid 29108 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd78c80000 size 0xc2a000
+pid 12008 module F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.0\MetroExodusVR.dll base 0x7ffd7b3d0000 size 0xc2b000
 calls=1204 caption=259 set_ok=0
 matched=209 last caption len=18 sample=b'HJE35M\x01<'
 found=0 kind=0 has_kind2=0
-found_any=206 set_ok_any=206 first_control=0xd92ad2edd0 first_q60=0x0000000000000000
+found_any=0 set_ok_any=0 first_control=0x0 first_q60=0x0000000000000000
 vtable=0x3 bag_bytes=0x558
+on_draw_item: count=0 control=0x0 vlen=0 value=b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+item*: count=0 control=0x0 nlen=0 name=b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+override_font_name(game, c): count=209 control=0x862aafece0 vlen=4 value=b'menu\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+current font_name: len=0 bytes=b'\x00\x00\x00\x00\x00\x00\x00\x00'
+first found-control vtable (+0x1998)=0x0
 gate [c+0xac]&1=0 qword [c+0x60]=0x0000000000000000 (hi32=0x0)
-control=0xd92ad2ebf0 begin=0x23a6d451e10 end=0x23a6d452368
+control=0x862aafece0 begin=0x2046d337170 end=0x2046d3376c8
 records in bag: 9 (dumped 9)
-caller=0x7ffd78d103fd (module+0x903fd)
+caller=0x7ffd7b4603fd (module+0x903fd)
  0 kind=2 name[sso]='caption' value[empty]=''
  1 kind=1 name[sso]='caption' value[empty]=''
  2 kind=2 name[sso]='hint' value[empty]=''
@@ -15,5 +20,5 @@ caller=0x7ffd78d103fd (module+0x903fd)
  4 kind=2 name[sso]='img' value[empty]=''
  5 kind=1 name[sso]='img' value[empty]=''
  6 kind=0 name[sso]='img_coord' value[empty]=''
- 7 kind=1 name[sso]='argument' value[heap]='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+ 7 kind=1 name[sso]='argument' value[heap]='\x10\x00\x00\x005M\x01<\x80)v>ý\x7f\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
  8 kind=0 name[sso]='index' value[empty]=''

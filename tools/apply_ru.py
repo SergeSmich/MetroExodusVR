@@ -563,19 +563,231 @@ def build_stub(base, disp, enc, string_rva, stub_rva, back_rva):
     return bytes(b)
 
 
+def sib_byte(scale, index, base):
+    """Encode a SIB byte; refuse a scale that would silently break a stride.
+
+    A-0028 §6: bag13 wrote ``mov [rcx+r9+0x1a34], r10d`` (scale 1) for a
+    dword array and the dump still looked plausible.  Keep the check here so
+    the same typo cannot cost another run.
+    """
+    if scale not in (1, 2, 4, 8):
+        raise SystemExit(f"apply_ru: bad SIB scale {scale}, expected 1/2/4/8")
+    if (index & 7) == 4:
+        raise SystemExit("apply_ru: SIB index rsp/r12 (field 4) is not encodable")
+    if base == 5:
+        raise SystemExit("apply_ru: SIB base rbp/r13 (field 5) is not encodable")
+    return ((scale.bit_length() - 1) << 6) | ((index & 7) << 3) | (base & 7)
+
+
+def _patch32(b, pos, target):
+    """Patch the rel32 of a ``0f 8x`` near jump at ``pos``."""
+    struct.pack_into("<i", b, pos + 2, target - (pos + 6))
+
+
+def _patchjmp32(b, pos, target):
+    """Patch the rel32 of an ``e9`` near jump at ``pos``."""
+    struct.pack_into("<i", b, pos + 1, target - (pos + 5))
+
+
+def emit_font_scan(out_len, out_bytes, base, fixups):
+    """Read-only scan of the control's bag for the ``font_name`` record.
+
+    ``rbx`` = control, ``rcx`` = marker on entry/exit.  Writes ``0xFFFFFFFF``
+    to ``out_len`` when no record exists, otherwise the record's value length
+    and its first 16 value bytes at ``out_bytes``.  Never writes to the game
+    object (A-0028 wants this probe to be safe to run before any change).
+
+    ``base`` is the current ``len(code)``; RIP fixups are appended with it.
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    def lit():
+        fixups.append((base + len(b) - 4, b"font_name_lit"))
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\xc7\x81" + struct.pack("<I", out_len) + b"\xff\xff\xff\xff"
+    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes) + b"\0" * 8
+    b += b"\x48\xc7\x81" + struct.pack("<I", out_bytes + 8) + b"\0" * 8
+    b += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+font_name_lit]
+    lit()
+    b += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38] (bag begin)
+    b += b"\x4c\x8b\x4b\x40"  # mov r9, [rbx+0x40]  (bag end)
+    loop = len(b)
+    b += b"\x4c\x39\xca"  # cmp rdx, r9
+    j_done = len(b)
+    b += b"\x0f\x83\0\0\0\0"
+    b += b"\x48\x83\x7a\x18\x09"  # cmp qword [rdx+0x18], 9
+    j_next1 = len(b)
+    b += b"\x0f\x85\0\0\0\0"
+    b += b"\x48\x83\x7a\x20\x0f"  # cmp qword [rdx+0x20], 0xf
+    j_inline = len(b)
+    b += b"\x0f\x86\0\0\0\0"
+    b += b"\x4c\x8b\x42\x08"  # mov r8, [rdx+8] (heap name)
+    j_cmp = len(b)
+    b += b"\xe9\0\0\0\0"
+    inline = len(b)
+    b += b"\x4c\x8d\x42\x08"  # lea r8, [rdx+8] (SSO name)
+    cmpstart = len(b)
+    b += b"\x45\x33\xdb"  # xor r11d, r11d
+    cloop = len(b)
+    b += b"\x49\x83\xfb\x09"  # cmp r11, 9
+    j_match = len(b)
+    b += b"\x0f\x83\0\0\0\0"
+    b += b"\x43\x8a\x04\x18"  # mov al, [r8+r11]
+    b += b"\x43\x3a\x04\x1a"  # cmp al, [r10+r11]
+    j_next2 = len(b)
+    b += b"\x0f\x85\0\0\0\0"
+    b += b"\x49\xff\xc3"  # inc r11
+    j_cloop = len(b)
+    b += b"\xe9\0\0\0\0"
+    match = len(b)
+    b += b"\x8b\x42\x70"  # mov eax, [rdx+0x70] (value len)
+    b += b"\x89\x81" + struct.pack("<I", out_len)  # mov [rcx+out_len], eax
+    b += b"\x41\xb8\x10\0\0\0"  # mov r8d, 16
+    b += b"\x44\x39\xc0"  # cmp eax, r8d
+    j_keep = len(b)
+    b += b"\x0f\x86\0\0\0\0"
+    b += b"\x44\x89\xc0"  # mov eax, r8d (clamp 16)
+    keep = len(b)
+    b += b"\x48\x83\x7a\x78\x0f"  # cmp qword [rdx+0x78], 0xf
+    j_vinline = len(b)
+    b += b"\x0f\x86\0\0\0\0"
+    b += b"\x4c\x8b\x42\x60"  # mov r8, [rdx+0x60]
+    j_vcopy = len(b)
+    b += b"\xe9\0\0\0\0"
+    vinline = len(b)
+    b += b"\x4c\x8d\x42\x60"  # lea r8, [rdx+0x60]
+    vcopy = len(b)
+    b += b"\x45\x33\xdb"  # xor r11d, r11d
+    vloop = len(b)
+    b += b"\x41\x39\xc3"  # cmp r11d, eax
+    j_vdone = len(b)
+    b += b"\x0f\x83\0\0\0\0"
+    b += b"\x46\x0f\xb6\x0c\x18"  # movzx r9d, byte [r8+r11]
+    b += b"\x46\x88\x8c\x19" + struct.pack("<I", out_bytes)
+    b += b"\x49\xff\xc3"  # inc r11
+    j_vloop = len(b)
+    b += b"\xe9\0\0\0\0"
+    next_ = len(b)
+    b += b"\x48\x81\xc2\x98\0\0\0"  # add rdx, 0x98
+    j_loop = len(b)
+    b += b"\xe9\0\0\0\0"
+    done = len(b)
+
+    _patch32(b, j_done, done)
+    _patch32(b, j_next1, next_)
+    _patch32(b, j_inline, inline)
+    _patchjmp32(b, j_cmp, cmpstart)
+    _patch32(b, j_match, match)
+    _patch32(b, j_next2, next_)
+    _patchjmp32(b, j_cloop, cloop)
+    _patch32(b, j_keep, keep)
+    _patch32(b, j_vinline, vinline)
+    _patchjmp32(b, j_vcopy, vcopy)
+    _patch32(b, j_vdone, done)
+    _patchjmp32(b, j_vloop, vloop)
+    _patchjmp32(b, j_loop, loop)
+    return bytes(b)
+
+
+def emit_ctrl_scan(out_off, out_slot, base, fixups):
+    """Read-only scan of ``[control+0x00 .. +0xA4]`` for the four live handles.
+
+    A-0028 §2.2: ``rbx`` = control, handles are read from the marker copy at
+    ``+0x1a38..+0x1a44`` (regular/arial/menu/console).  Writes the first
+    matching dword offset (``0xFFFFFFFF`` = none) and the slot number 1..4.
+    Stops at ``+0xA8`` -- the object is at least ``0xAD`` bytes (gate ``+0xac``
+    is read), but bag12 proved that going further is not worth a crash.
+    """
+    b = bytearray()
+
+    def mark():
+        fixups.append((base + len(b) - 4, b"marker"))
+
+    def slot_store(n):
+        return b"\xc7\x81" + struct.pack("<I", out_slot) + struct.pack("<I", n)
+
+    b += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    mark()
+    b += b"\xc7\x81" + struct.pack("<I", out_off) + b"\xff\xff\xff\xff"
+    b += b"\xc7\x81" + struct.pack("<I", out_slot) + b"\0\0\0\0"
+    b += b"\x44\x8b\x81" + struct.pack("<I", 0x1A38)  # mov r8d, [rcx+0x1a38]
+    b += b"\x44\x8b\x89" + struct.pack("<I", 0x1A3C)  # mov r9d, [rcx+0x1a3c]
+    b += b"\x44\x8b\x91" + struct.pack("<I", 0x1A40)  # mov r10d, [rcx+0x1a40]
+    b += b"\x44\x8b\x99" + struct.pack("<I", 0x1A44)  # mov r11d, [rcx+0x1a44]
+    b += b"\x33\xd2"  # xor edx, edx
+    loop = len(b)
+    b += b"\x81\xfa\xa8\0\0\0"  # cmp edx, 0xa8
+    j_done = len(b)
+    b += b"\x0f\x83\0\0\0\0"
+    b += b"\x8b\x04\x13"  # mov eax, [rbx+rdx]
+    b += b"\x85\xc0"  # test eax, eax
+    j_zero = len(b)
+    b += b"\x0f\x84\0\0\0\0"
+    b += b"\x44\x39\xc0"  # cmp eax, r8d
+    j_s1 = len(b)
+    b += b"\x0f\x84\0\0\0\0"
+    b += b"\x44\x39\xc8"  # cmp eax, r9d
+    j_s2 = len(b)
+    b += b"\x0f\x84\0\0\0\0"
+    b += b"\x44\x39\xd0"  # cmp eax, r10d
+    j_s3 = len(b)
+    b += b"\x0f\x84\0\0\0\0"
+    b += b"\x44\x39\xd8"  # cmp eax, r11d
+    j_s4 = len(b)
+    b += b"\x0f\x84\0\0\0\0"
+    next_ = len(b)
+    b += b"\x83\xc2\x04"  # add edx, 4
+    j_loop = len(b)
+    b += b"\xe9\0\0\0\0"
+    s1 = len(b)
+    b += slot_store(1)
+    j_f1 = len(b)
+    b += b"\xe9\0\0\0\0"
+    s2 = len(b)
+    b += slot_store(2)
+    j_f2 = len(b)
+    b += b"\xe9\0\0\0\0"
+    s3 = len(b)
+    b += slot_store(3)
+    j_f3 = len(b)
+    b += b"\xe9\0\0\0\0"
+    s4 = len(b)
+    b += slot_store(4)
+    found = len(b)
+    b += b"\x89\x91" + struct.pack("<I", out_off)  # mov [rcx+out_off], edx
+    done = len(b)
+
+    _patch32(b, j_done, done)
+    _patch32(b, j_zero, next_)
+    _patch32(b, j_s1, s1)
+    _patch32(b, j_s2, s2)
+    _patch32(b, j_s3, s3)
+    _patch32(b, j_s4, s4)
+    _patchjmp32(b, j_loop, loop)
+    _patchjmp32(b, j_f1, found)
+    _patchjmp32(b, j_f2, found)
+    _patchjmp32(b, j_f3, found)
+    return bytes(b)
+
+
 def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"):
     """Code cave for the property setter ``site_rva``.
 
     The mod sets the ``caption`` property of a control but never touches the
     font, so the engine draws the caption with its default ``arial`` (ASCII
-    only).  This hook watches the setter and, whenever the property being set
-    is ``caption``, sets ``prop_name`` (a font property: ``font_name`` class
-    level or ``override_font_name`` control level, A-0016 §7.2) on the same
-    control first.  The nested call re-enters the site and the hook lets it
-    through.
+    only).  Through bag14 this hook wrote ``prop_name`` on the same control;
+    A-0028 turned bag15 into a **read-only** probe: it records the original
+    ``font_name`` record of our controls and of the working ``local_text``
+    element (plus a dword scan for cached font handles) and never writes to
+    the game object.
 
     The cave starts at ``blob_rva``; the caller maps the first six bytes of
-    ``site_rva`` to it.  Returns ``(blob, site_patch)``.
+    ``site_rva`` to it.  Returns ``(blob, site_patch, marker_off)``.
     """
     code = bytearray()
     fixups = []
@@ -635,7 +847,9 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # SIB must be 0x89 (scale=4, index=r9, base=rcx): the old 0x09 wrote the
     # handles at a 1-byte stride, so each dword overlapped its neighbour and
     # the dump showed garbage (bag13: "regular=0x00cd6190, arial=0x00008000").
-    code += b"\x46\x89\x94\x89\x34\x1a\0\0"  # mov [rcx+r9*4+0x1a34], r10d
+    code += bytes([0x46, 0x89, 0x94, sib_byte(4, 9, 1)]) + struct.pack(
+        "<I", 0x1A34
+    )  # mov [rcx+r9*4+0x1a34], r10d (SIB asserted by sib_byte)
     floop_next = len(code)
     code += b"\x41\xff\xc1"  # inc r9d
     code += b"\x41\x83\xf9\x08"  # cmp r9d, 8
@@ -718,6 +932,65 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     mfx1 = len(code) - 4
     code += b"\xff\x40\x00"  # inc dword ptr [rax]      (calls seen)
+
+    # --- bag15 §2.1: the WORKING element (name == "local_text") --------------
+    # The right-hand values are drawn with the correct Cyrillic glyphs because
+    # the game sets `local_text` on them.  Record the first such call
+    # read-only: its control, its (original!) font_name record and its value.
+    # No write to the game object happens anywhere in bag15.
+    code += b"\x48\x83\x7d\x08\x0a"  # cmp qword [rbp+8], 10
+    lt_a = len(code)
+    code += b"\x0f\x85\0\0\0\0"  # jne lt_done (near)
+    code += b"\x48\x8b\x45\x00"  # mov rax, [rbp]
+    code += b"\x81\x38" + b"loca"  # cmp dword [rax], 'loca'
+    lt_b = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+    code += b"\x81\x78\x04" + b"l_te"  # cmp dword [rax+4], 'l_te'
+    lt_c = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+    code += b"\x66\x81\x78\x08" + b"xt"  # cmp word [rax+8], 'xt'
+    lt_d = len(code)
+    code += b"\x0f\x85\0\0\0\0"
+    code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
+    fixups.append((len(code) - 4, b"marker"))
+    code += b"\xff\x81" + struct.pack("<I", 0x1C00)  # inc [rcx+0x1c00]
+    code += b"\x83\xb9" + struct.pack("<I", 0x1C00) + b"\x01"  # cmp .., 1
+    lt_e = len(code)
+    code += b"\x0f\x85\0\0\0\0"  # jne lt_done (only the first call)
+    code += b"\x48\x89\x99" + struct.pack("<I", 0x1C08)  # val_ctl = control
+    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (local_text len)
+    code += b"\x89\x91" + struct.pack("<I", 0x1C60)  # val_text_len
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C64) + b"\0" * 8
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C6C) + b"\0" * 8
+    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]
+    code += b"\x41\xba\x10\0\0\0"  # mov r10d, 16
+    code += b"\x4c\x39\xd2"  # cmp rdx, r10
+    lt_f = len(code)
+    code += b"\x76\0"  # jbe lt_keep
+    code += b"\x44\x89\xd2"  # mov edx, r10d
+    lt_keep = len(code)
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    lt_vloop = len(code)
+    code += b"\x4c\x39\xda"  # cmp rdx, r11
+    lt_g = len(code)
+    code += b"\x74\0"  # je lt_scan
+    code += b"\x47\x0f\xb6\x04\x19"  # movzx r8d, byte [r9+r11]
+    code += b"\x46\x88\x84\x19" + struct.pack("<I", 0x1C64)
+    code += b"\x49\xff\xc3"  # inc r11
+    lt_h = len(code)
+    code += b"\xeb\0"  # jmp lt_vloop
+    lt_scan = len(code)
+    code += emit_font_scan(0x1C10, 0x1C14, len(code), fixups)
+    code += emit_ctrl_scan(0x1C40, 0x1C44, len(code), fixups)
+    lt_done = len(code)
+    for pos in (lt_a, lt_b, lt_c, lt_d, lt_e):
+        struct.pack_into("<i", code, pos + 2, lt_done - (pos + 6))
+    for pos, target in (
+        (lt_f, lt_keep),
+        (lt_g, lt_scan),
+        (lt_h, lt_vloop),
+    ):
+        struct.pack_into("<b", code, pos + 1, target - (pos + 2))
 
     # --- recognizers (A-0025 §3): name=="on_draw_item" / name startswith "item"
     code += b"\x48\x83\x7d\x08\x0c"  # cmp qword [rbp+8], 12
@@ -841,6 +1114,18 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     fixups.append((len(code) - 4, b"marker"))
     code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
+    # bag15 §2.1: cap_fn_* = the font_name record of OUR control, read-only.
+    # First matched caption primes the "absent" sentinel; fn_reader below
+    # overwrites it whenever the record exists (a later control may have one).
+    code += b"\x83\xb8" + struct.pack("<I", 0x1C48) + b"\x00"  # cmp [rax+0x1c48], 0
+    j_cap = len(code)
+    code += b"\x0f\x85\0\0\0\0"  # jne cap_ready
+    code += b"\xc7\x80" + struct.pack("<I", 0x1C24) + b"\xff\xff\xff\xff"
+    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C28) + b"\0" * 8
+    code += b"\x48\xc7\x80" + struct.pack("<I", 0x1C30) + b"\0" * 8
+    code += b"\xc7\x80" + struct.pack("<I", 0x1C48) + b"\x01\0\0\0"
+    cap_ready = len(code)
+    struct.pack_into("<i", code, j_cap + 2, cap_ready - (j_cap + 6))
     # len + sample describe THIS matched call (A-0024 §1)
     code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8]     (caption len)
     code += b"\x89\x50\x28"  # mov [rax+0x28], edx  (caption len)
@@ -919,6 +1204,8 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     sc10 = len(code)
     code += b"\xeb\0"  # jmp scan_loop
     scan_done = len(code)
+    # bag15 §2.2: scan [control..+0xA8] for a cached live font handle.
+    code += emit_ctrl_scan(0x1C38, 0x1C3C, len(code), fixups)
 
     # --- read the EXISTING font_name value before any write (A-0026 §3) ------
     # Scan the same bag for name "font_name" (9 bytes), capture value len+8B.
@@ -936,9 +1223,6 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     code += b"\x0f\x83\0\0\0\0"  # jae fn_done (near)
     code += b"\x48\x83\x7a\x18\x09"  # cmp qword [rdx+0x18], 9
     fn2 = len(code)
-    code += b"\x0f\x85\0\0\0\0"  # jne fn_next (near)
-    code += b"\x80\x3a\x01"  # cmp byte [rdx], 1 (setter writes kind==1 only)
-    fnn5 = len(code)
     code += b"\x0f\x85\0\0\0\0"  # jne fn_next (near)
     code += b"\x48\x83\x7a\x20\x0f"  # cmp qword [rdx+0x20], 0xf
     fn3 = len(code)
@@ -965,6 +1249,18 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     # rdx = matching record, rcx = marker
     code += b"\x4c\x8b\x42\x70"  # mov r8, [rdx+0x70] (value len)
     code += b"\x44\x89\x81\x88\x19\0\0"  # mov [rcx+0x1988], r8d
+    # bag15 §2.1: the same record is cap_fn_* (our control's original value).
+    # Keep the FIRST record that exists; later matched controls must not
+    # overwrite it (their values are expected to be identical anyway).
+    code += b"\x83\xb9" + struct.pack("<I", 0x1C4C) + b"\x00"  # cmp [rcx+0x1c4c], 0
+    j_capfn = len(code)
+    code += b"\x0f\x85\0\0\0\0"  # jne cap_fn_done
+    code += b"\x44\x89\x81" + struct.pack("<I", 0x1C24)  # cap_fn_len
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C28) + b"\0" * 8
+    code += b"\x48\xc7\x81" + struct.pack("<I", 0x1C30) + b"\0" * 8
+    code += b"\xc7\x81" + struct.pack("<I", 0x1C4C) + b"\x01\0\0\0"
+    cap_fn_done = len(code)
+    struct.pack_into("<i", code, j_capfn + 2, cap_fn_done - (j_capfn + 6))
 
     # --- A-0027 §3: first control that HAS a font_name record ----------------
     code += b"\xff\x81\xe8\x19\0\0"  # inc dword [rcx+0x19e8] (records found)
@@ -1026,143 +1322,38 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
     fn_vloop = len(code)
     code += b"\x41\x39\xd3"  # cmp r11d, edx
     fn12 = len(code)
-    code += b"\x0f\x83\0\0\0\0"  # jae fn_done (near)
+    code += b"\x0f\x83\0\0\0\0"  # jae fn_cap (near)
     code += b"\x46\x0f\xb6\x04\x18"  # movzx r8d, byte [rax+r11]
     code += b"\x46\x88\x84\x19\x8c\x19\0\0"  # mov [rcx+r11+0x198c], r8b
     code += b"\x49\xff\xc3"
     fn13 = len(code)
     code += b"\xe9\0\0\0\0"  # jmp fn_vloop (near)
+    # bag15 §2.1: up to 16 value bytes into cap_fn_16 (0x198c only had 8).
+    fn_cap = len(code)
+    code += b"\x8b\x91" + struct.pack("<I", 0x1C24)  # mov edx, [rcx+0x1c24]
+    code += b"\x41\xba\x10\0\0\0"  # mov r10d, 16
+    code += b"\x44\x39\xd0"  # cmp edx, r10d
+    cap_j1 = len(code)
+    code += b"\x0f\x86\0\0\0\0"  # jbe cap_keep
+    code += b"\x44\x89\xd2"  # mov edx, r10d
+    cap_keep = len(code)
+    code += b"\x45\x33\xdb"  # xor r11d, r11d
+    cap_loop = len(code)
+    code += b"\x41\x39\xd3"  # cmp r11d, edx
+    cap_j2 = len(code)
+    code += b"\x0f\x83\0\0\0\0"  # jae fn_done (patched below)
+    code += b"\x46\x0f\xb6\x04\x18"  # movzx r8d, byte [rax+r11]
+    code += b"\x46\x88\x84\x19" + struct.pack("<I", 0x1C28)
+    code += b"\x49\xff\xc3"  # inc r11
+    cap_j3 = len(code)
+    code += b"\xe9\0\0\0\0"  # jmp cap_loop
+    struct.pack_into("<i", code, cap_j1 + 2, cap_keep - (cap_j1 + 6))
+    struct.pack_into("<i", code, cap_j3 + 1, cap_loop - (cap_j3 + 5))
     fn_next = len(code)
     code += b"\x48\x81\xc2\x98\0\0\0"  # add rdx, 0x98
     fn14 = len(code)
     code += b"\xe9\0\0\0\0"  # jmp fn_loop (near)
     fn_done = len(code)
-
-    # --- set the font property on the same control ---------------------------
-    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
-    fixups.append((len(code) - 4, b"prop_name"))
-    code += b"\x48\x89\x04\x24"  # mov [rsp], rax
-    code += b"\x48\xc7\x44\x24\x08" + struct.pack("<I", len(prop))  # name len
-    code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+font_value]
-    fixups.append((len(code) - 4, b"font_value"))
-    code += b"\x48\x89\x44\x24\x10"  # mov [rsp+0x10], rax
-    code += b"\x48\xc7\x44\x24\x18" + struct.pack("<I", len(font_name))
-    code += b"\x48\x8b\xcb"  # mov rcx, rbx
-    code += b"\x48\x8d\x14\x24"  # lea rdx, [rsp]
-    code += b"\x4c\x8d\x44\x24\x10"  # lea r8, [rsp+0x10]
-    call_pos = len(code)
-    code += b"\xe8\0\0\0\0"  # call site (the setter itself)
-    code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
-    mfx3 = len(code) - 4
-    code += b"\x88\x41\x24"  # mov byte ptr [rcx+0x24], al (set result)
-    code += b"\x3c\x01"  # cmp al, 1
-    sok1 = len(code)
-    code += b"\x75\0"  # jne sok_done
-    code += b"\xff\x81\x08\x1a\0\0"  # inc dword [rcx+0x1a08] (any al==1)
-    sok_done = len(code)
-
-    # --- bag11: re-dump the first font_name record after the nested set ------
-    # The setter may rebuild the bag (copy-on-write), so re-read the bag
-    # bounds instead of reusing the pre-set record pointer.  Both raw records
-    # (pre at +0x1a60, post at +0x1af8) let an offline diff see exactly what
-    # the setter wrote into the value slot.
-    code += b"\x80\xb9\x5c\x1a\0\0\x00"  # cmp byte [rcx+0x1a5c], 0
-    po1 = len(code)
-    code += b"\x0f\x84\0\0\0\0"  # je post_done (near)
-    code += b"\xc6\x81\x5c\x1a\0\0\x00"  # mov byte [rcx+0x1a5c], 0
-    code += b"\xc6\x81\x5d\x1a\0\0\x00"  # mov byte [rcx+0x1a5d], 0
-    code += b"\x4c\x8d\x15\0\0\0\0"  # lea r10, [rip+font_name_lit]
-    fixups.append((len(code) - 4, b"font_name_lit"))
-    code += b"\x48\x8b\x53\x38"  # mov rdx, [rbx+0x38]
-    code += b"\x4c\x8b\x4b\x40"  # mov r9, [rbx+0x40]
-    po_loop = len(code)
-    code += b"\x4c\x39\xca"  # cmp rdx, r9
-    po2 = len(code)
-    code += b"\x0f\x83\0\0\0\0"  # jae post_done
-    code += b"\x48\x83\x7a\x18\x09"  # cmp qword [rdx+0x18], 9
-    po3 = len(code)
-    code += b"\x0f\x85\0\0\0\0"  # jne post_next
-    code += b"\x80\x3a\x01"  # cmp byte [rdx], 1 (kind the setter can write)
-    po14 = len(code)
-    code += b"\x0f\x85\0\0\0\0"  # jne post_next
-    code += b"\x48\x83\x7a\x20\x0f"  # cmp qword [rdx+0x20], 0xf
-    po4 = len(code)
-    code += b"\x0f\x86\0\0\0\0"  # jbe post_inline
-    code += b"\x4c\x8b\x42\x08"  # mov r8, [rdx+8]
-    po5 = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp post_cmp
-    post_inline = len(code)
-    code += b"\x4c\x8d\x42\x08"  # lea r8, [rdx+8]
-    post_cmp = len(code)
-    code += b"\x45\x33\xdb"  # xor r11d, r11d
-    post_cloop = len(code)
-    code += b"\x49\x83\xfb\x09"  # cmp r11, 9
-    po6 = len(code)
-    code += b"\x0f\x83\0\0\0\0"  # jae post_match
-    code += b"\x43\x8a\x04\x18"  # mov al, [r8+r11]
-    code += b"\x43\x3a\x04\x1a"  # cmp al, [r10+r11]
-    po7 = len(code)
-    code += b"\x0f\x85\0\0\0\0"  # jne post_next
-    code += b"\x49\xff\xc3"
-    po8 = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp post_cloop
-    post_next = len(code)
-    code += b"\x48\x81\xc2\x98\0\0\0"  # add rdx, 0x98
-    po9 = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp po_loop
-    post_match = len(code)
-    code += b"\x48\x89\x91\x90\x1b\0\0"  # mov [rcx+0x1b90], rdx (post rec)
-    code += b"\xc6\x81\x5d\x1a\0\0\x01"  # mov byte [rcx+0x1a5d], 1 (found)
-    code += b"\x48\x8b\xf2"  # mov rsi, rdx
-    code += b"\x48\x8d\xb9\xf8\x1a\0\0"  # lea rdi, [rcx+0x1af8]
-    code += b"\x49\x89\xc9"  # mov r9, rcx
-    code += b"\xfc"  # cld
-    code += b"\xb9\x98\0\0\0"  # mov ecx, 0x98
-    code += b"\xf3\xa4"  # rep movsb
-    code += b"\x4c\x89\xc9"  # mov rcx, r9
-    code += b"\x48\x8b\x91\x90\x1b\0\0"  # mov rdx, [rcx+0x1b90] (post rec)
-    code += b"\x48\x8b\x42\x70"  # mov rax, [rdx+0x70] (new value len)
-    code += b"\x89\x81\x98\x1b\0\0"  # mov [rcx+0x1b98], eax
-    code += b"\x48\x83\x7a\x78\x0f"  # cmp qword [rdx+0x78], 0xf
-    po10 = len(code)
-    code += b"\x0f\x86\0\0\0\0"  # jbe post_vsso
-    code += b"\x48\x8b\x72\x60"  # mov rsi, [rdx+0x60]
-    po11 = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp post_vcopy
-    post_vsso = len(code)
-    code += b"\x48\x8d\x72\x60"  # lea rsi, [rdx+0x60]
-    post_vcopy = len(code)
-    code += b"\x48\xc7\x81\x9c\x1b\0\0\0\0\0\0"  # mov qword [rcx+0x1b9c], 0
-    code += b"\x45\x33\xdb"  # xor r11d, r11d
-    post_vloop = len(code)
-    code += b"\x41\x83\xfb\x08"  # cmp r11d, 8
-    po12 = len(code)
-    code += b"\x0f\x83\0\0\0\0"  # jae post_done
-    code += b"\x46\x8a\x04\x1e"  # mov r8b, [rsi+r11]
-    code += b"\x46\x88\x84\x19\x9c\x1b\0\0"  # mov [rcx+r11+0x1b9c], r8b
-    code += b"\x49\xff\xc3"
-    po13 = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp post_vloop
-    post_done = len(code)
-
-    # bag11b: Fonts snapshot *after* the nested set - did the set resolve a
-    # handle into the registry (i.e. is [fonts+0x0c] still 0 after setting
-    # font_name="menu")?  Also re-read the bag end, the setter may regrow it.
-    code += b"\x48\x8b\x91\x2c\x1a\0\0"  # mov rdx, [rcx+0x1a2c] (fonts ptr)
-    code += b"\x48\x85\xd2"  # test rdx, rdx
-    pf1 = len(code)
-    code += b"\x74\0"  # je fonts_post_done
-    code += b"\x45\x33\xc9"  # xor r9d, r9d
-    fploop = len(code)
-    code += b"\x46\x8b\x14\x8a"  # mov r10d, [rdx+r9*4]
-    code += b"\x46\x89\x94\x89\xa4\x1b\0\0"  # mov [rcx+r9*4+0x1ba4], r10d
-    code += b"\x41\xff\xc1"  # inc r9d
-    code += b"\x41\x83\xf9\x08"  # cmp r9d, 8
-    pf2 = len(code)
-    code += b"\x72\0"  # jb fploop
-    fonts_post_done = len(code)
-    code += b"\x48\x8b\x43\x40"  # mov rax, [rbx+0x40] (bag end, after set)
-    code += b"\x48\x89\x81\xd8\x1b\0\0"  # mov [rcx+0x1bd8], rax
 
     # probe fields the resolver cares about (A-0018 §1/§2/§6)
     code += b"\x48\x8b\x43\x60"  # mov rax, [rbx+0x60]  (override member)
@@ -1253,26 +1444,12 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         (fn9, fn_vcopy, True),
         (fn10, fn_vcnt, False),
         (fn11, fn_vgo, True),
-        (fn12, fn_done, False),
+        (fn12, fn_cap, False),
         (fn13, fn_vloop, True),
         (fn14, fn_loop, True),
         (fnn1, fn_first_done, False),
-        (fnn5, fn_next, False),
-        # bag11 post-set rescan (near, rel32)
-        (po1, post_done, False),
-        (po2, post_done, False),
-        (po3, post_next, False),
-        (po14, post_next, False),
-        (po4, post_inline, False),
-        (po5, post_cmp, True),
-        (po6, post_match, False),
-        (po7, post_next, False),
-        (po8, post_cloop, True),
-        (po9, po_loop, True),
-        (po10, post_vsso, False),
-        (po11, post_vcopy, True),
-        (po12, post_done, False),
-        (po13, post_vloop, True),
+        # bag15 cap_fn_16 copy (near, rel32)
+        (cap_j2, fn_done, False),
         # bag12 resolver probe (near, rel32 - block is too long for rel8)
         (rp0, probe_done, False),
         (rp1, probe_done, False),
@@ -1320,10 +1497,7 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         (fz2, fonts_done),
         (fz3, floop),
         (fz4, floop_next),
-        (pf1, fonts_post_done),
-        (pf2, fploop),
         (g1, not_reentry),
-        (sok1, sok_done),
     ):
         disp = target - (pos + 2)
         if not -128 <= disp <= 127:
@@ -1362,11 +1536,11 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         (b"res_arial", b"arial\0"),
         (b"res_regular", b"regular\0"),
         (b"filter_table", struct.pack(f"<{len(hashes)}I", *hashes)),
-        (b"marker", b"\0" * 0x1C00),
+        (b"marker", b"\0" * 0x2000),
     ):
         data_off[name] = (len(code), len(raw) - 1)
         code += raw
-    for fx in (mfx1, mfx2, mfx3, mfx4):
+    for fx in (mfx1, mfx2, mfx4):
         fixups.append((fx, b"marker"))
     blob = bytes(code)
 
@@ -1378,7 +1552,6 @@ def build_caption_font_hook(blob_rva, site_rva, font_name, prop_name="font_name"
         blob = bytes(code)
 
     blob = bytearray(blob)
-    struct.pack_into("<i", blob, call_pos + 1, site_rva - (blob_rva + call_pos + 5))
     struct.pack_into("<i", blob, jmp_pos + 1, (site_rva + 6) - (blob_rva + jmp_pos + 5))
     return (
         bytes(blob),

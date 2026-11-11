@@ -1,43 +1,54 @@
-"""Dump the caption-font hook marker from the running game (bag11).
+"""Dump the caption-font hook marker from the running game (bag15).
 
 Usage: python work/read_marker10.py [marker_rva_hex] [pid]
 
-bag11 marker layout (offsets from marker base):
+bag15 is a READ-ONLY probe (A-0028 §2): it never writes to a game object.
+Marker layout (offsets from marker base, marker size 0x2000):
   0x0000 dword  setter calls seen        (inc [marker])
   0x0020 dword  records copied into marker
-  0x0024 byte   result (al) of the last nested set
-  0x0048..     first 40 records x 0x98 (raw, after the set)
+  0x002c dword  matched captions (recognizer hits)
+  0x0048..     first 40 records x 0x98 (raw copy)
   0x1988 dword  value len of the last matching font_name record
   0x198c byte[8] value bytes of that record
   0x1998 qword  vtable of the first control that had a font_name record
-  0x19a0 dword[16] legacy table slot (bag10: CRT buffer - unused in bag11)
   0x19e0 dword  low dword of the control tag ([ctrl])
   0x19e4 dword  low dword of [ctrl+0x60]
   0x19e8 dword  records found (font_name matches)
   0x19ec dword[6] tail [rec+0x80 .. +0x97]
   0x1a04 dword  0xffffffff (slot search removed in bag11)
-  0x1a08 dword  times the nested set returned al==1
   0x1a0c dword  "seen first record" flag
-  0x1a10 dword  unused in bag11
   0x1a14 dword  reentrancy depth
   0x1a18 dword  reentry hits
   0x1a1c qword  exe base (PEB)
   0x1a24 qword  control pointer
   0x1a2c qword  Fonts* singleton [exe+0x1733260]
   0x1a34 dword[8] Fonts dwords (last non-zero seen):
-                 [0] pad, [1] regular, [2] arial, [3] menu, [4] console
-  0x1a54 qword  first font_name record pointer (pre-set)
-  0x1a5c byte   post-set rescan pending
-  0x1a5d byte   post-set rescan found the record
-  0x1a60 rec    0x98 raw copy of the first font_name record (pre-set)
-  0x1af8 rec    0x98 raw copy of that record after the nested set
-  0x1b90 qword  post-set record pointer (kind==1 font_name record)
-  0x1b98 dword  post-set value len
-  0x1b9c byte[8] post-set value bytes
-  0x1ba4 dword[8] Fonts snapshot after the nested set
-  0x1bc8 qword  bag begin before the set
-  0x1bd0 qword  bag end before the set
-  0x1bd8 qword  bag end after the set
+                  [0] pad, [1] regular, [2] arial, [3] menu, [4] console
+  0x1a54 qword  first font_name record pointer
+  0x1a60 rec    0x98 raw copy of the first font_name record
+  0x1bc8 qword  bag begin before scan
+  0x1bd0 qword  bag end before scan
+  0x1be4 dword  resolver probe: menu handle
+  0x1be8 dword  resolver probe: arial handle
+  0x1bec dword  resolver probe: regular handle
+  0x1bf0 qword  resolver probe: font manager pointer
+  0x1bf8 dword  resolver probe: calls
+  --- bag15 / A-0028 §2.1: the WORKING element (name == "local_text") -------
+  0x1c00 dword  how many local_text calls were seen
+  0x1c08 qword  control of the first local_text call
+  0x1c10 dword  font_name record len of that control (0xffffffff = absent)
+  0x1c14 16B    first bytes of that record's value
+  0x1c40 dword  dword-scan offset on the local_text control (0xffffffff = none)
+  0x1c44 dword  dword-scan slot 1..4 (regular/arial/menu/console)
+  0x1c60 dword  local_text value len
+  0x1c64 16B    local_text value bytes
+  --- bag15 / A-0028 §2.1: OUR matched caption control ----------------------
+  0x1c24 dword  its original font_name record len (0xffffffff = absent)
+  0x1c28 16B    its original record value
+  0x1c38 dword  dword-scan offset on our control (0xffffffff = none)
+  0x1c3c dword  dword-scan slot 1..4
+  0x1c48 dword  first matched caption seen (sentinel primed)
+  0x1c4c dword  first existing font_name record captured
 """
 
 import ctypes
@@ -50,7 +61,7 @@ psapi = ctypes.WinDLL("psapi", use_last_error=True)
 
 PROCESS_VM_READ = 0x0010
 PROCESS_QUERY_INFORMATION = 0x0400
-DEFAULT_RVA = 0xC2885C  # bag13 (bag12 was 0xC2884C)
+DEFAULT_RVA = 0xC28A8C  # bag15 (bag14 was 0xC2885C)
 
 
 class MODULEINFO(ctypes.Structure):
@@ -143,7 +154,7 @@ def main():
     print(f"pid {pid} module {path}")
     print(f"base {base:#x} size {size:#x} marker {base + rva:#x}")
 
-    n = 0x1C00
+    n = 0x2000
     buf = ctypes.create_string_buffer(n)
     rd = ctypes.c_size_t()
     addr = base + rva
@@ -157,31 +168,32 @@ def main():
     def q(o):
         return struct.unpack_from("<Q", b, o)[0]
 
+    def s(o, ln):
+        return b[o : o + ln]
+
+    def show(off, ln):
+        v = d(off)
+        txt = "" if v == 0xFFFFFFFF else f"  value={s(off + 4, min(ln, 16))!r}"
+        return f"{v:#010x}{txt}"
+
     print(f"calls            = {d(0x0000)}")
     print(f"recs_copied      = {d(0x0020)}")
-    print(f"last_set_result  = {b[0x0024]}")
+    print(f"matched          = {d(0x002C)}")
     print(f"vlen             = {d(0x1988)}")
-    val = b[0x198C : 0x198C + 8]
-    print(f"value            = {val!r}")
+    print(f"value            = {s(0x198C, 8)!r}")
     print(f"first_ctrl_vtbl  = {q(0x1998):#x}")
     print(f"records_found    = {d(0x19E8)}")
     print(f"tag              = {d(0x19E0):#010x}")
     print(f"ctrl_q60         = {d(0x19E4):#010x}")
     tail = [d(0x19EC + 4 * i) for i in range(6)]
     print("tail[+0x80..97]  = " + " ".join(f"{v:#010x}" for v in tail))
-    slot = d(0x1A04)
-    print(
-        f"slot_index       = {slot:#x}" + (" (not found)" if slot == 0xFFFFFFFF else "")
-    )
-    print(f"set_call_ok_any  = {d(0x1A08)}")
     print(f"seen_flag        = {d(0x1A0C)}")
-    print(f"unused_1a10      = {d(0x1A10)}")
     print(f"depth            = {d(0x1A14)}")
     print(f"reentry_hits     = {d(0x1A18)}")
     print(f"exe_base         = {q(0x1A1C):#x}")
     print(f"control          = {q(0x1A24):#x}")
 
-    # bag11: live Fonts* registry
+    # live Fonts* registry
     fonts_ptr = q(0x1A2C)
     print(f"fonts_ptr        = {fonts_ptr:#x}")
     fonts = [d(0x1A34 + 4 * i) for i in range(8)]
@@ -189,49 +201,49 @@ def main():
     for i, v in enumerate(fonts):
         print(f"  fonts[{i}] {labels[i]:<8} = {v:#010x}")
 
-    # bag11: first font_name record, before/after the nested set
     print(f"rec_ptr_pre      = {q(0x1A54):#x}")
-    print(f"post_pending     = {b[0x1A5C]}")
-    print(f"post_found       = {b[0x1A5D]}")
     print(f"bag_begin_pre    = {q(0x1BC8):#x}")
     print(f"bag_end_pre      = {q(0x1BD0):#x}")
-    print(f"bag_end_post     = {q(0x1BD8):#x}")
-    print(f"rec_ptr_post     = {q(0x1B90):#x}")
-    print(f"post_vlen        = {d(0x1B98)}")
-    print(f"post_value       = {b[0x1B9C : 0x1B9C + 8]!r}")
     print(f"rec_kind_pre     = {b[0x1A60]}")
     print(
         f"rec_vlen_pre     = {int.from_bytes(b[0x1A60 + 0x70 : 0x1A60 + 0x78], 'little')}"
     )
     print(f"rec_value_pre    = {b[0x1A60 + 0x60 : 0x1A60 + 0x68]!r}")
 
-    fonts_post = [d(0x1BA4 + 4 * i) for i in range(8)]
-    print("fonts_post:")
-    for i, v in enumerate(fonts_post):
-        print(f"  fonts[{i}] {labels[i]:<8} = {v:#010x}")
-
-    # bag12: direct resolver probe (exe 0xab20d0) from inside the hook
+    # resolver probe (bag12)
     print(f"res_menu         = {d(0x1BE4):#010x}")
     print(f"res_arial        = {d(0x1BE8):#010x}")
     print(f"res_regular      = {d(0x1BEC):#010x}")
     print(f"font_manager     = {q(0x1BF0):#x}")
     print(f"probes           = {d(0x1BF8)}")
 
-    print("legacy_table[16] (bag10 artefact) =")
-    for i in range(4):
-        row = [d(0x19A0 + 4 * (4 * i + j)) for j in range(4)]
-        print("  " + " ".join(f"{v:#010x}" for v in row))
+    # bag15 §2.1: the working element vs ours
+    print("--- A-0028 §2.1: local_text (working) ---")
+    print(f"val_count        = {d(0x1C00)}")
+    print(f"val_ctl          = {q(0x1C08):#x}")
+    print(f"val_fn_len       = {show(0x1C10, 16)}")
+    print(f"val_text_len     = {show(0x1C60, 16)}")
+    so, ss = d(0x1C40), d(0x1C44)
+    print(
+        f"scan_work        = off {so:#x}"
+        + (" (none)" if so == 0xFFFFFFFF else f", slot {ss} {labels[ss]}")
+    )
+    print("--- A-0028 §2.1: our matched caption ---")
+    print(f"cap_seen         = {d(0x1C48)}")
+    print(f"cap_fn_flag      = {d(0x1C4C)}")
+    print(f"cap_fn_len       = {show(0x1C24, 16)}")
+    so, ss = d(0x1C38), d(0x1C3C)
+    print(
+        f"scan_ours        = off {so:#x}"
+        + (" (none)" if so == 0xFFFFFFFF else f", slot {ss} {labels[ss]}")
+    )
 
     # dump the raw marker next to the repo for offline parsing
     from pathlib import Path
 
-    out = Path(__file__).with_name("marker11.bin")
+    out = Path(__file__).with_name("marker15.bin")
     out.write_bytes(b)
-    pre = Path(__file__).with_name("marker11_rec_pre.bin")
-    pre.write_bytes(b[0x1A60 : 0x1A60 + 0x98])
-    post = Path(__file__).with_name("marker11_rec_post.bin")
-    post.write_bytes(b[0x1AF8 : 0x1AF8 + 0x98])
-    print(f"raw -> {out} (+ rec pre/post .bin)")
+    print(f"raw -> {out}")
 
 
 if __name__ == "__main__":

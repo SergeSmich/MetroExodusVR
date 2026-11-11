@@ -40,7 +40,7 @@ def main():
     base = next(b for p, b, s in mods if p.lower().endswith("metroexodusvr.dll"))
     print(f"pid {pid} dll base {base:#x}")
 
-    mrk = int(sys.argv[1], 0) if len(sys.argv) > 1 else 0xC27F3F
+    mrk = int(sys.argv[1], 0) if len(sys.argv) > 1 else 0xC27F18
     m = read(h, base + mrk, 0x40)
     control = struct.unpack_from("<Q", m, 8)[0]
     print(f"calls={int.from_bytes(m[0:4], 'little')} caption={int.from_bytes(m[4:8], 'little')} set_ok={m[0x24]} control={control:#x}")
@@ -49,6 +49,10 @@ def main():
     print(f"control readable {len(ctrl)}/0x200")
     if not ctrl:
         return
+    b0ac = ctrl[0xAC] if len(ctrl) > 0xAC else -1
+    q60 = struct.unpack_from("<Q", ctrl, 0x60)[0]
+    print(f"  GATE [c+0xac]={b0ac:#04x} bit0={b0ac & 1}")
+    print(f"  QWORD [c+0x60]={q60:#018x} hi32={q60 >> 32:#010x} lo32={q60 & 0xFFFFFFFF:#010x}")
     for off in (0x50, 0x58, 0x60, 0x68, 0x70, 0x78, 0x80, 0x88, 0x90, 0x98, 0xA0):
         tri = struct.unpack_from("<QQQ", ctrl, off)
         ptr, a, b = tri

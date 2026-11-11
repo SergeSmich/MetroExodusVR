@@ -195,6 +195,12 @@ def encode_text(s):
     the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
     ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
     """
+    if ENCODING == "utf8":
+        enc = s.encode("utf-8")
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
     if ENCODING == "cp1251":
         try:
             enc = s.encode("cp1251")
@@ -230,6 +236,10 @@ def encode_text(s):
 
 def decode_text(enc):
     """Inverse of encode_text (used by the self-check)."""
+    if ENCODING == "utf8":
+        return enc.decode("utf-8")
+    if ENCODING == "cp1251":
+        return enc.decode("cp1251")
     cps = charmap()
     out = []
     i = 0
@@ -1075,12 +1085,14 @@ def main():
     )
     ap.add_argument(
         "--encoding",
-        choices=("charmap", "cp1251"),
+        choices=("charmap", "cp1251", "utf8"),
         default="charmap",
         help=(
             "'charmap' (default) writes localization charmap indices, the "
             "mapping the engine's glyph lookup uses (A-0029); 'cp1251' "
-            "rebuilds the diagnostic build of the 0.9.1 kit"
+            "rebuilds the diagnostic build of the 0.9.1 kit; 'utf8' is the "
+            "live-caption test: the VR control text path renders bytes as "
+            "UTF-8, so charmap indices below 0x80 show up as Latin letters"
         ),
     )
     ap.add_argument(

@@ -4,24 +4,44 @@
 A port of ``tools/apply_ru.py`` to the 0.9.1 release.  Two things differ from
 the 0.9.0 path, and both are why this is a separate file:
 
-1. **The encoding is UTF-8, and that was settled live (L-0036).**  A-0029
-   assumed a caption's bytes are *indices into the drawing font's glyph
-   table* (the localization charmap of ``stable_ru.lng``), and L-0032 seemed to
-   confirm it because CP1251 captions came out blank.  Live runs on 0.9.1 show
-   the opposite: charmap indices below 0xE0 are valid ASCII, and the VR page
-   rendered them as Latin letters -- ``TURN MODE`` came out as
-   ``HIcDG <?7?H?:5``, exactly ``ru/charmap.txt`` bytes read as latin-1.  The
-   US charmap decodes those same bytes to a different sequence, so the control
-   text path does not use a charmap at all: it decodes the bytes as UTF-8.
-   Rebuilding with ``--encoding utf8`` put the whole main menu and the VR page
-   in Cyrillic.  ``utf8`` is therefore the default here; ``charmap`` and
-   ``--experimental-cp1251`` are kept for diagnostics only.
+1. **The encoding is the localization charmap, not UTF-8 (A-0034).**  A-0029
+   says a caption's bytes are *indices into the drawing font's glyph table*,
+   and the tables settle it: every Cyrillic-capable font carries exactly
+   ``len(charmap)`` = 271 entries, i.e. entry ``i`` is the glyph of
+   ``charmap[i]``, while the ASCII-only ones carry 256 and are the identity
+   over Latin-1.  A codepoint cannot index a 271-entry table -- ``U+0420`` is
+   1056 -- so the byte is an index and there is no decoder on this path.
 
-2. **The captions do not need a font swap.**  The mod never sets a font
-   property, and once the bytes are UTF-8 the default font draws Cyrillic
-   fine.  ``--caption-font menu`` (the code cave over the generic property
-   setter 0x9F0D0, see ``tools/caption_font_hook.py``) is now only a probe:
-   the live font-slot experiments changed nothing.
+   That makes UTF-8 a dead end, and the two live runs agree.  With
+   ``tools/predict_captions.py`` over all 193 rows of the kit translation:
+
+       charmap + menu     193 / 193 correct
+       charmap + regular  193 / 193 correct
+       charmap + arial      0 / 193   ('3I:', '{}% (aHI@?GI3C.)')
+       utf-8   + menu       0 / 193   (wrong Cyrillic)
+       utf-8   + arial     13 / 193   ('{}% (...........)') -- the 13
+                                      ASCII-only rows survive
+
+   The last line is L-0036 §1 exactly: "the captions are empty, but the
+   values render" -- ``{}% (`` and ``)`` are ASCII and stay, the Cyrillic
+   between them has no ink.  And ``charmap + arial`` reproduces L-0035's
+   screenshot character for character: "ПЛАВНО" comes out as ``<P573?``.
+   Because every Cyrillic-capable font is charmap-baked, **no** (encoding,
+   font) pair involving UTF-8 can ever produce Cyrillic.
+
+   The main menu being in Cyrillic is the game's own ``.lng`` (charmap
+   indices + a Cyrillic font), not evidence about the mod's caption path --
+   L-0036 §2 says the same.  ``charmap`` is the default again; ``utf8`` is
+   kept, with a warning, for reproducing L-0036.
+
+2. **The captions need a font, not different bytes.**  The mod never sets a
+   font property, so the engine draws every caption with ``arial``, whose glyph
+   table is Latin-1 with only 95 inked cells (0x20..0x7e); no byte stream can
+   coax Cyrillic out of it.  ``--caption-font menu`` installs a code cave over
+   the generic property setter (0x9F0D0) that writes the font on exactly those
+   captions our translation replaced (positive FNV-1a filter); the A-0033
+   probes (``--ctl-dump``, ``--font-subst``, ``--swap-sticky-slot``) cover the
+   case where writing the property turns out not to be enough.
 
 Everything version specific is in ``ADDRS`` below.  The source DLL is pinned by
 SHA-256; passing a different file needs ``--allow-unknown-source``.
@@ -82,15 +102,21 @@ ADDRS = dict(
     menu_lo=0xA0000,
     menu_hi=0xC0000,
     # Second-layer table bases (popups/options/hints/hintpages), 0.9.1 counts
-    # are 15/79/52/14.  UNKNOWN: fill from the kit's tables before building.
-    ui2_tables=None,
+    # are 15/79/52/14.  Filled from kit091/tools/apply_ru.py in A-0034; the
+    # 0.9.0 values in UI2_TABLES below are only a fallback now.
+    ui2_tables={
+        "popups": (0x4BABC0, 0x70, 0x10, True, None),
+        "options": (0x4C06A0, 0x20, 0x10, True, None),
+        "hints": (0x4B6768, 0x28, 0x10, False, None),
+        "hintpages": (0x4B85E0, 0x20, 0x10, True, 0x00),
+    },
     # Inline-built extras such as "VR HINTS".  UNKNOWN for 0.9.1.
     extra_strings=(),
 )
 DEFAULT_SRC = re_paths.DLL
 DEFAULT_OUT = ROOT / "build" / "MetroExodusVR.dll"
-STRINGS_TSV = ROOT / "ru" / "strings.tsv"
-UI2_JSON = ROOT / "ru" / "ui2.json"
+STRINGS_TSV = ROOT / "kit091" / "ru" / "strings-0.9.1.tsv"
+UI2_JSON = ROOT / "kit091" / "ru" / "ui2-0.9.1.json"
 
 # Embedded font resources that have to carry Cyrillic before the strings can be
 # displayed.  The files are produced by tools/merge_cyrillic.py.
@@ -111,11 +137,13 @@ FILE_ALIGN = 0x200
 # (table base RVA, entry stride, body slot offset, body has an explicit length,
 # title slot offset or None).
 UI2_TABLES = {
-    "popups": (0x49BF40, 0x70, 0x10, True, None),
-    "options": (0x4A1820, 0x20, 0x10, True, None),
-    "hints": (0x497E00, 0x20, 0x10, False, None),
-    "hintpages": (0x499A00, 0x20, 0x10, True, 0x00),
+    "popups": (0x4BABC0, 0x70, 0x10, True, None),
+    "options": (0x4C06A0, 0x20, 0x10, True, None),
+    "hints": (0x4B6768, 0x28, 0x10, False, None),
+    "hintpages": (0x4B85E0, 0x20, 0x10, True, 0x00),
 }
+# 0.9.0 for reference: popups 0x49BF40, options 0x4A1820, hints 0x497E00
+# (stride 0x20, not 0x28), hintpages 0x499A00.
 
 # Literals that are neither captions nor table entries but still show up in the
 # UI.  They are built inline, so they get the same copy-stub treatment.
@@ -158,14 +186,12 @@ HEAP_BASES = {
 
 CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-# The 4A engine's *control caption* path is plain UTF-8: the setter stores the
-# bytes unchanged and the UI decode step turns them into codepoints, then the
-# font draws them.  ``.lng`` strings are a different path (charmap indices) and
-# are not written by this driver.  Live proof in L-0036: charmap bytes for
-# "TURN MODE" (48 49 63 44 47 01 ...) showed up on the VR page as
-# "HIcDG <?7?H?:5", i.e. exactly those bytes under latin-1, while a UTF-8
-# rebuild renders Cyrillic.  ``charmap`` and ``cp1251`` remain for comparison.
-ENCODING = "utf8"
+# A-0034: a caption's bytes are glyph-table indices, never codepoints, so the
+# only encoding any Cyrillic-capable font can read is the one those fonts were
+# baked from -- the localization charmap.  UTF-8 indices select unrelated
+# glyphs in a 271-entry table and empty cells in ``arial``; see the module
+# docstring and ``tools/predict_captions.py --all`` for the 193-row numbers.
+ENCODING = "charmap"
 
 
 def load_charmap(path=None):
@@ -914,6 +940,21 @@ def filter_encoding(path=None):
     return m.group(1) if m else None
 
 
+def check_encoding():
+    """Fail loud on the one encoding that provably cannot work (A-0034)."""
+    if ENCODING != "utf8":
+        return
+    print(
+        "WARN --encoding utf8: a caption's bytes are glyph-table indices, and\n"
+        "     every Cyrillic-capable font is charmap-baked (271 entries), so\n"
+        "     UTF-8 indices select unrelated glyphs; in `arial` (identity, 95\n"
+        "     inked cells) they select nothing at all.  Of the 193 kit rows,\n"
+        "     utf-8 + arial renders 13 (the ASCII-only ones) and charmap +\n"
+        "     menu renders 193 -- see tools/predict_captions.py --all.\n"
+        "     Building anyway; use --encoding charmap for a readable DLL."
+    )
+
+
 def check_filter(strings_path, label="filter"):
     """Warn when translated captions would not be recognised by the cave."""
     built_with = filter_encoding()
@@ -972,6 +1013,8 @@ def self_test():
 
 
 def main():
+    global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
+    global VALIDATORS, STRINGS_TSV
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(DEFAULT_SRC))
     ap.add_argument("--out", default=str(DEFAULT_OUT))
@@ -979,12 +1022,12 @@ def main():
     ap.add_argument("--verify", action="store_true", help="verify the patched output")
     ap.add_argument(
         "--strings",
-        default=str(ROOT / "ru" / "strings-0.9.1.tsv"),
+        default=str(STRINGS_TSV),
         help="translation table: RVA<TAB>english<TAB>russian (0.9.1 RVAs)",
     )
     ap.add_argument(
         "--ui2",
-        default=str(ROOT / "ru" / "ui2-0.9.1.json"),
+        default=str(UI2_JSON),
         help="second-layer UI table for 0.9.1 (popups/options/hints/hintpages)",
     )
     ap.add_argument(
@@ -1108,13 +1151,14 @@ def main():
     )
     ap.add_argument(
         "--encoding",
-        choices=("utf8", "charmap", "cp1251"),
-        default="utf8",
+        choices=("charmap", "utf8", "cp1251"),
+        default="charmap",
         help=(
-            "'utf8' (default) matches the live VR control text path (L-0036); "
-            "'charmap' writes localization charmap indices, which the control "
-            "path renders as Latin letters because every index below 0xE0 is "
-            "ASCII; 'cp1251' rebuilds the diagnostic build of the 0.9.1 kit"
+            "'charmap' (default) writes localization charmap indices, the only "
+            "encoding any Cyrillic-capable font can read (A-0034); 'utf8' "
+            "reproduces the L-0036 build, which came out empty because the "
+            "caption font has no ink above 0x7e; 'cp1251' rebuilds the 0.9.1 "
+            "kit's diagnostic"
         ),
     )
     ap.add_argument(
@@ -1172,9 +1216,8 @@ def main():
     if args.experimental_cp1251:
         args.encoding = "cp1251"
 
-    global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
-    global VALIDATORS, STRINGS_TSV
     ENCODING = args.encoding
+    check_encoding()
     STRINGS_TSV = Path(args.strings)
     if args.build_filter:
         if not STRINGS_TSV.is_file():

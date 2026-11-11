@@ -116,26 +116,15 @@ UI2_TABLES = {
 
 # Literals that are neither captions nor table entries but still show up in the
 # UI.  They are built inline, so they get the same copy-stub treatment.
-EXTRA_STRINGS = (
-    dict(
-        orig="VR HINTS",
-        ru="СОВЕТЫ VR",
-        lit=0x4999E0,
-        site=0x8181C,
-        lit_len=8,
-        cap=0xF,
-        allow_heap=False,
-    ),
-    dict(
-        orig="VR GAMEPAD LAYOUT",
-        ru="ГЕЙМПАД VR",
-        lit=0x497100,
-        site=0x79A1C,
-        lit_len=0x11,
-        cap=None,
-        allow_heap=True,
-    ),
-)
+#
+# 0.9.1: empty.  The two literals from 0.9.0 ("VR HINTS" @0x4999E0 and
+# "VR GAMEPAD LAYOUT" @0x497100) have neither a rip-relative `lea` nor an
+# absolute pointer in the 0.9.1 .text: at the kit's sites 0x8181C / 0x79A1C
+# the bytes are unrelated, and the address check fails before any write.
+# opencode verified this on the release DLL; Arena has to confirm or refute
+# in A-0034.  Leaving the tuple empty keeps the build from writing stubs at
+# sites that do not hold those literals in this build.
+EXTRA_STRINGS = ()
 
 # Only the mod's own menu/page-building code is redirected.
 MENU_LO = 0xB0000
@@ -695,7 +684,9 @@ def check_encodings(entries, ui2, extras):
         try:
             back = decode_text(enc)
         except (IndexError, ValueError) as exc:
-            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
+            errors.append(
+                f"{label}: encoded bytes are not valid charmap indices ({exc})"
+            )
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
@@ -724,7 +715,10 @@ def check_encodings(entries, ui2, extras):
 def report_limits(entries, ui2, extras):
     """Print how close the encoded payloads come to the engine's limits."""
     groups = (
-        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
+        (
+            f"captions (string_view, {MAX_LEN:#x})",
+            [e for e in entries if not e["skip"]],
+        ),
         ("table entries", [p for it in ui2 for p in it["parts"]]),
         ("extras", extras),
     )
@@ -1447,9 +1441,7 @@ def main():
                 sticky_slot = 0x08
             if args.swap_sticky_slot:
                 sticky_slot = int(args.swap_sticky_slot, 16)
-            subst_off = (
-                int(args.subst_offset, 16) if args.subst_offset else None
-            )
+            subst_off = int(args.subst_offset, 16) if args.subst_offset else None
             hook_blob, site_patch, marker_off, hook_dlen, _ = (
                 cfh.build_caption_font_hook(
                     hook_rva,

@@ -11,14 +11,5 @@ build/
 # user-supplied test-kit archive (text mirror lives in work/handoff091/)
 MetroExodusVR_RU_v0.9.1_TEST.zip
 
-# arena-bridge: локальное состояние governor (квоты, lock), не коммитим.
-.arena/
-
 # Scratch analysis scripts generated while reverse-engineering the DLL.
 tools/tmp_*.py
-
-# game data captured on the developer's machine (reports reference it, but the
-# blobs are not ours to redistribute; re-fetch with tools/font_descriptors.py)
-work/fonts_ru.bin
-work/fonts_us.bin
-work/local/

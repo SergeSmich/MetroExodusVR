@@ -1,0 +1,2309 @@
+[
+  {
+    "addr": 4973776,
+    "text": "NOT SET",
+    "orig_len": 7,
+    "sites": [
+      [
+        775562,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4973784,
+    "text": "{} CM",
+    "orig_len": 5,
+    "sites": [
+      [
+        762632,
+        "lea"
+      ],
+      [
+        774077,
+        "lea"
+      ],
+      [
+        775757,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973792,
+    "text": "{}% (RECOMMENDED)",
+    "orig_len": 17,
+    "sites": [
+      [
+        779698,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973816,
+    "text": "+{} CM",
+    "orig_len": 6,
+    "sites": [
+      [
+        762625,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973824,
+    "text": "{} DEG",
+    "orig_len": 6,
+    "sites": [
+      [
+        741690,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973832,
+    "text": "{:.2f} M",
+    "orig_len": 8,
+    "sites": [
+      [
+        744905,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973844,
+    "text": "PLAY",
+    "orig_len": 4,
+    "sites": [
+      [
+        778974,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4973852,
+    "text": "SKIP",
+    "orig_len": 4,
+    "sites": [
+      [
+        779018,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4973864,
+    "text": "OFF (GAME TAA)",
+    "orig_len": 14,
+    "sites": [
+      [
+        777761,
+        "movsd"
+      ]
+    ]
+  },
+  {
+    "addr": 4973880,
+    "text": "FSR",
+    "orig_len": 3,
+    "sites": [
+      [
+        777995,
+        "mov"
+      ],
+      [
+        778034,
+        "lea"
+      ],
+      [
+        1364039,
+        "lea"
+      ],
+      [
+        1365066,
+        "lea"
+      ],
+      [
+        1367854,
+        "lea"
+      ],
+      [
+        1386483,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973884,
+    "text": "DLSS",
+    "orig_len": 4,
+    "sites": [
+      [
+        778091,
+        "mov"
+      ],
+      [
+        778119,
+        "lea"
+      ],
+      [
+        1364046,
+        "lea"
+      ],
+      [
+        1364330,
+        "lea"
+      ],
+      [
+        1364371,
+        "lea"
+      ],
+      [
+        1364408,
+        "lea"
+      ],
+      [
+        1365089,
+        "lea"
+      ],
+      [
+        1367868,
+        "lea"
+      ],
+      [
+        1386497,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973892,
+    "text": "AUTO",
+    "orig_len": 4,
+    "sites": [
+      [
+        740915,
+        "lea"
+      ],
+      [
+        743547,
+        "lea"
+      ],
+      [
+        775003,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4973900,
+    "text": "VR",
+    "orig_len": 2,
+    "sites": [
+      [
+        771025,
+        "movzx"
+      ],
+      [
+        775047,
+        "movzx"
+      ]
+    ]
+  },
+  {
+    "addr": 4973904,
+    "text": "VR NO TURN",
+    "orig_len": 10,
+    "sites": [
+      [
+        775092,
+        "movsd"
+      ]
+    ]
+  },
+  {
+    "addr": 4973916,
+    "text": "CINEMA",
+    "orig_len": 6,
+    "sites": [
+      [
+        775154,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4973928,
+    "text": "VR BODY TURN",
+    "orig_len": 12,
+    "sites": [
+      [
+        775209,
+        "movsd"
+      ]
+    ]
+  },
+  {
+    "addr": 4973960,
+    "text": "TURN MODE",
+    "orig_len": 9,
+    "sites": [
+      [
+        737575,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973972,
+    "text": "SNAP",
+    "orig_len": 4,
+    "sites": [
+      [
+        737630,
+        "mov"
+      ],
+      [
+        746901,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4973980,
+    "text": "SMOOTH",
+    "orig_len": 6,
+    "sites": [
+      [
+        737685,
+        "mov"
+      ],
+      [
+        746934,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974008,
+    "text": "SNAP TURN ANGLE",
+    "orig_len": 15,
+    "sites": [
+      [
+        737909,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974024,
+    "text": "{:g} DEG",
+    "orig_len": 8,
+    "sites": [
+      [
+        737963,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974064,
+    "text": "SMOOTH TURN SPEED",
+    "orig_len": 17,
+    "sites": [
+      [
+        738062,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974088,
+    "text": "{:g} DEG/S",
+    "orig_len": 10,
+    "sites": [
+      [
+        738122,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974128,
+    "text": "MOVEMENT DIRECTION",
+    "orig_len": 18,
+    "sites": [
+      [
+        738227,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974148,
+    "text": "HEAD",
+    "orig_len": 4,
+    "sites": [
+      [
+        738291,
+        "mov"
+      ]
+    ]
+  },
+  {
+    "addr": 4974156,
+    "text": "BODY",
+    "orig_len": 4,
+    "sites": [
+      [
+        738346,
+        "mov"
+      ],
+      [
+        765188,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974168,
+    "text": "LEFT HAND",
+    "orig_len": 9,
+    "sites": [
+      [
+        738404,
+        "movsd"
+      ],
+      [
+        2317444,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974184,
+    "text": "RIGHT HAND",
+    "orig_len": 10,
+    "sites": [
+      [
+        738482,
+        "movsd"
+      ],
+      [
+        2317451,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974216,
+    "text": "CROUCH BUTTON",
+    "orig_len": 13,
+    "sites": [
+      [
+        738721,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974232,
+    "text": "HOLD",
+    "orig_len": 4,
+    "sites": [
+      [
+        738785,
+        "mov"
+      ],
+      [
+        742016,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974240,
+    "text": "TOGGLE",
+    "orig_len": 6,
+    "sites": [
+      [
+        738840,
+        "mov"
+      ],
+      [
+        742049,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974272,
+    "text": "AUTO SPRINT",
+    "orig_len": 11,
+    "sites": [
+      [
+        739073,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974312,
+    "text": "MOVE STICK DEADZONE",
+    "orig_len": 19,
+    "sites": [
+      [
+        739130,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974360,
+    "text": "TURN STICK DEADZONE",
+    "orig_len": 19,
+    "sites": [
+      [
+        739202,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974408,
+    "text": "REDUCE HEAD BOB",
+    "orig_len": 15,
+    "sites": [
+      [
+        739274,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974448,
+    "text": "SHOW VR TIPS AGAIN",
+    "orig_len": 18,
+    "sites": [
+      [
+        739331,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974488,
+    "text": "PLAY MODE",
+    "orig_len": 9,
+    "sites": [
+      [
+        739388,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974504,
+    "text": "ROOM-SCALE",
+    "orig_len": 10,
+    "sites": [
+      [
+        739452,
+        "movsd"
+      ]
+    ]
+  },
+  {
+    "addr": 4974520,
+    "text": "STANDING",
+    "orig_len": 8,
+    "sites": [
+      [
+        739526,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974532,
+    "text": "SEATED",
+    "orig_len": 6,
+    "sites": [
+      [
+        739582,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974568,
+    "text": "PLAYER HEIGHT",
+    "orig_len": 13,
+    "sites": [
+      [
+        739791,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974608,
+    "text": "WORLD SCALE",
+    "orig_len": 11,
+    "sites": [
+      [
+        739860,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974648,
+    "text": "BODY TURNING",
+    "orig_len": 12,
+    "sites": [
+      [
+        739932,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974664,
+    "text": "FOLLOW HEAD",
+    "orig_len": 11,
+    "sites": [
+      [
+        739994,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974704,
+    "text": "BODY POSITION",
+    "orig_len": 13,
+    "sites": [
+      [
+        740273,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974720,
+    "text": "FOLLOW",
+    "orig_len": 6,
+    "sites": [
+      [
+        740335,
+        "lea"
+      ],
+      [
+        744647,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974752,
+    "text": "PHYSICAL CROUCH",
+    "orig_len": 15,
+    "sites": [
+      [
+        740609,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974792,
+    "text": "BELT HEIGHT",
+    "orig_len": 11,
+    "sites": [
+      [
+        740666,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974832,
+    "text": "BELT WHEN CROUCHING",
+    "orig_len": 19,
+    "sites": [
+      [
+        740738,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974856,
+    "text": "STAY WITH YOU",
+    "orig_len": 13,
+    "sites": [
+      [
+        740800,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974872,
+    "text": "FOLLOW BODY",
+    "orig_len": 11,
+    "sites": [
+      [
+        740856,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974904,
+    "text": "BHAPTICS (EXPERIMENTAL)",
+    "orig_len": 23,
+    "sites": [
+      [
+        741134,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4974952,
+    "text": "BHAPTICS STRENGTH",
+    "orig_len": 17,
+    "sites": [
+      [
+        741191,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975000,
+    "text": "DOMINANT HAND",
+    "orig_len": 13,
+    "sites": [
+      [
+        741278,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975016,
+    "text": "RIGHT",
+    "orig_len": 5,
+    "sites": [
+      [
+        741340,
+        "lea"
+      ],
+      [
+        743613,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975024,
+    "text": "LEFT",
+    "orig_len": 4,
+    "sites": [
+      [
+        741399,
+        "lea"
+      ],
+      [
+        743580,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975048,
+    "text": "WEAPON GRIP ANGLE",
+    "orig_len": 17,
+    "sites": [
+      [
+        741614,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975096,
+    "text": "FINGER TRACKING",
+    "orig_len": 15,
+    "sites": [
+      [
+        741949,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975124,
+    "text": "GRIP",
+    "orig_len": 4,
+    "sites": [
+      [
+        741994,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975152,
+    "text": "VIBRATION",
+    "orig_len": 9,
+    "sites": [
+      [
+        742178,
+        "lea"
+      ],
+      [
+        765615,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975192,
+    "text": "HAND CUES",
+    "orig_len": 9,
+    "sites": [
+      [
+        742253,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975232,
+    "text": "WEAPONS",
+    "orig_len": 7,
+    "sites": [
+      [
+        742328,
+        "lea"
+      ],
+      [
+        766519,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975264,
+    "text": "DAMAGE",
+    "orig_len": 6,
+    "sites": [
+      [
+        742403,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975296,
+    "text": "EXPLOSIONS",
+    "orig_len": 10,
+    "sites": [
+      [
+        742478,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975336,
+    "text": "SCENES AND VEHICLES",
+    "orig_len": 19,
+    "sites": [
+      [
+        742553,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975384,
+    "text": "MOVEMENT",
+    "orig_len": 8,
+    "sites": [
+      [
+        742628,
+        "lea"
+      ],
+      [
+        764540,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975424,
+    "text": "USE BY LOOKING",
+    "orig_len": 14,
+    "sites": [
+      [
+        742703,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975464,
+    "text": "WEAPON WEIGHT",
+    "orig_len": 13,
+    "sites": [
+      [
+        742748,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975504,
+    "text": "MANUAL RELOADING",
+    "orig_len": 16,
+    "sites": [
+      [
+        742808,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975552,
+    "text": "PART HIGHLIGHTS",
+    "orig_len": 15,
+    "sites": [
+      [
+        742853,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975568,
+    "text": "OFF",
+    "orig_len": 3,
+    "sites": [
+      [
+        742875,
+        "lea"
+      ],
+      [
+        743143,
+        "lea"
+      ],
+      [
+        746868,
+        "lea"
+      ],
+      [
+        748657,
+        "lea"
+      ],
+      [
+        749202,
+        "lea"
+      ],
+      [
+        749714,
+        "lea"
+      ],
+      [
+        750163,
+        "lea"
+      ],
+      [
+        1574246,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975576,
+    "text": "FIRST RELOADS",
+    "orig_len": 13,
+    "sites": [
+      [
+        742908,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975592,
+    "text": "ALWAYS",
+    "orig_len": 6,
+    "sites": [
+      [
+        742941,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975632,
+    "text": "RESET HIGHLIGHT COUNTS",
+    "orig_len": 22,
+    "sites": [
+      [
+        743073,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975680,
+    "text": "WEAPON FLICK",
+    "orig_len": 12,
+    "sites": [
+      [
+        743118,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975696,
+    "text": "GENTLE",
+    "orig_len": 6,
+    "sites": [
+      [
+        743176,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975704,
+    "text": "NORMAL",
+    "orig_len": 6,
+    "sites": [
+      [
+        743209,
+        "lea"
+      ],
+      [
+        2871005,
+        "lea"
+      ],
+      [
+        2906440,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975712,
+    "text": "HARD",
+    "orig_len": 4,
+    "sites": [
+      [
+        743242,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975744,
+    "text": "MAGAZINE POUCH",
+    "orig_len": 14,
+    "sites": [
+      [
+        743374,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975760,
+    "text": "HIP",
+    "orig_len": 3,
+    "sites": [
+      [
+        743396,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975792,
+    "text": "SIGHTING EYE",
+    "orig_len": 12,
+    "sites": [
+      [
+        743525,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975824,
+    "text": "OTHER EYE WHILE SCOPED",
+    "orig_len": 22,
+    "sites": [
+      [
+        743742,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975848,
+    "text": "VISIBLE",
+    "orig_len": 7,
+    "sites": [
+      [
+        743764,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975856,
+    "text": "BLURRED",
+    "orig_len": 7,
+    "sites": [
+      [
+        743797,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975864,
+    "text": "BLACK",
+    "orig_len": 5,
+    "sites": [
+      [
+        743830,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975888,
+    "text": "RETICLE TILT",
+    "orig_len": 12,
+    "sites": [
+      [
+        743962,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975904,
+    "text": "WITH WEAPON",
+    "orig_len": 11,
+    "sites": [
+      [
+        743984,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975916,
+    "text": "LEVEL",
+    "orig_len": 5,
+    "sites": [
+      [
+        744017,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975928,
+    "text": "FIXED TO VIEW",
+    "orig_len": 13,
+    "sites": [
+      [
+        744050,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975968,
+    "text": "SCOPE STEERING",
+    "orig_len": 14,
+    "sites": [
+      [
+        744179,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975984,
+    "text": "WEAPON",
+    "orig_len": 6,
+    "sites": [
+      [
+        744201,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4975992,
+    "text": "WEAPON + HEAD",
+    "orig_len": 13,
+    "sites": [
+      [
+        744234,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976032,
+    "text": "REALISTIC NIGHT VISION",
+    "orig_len": 22,
+    "sites": [
+      [
+        744363,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976072,
+    "text": "HUD SHAPE",
+    "orig_len": 9,
+    "sites": [
+      [
+        744408,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976120,
+    "text": "HUD POSITION",
+    "orig_len": 12,
+    "sites": [
+      [
+        744592,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976160,
+    "text": "HUD DISTANCE",
+    "orig_len": 12,
+    "sites": [
+      [
+        744776,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976192,
+    "text": "HUD SIZE",
+    "orig_len": 8,
+    "sites": [
+      [
+        744836,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976224,
+    "text": "HUD HEIGHT",
+    "orig_len": 10,
+    "sites": [
+      [
+        745001,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976240,
+    "text": "{:+.0f} DEG",
+    "orig_len": 11,
+    "sites": [
+      [
+        745013,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976280,
+    "text": "HUD OPACITY",
+    "orig_len": 11,
+    "sites": [
+      [
+        745114,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976320,
+    "text": "HINT HEIGHT",
+    "orig_len": 11,
+    "sites": [
+      [
+        745189,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976360,
+    "text": "HINT SIZE",
+    "orig_len": 9,
+    "sites": [
+      [
+        745302,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976400,
+    "text": "HINT TIME",
+    "orig_len": 9,
+    "sites": [
+      [
+        745415,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976412,
+    "text": "1.00X",
+    "orig_len": 5,
+    "sites": [
+      [
+        745440,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976420,
+    "text": "1.25X",
+    "orig_len": 5,
+    "sites": [
+      [
+        745473,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976428,
+    "text": "1.50X",
+    "orig_len": 5,
+    "sites": [
+      [
+        745506,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976436,
+    "text": "2.00X",
+    "orig_len": 5,
+    "sites": [
+      [
+        745539,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976472,
+    "text": "ACTION PROMPT SIZE",
+    "orig_len": 18,
+    "sites": [
+      [
+        745671,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976528,
+    "text": "MENU DISTANCE",
+    "orig_len": 13,
+    "sites": [
+      [
+        745784,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976560,
+    "text": "MENU SIZE",
+    "orig_len": 9,
+    "sites": [
+      [
+        745888,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976576,
+    "text": "{:.1f} M",
+    "orig_len": 8,
+    "sites": [
+      [
+        745900,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976616,
+    "text": "DAMAGE EFFECTS",
+    "orig_len": 14,
+    "sites": [
+      [
+        746001,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976656,
+    "text": "DAMAGE EFFECT SIZE",
+    "orig_len": 18,
+    "sites": [
+      [
+        746046,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976676,
+    "text": "SMALL",
+    "orig_len": 5,
+    "sites": [
+      [
+        746071,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976684,
+    "text": "MEDIUM",
+    "orig_len": 6,
+    "sites": [
+      [
+        746104,
+        "lea"
+      ],
+      [
+        748717,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976692,
+    "text": "LARGE",
+    "orig_len": 5,
+    "sites": [
+      [
+        746137,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976728,
+    "text": "HIT DIRECTION",
+    "orig_len": 13,
+    "sites": [
+      [
+        746269,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976768,
+    "text": "LOW-HEALTH PULSE",
+    "orig_len": 16,
+    "sites": [
+      [
+        746314,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976816,
+    "text": "DEBUG OVERLAY",
+    "orig_len": 13,
+    "sites": [
+      [
+        746359,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976856,
+    "text": "CINEMA POINTER",
+    "orig_len": 14,
+    "sites": [
+      [
+        746404,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976896,
+    "text": "CINEMA FLOOR",
+    "orig_len": 12,
+    "sites": [
+      [
+        746449,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976936,
+    "text": "CINEMA CONTROLLERS",
+    "orig_len": 18,
+    "sites": [
+      [
+        746494,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4976984,
+    "text": "CINEMA INFO",
+    "orig_len": 11,
+    "sites": [
+      [
+        746539,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977024,
+    "text": "CINEMA LINKS",
+    "orig_len": 12,
+    "sites": [
+      [
+        746584,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977064,
+    "text": "CAMERA PRESET",
+    "orig_len": 13,
+    "sites": [
+      [
+        746629,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977080,
+    "text": "IMMERSIVE",
+    "orig_len": 9,
+    "sites": [
+      [
+        746651,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977096,
+    "text": "COMFORT",
+    "orig_len": 7,
+    "sites": [
+      [
+        746684,
+        "lea"
+      ],
+      [
+        768754,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977104,
+    "text": "CINEMATIC",
+    "orig_len": 9,
+    "sites": [
+      [
+        746717,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977136,
+    "text": "RE-ALIGN AFTER SCENES",
+    "orig_len": 21,
+    "sites": [
+      [
+        746846,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977184,
+    "text": "CINEMA SCREEN DISTANCE",
+    "orig_len": 22,
+    "sites": [
+      [
+        747066,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977232,
+    "text": "CINEMA SCREEN SIZE",
+    "orig_len": 18,
+    "sites": [
+      [
+        747167,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977344,
+    "text": "FREE CAMERA",
+    "orig_len": 11,
+    "sites": [
+      [
+        747477,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977408,
+    "text": "BONE ANGLES",
+    "orig_len": 11,
+    "sites": [
+      [
+        747631,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977448,
+    "text": "SCRIPTED LOCK",
+    "orig_len": 13,
+    "sites": [
+      [
+        747708,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977496,
+    "text": "ANIMATION LOCK",
+    "orig_len": 14,
+    "sites": [
+      [
+        747785,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977544,
+    "text": "AXIS LOCKED",
+    "orig_len": 11,
+    "sites": [
+      [
+        747862,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977584,
+    "text": "GAMEPLAY UI",
+    "orig_len": 11,
+    "sites": [
+      [
+        747939,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977648,
+    "text": "RENDER MODE",
+    "orig_len": 11,
+    "sites": [
+      [
+        748048,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977660,
+    "text": "STEREO",
+    "orig_len": 6,
+    "sites": [
+      [
+        748070,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977672,
+    "text": "PERFORMANCE (AER+)",
+    "orig_len": 18,
+    "sites": [
+      [
+        748100,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977720,
+    "text": "RENDER SCALE (RESTART)",
+    "orig_len": 22,
+    "sites": [
+      [
+        748229,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977760,
+    "text": "UPSCALER",
+    "orig_len": 8,
+    "sites": [
+      [
+        748289,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977800,
+    "text": "UPSCALING MODE",
+    "orig_len": 14,
+    "sites": [
+      [
+        748361,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977816,
+    "text": "NATIVE AA",
+    "orig_len": 9,
+    "sites": [
+      [
+        748383,
+        "lea"
+      ],
+      [
+        749533,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977832,
+    "text": "QUALITY",
+    "orig_len": 7,
+    "sites": [
+      [
+        748413,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977840,
+    "text": "BALANCED",
+    "orig_len": 8,
+    "sites": [
+      [
+        748443,
+        "lea"
+      ],
+      [
+        750223,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977856,
+    "text": "PERFORMANCE",
+    "orig_len": 11,
+    "sites": [
+      [
+        748473,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977872,
+    "text": "ULTRA PERFORMANCE",
+    "orig_len": 17,
+    "sites": [
+      [
+        748503,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977920,
+    "text": "FSR SHARPENING",
+    "orig_len": 14,
+    "sites": [
+      [
+        748635,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977936,
+    "text": "LOW",
+    "orig_len": 3,
+    "sites": [
+      [
+        748687,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977940,
+    "text": "HIGH",
+    "orig_len": 4,
+    "sites": [
+      [
+        748747,
+        "lea"
+      ],
+      [
+        750253,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977968,
+    "text": "DLSS MODEL",
+    "orig_len": 10,
+    "sites": [
+      [
+        748879,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4977984,
+    "text": "AUTO (K)",
+    "orig_len": 8,
+    "sites": [
+      [
+        748901,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978000,
+    "text": "K (DLSS 4)",
+    "orig_len": 10,
+    "sites": [
+      [
+        748931,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978016,
+    "text": "M (DLSS 4.5)",
+    "orig_len": 12,
+    "sites": [
+      [
+        748961,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978032,
+    "text": "L (DLSS 4.5)",
+    "orig_len": 12,
+    "sites": [
+      [
+        748991,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978048,
+    "text": "J (DLSS 4)",
+    "orig_len": 10,
+    "sites": [
+      [
+        749021,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978064,
+    "text": "E (DLSS 3)",
+    "orig_len": 10,
+    "sites": [
+      [
+        749051,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978104,
+    "text": "FOVEATED UPSCALING",
+    "orig_len": 18,
+    "sites": [
+      [
+        749180,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978128,
+    "text": "ON (45 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749232,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978144,
+    "text": "ON (40 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749262,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978160,
+    "text": "ON (35 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749292,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978176,
+    "text": "ON (30 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749322,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978192,
+    "text": "ON (25 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749352,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978208,
+    "text": "ON (20 DEG)",
+    "orig_len": 11,
+    "sites": [
+      [
+        749382,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978256,
+    "text": "FOVEATED PERIPHERY",
+    "orig_len": 18,
+    "sites": [
+      [
+        749511,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978276,
+    "text": "TAA",
+    "orig_len": 3,
+    "sites": [
+      [
+        749563,
+        "lea"
+      ],
+      [
+        1383936,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978296,
+    "text": "DESKTOP MIRROR",
+    "orig_len": 14,
+    "sites": [
+      [
+        749692,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978312,
+    "text": "LEFT EYE",
+    "orig_len": 8,
+    "sites": [
+      [
+        749747,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978328,
+    "text": "BOTH EYES",
+    "orig_len": 9,
+    "sites": [
+      [
+        749780,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978368,
+    "text": "MIRROR WINDOW",
+    "orig_len": 13,
+    "sites": [
+      [
+        749912,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978384,
+    "text": "WINDOWED",
+    "orig_len": 8,
+    "sites": [
+      [
+        749934,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978400,
+    "text": "FULLSCREEN",
+    "orig_len": 10,
+    "sites": [
+      [
+        749967,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978432,
+    "text": "MIRROR HEADSET UI",
+    "orig_len": 17,
+    "sites": [
+      [
+        750096,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978472,
+    "text": "FOVEATED RENDERING",
+    "orig_len": 18,
+    "sites": [
+      [
+        750141,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978492,
+    "text": "LIGHT",
+    "orig_len": 5,
+    "sites": [
+      [
+        750193,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978504,
+    "text": "AGGRESSIVE",
+    "orig_len": 10,
+    "sites": [
+      [
+        750283,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978516,
+    "text": "ULTRA",
+    "orig_len": 5,
+    "sites": [
+      [
+        750313,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978528,
+    "text": "EXTREME",
+    "orig_len": 7,
+    "sites": [
+      [
+        750343,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978560,
+    "text": "BETTER WATER REFLECTIONS",
+    "orig_len": 24,
+    "sites": [
+      [
+        750472,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978616,
+    "text": "DISABLE BLUR",
+    "orig_len": 12,
+    "sites": [
+      [
+        750517,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978656,
+    "text": "DEPTH OF FIELD",
+    "orig_len": 14,
+    "sites": [
+      [
+        750562,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978696,
+    "text": "HUD RESOLUTION (RESTART)",
+    "orig_len": 24,
+    "sites": [
+      [
+        750637,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978752,
+    "text": "DEPTH REPROJECTION",
+    "orig_len": 18,
+    "sites": [
+      [
+        750782,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978776,
+    "text": "LEGAL NOTICE VIDEO",
+    "orig_len": 18,
+    "sites": [
+      [
+        750801,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978832,
+    "text": "CREDITS VIDEO",
+    "orig_len": 13,
+    "sites": [
+      [
+        750905,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4978880,
+    "text": "INTRO VIDEO",
+    "orig_len": 11,
+    "sites": [
+      [
+        751003,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979196,
+    "text": "HANDS",
+    "orig_len": 5,
+    "sites": [
+      [
+        765972,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979240,
+    "text": "SCOPES",
+    "orig_len": 6,
+    "sites": [
+      [
+        766864,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979264,
+    "text": "INTERFACE",
+    "orig_len": 9,
+    "sites": [
+      [
+        767775,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979296,
+    "text": "CAMERA OVERRIDES",
+    "orig_len": 16,
+    "sites": [
+      [
+        768177,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979360,
+    "text": "GRAPHICS",
+    "orig_len": 8,
+    "sites": [
+      [
+        770261,
+        "lea"
+      ]
+    ]
+  },
+  {
+    "addr": 4979392,
+    "text": "GAME",
+    "orig_len": 4,
+    "sites": [
+      [
+        770821,
+        "mov"
+      ]
+    ]
+  }
+]

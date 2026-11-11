@@ -116,7 +116,14 @@ UI2_TABLES = {
 
 # Literals that are neither captions nor table entries but still show up in the
 # UI.  They are built inline, so they get the same copy-stub treatment.
-EXTRA_STRINGS = (
+#
+# 0.9.0 addresses, kept only as a record: on 0.9.1 both literals moved
+# ("VR HINTS" 0x4999E0 -> 0x4B85C0, "VR GAMEPAD LAYOUT" 0x497100 -> 0x4B5860)
+# and nothing in .text references them any more -- no rip-relative lea and no
+# absolute 64-bit pointer anywhere in the image.  Patching the 0.9.0 sites would
+# hit unrelated code, so the 0.9.1 build treats extras as absent; they are only
+# enabled from ADDRS["extra_strings"] once someone finds real sites.
+EXTRA_STRINGS_090 = (
     dict(
         orig="VR HINTS",
         ru="СОВЕТЫ VR",
@@ -136,6 +143,9 @@ EXTRA_STRINGS = (
         allow_heap=True,
     ),
 )
+
+# Active list for the version being built; empty for 0.9.1 (see above).
+EXTRA_STRINGS = ()
 
 # Only the mod's own menu/page-building code is redirected.
 MENU_LO = 0xB0000
@@ -695,7 +705,9 @@ def check_encodings(entries, ui2, extras):
         try:
             back = decode_text(enc)
         except (IndexError, ValueError) as exc:
-            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
+            errors.append(
+                f"{label}: encoded bytes are not valid charmap indices ({exc})"
+            )
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
@@ -724,7 +736,10 @@ def check_encodings(entries, ui2, extras):
 def report_limits(entries, ui2, extras):
     """Print how close the encoded payloads come to the engine's limits."""
     groups = (
-        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
+        (
+            f"captions (string_view, {MAX_LEN:#x})",
+            [e for e in entries if not e["skip"]],
+        ),
         ("table entries", [p for it in ui2 for p in it["parts"]]),
         ("extras", extras),
     )
@@ -1333,6 +1348,7 @@ def main():
     marker_rva = None
     site_patch = None
     hook_dlen = 0
+    hook_code_len = 0
     if args.caption_font:
         setter = ADDRS["setter"]
         foff = pe.rva_to_off(setter)
@@ -1344,15 +1360,19 @@ def main():
                 cfh.check_displaced(disp)
             else:
                 disp = cfh.derive_displaced(pe.data, foff)
-                if disp != cfh.DEFAULT_DISPLACED_091:
+                # derive_displaced takes the shortest whole-instruction run of at
+                # least 5 bytes: 6 bytes (push rbx/rbp/rdi/r14) on both 0.9.0 and
+                # 0.9.1, whose entry bytes are identical.  Compare as a prefix,
+                # not for equality, so the 8-byte constant does not warn.
+                if not cfh.DEFAULT_DISPLACED_091.startswith(disp):
                     print(
-                        f"WARN setter prologue is {disp.hex()}, not the expected "
+                        f"WARN setter prologue is {disp.hex()}, not a prefix of "
                         f"{cfh.DEFAULT_DISPLACED_091.hex()}; using what is there"
                     )
             pre = len(payload)
             pad = (-pre) % 16
             hook_rva = new_va + pre + pad
-            hook_blob, site_patch, marker_off, hook_dlen, _ = (
+            hook_blob, site_patch, marker_off, hook_dlen, hook_code_len = (
                 cfh.build_caption_font_hook(
                     hook_rva,
                     setter,
@@ -1569,12 +1589,20 @@ def main():
             md,
         )
         if rc == 0 and hook_rva is not None:
-            rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
+            rc = verify_hook(
+                out_path, hook_rva, ADDRS["setter"], hook_dlen, hook_code_len, md
+            )
     return rc
 
 
-def verify_hook(path, hook_rva, setter_rva, dlen, md):
-    """Re-read the cave out of the patched DLL and disassemble it."""
+def verify_hook(path, hook_rva, setter_rva, dlen, code_len, md):
+    """Re-read the cave out of the patched DLL and check its code block.
+
+    The cave contains internal ``jmp`` instructions, so walking it until the
+    first ``jmp`` (the old behaviour) stopped at a branch and reported the
+    cave as unterminated.  The builder knows the code length; check the last
+    five bytes against ``jmp setter+dlen`` and walk exactly that block.
+    """
     data = Path(path).read_bytes()
     pe = PE(data)
     o = pe.rva_to_off(setter_rva)
@@ -1593,25 +1621,47 @@ def verify_hook(path, hook_rva, setter_rva, dlen, md):
     if body is None:
         print("VERIFY ERROR hook: setter body not mapped")
         return 1
-    # disassemble until the final `jmp` back to the setter body
     start = pe.rva_to_off(hook_rva)
-    ins = list(md.disasm(bytes(pe.data[start : start + 0x4000]), hook_rva))
-    total = 0
+    if not code_len:
+        print("VERIFY ERROR hook: builder reported no code length")
+        return 1
+    code = bytes(pe.data[start : start + code_len])
+    ins = list(md.disasm(code, hook_rva))
+    if not ins or ins[0].address != hook_rva:
+        print(
+            f"VERIFY ERROR hook: code block {code_len} bytes does not disassemble "
+            "cleanly"
+        )
+        return 1
+    # The tail jmp back into the setter body ends the main path, not the block:
+    # the cave carries local subroutines and `cc` padding after it.  Walk until
+    # that jmp, then require that everything after it is padding only.
     orphans = 0
+    hit = None
     for i in ins:
-        total += i.size
-        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
+        if code[i.address - hook_rva :][:2] == b"\x00\x00":
             orphans += 1
-        if i.mnemonic == "jmp" and i.operands[0].type == X86_OP_IMM:
-            if i.operands[0].imm == setter_rva + dlen:
-                print(
-                    f"hook ok: {total} bytes of code, {orphans} orphan "
-                    f"`00 00`, tail jmp -> {i.operands[0].imm:#x}"
-                )
-                return 0 if orphans == 0 else 1
+        if (
+            i.mnemonic == "jmp"
+            and i.operands
+            and i.operands[0].type == X86_OP_IMM
+            and i.operands[0].imm == setter_rva + dlen
+        ):
+            hit = i
             break
-    print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
-    return 1
+    if hit is None:
+        print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
+        return 1
+    rest = code[hit.address - hook_rva + hit.size :]
+    leftover = rest.strip(b"\xcc")
+    if leftover:
+        print(f"VERIFY ERROR hook: {len(leftover)} unexpected bytes after the tail jmp")
+        return 1
+    print(
+        f"hook ok: {hit.address - hook_rva + hit.size} bytes of main path, "
+        f"{orphans} orphan `00 00`, tail jmp -> {hit.operands[0].imm:#x}"
+    )
+    return 0 if orphans == 0 else 1
 
 
 def verify(

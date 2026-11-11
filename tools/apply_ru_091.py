@@ -998,12 +998,24 @@ def main():
     ap.add_argument(
         "--caption-prop",
         default="font_name",
-        choices=("font_name", "override_font_name"),
+        choices=("font_name", "override_font_name", "text_font", "alt_font_name"),
         help=(
             "property that receives --caption-font. 'font_name' (default) is "
             "the only one L-0026 saw succeed: the record exists on 206/209 "
             "matched controls and the setter returned success; L-0029 showed "
-            "override_font_name has no record at all, so the setter fails"
+            "override_font_name has no record at all, so the setter fails. "
+            "'text_font'/'alt_font_name' are the other font properties the "
+            "0.9.1 image carries (L-0035: font_name did not change the menu)"
+        ),
+    )
+    ap.add_argument(
+        "--caption-all",
+        action="store_true",
+        help=(
+            "L-0035 experiment: skip the ru/caption_filter.json table and write "
+            "the font on EVERY 'caption' property. Use it to test whether the "
+            "menu labels (which go through the same property but are mostly "
+            "not in the table) can be fixed without a UI2 table"
         ),
     )
     ap.add_argument(
@@ -1360,10 +1372,12 @@ def main():
                 cfh.check_displaced(disp)
             else:
                 disp = cfh.derive_displaced(pe.data, foff)
-                # derive_displaced takes the shortest whole-instruction run of at
-                # least 5 bytes: 6 bytes (push rbx/rbp/rdi/r14) on both 0.9.0 and
-                # 0.9.1, whose entry bytes are identical.  Compare as a prefix,
-                # not for equality, so the 8-byte constant does not warn.
+                # derive_displaced takes the *whole* leading run of `push reg`
+                # (up to 8 bytes): 6 bytes (4 pushes) on 0.9.0, 8 bytes (5
+                # pushes) on 0.9.1.  Cutting it at 5 bytes is not allowed -- the
+                # write arm replays the prologue and calls the body behind it,
+                # so a partial run breaks the body's stack alignment (L-0034).
+                # Compare as a prefix, not for equality, so 0.9.0 does not warn.
                 if not cfh.DEFAULT_DISPLACED_091.startswith(disp):
                     print(
                         f"WARN setter prologue is {disp.hex()}, not a prefix of "
@@ -1380,6 +1394,7 @@ def main():
                     args.caption_prop,
                     write=True,
                     displaced=disp,
+                    accept_all=args.caption_all,
                 )
             )
             marker_rva = hook_rva + marker_off
@@ -1547,7 +1562,7 @@ def main():
         0,
         0,
         0,
-        0x60000040,  # CNT_INITIALIZED_DATA | MEM_EXECUTE | MEM_READ
+        0xE0000040,  # CNT_INITIALIZED_DATA | EXECUTE | READ | WRITE
     )
     struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
     new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)
@@ -1605,6 +1620,24 @@ def verify_hook(path, hook_rva, setter_rva, dlen, code_len, md):
     """
     data = Path(path).read_bytes()
     pe = PE(data)
+    sec = next(
+        (
+            s
+            for s in pe.sections
+            if s["va"] <= hook_rva < s["va"] + max(s["vsize"], s["rawsize"])
+        ),
+        None,
+    )
+    if sec is None:
+        print(f"VERIFY ERROR hook: cave {hook_rva:#x} is in no section")
+        return 1
+    chars = struct.unpack_from("<I", pe.data, sec["hdr"] + 36)[0]
+    if not chars & 0x80000000:
+        print(
+            f"VERIFY ERROR hook: {sec['name']} is not writable (characteristics "
+            f"{chars:#x}); the marker block and the call counters live there"
+        )
+        return 1
     o = pe.rva_to_off(setter_rva)
     if o is None or pe.data[o] != 0xE9:
         print("VERIFY ERROR hook: setter site is not a jmp")

@@ -79,8 +79,14 @@ CAPTION_FILTER = ROOT / "ru" / "caption_filter.json"
 
 # pop opcode for rax..rdi; r8..r15 need a 0x41 REX.B prefix
 _POP64 = {
-    "rax": 0x58, "rcx": 0x59, "rdx": 0x5A, "rbx": 0x5B,
-    "rsp": 0x5C, "rbp": 0x5D, "rsi": 0x5E, "rdi": 0x5F,
+    "rax": 0x58,
+    "rcx": 0x59,
+    "rdx": 0x5A,
+    "rbx": 0x5B,
+    "rsp": 0x5C,
+    "rbp": 0x5D,
+    "rsi": 0x5E,
+    "rdi": 0x5F,
 }
 
 
@@ -118,8 +124,7 @@ def check_displaced(b):
         ops = i.operands
         if len(ops) != 1 or ops[0].type != X86_OP_REG:
             raise SystemExit(
-                f"caption_font_hook: `{i.mnemonic} {i.op_str}` is not a "
-                "register push"
+                f"caption_font_hook: `{i.mnemonic} {i.op_str}` is not a register push"
             )
         if i.reg_name(ops[0].reg) == "rsp":
             raise SystemExit("caption_font_hook: cannot replay `push rsp`")
@@ -145,18 +150,21 @@ def derive_displaced(data, file_off, max_len=8):
     """Read the displaced prologue straight out of the DLL.
 
     Preferred over a hardcoded constant: disassemble the setter entry and take
-    the shortest run of whole instructions that is at least 5 bytes long.  A
-    caller that passes ``--site-head`` bypasses this.
+    the whole run of leading ``push reg`` instructions, up to ``max_len``.
+    The run has to cover the *complete* prologue: the write arm replays it and
+    calls the body behind it, so cutting it in the middle (0.9.1: 6 of 8 bytes
+    = 4 of 5 pushes) left the body 8 bytes off its 16-byte stack alignment and
+    crashed inside the setter on the first caption write (bag15 never called
+    the setter, so this path was new in L-0034).  A caller that passes
+    ``--site-head`` bypasses this.
     """
     ins = _disasm(data[file_off : file_off + max_len + 16], 0)
     total = 0
-    taken = []
     for i in ins:
-        taken.append(i)
-        total += i.size
-        if total >= 5:
+        if i.mnemonic != "push" or total + i.size > max_len:
             break
-    if total < 5 or total > max_len:
+        total += i.size
+    if total < 5:
         raise SystemExit(
             f"caption_font_hook: cannot displace {total} bytes at the setter "
             f"(need 5..{max_len}); pass --site-head with the real bytes"
@@ -381,7 +389,6 @@ def emit_ctrl_scan(out_off, out_slot, base, fixups):
     return bytes(b)
 
 
-
 def build_caption_font_hook(
     blob_rva,
     site_rva,
@@ -389,6 +396,7 @@ def build_caption_font_hook(
     prop_name="font_name",
     write=True,
     displaced=None,
+    accept_all=False,
 ):
     """Code cave for the property setter ``site_rva``.
 
@@ -417,9 +425,12 @@ def build_caption_font_hook(
     displaced = bytes(displaced)
     check_displaced(displaced)
     dlen = len(displaced)
-    pop_bytes = pops_for(displaced)
 
     # --- positive caption filter (ru/caption_filter.json, A-0020 §7.1) -------
+    # ``accept_all`` (L-0035 experiment) skips the hash test and writes the font
+    # on every ``caption`` property: the menu labels go through the same
+    # property but only ~half of them are in the table, so this answers whether
+    # the same write can also fix the menu without a UI2 table.
     prop = prop_name.encode("ascii")
     hashes = []
     cf = Path(__file__).resolve().parent.parent / "ru" / "caption_filter.json"
@@ -429,6 +440,9 @@ def build_caption_font_hook(
     if not hashes:
         hashes = [0xFFFFFFFF]
     filter_count = len(hashes)
+    # labels of the branches that only exist in the filtered build
+    hash_loop = hash_done = search_loop = jmiss = h1 = h2 = s1 = s2 = None
+    accept_j = None
 
     # --- save every register we clobber (5 callee-saved + 8 volatile) --------
     code += b"\x53\x55\x57\x41\x56\x41\x57"  # push rbx, rbp, rdi, r14, r15
@@ -707,37 +721,45 @@ def build_caption_font_hook(
     code += b"\xff\x40\x04"  # inc dword ptr [rax+4]    (caption matches)
 
     # --- positive filter: fnv1a32(caption value) must be in our table --------
-    code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
-    code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (value len)
-    code += b"\xb8\xc5\x9d\x1c\x81"  # mov eax, 0x811c9dc5
-    code += b"\x45\x33\xdb"  # xor r11d, r11d
-    hash_loop = len(code)
-    code += b"\x4c\x39\xda"  # cmp rdx, r11
-    h1 = len(code)
-    code += b"\x76\0"  # jbe hash_done (r11 >= len)
-    code += b"\x47\x0f\xb6\x14\x19"  # movzx r10d, byte [r9+r11]
-    code += b"\x44\x31\xd0"  # xor eax, r10d
-    code += b"\x69\xc0\x93\x01\x00\x01"  # imul eax, eax, 0x01000193
-    code += b"\x49\xff\xc3"  # inc r11
-    h2 = len(code)
-    code += b"\xeb\0"  # jmp hash_loop
-    hash_done = len(code)
-    code += b"\x4c\x8d\x0d\0\0\0\0"  # lea r9, [rip+filter_table]
-    fixups.append((len(code) - 4, b"filter_table"))
-    code += b"\xb9" + struct.pack("<I", filter_count)  # mov ecx, count
-    search_loop = len(code)
-    code += b"\x41\x39\x01"  # cmp dword [r9], eax
-    s1 = len(code)
-    code += b"\x74\0"  # je hit
-    code += b"\x49\x83\xc1\x04"  # add r9, 4
-    code += b"\xff\xc9"  # dec ecx
-    s2 = len(code)
-    code += b"\x75\0"  # jnz search_loop
-    jmiss = len(code)
-    code += b"\xe9\0\0\0\0"  # jmp done (miss: not our caption)
+    if accept_all:
+        # Every caption is ours: jump straight to the hit arm.  The filter
+        # table stays in the data section (harmless, keeps offsets stable).
+        accept_j = len(code)
+        code += b"\xe9\0\0\0\0"  # jmp hit (patched once hit is known)
+    else:
+        code += b"\x4c\x8b\x0f"  # mov r9, [rdi]        (value bytes)
+        code += b"\x48\x8b\x57\x08"  # mov rdx, [rdi+8] (value len)
+        code += b"\xb8\xc5\x9d\x1c\x81"  # mov eax, 0x811c9dc5
+        code += b"\x45\x33\xdb"  # xor r11d, r11d
+        hash_loop = len(code)
+        code += b"\x4c\x39\xda"  # cmp rdx, r11
+        h1 = len(code)
+        code += b"\x76\0"  # jbe hash_done (r11 >= len)
+        code += b"\x47\x0f\xb6\x14\x19"  # movzx r10d, byte [r9+r11]
+        code += b"\x44\x31\xd0"  # xor eax, r10d
+        code += b"\x69\xc0\x93\x01\x00\x01"  # imul eax, eax, 0x01000193
+        code += b"\x49\xff\xc3"  # inc r11
+        h2 = len(code)
+        code += b"\xeb\0"  # jmp hash_loop
+        hash_done = len(code)
+        code += b"\x4c\x8d\x0d\0\0\0\0"  # lea r9, [rip+filter_table]
+        fixups.append((len(code) - 4, b"filter_table"))
+        code += b"\xb9" + struct.pack("<I", filter_count)  # mov ecx, count
+        search_loop = len(code)
+        code += b"\x41\x39\x01"  # cmp dword [r9], eax
+        s1 = len(code)
+        code += b"\x74\0"  # je hit
+        code += b"\x49\x83\xc1\x04"  # add r9, 4
+        code += b"\xff\xc9"  # dec ecx
+        s2 = len(code)
+        code += b"\x75\0"  # jnz search_loop
+        jmiss = len(code)
+        code += b"\xe9\0\0\0\0"  # jmp done (miss: not our caption)
 
     # --- hit: record kind/found in the marker --------------------------------
     hit = len(code)
+    if accept_j is not None:
+        struct.pack_into("<i", code, accept_j + 1, hit - (accept_j + 5))
     code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
     fixups.append((len(code) - 4, b"marker"))
     code += b"\xff\x40\x2c"  # inc dword ptr [rax+0x2c] (matched counter)
@@ -1126,6 +1148,8 @@ def build_caption_font_hook(
         (fz4, floop_next),
         (g1, not_reentry),
     ):
+        if pos is None:
+            continue  # branch does not exist in --caption-all builds
         disp = target - (pos + 2)
         if not -128 <= disp <= 127:
             raise SystemExit(
@@ -1145,44 +1169,62 @@ def build_caption_font_hook(
     # arm available for a control that does have the record.
     #
     # Two ABI details, each of which cost a run before:
+    # Two more ABI details, each of which cost a run:
     #   * the callee spills into its caller's 32-byte shadow space (bag12,
-    #     L-0031), so the two string_views live ABOVE it, at +0x20 and +0x30;
-    #   * we call ``site_rva + dlen`` -- the setter body -- instead of
-    #     ``site_rva``, which is our own hook entry.  bag6..bag9 called the
-    #     entry, so every nested write re-entered the hook and polluted the
-    #     ``override_font_name`` counter (L-0029 section 3).  Calling the body
-    #     means replaying the displaced prologue and popping it afterwards,
-    #     and it leaves ``reentries`` at 0.
+    #     L-0031), so the two string_views live in our own 32-byte slot;
+    #   * we never call ``site_rva`` itself -- that is our hook entry, and
+    #     bag6..bag9 re-entered the hook on every nested write (L-0029 §3).
     if write:
         prop_len = len(prop)
         font_len = len(font_name.encode("ascii"))
-        # keep rsp 16-aligned at the call: (dlen + sub_x) % 16 == 0
-        sub_x = 0x30 + ((16 - (dlen % 16)) % 16)
+        # ``site+dlen`` (the setter body) is NOT a function: the five pushes at
+        # ``site`` are its prologue and its epilogue pops them right before
+        # ``ret``.  So the body must see the original frame:
+        #     [ret] [saved r15] [saved r14] [saved rdi] [saved rbp] [saved rbx]
+        # A ``call`` would push the return address BELOW the replayed saves,
+        # the body's first ``pop r15`` would eat it and ``ret`` would land in
+        # our data (0xC0000096 at cave+code_len, L-0034b).  Hence: replay the
+        # prologue, push a return address, ``jmp`` -- and the body's ``ret``
+        # pops it with the five saves still on top.  Stack alignment matches
+        # the original exactly (rsp % 16 == 0 at the body entry).
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+marker]
         fixups.append((len(code) - 4, b"marker"))
         code += b"\xff\x80" + struct.pack("<I", 0x1C70)  # inc [rax+0x1c70] calls
-        code += displaced  # replayed prologue: push rbx..r15
-        code += b"\x48\x83\xec" + struct.pack("<B", sub_x)  # sub rsp, sub_x
+        # string_views: {ptr,len} at [rsp] and [rsp+0x10].  That is the cave's
+        # own 32-byte slot, above everything the body touches (its frame sits
+        # below the return address pushed further down).
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+prop_name]
         fixups.append((len(code) - 4, b"prop_name"))
-        code += b"\x48\x89\x44\x24\x20"  # mov [rsp+0x20], rax   (name ptr)
-        code += b"\x48\xc7\x44\x24\x28" + struct.pack(
+        code += b"\x48\x89\x04\x24"  # mov [rsp], rax        (name ptr)
+        code += b"\x48\xc7\x44\x24\x08" + struct.pack(
             "<I", prop_len
-        )  # mov qword [rsp+0x28], len
+        )  # mov qword [rsp+8], len
         code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+font_value]
         fixups.append((len(code) - 4, b"font_value"))
-        code += b"\x48\x89\x44\x24\x30"  # mov [rsp+0x30], rax   (value ptr)
-        code += b"\x48\xc7\x44\x24\x38" + struct.pack(
+        code += b"\x48\x89\x44\x24\x10"  # mov [rsp+0x10], rax   (value ptr)
+        code += b"\x48\xc7\x44\x24\x18" + struct.pack(
             "<I", font_len
-        )  # mov qword [rsp+0x38], len
+        )  # mov qword [rsp+0x18], len
         code += b"\x48\x8b\xcb"  # mov rcx, rbx          (control)
-        code += b"\x48\x8d\x54\x24\x20"  # lea rdx, [rsp+0x20]  (&name_sv)
-        code += b"\x4c\x8d\x44\x24\x30"  # lea r8, [rsp+0x30]   (&value_sv)
+        code += b"\x48\x8d\x14\x24"  # lea rdx, [rsp]        (&name_sv)
+        code += b"\x4c\x8d\x44\x24\x10"  # lea r8, [rsp+0x10]   (&value_sv)
+        # rsp is Q here and the two views sit at [Q, Q+0x20).  Reserve 8 bytes
+        # below them first: the replayed prologue then lands at Q-0x40..Q-8
+        # with the return address in the last slot above it, i.e. the original
+        # frame `[ret][saved rbx]..[saved r15]`.  Body entry rsp == Q-0x40 is
+        # 16-aligned, as it was after the real prologue.
+        code += b"\x48\x83\xec\x08"  # sub rsp, 8
+        code += displaced  # replay the entry prologue (saved regs)
+        code += b"\x48\x8d\x05\0\0\0\0"  # lea rax, [rip+cont]
+        cont_fix = len(code) - 4
+        code += b"\x48\x89\x44\x24\x28"  # mov [rsp+0x28], rax (return address)
         code += b"\x4c\x8d\x1d\0\0\0\0"  # lea r11, [rip+site_body]
         fixups.append((len(code) - 4, b"site_body"))
-        code += b"\x41\xff\xd3"  # call r11
-        code += b"\x48\x83\xc4" + struct.pack("<B", sub_x)  # add rsp, sub_x
-        code += pop_bytes  # pop r15..rbx (reverse of the replayed prologue)
+        code += b"\x41\xff\xe3"  # jmp r11
+        struct.pack_into("<i", code, cont_fix, len(code) - (cont_fix + 4))
+        # cont: the body's epilogue popped the five saves and its `ret` popped
+        # our address, so rsp is Q again -- exactly where the read path leaves
+        # it, ready for the marker counters and the shared epilogue.
         code += b"\x48\x8d\x0d\0\0\0\0"  # lea rcx, [rip+marker]
         fixups.append((len(code) - 4, b"marker"))
         code += b"\x88\x81" + struct.pack("<I", 0x1C7C)  # mov [rcx+0x1c7c], al
@@ -1200,7 +1242,8 @@ def build_caption_font_hook(
     code += b"\xff\x88\x14\x1a\0\0"  # dec dword [rax+0x1a14]
     for p in (jne1, jne2, jne3, jne4):
         struct.pack_into("<i", code, p + 2, done - (p + 6))
-    struct.pack_into("<i", code, jmiss + 1, done - (jmiss + 5))
+    if jmiss is not None:
+        struct.pack_into("<i", code, jmiss + 1, done - (jmiss + 5))
     struct.pack_into("<i", code, g2 + 1, done - (g2 + 5))
     code += b"\x48\x83\xc4\x20"  # add rsp, 0x20
     code += b"\x41\x5b\x41\x5a\x41\x59\x41\x58\x5e\x5a\x59\x58"
@@ -1246,9 +1289,7 @@ def build_caption_font_hook(
         "<i", blob, jmp_pos + 1, (site_rva + dlen) - (blob_rva + jmp_pos + 5)
     )
     site_patch = (
-        b"\xe9"
-        + struct.pack("<i", blob_rva - (site_rva + 5))
-        + b"\x90" * (dlen - 5)
+        b"\xe9" + struct.pack("<i", blob_rva - (site_rva + 5)) + b"\x90" * (dlen - 5)
     )
     return (bytes(blob), site_patch, data_off[b"marker"][0], dlen, code_len)
 
@@ -1304,41 +1345,52 @@ def self_test(verbose=True):
         blob_rva = 0xBF3000
         for prop in ("font_name", "override_font_name"):
             for write in (True, False):
-                blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
-                    blob_rva, site, "menu", prop, write=write, displaced=disp
-                )
-                tag = f"{label} {prop} write={int(write)}"
-                problems = audit(blob, code_len, site, dlen, blob_rva)
-                if len(patch) != len(disp):
-                    problems.append(
-                        f"site patch is {len(patch)} bytes, displaced {len(disp)}"
+                for accept in (False, True):
+                    blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
+                        blob_rva,
+                        site,
+                        "menu",
+                        prop,
+                        write=write,
+                        displaced=disp,
+                        accept_all=accept,
                     )
-                if patch[0] != 0xE9:
-                    problems.append("site patch does not start with jmp rel32")
-                jmp_tgt = site + 5 + struct.unpack_from("<i", patch, 1)[0]
-                if jmp_tgt != blob_rva:
-                    problems.append(f"site patch jumps to {jmp_tgt:#x}, not the cave")
-                if not (0 <= marker_off < len(blob)):
-                    problems.append("marker offset outside the blob")
-                for field in (WRITE_CALLS, WRITE_OK, WRITE_FAIL, WRITE_LAST):
-                    if field >= MARKER_SIZE:
-                        problems.append(f"marker field {field:#x} outside the marker")
-                if b"\0" * MARKER_SIZE not in blob:
-                    problems.append("marker is not MARKER_SIZE zero bytes")
-                if b"menu\0" not in blob:
-                    problems.append("font value literal missing from the blob")
-                if prop.encode("ascii") + b"\0" not in blob:
-                    problems.append("prop name literal missing from the blob")
-                if problems:
-                    ok = False
-                    for p in problems:
-                        print(f"FAIL {tag}: {p}")
-                elif verbose:
-                    print(
-                        f"ok   {tag}: cave {len(blob)} B "
-                        f"(code {code_len} B), site patch {len(patch)} B, "
-                        f"marker +{marker_off:#x}"
-                    )
+                    tag = f"{label} {prop} write={int(write)} all={int(accept)}"
+                    problems = audit(blob, code_len, site, dlen, blob_rva)
+                    if len(patch) != len(disp):
+                        problems.append(
+                            f"site patch is {len(patch)} bytes, displaced {len(disp)}"
+                        )
+                    if patch[0] != 0xE9:
+                        problems.append("site patch does not start with jmp rel32")
+                    jmp_tgt = site + 5 + struct.unpack_from("<i", patch, 1)[0]
+                    if jmp_tgt != blob_rva:
+                        problems.append(
+                            f"site patch jumps to {jmp_tgt:#x}, not the cave"
+                        )
+                    if not (0 <= marker_off < len(blob)):
+                        problems.append("marker offset outside the blob")
+                    for field in (WRITE_CALLS, WRITE_OK, WRITE_FAIL, WRITE_LAST):
+                        if field >= MARKER_SIZE:
+                            problems.append(
+                                f"marker field {field:#x} outside the marker"
+                            )
+                    if b"\0" * MARKER_SIZE not in blob:
+                        problems.append("marker is not MARKER_SIZE zero bytes")
+                    if b"menu\0" not in blob:
+                        problems.append("font value literal missing from the blob")
+                    if prop.encode("ascii") + b"\0" not in blob:
+                        problems.append("prop name literal missing from the blob")
+                    if problems:
+                        ok = False
+                        for p in problems:
+                            print(f"FAIL {tag}: {p}")
+                    elif verbose:
+                        print(
+                            f"ok   {tag}: cave {len(blob)} B "
+                            f"(code {code_len} B), site patch {len(patch)} B, "
+                            f"marker +{marker_off:#x}"
+                        )
     return ok
 
 
@@ -1367,8 +1419,12 @@ def main():
     blob_rva = int(args.blob_rva, 16)
     disp = bytes.fromhex(args.site_head) if args.site_head else DEFAULT_DISPLACED_091
     blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
-        blob_rva, site, args.font, args.prop,
-        write=not args.no_write, displaced=disp,
+        blob_rva,
+        site,
+        args.font,
+        args.prop,
+        write=not args.no_write,
+        displaced=disp,
     )
     if args.dump_asm:
         lines = [

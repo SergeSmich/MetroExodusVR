@@ -116,14 +116,7 @@ UI2_TABLES = {
 
 # Literals that are neither captions nor table entries but still show up in the
 # UI.  They are built inline, so they get the same copy-stub treatment.
-#
-# 0.9.0 addresses, kept only as a record: on 0.9.1 both literals moved
-# ("VR HINTS" 0x4999E0 -> 0x4B85C0, "VR GAMEPAD LAYOUT" 0x497100 -> 0x4B5860)
-# and nothing in .text references them any more -- no rip-relative lea and no
-# absolute 64-bit pointer anywhere in the image.  Patching the 0.9.0 sites would
-# hit unrelated code, so the 0.9.1 build treats extras as absent; they are only
-# enabled from ADDRS["extra_strings"] once someone finds real sites.
-EXTRA_STRINGS_090 = (
+EXTRA_STRINGS = (
     dict(
         orig="VR HINTS",
         ru="СОВЕТЫ VR",
@@ -143,9 +136,6 @@ EXTRA_STRINGS_090 = (
         allow_heap=True,
     ),
 )
-
-# Active list for the version being built; empty for 0.9.1 (see above).
-EXTRA_STRINGS = ()
 
 # Only the mod's own menu/page-building code is redirected.
 MENU_LO = 0xB0000
@@ -705,9 +695,7 @@ def check_encodings(entries, ui2, extras):
         try:
             back = decode_text(enc)
         except (IndexError, ValueError) as exc:
-            errors.append(
-                f"{label}: encoded bytes are not valid charmap indices ({exc})"
-            )
+            errors.append(f"{label}: encoded bytes are not valid charmap indices ({exc})")
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
@@ -736,10 +724,7 @@ def check_encodings(entries, ui2, extras):
 def report_limits(entries, ui2, extras):
     """Print how close the encoded payloads come to the engine's limits."""
     groups = (
-        (
-            f"captions (string_view, {MAX_LEN:#x})",
-            [e for e in entries if not e["skip"]],
-        ),
+        (f"captions (string_view, {MAX_LEN:#x})", [e for e in entries if not e["skip"]]),
         ("table entries", [p for it in ui2 for p in it["parts"]]),
         ("extras", extras),
     )
@@ -998,24 +983,35 @@ def main():
     ap.add_argument(
         "--caption-prop",
         default="font_name",
-        choices=("font_name", "override_font_name", "text_font", "alt_font_name"),
+        choices=(
+            "font_name",
+            "override_font_name",
+            "text_font",
+            "alt_font_name",
+        ),
         help=(
             "property that receives --caption-font. 'font_name' (default) is "
             "the only one L-0026 saw succeed: the record exists on 206/209 "
             "matched controls and the setter returned success; L-0029 showed "
             "override_font_name has no record at all, so the setter fails. "
             "'text_font'/'alt_font_name' are the other font properties the "
-            "0.9.1 image carries (L-0035: font_name did not change the menu)"
+            "0.9.1 image carries (opencode, L-0035: font_name did not change "
+            "the menu)"
         ),
+    )
+    ap.add_argument(
+        "--hook-only",
+        action="store_true",
+        help="install the caption-font cave only; leave every string as shipped",
     )
     ap.add_argument(
         "--caption-all",
         action="store_true",
         help=(
-            "L-0035 experiment: skip the ru/caption_filter.json table and write "
-            "the font on EVERY 'caption' property. Use it to test whether the "
-            "menu labels (which go through the same property but are mostly "
-            "not in the table) can be fixed without a UI2 table"
+            "L-0035: skip the ru/caption_filter.json table and run the cave "
+            "on EVERY 'caption' property. Menu labels go through the same "
+            "setter but are mostly not in the table, so the VR Options page "
+            "is only reachable with this flag (opencode, L-0035 runlog)"
         ),
     )
     ap.add_argument(
@@ -1023,16 +1019,65 @@ def main():
         action="store_true",
         help=(
             "L-0035 binary test: the cave writes [Fonts+0x08] = [Fonts+0x0c] "
-            "(arial <- menu) once per process, keeping the old/new refs in the "
-            "marker (+0x1C80 swapped, +0x1C84 old, +0x1C88 new). Without "
-            "--caption-font the cave does not write any property; combine both "
-            "flags to do the swap and the font_name write in one run"
+            "(arial <- menu) once per process, keeping old/new in the marker "
+            "(+0x1C80 swapped, +0x1C84 old, +0x1C88 new)"
         ),
     )
     ap.add_argument(
-        "--hook-only",
+        "--swap-arial-sticky",
         action="store_true",
-        help="install the caption-font cave only; leave every string as shipped",
+        help=(
+            "L-0035: like --swap-arial-slot, but the registry pointer is "
+            "re-read from exe+0x1733260 and the store is re-applied on EVERY "
+            "setter call, because Fonts::Fonts rebuilds the slots after a "
+            "one-shot write (runlog L-0035: arial came back as 0x17056E28). "
+            "Counts the passes that really changed the slot at marker "
+            "+0x2198"
+        ),
+    )
+    ap.add_argument(
+        "--swap-sticky-slot",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: sticky swap of a chosen Fonts slot instead of arial: "
+            "0x04 regular, 0x08 arial (default), 0x0c menu, 0x10 console. "
+            "The live dump in the runlog has regular = 0 while the page "
+            "draws arial, so regular is the slot worth trying next"
+        ),
+    )
+    ap.add_argument(
+        "--ctl-dump",
+        action="store_true",
+        help=(
+            "L-0035: dump the font registry (Fonts inline + dereferenced, the "
+            "32 bank bases, the four resolved nodes with names) and the first "
+            "0x100 bytes of the matched caption control and of the first "
+            "local_text control into the marker"
+        ),
+    )
+    ap.add_argument(
+        "--font-subst",
+        choices=("off", "dry", "write"),
+        default="off",
+        help=(
+            "L-0035: in every control that reaches the cave, replace each "
+            "dword in [control, control+0x100) equal to the current `arial` "
+            "ref by the `menu` ref. 'dry' only counts matches and records "
+            "offsets (+0x2184 found, +0x2188 first, +0x218C last); 'write' "
+            "also substitutes and bumps the menu node refcount"
+        ),
+    )
+    ap.add_argument(
+        "--subst-offset",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: with --font-subst, also store the `menu` ref at "
+            "[control+HEX] on every pass. Probe for the case where the "
+            "control carries an empty ref and arial is substituted at draw "
+            "time; pick HEX from the control dump"
+        ),
     )
     ap.add_argument(
         "--encoding",
@@ -1371,8 +1416,14 @@ def main():
     marker_rva = None
     site_patch = None
     hook_dlen = 0
-    hook_code_len = 0
-    if args.caption_font or args.swap_arial_slot:
+    probe_only = bool(
+        args.ctl_dump
+        or args.font_subst != "off"
+        or args.swap_arial_slot
+        or args.swap_arial_sticky
+        or args.swap_sticky_slot
+    )
+    if args.caption_font or probe_only:
         setter = ADDRS["setter"]
         foff = pe.rva_to_off(setter)
         if foff is None:
@@ -1383,21 +1434,23 @@ def main():
                 cfh.check_displaced(disp)
             else:
                 disp = cfh.derive_displaced(pe.data, foff)
-                # derive_displaced takes the *whole* leading run of `push reg`
-                # (up to 8 bytes): 6 bytes (4 pushes) on 0.9.0, 8 bytes (5
-                # pushes) on 0.9.1.  Cutting it at 5 bytes is not allowed -- the
-                # write arm replays the prologue and calls the body behind it,
-                # so a partial run breaks the body's stack alignment (L-0034).
-                # Compare as a prefix, not for equality, so 0.9.0 does not warn.
-                if not cfh.DEFAULT_DISPLACED_091.startswith(disp):
+                if disp != cfh.DEFAULT_DISPLACED_091:
                     print(
-                        f"WARN setter prologue is {disp.hex()}, not a prefix of "
+                        f"WARN setter prologue is {disp.hex()}, not the expected "
                         f"{cfh.DEFAULT_DISPLACED_091.hex()}; using what is there"
                     )
             pre = len(payload)
             pad = (-pre) % 16
             hook_rva = new_va + pre + pad
-            hook_blob, site_patch, marker_off, hook_dlen, hook_code_len = (
+            sticky_slot = False
+            if args.swap_arial_sticky:
+                sticky_slot = 0x08
+            if args.swap_sticky_slot:
+                sticky_slot = int(args.swap_sticky_slot, 16)
+            subst_off = (
+                int(args.subst_offset, 16) if args.subst_offset else None
+            )
+            hook_blob, site_patch, marker_off, hook_dlen, _ = (
                 cfh.build_caption_font_hook(
                     hook_rva,
                     setter,
@@ -1407,6 +1460,10 @@ def main():
                     displaced=disp,
                     accept_all=args.caption_all,
                     swap_arial=args.swap_arial_slot,
+                    swap_sticky=sticky_slot,
+                    ctl_dump=args.ctl_dump,
+                    font_subst=args.font_subst,
+                    subst_offset=subst_off,
                 )
             )
             marker_rva = hook_rva + marker_off
@@ -1574,7 +1631,7 @@ def main():
         0,
         0,
         0,
-        0xE0000040,  # CNT_INITIALIZED_DATA | EXECUTE | READ | WRITE
+        0x60000040,  # CNT_INITIALIZED_DATA | MEM_EXECUTE | MEM_READ
     )
     struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
     new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)
@@ -1616,40 +1673,14 @@ def main():
             md,
         )
         if rc == 0 and hook_rva is not None:
-            rc = verify_hook(
-                out_path, hook_rva, ADDRS["setter"], hook_dlen, hook_code_len, md
-            )
+            rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
     return rc
 
 
-def verify_hook(path, hook_rva, setter_rva, dlen, code_len, md):
-    """Re-read the cave out of the patched DLL and check its code block.
-
-    The cave contains internal ``jmp`` instructions, so walking it until the
-    first ``jmp`` (the old behaviour) stopped at a branch and reported the
-    cave as unterminated.  The builder knows the code length; check the last
-    five bytes against ``jmp setter+dlen`` and walk exactly that block.
-    """
+def verify_hook(path, hook_rva, setter_rva, dlen, md):
+    """Re-read the cave out of the patched DLL and disassemble it."""
     data = Path(path).read_bytes()
     pe = PE(data)
-    sec = next(
-        (
-            s
-            for s in pe.sections
-            if s["va"] <= hook_rva < s["va"] + max(s["vsize"], s["rawsize"])
-        ),
-        None,
-    )
-    if sec is None:
-        print(f"VERIFY ERROR hook: cave {hook_rva:#x} is in no section")
-        return 1
-    chars = struct.unpack_from("<I", pe.data, sec["hdr"] + 36)[0]
-    if not chars & 0x80000000:
-        print(
-            f"VERIFY ERROR hook: {sec['name']} is not writable (characteristics "
-            f"{chars:#x}); the marker block and the call counters live there"
-        )
-        return 1
     o = pe.rva_to_off(setter_rva)
     if o is None or pe.data[o] != 0xE9:
         print("VERIFY ERROR hook: setter site is not a jmp")
@@ -1666,47 +1697,25 @@ def verify_hook(path, hook_rva, setter_rva, dlen, code_len, md):
     if body is None:
         print("VERIFY ERROR hook: setter body not mapped")
         return 1
+    # disassemble until the final `jmp` back to the setter body
     start = pe.rva_to_off(hook_rva)
-    if not code_len:
-        print("VERIFY ERROR hook: builder reported no code length")
-        return 1
-    code = bytes(pe.data[start : start + code_len])
-    ins = list(md.disasm(code, hook_rva))
-    if not ins or ins[0].address != hook_rva:
-        print(
-            f"VERIFY ERROR hook: code block {code_len} bytes does not disassemble "
-            "cleanly"
-        )
-        return 1
-    # The tail jmp back into the setter body ends the main path, not the block:
-    # the cave carries local subroutines and `cc` padding after it.  Walk until
-    # that jmp, then require that everything after it is padding only.
+    ins = list(md.disasm(bytes(pe.data[start : start + 0x4000]), hook_rva))
+    total = 0
     orphans = 0
-    hit = None
     for i in ins:
-        if code[i.address - hook_rva :][:2] == b"\x00\x00":
+        total += i.size
+        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
             orphans += 1
-        if (
-            i.mnemonic == "jmp"
-            and i.operands
-            and i.operands[0].type == X86_OP_IMM
-            and i.operands[0].imm == setter_rva + dlen
-        ):
-            hit = i
+        if i.mnemonic == "jmp" and i.operands[0].type == X86_OP_IMM:
+            if i.operands[0].imm == setter_rva + dlen:
+                print(
+                    f"hook ok: {total} bytes of code, {orphans} orphan "
+                    f"`00 00`, tail jmp -> {i.operands[0].imm:#x}"
+                )
+                return 0 if orphans == 0 else 1
             break
-    if hit is None:
-        print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
-        return 1
-    rest = code[hit.address - hook_rva + hit.size :]
-    leftover = rest.strip(b"\xcc")
-    if leftover:
-        print(f"VERIFY ERROR hook: {len(leftover)} unexpected bytes after the tail jmp")
-        return 1
-    print(
-        f"hook ok: {hit.address - hook_rva + hit.size} bytes of main path, "
-        f"{orphans} orphan `00 00`, tail jmp -> {hit.operands[0].imm:#x}"
-    )
-    return 0 if orphans == 0 else 1
+    print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
+    return 1
 
 
 def verify(

@@ -1,9 +1,13 @@
 """Read the caption-font-hook marker out of a live MetroExodus process.
 
-The cave writes its counters into MetroExodusVR.dll+0xbf4dac (marker RVA from
-the 0.9.1 build).  Reading it while the game is up is the only way to tell
-"the write never happened" from "the engine ignored the new font" without
-another round through the chat.
+The cave writes its counters into MetroExodusVR.dll + marker RVA.  Reading it
+while the game is up is the only way to tell "the write never happened" from
+"the engine ignored the new font" without another round through the chat.
+
+The marker RVA moves with the cave options (it sits after the code), so the
+build prints it ("marker +0x...").  Defaults: 0xBF4DAC for the property-only
+build, 0xBF4D8C for the ``--swap-arial-slot`` build.  Override on the command
+line: ``python work/marker_live.py <hex-rva>``.
 """
 
 import ctypes
@@ -13,7 +17,7 @@ from ctypes import wintypes
 
 import psutil
 
-MARKER_RVA = int(sys.argv[1], 16) if len(sys.argv) > 1 else 0xBF4DAC
+MARKER_RVA = int(sys.argv[1], 16) if len(sys.argv) > 1 else 0xBF4D8C
 
 FIELDS = [
     (0x1C00, "<I", "probe_calls"),
@@ -30,6 +34,15 @@ FIELDS = [
     (0x1C74, "<I", "set_ok"),
     (0x1C78, "<I", "set_fail"),
     (0x1C7C, "<I", "set_last"),
+    (0x1C80, "<I", "swap_done"),
+    (0x1C84, "<I", "swap_old_ref"),
+    (0x1C88, "<I", "swap_new_ref"),
+    (0x1A1C, "<Q", "exe_base"),
+    (0x1A2C, "<Q", "fonts_ptr"),
+    (0x1A34, "<I", "font_h0_regular?"),
+    (0x1A38, "<I", "font_h1_arial?"),
+    (0x1A3C, "<I", "font_h2_menu?"),
+    (0x1A40, "<I", "font_h3_console?"),
 ]
 
 k32 = ctypes.WinDLL("kernel32", use_last_error=True)

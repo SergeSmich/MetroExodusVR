@@ -389,6 +389,33 @@ def emit_ctrl_scan(out_off, out_slot, base, fixups):
     return bytes(b)
 
 
+def _check_swap_encoding(code):
+    """Assert the arial->menu swap block really moves r11d, not r10d.
+
+    The first version had ModRM 0x91/0x50 with REX.R set, i.e. both stores
+    used r10d (the *old* arial ref): the swap silently wrote the old handle
+    back into the arial slot and only the marker showed the new value.
+    Encoding is not reviewable by eye, so the block is disassembled at build
+    time and the three memory operations are pinned here.
+    """
+    want = [
+        "mov r10d, dword ptr [rax + 8]",
+        "mov r11d, dword ptr [rax + 0xc]",
+        "mov dword ptr [rcx + 0x1c84], r10d",
+        "mov dword ptr [rcx + 0x1c88], r11d",
+        "mov dword ptr [rax + 8], r11d",
+    ]
+    got = [f"{i.mnemonic} {i.op_str}" for i in _disasm(code)]
+    missing = [w for w in want if w not in got]
+    if missing:
+        raise AssertionError(
+            "swap block encoding wrong, expected "
+            + "; ".join(missing)
+            + " in "
+            + " | ".join(got)
+        )
+
+
 def build_caption_font_hook(
     blob_rva,
     site_rva,
@@ -397,6 +424,7 @@ def build_caption_font_hook(
     write=True,
     displaced=None,
     accept_all=False,
+    swap_arial=False,
 ):
     """Code cave for the property setter ``site_rva``.
 
@@ -497,6 +525,50 @@ def build_caption_font_hook(
     fz3 = len(code)
     code += b"\x72\0"  # jb floop
     fonts_done = len(code)
+
+    # --- L-0035: one-time arial -> menu slot swap ----------------------------
+    # A-0027 §5 / A-0030 §4.4 / A-0031 §3: the only remaining binary test for
+    # "our captions are drawn with `arial`".  The mod never sets a font, the
+    # exe falls back to the `arial` slot of the live `Fonts` object; the menu
+    # labels go through the same caption property.  If the captions turn
+    # Cyrillic after this write, the font is taken from the slot and the fix
+    # is one dword.  If nothing changes, the font is pinned per class.
+    #
+    # `Fonts` is a heap object (lazy singleton at exe+0x1733260), so the slot
+    # write needs no VirtualProtect.  Slot layout (L-0030 §2.1):
+    #   +0x04 regular, +0x08 arial, +0x0c menu, +0x10 console
+    # Do it once per process, only when the `menu` handle is already resolved;
+    # otherwise retry on the next setter call.  Never write a zero handle.
+    swap_done = None
+    swap_start = len(code)
+    if swap_arial:
+        code += b"\x48\x8b\x81\x2c\x1a\0\0"  # mov rax, [rcx+0x1a2c] (Fonts*)
+        code += b"\x48\x85\xc0"  # test rax, rax
+        sw1 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je swap_done
+        code += b"\x83\xb9\x80\x1c\0\0\x00"  # cmp dword [rcx+0x1c80], 0
+        sw2 = len(code)
+        code += b"\x0f\x85\0\0\0\0"  # jne swap_done (already swapped)
+        code += b"\x44\x8b\x50\x08"  # mov r10d, [rax+0x08] (old arial ref)
+        code += b"\x44\x8b\x58\x0c"  # mov r11d, [rax+0x0c] (menu ref)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        sw3 = len(code)
+        code += b"\x75\0"  # jne swap_have (slot already resolved)
+        code += b"\x44\x8b\x99\xe4\x1b\0\0"  # mov r11d, [rcx+0x1be4] probe
+        swap_have = len(code)
+        code += b"\x45\x85\xdb"  # test r11d, r11d
+        sw4 = len(code)
+        code += b"\x0f\x84\0\0\0\0"  # je swap_done (no menu handle yet)
+        code += b"\x44\x89\x91\x84\x1c\0\0"  # mov [rcx+0x1c84], r10d (old)
+        code += b"\x44\x89\x99\x88\x1c\0\0"  # mov [rcx+0x1c88], r11d (new)
+        code += b"\x44\x89\x58\x08"  # mov [rax+0x08], r11d (arial <- menu)
+        code += b"\xc7\x81\x80\x1c\0\0\x01\0\0\0"  # mov dword [rcx+0x1c80], 1
+        swap_done = len(code)
+        struct.pack_into("<i", code, sw1 + 2, swap_done - (sw1 + 6))
+        struct.pack_into("<i", code, sw2 + 2, swap_done - (sw2 + 6))
+        struct.pack_into("<i", code, sw4 + 2, swap_done - (sw4 + 6))
+        struct.pack_into("<b", code, sw3 + 1, swap_have - (sw3 + 2))
+        _check_swap_encoding(bytes(code[swap_start:swap_done]))
 
     # --- bag12: probe the exe font manager -----------------------------------
     # Fonts::Fonts (exe 0x39b5f0) resolves regular/arial/menu/console once at
@@ -1344,53 +1416,59 @@ def self_test(verbose=True):
     ):
         blob_rva = 0xBF3000
         for prop in ("font_name", "override_font_name"):
-            for write in (True, False):
-                for accept in (False, True):
-                    blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
-                        blob_rva,
-                        site,
-                        "menu",
-                        prop,
-                        write=write,
-                        displaced=disp,
-                        accept_all=accept,
+            for write, accept, swap in (
+                (True, False, False),
+                (True, True, False),
+                (False, False, False),
+                (False, True, False),
+                (False, False, True),
+                (True, False, True),
+            ):
+                blob, patch, marker_off, dlen, code_len = build_caption_font_hook(
+                    blob_rva,
+                    site,
+                    "menu",
+                    prop,
+                    write=write,
+                    displaced=disp,
+                    accept_all=accept,
+                    swap_arial=swap,
+                )
+                tag = (
+                    f"{label} {prop} write={int(write)} all={int(accept)} "
+                    f"swap={int(swap)}"
+                )
+                problems = audit(blob, code_len, site, dlen, blob_rva)
+                if len(patch) != len(disp):
+                    problems.append(
+                        f"site patch is {len(patch)} bytes, displaced {len(disp)}"
                     )
-                    tag = f"{label} {prop} write={int(write)} all={int(accept)}"
-                    problems = audit(blob, code_len, site, dlen, blob_rva)
-                    if len(patch) != len(disp):
-                        problems.append(
-                            f"site patch is {len(patch)} bytes, displaced {len(disp)}"
-                        )
-                    if patch[0] != 0xE9:
-                        problems.append("site patch does not start with jmp rel32")
-                    jmp_tgt = site + 5 + struct.unpack_from("<i", patch, 1)[0]
-                    if jmp_tgt != blob_rva:
-                        problems.append(
-                            f"site patch jumps to {jmp_tgt:#x}, not the cave"
-                        )
-                    if not (0 <= marker_off < len(blob)):
-                        problems.append("marker offset outside the blob")
-                    for field in (WRITE_CALLS, WRITE_OK, WRITE_FAIL, WRITE_LAST):
-                        if field >= MARKER_SIZE:
-                            problems.append(
-                                f"marker field {field:#x} outside the marker"
-                            )
-                    if b"\0" * MARKER_SIZE not in blob:
-                        problems.append("marker is not MARKER_SIZE zero bytes")
-                    if b"menu\0" not in blob:
-                        problems.append("font value literal missing from the blob")
-                    if prop.encode("ascii") + b"\0" not in blob:
-                        problems.append("prop name literal missing from the blob")
-                    if problems:
-                        ok = False
-                        for p in problems:
-                            print(f"FAIL {tag}: {p}")
-                    elif verbose:
-                        print(
-                            f"ok   {tag}: cave {len(blob)} B "
-                            f"(code {code_len} B), site patch {len(patch)} B, "
-                            f"marker +{marker_off:#x}"
-                        )
+                if patch[0] != 0xE9:
+                    problems.append("site patch does not start with jmp rel32")
+                jmp_tgt = site + 5 + struct.unpack_from("<i", patch, 1)[0]
+                if jmp_tgt != blob_rva:
+                    problems.append(f"site patch jumps to {jmp_tgt:#x}, not the cave")
+                if not (0 <= marker_off < len(blob)):
+                    problems.append("marker offset outside the blob")
+                for field in (WRITE_CALLS, WRITE_OK, WRITE_FAIL, WRITE_LAST):
+                    if field >= MARKER_SIZE:
+                        problems.append(f"marker field {field:#x} outside the marker")
+                if b"\0" * MARKER_SIZE not in blob:
+                    problems.append("marker is not MARKER_SIZE zero bytes")
+                if b"menu\0" not in blob:
+                    problems.append("font value literal missing from the blob")
+                if prop.encode("ascii") + b"\0" not in blob:
+                    problems.append("prop name literal missing from the blob")
+                if problems:
+                    ok = False
+                    for p in problems:
+                        print(f"FAIL {tag}: {p}")
+                elif verbose:
+                    print(
+                        f"ok   {tag}: cave {len(blob)} B "
+                        f"(code {code_len} B), site patch {len(patch)} B, "
+                        f"marker +{marker_off:#x}"
+                    )
     return ok
 
 
@@ -1407,6 +1485,11 @@ def main():
         choices=("font_name", "override_font_name"),
     )
     ap.add_argument("--no-write", action="store_true", help="read-only probe (bag15)")
+    ap.add_argument(
+        "--swap-arial-slot",
+        action="store_true",
+        help="L-0035: one-time [Fonts+0x08] = [Fonts+0x0c] (arial <- menu)",
+    )
     ap.add_argument(
         "--site-head",
         default=None,
@@ -1425,6 +1508,7 @@ def main():
         args.prop,
         write=not args.no_write,
         displaced=disp,
+        swap_arial=args.swap_arial_slot,
     )
     if args.dump_asm:
         lines = [

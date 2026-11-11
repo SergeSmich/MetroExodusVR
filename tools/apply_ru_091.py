@@ -1019,6 +1019,17 @@ def main():
         ),
     )
     ap.add_argument(
+        "--swap-arial-slot",
+        action="store_true",
+        help=(
+            "L-0035 binary test: the cave writes [Fonts+0x08] = [Fonts+0x0c] "
+            "(arial <- menu) once per process, keeping the old/new refs in the "
+            "marker (+0x1C80 swapped, +0x1C84 old, +0x1C88 new). Without "
+            "--caption-font the cave does not write any property; combine both "
+            "flags to do the swap and the font_name write in one run"
+        ),
+    )
+    ap.add_argument(
         "--hook-only",
         action="store_true",
         help="install the caption-font cave only; leave every string as shipped",
@@ -1361,7 +1372,7 @@ def main():
     site_patch = None
     hook_dlen = 0
     hook_code_len = 0
-    if args.caption_font:
+    if args.caption_font or args.swap_arial_slot:
         setter = ADDRS["setter"]
         foff = pe.rva_to_off(setter)
         if foff is None:
@@ -1390,11 +1401,12 @@ def main():
                 cfh.build_caption_font_hook(
                     hook_rva,
                     setter,
-                    args.caption_font,
+                    args.caption_font or "menu",
                     args.caption_prop,
-                    write=True,
+                    write=bool(args.caption_font),
                     displaced=disp,
                     accept_all=args.caption_all,
+                    swap_arial=args.swap_arial_slot,
                 )
             )
             marker_rva = hook_rva + marker_off

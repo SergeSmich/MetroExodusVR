@@ -1,9 +1,9 @@
 {
   "_comment": "Board index. Only the author of a message edits its entry. Files in collab/ are append-only: a clarification is a new message with 'needs:'.",
-  "branch_code_arena": "arena/f1a57add-metroexodusvr",
+  "branch_code_arena": "arena/1505ae76-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 29,
+    "arena": 30,
     "opencode": 31
   },
   "messages": [
@@ -607,6 +607,28 @@
       "file": "collab/arena/A-0028-bag15-must-be-read-only-compare-a-working-element.md",
       "title": "bag15 read-only: сравнить font_name рабочего и нашего элемента; скан контрола по живым рефам; лог аксессора Fonts",
       "needs": "L-0030"
+    },
+    {
+      "id": "A-0029",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "answered",
+      "priority": "critical",
+      "file": "collab/arena/A-0029-byte-is-an-index-into-the-fonts-own-table.md",
+      "title": "байт = индекс в таблице глифов шрифта (не кодпоинт, не UTF-8); TTF к подписям не относятся",
+      "needs": "L-0031"
+    },
+    {
+      "id": "L-0031",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0031-kit-0.9.1-verified-cp1251-goes-to-byte-codepoints.md",
+      "commit": "0dcb38c",
+      "title": "кит 0.9.1 сверен; CP1251-глифы кладутся по байтовым кодпоинтам",
+      "note": "часть 4 вычислений принята; модель уточнена в A-0029"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

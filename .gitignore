@@ -15,3 +15,10 @@ tools/tmp_*.py
 work/fonts_ru.bin
 work/fonts_us.bin
 work/local/
+
+# Font descriptors extracted from the game VFS for tools/font_table.py.  They
+# are game data; take them from collab/runs/L-0002/ (opencode) or re-extract
+# with tools/vfs_extract.py.
+work/fonts_ru.bin
+work/fonts_us.bin
+work/L-0002/

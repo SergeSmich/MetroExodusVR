@@ -5,7 +5,13 @@ import sys, json, struct
 import pefile
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 
-DLL = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+
+DLL = str(re_paths.DLL)
 
 pe = pefile.PE(DLL, fast_load=True)
 image_base = pe.OPTIONAL_HEADER.ImageBase
@@ -148,7 +154,7 @@ out = {
     "ptr_xrefs": {str(k): v for k, v in ptr_xrefs.items()},
 }
 with open(
-    r"F:\Projects\MetroExodusVR\work\pe_analysis.json", "w", encoding="utf-8"
+    str(re_paths.PE_ANALYSIS), "w", encoding="utf-8"
 ) as f:
     json.dump(out, f, ensure_ascii=False)
 print("saved work/pe_analysis.json")

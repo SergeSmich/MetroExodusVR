@@ -5,9 +5,14 @@ import re, json, io, sys
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_REG_RIP
 
-ROOT = r"F:\Projects\MetroExodusVR"
-DLL = ROOT + r"\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
-PE = json.load(open(ROOT + r"\work\pe_analysis.json", encoding="utf-8"))
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+ROOT = str(re_paths.ROOT)
+DLL = str(re_paths.DLL)
+PE = json.load(open(str(re_paths.PE_ANALYSIS), encoding="utf-8"))
 data = open(DLL, "rb").read()
 sections = PE["sections"]
 IMAGE_BASE = PE["image_base"]
@@ -15,7 +20,7 @@ IMAGE_BASE = PE["image_base"]
 md = Cs(CS_ARCH_X86, CS_MODE_64)
 md.detail = True
 
-FUNCS = json.load(open(ROOT + r"\work\funcs.json", encoding="utf-8"))["funcs"]
+FUNCS = json.load(open(str(re_paths.FUNCS), encoding="utf-8"))["funcs"]
 
 
 def func_start(rva):
@@ -58,7 +63,7 @@ def is_display(s):
 
 def parse_caption_sites():
     out = []
-    for ln in open(ROOT + r"\work\caption_sites.txt", encoding="utf-8"):
+    for ln in open(str(re_paths.WORK / "caption_sites.txt"), encoding="utf-8"):
         m = re.match(r"^0x([0-9A-Fa-f]+)\s+(\S+)\s+(.*?)\s+\|\s+(.*)$", ln.rstrip("\n"))
         if not m:
             continue
@@ -169,7 +174,7 @@ def main():
         plan.append(e)
     json.dump(
         plan,
-        open(ROOT + r"\work\plan.json", "w", encoding="utf-8"),
+        open(str(re_paths.WORK / "plan.json"), "w", encoding="utf-8"),
         ensure_ascii=False,
         indent=1,
     )
@@ -193,7 +198,7 @@ def main():
             buf.write(
                 f"    total={tot} lenconst={blk['len_const']} cap={blk['cap_const']}\n"
             )
-    open(ROOT + r"\work\inline_summary.txt", "w", encoding="utf-8").write(
+    open(str(re_paths.WORK / "inline_summary.txt"), "w", encoding="utf-8").write(
         buf.getvalue()
     )
     print(buf.getvalue())

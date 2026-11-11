@@ -1,9 +1,16 @@
 import json, struct
 import pefile
 
-DLL = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+
+DLL = str(re_paths.DLL)
 A = json.load(
-    open(r"F:\Projects\MetroExodusVR\work\pe_analysis.json", encoding="utf-8")
+    open(str(re_paths.PE_ANALYSIS), encoding="utf-8")
 )
 image_base = A["image_base"]
 strings = {int(k): v for k, v in A["strings"].items()}

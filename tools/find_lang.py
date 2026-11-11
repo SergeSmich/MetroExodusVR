@@ -2,7 +2,7 @@
 
 import os, sys, glob
 
-BASE = r"F:\SteamLibrary\steamapps\common\Metro Exodus"
+BASE = str(re_paths.GAME)
 
 words = ["Настройки", "Графика", "Игра", "Звук", "Управление", "Язык"]
 encs = ["utf-8", "utf-16-le", "cp1251"]

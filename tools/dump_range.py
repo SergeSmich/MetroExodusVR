@@ -1,6 +1,6 @@
 import json, sys
 
-path = r"F:\Projects\MetroExodusVR\work\strings_ascii.json"
+path = str(re_paths.WORK / "strings_ascii.json")
 strings = json.load(open(path, encoding="utf-8"))
 
 lo = int(sys.argv[1], 0) if len(sys.argv) > 1 else 0x496000

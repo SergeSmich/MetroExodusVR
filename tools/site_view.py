@@ -5,9 +5,15 @@ import sys, json
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_REG_RIP
 
-DLL = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL))
+
+
+DLL = str(re_paths.DLL)
 PE = json.load(
-    open(r"F:\Projects\MetroExodusVR\work\pe_analysis.json", encoding="utf-8")
+    open(str(re_paths.PE_ANALYSIS), encoding="utf-8")
 )
 data = open(DLL, "rb").read()
 sections = PE["sections"] if isinstance(PE, dict) and "sections" in PE else PE

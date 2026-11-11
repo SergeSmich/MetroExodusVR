@@ -8,7 +8,11 @@ import pefile
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_REG_RIP
 
-EXE = r"F:\SteamLibrary\steamapps\common\Metro Exodus\MetroExodus.exe"
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+
+EXE = str(re_paths.EXE)
 pe = pefile.PE(EXE, fast_load=True)
 data = open(EXE, "rb").read()
 secs = [

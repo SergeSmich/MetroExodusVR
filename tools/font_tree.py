@@ -6,8 +6,11 @@ import sys
 import zlib
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
-EXE = r"F:\SteamLibrary\steamapps\common\Metro Exodus\MetroExodus.exe"
+EXE = str(re_paths.EXE)
 
 
 def build_names():

@@ -101,9 +101,9 @@ authority, body/hands debug, dev-хоткеи) и подпись «Opened in you
 ## Пересборка перевода вручную
 
 ```bat
-:: проверка таблиц и плана патча
+:: проверка таблиц, кодека и плана патча
 python tools\validate_ui2.py
-python tools\merge_cyrillic.py
+python tools\charmap_codec.py --lng work\stable_ru.lng
 python tools\apply_ru.py --check
 
 :: сборка пропатченного DLL из оригинального
@@ -111,7 +111,10 @@ python tools\apply_ru.py --src work\0.9.0\versions\0.9.0\MetroExodusVR.dll ^
     --out build\MetroExodusVR.dll --verify
 ```
 
-* `merge_cyrillic.py` — вливает кириллицу в TTF мода (`build\fonts\`).
+* `charmap_codec.py` — проверяет, что каждая строка выразима индексами
+  charmap, и что байты декодируются обратно в тот же текст.
+* `merge_cyrillic.py` — вспомогательный инструмент для TTF (в сборке больше
+  не используется: меню рисует шрифт игры).
 * `--check` — валидация переводов и построение плана без записи файла.
 * `--verify` — после записи повторно читает результат и сверяет стабы и патчи.
 * Оригинальный DLL версии 0.9.0 лежит в `work\0.9.0\`; `build\` содержит
@@ -129,18 +132,37 @@ python tools\apply_ru.py --src work\0.9.0\versions\0.9.0\MetroExodusVR.dll ^
 `Ё`/`ё` в таблице отсутствуют и заменяются на `Е`/`е`; неизвестный символ —
 ошибка сборки, а не молчаливый мусор.
 
-Штатные TTF мода (Inter/Barlow) содержат только латиницу, поэтому перед
-патчем `tools/merge_cyrillic.py` вливает в них кириллицу из системного Arial,
-а `apply_ru.py` добавляет готовые файлы в `.ru` и переуказывает на них
-resource data entries (`RCDATA`). Флаг `--no-fonts` оставляет оригинальные
-шрифты — тогда кириллица снова станет квадратами.
+Встроенные TTF мода (Inter/Barlow) — это `RCDATA`-ресурсы плашки со ссылками
+(«Opened in your browser»), к нативному меню они отношения не имеют: меню
+рисует шрифт игры. Поэтому `apply_ru.py` больше **не** подменяет их (флаг
+`--fonts` включает старую подмену, `--no-fonts` оставлен для совместимости
+и ничего не меняет).
+
+Проверить кодек без DLL и без игры:
 
 ```bat
-python tools\merge_cyrillic.py
+python tools\charmap_codec.py --lng work\stable_ru.lng
 python tools\apply_ru.py --check
+```
+
+Сборка:
+
+```bat
 python tools\apply_ru.py --src work\0.9.0\versions\0.9.0\MetroExodusVR.dll ^
     --out build\MetroExodusVR.dll --verify
 ```
+
+`--encoding cp1251` собирает старый вариант с Windows-1251 (оставлен, чтобы
+сравнивать поведение в игре).
+
+### Почему не хватает одной правки кодировки
+
+Часть строк мод рисует **своим** шрифтом (пакет строк вида
+`font_metro_for_menu_main_strings`, US-таблица из 203 записей), а не шрифтом
+игры. Для них индексы RU-charmap выглядят как сдвинутый латинский мусор
+(`ВКЛ` -> `PJ/`) независимо от кодировки байтов в `.ru`. Разбор и точки
+перехвата — в [`ENCODING_NOTES.md`](ENCODING_NOTES.md); там же — как
+отличить по поведению в VR, какой шрифт рисует конкретную строку.
 
 ## Ограничения
 
@@ -159,10 +181,31 @@ python tools\apply_ru.py --src work\0.9.0\versions\0.9.0\MetroExodusVR.dll ^
 | `ru/strings.tsv` | 193 подписи: RVA, оригинал, перевод |
 | `ru/ui2.json` | popups / options / hints / hintpages |
 | `tools/apply_ru.py` | PE-патчер и верификатор |
+| `tools/charmap_codec.py` | проверка кодека charmap без DLL |
+| `ru/ENCODING_NOTES.md` | разбор пути «байты -> глифы», карта кода, варианты фикса |
+| `AGENTS.md` | протокол работы двух агентов (Arena + локальный opencode) |
+| `collab/` | доска задач и отчётов между агентами |
+| `docs/OPENCODE_START.md` | стартовый промпт для локального агента |
 | `tools/validate_ui2.py` | проверка `ui2.json` по таблицам DLL и charmap |
 | `tools/install_ru.py` | установка в игру, бэкапы, `updater.json` |
+| `tools/re_paths.py` | пути для инструментов анализа (см. ниже) |
 | `work/` | дампы, xref-ы и промежуточные данные анализа |
 | `build/` | собранный `MetroExodusVR.dll` |
+
+### Инструменты анализа вне исходной машины
+
+Скрипты разбора (`disasm_func.py`, `xrefs.py`, `plan.py`, ...) больше не
+содержат путей `F:\...`: репозиторий определяется по расположению файла, а
+пути к игре и DLL задаются переменными окружения:
+
+| Переменная | Что задаёт | По умолчанию |
+| --- | --- | --- |
+| `METROEXODUSVR_DLL` | патчируемый `MetroExodusVR.dll` | `work/0.9.0/versions/0.9.0/` |
+| `METROEXODUS_EXE` | `MetroExodus.exe` | `%METROEXODUS_GAME%\MetroExodus.exe` |
+| `METROEXODUS_GAME` | папка игры | `F:\SteamLibrary\steamapps\common\Metro Exodus` |
+
+Если файла нет, инструмент печатает, чего не хватает, и подсказку про
+переменные, а не падает с `FileNotFoundError`.
 
 `work/0.9.0/` (распакованный релиз) и `build/` не хранятся в git — они
 воспроизводятся из архива релиза и `tools/apply_ru.py`.

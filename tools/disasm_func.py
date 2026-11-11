@@ -1,12 +1,20 @@
 """Disassemble a function/range with string and call annotations."""
 
-import json, sys, bisect
+import bisect
+import json
+import sys
+from pathlib import Path
+
 import pefile
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_IMM, X86_OP_MEM, X86_REG_RIP
 
-DLL = r"F:\Projects\MetroExodusVR\work\0.9.0\versions\0.9.0\MetroExodusVR.dll"
-pe = pefile.PE(DLL, fast_load=True)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.DLL), re_paths.XREFS, re_paths.FUNCS)
+
+DLL = str(re_paths.DLL)
+pe = pefile.PE(str(re_paths.DLL), fast_load=True)
 base = pe.OPTIONAL_HEADER.ImageBase
 data = open(DLL, "rb").read()
 sections = [
@@ -31,7 +39,7 @@ def rva_to_off(rva):
     return None
 
 
-A = json.load(open(r"F:\Projects\MetroExodusVR\work\xrefs.json", encoding="utf-8"))
+A = json.load(open(str(re_paths.XREFS), encoding="utf-8"))
 strings = {int(k): v for k, v in A["strings"].items()}
 sorted_s = sorted(strings)
 
@@ -47,7 +55,7 @@ def string_at(t):
     return None
 
 
-F = json.load(open(r"F:\Projects\MetroExodusVR\work\funcs.json", encoding="utf-8"))
+F = json.load(open(str(re_paths.FUNCS), encoding="utf-8"))
 funcs = [tuple(x) for x in F["funcs"]]
 starts = [f[0] for f in funcs]
 calls = {int(k): v for k, v in F["calls"].items()}

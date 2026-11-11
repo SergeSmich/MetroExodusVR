@@ -8,7 +8,13 @@ import sys
 
 from capstone import CS_ARCH_X86, CS_MODE_64, Cs
 
-EXE = r"F:\SteamLibrary\steamapps\common\Metro Exodus\MetroExodus.exe"
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import re_paths  # noqa: E402
+re_paths.require(str(re_paths.EXE))
+
+
+EXE = str(re_paths.EXE)
 
 
 def load():

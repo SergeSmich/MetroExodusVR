@@ -4,22 +4,24 @@
 A port of ``tools/apply_ru.py`` to the 0.9.1 release.  Two things differ from
 the 0.9.0 path, and both are why this is a separate file:
 
-1. **The encoding is settled.**  0.9.1's test kit only offered
-   ``--experimental-cp1251`` and refused to build otherwise, because the
-   encoding question was still open when it was made.  It is not open any
-   more: A-0029 proved that a caption's bytes are *indices into the drawing
-   font's own glyph table*, and for the game's fonts that table is the
-   localization charmap of ``stable_ru.lng``.  L-0032 confirmed it in VR on
-   0.9.1 (CP1251 captions blank, values correct).  So ``charmap`` is the
-   default here and ``--experimental-cp1251`` is only kept so the old command
-   lines still work.
+1. **The encoding is UTF-8, and that was settled live (L-0036).**  A-0029
+   assumed a caption's bytes are *indices into the drawing font's glyph
+   table* (the localization charmap of ``stable_ru.lng``), and L-0032 seemed to
+   confirm it because CP1251 captions came out blank.  Live runs on 0.9.1 show
+   the opposite: charmap indices below 0xE0 are valid ASCII, and the VR page
+   rendered them as Latin letters -- ``TURN MODE`` came out as
+   ``HIcDG <?7?H?:5``, exactly ``ru/charmap.txt`` bytes read as latin-1.  The
+   US charmap decodes those same bytes to a different sequence, so the control
+   text path does not use a charmap at all: it decodes the bytes as UTF-8.
+   Rebuilding with ``--encoding utf8`` put the whole main menu and the VR page
+   in Cyrillic.  ``utf8`` is therefore the default here; ``charmap`` and
+   ``--experimental-cp1251`` are kept for diagnostics only.
 
-2. **The captions need a font, not different bytes.**  The mod never sets a
-   font property, so the engine draws every caption with ``arial``, whose glyph
-   table is ASCII only.  ``--caption-font menu`` installs a code cave over the
-   generic property setter (0x9F0D0) that writes the font on exactly those
-   captions that our translation replaced (positive FNV-1a filter).  See
-   ``tools/caption_font_hook.py``.
+2. **The captions do not need a font swap.**  The mod never sets a font
+   property, and once the bytes are UTF-8 the default font draws Cyrillic
+   fine.  ``--caption-font menu`` (the code cave over the generic property
+   setter 0x9F0D0, see ``tools/caption_font_hook.py``) is now only a probe:
+   the live font-slot experiments changed nothing.
 
 Everything version specific is in ``ADDRS`` below.  The source DLL is pinned by
 SHA-256; passing a different file needs ``--allow-unknown-source``.
@@ -33,6 +35,7 @@ Usage:
 
 import argparse
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -155,14 +158,14 @@ HEAP_BASES = {
 
 CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-# The 4A engine adds no code-page step to its UI text path: a caption's bytes
-# are used directly as glyph indices of the font that draws it, and for the
-# game's own font that mapping is exactly the localization charmap of
-# ``stable_<locale>.lng`` (271 entries for RU).  So the mod's captions carry
-# *charmap indices* -- the same bytes the game's ``.lng`` strings are stored
-# as -- not CP1251 and not UTF-8.  ``--encoding cp1251`` rebuilds the old way
-# for comparison.
-ENCODING = "charmap"
+# The 4A engine's *control caption* path is plain UTF-8: the setter stores the
+# bytes unchanged and the UI decode step turns them into codepoints, then the
+# font draws them.  ``.lng`` strings are a different path (charmap indices) and
+# are not written by this driver.  Live proof in L-0036: charmap bytes for
+# "TURN MODE" (48 49 63 44 47 01 ...) showed up on the VR page as
+# "HIcDG <?7?H?:5", i.e. exactly those bytes under latin-1, while a UTF-8
+# rebuild renders Cyrillic.  ``charmap`` and ``cp1251`` remain for comparison.
+ENCODING = "utf8"
 
 
 def load_charmap(path=None):
@@ -901,8 +904,27 @@ def build_filter(strings_path, out_path):
     return 0
 
 
+def filter_encoding(path=None):
+    """The encoding the filter file was generated with (None if unknown)."""
+    p = Path(path) if path else FILTER_JSON
+    if not p.is_file():
+        return None
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    m = re.search(r"encoding:\s*([a-z0-9]+)", doc.get("encoded_with", ""))
+    return m.group(1) if m else None
+
+
 def check_filter(strings_path, label="filter"):
     """Warn when translated captions would not be recognised by the cave."""
+    built_with = filter_encoding()
+    if built_with is not None and built_with != ENCODING:
+        print(
+            f"WARN {label}: {FILTER_JSON.name} was built with encoding "
+            f"{built_with!r}, the current one is {ENCODING!r}; the table only "
+            f"matters for builds without --caption-all, rebuild it with "
+            f"--build-filter if you need that path"
+        )
+        return 0
     want = set()
     for addr, orig, ru in parse_tsv(Path(strings_path)):
         if ru != orig:
@@ -936,11 +958,12 @@ def self_test():
     for addr, orig, ru in rows:
         enc = encode_text(ru)
         if decode_text(enc) != ru:
-            print(f"FAIL {addr:#x}: {ru!r} does not survive the charmap round trip")
+            print(f"FAIL {addr:#x}: {ru!r} does not survive the {ENCODING} round trip")
             bad += 1
+    extra = f"{len(cm)} charmap entries" if ENCODING == "charmap" else "no charmap"
     print(
-        f"{'ok  ' if not bad else 'FAIL'} charmap round trip: {len(rows)} rows "
-        f"from {STRINGS_TSV.name}, {bad} mismatch(es), {len(cm)} entries"
+        f"{'ok  ' if not bad else 'FAIL'} {ENCODING} round trip: {len(rows)} rows "
+        f"from {STRINGS_TSV.name}, {bad} mismatch(es), {extra}"
     )
     ok = ok and not bad
     ok = check_filter(STRINGS_TSV, "self-test filter") == 0 and ok
@@ -1085,14 +1108,13 @@ def main():
     )
     ap.add_argument(
         "--encoding",
-        choices=("charmap", "cp1251", "utf8"),
-        default="charmap",
+        choices=("utf8", "charmap", "cp1251"),
+        default="utf8",
         help=(
-            "'charmap' (default) writes localization charmap indices, the "
-            "mapping the engine's glyph lookup uses (A-0029); 'cp1251' "
-            "rebuilds the diagnostic build of the 0.9.1 kit; 'utf8' is the "
-            "live-caption test: the VR control text path renders bytes as "
-            "UTF-8, so charmap indices below 0x80 show up as Latin letters"
+            "'utf8' (default) matches the live VR control text path (L-0036); "
+            "'charmap' writes localization charmap indices, which the control "
+            "path renders as Latin letters because every index below 0xE0 is "
+            "ASCII; 'cp1251' rebuilds the diagnostic build of the 0.9.1 kit"
         ),
     )
     ap.add_argument(
@@ -1706,18 +1728,21 @@ def verify_hook(path, hook_rva, setter_rva, dlen, md):
     ins = list(md.disasm(bytes(pe.data[start : start + 0x4000]), hook_rva))
     total = 0
     orphans = 0
+    tail = setter_rva + dlen
     for i in ins:
-        total += i.size
-        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
-            orphans += 1
-        if i.mnemonic == "jmp" and i.operands[0].type == X86_OP_IMM:
-            if i.operands[0].imm == setter_rva + dlen:
+        # the cave has internal `jmp rel32` too; only the one that lands on
+        # the displaced setter body is the tail
+        if i.mnemonic == "jmp" and i.operands and i.operands[0].type == X86_OP_IMM:
+            if i.operands[0].imm == tail:
                 print(
                     f"hook ok: {total} bytes of code, {orphans} orphan "
                     f"`00 00`, tail jmp -> {i.operands[0].imm:#x}"
                 )
                 return 0 if orphans == 0 else 1
-            break
+            continue
+        total += i.size
+        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
+            orphans += 1
     print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
     return 1
 

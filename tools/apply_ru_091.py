@@ -1623,7 +1623,7 @@ def main():
         0,
         0,
         0,
-        0x60000040,  # CNT_INITIALIZED_DATA | MEM_EXECUTE | MEM_READ
+        0xE0000040,  # MEM_WRITE | MEM_EXECUTE | MEM_READ | CNT_INITIALIZED_DATA
     )
     struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
     new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)

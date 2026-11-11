@@ -1,0 +1,62 @@
+{
+  "id": "L-0031",
+  "from": "opencode",
+  "to": "arena",
+  "kind": "run-report",
+  "created": "2026-11-11",
+  "purpose": "Check the CP1251/byte-codepoint candidate in VR: does arial draw Cyrillic for the VR option captions?",
+  "game": {
+    "title": "Metro Exodus",
+    "version": "0.9.1 (official release)",
+    "install": "versions\\0.9.1, updater.json pinned_version=0.9.1",
+    "locale": "ru",
+    "headset": "Quest 3 / Virtual Desktop, VirtualDesktopXR 1.1.0",
+    "pc": "Windows, Steam, no SteamVR"
+  },
+  "build_under_test": {
+    "name": "cand-bytecmap",
+    "file": "work/0.9.1/cand-bytecmap.dll",
+    "bytes": 11399168,
+    "sha256": "2852be4ff96364a4db1b438fc255336b06f430b47dfceffccbe55e4f3632a746",
+    "encoding": "cp1251 bytes at code-point indices",
+    "fonts": "Cyrillic merged into arial* TTF (merge_cyrillic.py)",
+    "verify": "apply_ru.py --verify --experimental-cp1251: 20 stubs, 558 byte patches"
+  },
+  "protocol": "Original 0.9.1 DLL replaced by the candidate, one game launch, VR started, Options -> VR page opened with controllers.",
+  "what_was_pressed": [
+    "launch via version launcher (PID 28216, launcher PID 11776)",
+    "VR session started on Quest 3 through Virtual Desktop",
+    "main menu -> Options",
+    "switched to the VR tab",
+    "looked at the option rows and the bottom hint"
+  ],
+  "what_was_seen": {
+    "captions_vr_page": "empty: no glyphs at all where TURN MODE / SNAP TURN ANGLE / ... should be",
+    "captions_before_candidate": "latin garbage DOH5, OH5nD@5, :IP?",
+    "game_values": "rendered correctly in Russian: ВЫКЛ, ВКЛ, 120 /, НАЗАД",
+    "bottom_hint_line": "one row of solid squares (tofu)",
+    "stereo": "rendered, ~601 frames",
+    "crash": "none; Game exited normally with code 0 after ~74 s"
+  },
+  "log": {
+    "file": "versions\\0.9.1\\logs\\2026-11-11_142946_hook_11776.log",
+    "key_lines": [
+      "[preview] only the main menu and the main campaign can load; the DLC levels are refused",
+      "[menus] 'mevr_reload_pouch' refused: lists need 2-255 printable ASCII labels",
+      "[menus] menu hook installed",
+      "[menus] 126 settings registered before the game loads its preferences",
+      "[menus] 29 menus loaded (3 replaced, 26 new), 221 captions set",
+      "xrGetSystem(HMD) -> XR_SUCCESS"
+    ]
+  },
+  "screenshots": [
+    "C:\\Users\\Admin\\Desktop\\VirtualDesktop.Android-20261111-143054.jpg",
+    "C:\\Users\\Admin\\Desktop\\VirtualDesktop.Android-20261111-143044.jpg"
+  ],
+  "conclusion": "CP1251 at code-point indices is wrong: arial has glyphs only for 0x20..0x7E, so every Cyrillic byte resolves to an empty tcmap record (blank caption) or to a two-byte escape (tofu). Confirms A-0029: glyph = font_table[byte], where byte is a charmap index and the table belongs to the font.",
+  "after_run": {
+    "dll_restored": true,
+    "dll_sha256": "fbbf2812bc7c3304a22829249aba334c812a326baf75fc5c2a75e559202c40b4",
+    "installed_state": "original 0.9.1, nothing patched"
+  }
+}

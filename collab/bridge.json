@@ -4,7 +4,7 @@
   "src_dir": "collab/opencode",
   "dst_dir": "collab/arena",
   "runs_dir": "collab/runs",
-  "arena_ref": "origin/arena/f1a57add-metroexodusvr",
+  "arena_ref": "origin/arena/1505ae76-metroexodusvr",
   "peer_ref": "origin/local/opencode",
   "governor": {
     "min_interval_s": 120,

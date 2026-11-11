@@ -3,7 +3,7 @@
   "branch_code_arena": "arena/1505ae76-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 30,
+    "arena": 31,
     "opencode": 31
   },
   "messages": [
@@ -629,6 +629,28 @@
       "commit": "0dcb38c",
       "title": "кит 0.9.1 сверен; CP1251-глифы кладутся по байтовым кодпоинтам",
       "note": "часть 4 вычислений принята; модель уточнена в A-0029"
+    },
+    {
+      "id": "L-0032",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "result",
+      "status": "answered",
+      "file": "collab/opencode/L-0032-vr-run-091-bytecmap-empty-captions-index-model-confirmed.md",
+      "commit": "26384ca",
+      "title": "VR-прогон cand-bytecmap: подписи пустые, индексная модель подтверждена",
+      "note": "принято с оговоркой: см. A-0030 §2"
+    },
+    {
+      "id": "A-0030",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "decision",
+      "status": "answered",
+      "priority": "critical",
+      "file": "collab/arena/A-0030-captions-may-be-refused-not-uninked-font-data-route-closed.md",
+      "title": "пустые подписи двусмысленны (валидатор объявлений); шрифт данными задать нельзя; путь — [control+0x60]",
+      "needs": "L-0032"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

@@ -270,6 +270,59 @@ def cmd_predict(fonts, args):
 _BLANK = "·"
 
 
+def cmd_validator(fonts, args):
+    """Which translation strings the mod's own declaration validator would refuse.
+
+    The declaration API refuses a caption with a reason string found in .rdata
+    (RVA 0x49dbc0 in 0.9.0): 'captions are printable ASCII (at most 127)'.
+    Three readings of that sentence are possible, and they differ wildly:
+
+      H1  every byte <= 0x7F              -> refuses 19/193 captions
+      H2  0x20 <= every byte <= 0x7E      -> refuses 131/193 captions
+      H3  only the length (<= 127)        -> refuses nothing
+
+    Under H1/H2 every CP1251 caption is refused too, which is a second
+    explanation for the blank captions of L-0032 -- see A-0030.
+    """
+    charmap = load_charmap(args.charmap)
+    rows = []
+    for line in (ROOT / "ru" / "strings.tsv").read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if len(parts) >= 3:
+            rows.append((parts[0], parts[1], parts[2]))
+
+    def fails(enc, lo, hi):
+        return [b for b in enc if not (lo <= b <= hi)]
+
+    print(f"captions in ru/strings.tsv: {len(rows)}")
+    for enc_name in ("charmap", "cp1251"):
+        n1 = n2 = n3 = 0
+        bad1, bad2 = [], []
+        for _rva, _orig, ru in rows:
+            try:
+                enc = encode(ru, enc_name, charmap)
+            except SystemExit:
+                continue
+            if fails(enc, 0x00, 0x7F):
+                n1 += 1
+                bad1.append(ru)
+            if fails(enc, 0x20, 0x7E):
+                n2 += 1
+                bad2.append(ru)
+            if len(enc) > 127:
+                n3 += 1
+        print(f"\n  encoding {enc_name}:")
+        print(f"    H1 (bytes <= 0x7F) refused      : {n1}/{len(rows)}")
+        print(f"    H2 (0x20..0x7E)     refused     : {n2}/{len(rows)}")
+        print(f"    H3 (length > 127)   refused     : {n3}/{len(rows)}")
+        if args.show and n1:
+            print("    H1 offenders:")
+            for t in bad1[: args.show]:
+                print(f"      {t!r} -> {encode(t, enc_name, charmap).hex(' ')}")
+
+
 def cmd_accuracy(fonts, args):
     """How much of the translation a font can actually draw."""
     charmap = load_charmap(args.charmap)
@@ -394,6 +447,9 @@ def main(argv=None):
                     help=f"escape origin for --predict (default {ESCAPE_ORIGIN:#x})")
     ap.add_argument("--coverage", action="store_true")
     ap.add_argument("--accuracy", action="store_true")
+    ap.add_argument("--validator", action="store_true")
+    ap.add_argument("--show", type=int, default=0, metavar="N",
+                    help="with --validator, print N offending strings")
     ap.add_argument("--charmap", help="charmap file (default ru/charmap.txt)")
     ap.add_argument("--encode-charmap",
                     help="charmap used to produce the bytes (default: --charmap)")
@@ -413,8 +469,10 @@ def main(argv=None):
         cmd_coverage(fonts, args)
     if args.accuracy:
         cmd_accuracy(fonts, args)
+    if args.validator:
+        cmd_validator(fonts, args)
     if not (args.list or args.dump or args.predict or args.coverage
-            or args.accuracy):
+            or args.accuracy or args.validator):
         cmd_list(fonts, args)
 
 

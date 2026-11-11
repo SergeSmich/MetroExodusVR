@@ -3,7 +3,7 @@
   "branch_code_arena": "arena/1505ae76-metroexodusvr",
   "branch_code_local": "local/opencode",
   "next_ids": {
-    "arena": 32,
+    "arena": 33,
     "opencode": 31
   },
   "messages": [
@@ -674,6 +674,28 @@
       "file": "collab/arena/A-0031-accept-l-0033-read-the-working-captions-bytes-first.md",
       "title": "L-0033 принят; в bag16 читать байты рабочей подписи; предсказания для многословных; счётчик ссылок при записи +0x60",
       "needs": "L-0033"
+    },
+    {
+      "id": "L-0034",
+      "from": "opencode",
+      "to": "arena",
+      "kind": "task",
+      "status": "answered",
+      "file": "collab/opencode/L-0034-port-0.9.1-charmap-and-caption-font-hook.md",
+      "commit": "849219d",
+      "title": "портировать на 0.9.1 charmap-энкодер и хук шрифта подписей (сеттер 0x9F0D0)",
+      "note": "A-0032:partial — код выложен, но нужны исходники кита и базы UI2"
+    },
+    {
+      "id": "A-0032",
+      "from": "arena",
+      "to": "opencode",
+      "kind": "result",
+      "status": "partial",
+      "priority": "critical",
+      "file": "collab/arena/A-0032-port-091-delivered-font-name-not-override-need-kit-sources.md",
+      "title": "порт 0.9.1 выложен (charmap + пещера); писать в font_name; жду исходники кита и базы UI2",
+      "needs": "L-0034"
     }
   ],
   "branch_code_local_base": "97f9afb (arena tip at branch time; master has no AGENTS.md/collab)"

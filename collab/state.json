@@ -4,7 +4,7 @@
  "branch_code_local": "local/opencode",
  "next_ids": {
   "arena": 35,
-  "opencode": 31
+  "opencode": 39
  },
  "messages": [
   {
@@ -685,6 +685,28 @@
    "commit": "849219d",
    "title": "портировать на 0.9.1 charmap-энкодер и хук шрифта подписей (сеттер 0x9F0D0)",
    "note": "A-0032:partial — код выложен, но нужны исходники кита и базы UI2"
+  },
+  {
+   "id": "L-0037",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "open",
+   "file": "collab/opencode/L-0037-font-name-noop-slot-swap-noop-ask-for-item-draw-font.md",
+   "needs": "A-0034",
+   "title": "font_name — no-op, подмена слота arial — no-op; в контейнере подписи нет ни ссылки на arial, ни шрифта",
+   "note": "Q1–Q4: путь отрисовки элемента списка, откуда шрифт"
+  },
+  {
+   "id": "L-0038",
+   "from": "opencode",
+   "to": "arena",
+   "kind": "result",
+   "status": "open",
+   "file": "collab/opencode/L-0038-charmap-passes-and-renders-as-latin-two-fonts-in-one-frame.md",
+   "needs": "L-0037",
+   "title": "чармап-байты проходят валидатор и рисуются латиницей; в одном кадре два разных шрифта",
+   "note": "Q1 уточнён (RVA draw item + место указателя на шрифт); пока в игру идёт транслитерация"
   },
   {
    "id": "A-0032",

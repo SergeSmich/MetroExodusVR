@@ -18,10 +18,22 @@
   "runs": [
     {
       "dll": "work/build/MetroExodusVR-092-latin.dll (F74D27BC)",
-      "what_clicked": "пока ничего: VR-прогон не сделан, шлем не подключён",
+      "what_clicked": "плоский режим: запуск MetroExodusVR.exe, открыл меню мода (Настройки -> VR), прошёл по разделам и списку опций",
+      "what_seen": "подписи читаются: IGRA, DVIZHENIE, TELO, RUKI, PRITSELY, INTERFEYS, KOMFORT; внизу Esc НАЗАД — кириллицей (это строка локализации игры, шрифт menu)",
+      "screenshots": [
+        "work/shots/092-telo.png",
+        "work/shots/092-a.png",
+        "work/shots/092-b.png",
+        "work/shots/092-c.png"
+      ],
+      "verdict": "латинская сборка рабочая; на экране два шрифта в одном кадре — строки мода рисует identity-arial, строки игры — menu"
+    },
+    {
+      "dll": "VR-прогон",
+      "what_clicked": "—",
       "what_seen": "—",
       "screenshot": null,
-      "verdict": "ожидает прогона"
+      "verdict": "не сделан: шлем не подключён"
     }
   ],
   "clarified_previous_screenshot": {
@@ -36,7 +48,7 @@
   "known_limits": [
     "0 (LOCKED) строится inline-копией на 0xC3523 в std::string с cap 0xF: ASCII 0 (ZAKRYTO) = 11 байт и charmap 0 (ЗАКРЫТО) = 11 байт влезают, UTF-8 (18 байт) — нет; патчер это проверяет и падает, а не обрезает",
     "CINEMA POINTER (0.9.1 0x4BF0D8) в 0.9.2 отсутствует",
-    "кириллица в подписях мода недостижима через данные: glyph = font.tcmap[byte], identity-шрифт arial (A-0035)"
+    "кириллица в подписях мода недостижима через данные: glyph = font.tcmap[byte], identity-шрифт arial (A-0035); свойства text_font/font_name проверены и не срабатывают — см. L-0040"
   ],
   "blocked": "VR-прогон: нужен шлем. Дополнительно: штатная 0.9.2 упала 16.11.2026 08:58:50 (0xC0000005, запись в 0x24, MetroExodusVR.dll+0x3D6961 рядом с ffxFsr2ResourceIsNull) — к переводу не относится, но прогон на штатной сборке этим путём закрыт"
 }

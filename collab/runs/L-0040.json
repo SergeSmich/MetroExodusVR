@@ -1,0 +1,54 @@
+{
+  "id": "L-0040",
+  "build": "0.9.2",
+  "locale": "ru (charmap-байты в .ru; шрифт подписей не сменён)",
+  "headset": null,
+  "dll": "work/build/MetroExodusVR-092-tf.dll, SHA-256 1F7F769288E22236D7E2B431D7296DB6F22F80C26EB51CCFCA819F9CB9D8037 (11 342 848 B)",
+  "build_flags": "tools/apply_ru_092.py --encoding charmap --caption-font menu --caption-prop text_font --caption-all --no-validators --verify",
+  "build_checks": "verify ok: 20 stubs, 572 byte patches; hook ok: 2467 bytes; prop 'text_font' = 'menu'; setter 0xA4C40 -> cave 0xC56000; marker 0xC56D1C",
+  "installed_to": "F:\\SteamLibrary\\steamapps\\common\\Metro Exodus\\versions\\0.9.2\\MetroExodusVR.dll и E:\\MetroExodusVR\\versions\\0.9.2\\MetroExodusVR.dll (хеш совпадает); латинская сборка рядом как MetroExodusVR.dll.bak-latin",
+  "runs": [
+    {
+      "what_clicked": "плоский режим: запуск MetroExodusVR.exe, открыл меню мода (Настройки -> VR), дошёл до списка опций",
+      "what_seen": "меню открылось; подписи рисуются мусором :IP? / HJ@D / ?HJcDI / <HDwIPh / D3:IHnlo; / @?Gn?H:; Esc НАЗАД — кириллицей",
+      "interpretation": "мусор = наши charmap-байты, прочитанные identity-таблицей arial (ДВИЖЕНИЕ -> 43 37 44 63 49 33 44 49 -> ?HJcDI): кодирование применилось, шрифт нет",
+      "screenshot": "work/shots/092tf-01.png",
+      "verdict": "text_font на строке не влияет на рендер"
+    }
+  ],
+  "marker": {
+    "snapshot": "work/mark-tf.bin",
+    "reader": "work/tmp_mark.py",
+    "calls": 263,
+    "caption": 67,
+    "records": 53,
+    "set_calls": 67,
+    "set_ok": 0,
+    "set_fail": 0,
+    "set_last": 0,
+    "res_menu": "0x1C58A0",
+    "res_arial": "0x170574F0",
+    "probes": 1,
+    "verdict": "write-arm не отчитался ни разу при 67 входах: опыт 'принято/не принято' не подтверждает; в bag строки нет записи text_font"
+  },
+  "live_evidence": {
+    "scanner": "work/tmp_vqscan.py, прочитано 6 214 МБ commit-памяти",
+    "text_font": [
+      "MetroExodus.exe+0x1490A20 — таблица имён (deaf_color, text_font, persona_font, size_small/medium/big, background, text_rect, wnd_rect)",
+      "heap 0x2175EC5840 — загруженная схема: text_font/choose/text_font/stringz/regular, затем persona_font/choose/persona_font/stringz/menu"
+    ],
+    "style_slots": "MetroExodus.exe+0x14909F0 — Text\\Font, Persona\\Font (рядом line_spacing)",
+    "absent": [
+      "font_arial — 0 совпадений",
+      "font_metro_for_menu_cyr_ru — 0 совпадений",
+      "23-байтовые записи tcmap arial/menu/regular (полные и без 9-байтовой шапки) — 0 совпадений"
+    ]
+  },
+  "conclusions": [
+    "text_font — свойство text/persona-виджета, у строки списка опций его нет: сеттер 0xA4C40 ищет имя в контейнере [ctl+0x38]..[ctl+0x40] и не находит",
+    "font_name у строки есть (choose/stringz), но на 0.9.1 его запись ('menu') рендер не меняла: шрифт разбирается раньше set_caption",
+    "подмена tcmap/атласа в памяти невозможна вслепую: в процессе нет ни записей fonts_ru.bin, ни имён ресурсов шрифтов",
+    "остаётся engine-side выбор шрифта в MetroExodus.exe, а он вне рамок проекта (игру не декомпилируем и не патчим)"
+  ],
+  "blocked": "нужен ответ Arena по §5 L-0040: RVA функции установки шрифта текстовой ноде, либо поле шрифта в дескрипторе регистрации опции"
+}

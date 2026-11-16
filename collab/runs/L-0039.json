@@ -1,0 +1,42 @@
+{
+  "id": "L-0039",
+  "build": "0.9.2",
+  "locale": "ru (подписи мода — латинская транслитерация, тело строк printable ASCII)",
+  "headset": null,
+  "base": "work/original/MetroExodusVR/versions/0.9.2/MetroExodusVR.dll, SHA-256 5226913B…634F3D (11 297 280 B)",
+  "dll": "work/build/MetroExodusVR-092-latin.dll, SHA-256 F74D27BC3632D2211F9F22E665AFD9C0A178A3C85F705832046BB49A983CAE3E (11 331 584 B)",
+  "encoding": "utf8 (в данных уже ASCII, поэтому флаг безопасен; charmap-режим не нужен)",
+  "installed_to": "E:\\MetroExodusVR\\versions\\0.9.2\\MetroExodusVR.dll (хеш совпадает с собранным; оригинал рядом как .bak-092-install)",
+  "stand_pin": "E:\\MetroExodusVR\\updater.json -> mode=never, pinned_version=0.9.2 (бэкап updater.json.bak-092-test), иначе stub перекачивает релиз поверх патча",
+  "static_checks": {
+    "patcher": "tools/apply_ru_092.py --self-test -> PASS; --check -> check ok; --verify -> verify ok: 20 stubs, 565 byte patches",
+    "captions": "189 подписей в caption_filter-0.9.2.json, 200 lea-сайтов в плане",
+    "ui2": "popups/options/hints/hintpages: 16/82/52/14 записей, ui2 problems: 0; dump_ui2.py подтверждает, что таблицы реально указывают в .ru",
+    "sites": "196 lea-сайтов в .ru: 27 пар {ptr,len} (все длины-иммедиаты = длине строки, 0 расхождений), 163 через копирующий хелпер, 6 format-строк",
+    "leftovers": "из 267 записей плана 189 переведены, 13 оставлены ASCII по стилю (FSR, DLSS, VR, 1.00X…2.00X, TAA, K/M/L/J/E (DLSS)), 65 вне кита: внутренние логи [menus]…, тексты валидаторов, числовые форматы {} CM / {:.1f} M, пресеты STEREO/ULTRA"
+  },
+  "runs": [
+    {
+      "dll": "work/build/MetroExodusVR-092-latin.dll (F74D27BC)",
+      "what_clicked": "пока ничего: VR-прогон не сделан, шлем не подключён",
+      "what_seen": "—",
+      "screenshot": null,
+      "verdict": "ожидает прогона"
+    }
+  ],
+  "clarified_previous_screenshot": {
+    "claim": "присланный скриншот с английскими заголовками PLAY MODE / BELT WHEN CROUCHING / BHAPTICS (EXPERIMENTAL) и английской подсказкой ROOM-SCALE — это 0.9.1, не 0.9.2",
+    "evidence": [
+      "в MetroExodus/versions/0.9.1/MetroExodusVR.dll изменено 99 байт только в .rdata, .text — 0 байт: STANDING->STOYA, BHAPTICS->SILA, BELT HEIGHT->POYAS, PLAYER HEIGHT->ROST",
+      "эта схема пишет перевод поверх английского литерала и добивает пробелами, длина не меняется; PLAY MODE (9) и BELT WHEN CROUCHING (18) не влезли",
+      "ui2-таблицы в 0.9.1 не пропатчены вообще: options[23] ROOM-SCALE читается прямо из .rdata",
+      "в 0.9.2 lea в сборке ведут на .ru (REZHIM IGRY, POYAS PRI PRISEDANII, BHAPTICS (EKSPERIM.)), длина-иммедиат переписана"
+    ]
+  },
+  "known_limits": [
+    "0 (LOCKED) строится inline-копией на 0xC3523 в std::string с cap 0xF: ASCII 0 (ZAKRYTO) = 11 байт и charmap 0 (ЗАКРЫТО) = 11 байт влезают, UTF-8 (18 байт) — нет; патчер это проверяет и падает, а не обрезает",
+    "CINEMA POINTER (0.9.1 0x4BF0D8) в 0.9.2 отсутствует",
+    "кириллица в подписях мода недостижима через данные: glyph = font.tcmap[byte], identity-шрифт arial (A-0035)"
+  ],
+  "blocked": "VR-прогон: нужен шлем. Дополнительно: штатная 0.9.2 упала 16.11.2026 08:58:50 (0xC0000005, запись в 0x24, MetroExodusVR.dll+0x3D6961 рядом с ffxFsr2ResourceIsNull) — к переводу не относится, но прогон на штатной сборке этим путём закрыт"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "L-0038",
+  "build": "MetroExodusVR-labels-translit.dll",
+  "sha256": "B58ECBCB4355B6D0EB78CD757068ABFA30CA865A2862616E19862A0614CF077B",
+  "base": "0.9.1 + font resources (clean-fonts), 10 caption slots rewritten in ASCII",
+  "game": {
+    "build": "0.9.1",
+    "locale": "ru",
+    "mode": "плоский режим, окно 1920x1080 (без HMD)"
+  },
+  "checked": "Options -> VR: строки PLAY MODE, BELT WHEN CROUCHING, BHAPTICS (EXPERIMENTAL)",
+  "observed": [
+    "PLAY MODE -> значение STOYA: транслитерация подписи мода читается, шрифт тот же, что у английских строк",
+    "BHAPTICS (EXPERIMENTAL) -> подпись SILA читается (10-я подпись, слот 18 байт)",
+    "значение bHaptics ВКЛ нарисовано кириллицей: это строка локализации игры, шрифт menu",
+    "заголовки строк остались английскими (PLAY MODE, BELT WHEN CROUCHING, BHAPTICS (EXPERIMENTAL)) - в этой сборке переведены только 10 слотов",
+    "STAY WITH YOU (значение BELT WHEN CROUCHING) - строка мода, латиницей"
+  ],
+  "refusals": "нет: все 10 подписей добиты пробелами, тело printable ASCII",
+  "conclusion": "тождественный шрифт arial подтверждён на рабочем тексте: ASCII проходит валидатор и рисуется как есть; кириллица требует смены шрифта у строки списка (вопрос A-0035)",
+  "next": "полный проход транслитерации по всем подписям (work/build/MetroExodusVR-latin.dll, kit091 193 строки + ui2)",
+  "screenshot": "скриншот от пользователя в чате, 15.11.2026 21:5x (MetroExodus, окно 4A Engine)"
+}

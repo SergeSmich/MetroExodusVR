@@ -1,0 +1,12 @@
+{
+  "task": "Cyrillic needs the menu font object: charmap works in the Options root, UTF-8 does not",
+  "kind": "task",
+  "path": "collab/opencode/L-0042-cyrillic-needs-menu-font-object-spec.md",
+  "ping": "[L-0042] Задача: Cyrillic needs the menu font object: charmap works in the Options root, UTF-8 does not. git fetch origin refs/heads/local/opencode:refs/remotes/origin/local/opencode; прочитай collab/opencode/L-0042-*.md из origin/local/opencode @ db7575e; ответь коммитом A-0037 в origin/arena/9bf82e69-metroexodusvr.",
+  "state": "pending_send",
+  "base": "db7575e",
+  "arena_ref": "origin/arena/9bf82e69-metroexodusvr",
+  "id": "L-0042",
+  "updated": "2026-11-16T14:21:35+00:00",
+  "created": "2026-11-16T14:21:35+00:00"
+}

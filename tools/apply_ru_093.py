@@ -1,0 +1,1972 @@
+#!/usr/bin/env python3
+"""Apply the Russian translation to MetroExodusVR.dll 0.9.3 (mod UI text).
+
+Fork of ``apply_ru_092.py`` for the 0.9.3 release (SHA-256
+``2f9ed2d1..458b2c64``).  Only the version block below changed; the mechanics
+are the 0.9.2 ones, so the long rationale lives in that file.  The 0.9.3
+values were measured on the release DLL:
+
+* captions: the 267 literals are located by exact C-string match, their
+  display sites by the RIP-relative references in ``.text`` (325 lea + 30
+  inline sites);
+* ui2 tables moved by +0xE0 and kept their strides: popups ``0x4EF0F0``/0x70,
+  options ``0x4F5170``/0x20, hints ``0x4EA618``/0x28 (bare body pointer),
+  hintpages ``0x4EC570``/0x20 with the title at +0x00;
+* the menu code ends at ``0xC581F``, so the window is ``0xA0000..0xC5820``;
+* the printable-ASCII gates were not relocated yet, so they are left alone:
+  a charmap build keeps every byte below 0x80 (L-0033 patched nothing here).
+
+The encoding is the localization charmap, not UTF-8 (A-0034); the full
+argument is in the 0.9.1/0.9.2 builders.
+"""
+
+import argparse
+import json
+import os
+import re
+import struct
+import sys
+from pathlib import Path
+
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import (
+    X86_OP_IMM,
+    X86_OP_MEM,
+    X86_OP_REG,
+    X86_REG_RBP,
+    X86_REG_RAX,
+    X86_REG_RDX,
+    X86_REG_RIP,
+    X86_REG_RSP,
+    X86_REG_R11,
+)
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import hashlib  # noqa: E402
+
+# ---------------------------------------------------------------------------
+# 0.9.2 addresses -- everything version specific lives here
+# ---------------------------------------------------------------------------
+
+# MetroExodusVR.dll from versions/0.9.2 of the mod (E:\MetroExodusVR).
+SRC_SHA256 = "2f9ed2d1206f7fc18f87ff554a10e9e6fae849ce8a7dc3074685aa14458b2c64"
+
+ADDRS = dict(
+    # Generic control-property setter `bool set(control, name_sv*, value_sv*)`.
+    # 0.9.2: 0xA4C40 (0.9.1 0x9F0D0, 0.9.0 0x9BC70).  Found by normalizing the
+    # immediates of the 0.9.1 body and comparing against every prologue match
+    # in 0.9.2: 55/55 instructions identical, prologue bytes identical.
+    setter=0x0,  # 0.9.3: not located; only --caption-font uses it
+    # `sub .., 0x20; cmp .., 0x5e` printable-ASCII gates of the page builder.
+    # Same three patterns as 0.9.1 (0xA4728/0xA4C76/0xA6556): 0xAA290 is the
+    # 32-bit form (`80 f9 5e`), 0xAA7E0 and 0xAC0C0 the byte form (`3c 5e`).
+    # The address is the *entry* of the sequence, so the immediate is located
+    # by decoding; widening it to 0xff is what lets UTF-8 (Cyrillic) strings
+    # through -- a charmap build keeps every byte below 0x80 and does not need
+    # it (L-0033 patched nothing here).
+    validators=(),  # 0.9.3: not relocated; charmap byte range
+    # Only the mod's own menu code is redirected.  The range is used to warn
+    # about display sites outside it; every site comes from --plan anyway.
+    # 0.9.2 menu code ends at 0xC5508 (0.9.1 ended below 0xC0000).
+    menu_lo=0xA0000,
+    menu_hi=0xC5820,
+    # Second-layer table bases (popups/options/hints/hintpages), 0.9.2 counts
+    # are 16/82/52/14.  Strides are unchanged from 0.9.1.
+    ui2_tables={
+        "popups": (0x4EF0F0, 0x70, 0x10, True, None),
+        "options": (0x4F5170, 0x20, 0x10, True, None),
+        "hints": (0x4EA618, 0x28, 0x10, False, None),
+        "hintpages": (0x4EC570, 0x20, 0x10, True, 0x00),
+    },
+    # Inline-built extras such as "VR HINTS".  None in 0.9.2 either.
+    extra_strings=(),
+)
+
+# The 0.9.2 kit and the caption plan live in the analysis repository
+# (MetroExodusVR-REA); this tools repository is frozen as the 0.9.1 source.
+# Override with METRO_KIT093 when the checkout is somewhere else.
+KIT093 = Path(os.environ.get("METRO_KIT093", str(ROOT / "kit093")))
+PLAN_093 = Path(
+    os.environ.get("METRO_PLAN093", str(KIT093 / "ru" / "plan-0.9.3.json"))
+)
+DEFAULT_SRC = Path(
+    os.environ.get(
+        "METRO_SRC093",
+        r"F:\SteamLibrary\steamapps\common\Metro Exodus\versions\0.9.3\MetroExodusVR.dll",
+    )
+)
+DEFAULT_OUT = ROOT / "build" / "MetroExodusVR-0.9.3.dll"
+STRINGS_TSV = KIT093 / "ru" / "strings-0.9.3.tsv"
+UI2_JSON = KIT093 / "ru" / "ui2-0.9.3.json"
+
+# Embedded font resources that have to carry Cyrillic before the strings can be
+# displayed.  The files are produced by tools/merge_cyrillic.py.  Not used on
+# the 0.9.2 path: the readable build is Latin (see the docstring).
+FONT_DIR = ROOT / "build" / "fonts"
+FONT_RESOURCES = (
+    "INFO_BARLOW_CONDENSED_SEMIBOLD",
+    "INFO_INTER_MEDIUM",
+    "INFO_INTER_REGULAR",
+    "INFO_INTER_SEMIBOLD",
+)
+
+IMAGE_BASE = 0x180000000
+
+SECT_ALIGN = 0x1000
+FILE_ALIGN = 0x200
+
+# Second UI layer: tables of (ptr, len) pairs in .rdata.  Each tuple is
+# (table base RVA, entry stride, body slot offset, body has an explicit length,
+# title slot offset or None).
+UI2_TABLES = {
+    "popups": (0x4EF0F0, 0x70, 0x10, True, None),
+    "options": (0x4F5170, 0x20, 0x10, True, None),
+    "hints": (0x4EA618, 0x28, 0x10, False, None),
+    "hintpages": (0x4EC570, 0x20, 0x10, True, 0x00),
+}
+# 0.9.1 for reference: popups 0x4BABC0, options 0x4C06A0, hints 0x4B6768,
+# hintpages 0x4B85E0; 0.9.0: 0x49BF40, 0x4A1820, 0x497E00, 0x499A00.
+
+# Literals that are neither captions nor table entries but still show up in the
+# UI.  They are built inline, so they get the same copy-stub treatment.
+# 0.9.2: empty, as in 0.9.1 (the 0.9.0 "VR HINTS"/"VR GAMEPAD LAYOUT" literals
+# have no reference in the newer .text and the address check would fail).
+EXTRA_STRINGS = ()
+
+# Only the mod's own menu/page-building code is redirected.
+MENU_LO = 0xA0000
+MENU_HI = 0xC5820
+
+# offset of the immediate byte in a printable-ASCII check:
+#   cmp al, 0x5e  (after `sub al, 0x20`)  ->  cmp al, 0xff  (any byte)
+#   cmp cl, 0x5e  (after `sub cl, 0x20`)  ->  cmp cl, 0xff  (any byte)
+# 0.9.1 page builder was 0xA1816; the 0.9.2 addresses are in ADDRS above.
+VALIDATORS = ()  # 0.9.3: ASCII gates not relocated
+
+# std::string SSO capacity used by all inline constructions in the menu code
+SSO_CAP = 0xF
+MAX_LEN = 0x7E  # caption length limit enforced by the page builder
+
+BASE_NAMES = {
+    X86_REG_RSP: "rsp",
+    X86_REG_RBP: "rbp",
+    X86_REG_RDX: "rdx",
+    X86_REG_R11: "r11",
+}
+
+HEAP_BASES = {
+    X86_REG_RAX: "rax",
+}
+
+
+CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
+
+# A-0034: a caption's bytes are glyph-table indices, never codepoints, so the
+# only encoding any Cyrillic-capable font can read is the one those fonts were
+# baked from -- the localization charmap.  UTF-8 indices select unrelated
+# glyphs in a 271-entry table and empty cells in ``arial``; see the module
+# docstring and ``tools/predict_captions.py --all`` for the 193-row numbers.
+ENCODING = "charmap"
+
+
+def load_charmap(path=None):
+    """Return the localization charmap: index -> Unicode codepoint."""
+    p = Path(path) if path else CHARMAP_TXT
+    cps = [
+        int(line.strip()[2:], 16)
+        for line in p.read_text(encoding="utf-8").splitlines()
+        if line.strip().startswith("U+")
+    ]
+    if not cps:
+        raise ValueError(f"{p}: no charmap entries")
+    return cps
+
+
+_CHARMAP = None
+
+
+def charmap():
+    global _CHARMAP
+    if _CHARMAP is None:
+        _CHARMAP = load_charmap()
+    return _CHARMAP
+
+
+def encode_text(s):
+    """Encode a display string as localization charmap indices.
+
+    Indices below 0xE0 are one byte.  Larger indices use the two byte form of
+    the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
+    ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
+    """
+    if ENCODING == "utf8":
+        enc = s.encode("utf-8")
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
+    if ENCODING == "cp1251":
+        try:
+            enc = s.encode("cp1251")
+        except UnicodeEncodeError as exc:
+            raise ValueError(
+                f"{s!r}: character {s[exc.start]!r} (U+{ord(s[exc.start]):04X}) "
+                "cannot be encoded as CP1251"
+            ) from None
+        if 0 in enc:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return enc
+
+    rev = {}
+    for i, cp in enumerate(charmap()):
+        rev.setdefault(cp, i)
+    out = bytearray()
+    for ch in s:
+        i = rev.get(ord(ch))
+        if i is None:
+            raise ValueError(
+                f"{s!r}: character {ch!r} (U+{ord(ch):04X}) is not in the "
+                "localization charmap (see ru/charmap.txt)"
+            )
+        if i < 0xE0:
+            out.append(i)
+        else:
+            v = i + 0xDE41
+            out += bytes((v // 255, v % 255))
+    if 0 in out:
+        raise ValueError(f"encoded {s!r} contains a NUL byte")
+    return bytes(out)
+
+
+def decode_text(enc):
+    """Inverse of encode_text (used by the self-check)."""
+    if ENCODING == "utf8":
+        return enc.decode("utf-8")
+    if ENCODING == "cp1251":
+        return enc.decode("cp1251")
+    cps = charmap()
+    out = []
+    i = 0
+    while i < len(enc):
+        ci = enc[i]
+        if ci < 0xE0:
+            out.append(chr(cps[ci]))
+            i += 1
+        else:
+            idx = ci * 255 + enc[i + 1] - 0xDE41
+            out.append(chr(cps[idx]))
+            i += 2
+    return "".join(out)
+
+
+class PE:
+    def __init__(self, data):
+        self.data = bytearray(data)
+        self.e_lfanew = struct.unpack_from("<I", self.data, 0x3C)[0]
+        self.nsec = struct.unpack_from("<H", self.data, self.e_lfanew + 6)[0]
+        self.size_opt = struct.unpack_from("<H", self.data, self.e_lfanew + 20)[0]
+        self.opt = self.e_lfanew + 24
+        if struct.unpack_from("<H", self.data, self.opt)[0] != 0x20B:
+            raise RuntimeError("expected PE32+")
+        self.size_image = struct.unpack_from("<I", self.data, self.opt + 56)[0]
+        self.size_headers = struct.unpack_from("<I", self.data, self.opt + 60)[0]
+        self.sect_table = self.opt + self.size_opt
+        self.sections = []
+        for i in range(self.nsec):
+            off = self.sect_table + 40 * i
+            name = bytes(self.data[off : off + 8]).rstrip(b"\0").decode("latin-1")
+            vsize, va, rawsize, raw = struct.unpack_from("<IIII", self.data, off + 8)
+            self.sections.append(
+                dict(name=name, vsize=vsize, va=va, rawsize=rawsize, raw=raw, hdr=off)
+            )
+
+    def rva_to_off(self, rva):
+        for s in self.sections:
+            if s["va"] <= rva < s["va"] + max(s["vsize"], s["rawsize"]):
+                d = rva - s["va"]
+                return None if d >= s["rawsize"] else s["raw"] + d
+        return None
+
+    def read_cstr(self, rva, maxlen=400):
+        o = self.rva_to_off(rva)
+        if o is None:
+            return None
+        e = self.data.find(b"\0", o, o + maxlen)
+        if e < 0:
+            return None
+        return bytes(self.data[o:e]).decode("latin-1")
+
+
+def resource_leaves(pe, data):
+    """Yield the PE resource leaves as (path, data-entry offset, rva, size)."""
+    # PE32+: data directories start after the 112-byte optional header
+    rsrc_rva = struct.unpack_from("<I", data, pe.opt + 112 + 8 * 2)[0]
+    if not rsrc_rva:
+        return
+    base = pe.rva_to_off(rsrc_rva)
+    if base is None:
+        raise RuntimeError("resource directory is not mapped")
+
+    def name_at(off):
+        ln = struct.unpack_from("<H", data, base + off)[0]
+        raw = data[base + off + 2 : base + off + 2 + ln * 2]
+        return raw.decode("utf-16-le")
+
+    def walk(dir_off, path):
+        n_named, n_id = struct.unpack_from("<HH", data, base + dir_off + 12)
+        for i in range(n_named + n_id):
+            e = base + dir_off + 16 + i * 8
+            name_field, data_field = struct.unpack_from("<II", data, e)
+            nm = (
+                name_at(name_field & 0x7FFFFFFF)
+                if name_field & 0x80000000
+                else f"#{name_field}"
+            )
+            if data_field & 0x80000000:
+                yield from walk(data_field & 0x7FFFFFFF, path + [nm])
+            else:
+                de = base + data_field
+                rva, size = struct.unpack_from("<II", data, de)
+                yield path + [nm], de, rva, size
+
+    yield from walk(0, [])
+
+
+def collect_fonts(pe, data, errors):
+    """Load the patched fonts and match them with their RCDATA entries."""
+    leaves = list(resource_leaves(pe, data))
+    out = []
+    for name in FONT_RESOURCES:
+        path = FONT_DIR / f"{name}.ttf"
+        if not path.exists():
+            errors.append(
+                f"font {name}: {path} is missing (run tools/merge_cyrillic.py first)"
+            )
+            continue
+        found = [leaf for leaf in leaves if name in leaf[0]]
+        if len(found) != 1:
+            errors.append(
+                f"font {name}: expected one resource entry, found {len(found)}"
+            )
+            continue
+        blob = path.read_bytes()
+        if blob[:4] not in (b"\x00\x01\x00\x00", b"true", b"OTTO"):
+            errors.append(f"font {name}: {path} is not a TrueType/OpenType file")
+            continue
+        out.append(dict(name=name, blob=blob, entry=found[0][1]))
+    return out
+
+
+def parse_tsv(path):
+    rows = []
+    for ln, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if len(parts) != 3:
+            raise RuntimeError(f"{path}:{ln}: expected 3 tab separated columns")
+        rows.append((int(parts[0], 16), parts[1], parts[2]))
+    return rows
+
+
+def is_mov_imm64(x):
+    return (
+        x.mnemonic == "mov"
+        and len(x.operands) == 2
+        and x.operands[0].type == X86_OP_MEM
+        and x.operands[0].size == 8
+        and x.operands[1].type == X86_OP_IMM
+    )
+
+
+def find_capacity_pairs(ins_list, idx, lit_len, cap_value=SSO_CAP):
+    """Find the (size, capacity) store pair emitted just before the data copy.
+
+    MSVC emits ``mov qword [obj+0x10], len`` followed by
+    ``mov qword [obj+0x18], 0xf`` immediately before filling the SSO buffer.
+    A heap-allocated string gets an arbitrary capacity instead, so ``cap_value``
+    can be set to ``None`` to accept any capacity that fits ``lit_len``.
+    """
+    for j in range(idx - 1, 0, -1):
+        cap = ins_list[j]
+        if not is_mov_imm64(cap):
+            continue
+        if cap_value is not None:
+            if cap.operands[1].imm != cap_value:
+                continue
+        elif cap.operands[1].imm < lit_len:
+            continue
+        size = ins_list[j - 1]
+        if not is_mov_imm64(size) or size.operands[1].imm != lit_len:
+            continue
+        if size.operands[0].mem.base != cap.operands[0].mem.base:
+            continue
+        if cap.operands[0].mem.disp - size.operands[0].mem.disp != 8:
+            continue
+        return size, cap
+    return None, None
+
+
+def lea_rdi(base, disp):
+    if base == "rsp":
+        return b"\x48\x8d\xbc\x24" + struct.pack("<i", disp)
+    if base == "rbp":
+        return b"\x48\x8d\xbd" + struct.pack("<i", disp)
+    if base == "rdx":
+        return b"\x48\x8d\xba" + struct.pack("<i", disp)
+    if base == "r11":
+        return b"\x49\x8d\xbb" + struct.pack("<i", disp)
+    raise ValueError(f"unsupported dst base {base}")
+
+
+def rdi_from_dst(base, disp):
+    if base == "rax":
+        return b"\x48\x89\xc7"  # mov rdi, rax
+    return lea_rdi(base, disp)
+
+
+def func_start(funcs, rva):
+    for a, b, _ in funcs:
+        if a <= rva < b:
+            return a
+    return rva
+
+
+def disasm_func(md, data, pe, funcs, site, extra=0x200):
+    """Disassemble from the enclosing function start up to site + extra."""
+    lo = func_start(funcs, site)
+    o = pe.rva_to_off(lo)
+    end = pe.rva_to_off(site + extra)
+    if o is None or end is None:
+        raise RuntimeError(f"cannot map {lo:#x}..{site + extra:#x}")
+    return list(md.disasm(bytes(data[o:end]), lo))
+
+
+def same_mem_location(m1, m2):
+    return (
+        m1.base == m2.base
+        and m1.index == m2.index
+        and m1.segment == m2.segment
+        and m1.disp + 8 == m2.disp
+    )
+
+
+def find_len_store(ins, idx, lit_len):
+    """Find ``mov qword [ptr+8], lit_len`` emitted right after ``mov [ptr], reg``.
+
+    Some captions are stored as a ``string_view`` (pointer + explicit length)
+    rather than as a C string; the length immediate then has to be updated.
+    """
+    seq = ins[idx : idx + 9]
+    dstreg = seq[0].operands[0].reg
+    for j, x in enumerate(seq[1:], 1):
+        if not (x.mnemonic == "mov" and len(x.operands) == 2):
+            continue
+        if x.operands[0].type != X86_OP_MEM or x.operands[1].type != X86_OP_REG:
+            continue
+        if x.operands[1].reg != dstreg:
+            continue
+        if j + 1 >= len(seq):
+            continue
+        nxt = seq[j + 1]
+        if (
+            nxt.mnemonic == "mov"
+            and len(nxt.operands) == 2
+            and nxt.operands[0].type == X86_OP_MEM
+            and nxt.operands[0].size == 8
+            and nxt.operands[1].type == X86_OP_IMM
+            and same_mem_location(x.operands[0].mem, nxt.operands[0].mem)
+            and nxt.operands[1].imm == lit_len
+        ):
+            return nxt
+    return None
+
+
+def analyze_inline(
+    md, data, pe, funcs, site, lit_addr, lit_len, allow_heap=False, cap_value=SSO_CAP
+):
+    """Parse the inline std::string construction starting at ``site``."""
+    bases = dict(BASE_NAMES)
+    if allow_heap:
+        bases.update(HEAP_BASES)
+    ins = disasm_func(md, data, pe, funcs, site)
+    idx = next((i for i, x in enumerate(ins) if x.address == site), None)
+    if idx is None:
+        raise RuntimeError(f"{site:#x}: not an instruction boundary")
+
+    dst = None
+    region = []
+    for x in ins[idx:]:
+        if x.id == 0:
+            break
+        copy = False
+        for op in x.operands:
+            if op.type == X86_OP_MEM and op.mem.base == X86_REG_RIP:
+                tgt = x.address + x.size + op.mem.disp
+                if lit_addr <= tgt < lit_addr + lit_len:
+                    copy = True
+        if (
+            x.mnemonic.startswith("mov")
+            and len(x.operands) == 2
+            and x.operands[0].type == X86_OP_MEM
+            and x.operands[0].mem.base in bases
+        ):
+            m = x.operands[0].mem
+            if dst is None:
+                dst = (bases[m.base], m.disp)
+                copy = True
+            elif bases[m.base] == dst[0] and 0 <= m.disp - dst[1] <= lit_len:
+                copy = True
+        if not copy:
+            break
+        region.append(x)
+
+    if dst is None or not region:
+        raise RuntimeError(f"{site:#x}: cannot find inline construction buffer")
+
+    size_insn, cap_insn = find_capacity_pairs(ins, idx, lit_len, cap_value)
+    if size_insn is None:
+        raise RuntimeError(f"{site:#x}: cannot find size/capacity pair")
+
+    return dict(
+        site=site,
+        region=region,
+        dst=dst,
+        back=region[-1].address + region[-1].size,
+        size_insn=size_insn,
+        cap_insn=cap_insn,
+    )
+
+
+def build_stub(base, disp, enc, string_rva, stub_rva, back_rva):
+    b = bytearray()
+    b += b"\x57"  # push rdi
+    b += rdi_from_dst(base, disp + (8 if base == "rsp" else 0))
+    b += b"\x9c\x50\x56\x51"  # pushfq; push rax; push rsi; push rcx
+    lea_rsi_pos = len(b)
+    b += b"\x48\x8d\x35\0\0\0\0"  # lea rsi, [rip+string]
+    b += b"\xfc"  # cld
+    b += b"\xb9" + struct.pack("<I", len(enc))  # mov ecx, len
+    b += b"\xf3\xa4"  # rep movsb
+    b += b"\xc6\x07\x00"  # mov byte ptr [rdi], 0
+    b += b"\x59\x5e\x58\x9d\x5f"  # pop rcx/rsi/rax/rflags/rdi
+    jmp_pos = len(b)
+    b += b"\xe9\0\0\0\0"  # jmp back
+
+    str_disp = string_rva - (stub_rva + lea_rsi_pos + 7)
+    back_disp = back_rva - (stub_rva + jmp_pos + 5)
+    struct.pack_into("<i", b, lea_rsi_pos + 3, str_disp)
+    struct.pack_into("<i", b, jmp_pos + 1, back_disp)
+    return bytes(b)
+
+
+def load_ui2(data, pe, errors):
+    """Validate ru/ui2.json against the (ptr,len) tables in .rdata."""
+    if not UI2_JSON.exists():
+        return []
+    doc = json.loads(UI2_JSON.read_text(encoding="utf-8"))
+    out = []
+    seen = set()
+
+    def read_pair(slot, label, what):
+        off = pe.rva_to_off(slot)
+        if off is None:
+            errors.append(f"{label}: {what} slot {slot:#x} not mapped")
+            return None
+        ptr, ln = struct.unpack_from("<QQ", data, off)
+        if not (IMAGE_BASE <= ptr < IMAGE_BASE + 0x2000000):
+            errors.append(f"{label}: bad {what} pointer {ptr:#x}")
+            return None
+        return ptr - IMAGE_BASE, ln
+
+    for table, (base, stride, body_off, is_sv, title_off) in UI2_TABLES.items():
+        for item in doc.get(table, []):
+            i = item["index"]
+            key = (table, i)
+            if key in seen:
+                errors.append(f"{table}[{i}]: duplicate index in {UI2_JSON.name}")
+                continue
+            seen.add(key)
+            label = f"{table}[{i}]"
+            slot = base + i * stride
+            parts = []
+            ok = True
+
+            if title_off is not None:
+                got = read_pair(slot + title_off, label, "title")
+                if got is None:
+                    ok = False
+                else:
+                    tptr, tlen = got
+                    actual = pe.read_cstr(tptr, tlen + 1)
+                    if actual != item["orig_title"]:
+                        errors.append(
+                            f"{label}: title mismatch\n"
+                            f"  expect={item['orig_title']!r}\n  actual={actual!r}"
+                        )
+                        ok = False
+                    else:
+                        parts.append(
+                            dict(
+                                slot=slot + title_off,
+                                text=item["ru_title"],
+                                enc=encode_text(item["ru_title"]),
+                                has_len=True,
+                            )
+                        )
+
+            got = read_pair(slot + body_off, label, "body")
+            if got is None:
+                ok = False
+            else:
+                bptr, blen = got
+                actual = pe.read_cstr(bptr, (blen + 1) if is_sv else 20000)
+                if actual != item["orig"]:
+                    errors.append(
+                        f"{label}: orig mismatch\n  expect={item['orig']!r}\n  actual={actual!r}"
+                    )
+                    ok = False
+                else:
+                    parts.append(
+                        dict(
+                            slot=slot + body_off,
+                            text=item["ru"],
+                            enc=encode_text(item["ru"]),
+                            has_len=is_sv,
+                        )
+                    )
+
+            if ok:
+                out.append(
+                    dict(
+                        table=table,
+                        index=i,
+                        parts=parts,
+                        orig=item["orig"],
+                        ru=item["ru"],
+                    )
+                )
+    return out
+
+
+def resolve_extras(md, data, pe, funcs, errors):
+    """Prepare stubs for display literals outside the caption/table ranges."""
+    out = []
+    for spec in EXTRA_STRINGS:
+        actual = pe.read_cstr(spec["lit"], spec["lit_len"] + 1)
+        if actual != spec["orig"]:
+            errors.append(
+                f"extra {spec['site']:#x}: expected {spec['orig']!r}, found {actual!r}"
+            )
+            continue
+        enc = encode_text(spec["ru"])
+        try:
+            info = analyze_inline(
+                md,
+                data,
+                pe,
+                funcs,
+                spec["site"],
+                spec["lit"],
+                spec["lit_len"],
+                allow_heap=spec["allow_heap"],
+                cap_value=spec["cap"],
+            )
+        except RuntimeError as ex:
+            errors.append(str(ex))
+            continue
+        cap = info["cap_insn"].operands[1].imm
+        if len(enc) > cap:
+            errors.append(
+                f"extra {spec['site']:#x}: {spec['ru']!r} needs {len(enc)} bytes (capacity {cap})"
+            )
+            continue
+        out.append(dict(orig=spec["orig"], ru=spec["ru"], enc=enc, info=info))
+    return out
+
+
+def check_encodings(entries, ui2, extras):
+    """Round-trip every payload through the engine's glyph lookup.
+
+    ``encode_text`` maps text to charmap indices; the engine maps those indices
+    back to glyphs through the font of the menu.  A mismatch here means the
+    caption would render as other characters (or as .notdef).
+    """
+    errors = []
+
+    def check(label, text, enc):
+        try:
+            back = decode_text(enc)
+        except (IndexError, ValueError) as exc:
+            errors.append(
+                f"{label}: encoded bytes are not valid charmap indices ({exc})"
+            )
+            return
+        if back != text:
+            errors.append(f"{label}: {text!r} would render as {back!r}")
+        if 0 in enc:
+            errors.append(f"{label}: encoded text contains a NUL")
+
+    for e in entries:
+        if not e["skip"]:
+            check(f"{e['addr']:#x}", e["ru"], e["enc"])
+    for it in ui2:
+        for part in it["parts"]:
+            check(
+                f"{it['table']}[{it['index']}] @{part['slot']:#x}",
+                part.get("text", ""),
+                part["enc"],
+            )
+    for ex in extras:
+        check(f"extra {ex['info']['site']:#x}", ex["ru"], ex["enc"])
+    if len(charmap()) <= 0xE0:
+        errors.append(
+            f"charmap has {len(charmap())} entries; the two-byte form starts at 0xE0"
+        )
+    return errors
+
+
+def report_limits(entries, ui2, extras):
+    """Print how close the encoded payloads come to the engine's limits."""
+    groups = (
+        (
+            f"captions (string_view, {MAX_LEN:#x})",
+            [e for e in entries if not e["skip"]],
+        ),
+        ("table entries", [p for it in ui2 for p in it["parts"]]),
+        ("extras", extras),
+    )
+    print(f"encoding: {ENCODING}")
+    for label, items in groups:
+        if not items:
+            continue
+        longest = max(len(it["enc"]) for it in items)
+        over = sum(1 for it in items if len(it["enc"]) > MAX_LEN)
+        print(
+            f"  {label}: {len(items)} payloads, longest {longest} bytes, "
+            f"{over} over {MAX_LEN:#x}"
+        )
+    inline = [e for e in entries if not e["skip"] and e["inline"]]
+    if inline:
+        tight = sum(1 for e in inline if len(e["enc"]) <= SSO_CAP)
+        print(
+            f"  inline std::string sites: {len(inline)} entries, "
+            f"{tight} fit the {SSO_CAP:#x} byte SSO buffer"
+        )
+
+
+def disasm_window(md, pe, site, extra=0x200, back=0x200):
+    """Disassemble around ``site`` when no function map is available.
+
+    ``find_capacity_pairs`` walks *backwards* from the site, so the window has
+    to start before it.  x86 instructions are variable length, so an arbitrary
+    start decodes garbage for the first few instructions; try every byte offset
+    in the window and keep the one that both puts an instruction boundary on
+    ``site`` and decodes the most instructions before it.
+    """
+    lo = max(0, site - back)
+    o0 = pe.rva_to_off(lo)
+    o1 = pe.rva_to_off(site + extra)
+    if o0 is None or o1 is None:
+        raise RuntimeError(f"cannot map {lo:#x}..{site + extra:#x}")
+    buf = bytes(pe.data[o0:o1])
+    best = None
+    best_n = -1
+    for skip in range(24):
+        ins = list(md.disasm(buf[skip:], lo + skip))
+        n = sum(1 for i in ins if i.address < site)
+        if any(i.address == site for i in ins) and n > best_n:
+            best, best_n = ins, n
+    if best is None:
+        raise RuntimeError(
+            f"{site:#x}: no instruction boundary inside a {back:#x} byte window"
+        )
+    return best
+
+
+def disasm_func(md, data, pe, funcs, site, extra=0x200):
+    """Disassemble around ``site``; uses the function map when there is one."""
+    if funcs:
+        lo = func_start(funcs, site)
+        o = pe.rva_to_off(lo)
+        end = pe.rva_to_off(site + extra)
+        if o is None or end is None:
+            raise RuntimeError(f"cannot map {lo:#x}..{site + extra:#x}")
+        return list(md.disasm(bytes(data[o:end]), lo))
+    return disasm_window(md, pe, site, extra)
+
+
+def load_plan(path):
+    """Caption plan: ``addr -> {text, sites:[[site, kind], ...]}``.
+
+    Accepts three shapes: a list of dicts with ``addr``, ``text`` and ``sites``
+    (the 0.9.0/0.9.1 plan); the ``{"plan": [...], "funcs": [...]}`` object
+    ``work/raw/plan_from_dll.py`` writes for 0.9.2; or the flat table
+    ``RVA<TAB>original text<TAB>site RVA<TAB>lea|inline``, one row per display
+    site, several rows per string.
+    """
+    p = Path(path)
+    if not p.is_file():
+        raise SystemExit(
+            f"ERROR caption plan not found: {p}\n"
+            "      pass --plan with work/plan-0.9.2.json (built by\n"
+            "      work/raw/plan_from_dll.py), or dump\n"
+            "      RVA<TAB>text<TAB>site<TAB>kind and pass --plan that.tsv"
+        )
+    if p.suffix.lower() == ".json":
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if isinstance(doc, dict):
+            doc = doc["plan"]
+        return {e["addr"]: e for e in doc}
+    plan = {}
+    for ln, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if len(parts) < 3:
+            raise SystemExit(f"{p}:{ln}: expected at least 3 tab separated columns")
+        addr = int(parts[0], 16)
+        text = parts[1]
+        site = int(parts[2], 16)
+        kind = parts[3] if len(parts) > 3 and parts[3] else "lea"
+        e = plan.setdefault(addr, dict(addr=addr, text=text, sites=[]))
+        e["sites"].append([site, kind])
+    return plan
+
+
+def load_funcs(path):
+    """Function boundaries, optional: without them sites are window-decoded."""
+    if path is None:
+        return []
+    p = Path(path)
+    if not p.is_file():
+        print(f"WARN function map not found ({p}); decoding sites from a window")
+        return []
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    if isinstance(doc, dict):
+        return doc.get("funcs", [])
+    return doc["funcs"]
+
+
+# Positive filter for the caption-font cave, hashed over the *payload* bytes.
+# It only matters for the charmap path; the readable 0.9.2 build is Latin and
+# needs no cave, so the table lives with the rest of the kit data.
+FILTER_JSON = Path(
+    os.environ.get("METRO_FILTER093", str(KIT093 / "ru" / "caption_filter-0.9.3.json"))
+)
+
+
+def fnv1a32(b):
+    """FNV-1a 32, the hash the cave's positive filter compares against."""
+    h = 0x811C9DC5
+    for x in b:
+        h ^= x
+        h = (h * 0x01000193) & 0xFFFFFFFF
+    return h
+
+
+def filter_hashes(path=None):
+    p = Path(path) if path else FILTER_JSON
+    if not p.is_file():
+        return None
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    return {int(e["hash32"]) & 0xFFFFFFFF for e in doc.get("entries", [])}
+
+
+def build_filter(strings_path, out_path):
+    """Regenerate the positive filter from the translation table in use.
+
+    The cave filters captions by FNV-1a of the *payload bytes*, so the filter
+    has to be rebuilt whenever the translations or the encoding change --
+    otherwise the captions the filter does not know simply never get a font.
+    """
+    rows = parse_tsv(Path(strings_path))
+    entries = []
+    for addr, orig, ru in rows:
+        if ru == orig:
+            continue
+        enc = encode_text(ru)
+        entries.append(
+            dict(
+                rva=hex(addr),
+                original=orig,
+                ru=ru,
+                len=len(enc),
+                hash32=fnv1a32(enc),
+                hash16=fnv1a32(enc) & 0xFFFF,
+                bytes_hex=" ".join(f"{b:02X}" for b in enc),
+            )
+        )
+    doc = dict(
+        purpose=(
+            "positive filter for the caption-font cave: FNV-1a 32 of the "
+            "payload bytes the patcher writes"
+        ),
+        encoded_with="tools/apply_ru_092.py encode_text (encoding: %s)" % ENCODING,
+        applies_to="MetroExodusVR.dll 0.9.2",
+        counts=dict(entries=len(entries), source=Path(strings_path).name),
+        match_rule="fnv1a32(caption value) must be in this table",
+        entries=sorted(entries, key=lambda e: e["hash32"]),
+    )
+    Path(out_path).write_text(
+        json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    print(f"wrote {out_path}: {len(entries)} entries (encoding {ENCODING})")
+    return 0
+
+
+def filter_encoding(path=None):
+    """The encoding the filter file was generated with (None if unknown)."""
+    p = Path(path) if path else FILTER_JSON
+    if not p.is_file():
+        return None
+    doc = json.loads(p.read_text(encoding="utf-8"))
+    m = re.search(r"encoding:\s*([a-z0-9]+)", doc.get("encoded_with", ""))
+    return m.group(1) if m else None
+
+
+def check_encoding():
+    """Fail loud on the one encoding that provably cannot work (A-0034)."""
+    if ENCODING != "utf8":
+        return
+    print(
+        "WARN --encoding utf8: a caption's bytes are glyph-table indices, and\n"
+        "     every Cyrillic-capable font is charmap-baked (271 entries), so\n"
+        "     UTF-8 indices select unrelated glyphs; in `arial` (identity, 95\n"
+        "     inked cells) they select nothing at all.  Of the 193 kit rows,\n"
+        "     utf-8 + arial renders 13 (the ASCII-only ones) and charmap +\n"
+        "     menu renders 193 -- see tools/predict_captions.py --all.\n"
+        "     Building anyway; use --encoding charmap for a readable DLL."
+    )
+
+
+def check_filter(strings_path, label="filter"):
+    """Warn when translated captions would not be recognised by the cave."""
+    built_with = filter_encoding()
+    if built_with is not None and built_with != ENCODING:
+        print(
+            f"WARN {label}: {FILTER_JSON.name} was built with encoding "
+            f"{built_with!r}, the current one is {ENCODING!r}; the table only "
+            f"matters for builds without --caption-all, rebuild it with "
+            f"--build-filter if you need that path"
+        )
+        return 0
+    want = set()
+    for addr, orig, ru in parse_tsv(Path(strings_path)):
+        if ru != orig:
+            want.add(fnv1a32(encode_text(ru)))
+    have = filter_hashes()
+    if have is None:
+        print(f"WARN {FILTER_JSON.name} not found: the cave would match nothing")
+        return 1
+    miss = sorted(want - have)
+    if miss:
+        print(
+            f"WARN {label}: {len(miss)} of {len(want)} translated captions are "
+            f"not in {FILTER_JSON.name} and would get no font; rebuild it with "
+            f"--build-filter ({', '.join(hex(x) for x in miss[:4])}...)"
+        )
+        return 1
+    print(f"ok   {label}: all {len(want)} translated captions are covered")
+    return 0
+
+
+def self_test():
+    """Everything that can be checked without the DLL: the cave and the encoder."""
+    ok = True
+    import caption_font_hook as cfh
+
+    ok = cfh.self_test() and ok
+
+    cm = load_charmap()
+    rows = parse_tsv(STRINGS_TSV)
+    bad = 0
+    for addr, orig, ru in rows:
+        enc = encode_text(ru)
+        if decode_text(enc) != ru:
+            print(f"FAIL {addr:#x}: {ru!r} does not survive the {ENCODING} round trip")
+            bad += 1
+    extra = f"{len(cm)} charmap entries" if ENCODING == "charmap" else "no charmap"
+    print(
+        f"{'ok  ' if not bad else 'FAIL'} {ENCODING} round trip: {len(rows)} rows "
+        f"from {STRINGS_TSV.name}, {bad} mismatch(es), {extra}"
+    )
+    ok = ok and not bad
+    ok = check_filter(STRINGS_TSV, "self-test filter") == 0 and ok
+    print("self-test:", "PASS" if ok else "FAIL")
+    return 0 if ok else 1
+
+
+def validator_immediate(md, data, pe, rva):
+    """File offset of the ``0x5e`` immediate in a printable-ASCII gate.
+
+    The recorded site is the first instruction of a short sequence::
+
+        0f b6 01   movzx eax, byte [rcx]      (or 0f b6 08 for ecx)
+        2c 20      sub   al, 0x20             (or 80 e9 20)
+        3c 5e      cmp   al, 0x5e             (or 80 f9 5e)
+
+    so the immediate has to be found by decoding, not assumed to be the first
+    byte of the site.
+    """
+    off = pe.rva_to_off(rva)
+    if off is None:
+        return None
+    for ins in md.disasm(data[off : off + 32], rva):
+        if ins.mnemonic == "cmp" and len(ins.operands) == 2:
+            op = ins.operands[1]
+            if op.type == X86_OP_IMM and op.imm == 0x5E:
+                return pe.rva_to_off(ins.address + ins.size - 1)
+        if ins.address - rva > 0x18:
+            break
+    return None
+
+
+def main():
+    global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
+    global VALIDATORS, STRINGS_TSV
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--src", default=str(DEFAULT_SRC))
+    ap.add_argument("--out", default=str(DEFAULT_OUT))
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--verify", action="store_true", help="verify the patched output")
+    ap.add_argument(
+        "--strings",
+        default=str(STRINGS_TSV),
+        help="translation table: RVA<TAB>english<TAB>russian (0.9.2 RVAs)",
+    )
+    ap.add_argument(
+        "--ui2",
+        default=str(UI2_JSON),
+        help="second-layer UI table for 0.9.2 (popups/options/hints/hintpages)",
+    )
+    ap.add_argument(
+        "--plan",
+        default=str(PLAN_093),
+        help=(
+            "caption display sites: JSON (a list, or the {plan, funcs} object "
+            "plan_from_dll.py writes) or RVA/text/site/kind TSV"
+        ),
+    )
+    ap.add_argument(
+        "--funcs",
+        default=str(PLAN_093),
+        help="function boundaries; the plan JSON carries them, sites are window-decoded otherwise",
+    )
+    ap.add_argument(
+        "--caption-font",
+        default=None,
+        metavar="NAME",
+        help=(
+            "font to write on the translated captions, e.g. 'menu' or "
+            "'regular'; without it the engine keeps drawing them with "
+            "'arial', whose glyph table is ASCII only"
+        ),
+    )
+    ap.add_argument(
+        "--caption-prop",
+        default="font_name",
+        choices=(
+            "font_name",
+            "override_font_name",
+            "text_font",
+            "alt_font_name",
+        ),
+        help=(
+            "property that receives --caption-font. 'font_name' (default) is "
+            "the only one L-0026 saw succeed: the record exists on 206/209 "
+            "matched controls and the setter returned success; L-0029 showed "
+            "override_font_name has no record at all, so the setter fails. "
+            "'text_font'/'alt_font_name' are the other font properties the "
+            "released image carries (opencode, L-0035: font_name did not change "
+            "the menu)"
+        ),
+    )
+    ap.add_argument(
+        "--hook-only",
+        action="store_true",
+        help="install the caption-font cave only; leave every string as shipped",
+    )
+    ap.add_argument(
+        "--caption-all",
+        action="store_true",
+        help=(
+            "L-0035: skip the ru/caption_filter.json table and run the cave "
+            "on EVERY 'caption' property. Menu labels go through the same "
+            "setter but are mostly not in the table, so the VR Options page "
+            "is only reachable with this flag (opencode, L-0035 runlog)"
+        ),
+    )
+    ap.add_argument(
+        "--swap-arial-slot",
+        action="store_true",
+        help=(
+            "L-0035 binary test: the cave writes [Fonts+0x08] = [Fonts+0x0c] "
+            "(arial <- menu) once per process, keeping old/new in the marker "
+            "(+0x1C80 swapped, +0x1C84 old, +0x1C88 new)"
+        ),
+    )
+    ap.add_argument(
+        "--swap-arial-sticky",
+        action="store_true",
+        help=(
+            "L-0035: like --swap-arial-slot, but the registry pointer is "
+            "re-read from exe+0x1733260 and the store is re-applied on EVERY "
+            "setter call, because Fonts::Fonts rebuilds the slots after a "
+            "one-shot write (runlog L-0035: arial came back as 0x17056E28). "
+            "Counts the passes that really changed the slot at marker "
+            "+0x2198"
+        ),
+    )
+    ap.add_argument(
+        "--swap-sticky-slot",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: sticky swap of a chosen Fonts slot instead of arial: "
+            "0x04 regular, 0x08 arial (default), 0x0c menu, 0x10 console. "
+            "The live dump in the runlog has regular = 0 while the page "
+            "draws arial, so regular is the slot worth trying next"
+        ),
+    )
+    ap.add_argument(
+        "--ctl-dump",
+        action="store_true",
+        help=(
+            "L-0035: dump the font registry (Fonts inline + dereferenced, the "
+            "32 bank bases, the four resolved nodes with names) and the first "
+            "0x100 bytes of the matched caption control and of the first "
+            "local_text control into the marker"
+        ),
+    )
+    ap.add_argument(
+        "--font-subst",
+        choices=("off", "dry", "write"),
+        default="off",
+        help=(
+            "L-0035: in every control that reaches the cave, replace each "
+            "dword in [control, control+0x100) equal to the current `arial` "
+            "ref by the `menu` ref. 'dry' only counts matches and records "
+            "offsets (+0x2184 found, +0x2188 first, +0x218C last); 'write' "
+            "also substitutes and bumps the menu node refcount"
+        ),
+    )
+    ap.add_argument(
+        "--subst-offset",
+        default=None,
+        metavar="HEX",
+        help=(
+            "L-0035: with --font-subst, also store the `menu` ref at "
+            "[control+HEX] on every pass. Probe for the case where the "
+            "control carries an empty ref and arial is substituted at draw "
+            "time; pick HEX from the control dump"
+        ),
+    )
+    ap.add_argument(
+        "--encoding",
+        choices=("charmap", "utf8", "cp1251"),
+        default="charmap",
+        help=(
+            "'charmap' (default) writes localization charmap indices, the only "
+            "encoding any Cyrillic-capable font can read (A-0034); 'utf8' "
+            "reproduces the L-0036 build, which came out empty because the "
+            "caption font has no ink above 0x7e; 'cp1251' rebuilds the 0.9.1 "
+            "kit's diagnostic"
+        ),
+    )
+    ap.add_argument(
+        "--experimental-cp1251",
+        action="store_true",
+        help="alias for --encoding cp1251, kept for the kit's command lines",
+    )
+    ap.add_argument(
+        "--no-validators",
+        dest="validators",
+        action="store_false",
+        default=True,
+        help=(
+            "do not relax the 0x5e ASCII checks. L-0033 proved they never see "
+            "our bytes (they run on the .rdata literals), so this is the "
+            "default for a clean build; the tested 0.9.1 candidate had them "
+            "patched, hence the flag rather than a silent change"
+        ),
+    )
+    ap.add_argument(
+        "--site-head",
+        default=None,
+        metavar="HEX",
+        help=(
+            "the bytes the site jmp overwrites at the setter, e.g. "
+            "4053555741564157 for the five-push prologue; by default they are "
+            "read out of the DLL and checked"
+        ),
+    )
+    ap.add_argument(
+        "--allow-unknown-source",
+        action="store_true",
+        help="build from a DLL whose SHA-256 is not the pinned 0.9.2 release",
+    )
+    ap.add_argument(
+        "--build-filter",
+        default=None,
+        metavar="PATH",
+        help=(
+            "regenerate the positive caption filter from --strings and the "
+            "selected encoding, then exit"
+        ),
+    )
+    ap.add_argument(
+        "--self-test",
+        action="store_true",
+        help="check the code cave and the charmap encoder; needs no DLL",
+    )
+    ap.add_argument(
+        "--fonts",
+        action="store_true",
+        help=(
+            "replace the four embedded ImGui font resources (INFO_*) with the "
+            "files in build/fonts, so the mod can draw Cyrillic; needed with "
+            "--encoding utf8"
+        ),
+    )
+    ap.add_argument("--no-fonts", action="store_true", help=argparse.SUPPRESS)
+    args = ap.parse_args()
+
+    if args.self_test:
+        return self_test()
+    if args.experimental_cp1251:
+        args.encoding = "cp1251"
+
+    ENCODING = args.encoding
+    check_encoding()
+    STRINGS_TSV = Path(args.strings)
+    if args.build_filter:
+        if not STRINGS_TSV.is_file():
+            print(f"ERROR translation table not found: {STRINGS_TSV}")
+            return 1
+        return build_filter(STRINGS_TSV, args.build_filter)
+
+    MENU_LO = ADDRS["menu_lo"]
+    MENU_HI = ADDRS["menu_hi"]
+    VALIDATORS = () if not args.validators else ADDRS["validators"]
+    UI2_JSON = Path(args.ui2)
+    STRINGS_TSV = Path(args.strings)
+    if "ui2_tables" in ADDRS and ADDRS["ui2_tables"]:
+        UI2_TABLES = {k: tuple(v) for k, v in ADDRS["ui2_tables"].items()}
+    if ADDRS["extra_strings"]:
+        EXTRA_STRINGS = [dict(x) for x in ADDRS["extra_strings"]]
+
+    src = Path(args.src)
+    if not src.is_file():
+        print(f"ERROR source DLL not found: {src}")
+        print("      unpack the mod release there, or pass --src/--out")
+        return 1
+    data = src.read_bytes()
+    got_sha = hashlib.sha256(data).hexdigest()
+    if got_sha != SRC_SHA256 and not args.allow_unknown_source:
+        print(f"ERROR unexpected source DLL: sha256 {got_sha}")
+        print(f"      expected the 0.9.2 release   {SRC_SHA256}")
+        print("      pass --allow-unknown-source only if you know why")
+        return 1
+    if got_sha != SRC_SHA256:
+        print(f"WARN source sha256 {got_sha} is not the pinned 0.9.2 release")
+
+    if data[:2] != b"MZ":
+        print(f"ERROR {src} is not a PE image (no MZ signature)")
+        return 1
+    try:
+        pe = PE(data)
+    except (struct.error, IndexError, ValueError) as ex:
+        print(f"ERROR {src}: cannot parse the PE headers ({ex})")
+        return 1
+    md = Cs(CS_ARCH_X86, CS_MODE_64)
+    md.detail = True
+
+    funcs = [] if args.hook_only else load_funcs(args.funcs)
+    errors = []
+
+    if args.hook_only:
+        entries, ui2, extras = [], [], []
+        plan_by_addr = {}
+    else:
+        plan_by_addr = load_plan(args.plan)
+        rows = parse_tsv(STRINGS_TSV)
+        entries = []
+        seen_addr = set()
+        for addr, orig, ru in rows:
+            if addr in seen_addr:
+                errors.append(f"{addr:#x}: duplicate row in {STRINGS_TSV.name}")
+                continue
+            seen_addr.add(addr)
+            p = plan_by_addr.get(addr)
+            if p is None:
+                errors.append(f"{addr:#x}: not a known caption address")
+                continue
+            actual = pe.read_cstr(addr)
+            if actual != orig:
+                errors.append(f"{addr:#x}: expected {orig!r}, found {actual!r}")
+                continue
+            enc = encode_text(ru)
+            if len(enc) > MAX_LEN:
+                errors.append(
+                    f"{addr:#x}: {ru!r} encodes to {len(enc)} bytes (> {MAX_LEN})"
+                )
+            e = dict(
+                addr=addr,
+                orig=orig,
+                ru=ru,
+                enc=enc,
+                skip=(ru == orig),
+                lea_sites=[],
+                inline=[],
+                outside=[],
+            )
+            for site, kind in p["sites"]:
+                if not (MENU_LO <= site < MENU_HI):
+                    e["outside"].append((site, kind))
+                elif kind == "lea":
+                    e["lea_sites"].append(site)
+                else:
+                    e["inline"].append(site)
+            entries.append(e)
+
+    if errors:
+        for x in errors:
+            print("ERROR", x)
+        return 1
+
+    # ---- resolve every display site ------------------------------------------
+    for e in entries:
+        if e["skip"]:
+            continue
+        e["lea_patches"] = []
+        e["lea_len"] = []
+        for site in e["lea_sites"]:
+            ins = disasm_func(md, data, pe, funcs, site, 0x10)
+            idx = next((i for i, x in enumerate(ins) if x.address == site), None)
+            if idx is None:
+                errors.append(f"{site:#x}: lea site not on an instruction boundary")
+                continue
+            insn = ins[idx]
+            ok = False
+            if insn.mnemonic == "lea":
+                for op in insn.operands:
+                    if op.type == X86_OP_MEM and op.mem.base == X86_REG_RIP:
+                        if insn.address + insn.size + op.mem.disp == e["addr"]:
+                            ok = True
+                            e["lea_patches"].append(
+                                (site + insn.size - 4, site + insn.size)
+                            )
+            if not ok:
+                errors.append(
+                    f"{site:#x}: not a lea to {e['addr']:#x} "
+                    f"({insn.mnemonic} {insn.op_str})"
+                )
+                continue
+            wide = disasm_func(md, data, pe, funcs, site, 0x60)
+            widx = next((i for i, x in enumerate(wide) if x.address == site), None)
+            store = (
+                find_len_store(wide, widx, len(e["orig"])) if widx is not None else None
+            )
+            if store is not None:
+                e["lea_len"].append((store.address + store.size - 4, store.address))
+
+        e["inline"] = []
+        for site, kind in [
+            (s, k) for s, k in plan_by_addr[e["addr"]]["sites"] if k != "lea"
+        ]:
+            if not (MENU_LO <= site < MENU_HI):
+                continue
+            try:
+                info = analyze_inline(
+                    md, data, pe, funcs, site, e["addr"], len(e["orig"])
+                )
+            except RuntimeError as ex:
+                errors.append(str(ex))
+                continue
+            info["kind"] = kind
+            e["inline"].append(info)
+
+        for info in e["inline"]:
+            if len(e["enc"]) > SSO_CAP:
+                errors.append(
+                    f"{info['site']:#x}: {e['ru']!r} needs {len(e['enc'])} "
+                    f"bytes (SSO cap {SSO_CAP})"
+                )
+
+    if not args.hook_only and UI2_JSON.is_file() and not ADDRS.get("ui2_tables"):
+        errors.append(
+            f"{UI2_JSON.name} exists but ADDRS['ui2_tables'] is not filled for "
+            "this release; the older bases would patch the wrong slots"
+        )
+    ui2 = [] if args.hook_only else load_ui2(data, pe, errors)
+    extras = [] if args.hook_only else resolve_extras(md, data, pe, funcs, errors)
+    if not args.hook_only and not ui2:
+        print(f"WARN no second-layer table loaded from {UI2_JSON.name}")
+
+    if not errors:
+        errors.extend(check_encodings(entries, ui2, extras))
+        report_limits(entries, ui2, extras)
+
+    if errors:
+        for x in errors:
+            print("ERROR", x)
+        print(f"{len(errors)} error(s)")
+        return 1
+
+    # ---- layout the new section ----------------------------------------------
+    strings_blob = bytearray()
+    str_off = {}
+    for e in entries:
+        if e["skip"]:
+            continue
+        str_off[e["addr"]] = len(strings_blob)
+        strings_blob += e["enc"] + b"\0"
+        while len(strings_blob) % 8:
+            strings_blob.append(0)
+
+    ui2_off = {}
+    for it in ui2:
+        for part in it["parts"]:
+            ui2_off[(it["table"], it["index"], part["slot"])] = len(strings_blob)
+            strings_blob += part["enc"] + b"\0"
+            while len(strings_blob) % 8:
+                strings_blob.append(0)
+
+    extra_off = {}
+    for ex in extras:
+        extra_off[ex["info"]["site"]] = len(strings_blob)
+        strings_blob += ex["enc"] + b"\0"
+        while len(strings_blob) % 8:
+            strings_blob.append(0)
+
+    last = max(pe.sections, key=lambda s: s["va"])
+    new_va = max(
+        (last["va"] + last["vsize"] + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1),
+        pe.size_image,
+    )
+    while len(strings_blob) % 16:
+        strings_blob.append(0)
+
+    # ---- build stubs ----------------------------------------------------------
+    inline_plans = []
+    for e in entries:
+        if e["skip"]:
+            continue
+        for info in e["inline"]:
+            inline_plans.append(
+                dict(enc=e["enc"], key=("cap", e["addr"]), info=info, text=e)
+            )
+    for ex in extras:
+        inline_plans.append(
+            dict(
+                enc=ex["enc"],
+                key=("extra", ex["info"]["site"]),
+                info=ex["info"],
+                text=ex,
+            )
+        )
+
+    stubs = bytearray()
+    stub_plans = []
+    for ip in inline_plans:
+        while len(stubs) % 16:
+            stubs.append(0xCC)
+        stub_plans.append(dict(ip, off=len(stubs)))
+        stubs += b"\0" * 64
+    stub_base_off = len(strings_blob)
+    stub_base_rva = new_va + stub_base_off
+    for sp in stub_plans:
+        stub_rva = stub_base_rva + sp["off"]
+        kind, val = sp["key"]
+        str_rva = new_va + (str_off[val] if kind == "cap" else extra_off[val])
+        blob = build_stub(
+            sp["info"]["dst"][0],
+            sp["info"]["dst"][1],
+            sp["enc"],
+            str_rva,
+            stub_rva,
+            sp["info"]["back"],
+        )
+        stubs[sp["off"] : sp["off"] + len(blob)] = blob
+        sp["size"] = len(blob)
+    used = max((sp["off"] + sp["size"] for sp in stub_plans), default=0)
+    stubs = stubs[:used]
+    while len(stubs) % 16:
+        stubs.append(0xCC)
+
+    payload = bytes(strings_blob) + bytes(stubs)
+
+    # ---- the caption-font cave ------------------------------------------------
+    import caption_font_hook as cfh
+
+    if args.caption_font and not args.hook_only:
+        check_filter(STRINGS_TSV, "caption filter")
+
+    hook_blob = b""
+    hook_rva = None
+    marker_rva = None
+    site_patch = None
+    hook_dlen = 0
+    probe_only = bool(
+        args.ctl_dump
+        or args.font_subst != "off"
+        or args.swap_arial_slot
+        or args.swap_arial_sticky
+        or args.swap_sticky_slot
+    )
+    if args.caption_font or probe_only:
+        setter = ADDRS["setter"]
+        foff = pe.rva_to_off(setter)
+        if foff is None:
+            errors.append(f"caption font: setter {setter:#x} not mapped")
+        else:
+            if args.site_head:
+                disp = bytes.fromhex(args.site_head)
+                cfh.check_displaced(disp)
+            else:
+                disp = cfh.derive_displaced(pe.data, foff)
+                if disp != cfh.DEFAULT_DISPLACED_091:
+                    print(
+                        f"WARN setter prologue is {disp.hex()}, not the expected "
+                        f"{cfh.DEFAULT_DISPLACED_091.hex()}; using what is there"
+                    )
+            pre = len(payload)
+            pad = (-pre) % 16
+            hook_rva = new_va + pre + pad
+            sticky_slot = False
+            if args.swap_arial_sticky:
+                sticky_slot = 0x08
+            if args.swap_sticky_slot:
+                sticky_slot = int(args.swap_sticky_slot, 16)
+            subst_off = int(args.subst_offset, 16) if args.subst_offset else None
+            hook_blob, site_patch, marker_off, hook_dlen, _ = (
+                cfh.build_caption_font_hook(
+                    hook_rva,
+                    setter,
+                    args.caption_font or "menu",
+                    args.caption_prop,
+                    write=bool(args.caption_font),
+                    displaced=disp,
+                    accept_all=args.caption_all,
+                    swap_arial=args.swap_arial_slot,
+                    swap_sticky=sticky_slot,
+                    ctl_dump=args.ctl_dump,
+                    font_subst=args.font_subst,
+                    subst_offset=subst_off,
+                )
+            )
+            marker_rva = hook_rva + marker_off
+            hook_blob = b"\0" * pad + hook_blob
+            payload = payload + hook_blob
+
+    # ---- collect byte patches -------------------------------------------------
+    patches = []
+    if site_patch is not None:
+        patches.append((pe.rva_to_off(ADDRS["setter"]), site_patch))
+    for e in entries:
+        if e["skip"]:
+            continue
+        target = new_va + str_off[e["addr"]]
+        for disp_off, end in e["lea_patches"]:
+            foff = pe.rva_to_off(disp_off)
+            if foff is None:
+                errors.append(f"{disp_off:#x}: cannot map lea displacement")
+                continue
+            patches.append((foff, struct.pack("<i", target - end)))
+        for imm_off, ins_end in e["lea_len"]:
+            foff = pe.rva_to_off(imm_off)
+            if foff is None:
+                errors.append(f"{imm_off:#x}: cannot map lea length constant")
+                continue
+            patches.append((foff, struct.pack("<I", len(e["enc"]))))
+        for info in e["inline"]:
+            si = info["size_insn"]
+            foff = pe.rva_to_off(si.address + si.size - 4)
+            if foff is None:
+                errors.append(f"{si.address:#x}: cannot map length constant")
+                continue
+            patches.append((foff, struct.pack("<I", len(e["enc"]))))
+
+    for it in ui2:
+        label = f"{it['table']}[{it['index']}]"
+        for part in it["parts"]:
+            target = new_va + ui2_off[(it["table"], it["index"], part["slot"])]
+            ptr_off = pe.rva_to_off(part["slot"])
+            if ptr_off is None:
+                errors.append(f"{label}: cannot map slot {part['slot']:#x}")
+                continue
+            patches.append((ptr_off, struct.pack("<Q", IMAGE_BASE + target)))
+            if part["has_len"]:
+                len_off = pe.rva_to_off(part["slot"] + 8)
+                if len_off is None:
+                    errors.append(f"{label}: cannot map length slot")
+                    continue
+                patches.append((len_off, struct.pack("<Q", len(part["enc"]))))
+
+    for ex in extras:
+        si = ex["info"]["size_insn"]
+        foff = pe.rva_to_off(si.address + si.size - 4)
+        if foff is None:
+            errors.append(f"{si.address:#x}: cannot map extra length constant")
+            continue
+        patches.append((foff, struct.pack("<I", len(ex["enc"]))))
+
+    for sp in stub_plans:
+        start = sp["info"]["site"]
+        foff = pe.rva_to_off(start)
+        if foff is None:
+            errors.append(f"{start:#x}: cannot map inline site")
+            continue
+        rel = stub_base_rva + sp["off"] - (start + 5)
+        fill = sp["info"]["back"] - start
+        if fill < 5:
+            errors.append(f"{start:#x}: inline region too small ({fill} bytes)")
+            continue
+        patches.append((foff, b"\xe9" + struct.pack("<i", rel) + b"\x90" * (fill - 5)))
+
+    for v in VALIDATORS:
+        ioff = validator_immediate(md, data, pe, v)
+        if ioff is None:
+            errors.append(f"validator {v:#x}: no `cmp .., 0x5e` found")
+            continue
+        if bytes(data[ioff : ioff + 1]) != b"\x5e":
+            errors.append(
+                f"validator {v:#x}: unexpected byte {data[ioff : ioff + 1].hex()}"
+            )
+            continue
+        patches.append((ioff, b"\xff"))
+
+    # ---- embedded ImGui font resources ---------------------------------------
+    # The mod draws its own UI with Dear ImGui and loads these four RCDATA fonts
+    # by name (INFO_*).  The shipped blobs have no Cyrillic, so a UTF-8 caption
+    # renders as empty space.  The replacement is written in place: it has to fit
+    # the original resource size, the tail is zero padded and the data entry is
+    # narrowed to the real font length, which is what SizeofResource hands to
+    # AddFontFromMemoryTTF.
+    fonts = []
+    if args.fonts:
+        fonts = collect_fonts(pe, data, errors)
+        for f in fonts:
+            rva, size = struct.unpack_from("<II", data, f["entry"])
+            foff = pe.rva_to_off(rva)
+            if foff is None:
+                errors.append(f"font {f['name']}: resource RVA {rva:#x} not mapped")
+                continue
+            if len(f["blob"]) > size:
+                errors.append(
+                    f"font {f['name']}: {len(f['blob'])} bytes do not fit the "
+                    f"{size} byte resource"
+                )
+                continue
+            f["rva"] = rva
+            f["orig_size"] = size
+            patches.append((foff, f["blob"] + b"\0" * (size - len(f["blob"]))))
+            patches.append((f["entry"] + 4, struct.pack("<I", len(f["blob"]))))
+
+    if errors:
+        for x in errors:
+            print("ERROR", x)
+        return 1
+
+    for a, b in zip(sorted(patches), sorted(patches)[1:]):
+        if a[0] + len(a[1]) > b[0]:
+            errors.append(f"overlapping patches at {a[0]:#x} and {b[0]:#x}")
+    if errors:
+        for x in errors:
+            print("ERROR", x)
+        return 1
+
+    total_strings = sum(1 for e in entries if not e["skip"])
+    total_lea = sum(len(e["lea_patches"]) for e in entries if not e["skip"])
+    total_lea_len = sum(len(e["lea_len"]) for e in entries if not e["skip"])
+    if args.check:
+        print("check ok")
+        print(
+            f"rows: {len(entries)}  translated: {total_strings}  "
+            f"kept: {len(entries) - total_strings}"
+        )
+        print(f"lea patches: {total_lea}  lea length immediates: {total_lea_len}")
+        print(
+            f"ui2: popups {sum(1 for x in ui2 if x['table'] == 'popups')}"
+            f"  options {sum(1 for x in ui2 if x['table'] == 'options')}"
+            f"  hints {sum(1 for x in ui2 if x['table'] == 'hints')}"
+            f"  hintpages {sum(1 for x in ui2 if x['table'] == 'hintpages')}"
+            f"  extras {len(extras)}"
+        )
+        print(f"inline stubs: {len(stub_plans)}")
+        print(f"validator patches: {len(VALIDATORS)}")
+        for f in fonts:
+            print(
+                f"font {f['name']}: {len(f['blob'])} / {f['orig_size']} bytes, "
+                f"RVA {f['rva']:#x}"
+            )
+        print(f"new section .ru @ RVA {new_va:#x}, payload {len(payload)} bytes")
+        print(f"strings {len(strings_blob)} bytes, stubs {len(stubs)} bytes")
+        if hook_rva is not None:
+            print(
+                f"caption font hook: RVA {hook_rva:#x}, "
+                f"setter {ADDRS['setter']:#x} redirected, prop "
+                f"{args.caption_prop!r} = {args.caption_font!r}, "
+                f"{len(hook_blob)} bytes, marker RVA {marker_rva:#x}"
+            )
+        else:
+            print("caption font hook: off")
+        for sp in stub_plans:
+            e = sp["text"]
+            print(
+                f"  inline {sp['info']['site']:#07x} {e['orig']!r} -> "
+                f"{e['ru']!r} ({len(e['enc'])}B, region "
+                f"{sp['info']['back'] - sp['info']['site']}B)"
+            )
+        return 0
+
+    # ---- write the patched image ---------------------------------------------
+    out = bytearray(data)
+    for foff, blob in patches:
+        out[foff : foff + len(blob)] = blob
+
+    raw_ptr = (len(out) + FILE_ALIGN - 1) & ~(FILE_ALIGN - 1)
+    out += b"\0" * (raw_ptr - len(out))
+    out += payload
+    raw_size = (len(payload) + FILE_ALIGN - 1) & ~(FILE_ALIGN - 1)
+    out += b"\0" * (raw_size - len(payload))
+
+    hdr = pe.sect_table + 40 * pe.nsec
+    if hdr + 40 > pe.size_headers:
+        errors.append("no room for another section header")
+    if errors:
+        for x in errors:
+            print("ERROR", x)
+        return 1
+
+    struct.pack_into(
+        "<8sIIIIIIHHI",
+        out,
+        hdr,
+        b".ru\0\0\0\0\0",
+        len(payload),
+        new_va,
+        raw_size,
+        raw_ptr,
+        0,
+        0,
+        0,
+        0,
+        0xE0000040,  # MEM_WRITE | MEM_EXECUTE | MEM_READ | CNT_INITIALIZED_DATA
+    )
+    struct.pack_into("<H", out, pe.e_lfanew + 6, pe.nsec + 1)
+    new_size_image = (new_va + len(payload) + SECT_ALIGN - 1) & ~(SECT_ALIGN - 1)
+    struct.pack_into("<I", out, pe.opt + 56, new_size_image)
+    size_init = struct.unpack_from("<I", out, pe.opt + 8)[0]
+    struct.pack_into("<I", out, pe.opt + 8, size_init + raw_size)
+    struct.pack_into("<I", out, pe.opt + 64, 0)  # clear checksum
+
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_bytes(out)
+
+    print(f"wrote {out_path} ({len(out)} bytes)")
+    print(
+        f"translated {total_strings} strings ({total_lea} lea sites, "
+        f"{len(stub_plans)} stubs), encoding {ENCODING}"
+    )
+    print(f".ru section: RVA {new_va:#x}, raw {raw_ptr:#x}, {len(payload)} bytes")
+    if hook_rva is not None:
+        print(
+            f"caption font hook: RVA {hook_rva:#x} -> prop "
+            f"{args.caption_prop!r} = {args.caption_font!r} "
+            f"(setter {ADDRS['setter']:#x} redirected, marker {marker_rva:#x})"
+        )
+
+    rc = 0
+    if args.verify:
+        rc = verify(
+            out_path,
+            entries,
+            ui2,
+            extras,
+            stub_plans,
+            str_off,
+            ui2_off,
+            extra_off,
+            new_va,
+            patches,
+            md,
+            fonts=fonts,
+        )
+        if rc == 0 and hook_rva is not None:
+            rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
+    return rc
+
+
+def verify_hook(path, hook_rva, setter_rva, dlen, md):
+    """Re-read the cave out of the patched DLL and disassemble it."""
+    data = Path(path).read_bytes()
+    pe = PE(data)
+    o = pe.rva_to_off(setter_rva)
+    if o is None or pe.data[o] != 0xE9:
+        print("VERIFY ERROR hook: setter site is not a jmp")
+        return 1
+    tgt = setter_rva + 5 + struct.unpack_from("<i", pe.data, o + 1)[0]
+    if tgt != hook_rva:
+        print(f"VERIFY ERROR hook: site jumps to {tgt:#x}, cave is {hook_rva:#x}")
+        return 1
+    for i in range(5, dlen):
+        if pe.data[o + i] != 0x90:
+            print(f"VERIFY ERROR hook: site pad byte {i} is not 0x90")
+            return 1
+    body = pe.rva_to_off(setter_rva + dlen)
+    if body is None:
+        print("VERIFY ERROR hook: setter body not mapped")
+        return 1
+    # disassemble until the final `jmp` back to the setter body
+    start = pe.rva_to_off(hook_rva)
+    ins = list(md.disasm(bytes(pe.data[start : start + 0x4000]), hook_rva))
+    total = 0
+    orphans = 0
+    tail = setter_rva + dlen
+    for i in ins:
+        # the cave has internal `jmp rel32` too; only the one that lands on
+        # the displaced setter body is the tail
+        if i.mnemonic == "jmp" and i.operands and i.operands[0].type == X86_OP_IMM:
+            if i.operands[0].imm == tail:
+                print(
+                    f"hook ok: {total} bytes of code, {orphans} orphan "
+                    f"`00 00`, tail jmp -> {i.operands[0].imm:#x}"
+                )
+                return 0 if orphans == 0 else 1
+            continue
+        total += i.size
+        if bytes(pe.data[start + i.address - hook_rva :][:2]) == b"\x00\x00":
+            orphans += 1
+    print("VERIFY ERROR hook: cave does not end with a jmp back to the setter")
+    return 1
+
+
+def verify(
+    path,
+    entries,
+    ui2,
+    extras,
+    stub_plans,
+    str_off,
+    ui2_off,
+    extra_off,
+    new_va,
+    patches,
+    md,
+    fonts=(),
+):
+    data = Path(path).read_bytes()
+    pe = PE(data)
+    errors = []
+
+    for e in entries:
+        if e["skip"]:
+            continue
+        o = pe.rva_to_off(new_va + str_off[e["addr"]])
+        got = bytes(pe.data[o : o + len(e["enc"])])
+        if got != e["enc"]:
+            errors.append(f"{e['addr']:#x}: string bytes mismatch")
+        elif pe.data[o + len(e["enc"])] != 0:
+            errors.append(f"{e['addr']:#x}: missing terminator")
+
+    for it in ui2:
+        label = f"{it['table']}[{it['index']}]"
+        for part in it["parts"]:
+            o = pe.rva_to_off(
+                new_va + ui2_off[(it["table"], it["index"], part["slot"])]
+            )
+            enc = part["enc"]
+            got = bytes(pe.data[o : o + len(enc)])
+            if got != enc:
+                errors.append(f"{label} @{part['slot']:#x}: string bytes mismatch")
+            elif pe.data[o + len(enc)] != 0:
+                errors.append(f"{label} @{part['slot']:#x}: missing terminator")
+
+    for ex in extras:
+        label = f"extra {ex['info']['site']:#x}"
+        o = pe.rva_to_off(new_va + extra_off[ex["info"]["site"]])
+        got = bytes(pe.data[o : o + len(ex["enc"])])
+        if got != ex["enc"]:
+            errors.append(f"{label}: string bytes mismatch")
+        elif pe.data[o + len(ex["enc"])] != 0:
+            errors.append(f"{label}: missing terminator")
+
+    for foff, blob in patches:
+        if bytes(pe.data[foff : foff + len(blob)]) != blob:
+            errors.append(f"patch at file offset {foff:#x} not applied")
+
+    # disassemble every patched lea and every replaced inline region
+    for e in entries:
+        if e["skip"]:
+            continue
+        for disp_off, end in e.get("lea_patches", []):
+            site = disp_off - 3
+            # the instruction may start further back; just decode the target
+            o = pe.rva_to_off(disp_off)
+            disp = struct.unpack_from("<i", pe.data, o)[0]
+            if end + disp != new_va + str_off[e["addr"]]:
+                errors.append(f"{disp_off:#x}: lea target wrong")
+        for imm_off, ins_end in e.get("lea_len", []):
+            o = pe.rva_to_off(imm_off)
+            if struct.unpack_from("<I", pe.data, o)[0] != len(e["enc"]):
+                errors.append(f"{imm_off:#x}: lea length constant not updated")
+
+    for sp in stub_plans:
+        site = sp["info"]["site"]
+        o = pe.rva_to_off(site)
+        if pe.data[o] != 0xE9:
+            errors.append(f"{site:#x}: inline site is not a jmp")
+            continue
+        rel = struct.unpack_from("<i", pe.data, o + 1)[0]
+        stub_rva = site + 5 + rel
+        so = pe.rva_to_off(stub_rva)
+        ins = list(md.disasm(bytes(pe.data[so : so + 0x60]), stub_rva))
+        if not ins or ins[0].mnemonic != "push":
+            errors.append(f"{site:#x}: stub does not start with push")
+            continue
+        last = None
+        for x in ins:
+            if x.mnemonic == "jmp" and x.address > stub_rva + 5:
+                last = x
+                break
+        if last is None:
+            errors.append(f"{site:#x}: stub has no closing jmp")
+            continue
+        if last.operands[0].imm != sp["info"]["back"]:
+            errors.append(f"{site:#x}: stub jumps to the wrong place")
+        # length constant
+        si = sp["info"]["size_insn"]
+        lo = pe.rva_to_off(si.address + si.size - 4)
+        if struct.unpack_from("<I", pe.data, lo)[0] != len(sp["enc"]):
+            errors.append(f"{si.address:#x}: length constant not updated")
+
+    for f in fonts:
+        o = pe.rva_to_off(f["rva"])
+        if o is None:
+            errors.append(f"font {f['name']}: resource data is not mapped")
+            continue
+        if bytes(pe.data[o : o + len(f["blob"])]) != f["blob"]:
+            errors.append(f"font {f['name']}: bytes mismatch in .rsrc")
+        if bytes(pe.data[o + len(f["blob"]) : o + f["orig_size"]]) != (
+            b"\0" * (f["orig_size"] - len(f["blob"]))
+        ):
+            errors.append(f"font {f['name']}: padding after the font is not zero")
+        rva, size = struct.unpack_from("<II", pe.data, f["entry"])
+        if rva != f["rva"] or size != len(f["blob"]):
+            errors.append(f"font {f['name']}: resource data entry not sized")
+
+    if errors:
+        for x in errors:
+            print("VERIFY ERROR", x)
+        return 1
+    print(f"verify ok: {len(stub_plans)} stubs, {len(patches)} byte patches")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

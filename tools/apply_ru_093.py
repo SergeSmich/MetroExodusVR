@@ -16,8 +16,14 @@ values were measured on the release DLL:
 * the printable-ASCII gates were not relocated yet, so they are left alone:
   a charmap build keeps every byte below 0x80 (L-0033 patched nothing here).
 
-The encoding is the localization charmap, not UTF-8 (A-0034); the full
-argument is in the 0.9.1/0.9.2 builders.
+The encoding is the glyph table of the *menu* font, not UTF-8 and not the
+localization charmap (A-0034, L-0048).  A caption's bytes are glyph indices,
+so the builder writes the index of every character in the 269-entry table the
+game holds at ``exe+0x1765A68`` (``work/font093.json``), and the init cave in
+``.ru`` flips the EXE's kind-4 text handler to the byte-identity kind-6 one --
+without that flip the engine reads kind-4 bytes as ANSI codepoints and looks
+them up in a different table, which is why the charmap build rendered Latin
+garbage.  All Cyrillic the kit uses is below index 0x100, i.e. one byte.
 """
 
 import argparse
@@ -87,9 +93,7 @@ ADDRS = dict(
 # (MetroExodusVR-REA); this tools repository is frozen as the 0.9.1 source.
 # Override with METRO_KIT093 when the checkout is somewhere else.
 KIT093 = Path(os.environ.get("METRO_KIT093", str(ROOT / "kit093")))
-PLAN_093 = Path(
-    os.environ.get("METRO_PLAN093", str(KIT093 / "ru" / "plan-0.9.3.json"))
-)
+PLAN_093 = Path(os.environ.get("METRO_PLAN093", str(KIT093 / "ru" / "plan-0.9.3.json")))
 DEFAULT_SRC = Path(
     os.environ.get(
         "METRO_SRC093",
@@ -162,12 +166,63 @@ HEAP_BASES = {
 
 CHARMAP_TXT = ROOT / "ru" / "charmap.txt"
 
-# A-0034: a caption's bytes are glyph-table indices, never codepoints, so the
-# only encoding any Cyrillic-capable font can read is the one those fonts were
-# baked from -- the localization charmap.  UTF-8 indices select unrelated
-# glyphs in a 271-entry table and empty cells in ``arial``; see the module
-# docstring and ``tools/predict_captions.py --all`` for the 193-row numbers.
-ENCODING = "charmap"
+# ---- the game EXE the DLL runs inside (0.9.3, ImageBase 0x140000000) ---------
+# kind 4 = "the bytes are ANSI codepoints, look them up in the font table of
+# 0xb56a60"; kind 6 = "the bytes are glyph indices, take them as they are".
+# The descriptor table lives at [exe+0xB8DC60] and entry N is the dword at
+# +4*N; the panel and the other mod captions are the only kind-4 texts the
+# process builds (18 sidebar nodes + "VR" + "VR HINTS"), so the init cave
+# rewrites that one slot to kind 6 and leaves kind 1 (the game UI, 369 nodes)
+# alone.  Proven live: work/shots/v093_now.png.
+EXE_KIND_TABLE = 0xB8DC60
+EXE_KIND4_SLOT = 0xB8DC70
+EXE_KIND_TABLE_CODE = 0xB8D629  # kind 0/3 handler, an identity check
+EXE_KIND6_CODE = 0xB8DBE9
+EXE_VIRTUALPROTECT_IAT = 0x4D7200  # KERNEL32!VirtualProtect
+
+# DllMain entry of the 0.9.3 DLL: two `mov [rsp+..], reg` we replay in the cave
+# and then jump back to entry+len(ENTRY_DISPLACED).
+ENTRY_RVA = 0x4641A0
+ENTRY_DISPLACED = bytes.fromhex("48895c24084889742410")
+
+# A-0034: a caption's bytes are glyph-table indices, never codepoints.  The
+# kind-4 handler reads them as ANSI codepoints and looks them up in a *second*
+# table (``0xb56a60``), so a charmap build came out as Latin garbage; the
+# kind-6 handler in the engine takes the bytes literally, so the payload has to
+# be the indices of the glyph table the menu font really uses.
+ENCODING = "fontidx"
+
+# The 269 codepoints of the 0.9.3 menu font, in glyph order: index = position.
+# Read live from ``[[exe+0x1765A68]+8]`` (u16 array, count at ``+0x12``); see
+# ``work/font093.json`` and ``work/panel_idx.py``.  It is NOT ``ru/charmap.txt``
+# ('Д' is index 0x4d here, 0x43 there).  Only indices <= 0xFF are usable,
+# because kind 6 takes one byte per glyph; every character the kit uses fits
+# (max is 0xB0 for the Cyrillic letters).
+_FONT_GLYPHS_HEX = (
+    "0000 0020 043E 0430 0435 0442 0438 043D 002E 0441 0440 043B 0066 0432 002C 003A 043A 0443"
+    "043C 0072 0434 003C 003E 0069 043F 0074 044F 044C 0065 0073 044B 0078 0021 0431 0447 006E"
+    "0412 006C 0064 0410 0433 0061 0437 006F 005F 0439 0445 0436 0448 0420 0067 0418 041A 041E"
+    "041F 0421 0415 041D 002D 0075 0079 0070 0413 0422 0068 003F 0032 044E 006D 0077 0449 044D"
+    "041C 0062 0427 041B 0446 0414 0417 0423 042D 0411 042F 0041 0425 0022 0045 0031 0052 0049"
+    "0054 0053 0030 004F 004E 006B 0063 0444 0428 0044 0043 0416 0076 004D 004C 003D 0028 0029"
+    "0033 2026 0050 0047 0429 042B 0034 042C 0056 0048 0036 004B 0038 0055 0042 0046 0035 0424"
+    "0419 0037 0426 0039 0059 007A 044A 0057 004A 0058 201D 201C 002F 042E 006A 00A9 005A 0051"
+    "005C 003B 00AE 00A0 0071 00AB 00BB 0023 0026 0027 002B 0025 2122 007C 2019 2013 005B 00E9"
+    "00ED 005D 002A 00F6 00FC 00F1 00D3 00E1 00FA 00E4 00D6 00C1 007D 2018 042A 007B 2014 0001"
+    "0002 0003 0004 0005 0006 0007 0008 0009 000A 000B 000C 000D 000E 000F 0010 0011 0012 0013"
+    "0014 0015 0016 0017 0018 0019 001A 001B 001C 001D 001E 001F 0024 0040 005E 0060 007E 00C0"
+    "00C2 00C3 00C4 00C5 00C6 00C7 00C8 00C9 00CA 00CB 00CC 00CD 00CE 00CF 00D0 00D1 00D2 00D4"
+    "00D5 00D7 00D8 00D9 00DA 00DB 00DC 00DD 00DE 00DF 00E0 00E2 00E3 00E5 00E6 00E7 00E8 00EA"
+    "00EB 00EC 00EE 00EF 00F0 00F2 00F3 00F4 00F5 00F7 00F8 00F9 00FB 00FD 00FE 00FF F8FF"
+)
+# The literals above are one implicitly concatenated string; the line breaks
+# fell where they fell, so drop the whitespace and slice the codepoints back
+# out four hex digits at a time.
+_FONT_GLYPHS_HEX = "".join(_FONT_GLYPHS_HEX.split())
+assert len(_FONT_GLYPHS_HEX) == 269 * 4, "font table is not 4 hex digits per glyph"
+FONT_GLYPHS = tuple(
+    int(_FONT_GLYPHS_HEX[i : i + 4], 16) for i in range(0, len(_FONT_GLYPHS_HEX), 4)
+)
 
 
 def load_charmap(path=None):
@@ -194,11 +249,12 @@ def charmap():
 
 
 def encode_text(s):
-    """Encode a display string as localization charmap indices.
+    """Encode a display string as menu-font glyph indices (``fontidx``).
 
-    Indices below 0xE0 are one byte.  Larger indices use the two byte form of
-    the ``.lng`` format: ``value = index + 0xDE41``, bytes ``value // 255`` and
-    ``value % 255`` -- the same rule ``tools/lng_dump.py`` decodes with.
+    The 0.9.3 kind-6 handler takes each byte as a glyph index, so that is what
+    this writes; every character the kit uses is below 0x100.  The older
+    ``charmap`` branch is kept: indices below 0xE0 are one byte, larger ones use
+    the two byte form of the ``.lng`` format (``value = index + 0xDE41``).
     """
     if ENCODING == "utf8":
         enc = s.encode("utf-8")
@@ -217,6 +273,28 @@ def encode_text(s):
         if 0 in enc:
             raise ValueError(f"encoded {s!r} contains a NUL byte")
         return enc
+
+    if ENCODING == "fontidx":
+        rev = {}
+        for i, cp in enumerate(FONT_GLYPHS):
+            rev.setdefault(cp, i)
+        out = bytearray()
+        for ch in s:
+            i = rev.get(ord(ch))
+            if i is None:
+                raise ValueError(
+                    f"{s!r}: character {ch!r} (U+{ord(ch):04X}) has no glyph in "
+                    "the 0.9.3 menu font (work/font093.json)"
+                )
+            if i > 0xFF:
+                raise ValueError(
+                    f"{s!r}: glyph index {i:#x} for {ch!r} does not fit one "
+                    "byte; kind 6 takes one byte per glyph"
+                )
+            out.append(i)
+        if 0 in out:
+            raise ValueError(f"encoded {s!r} contains a NUL byte")
+        return bytes(out)
 
     rev = {}
     for i, cp in enumerate(charmap()):
@@ -245,6 +323,8 @@ def decode_text(enc):
         return enc.decode("utf-8")
     if ENCODING == "cp1251":
         return enc.decode("cp1251")
+    if ENCODING == "fontidx":
+        return "".join(chr(FONT_GLYPHS[b]) for b in enc)
     cps = charmap()
     out = []
     i = 0
@@ -720,10 +800,12 @@ def check_encodings(entries, ui2, extras):
             )
     for ex in extras:
         check(f"extra {ex['info']['site']:#x}", ex["ru"], ex["enc"])
-    if len(charmap()) <= 0xE0:
+    if ENCODING == "charmap" and len(charmap()) <= 0xE0:
         errors.append(
             f"charmap has {len(charmap())} entries; the two-byte form starts at 0xE0"
         )
+    if ENCODING == "fontidx" and len(FONT_GLYPHS) != 269:
+        errors.append(f"font glyph table has {len(FONT_GLYPHS)} entries, expected 269")
     return errors
 
 
@@ -1024,6 +1106,101 @@ def validator_immediate(md, data, pe, rva):
     return None
 
 
+def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
+    """Assemble the DllMain cave that points the EXE's kind-4 slot at kind 6.
+
+    The cave runs at DLL load, before the mod builds any page, so every kind-4
+    text object created afterwards is resolved by the byte-identity kind-6
+    handler and the ``fontidx`` payloads render as Cyrillic.  It is idempotent
+    (skips when the slot already holds kind 6), keeps DllBase in rbx because
+    the VirtualProtect calls clobber every volatile register, and pushes
+    rcx/rdx/r8 (DllMain's arguments) around the work.  The two displaced
+    instructions are spliced verbatim at the cave entry and the cave jumps back
+    to ``back_rva``.
+    """
+    code = bytearray(displaced)
+    labels = {}
+    jmp_fix = []
+    rip_fix = []
+
+    def emit(h):
+        code.extend(bytes.fromhex(h))
+
+    def label(name):
+        labels[name] = len(code)
+
+    def branch(op, name):
+        emit(op)
+        jmp_fix.append((len(code), name))
+        code.extend(b"\0\0\0\0")
+
+    def call_iat(rva):
+        emit("ff15")
+        rip_fix.append((len(code), rva))
+        code.extend(b"\0\0\0\0")
+
+    emit("53")  # push rbx (callee-saved: keeps DllBase across the VP calls)
+    emit("51")  # push rcx (HINSTANCE)
+    emit("52")  # push rdx (reason)
+    emit("4150415141524153")  # push r8 r9 r10 r11
+    # PEB -> Ldr -> InLoadOrderModuleList.Flink: the first module is the EXE
+    emit("65488b042560000000")  # mov rax, gs:[0x60]
+    emit("488b4018")  # mov rax, [rax+0x18]
+    emit("488b4010")  # mov rax, [rax+0x10]
+    emit("488b5830")  # mov rbx, [rax+0x30]  (DllBase; NOT r10: the calls clobber it)
+    # The launcher (versions/<ver>/MetroExodusVR-launcher.exe) LoadLibrary's
+    # this DLL too, and there the offsets below are unmapped: read
+    # SizeOfImage out of the PE header and bail out unless the module is at
+    # least as big as the game EXE, otherwise the cave faults in that process.
+    emit("8b433c")  # mov eax, [rbx+0x3c]        (e_lfanew)
+    emit("3d00040000")  # cmp eax, 0x400
+    branch("0f87", "done")  # ja done
+    emit("8b440350")  # mov eax, [rbx+rax+0x50]  (SizeOfImage)
+    emit("3d78dcb800")  # cmp eax, 0xb8dc78
+    branch("0f82", "done")  # jb done
+    emit("0fb703")  # movzx eax, word [rbx]
+    emit("3d4d5a0000")  # cmp eax, 'MZ'
+    branch("0f85", "done")
+    emit("81bb60dcb80029d6b800")  # cmp dword [rbx+0xb8dc60], 0xB8D629
+    branch("0f85", "done")
+    emit("81bb70dcb800e9dbb800")  # cmp dword [rbx+0xb8dc70], 0xB8DBE9
+    branch("0f84", "done")
+    emit("4883ec20")  # sub rsp, 0x20 (7 pushes + 0x20 keeps rsp 16-aligned)
+    emit("488d8b70dcb800")  # lea rcx, [rbx+0xb8dc70]
+    emit("ba04000000")  # mov edx, 4
+    emit("41b840000000")  # mov r8d, PAGE_EXECUTE_READWRITE
+    emit("4c8d0c24")  # lea r9, [rsp]
+    call_iat(vp_slot_rva)
+    emit("85c0")  # test eax, eax
+    branch("0f84", "norestore")
+    emit("c78370dcb800e9dbb800")  # mov dword [rbx+0xb8dc70], 0xB8DBE9
+    emit("8b0424")  # mov eax, [rsp]     (old protect)
+    emit("418bc0")  # mov r8d, eax
+    emit("488d8b70dcb800")  # lea rcx, [rbx+0xb8dc70]
+    emit("ba04000000")  # mov edx, 4
+    emit("4c8d4c2408")  # lea r9, [rsp+8]
+    call_iat(vp_slot_rva)
+    label("norestore")
+    emit("4883c420")  # add rsp, 0x20
+    label("done")
+    emit("415b")  # pop r11
+    emit("415a")  # pop r10
+    emit("4159")  # pop r9
+    emit("4158")  # pop r8
+    emit("5a")  # pop rdx
+    emit("59")  # pop rcx
+    emit("5b")  # pop rbx
+    off = len(code)
+    code.append(0xE9)
+    code += struct.pack("<i", back_rva - (cave_rva + off + 5))
+
+    for at, name in jmp_fix:
+        struct.pack_into("<i", code, at, cave_rva + labels[name] - (cave_rva + at + 4))
+    for at, rva in rip_fix:
+        struct.pack_into("<i", code, at, rva - (cave_rva + at + 4))
+    return bytes(code)
+
+
 def main():
     global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
     global VALIDATORS, STRINGS_TSV
@@ -1166,14 +1343,27 @@ def main():
     )
     ap.add_argument(
         "--encoding",
-        choices=("charmap", "utf8", "cp1251"),
-        default="charmap",
+        choices=("fontidx", "charmap", "utf8", "cp1251"),
+        default="fontidx",
         help=(
-            "'charmap' (default) writes localization charmap indices, the only "
-            "encoding any Cyrillic-capable font can read (A-0034); 'utf8' "
-            "reproduces the L-0036 build, which came out empty because the "
-            "caption font has no ink above 0x7e; 'cp1251' rebuilds the 0.9.1 "
-            "kit's diagnostic"
+            "'fontidx' (default, L-0048) writes one byte per glyph -- the index "
+            "of the character in the menu font's 269-entry table -- which the "
+            "engine's kind-6 handler takes literally; the init cave in .ru "
+            "flips the EXE's kind-4 slot to it.  'charmap' writes localization "
+            "charmap indices and renders as Latin garbage on 0.9.3 (the kind-4 "
+            "handler looks them up again); 'utf8' reproduces the L-0036 build, "
+            "which came out empty; 'cp1251' rebuilds the 0.9.1 diagnostic"
+        ),
+    )
+    ap.add_argument(
+        "--no-kind-flip",
+        dest="kind_flip",
+        action="store_false",
+        default=True,
+        help=(
+            "do not add the init cave that rewrites the game EXE's kind-4 text "
+            "slot to kind 6.  Without it the fontidx payloads are read as ANSI "
+            "codepoints and render as Latin garbage (L-0048)"
         ),
     )
     ap.add_argument(
@@ -1562,8 +1752,52 @@ def main():
             hook_blob = b"\0" * pad + hook_blob
             payload = payload + hook_blob
 
+    # ---- the kind-4 -> kind-6 init cave --------------------------------------
+    init_blob = b""
+    init_rva = None
+    init_site_off = None
+    init_patch = None
+    if args.kind_flip:
+        entry = struct.unpack_from("<I", data, pe.opt + 16)[0]
+        foff = pe.rva_to_off(entry)
+        if entry != ENTRY_RVA:
+            errors.append(f"DllMain is at {entry:#x}, the cave expects {ENTRY_RVA:#x}")
+        if foff is None:
+            errors.append(f"DllMain {entry:#x} is not mapped")
+        else:
+            have = bytes(data[foff : foff + len(ENTRY_DISPLACED)])
+            if have != ENTRY_DISPLACED:
+                errors.append(
+                    f"DllMain prologue is {have.hex()}, the cave replays "
+                    f"{ENTRY_DISPLACED.hex()}"
+                )
+        if pe.rva_to_off(EXE_VIRTUALPROTECT_IAT) is None:
+            errors.append(
+                f"VirtualProtect IAT slot {EXE_VIRTUALPROTECT_IAT:#x} is not mapped"
+            )
+        if not errors:
+            pre = len(payload)
+            pad = (-pre) % 16
+            init_rva = new_va + pre + pad
+            blob = build_kind_flip_cave(
+                init_rva,
+                entry + len(ENTRY_DISPLACED),
+                EXE_VIRTUALPROTECT_IAT,
+                ENTRY_DISPLACED,
+            )
+            init_blob = b"\0" * pad + blob
+            payload = payload + init_blob
+            init_site_off = foff
+            init_patch = (
+                b"\xe9"
+                + struct.pack("<i", init_rva - (entry + 5))
+                + b"\x90" * (len(ENTRY_DISPLACED) - 5)
+            )
+
     # ---- collect byte patches -------------------------------------------------
     patches = []
+    if init_patch is not None:
+        patches.append((init_site_off, init_patch))
     if site_patch is not None:
         patches.append((pe.rva_to_off(ADDRS["setter"]), site_patch))
     for e in entries:
@@ -1714,6 +1948,14 @@ def main():
             )
         else:
             print("caption font hook: off")
+        if init_rva is not None:
+            print(
+                f"kind flip cave: RVA {init_rva:#x}, DllMain {ENTRY_RVA:#x} "
+                f"jump, {len(init_blob)} bytes, slot "
+                f"exe+{EXE_KIND4_SLOT:#x} -> {EXE_KIND6_CODE:#x}"
+            )
+        else:
+            print("kind flip cave: off")
         for sp in stub_plans:
             e = sp["text"]
             print(
@@ -1799,7 +2041,46 @@ def main():
         )
         if rc == 0 and hook_rva is not None:
             rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
+        if rc == 0 and init_rva is not None:
+            rc = verify_kind_flip(out_path, init_rva, init_blob)
     return rc
+
+
+def verify_kind_flip(path, init_rva, init_blob):
+    """Re-read the DllMain hook and the cave out of the patched DLL."""
+    data = Path(path).read_bytes()
+    pe = PE(data)
+    errors = []
+    o = pe.rva_to_off(ENTRY_RVA)
+    if o is None or pe.data[o] != 0xE9:
+        print("VERIFY ERROR kind flip: DllMain is not a jmp")
+        return 1
+    tgt = ENTRY_RVA + 5 + struct.unpack_from("<i", pe.data, o + 1)[0]
+    if tgt != init_rva:
+        errors.append(f"DllMain jumps to {tgt:#x}, the cave is {init_rva:#x}")
+    if bytes(pe.data[o + 5 : o + len(ENTRY_DISPLACED)]) != b"\x90" * (
+        len(ENTRY_DISPLACED) - 5
+    ):
+        errors.append("DllMain site is not padded with 0x90")
+    o = pe.rva_to_off(init_rva)
+    if o is None:
+        errors.append(f"cave {init_rva:#x} is not mapped")
+    elif bytes(pe.data[o : o + len(init_blob)]) != init_blob:
+        errors.append("cave bytes differ from what was built")
+    else:
+        back = ENTRY_RVA + len(ENTRY_DISPLACED)
+        tail = init_rva + len(init_blob) - 5
+        rel = struct.unpack_from("<i", pe.data, o + len(init_blob) - 4)[0]
+        if tail + 5 + rel != back:
+            errors.append(f"cave tail jmp -> {tail + 5 + rel:#x}, expected {back:#x}")
+    for e in errors:
+        print(f"VERIFY ERROR kind flip: {e}")
+    if not errors:
+        print(
+            f"kind flip ok: DllMain {ENTRY_RVA:#x} -> cave {init_rva:#x} "
+            f"({len(init_blob)} bytes) -> {ENTRY_RVA + len(ENTRY_DISPLACED):#x}"
+        )
+    return 0 if not errors else 1
 
 
 def verify_hook(path, hook_rva, setter_rva, dlen, md):

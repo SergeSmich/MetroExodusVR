@@ -1,0 +1,42 @@
+{
+  "id": "L-0048",
+  "build": "0.9.3",
+  "locale": "ru (fontidx: байты = индексы глифов живого шрифта; kind 4 -> 6 в EXE)",
+  "headset": null,
+  "dll": "build/MetroExodusVR-0.9.3.dll (не коммитится, build/ в .gitignore), SHA-256 A0B0EA09719187A7B0B58F96BE658ADB4E13CFD467ABAC4DDCF1CD660C430FFB (11 332 096 B)",
+  "build_flags": "tools/apply_ru_093.py --src \"<game>\\versions\\0.9.3\\MetroExodusVR.dll.bak-093-orig\" --out build\\MetroExodusVR-0.9.3.dll --verify",
+  "build_checks": "check ok: 189 строк / 200 lea / 20 stub / 572 байт-патч, encoding fontidx; .ru RVA 0xC4E000 33 032 B; cave 0xC56030 (216 B); verify ok: 20 stubs, 572 byte patches; kind flip ok: DllMain 0x4641A0 -> cave 0xC56030 -> 0x4641AA",
+  "installed_to": "F:\\SteamLibrary\\steamapps\\common\\Metro Exodus\\versions\\0.9.3\\MetroExodusVR.dll (хеш совпадает); рядом .bak-093-orig (оригинал 0.9.3) и .bak-093-prev (прежняя сборка)",
+  "runs": [
+    {
+      "what_clicked": "лаунчер versions\\0.9.3\\MetroExodusVR-launcher.exe -> MetroExodus.exe; пользователь открыл меню мода (Настройки -> VR)",
+      "what_seen": "ИГРА / ДВИЖЕНИЕ / ТЕЛО / РУКИ / ОРУЖИЕ / ИНТЕРФЕЙС / КОМФОРТ, внизу Esc НАЗАД — всё кириллицей. Поверх нижней строки идёт зубчатая полоса CRT-шума (эффект экрана, текст читается)",
+      "interpretation": "kind-flip сработал: подписи читаются identity-обработчиком как индексы глифов живого шрифта; порядок глифов совпал с work/font093.json",
+      "screenshot": "work/shots/v093_dll_02.png, work/shots/v093_dll_03.png (два снимка подряд, идентичны)",
+      "verdict": "OK, цель достигнута"
+    }
+  ],
+  "live_evidence": {
+    "checker": "work/_check_flip.py (OpenProcess + ReadProcessMemory, без записи и ввода)",
+    "process": "pid 29152, MetroExodus.exe base 0x7FF679B50000 size 0x23AA000, MetroExodusVR.dll загружена из versions\\0.9.3",
+    "slot": "MetroExodus.exe+0xB8DC70 = 0xB8DBE9 (kind 6); +0xB8DC60 = 0xB8D629 (kind 0/3, не тронут)",
+    "hook_log": "versions\\0.9.3\\logs\\2026-11-17_230457_hook_28608.log — без ошибок DLL; единственные warning'и: XR_ERROR_FORM_FACTOR_UNAVAILABLE (-35) и парковка главного потока в MsgWaitForMultipleObjectsEx"
+  },
+  "crashes_fixed": [
+    {
+      "symptom": "Launcher exited with code 0xC0000142 (versions\\0.9.3\\logs\\2026-11-17_230020_launcher_21052.log)",
+      "cause": "лаунчер тоже LoadLibrary'ит DLL; в его адресном пространстве смещений 0xB8xxxx нет, cave читал неотображённую страницу",
+      "fix": "gate по PE-заголовку: e_lfanew <= 0x400 и SizeOfImage >= 0xB8DC78, иначе выход из cave"
+    },
+    {
+      "symptom": "APPCRASH: MetroExodus.exe 1.0.0.7, модуль MetroExodusVR.dll 0.9.3.0, код 0xC0000005 (журнал Application, 17.11.2026 23:02:33)",
+      "cause": "VirtualProtect клоберит волатильные регистры; база EXE лежала в r10 и после вызова стала мусором",
+      "fix": "база в rbx (callee-saved), push rbx, sub rsp,0x20 при 7 push'ах для 16-выравнивания перед call"
+    }
+  ],
+  "risks": [
+    "kind-flip меняет чтение всех kind4-объектов, включая строки вне plan/tsv: 0x4EC548 'VR HINTS' (SSO qword на 0x8A2CC, длина 8 захардкожена), 0x4EF9C0 / 0x4EF9F5 / 0x4EFD58 / 0x4EFE50 (страницы подсказок мода), 13 'kept' строк — ожидаются кракозябры",
+    "для 'VR HINTS' при смене длины нужно править константу 8 рядом с 0x8A2CC — статику по этой строке Arena ещё не дала"
+  ],
+  "next": "проверить в игре страницу подсказок VR; перекодировать и перевести оставшиеся kind4-строки; обновить ru/ENCODING_NOTES.md"
+}

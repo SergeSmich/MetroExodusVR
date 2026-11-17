@@ -113,10 +113,13 @@ ADDRS = dict(
     # immediates of the 0.9.1 body and comparing against every prologue match
     # in 0.9.2: 55/55 instructions identical, prologue bytes identical.
     setter=0xA4C40,
-    # `cmp .., 0x5e` immediates of the printable-ASCII checks.  Same three
-    # patterns as 0.9.1 (0xA4728/0xA4C76/0xA6556), at 0xAA290 (`80 f9 5e`),
-    # 0xAA7E0 and 0xAC0C0 (`3c 5e`).  L-0033: they run on the .rdata literals,
-    # not on our payload, so --no-validators keeps the build clean.
+    # `sub .., 0x20; cmp .., 0x5e` printable-ASCII gates of the page builder.
+    # Same three patterns as 0.9.1 (0xA4728/0xA4C76/0xA6556): 0xAA290 is the
+    # 32-bit form (`80 f9 5e`), 0xAA7E0 and 0xAC0C0 the byte form (`3c 5e`).
+    # The address is the *entry* of the sequence, so the immediate is located
+    # by decoding; widening it to 0xff is what lets UTF-8 (Cyrillic) strings
+    # through -- a charmap build keeps every byte below 0x80 and does not need
+    # it (L-0033 patched nothing here).
     validators=(0xAA290, 0xAA7E0, 0xAC0C0),
     # Only the mod's own menu code is redirected.  The range is used to warn
     # about display sites outside it; every site comes from --plan anyway.
@@ -1056,6 +1059,31 @@ def self_test():
     return 0 if ok else 1
 
 
+def validator_immediate(md, data, pe, rva):
+    """File offset of the ``0x5e`` immediate in a printable-ASCII gate.
+
+    The recorded site is the first instruction of a short sequence::
+
+        0f b6 01   movzx eax, byte [rcx]      (or 0f b6 08 for ecx)
+        2c 20      sub   al, 0x20             (or 80 e9 20)
+        3c 5e      cmp   al, 0x5e             (or 80 f9 5e)
+
+    so the immediate has to be found by decoding, not assumed to be the first
+    byte of the site.
+    """
+    off = pe.rva_to_off(rva)
+    if off is None:
+        return None
+    for ins in md.disasm(data[off : off + 32], rva):
+        if ins.mnemonic == "cmp" and len(ins.operands) == 2:
+            op = ins.operands[1]
+            if op.type == X86_OP_IMM and op.imm == 0x5E:
+                return pe.rva_to_off(ins.address + ins.size - 1)
+        if ins.address - rva > 0x18:
+            break
+    return None
+
+
 def main():
     global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
     global VALIDATORS, STRINGS_TSV
@@ -1254,7 +1282,15 @@ def main():
         action="store_true",
         help="check the code cave and the charmap encoder; needs no DLL",
     )
-    ap.add_argument("--fonts", action="store_true", help=argparse.SUPPRESS)
+    ap.add_argument(
+        "--fonts",
+        action="store_true",
+        help=(
+            "replace the four embedded ImGui font resources (INFO_*) with the "
+            "files in build/fonts, so the mod can draw Cyrillic; needed with "
+            "--encoding utf8"
+        ),
+    )
     ap.add_argument("--no-fonts", action="store_true", help=argparse.SUPPRESS)
     args = ap.parse_args()
 
@@ -1652,16 +1688,43 @@ def main():
         patches.append((foff, b"\xe9" + struct.pack("<i", rel) + b"\x90" * (fill - 5)))
 
     for v in VALIDATORS:
-        foff = pe.rva_to_off(v)
-        if foff is None:
-            errors.append(f"validator {v:#x}: not mapped")
+        ioff = validator_immediate(md, data, pe, v)
+        if ioff is None:
+            errors.append(f"validator {v:#x}: no `cmp .., 0x5e` found")
             continue
-        if bytes(pe.data[foff : foff + 1]) != b"\x5e":
+        if bytes(data[ioff : ioff + 1]) != b"\x5e":
             errors.append(
-                f"validator {v:#x}: unexpected byte {pe.data[foff : foff + 1].hex()}"
+                f"validator {v:#x}: unexpected byte {data[ioff : ioff + 1].hex()}"
             )
             continue
-        patches.append((foff, b"\xff"))
+        patches.append((ioff, b"\xff"))
+
+    # ---- embedded ImGui font resources ---------------------------------------
+    # The mod draws its own UI with Dear ImGui and loads these four RCDATA fonts
+    # by name (INFO_*).  The shipped blobs have no Cyrillic, so a UTF-8 caption
+    # renders as empty space.  The replacement is written in place: it has to fit
+    # the original resource size, the tail is zero padded and the data entry is
+    # narrowed to the real font length, which is what SizeofResource hands to
+    # AddFontFromMemoryTTF.
+    fonts = []
+    if args.fonts:
+        fonts = collect_fonts(pe, data, errors)
+        for f in fonts:
+            rva, size = struct.unpack_from("<II", data, f["entry"])
+            foff = pe.rva_to_off(rva)
+            if foff is None:
+                errors.append(f"font {f['name']}: resource RVA {rva:#x} not mapped")
+                continue
+            if len(f["blob"]) > size:
+                errors.append(
+                    f"font {f['name']}: {len(f['blob'])} bytes do not fit the "
+                    f"{size} byte resource"
+                )
+                continue
+            f["rva"] = rva
+            f["orig_size"] = size
+            patches.append((foff, f["blob"] + b"\0" * (size - len(f["blob"]))))
+            patches.append((f["entry"] + 4, struct.pack("<I", len(f["blob"]))))
 
     if errors:
         for x in errors:
@@ -1695,6 +1758,11 @@ def main():
         )
         print(f"inline stubs: {len(stub_plans)}")
         print(f"validator patches: {len(VALIDATORS)}")
+        for f in fonts:
+            print(
+                f"font {f['name']}: {len(f['blob'])} / {f['orig_size']} bytes, "
+                f"RVA {f['rva']:#x}"
+            )
         print(f"new section .ru @ RVA {new_va:#x}, payload {len(payload)} bytes")
         print(f"strings {len(strings_blob)} bytes, stubs {len(stubs)} bytes")
         if hook_rva is not None:
@@ -1787,6 +1855,7 @@ def main():
             new_va,
             patches,
             md,
+            fonts=fonts,
         )
         if rc == 0 and hook_rva is not None:
             rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
@@ -1850,12 +1919,10 @@ def verify(
     patches,
     md,
     fonts=(),
-    font_off=None,
 ):
     data = Path(path).read_bytes()
     pe = PE(data)
     errors = []
-    font_off = font_off or {}
 
     for e in entries:
         if e["skip"]:
@@ -1939,15 +2006,19 @@ def verify(
             errors.append(f"{si.address:#x}: length constant not updated")
 
     for f in fonts:
-        o = pe.rva_to_off(new_va + font_off[f["name"]])
+        o = pe.rva_to_off(f["rva"])
         if o is None:
-            errors.append(f"font {f['name']}: payload is not mapped")
+            errors.append(f"font {f['name']}: resource data is not mapped")
             continue
         if bytes(pe.data[o : o + len(f["blob"])]) != f["blob"]:
-            errors.append(f"font {f['name']}: bytes mismatch in .ru")
+            errors.append(f"font {f['name']}: bytes mismatch in .rsrc")
+        if bytes(pe.data[o + len(f["blob"]) : o + f["orig_size"]]) != (
+            b"\0" * (f["orig_size"] - len(f["blob"]))
+        ):
+            errors.append(f"font {f['name']}: padding after the font is not zero")
         rva, size = struct.unpack_from("<II", pe.data, f["entry"])
-        if (rva, size) != (new_va + font_off[f["name"]], len(f["blob"])):
-            errors.append(f"font {f['name']}: resource data entry not repointed")
+        if rva != f["rva"] or size != len(f["blob"]):
+            errors.append(f"font {f['name']}: resource data entry not sized")
 
     if errors:
         for x in errors:

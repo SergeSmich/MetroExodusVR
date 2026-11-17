@@ -1,0 +1,1360 @@
+[
+ {
+  "id": "mevr_turn_mode",
+  "caption": "TURN MODE",
+  "addr": 5189504,
+  "lo": 764437,
+  "hi": 764455,
+  "values": [
+   {
+    "text": "SNAP",
+    "addr": 5189516
+   },
+   {
+    "text": "SMOOTH",
+    "addr": 5189524
+   }
+  ]
+ },
+ {
+  "id": "mevr_snap_turn",
+  "caption": "SNAP TURN ANGLE",
+  "addr": 5189552,
+  "lo": 764770,
+  "hi": 764789,
+  "values": [
+   {
+    "text": "{:g} DEG",
+    "addr": 5189568
+   }
+  ]
+ },
+ {
+  "id": "mevr_smooth_turn",
+  "caption": "SMOOTH TURN SPEED",
+  "addr": 5189608,
+  "lo": 764917,
+  "hi": 764942,
+  "values": [
+   {
+    "text": "{:g} DEG/S",
+    "addr": 5189632
+   }
+  ]
+ },
+ {
+  "id": "mevr_move_direction",
+  "caption": "MOVEMENT DIRECTION",
+  "addr": 5189672,
+  "lo": 765082,
+  "hi": 765107,
+  "values": [
+   {
+    "text": "HEAD",
+    "addr": 5189692
+   },
+   {
+    "text": "LEFT HAND",
+    "addr": 5189712
+   },
+   {
+    "text": "RIGHT HAND",
+    "addr": 5189728
+   }
+  ]
+ },
+ {
+  "id": "mevr_crouch",
+  "caption": "CROUCH BUTTON",
+  "addr": 5189760,
+  "lo": 765576,
+  "hi": 765601,
+  "values": [
+   {
+    "text": "HOLD",
+    "addr": 5189776
+   },
+   {
+    "text": "TOGGLE",
+    "addr": 5189784
+   }
+  ]
+ },
+ {
+  "id": "mevr_auto_sprint",
+  "caption": "AUTO SPRINT",
+  "addr": 5189816,
+  "lo": 765928,
+  "hi": 765953,
+  "values": []
+ },
+ {
+  "id": "mevr_move_deadzone",
+  "caption": "MOVE STICK DEADZONE",
+  "addr": 5189856,
+  "lo": 765985,
+  "hi": 766010,
+  "values": []
+ },
+ {
+  "id": "mevr_turn_deadzone",
+  "caption": "TURN STICK DEADZONE",
+  "addr": 5189904,
+  "lo": 766057,
+  "hi": 766082,
+  "values": []
+ },
+ {
+  "id": "mevr_reduce_head_bob",
+  "caption": "REDUCE HEAD BOB",
+  "addr": 5189952,
+  "lo": 766129,
+  "hi": 766154,
+  "values": []
+ },
+ {
+  "id": "mevr_popups_again",
+  "caption": "SHOW VR TIPS AGAIN",
+  "addr": 5189992,
+  "lo": 766186,
+  "hi": 766211,
+  "values": []
+ },
+ {
+  "id": "mevr_play_mode",
+  "caption": "PLAY MODE",
+  "addr": 5190032,
+  "lo": 766243,
+  "hi": 766268,
+  "values": [
+   {
+    "text": "ROOM-SCALE",
+    "addr": 5190048
+   },
+   {
+    "text": "STANDING",
+    "addr": 5190064
+   },
+   {
+    "text": "SEATED",
+    "addr": 5190076
+   }
+  ]
+ },
+ {
+  "id": "mevr_player_height",
+  "caption": "PLAYER HEIGHT",
+  "addr": 5190112,
+  "lo": 766646,
+  "hi": 766671,
+  "values": []
+ },
+ {
+  "id": "mevr_world_scale",
+  "caption": "WORLD SCALE",
+  "addr": 5190152,
+  "lo": 766715,
+  "hi": 766740,
+  "values": []
+ },
+ {
+  "id": "mevr_body_turning",
+  "caption": "BODY TURNING",
+  "addr": 5190192,
+  "lo": 766787,
+  "hi": 766812,
+  "values": [
+   {
+    "text": "FOLLOW HEAD",
+    "addr": 5190208
+   },
+   {
+    "text": "LOCKED",
+    "addr": 5124496
+   }
+  ]
+ },
+ {
+  "id": "mevr_body_position",
+  "caption": "BODY POSITION",
+  "addr": 5190248,
+  "lo": 767128,
+  "hi": 767153,
+  "values": [
+   {
+    "text": "FOLLOW",
+    "addr": 5190264
+   },
+   {
+    "text": "LOCKED",
+    "addr": 5124496
+   }
+  ]
+ },
+ {
+  "id": "mevr_physical_crouch",
+  "caption": "PHYSICAL CROUCH",
+  "addr": 5190296,
+  "lo": 767464,
+  "hi": 767489,
+  "values": []
+ },
+ {
+  "id": "mevr_belt_height",
+  "caption": "BELT HEIGHT",
+  "addr": 5190336,
+  "lo": 767521,
+  "hi": 767546,
+  "values": []
+ },
+ {
+  "id": "mevr_belt_crouch",
+  "caption": "BELT WHEN CROUCHING",
+  "addr": 5190376,
+  "lo": 767593,
+  "hi": 767618,
+  "values": [
+   {
+    "text": "STAY WITH YOU",
+    "addr": 5190400
+   },
+   {
+    "text": "FOLLOW BODY",
+    "addr": 5190416
+   },
+   {
+    "text": "AUTO",
+    "addr": 5189436
+   }
+  ]
+ },
+ {
+  "id": "mevr_bhaptics",
+  "caption": "BHAPTICS (EXPERIMENTAL)",
+  "addr": 5190448,
+  "lo": 767989,
+  "hi": 768014,
+  "values": []
+ },
+ {
+  "id": "mevr_bhaptics_strength",
+  "caption": "BHAPTICS STRENGTH",
+  "addr": 5190496,
+  "lo": 768046,
+  "hi": 768071,
+  "values": []
+ },
+ {
+  "id": "mevr_dominant_hand",
+  "caption": "DOMINANT HAND",
+  "addr": 5190544,
+  "lo": 768133,
+  "hi": 768158,
+  "values": [
+   {
+    "text": "RIGHT",
+    "addr": 5190560
+   },
+   {
+    "text": "LEFT",
+    "addr": 5190568
+   }
+  ]
+ },
+ {
+  "id": "mevr_grip_angle",
+  "caption": "WEAPON GRIP ANGLE",
+  "addr": 5190592,
+  "lo": 768469,
+  "hi": 768494,
+  "values": [
+   {
+    "text": "{} DEG",
+    "addr": 5189364
+   }
+  ]
+ },
+ {
+  "id": "mevr_finger_tracking",
+  "caption": "FINGER TRACKING",
+  "addr": 5190640,
+  "lo": 768810,
+  "hi": 768829,
+  "values": []
+ },
+ {
+  "id": "mevr_grab",
+  "caption": "GRIP",
+  "addr": 5190668,
+  "lo": 768855,
+  "hi": 768874,
+  "values": [
+   {
+    "text": "HOLD",
+    "addr": 5189776
+   },
+   {
+    "text": "TOGGLE",
+    "addr": 5189784
+   }
+  ]
+ },
+ {
+  "id": "mevr_backpack_in_hand",
+  "caption": "BACKPACK IN HAND",
+  "addr": 5190704,
+  "lo": 769039,
+  "hi": 769058,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration",
+  "caption": "VIBRATION",
+  "addr": 5190744,
+  "lo": 769084,
+  "hi": 769103,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_cues",
+  "caption": "HAND CUES",
+  "addr": 5190784,
+  "lo": 769159,
+  "hi": 769178,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_weapons",
+  "caption": "WEAPONS",
+  "addr": 5190824,
+  "lo": 769234,
+  "hi": 769253,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_damage",
+  "caption": "DAMAGE",
+  "addr": 5190856,
+  "lo": 769309,
+  "hi": 769328,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_world",
+  "caption": "EXPLOSIONS",
+  "addr": 5190888,
+  "lo": 769384,
+  "hi": 769403,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_scenes",
+  "caption": "SCENES AND VEHICLES",
+  "addr": 5190928,
+  "lo": 769459,
+  "hi": 769478,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_movement",
+  "caption": "MOVEMENT",
+  "addr": 5190976,
+  "lo": 769534,
+  "hi": 769553,
+  "values": []
+ },
+ {
+  "id": "mevr_use_reach",
+  "caption": "USE REACH",
+  "addr": 5191008,
+  "lo": 769609,
+  "hi": 769628,
+  "values": []
+ },
+ {
+  "id": "mevr_use_by_looking",
+  "caption": "USE BY LOOKING",
+  "addr": 5191048,
+  "lo": 769669,
+  "hi": 769688,
+  "values": []
+ },
+ {
+  "id": "mevr_weapon_weight",
+  "caption": "WEAPON WEIGHT",
+  "addr": 5191088,
+  "lo": 769714,
+  "hi": 769733,
+  "values": []
+ },
+ {
+  "id": "mevr_manual_reload",
+  "caption": "MANUAL RELOADING",
+  "addr": 5191128,
+  "lo": 769774,
+  "hi": 769793,
+  "values": []
+ },
+ {
+  "id": "mevr_part_highlights",
+  "caption": "PART HIGHLIGHTS",
+  "addr": 5191176,
+  "lo": 769819,
+  "hi": 769838,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "FIRST RELOADS",
+    "addr": 5191192
+   },
+   {
+    "text": "ALWAYS",
+    "addr": 5191208
+   }
+  ]
+ },
+ {
+  "id": "mevr_part_highlights_reset",
+  "caption": "RESET HIGHLIGHT COUNTS",
+  "addr": 5191248,
+  "lo": 770039,
+  "hi": 770058,
+  "values": []
+ },
+ {
+  "id": "mevr_revolver_flick",
+  "caption": "WEAPON FLICK",
+  "addr": 5191296,
+  "lo": 770084,
+  "hi": 770103,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "GENTLE",
+    "addr": 5191312
+   },
+   {
+    "text": "NORMAL",
+    "addr": 5191320
+   },
+   {
+    "text": "HARD",
+    "addr": 5191328
+   }
+  ]
+ },
+ {
+  "id": "mevr_reload_pouch",
+  "caption": "MAGAZINE POUCH",
+  "addr": 5191360,
+  "lo": 770340,
+  "hi": 770359,
+  "values": [
+   {
+    "text": "HIP",
+    "addr": 5191376
+   }
+  ]
+ },
+ {
+  "id": "mevr_sighting_eye",
+  "caption": "SIGHTING EYE",
+  "addr": 5191408,
+  "lo": 770491,
+  "hi": 770510,
+  "values": [
+   {
+    "text": "AUTO",
+    "addr": 5189436
+   },
+   {
+    "text": "LEFT",
+    "addr": 5190568
+   },
+   {
+    "text": "RIGHT",
+    "addr": 5190560
+   }
+  ]
+ },
+ {
+  "id": "mevr_other_eye",
+  "caption": "OTHER EYE WHILE SCOPED",
+  "addr": 5191440,
+  "lo": 770708,
+  "hi": 770727,
+  "values": [
+   {
+    "text": "VISIBLE",
+    "addr": 5191464
+   },
+   {
+    "text": "BLURRED",
+    "addr": 5191472
+   },
+   {
+    "text": "BLACK",
+    "addr": 5191480
+   }
+  ]
+ },
+ {
+  "id": "mevr_reticle",
+  "caption": "RETICLE TILT",
+  "addr": 5191504,
+  "lo": 770928,
+  "hi": 770947,
+  "values": [
+   {
+    "text": "WITH WEAPON",
+    "addr": 5191520
+   },
+   {
+    "text": "LEVEL",
+    "addr": 5191532
+   },
+   {
+    "text": "FIXED TO VIEW",
+    "addr": 5191544
+   }
+  ]
+ },
+ {
+  "id": "mevr_scope_steering",
+  "caption": "SCOPE STEERING",
+  "addr": 5191584,
+  "lo": 771145,
+  "hi": 771164,
+  "values": [
+   {
+    "text": "WEAPON",
+    "addr": 5191600
+   },
+   {
+    "text": "WEAPON + HEAD",
+    "addr": 5191608
+   }
+  ]
+ },
+ {
+  "id": "mevr_night_vision_tube",
+  "caption": "REALISTIC NIGHT VISION",
+  "addr": 5191648,
+  "lo": 771329,
+  "hi": 771348,
+  "values": []
+ },
+ {
+  "id": "mevr_hud_shape",
+  "caption": "HUD SHAPE",
+  "addr": 5191688,
+  "lo": 771374,
+  "hi": 771393,
+  "values": []
+ },
+ {
+  "id": "mevr_hud_position",
+  "caption": "HUD POSITION",
+  "addr": 5191736,
+  "lo": 771558,
+  "hi": 771577,
+  "values": [
+   {
+    "text": "LOCKED",
+    "addr": 5124496
+   },
+   {
+    "text": "FOLLOW",
+    "addr": 5190264
+   }
+  ]
+ },
+ {
+  "id": "mevr_hud_distance",
+  "caption": "HUD DISTANCE",
+  "addr": 5191776,
+  "lo": 771742,
+  "hi": 771761,
+  "values": []
+ },
+ {
+  "id": "mevr_hud_size",
+  "caption": "HUD SIZE",
+  "addr": 5191808,
+  "lo": 771802,
+  "hi": 771821,
+  "values": [
+   {
+    "text": "{:.2f} M",
+    "addr": 5189376
+   }
+  ]
+ },
+ {
+  "id": "mevr_hud_height",
+  "caption": "HUD HEIGHT",
+  "addr": 5191840,
+  "lo": 771967,
+  "hi": 771986,
+  "values": [
+   {
+    "text": "{:+.0f} DEG",
+    "addr": 5191856
+   }
+  ]
+ },
+ {
+  "id": "mevr_hud_opacity",
+  "caption": "HUD OPACITY",
+  "addr": 5191896,
+  "lo": 772080,
+  "hi": 772099,
+  "values": []
+ },
+ {
+  "id": "mevr_hint_height",
+  "caption": "HINT HEIGHT",
+  "addr": 5191936,
+  "lo": 772155,
+  "hi": 772174,
+  "values": []
+ },
+ {
+  "id": "mevr_hint_size",
+  "caption": "HINT SIZE",
+  "addr": 5191976,
+  "lo": 772268,
+  "hi": 772287,
+  "values": []
+ },
+ {
+  "id": "mevr_hint_time",
+  "caption": "HINT TIME",
+  "addr": 5192016,
+  "lo": 772381,
+  "hi": 772400,
+  "values": [
+   {
+    "text": "1.00X",
+    "addr": 5192028
+   },
+   {
+    "text": "1.25X",
+    "addr": 5192036
+   },
+   {
+    "text": "1.50X",
+    "addr": 5192044
+   },
+   {
+    "text": "2.00X",
+    "addr": 5192052
+   }
+  ]
+ },
+ {
+  "id": "mevr_prompt_size",
+  "caption": "ACTION PROMPT SIZE",
+  "addr": 5192088,
+  "lo": 772637,
+  "hi": 772656,
+  "values": []
+ },
+ {
+  "id": "mevr_menu_distance",
+  "caption": "MENU DISTANCE",
+  "addr": 5192144,
+  "lo": 772750,
+  "hi": 772769,
+  "values": []
+ },
+ {
+  "id": "mevr_menu_size",
+  "caption": "MENU SIZE",
+  "addr": 5192176,
+  "lo": 772854,
+  "hi": 772873,
+  "values": [
+   {
+    "text": "{:.1f} M",
+    "addr": 5192192
+   }
+  ]
+ },
+ {
+  "id": "mevr_damage_effects",
+  "caption": "DAMAGE EFFECTS",
+  "addr": 5192232,
+  "lo": 772967,
+  "hi": 772986,
+  "values": []
+ },
+ {
+  "id": "mevr_damage_size",
+  "caption": "DAMAGE EFFECT SIZE",
+  "addr": 5192272,
+  "lo": 773012,
+  "hi": 773031,
+  "values": [
+   {
+    "text": "SMALL",
+    "addr": 5192292
+   },
+   {
+    "text": "MEDIUM",
+    "addr": 5192300
+   },
+   {
+    "text": "LARGE",
+    "addr": 5192308
+   }
+  ]
+ },
+ {
+  "id": "mevr_hit_direction",
+  "caption": "HIT DIRECTION",
+  "addr": 5192344,
+  "lo": 773235,
+  "hi": 773254,
+  "values": []
+ },
+ {
+  "id": "mevr_health_pulse",
+  "caption": "LOW-HEALTH PULSE",
+  "addr": 5192384,
+  "lo": 773280,
+  "hi": 773299,
+  "values": []
+ },
+ {
+  "id": "mevr_debug_overlay",
+  "caption": "DEBUG OVERLAY",
+  "addr": 5192432,
+  "lo": 773325,
+  "hi": 773344,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_floor",
+  "caption": "CINEMA FLOOR",
+  "addr": 5192472,
+  "lo": 773370,
+  "hi": 773389,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_controllers",
+  "caption": "CINEMA CONTROLLERS",
+  "addr": 5192512,
+  "lo": 773415,
+  "hi": 773434,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_info",
+  "caption": "CINEMA INFO",
+  "addr": 5192560,
+  "lo": 773460,
+  "hi": 773479,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_links",
+  "caption": "CINEMA LINKS",
+  "addr": 5192600,
+  "lo": 773505,
+  "hi": 773524,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_preset",
+  "caption": "CAMERA PRESET",
+  "addr": 5192640,
+  "lo": 773550,
+  "hi": 773569,
+  "values": [
+   {
+    "text": "IMMERSIVE",
+    "addr": 5192656
+   },
+   {
+    "text": "CINEMATIC",
+    "addr": 5192680
+   }
+  ]
+ },
+ {
+  "id": "mevr_realign",
+  "caption": "RE-ALIGN AFTER SCENES",
+  "addr": 5192712,
+  "lo": 773767,
+  "hi": 773786,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "SNAP",
+    "addr": 5189516
+   },
+   {
+    "text": "SMOOTH",
+    "addr": 5189524
+   }
+  ]
+ },
+ {
+  "id": "mevr_head_leash",
+  "caption": "HEAD LEASH",
+  "addr": 5192752,
+  "lo": 773987,
+  "hi": 774006,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_distance",
+  "caption": "CINEMA SCREEN DISTANCE",
+  "addr": 5192792,
+  "lo": 774047,
+  "hi": 774066,
+  "values": []
+ },
+ {
+  "id": "mevr_cinema_size",
+  "caption": "CINEMA SCREEN SIZE",
+  "addr": 5192840,
+  "lo": 774148,
+  "hi": 774167,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_cinematic_track",
+  "caption": "CINEMATIC TRACK",
+  "addr": 5124440,
+  "lo": 774242,
+  "hi": 774266,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_attached",
+  "caption": "ATTACHED",
+  "addr": 5124456,
+  "lo": 774322,
+  "hi": 774347,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_third_person",
+  "caption": "THIRD PERSON",
+  "addr": 5124512,
+  "lo": 774400,
+  "hi": 774424,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_free_cam",
+  "caption": "FREE CAMERA",
+  "addr": 5192952,
+  "lo": 774477,
+  "hi": 774501,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_station",
+  "caption": "STATION",
+  "addr": 5124504,
+  "lo": 774554,
+  "hi": 774578,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_bone_angles",
+  "caption": "BONE ANGLES",
+  "addr": 5193016,
+  "lo": 774631,
+  "hi": 774655,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_scripted_lock",
+  "caption": "SCRIPTED LOCK",
+  "addr": 5193056,
+  "lo": 774708,
+  "hi": 774732,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_animation_lock",
+  "caption": "ANIMATION LOCK",
+  "addr": 5193104,
+  "lo": 774785,
+  "hi": 774809,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_axis_locked",
+  "caption": "AXIS LOCKED",
+  "addr": 5193152,
+  "lo": 774862,
+  "hi": 774886,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_gameplay_ui",
+  "caption": "GAMEPLAY UI",
+  "addr": 5193192,
+  "lo": 774939,
+  "hi": 774966,
+  "values": []
+ },
+ {
+  "id": "mevr_alternate_eye",
+  "caption": "RENDER MODE",
+  "addr": 5193256,
+  "lo": 775029,
+  "hi": 775048,
+  "values": [
+   {
+    "text": "STEREO",
+    "addr": 5193268
+   },
+   {
+    "text": "PERFORMANCE (AER+)",
+    "addr": 5193280
+   }
+  ]
+ },
+ {
+  "id": "mevr_render_scale",
+  "caption": "RENDER SCALE (RESTART)",
+  "addr": 5193328,
+  "lo": 775210,
+  "hi": 775229,
+  "values": []
+ },
+ {
+  "id": "mevr_upscaler",
+  "caption": "UPSCALER",
+  "addr": 5193368,
+  "lo": 775270,
+  "hi": 775289,
+  "values": []
+ },
+ {
+  "id": "mevr_upscaling_mode",
+  "caption": "UPSCALING MODE",
+  "addr": 5193408,
+  "lo": 775342,
+  "hi": 775361,
+  "values": [
+   {
+    "text": "NATIVE AA",
+    "addr": 5193424
+   },
+   {
+    "text": "QUALITY",
+    "addr": 5193440
+   },
+   {
+    "text": "BALANCED",
+    "addr": 5193448
+   },
+   {
+    "text": "PERFORMANCE",
+    "addr": 5193464
+   },
+   {
+    "text": "ULTRA PERFORMANCE",
+    "addr": 5193480
+   }
+  ]
+ },
+ {
+  "id": "mevr_fsr_sharpness",
+  "caption": "FSR SHARPENING",
+  "addr": 5193528,
+  "lo": 775616,
+  "hi": 775635,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "LOW",
+    "addr": 5193544
+   },
+   {
+    "text": "MEDIUM",
+    "addr": 5192300
+   },
+   {
+    "text": "HIGH",
+    "addr": 5193548
+   }
+  ]
+ },
+ {
+  "id": "mevr_dlss_model",
+  "caption": "DLSS MODEL",
+  "addr": 5193576,
+  "lo": 775860,
+  "hi": 775879,
+  "values": [
+   {
+    "text": "AUTO (K)",
+    "addr": 5193592
+   },
+   {
+    "text": "K (DLSS 4)",
+    "addr": 5193608
+   },
+   {
+    "text": "M (DLSS 4.5)",
+    "addr": 5193624
+   },
+   {
+    "text": "L (DLSS 4.5)",
+    "addr": 5193640
+   },
+   {
+    "text": "J (DLSS 4)",
+    "addr": 5193656
+   },
+   {
+    "text": "E (DLSS 3)",
+    "addr": 5193672
+   }
+  ]
+ },
+ {
+  "id": "mevr_upscaling_fovea",
+  "caption": "FOVEATED UPSCALING",
+  "addr": 5193712,
+  "lo": 776161,
+  "hi": 776180,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "ON (45 DEG)",
+    "addr": 5193736
+   },
+   {
+    "text": "ON (40 DEG)",
+    "addr": 5193752
+   },
+   {
+    "text": "ON (35 DEG)",
+    "addr": 5193768
+   },
+   {
+    "text": "ON (30 DEG)",
+    "addr": 5193784
+   },
+   {
+    "text": "ON (25 DEG)",
+    "addr": 5193800
+   },
+   {
+    "text": "ON (20 DEG)",
+    "addr": 5193816
+   }
+  ]
+ },
+ {
+  "id": "mevr_upscaling_periphery",
+  "caption": "FOVEATED PERIPHERY",
+  "addr": 5193864,
+  "lo": 776492,
+  "hi": 776511,
+  "values": [
+   {
+    "text": "NATIVE AA",
+    "addr": 5193424
+   },
+   {
+    "text": "TAA",
+    "addr": 5193884
+   }
+  ]
+ },
+ {
+  "id": "mevr_mirror",
+  "caption": "DESKTOP MIRROR",
+  "addr": 5193904,
+  "lo": 776673,
+  "hi": 776692,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "LEFT EYE",
+    "addr": 5193920
+   },
+   {
+    "text": "BOTH EYES",
+    "addr": 5193936
+   }
+  ]
+ },
+ {
+  "id": "mevr_mirror_window",
+  "caption": "MIRROR WINDOW",
+  "addr": 5193976,
+  "lo": 776893,
+  "hi": 776912,
+  "values": [
+   {
+    "text": "WINDOWED",
+    "addr": 5193992
+   },
+   {
+    "text": "FULLSCREEN",
+    "addr": 5194008
+   }
+  ]
+ },
+ {
+  "id": "mevr_mirror_ui",
+  "caption": "MIRROR HEADSET UI",
+  "addr": 5194040,
+  "lo": 777077,
+  "hi": 777096,
+  "values": []
+ },
+ {
+  "id": "mevr_foveation",
+  "caption": "FOVEATED RENDERING",
+  "addr": 5194080,
+  "lo": 777122,
+  "hi": 777141,
+  "values": [
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "LIGHT",
+    "addr": 5194100
+   },
+   {
+    "text": "BALANCED",
+    "addr": 5193448
+   },
+   {
+    "text": "HIGH",
+    "addr": 5193548
+   },
+   {
+    "text": "AGGRESSIVE",
+    "addr": 5194112
+   },
+   {
+    "text": "ULTRA",
+    "addr": 5194124
+   },
+   {
+    "text": "EXTREME",
+    "addr": 5194136
+   }
+  ]
+ },
+ {
+  "id": "mevr_water_reflections",
+  "caption": "BETTER WATER REFLECTIONS",
+  "addr": 5194168,
+  "lo": 777453,
+  "hi": 777472,
+  "values": []
+ },
+ {
+  "id": "mevr_disable_blur",
+  "caption": "DISABLE BLUR",
+  "addr": 5194224,
+  "lo": 777498,
+  "hi": 777517,
+  "values": []
+ },
+ {
+  "id": "mevr_depth_of_field",
+  "caption": "DEPTH OF FIELD",
+  "addr": 5194264,
+  "lo": 777543,
+  "hi": 777562,
+  "values": []
+ },
+ {
+  "id": "mevr_deep_blacks",
+  "caption": "DEEP BLACKS",
+  "addr": 5194304,
+  "lo": 777618,
+  "hi": 777637,
+  "values": []
+ },
+ {
+  "id": "mevr_hud_resolution",
+  "caption": "HUD RESOLUTION (RESTART)",
+  "addr": 5194344,
+  "lo": 777663,
+  "hi": 777682,
+  "values": []
+ },
+ {
+  "id": "mevr_depth_reprojection",
+  "caption": "DEPTH REPROJECTION",
+  "addr": 5194400,
+  "lo": 777808,
+  "hi": 777827,
+  "values": []
+ },
+ {
+  "id": "mevr_video_legal",
+  "caption": "LEGAL NOTICE VIDEO",
+  "addr": 5194424,
+  "lo": 777846,
+  "hi": 777868,
+  "values": []
+ },
+ {
+  "id": "mevr_video_credits",
+  "caption": "CREDITS VIDEO",
+  "addr": 5194480,
+  "lo": 777950,
+  "hi": 777969,
+  "values": []
+ },
+ {
+  "id": "mevr_video_intro",
+  "caption": "INTRO VIDEO",
+  "addr": 5194528,
+  "lo": 778048,
+  "hi": 778067,
+  "values": [
+   {
+    "text": "+{} CM",
+    "addr": 5189356
+   },
+   {
+    "text": "{} CM",
+    "addr": 5189304
+   }
+  ]
+ },
+ {
+  "id": "mevr_movement",
+  "caption": "MOVEMENT",
+  "addr": 5190976,
+  "lo": 791948,
+  "hi": 791970,
+  "values": []
+ },
+ {
+  "id": "mevr_body",
+  "caption": "BODY",
+  "addr": 5189700,
+  "lo": 792595,
+  "hi": 792617,
+  "values": []
+ },
+ {
+  "id": "mevr_vibration_page",
+  "caption": "VIBRATION",
+  "addr": 5190744,
+  "lo": 793008,
+  "hi": 793030,
+  "values": []
+ },
+ {
+  "id": "mevr_hands",
+  "caption": "HANDS",
+  "addr": 5194844,
+  "lo": 793434,
+  "hi": 793453,
+  "values": []
+ },
+ {
+  "id": "mevr_weapons",
+  "caption": "WEAPONS",
+  "addr": 5190824,
+  "lo": 793981,
+  "hi": 794003,
+  "values": []
+ },
+ {
+  "id": "mevr_scopes",
+  "caption": "SCOPES",
+  "addr": 5194888,
+  "lo": 794326,
+  "hi": 794348,
+  "values": []
+ },
+ {
+  "id": "mevr_hud",
+  "caption": "INTERFACE",
+  "addr": 5194912,
+  "lo": 795234,
+  "hi": 795256,
+  "values": []
+ },
+ {
+  "id": "mevr_camera_overrides",
+  "caption": "CAMERA OVERRIDES",
+  "addr": 5194944,
+  "lo": 795709,
+  "hi": 795750,
+  "values": []
+ },
+ {
+  "id": "mevr_comfort",
+  "caption": "COMFORT",
+  "addr": 5192672,
+  "lo": 796283,
+  "hi": 796330,
+  "values": []
+ },
+ {
+  "id": "mevr_graphics",
+  "caption": "GRAPHICS",
+  "addr": 5195008,
+  "lo": 797795,
+  "hi": 797836,
+  "values": [
+   {
+    "text": "GAME",
+    "addr": 5195040
+   },
+   {
+    "text": "VR",
+    "addr": 5189444
+   },
+   {
+    "text": "OFF",
+    "addr": 5189336
+   },
+   {
+    "text": "0 (LOCKED)",
+    "addr": 5189344
+   },
+   {
+    "text": "{} CM",
+    "addr": 5189304
+   },
+   {
+    "text": "{} CM",
+    "addr": 5189304
+   }
+  ]
+ }
+]

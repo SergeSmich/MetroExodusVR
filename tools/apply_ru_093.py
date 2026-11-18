@@ -294,6 +294,28 @@ VALUE_CAVE3_TABLE_AT = 198
 # 0xC1030, plus 0xC4814, 0xC5442, 0xC55F9.  Under fontidx '%' is 0x9b.
 FMT_LITERAL_PATCHES = ((0x4F2ED4 + 2, 0x25, 0x9B),)
 
+# Raw-ASCII literals that never reach the caption plan, yet are drawn as they
+# are.  Two kinds: short labels the plan generator does not classify as captions
+# ("16:9", "4:3", "1.00X" ...) and suffixes of printf patterns that are not
+# translated at all ("{:.1f}X", "{:.2f}X", "{}P").  Because kind-6 reads each
+# byte as a glyph index, their ASCII letters came out as whatever character sits
+# at that index: HUD SHAPE read "РП-Н" (0x31 0x36 0x3a 0x39 = Р П - Н) and "К-И",
+# the size rows ended in "R" ('X' = 0x58) and "720P" in the glyph 0x50.  Only the
+# literal bytes are rewritten; a {format} part stays ASCII for the formatter.
+# Under fontidx: '1'=0x57 '6'=0x76 ':'=0x0f '9'=0x81, '4'=0x72 '3'=0x6c,
+# '.'=0x08 '0'=0x5c '2'=0x42 '5'=0x7c, 'X'=0x87, 'P'=0x6e.
+GLYPH_LITERAL_PATCHES = (
+    (0x4F3814, "16:9"),  # HUD SHAPE option labels (0xBC557 / 0xBC578)
+    (0x4F381C, "4:3"),
+    (0x4F395C, "1.00X"),  # HINT TIME multipliers (0xBC949 ... 0xBC9AC)
+    (0x4F3964, "1.25X"),
+    (0x4F396C, "1.50X"),
+    (0x4F3974, "2.00X"),
+    (0x4F393E, "X"),  # suffix of "{:.1f}X", HINT SIZE value (0xBC8CB)
+    (0x4F39B6, "X"),  # suffix of "{:.2f}X", ACTION PROMPT SIZE (0xBCA3C)
+    (0x4F4286, "P"),  # suffix of "{}P", HUD RESOLUTION (0xBDDFC)
+)
+
 # A-0034: a caption's bytes are glyph-table indices, never codepoints.  The
 # kind-4 handler reads them as ANSI codepoints and looks them up in a *second*
 # table (``0xb56a60``), so a charmap build came out as Latin garbage; the
@@ -2212,6 +2234,16 @@ def main():
             )
             continue
         patches.append((foff, bytes((new,))))
+    for off, text in GLYPH_LITERAL_PATCHES:
+        foff = pe.rva_to_off(off)
+        if foff is None:
+            errors.append(f"glyph literal {off:#x}: not mapped")
+            continue
+        have = bytes(data[foff : foff + len(text)])
+        if have != text.encode("ascii"):
+            errors.append(f"glyph literal {off:#x}: expected {text!r}, found {have!r}")
+            continue
+        patches.append((foff, bytes(FONT_GLYPHS.index(ord(c)) for c in text)))
     for e in entries:
         if e["skip"]:
             continue

@@ -13,6 +13,7 @@ MetroExodusVR_RU_v0.9.1_TEST.zip
 
 # Scratch analysis scripts generated while reverse-engineering the DLL.
 tools/tmp_*.py
+work/tmp_*
 .arena/
 
 # modkit: архивы установок и логи прогонов (локальные, гигабайты)

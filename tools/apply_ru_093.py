@@ -191,6 +191,51 @@ EXE_VIRTUALPROTECT_IAT = 0x4D7200  # KERNEL32!VirtualProtect
 ENTRY_RVA = 0x4641A0
 ENTRY_DISPLACED = bytes.fromhex("48895c24084889742410")
 
+# L-0051: the value rows ("{:g} Gr./s") are built by the std::vformat look-alike
+# at 0xB6C70, which returns plain ASCII; the menu font wants glyph indices, so
+# the substituted number drew as random Cyrillic letters ("240" -> "gКш").  The
+# call to the formatter is retargeted into a cave that rewrites the field's
+# value bytes with glyph indices.  See ``work/_fmt_cave.py``.
+VALUE_SITE_RVA = 0xB6D2E  # call 0x180022DF0 inside 0xB6C70
+VALUE_BACK_RVA = 0xB6D33  # or esi, 2 -- where the cave returns
+FORMATTER_RVA = 0x22DF0
+VALUE_TABLE_FIRST = 0x2B  # '+'
+VALUE_TABLE_LAST = 0x39  # '9'
+# Cave bytes: 157 total.  Layout: ``sub rsp,8``, ``call formatter`` (opcode at
+# 4, displacement at 5), ``add rsp,8``, the scan/rewrite loop, ``ret`` back to
+# 0xB6D33 (at 141) and the 15-byte glyph table at 142.  ``ret`` and not
+# ``jmp``: it must drop the return address that the retargeted ``call`` pushed.
+# A ``jmp`` left rsp 8 bytes low, the rest of 0xB6C70 ran shifted and its
+# epilogue compared the stack cookie from the wrong slot -> 0xC0000409 with
+# fast fail code 2 (stack cookie check); that was the third crash of L-0051.
+VALUE_CAVE_TEMPLATE = bytes.fromhex(
+    "4883ec08e8000000004883c4084c8b4424584c8b4c246041ba000000004d39ca736b43803c107b74"
+    "0549ffc2ebef4d89d349ffc34d39cb735443803c187d75f14d29d949ffc9488d5424684883bc2480"
+    "000000107205488b542468488b4424784c29c84c39d076254c8d1d1f000000420fb60c1283e92b83"
+    "f90e7709410fb60c0b42880c1249ffc24939c272e2c39a0e3a088a5c57426c727c767f7881"
+)
+VALUE_CAVE_CALL_DISP_AT = 5
+VALUE_CAVE_RET_AT = 141
+VALUE_CAVE_TABLE_AT = 142
+
+# The deadzone rows ("{}%" choice lists: 0%, 5% ... 30%) are built by a
+# different helper, 0xC1030, which keeps the format string_view 0x10 bytes
+# higher in its frame than 0xB6C70 does.  Same cave logic, shifted slots:
+# [S+0x60] fmt ptr, [S+0x68] len, [S+0x70] result, size +0x80, cap +0x88.
+# Left unpatched, those two rows kept ASCII digits and drew as Cyrillic
+# garbage while every 0xB6C70 row ("240 Gr./s") was already correct.
+VALUE_SITE2_RVA = 0xC10FF  # call 0x180022DF0 inside 0xC1030
+VALUE_BACK2_RVA = 0xC1104  # or esi, 2 -- where the second cave returns
+VALUE_CAVE2_TEMPLATE = bytes.fromhex(
+    "4883ec08e8000000004883c4084c8b4424684c8b4c247041ba000000004d39ca736e43803c107b74"
+    "0549ffc2ebef4d89d349ffc34d39cb735743803c187d75f14d29d949ffc9488d5424784883bc2490"
+    "000000107205488b542478488b8424880000004c29c84c39d076254c8d1d1f000000420fb60c1283e9"
+    "2b83f90e7709410fb60c0b42880c1249ffc24939c272e2c39a0e3a088a5c57426c727c767f7881"
+)
+VALUE_CAVE2_CALL_DISP_AT = 5
+VALUE_CAVE2_RET_AT = 144
+VALUE_CAVE2_TABLE_AT = 145
+
 # A-0034: a caption's bytes are glyph-table indices, never codepoints.  The
 # kind-4 handler reads them as ANSI codepoints and looks them up in a *second*
 # table (``0xb56a60``), so a charmap build came out as Latin garbage; the
@@ -254,6 +299,37 @@ def charmap():
     return _CHARMAP
 
 
+def _fontidx_pieces(s):
+    """Split ``s`` into characters and raw-ASCII ``{...}`` fields.
+
+    The mod builds value texts with a std::vformat look-alike that scans the
+    bytes for ``{`` / ``}`` (0x7B / 0x7D).  A glyph index for ``{`` is 0xB1, so
+    an encoded format field is invisible to it and ends up drawn literally
+    ("{:g} Gr./s" instead of the number).  Replacement fields are therefore
+    kept as plain ASCII, everything else is encoded.
+    """
+    out = []
+    i = 0
+    n = len(s)
+    while i < n:
+        ch = s[i]
+        if ch == "{":
+            end = s.find("}", i)
+            if end > i:
+                field = s[i : end + 1]
+                try:
+                    raw = field.encode("ascii")
+                except UnicodeEncodeError:
+                    raw = None
+                if raw is not None and "{" not in field[1:]:
+                    out.append(raw)
+                    i = end + 1
+                    continue
+        out.append(ch)
+        i += 1
+    return out
+
+
 def encode_text(s):
     """Encode a display string as menu-font glyph indices (``fontidx``).
 
@@ -285,7 +361,13 @@ def encode_text(s):
         for i, cp in enumerate(FONT_GLYPHS):
             rev.setdefault(cp, i)
         out = bytearray()
-        for ch in s:
+        for ch in _fontidx_pieces(s):
+            if isinstance(ch, bytes):
+                # A ``{...}`` replacement field stays raw ASCII: the mod feeds the
+                # string to a std::vformat-like routine that scans bytes for
+                # ``{`` / ``}`` (0x7B / 0x7D) and would ignore glyph indices.
+                out += ch
+                continue
             i = rev.get(ord(ch))
             if i is None:
                 raise ValueError(
@@ -330,7 +412,19 @@ def decode_text(enc):
     if ENCODING == "cp1251":
         return enc.decode("cp1251")
     if ENCODING == "fontidx":
-        return "".join(chr(FONT_GLYPHS[b]) for b in enc)
+        out = []
+        i = 0
+        while i < len(enc):
+            b = enc[i]
+            if b == 0x7B:
+                end = enc.find(b"\x7d", i)
+                if end > i:
+                    out.append(enc[i : end + 1].decode("ascii"))
+                    i = end + 1
+                    continue
+            out.append(chr(FONT_GLYPHS[b]))
+            i += 1
+        return "".join(out)
     cps = charmap()
     out = []
     i = 0
@@ -1253,6 +1347,47 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
     return bytes(code)
 
 
+def value_glyph_table():
+    """Glyph indices for the 15 characters a formatted number can contain."""
+    table = bytearray()
+    for cp in range(VALUE_TABLE_FIRST, VALUE_TABLE_LAST + 1):
+        if cp not in FONT_GLYPHS:
+            raise ValueError(f"value cave: U+{cp:04X} has no glyph in the menu font")
+        table.append(FONT_GLYPHS.index(cp))
+    return bytes(table)
+
+
+def build_value_cave(cave_rva, second=False):
+    """Assemble the ASCII -> glyph-index cave for the vformat numbers (L-0051).
+
+    The cave is entered instead of a formatter ``call`` (``VALUE_SITE_RVA`` for
+    the float rows of 0xB6C70, ``VALUE_SITE2_RVA`` for the percent lists of
+    0xC1030).  It calls the formatter itself, then rewrites the bytes between
+    the format string's first ``{`` and ``}`` in the result -- the substituted
+    number, whose literal prefix and suffix keep their byte lengths -- through
+    the glyph table.  Registers the caller keeps (rbx, rsi, rdi, rbp, r12,
+    r14, r15) are untouched.
+    """
+    if second:
+        template = VALUE_CAVE2_TEMPLATE
+        disp_at = VALUE_CAVE2_CALL_DISP_AT
+        ret_at = VALUE_CAVE2_RET_AT
+        table_at = VALUE_CAVE2_TABLE_AT
+    else:
+        template = VALUE_CAVE_TEMPLATE
+        disp_at = VALUE_CAVE_CALL_DISP_AT
+        ret_at = VALUE_CAVE_RET_AT
+        table_at = VALUE_CAVE_TABLE_AT
+    blob = bytearray(template)
+    assert blob[disp_at - 1] == 0xE8, "value cave: call opcode moved"
+    assert blob[ret_at] == 0xC3, "value cave: ret moved"
+    call_disp = FORMATTER_RVA - (cave_rva + disp_at + 4)
+    struct.pack_into("<i", blob, disp_at, call_disp)
+    table = value_glyph_table()
+    blob[table_at : table_at + len(table)] = table
+    return bytes(blob)
+
+
 def main():
     global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
     global VALIDATORS, STRINGS_TSV
@@ -1416,6 +1551,17 @@ def main():
             "do not add the init cave that rewrites the game EXE's kind-4 text "
             "slot to kind 6.  Without it the fontidx payloads are read as ANSI "
             "codepoints and render as Latin garbage (L-0048)"
+        ),
+    )
+    ap.add_argument(
+        "--no-value-glyphs",
+        dest="value_glyphs",
+        action="store_false",
+        default=True,
+        help=(
+            "do not add the L-0051 cave that rewrites the ASCII number the "
+            "vformat look-alike returns into menu-font glyph indices; without "
+            "it '{:g} Gr./s' shows 'gКш Gr./s' on 0.9.3"
         ),
     )
     ap.add_argument(
@@ -1854,8 +2000,91 @@ def main():
                 + b"\x90" * (len(ENTRY_DISPLACED) - 5)
             )
 
+    # ---- the ASCII -> glyph cave for formatted numbers (L-0051) --------------
+    value_blob = b""
+    value_cave_bytes = b""
+    value_rva = None
+    value_site_off = None
+    value_patch = None
+    if args.value_glyphs:
+        foff = pe.rva_to_off(VALUE_SITE_RVA)
+        want = b"\xe8" + struct.pack("<i", FORMATTER_RVA - (VALUE_SITE_RVA + 5))
+        if foff is None:
+            errors.append(f"value cave: call site {VALUE_SITE_RVA:#x} is not mapped")
+        else:
+            have = bytes(data[foff : foff + 5])
+            if have != want:
+                errors.append(
+                    f"value cave: call at {VALUE_SITE_RVA:#x} is {have.hex()}, "
+                    f"the cave expects {want.hex()}"
+                )
+        if pe.rva_to_off(VALUE_BACK_RVA) is None:
+            errors.append(f"value cave: return site {VALUE_BACK_RVA:#x} is not mapped")
+        for e in entries:
+            if e["skip"]:
+                continue
+            n_open = e["ru"].count("{")
+            n_close = e["ru"].count("}")
+            if n_open > 1 or n_open != n_close:
+                errors.append(
+                    f"{e['addr']:#x}: {e['ru']!r} needs exactly one '{{...}}' "
+                    "field for the value cave"
+                )
+        if not errors:
+            try:
+                value_glyph_table()
+            except ValueError as exc:
+                errors.append(str(exc))
+        if not errors:
+            pre = len(payload)
+            pad = (-pre) % 16
+            value_rva = new_va + pre + pad
+            value_cave_bytes = build_value_cave(value_rva)
+            value_blob = b"\0" * pad + value_cave_bytes
+            payload = payload + value_blob
+            value_site_off = foff
+            value_patch = b"\xe8" + struct.pack("<i", value_rva - (VALUE_SITE_RVA + 5))
+
+    # ---- second cave: the percent lists of 0xC1030 (deadzone rows) -----------
+    value2_blob = b""
+    value2_cave_bytes = b""
+    value2_rva = None
+    value2_site_off = None
+    value2_patch = None
+    if args.value_glyphs:
+        foff2 = pe.rva_to_off(VALUE_SITE2_RVA)
+        want2 = b"\xe8" + struct.pack("<i", FORMATTER_RVA - (VALUE_SITE2_RVA + 5))
+        if foff2 is None:
+            errors.append(f"value cave 2: call site {VALUE_SITE2_RVA:#x} is not mapped")
+        else:
+            have2 = bytes(data[foff2 : foff2 + 5])
+            if have2 != want2:
+                errors.append(
+                    f"value cave 2: call at {VALUE_SITE2_RVA:#x} is {have2.hex()}, "
+                    f"the cave expects {want2.hex()}"
+                )
+        if pe.rva_to_off(VALUE_BACK2_RVA) is None:
+            errors.append(
+                f"value cave 2: return site {VALUE_BACK2_RVA:#x} is not mapped"
+            )
+        if not errors:
+            pre = len(payload)
+            pad = (-pre) % 16
+            value2_rva = new_va + pre + pad
+            value2_cave_bytes = build_value_cave(value2_rva, second=True)
+            value2_blob = b"\0" * pad + value2_cave_bytes
+            payload = payload + value2_blob
+            value2_site_off = foff2
+            value2_patch = b"\xe8" + struct.pack(
+                "<i", value2_rva - (VALUE_SITE2_RVA + 5)
+            )
+
     # ---- collect byte patches -------------------------------------------------
     patches = []
+    if value_patch is not None:
+        patches.append((value_site_off, value_patch))
+    if value2_patch is not None:
+        patches.append((value2_site_off, value2_patch))
     if init_patch is not None:
         patches.append((init_site_off, init_patch))
     if site_patch is not None:
@@ -2016,6 +2245,22 @@ def main():
             )
         else:
             print("kind flip cave: off")
+        if value_rva is not None:
+            print(
+                f"value glyph cave: RVA {value_rva:#x}, call "
+                f"{VALUE_SITE_RVA:#x} redirected, {len(value_blob)} bytes, "
+                f"table {value_glyph_table().hex()}"
+            )
+        else:
+            print("value glyph cave: off")
+        if value2_rva is not None:
+            print(
+                f"value glyph cave 2: RVA {value2_rva:#x}, call "
+                f"{VALUE_SITE2_RVA:#x} redirected, {len(value2_blob)} bytes "
+                f"(percent lists of 0xC1030, deadzone rows)"
+            )
+        else:
+            print("value glyph cave 2: off")
         for sp in stub_plans:
             e = sp["text"]
             print(
@@ -2103,7 +2348,36 @@ def main():
             rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
         if rc == 0 and init_rva is not None:
             rc = verify_kind_flip(out_path, init_rva, init_blob)
+        caves = []
+        if rc == 0 and value_rva is not None:
+            caves.append(("value cave", value_rva, value_cave_bytes))
+        if rc == 0 and value2_rva is not None:
+            caves.append(("value cave 2", value2_rva, value2_cave_bytes))
+        if rc == 0 and caves:
+            rc = verify_value_caves(out_path, caves)
     return rc
+
+
+def verify_value_caves(path, caves):
+    """Re-read the value caves out of the patched DLL (L-0051)."""
+    data = Path(path).read_bytes()
+    pe = PE(data)
+    errors = []
+    for label, rva, blob in caves:
+        o = pe.rva_to_off(rva)
+        if o is None:
+            errors.append(f"{label}: cave {rva:#x} is not mapped")
+            continue
+        if bytes(pe.data[o : o + len(blob)]) != blob:
+            errors.append(f"{label}: cave bytes differ from what was built")
+            continue
+        if pe.data[o + len(blob) - 16] != 0xC3:
+            errors.append(f"{label}: cave does not end the loop with ret")
+            continue
+        print(f"{label} ok: cave {rva:#x}, {len(blob)} bytes, ret before table")
+    for e in errors:
+        print(f"VERIFY ERROR {e}")
+    return 0 if not errors else 1
 
 
 def verify_kind_flip(path, init_rva, init_blob):

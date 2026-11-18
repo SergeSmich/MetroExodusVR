@@ -236,6 +236,15 @@ VALUE_CAVE2_CALL_DISP_AT = 5
 VALUE_CAVE2_RET_AT = 144
 VALUE_CAVE2_TABLE_AT = 145
 
+# The mod's own "{}%" literal (0x4f2ed4) never reaches the caption table: the
+# plan generator classifies a brace-only string as a printf pattern, not a
+# caption (tools/plan.py, FMT), so the row is not in plan-0.9.3.json.  Its '%'
+# therefore stayed raw ASCII 0x25, which under fontidx is the glyph index of
+# 'l' -- the deadzone rows read "30l" while the digits (rewritten by the cave
+# above) were already right.  Four menu builders use this literal: 0xC1092 in
+# 0xC1030, plus 0xC4814, 0xC5442, 0xC55F9.  Under fontidx '%' is 0x9b.
+FMT_LITERAL_PATCHES = ((0x4F2ED4 + 2, 0x25, 0x9B),)
+
 # A-0034: a caption's bytes are glyph-table indices, never codepoints.  The
 # kind-4 handler reads them as ANSI codepoints and looks them up in a *second*
 # table (``0xb56a60``), so a charmap build came out as Latin garbage; the
@@ -2089,6 +2098,17 @@ def main():
         patches.append((init_site_off, init_patch))
     if site_patch is not None:
         patches.append((pe.rva_to_off(ADDRS["setter"]), site_patch))
+    for off, want, new in FMT_LITERAL_PATCHES:
+        foff = pe.rva_to_off(off)
+        if foff is None:
+            errors.append(f"fmt literal {off:#x}: not mapped")
+            continue
+        if data[foff] != want:
+            errors.append(
+                f"fmt literal {off:#x}: expected {want:#04x}, found {data[foff]:#04x}"
+            )
+            continue
+        patches.append((foff, bytes((new,))))
     for e in entries:
         if e["skip"]:
             continue

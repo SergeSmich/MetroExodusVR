@@ -386,8 +386,8 @@ def cmd_apply(c, args):
     )
     print("готово. установлено: %s" % prof["title"])
     print("запуск: %s" % (g / "MetroExodusVR.exe"))
-    print("после прогона: mod_switch.py collect <id>  (до следующего apply!)")
-    print("затем проверь: mod_switch.py verify")
+    print("логи прогона сохранятся сами при следующем переключении билда.")
+    print("проверить состояние: 0-СОСТОЯНИЕ.cmd")
 
 
 # ------------------------------------------------------------------ verify
@@ -427,20 +427,26 @@ def cmd_verify(c, args):
 
 
 # ----------------------------------------------------------------- collect
-def cmd_collect(c, args):
+def _collect(c, run_id, shots_wanted, note, quiet=False):
+    """Скопировать логи последнего прогона. run_id=None -> автоимя по логу."""
     g = game_root(c)
     ver = c["version"]
     logs = newest_logs(g, ver, 6)
-    if not logs:
+    hook = [p for p in logs if "_hook_" in p.name]
+    if not logs or not hook:
+        if quiet:
+            return None
         die(
             "нет логов мода в %s - игра не запускалась с модом?"
             % (g / "versions" / ver / "logs")
         )
-    hook = [p for p in logs if "_hook_" in p.name]
-    if not hook:
-        die("нет hook-лога в %s" % (g / "versions" / ver / "logs"))
     newest = hook[0]
-    run_dir = RUNS / args.id
+    if not run_id:
+        run_id = (
+            time.strftime("%Y-%m-%d_%H%M", time.localtime(newest.stat().st_mtime))
+            + "-auto"
+        )
+    run_dir = RUNS / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     copied = []
     for p in logs:
@@ -464,7 +470,7 @@ def cmd_collect(c, args):
                 cfgs.append(cfgp.name)
                 break
     shots = []
-    if args.shots and SHOTS.is_dir():
+    if shots_wanted and SHOTS.is_dir():
         for p in sorted(SHOTS.glob("*.png")):
             if p.stat().st_mtime >= newest.stat().st_mtime - 120:
                 shutil.copy2(str(p), str(run_dir / p.name))
@@ -473,11 +479,11 @@ def cmd_collect(c, args):
     if STATE_PATH.exists():
         state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
     run = {
-        "id": args.id,
+        "id": run_id,
         "collected": time.strftime("%Y-%m-%d %H:%M:%S"),
         "profile": state.get("profile"),
         "dll_sha": state.get("dll_sha"),
-        "progress": args.note or "",
+        "progress": note or "",
         "logs": copied,
         "user_vr_cfg": cfgs,
         "shots": shots,
@@ -485,13 +491,35 @@ def cmd_collect(c, args):
     (run_dir / "run.json").write_text(
         json.dumps(run, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print("собрано в %s:" % run_dir)
-    for r in copied:
-        print("  %-50s %s" % (r["file"], fmt(r["bytes"])))
-    for s in shots:
-        print("  скрин: %s" % s)
-    if cfgs:
-        print("  user_vr.cfg скопирован")
+    if not quiet:
+        print("собрано в %s:" % run_dir)
+        for r in copied:
+            print("  %-50s %s" % (r["file"], fmt(r["bytes"])))
+        for s in shots:
+            print("  скрин: %s" % s)
+        if cfgs:
+            print("  user_vr.cfg скопирован")
+    return run_dir
+
+
+def cmd_collect(c, args):
+    g = game_root(c)
+    ver = c["version"]
+    logs = newest_logs(g, ver, 6)
+    if not [p for p in logs if "_hook_" in p.name]:
+        print(
+            "логов нет: мод ещё не запускался (или последним был запуск чистой игры)."
+        )
+        return
+    _collect(c, getattr(args, "id", None) or None, args.shots, args.note)
+
+
+def cmd_autocollect(c, args):
+    d = _collect(c, None, True, "авто-сбор перед переключением/выходом", quiet=True)
+    if d:
+        print("логи прошлого прогона сохранены: %s" % d)
+    else:
+        print("логов прошлого прогона нет (мод ещё не запускался) - пропускаю.")
 
 
 # ------------------------------------------------------------------- purge
@@ -559,9 +587,13 @@ def main():
     sub.add_parser("verify", help="сверить установленное")
 
     p = sub.add_parser("collect", help="собрать логи прогона")
-    p.add_argument("id")
+    p.add_argument("id", nargs="?", default=None, help="имя прогона (пусто = авто)")
     p.add_argument("--shots", action="store_true", help="копировать свежие скрины")
     p.add_argument("--note", default="", help="что проверяли/что видно")
+
+    sub.add_parser(
+        "autocollect", help="тихо сохранить логи (для .cmd перед переключением)"
+    )
 
     p = sub.add_parser("purge", help="удалить архивы")
     p.add_argument("--yes", action="store_true")
@@ -579,6 +611,7 @@ def main():
         "clean": cmd_clean,
         "verify": cmd_verify,
         "collect": cmd_collect,
+        "autocollect": cmd_autocollect,
         "purge": cmd_purge,
         "hashes": cmd_hashes,
     }[args.cmd]

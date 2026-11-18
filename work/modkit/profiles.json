@@ -1,0 +1,17 @@
+{
+  "_comment": "Профили для переключения билдов мода Metro Exodus VR. tree = чистая поставка мода (стаб + versions), dll = конкретная сборка DLL.",
+  "game_root": "F:\\SteamLibrary\\steamapps\\common\\Metro Exodus",
+  "version": "0.9.3",
+  "profiles": {
+    "orig": {
+      "title": "Оригинальный мод 0.9.3 (английский, без перевода)",
+      "tree": "E:\\MetroExodusVR",
+      "dll": "E:\\MetroExodusVR\\versions\\0.9.3\\MetroExodusVR.dll"
+    },
+    "ours": {
+      "title": "Наш проект: мод 0.9.3 + правки перевода A/C",
+      "tree": "E:\\MetroExodusVR",
+      "dll": "F:\\Projects\\MetroExodusVR\\build\\MetroExodusVR-0.9.3.dll"
+    }
+  }
+}

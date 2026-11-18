@@ -90,7 +90,7 @@
     {
       "index": 1,
       "orig": "STEREO renders both eyes every frame. PERFORMANCE renders one eye per frame, in turn, and rebuilds the other: much faster at a very slight cost of quality in fast motion.",
-      "ru": "СТЕРЕО рендерит оба глаза каждый кадр. ПРОИЗВОДИТЕЛЬНОСТЬ рендерит по одному глазу за кадр по очереди и восстанавливает второй: намного быстрее при очень небольшой потере качества в быстром движении."
+      "ru": "СТЕРЕО рендерит оба глаза каждый кадр. ПРОИЗВОДИТ. (AER+) рендерит по одному глазу за кадр по очереди и восстанавливает второй: намного быстрее при небольшой потере качества."
     },
     {
       "index": 2,
@@ -105,7 +105,7 @@
     {
       "index": 4,
       "orig": "How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.",
-      "ru": "С какого разрешения работает апскейлер. НАТИВНОЕ СГЛАЖИВАНИЕ сохраняет полное разрешение и только сглаживает края; более низкие режимы быстрее, но менее четкие."
+      "ru": "С какого разрешения работает апскейлер. НАТИВНОЕ AA не снижает разрешение и только сглаживает края; более низкие режимы быстрее, но менее четкие."
     },
     {
       "index": 5,
@@ -120,7 +120,7 @@
     {
       "index": 7,
       "orig": "How the edges outside FOVEATED UPSCALING's middle area are smoothed. NATIVE (FSR/FSR) is sharper but slower, TAA is faster and more blurry.",
-      "ru": "Как сглаживаются края за пределами средней области ФОВЕАЛЬНОГО АПСКЕЙЛА. НАТИВНОЕ (FSR/FSR) четче, но медленнее, TAA быстрее и более размыто."
+      "ru": "Как сглаживаются края за пределами средней области ФОВЕАЛЬНОГО АПСКЕЙЛА. НАТИВНОЕ AA (FSR/FSR) четче, но медленнее, TAA быстрее и более размыто."
     },
     {
       "index": 8,
@@ -225,17 +225,17 @@
     {
       "index": 28,
       "orig": "STAY WITH YOU keeps the belt where your own is when you crouch. FOLLOW BODY moves it with the character's body. AUTO follows a real-life crouch only; set PLAYER HEIGHT for it (NOT SET: 178 CM).",
-      "ru": "ОСТАВАТЬСЯ С ВАМИ сохраняет пояс там, где ваш собственный, когда вы приседаете. СЛЕДОВАТЬ ЗА ТЕЛОМ двигает его вместе с телом персонажа. АВТО следует за приседанием в реальной жизни; укажите РОСТ ИГРОКА (НЕТ: 178 СМ)."
+      "ru": "ОСТАВАТЬСЯ С ВАМИ сохраняет пояс там, где ваш собственный, когда вы приседаете. СЛЕЖЕНИЕ ЗА ТЕЛОМ двигает его вместе с телом персонажа. АВТО следует за приседанием в реальной жизни; укажите РОСТ ИГРОКА (НЕТ: 178 СМ)."
     },
     {
       "index": 29,
       "orig": "FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.",
-      "ru": "ПО ГОЛОВЕ поворачивает тело вслед за головой, когда вы достаточно далеко посмотрите в сторону. ЗАБЛОКИРОВАНО поворачивает его только стиком поворота."
+      "ru": "ПО ГОЛОВЕ поворачивает тело вслед за головой, когда вы достаточно далеко посмотрите в сторону. БЛОКИРОВКА поворачивает его только стиком поворота."
     },
     {
       "index": 30,
       "orig": "FOLLOW lets you lean and step freely, the body walking after you. LOCKED keeps your view over the body, and real steps move the body along.",
-      "ru": "СЛЕДОВАТЬ позволяет свободно наклоняться и шагать, тело идет за вами. ЗАБЛОКИРОВАНО удерживает взгляд над телом, а реальные шаги двигают тело вперед."
+      "ru": "СЛЕЖЕНИЕ позволяет свободно наклоняться и шагать, тело идет за вами. БЛОКИРОВКА удерживает взгляд над телом, а реальные шаги двигают тело вперед."
     },
     {
       "index": 31,
@@ -305,7 +305,7 @@
     {
       "index": 44,
       "orig": "How heavy weapons feel. Fast swings trail your hand and settle; slow aiming stays precise. Lighter with two hands. 0% only steadies hand shake.",
-      "ru": "Насколько тяжелым ощущается оружие. Быстрые взмахи следуют за рукой и затухают; медленное прицеливание остается точным. Легче при удержании двумя руками. 0% только стабилизирует дрожание рук."
+      "ru": "Насколько тяжелым ощущается оружие. Быстрые взмахи отстают от руки и затухают; медленное прицеливание остается точным. Легче при удержании двумя руками. 0% только стабилизирует дрожание рук."
     },
     {
       "index": 45,
@@ -360,7 +360,7 @@
     {
       "index": 55,
       "orig": "LOCKED keeps the HUD fixed in front of your eyes. FOLLOW leaves it in place and brings it back once you look away.",
-      "ru": "ЗАБЛОКИРОВАНО фиксирует HUD перед глазами. СЛЕДОВАТЬ оставляет его на месте и возвращает, когда вы отводите взгляд."
+      "ru": "БЛОКИРОВКА фиксирует HUD перед глазами. СЛЕЖЕНИЕ оставляет его на месте и возвращает, когда вы отводите взгляд."
     },
     {
       "index": 56,
@@ -410,27 +410,27 @@
     {
       "index": 65,
       "orig": "A dim dotted floor under the Cinema screen, so you do not float in the dark.",
-      "ru": "Тусклый точечный пол под экраном кино, чтобы вы не парили в темноте."
+      "ru": "Тусклый точечный пол под экраном VR, чтобы вы не парили в темноте."
     },
     {
       "index": 66,
       "orig": "Shows your controllers while the Cinema screen is up.",
-      "ru": "Показывает ваши контроллеры, пока открыт экран кино."
+      "ru": "Показывает ваши контроллеры, пока открыт экран VR."
     },
     {
       "index": 67,
       "orig": "In the main menu, a plaque under the Cinema screen with the mod's name and version.",
-      "ru": "В главном меню – табличка под экраном кино с названием и версией мода."
+      "ru": "В главном меню – табличка под экраном VR с названием и версией мода."
     },
     {
       "index": 68,
       "orig": "In the main menu, links under the Cinema screen (Buy Me a Coffee, Ko-fi, GitHub). Point at the plaque to show them; a click opens the page in your desktop browser, behind the game.",
-      "ru": "В главном меню – ссылки под экраном кино (Buy Me a Coffee, Ko-fi, GitHub). Наведите на табличку, чтобы показать их; щелчок открывает страницу в браузере на рабочем столе, за игрой."
+      "ru": "В главном меню – ссылки под экраном VR (Buy Me a Coffee, Ko-fi, GitHub). Наведите на табличку, чтобы показать их; щелчок открывает страницу в браузере на рабочем столе, за игрой."
     },
     {
       "index": 69,
       "orig": "What plays in VR and what on a flat Cinema screen. IMMERSIVE: all in VR. COMFORT: cutscenes on the screen. CINEMATIC: all but gameplay on the screen.",
-      "ru": "Что воспроизводится в VR, а что на плоском экране кино. ИММЕРСИВНЫЙ: все в VR. КОМФОРТНЫЙ: катсцены на экране. КИНЕМАТОГРАФИЧНЫЙ: все, кроме геймплея, на экране."
+      "ru": "Что идет в VR, а что на плоском экране. ИММЕРСИВНЫЙ: все в VR. КОМФОРТ: катсцены на экране. КИНЕМАТОГРАФИЧНЫЙ: все, кроме геймплея, на экране."
     },
     {
       "index": 70,
@@ -440,7 +440,7 @@
     {
       "index": 71,
       "orig": "In a car or a scene, where the game moves you: if your head moves this far from where the game has it, your view jumps back there. LOCKED keeps your view there all the time; you can still look around.",
-      "ru": "В машине или сцене, где вас перемещает игра: если голова уходит от положения, заданного игрой, на это расстояние, взгляд возвращается туда. ЗАБЛОКИРОВАНО удерживает взгляд там все время; осматриваться при этом можно."
+      "ru": "В машине или сцене, где вас перемещает игра: если голова уходит от положения, заданного игрой, на это расстояние, взгляд возвращается туда. БЛОКИРОВКА удерживает взгляд там все время; осматриваться при этом можно."
     },
     {
       "index": 72,

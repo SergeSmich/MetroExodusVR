@@ -184,7 +184,21 @@ EXE_KIND_TABLE = 0xB8DC60
 EXE_KIND4_SLOT = 0xB8DC70
 EXE_KIND_TABLE_CODE = 0xB8D629  # kind 0/3 handler, an identity check
 EXE_KIND6_CODE = 0xB8DBE9
-EXE_VIRTUALPROTECT_IAT = 0x4D7200  # KERNEL32!VirtualProtect
+EXE_VIRTUALPROTECT_IAT = 0x4D7200  # DLL IAT: KERNEL32!VirtualProtect
+DLL_CREATETHREAD_IAT = 0x4D71A0  # DLL IAT: KERNEL32!CreateThread
+DLL_SLEEP_IAT = 0x4D71C0  # DLL IAT: KERNEL32!Sleep
+
+# L-0053: the footer hints of the game's own pause menu are composed with a real
+# ASCII space (0x20), and after the kind flip that byte is a glyph index: the
+# font table's 0x20 holds U+0021, so "A PLAY" drew as "A !PLAY".  The table is
+# built by the game long after DllMain, so the cave spawns a small poller that
+# rewrites two entries once the manager exists: 0x20 -> space, 0xA1 -> '!'
+# (0xA1 is 'é' in the stock table, a codepoint the Russian kit never emits; our
+# own '!' moves there through FONTIDX_BYTE_OVERRIDES).
+EXE_FONT_MGR = 0x1765A68  # EXE global: menu font manager ([+8] table, [+0x12] count)
+FONT_TABLE_COUNT = 269
+FONT_TABLE_SIZE = FONT_TABLE_COUNT * 2
+FONT_TABLE_PATCHES = ((0x20, 0x21, 0x20), (0xA1, 0xE9, 0x21))  # index, old cp, new cp
 
 # DllMain entry of the 0.9.3 DLL: two `mov [rsp+..], reg` we replay in the cave
 # and then jump back to entry+len(ENTRY_DISPLACED).
@@ -316,6 +330,17 @@ GLYPH_LITERAL_PATCHES = (
     (0x4F4286, "P"),  # suffix of "{}P", HUD RESOLUTION (0xBDDFC)
 )
 
+# L-0053: the pause-menu caption of the mod's VR hints section is a plain ASCII
+# literal, not a caption row, so it kept its Latin bytes and kind 6 drew them as
+# glyph indices: "VR HINTS" read "ЕЯ!МЬЗХА" (V=0x56 -> 'E', R=0x52 -> 'Я',
+# ' '=0x20 -> '!', H=0x4d -> 'М', I=0x49 -> 'b', N=0x4e -> 'З', T=0x54 -> 'Х',
+# S=0x53 -> 'А').  The literal is loaded whole at 0x8A2CC, one ``mov rax,
+# [rip+..]`` plus ``mov [rbp+0x210], rax``, and the std::string's size is then
+# set to 8 -- so the field is exactly 8 bytes wide and the word has to fit.
+# "СОВЕТЫ VR" is the name the kit uses in the popups but needs 9 bytes; the
+# slot keeps "СОВЕТЫ" and two glyph spaces (0x01) as padding.
+GLYPH_TEXT_PATCHES = ((0x4EC548, "VR HINTS", "СОВЕТЫ", 8),)
+
 # A-0034: a caption's bytes are glyph-table indices, never codepoints.  The
 # kind-4 handler reads them as ANSI codepoints and looks them up in a *second*
 # table (``0xb56a60``), so a charmap build came out as Latin garbage; the
@@ -354,6 +379,16 @@ assert len(_FONT_GLYPHS_HEX) == 269 * 4, "font table is not 4 hex digits per gly
 FONT_GLYPHS = tuple(
     int(_FONT_GLYPHS_HEX[i : i + 4], 16) for i in range(0, len(_FONT_GLYPHS_HEX), 4)
 )
+
+# L-0053: the engine composes some of its own text and keeps the ASCII space
+# (0x20) in it; kind 6 reads every byte as a glyph index, so the footer read
+# "A !PLAY" -- index 0x20 is '!' in this table.  The DllMain cave patches the
+# live table (index 0x20 -> U+0020, index 0xA1 -> U+0021); until it runs, and
+# for anything the patch does not cover, our own '!' therefore moves to the
+# free Latin index 0xA1 (it maps to 'é' in the table, a codepoint the Russian
+# kit never uses).
+FONTIDX_BYTE_OVERRIDES = {0x21: 0xA1}
+FONTIDX_INDEX_OVERRIDES = {0xA1: 0x21}
 
 
 def load_charmap(path=None):
@@ -448,7 +483,9 @@ def encode_text(s):
                 # ``{`` / ``}`` (0x7B / 0x7D) and would ignore glyph indices.
                 out += ch
                 continue
-            i = rev.get(ord(ch))
+            i = FONTIDX_BYTE_OVERRIDES.get(ord(ch))
+            if i is None:
+                i = rev.get(ord(ch))
             if i is None:
                 raise ValueError(
                     f"{s!r}: character {ch!r} (U+{ord(ch):04X}) has no glyph in "
@@ -502,7 +539,7 @@ def decode_text(enc):
                     out.append(enc[i : end + 1].decode("ascii"))
                     i = end + 1
                     continue
-            out.append(chr(FONT_GLYPHS[b]))
+            out.append(chr(FONTIDX_INDEX_OVERRIDES.get(b, FONT_GLYPHS[b])))
             i += 1
         return "".join(out)
     cps = charmap()
@@ -1332,7 +1369,7 @@ def validator_immediate(md, data, pe, rva):
     return None
 
 
-def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
+def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced, font_aux=None):
     """Assemble the DllMain cave that points the EXE's kind-4 slot at kind 6.
 
     The cave runs at DLL load, before the mod builds any page, so every kind-4
@@ -1343,11 +1380,16 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
     rcx/rdx/r8 (DllMain's arguments) around the work.  The two displaced
     instructions are spliced verbatim at the cave entry and the cave jumps back
     to ``back_rva``.
+
+    ``font_aux`` = (create_thread_slot, sleep_slot, font_mgr_rva) additionally
+    spawns the L-0053 poller (see ``build_font_table_thread``) with the EXE base
+    as its parameter; the poller body is appended after the jump back.
     """
     code = bytearray(displaced)
     labels = {}
     jmp_fix = []
     rip_fix = []
+    thread_fix = []
 
     def emit(h):
         code.extend(bytes.fromhex(h))
@@ -1408,6 +1450,21 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
     call_iat(vp_slot_rva)
     label("norestore")
     emit("4883c420")  # add rsp, 0x20
+    if font_aux:
+        ct_slot, _sleep_slot, _mgr_rva = font_aux
+        # CreateThread(0, 0, poller, exe_base, 0, 0): args 5/6 live at
+        # [rsp+0x20]/[rsp+0x28], so the frame is 0x30 (7 pushes left rsp aligned).
+        emit("4883ec30")  # sub rsp, 0x30
+        emit("c744242000000000")  # mov dword [rsp+0x20], 0
+        emit("c744242800000000")  # mov dword [rsp+0x28], 0
+        emit("31c9")  # xor ecx, ecx
+        emit("31d2")  # xor edx, edx
+        emit("4c8d05")  # lea r8, [rip + poller]
+        thread_fix.append(len(code))
+        code.extend(b"\0\0\0\0")
+        emit("4989d9")  # mov r9, rbx      (lpParameter = EXE base)
+        call_iat(ct_slot)
+        emit("4883c430")  # add rsp, 0x30
     label("done")
     emit("415b")  # pop r11
     emit("415a")  # pop r10
@@ -1419,6 +1476,112 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
     off = len(code)
     code.append(0xE9)
     code += struct.pack("<i", back_rva - (cave_rva + off + 5))
+
+    if font_aux:
+        _ct_slot, sleep_slot, mgr_rva = font_aux
+        thread_off = len(code)
+        body = build_font_table_thread(
+            cave_rva + thread_off, vp_slot_rva, sleep_slot, mgr_rva
+        )
+        code += body
+
+    for at, name in jmp_fix:
+        struct.pack_into("<i", code, at, cave_rva + labels[name] - (cave_rva + at + 4))
+    for at, rva in rip_fix:
+        struct.pack_into("<i", code, at, rva - (cave_rva + at + 4))
+    for at in thread_fix:
+        struct.pack_into("<i", code, at, (cave_rva + thread_off) - (cave_rva + at + 4))
+    return bytes(code)
+
+
+def build_font_table_thread(cave_rva, vp_slot_rva, sleep_slot_rva, mgr_rva):
+    """Assemble the L-0053 poller body (a thread entry, rcx = EXE base).
+
+    Waits up to ~60 s for the game to build the menu font table, then swaps two
+    entries of it (``FONT_TABLE_PATCHES``) so a composed ASCII space stops
+    drawing as '!' and the freed index 0xA1 renders '!'.  Every guard is checked
+    before writing: the manager, the table pointer, ``count == 269`` and the
+    stock codepoints at both indices, so a different build is left untouched.
+    The thread exits on its own; it touches memory only (plus Sleep and
+    VirtualProtect), so it is safe under the loader lock.
+    """
+    code = bytearray()
+    labels = {}
+    jmp_fix = []
+    rip_fix = []
+
+    def emit(h):
+        code.extend(bytes.fromhex(h))
+
+    def label(name):
+        labels[name] = len(code)
+
+    def branch(op, name):
+        emit(op)
+        jmp_fix.append((len(code), name))
+        code.extend(b"\0\0\0\0")
+
+    def call_iat(rva):
+        emit("ff15")
+        rip_fix.append((len(code), rva))
+        code.extend(b"\0\0\0\0")
+
+    emit("53")  # push rbx
+    emit("56")  # push rsi
+    emit("4154")  # push r12
+    emit("4889cb")  # mov rbx, rcx        (EXE base)
+    emit("be58020000")  # mov esi, 600   (600 * 100 ms = 60 s)
+    label("tloop")
+    emit("488b83")  # mov rax, [rbx + mgr_rva]
+    code.extend(struct.pack("<i", mgr_rva))
+    emit("4885c0")  # test rax, rax
+    branch("0f84", "tsleep")
+    emit("4c8b6008")  # mov r12, [rax+8]    (table)
+    emit("4d85e4")  # test r12, r12
+    branch("0f84", "tsleep")
+    emit("0fb75012")  # movzx edx, word [rax+0x12]
+    emit("81fa")  # cmp edx, FONT_TABLE_COUNT
+    code.extend(struct.pack("<I", FONT_TABLE_COUNT))
+    branch("0f85", "tsleep")
+    for idx, old_cp, _new_cp in FONT_TABLE_PATCHES:
+        emit("410fb78424")  # movzx eax, word [r12 + idx*2]
+        code.extend(struct.pack("<I", idx * 2))
+        emit("3d")  # cmp eax, old_cp
+        code.extend(struct.pack("<I", old_cp))
+        branch("0f85", "tsleep")
+    emit("4883ec30")  # sub rsp, 0x30 (3 pushes: rsp was 8 mod 16, now aligned)
+    emit("4c89e1")  # mov rcx, r12
+    emit("ba")  # mov edx, FONT_TABLE_SIZE
+    code.extend(struct.pack("<I", FONT_TABLE_SIZE))
+    emit("41b804000000")  # mov r8d, PAGE_READWRITE
+    emit("4c8d0c24")  # lea r9, [rsp]
+    call_iat(vp_slot_rva)
+    emit("85c0")  # test eax, eax
+    branch("0f84", "tnopatch")
+    for idx, _old_cp, new_cp in FONT_TABLE_PATCHES:
+        emit("6641c78424")  # mov word [r12 + idx*2], new_cp
+        code.extend(struct.pack("<I", idx * 2))
+        code.extend(struct.pack("<H", new_cp))
+    emit("448b0424")  # mov r8d, [rsp]     (old protect)
+    emit("4c89e1")  # mov rcx, r12
+    emit("ba")
+    code.extend(struct.pack("<I", FONT_TABLE_SIZE))
+    emit("4c8d4c2408")  # lea r9, [rsp+8]
+    call_iat(vp_slot_rva)
+    label("tnopatch")
+    emit("4883c430")  # add rsp, 0x30
+    branch("e9", "tout")
+    label("tsleep")
+    emit("b964000000")  # mov ecx, 100
+    call_iat(sleep_slot_rva)
+    emit("ffce")  # dec esi
+    branch("0f85", "tloop")
+    label("tout")
+    emit("31c0")  # xor eax, eax
+    emit("415c")  # pop r12
+    emit("5e")  # pop rsi
+    emit("5b")  # pop rbx
+    emit("c3")  # ret
 
     for at, name in jmp_fix:
         struct.pack_into("<i", code, at, cave_rva + labels[name] - (cave_rva + at + 4))
@@ -2080,6 +2243,12 @@ def main():
             errors.append(
                 f"VirtualProtect IAT slot {EXE_VIRTUALPROTECT_IAT:#x} is not mapped"
             )
+        for name, slot in (
+            ("CreateThread", DLL_CREATETHREAD_IAT),
+            ("Sleep", DLL_SLEEP_IAT),
+        ):
+            if pe.rva_to_off(slot) is None:
+                errors.append(f"{name} IAT slot {slot:#x} is not mapped")
         if not errors:
             pre = len(payload)
             pad = (-pre) % 16
@@ -2089,6 +2258,7 @@ def main():
                 entry + len(ENTRY_DISPLACED),
                 EXE_VIRTUALPROTECT_IAT,
                 ENTRY_DISPLACED,
+                font_aux=(DLL_CREATETHREAD_IAT, DLL_SLEEP_IAT, EXE_FONT_MGR),
             )
             init_blob = b"\0" * pad + blob
             payload = payload + init_blob
@@ -2244,6 +2414,23 @@ def main():
             errors.append(f"glyph literal {off:#x}: expected {text!r}, found {have!r}")
             continue
         patches.append((foff, bytes(FONT_GLYPHS.index(ord(c)) for c in text)))
+    for off, want, ru, width in GLYPH_TEXT_PATCHES:
+        foff = pe.rva_to_off(off)
+        if foff is None:
+            errors.append(f"glyph text {off:#x}: not mapped")
+            continue
+        have = bytes(data[foff : foff + len(want)])
+        if have != want.encode("ascii"):
+            errors.append(f"glyph text {off:#x}: expected {want!r}, found {have!r}")
+            continue
+        enc = encode_text(ru)
+        if len(enc) > width:
+            errors.append(
+                f"glyph text {off:#x}: {ru!r} is {len(enc)} glyphs, "
+                f"the field holds {width}"
+            )
+            continue
+        patches.append((foff, enc + b"\x01" * (width - len(enc))))
     for e in entries:
         if e["skip"]:
             continue
@@ -2560,10 +2747,18 @@ def verify_kind_flip(path, init_rva, init_blob):
         errors.append("cave bytes differ from what was built")
     else:
         back = ENTRY_RVA + len(ENTRY_DISPLACED)
-        tail = init_rva + len(init_blob) - 5
-        rel = struct.unpack_from("<i", pe.data, o + len(init_blob) - 4)[0]
-        if tail + 5 + rel != back:
-            errors.append(f"cave tail jmp -> {tail + 5 + rel:#x}, expected {back:#x}")
+        # L-0053 appends the font-table poller after the jmp back, so the tail
+        # jmp is no longer the last instruction: scan back for it instead.
+        found = None
+        for i in range(len(init_blob) - 5, -1, -1):
+            if init_blob[i] != 0xE9:
+                continue
+            rel = struct.unpack_from("<i", init_blob, i + 1)[0]
+            if init_rva + i + 5 + rel == back:
+                found = i
+                break
+        if found is None:
+            errors.append(f"cave has no jmp back to {back:#x}")
     for e in errors:
         print(f"VERIFY ERROR kind flip: {e}")
     if not errors:

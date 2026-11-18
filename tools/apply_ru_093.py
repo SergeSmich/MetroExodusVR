@@ -236,6 +236,32 @@ VALUE_CAVE2_CALL_DISP_AT = 5
 VALUE_CAVE2_RET_AT = 144
 VALUE_CAVE2_TABLE_AT = 145
 
+# Options-page rows, third builder family.  Every formatter call is the same
+# shape: ``rcx`` = &result std::string (MSVC: inline buffer at +0, size at
+# +0x10, capacity at +0x18), ``rdx`` = &format std::string_view (pointer at +0,
+# length at +8), ``r8`` = &arguments.  So unlike the two caves above this one
+# needs no frame offsets at all: it saves rcx/rdx across its own formatter call
+# and rewrites the result through them.
+#
+# Covered here are the remaining ``{}%`` choice lists (0xC4814, 0xC5442,
+# 0xC55F9 -- e.g. RENDER SCALE, which drew "70" as two Cyrillic letters and
+# "100" as three).  The cave is deliberately conservative: it converts the
+# substituted field only if the format has exactly one ``{...}`` pair and the
+# field bytes are all in 0x2b..0x39 (``+ , - . / 0..9``), so a row that
+# substitutes an already-translated glyph string is left alone.
+VALUE_SITES3_RVA = (0xC487F, 0xC54AF, 0xC566D, 0xC56CD)
+VALUE_CAVE3_TEMPLATE = bytes.fromhex(
+    "4883ec2848894c24184889542420e800000000488b5424204c8b024c8b4a08488b4c24184883c428"
+    "4531d24d39ca0f839100000043803c107b740549ffc2ebeb4d89d349ffc34d39cb737a43803c187d"
+    "75f14c89d848ffc04c39c8730941803c007b7461ebef4d29d949ffc9488d0148837918107203488b"
+    "01488b51104c29ca4c39d276404c89d14839d17314440fb60c084183e92b4183f90e772948ffc1eb"
+    "e74c89d14c8d1d1b000000440fb60c084183e92b470fb60c0b44880c0848ffc14839d172e6c30000"
+    "00000000000000000000000000"
+)
+VALUE_CAVE3_CALL_DISP_AT = 15
+VALUE_CAVE3_RET_AT = 197
+VALUE_CAVE3_TABLE_AT = 198
+
 # The mod's own "{}%" literal (0x4f2ed4) never reaches the caption table: the
 # plan generator classifies a brace-only string as a printf pattern, not a
 # caption (tools/plan.py, FMT), so the row is not in plan-0.9.3.json.  Its '%'
@@ -1397,6 +1423,25 @@ def build_value_cave(cave_rva, second=False):
     return bytes(blob)
 
 
+def build_value_cave3(cave_rva):
+    """Assemble the frame-independent ASCII -> glyph cave (L-0052).
+
+    Same glyph table and same "one replacement field" rule as the caves above,
+    but the result string and the format string_view are taken from the ABI
+    (rcx / rdx) instead of fixed frame offsets, so one blob serves every
+    options-page builder.  See ``VALUE_SITES3_RVA``.
+    """
+    blob = bytearray(VALUE_CAVE3_TEMPLATE)
+    assert blob[VALUE_CAVE3_CALL_DISP_AT - 1] == 0xE8, "value cave 3: call opcode moved"
+    assert blob[VALUE_CAVE3_RET_AT] == 0xC3, "value cave 3: ret moved"
+    call_disp = FORMATTER_RVA - (cave_rva + VALUE_CAVE3_CALL_DISP_AT + 4)
+    struct.pack_into("<i", blob, VALUE_CAVE3_CALL_DISP_AT, call_disp)
+    table = value_glyph_table()
+    at = VALUE_CAVE3_TABLE_AT
+    blob[at : at + len(table)] = table
+    return bytes(blob)
+
+
 def main():
     global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
     global VALIDATORS, STRINGS_TSV
@@ -2088,12 +2133,47 @@ def main():
                 "<i", value2_rva - (VALUE_SITE2_RVA + 5)
             )
 
+    # ---- third cave: remaining "{}%" choice lists (render scale) --------------
+    value3_blob = b""
+    value3_cave_bytes = b""
+    value3_rva = None
+    value3_site_patches = []
+    if args.value_glyphs:
+        for site in VALUE_SITES3_RVA:
+            foff3 = pe.rva_to_off(site)
+            want3 = b"\xe8" + struct.pack("<i", FORMATTER_RVA - (site + 5))
+            if foff3 is None:
+                errors.append(f"value cave 3: call site {site:#x} is not mapped")
+            else:
+                have3 = bytes(data[foff3 : foff3 + 5])
+                if have3 != want3:
+                    errors.append(
+                        f"value cave 3: call at {site:#x} is {have3.hex()}, "
+                        f"the cave expects {want3.hex()}"
+                    )
+        if not errors:
+            pre = len(payload)
+            pad = (-pre) % 16
+            value3_rva = new_va + pre + pad
+            value3_cave_bytes = build_value_cave3(value3_rva)
+            value3_blob = b"\0" * pad + value3_cave_bytes
+            payload = payload + value3_blob
+            for site in VALUE_SITES3_RVA:
+                value3_site_patches.append(
+                    (
+                        pe.rva_to_off(site),
+                        b"\xe8" + struct.pack("<i", value3_rva - (site + 5)),
+                    )
+                )
+
     # ---- collect byte patches -------------------------------------------------
     patches = []
     if value_patch is not None:
         patches.append((value_site_off, value_patch))
     if value2_patch is not None:
         patches.append((value2_site_off, value2_patch))
+    for off, p in value3_site_patches:
+        patches.append((off, p))
     if init_patch is not None:
         patches.append((init_site_off, init_patch))
     if site_patch is not None:
@@ -2373,6 +2453,8 @@ def main():
             caves.append(("value cave", value_rva, value_cave_bytes))
         if rc == 0 and value2_rva is not None:
             caves.append(("value cave 2", value2_rva, value2_cave_bytes))
+        if rc == 0 and value3_rva is not None:
+            caves.append(("value cave 3", value3_rva, value3_cave_bytes))
         if rc == 0 and caves:
             rc = verify_value_caves(out_path, caves)
     return rc

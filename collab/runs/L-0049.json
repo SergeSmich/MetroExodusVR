@@ -1,0 +1,37 @@
+{
+  "id": "L-0049",
+  "build": "0.9.3",
+  "locale": "ru (fontidx)",
+  "headset": null,
+  "dll": "build/MetroExodusVR-0.9.3.dll (не коммитится), SHA-256 A79BA15C2CF581C341176DB5E6A2CE666B8324F4AC8DA2912A992637974504AD (11 332 608 B)",
+  "build_flags": "tools/apply_ru_093.py --src \"F:\\SteamLibrary\\steamapps\\common\\Metro Exodus\\versions\\0.9.3\\MetroExodusVR.dll.bak-093-orig\" --out build\\MetroExodusVR-0.9.3.dll --verify",
+  "build_checks": "translated 202 strings (212 lea sites, 24 stubs), encoding fontidx; .ru RVA 0xC4E000, 33 592 B; verify ok: 24 stubs, 609 byte patches (+14 к прошлой сборке); kind flip ok: DllMain 0x4641A0 -> cave 0xC56260 -> 0x4641AA",
+  "installed_to": "F:\\SteamLibrary\\steamapps\\common\\Metro Exodus\\versions\\0.9.3\\MetroExodusVR.dll (хеш совпадает). С 12:40 игра очищена от мода целиком (work/modkit), состояние vanilla",
+  "runs": [
+    {
+      "what_clicked": "пользователь запустил корневой стаб MetroExodusVR.exe (12:25:35), кликнул в окно; НАСТРОЙКИ -> VR -> ГРАФИКА",
+      "what_seen": "страница ГРАФИКА открылась; кириллица рисуется: РЕЖИМ РЕНДЕРА, СТЕРЕО, ВЫКЛ (TAA), АВТО (K), МАСШТАБ РЕНДЕРА, АПСКЕЙЛЕР, РЕЖИМ АПСКЕЙЛА, РЕЗКОСТЬ FSR, МОДЕЛЬ DLSS",
+      "interpretation": "прошлый баг 'ГРАФИКА не открывается' устранён: подпись страницы собирается через std::string(ptr, len), и явная длина в `mov r8d, imm` оставалась 8 при 7-байтовом переводе ('ГРАФИКА\\0'). find_len_imm()/_near_len() в tools/apply_ru_093.py переписывают иммедиат; всего таких сайтов 14",
+      "screenshot": "только в чате (пользовательский скриншот не сохраняется на диск агенту); описание — в what_seen",
+      "verdict": "OK, цель достигнута"
+    }
+  ],
+  "live_evidence": {
+    "hook_log": "versions\\0.9.3\\logs\\2026-11-18_122535_hook_22244.log (1.8 MB), копия в work/modkit/runs/2026-11-18_1225-ours-gfx-ok/",
+    "stereo": "XR_ERROR_FORM_FACTOR_UNAVAILABLE (-35): HMD нет, проверка на плоском экране; [stereo] rendering enabled=true",
+    "menus": "menu hook installed; 130 settings registered; [menus] 'mevr_reload_pouch' refused: lists need 2-255 printable ASCII labels (известная, не связана)",
+    "focus": "в 12:25:52 игра потеряла фокус ([focus] unfocused: cursor clip released, visibility forced, затем spam 'blocked SetCursorPos warp') — меню при этом осталось видимым и ГРАФИКА открылась. Значит unfocus сам по себе НЕ причина чёрного экрана; прошлая гипотеза ослаблена"
+  },
+  "crashes_fixed": [
+    {
+      "symptom": "пункт VR -> ГРАФИКА не открывался при нашей сборке",
+      "cause": "длина страницы передаётся аргументом std::string(ptr, len): `mov r8d, 8` / `lea rdx, [rip+lit]` / `call 0x8E80`; правка lea не убирала хвост, подпись становилась 'ГРАФИКА\\0'",
+      "fix": "tools/apply_ru_093.py: find_len_imm()/_near_len() переписывают imm в len(enc); 14 сайтов; сборка воспроизводится байт-в-байт"
+    }
+  ],
+  "risks": [
+    "другие подписи той же механики проверить перебором страниц VR-настроек (КОМФОРТ/УПРАВЛЕНИЕ/КАМЕРА/ИНТЕРФЕЙС): фикс общий, но конкретные страницы в игре ещё не открывались",
+    "стаб при старте ходит на GitHub: updater.json mode=never + pinned=0.9.3, но после каждого прогона нужен verify (мог подменить DLL)"
+  ],
+  "next": "прогоны orig/ours через work/modkit/mod_switch.py по инструкции work/modkit/README.md: T1 оригинал, T2 наш билд, T3 повтор; собрать логи в collab/runs/"
+}

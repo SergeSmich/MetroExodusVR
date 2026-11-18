@@ -184,62 +184,7 @@ EXE_KIND_TABLE = 0xB8DC60
 EXE_KIND4_SLOT = 0xB8DC70
 EXE_KIND_TABLE_CODE = 0xB8D629  # kind 0/3 handler, an identity check
 EXE_KIND6_CODE = 0xB8DBE9
-EXE_VIRTUALPROTECT_IAT = 0x4D7200  # KERNEL32!VirtualProtect (in the DLL's IAT)
-
-# ---- L-0050: the cp1251 kind-4 hook -----------------------------------------
-# The native kind-4 body (exe+0xB8DB98) turns every byte into an ANSI codepoint
-# and looks that codepoint up in the font table of the text object, so cp1251
-# bytes 0x80..0xFF (all of Cyrillic) miss the table and come out as 0xF8FF
-# (empty).  This handler does the same thing the engine does for kind 0: it
-# decodes the bytes as cp1251 into UTF-16 code points and hands them to
-# exe+0xB56BB0, which maps codepoints to glyph indices of the object's font and
-# interns the result.  ASCII keeps behaving exactly as before (0x00..0x7F map
-# to themselves), so nothing regresses where the bytes are really ASCII.
-#
-# The blob is 0x1C0 bytes: 182 bytes of code, padding, then the 128-entry
-# cp1251 table at +0xC0 (the ``lea r10,[rip+..]`` inside has that displacement
-# baked in).  It is position independent, calls the engine through
-# ``lea rax,[r13+const]`` (r13 = EXE base in the kind dispatcher) and returns
-# via ``jmp r13+0xB8DC41``, the shared epilogue.
-K4_HANDLER_BLOB = bytes.fromhex(
-    "41c70601000000418b0785c0741b89c148c1e81881e1ffffff00498b84c540f17501"
-    "4c8d440814eb034989f056554889e54883e4f04881ec00100000800c24004881ec00"
-    "100000800c24004883ec1031c041803c00007409ffc03d0010000072f04531c985c0"
-    "74274c8d1551000000430fb6140880fa807209410fb7945200ffffff664289144c41"
-    "ffc14139c172e06642c7044c00004989e04889da4c89e1498d85b06bb500ffd04889"
-    "ec5d5e498d8541dcb800ffe0"
-    + "00"
-    * 10
-    + "020403041a2053041e20262020202120ac203020090439200a040c040b040f045204"
-    "182019201c201d202220132014202000222159043a205a045c045b045f0420000e04"
-    "5e040804a4009004a600a7000104a9000404ab00ac002000ae000704b000b1000604"
-    "56049104b500b600b700510416215404bb0058040504550457041004110412041304"
-    "1404150416041704180419041a041b041c041d041e041f0420042104220423042404"
-    "250426042704280429042a042b042c042d042e042f04300431043204330434043504"
-    "36043704380439043a043b043c043d043e043f044004410442044304440445044604"
-    "4704480449044a044b044c044d044e044f04"
-)
-assert len(K4_HANDLER_BLOB) == 0x1C0, "cp1251 handler blob is not 0x1C0 bytes"
-
-# The cave allocates one RWX page near the EXE for a 12-byte trampoline
-# (``mov rax, imm64; jmp rax``) because the kind table holds 32-bit RVAs that
-# the dispatcher adds to the EXE base: the DLL itself sits ~6 GB away, out of
-# reach.  Hints are offsets from the EXE base; VirtualAlloc rounds them down to
-# a 64K boundary and fails (we try the next one) when the range is taken.  The
-# runlog's live map has a ~4.8 GB free hole right above the image, so the first
-# hint hits; 0 = no hint (last resort).
-K4_ALLOC_HINTS = (
-    0x02400000,
-    0x02800000,
-    0x03000000,
-    0x04000000,
-    0x08000000,
-    0x20000000,
-    0x40000000,
-    0,
-)
-K4_ENGINE_CONVERT = 0xB56BB0  # exe+0xB56BB0(font, out, u16 codepoints)
-K4_ENGINE_TAIL = 0xB8DC41  # shared epilogue of the kind dispatcher
+EXE_VIRTUALPROTECT_IAT = 0x4D7200  # KERNEL32!VirtualProtect
 
 # DllMain entry of the 0.9.3 DLL: two `mov [rsp+..], reg` we replay in the cave
 # and then jump back to entry+len(ENTRY_DISPLACED).
@@ -892,18 +837,6 @@ def check_encodings(entries, ui2, extras):
             return
         if back != text:
             errors.append(f"{label}: {text!r} would render as {back!r}")
-        if ENCODING == "cp1251":
-            # The native kind-4 handler turns each ANSI byte back into a
-            # codepoint and looks it up in the font of the menu (269 entries),
-            # so the byte is only correct if that codepoint has a glyph.
-            have = set(FONT_GLYPHS)
-            missing = sorted(
-                {f"{ch!r} (U+{ord(ch):04X})" for ch in text if ord(ch) not in have}
-            )
-            if missing:
-                errors.append(
-                    f"{label}: no glyph in the menu font for {', '.join(missing)}"
-                )
         if 0 in enc:
             errors.append(f"{label}: encoded text contains a NUL")
 
@@ -1320,198 +1253,6 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced):
     return bytes(code)
 
 
-def iat_slots(pe, data, names):
-    """Return ``{name: IAT slot RVA}`` for the requested imported functions."""
-    rva = struct.unpack_from("<I", data, pe.opt + 112 + 8 * 1)[0]
-    off = pe.rva_to_off(rva)
-    out = {}
-    if off is None:
-        return out
-    i = 0
-    while True:
-        oft, ts, fc, name_rva, ft = struct.unpack_from("<IIIII", data, off + i * 20)
-        if name_rva == 0:
-            break
-        j = 0
-        thunk_off = pe.rva_to_off(oft or ft)
-        if thunk_off is not None:
-            while True:
-                t = struct.unpack_from("<Q", data, thunk_off + j * 8)[0]
-                if t == 0:
-                    break
-                if not (t >> 63):
-                    no = pe.rva_to_off(t)
-                    if no is not None:
-                        end = data.find(b"\0", no + 2)
-                        nm = bytes(data[no + 2 : end]).decode("ascii", "replace")
-                        if nm in names:
-                            out.setdefault(nm, ft + j * 8)
-                j += 1
-        i += 1
-    return out
-
-
-def build_k4_hook_cave(
-    cave_rva,
-    back_rva,
-    vp_slot_rva,
-    va_slot_rva,
-    handler_rva,
-    hints_rva,
-    marker_rva,
-    displaced,
-):
-    """Assemble the DllMain cave that installs the cp1251 kind-4 handler.
-
-    What it does, once per process (the marker in .ru and the untouched kind-6
-    slot are the idempotency guards, so the THREAD_ATTACH calls fall through):
-
-    * reads the EXE base out of the PEB and sanity-checks it (MZ, SizeOfImage,
-      the kind table's first entry, the kind-4 body prologue and that the
-      kind-4 slot still holds kind 6);
-    * allocates one RWX page near the EXE (the kind slot is a 32-bit offset
-      from the EXE base, the DLL is far outside that range) and writes the
-      absolute-jump trampoline to the handler blob in .ru;
-    * points ``exe+0xB8DC70`` (kind 4) at the trampoline;
-    * records the trampoline at marker+8 and sets marker+0 = 1.
-
-    The displaced DllMain bytes are replayed at the cave entry and the cave
-    jumps back to ``back_rva``.
-    """
-    code = bytearray(displaced)
-    labels = {}
-    jmp_fix = []
-    rip_fix = []
-
-    def emit(h):
-        code.extend(bytes.fromhex(h))
-
-    def label(name):
-        labels[name] = len(code)
-
-    def branch(op, name):
-        emit(op)
-        jmp_fix.append((len(code), name))
-        code.extend(b"\0\0\0\0")
-
-    def call_iat(rva):
-        emit("ff15")
-        rip_fix.append((len(code), rva))
-        code.extend(b"\0\0\0\0")
-
-    def lea_rip(h, rva):
-        emit(h)
-        rip_fix.append((len(code), rva))
-        code.extend(b"\0\0\0\0")
-
-    emit("56")  # push rsi
-    emit("53")  # push rbx
-    emit("51")  # push rcx (HINSTANCE = DllBase, read back as [rsp+0x28])
-    emit("52")  # push rdx
-    emit("4150415141524153")  # push r8 r9 r10 r11
-    # PEB -> Ldr -> InLoadOrderModuleList.Flink: the first module is the EXE
-    emit("65488b042560000000")  # mov rax, gs:[0x60]
-    emit("488b4018")  # mov rax, [rax+0x18]
-    emit("488b4010")  # mov rax, [rax+0x10]
-    emit("488b5830")  # mov rbx, [rax+0x30]
-    # The launcher LoadLibrary's this DLL too and there the offsets are
-    # unmapped: bail out unless the module looks like the game EXE.
-    emit("8b433c")  # mov eax, [rbx+0x3c]
-    emit("3d00040000")  # cmp eax, 0x400
-    branch("0f87", "done")  # ja done
-    emit("8b440350")  # mov eax, [rbx+rax+0x50]  (SizeOfImage)
-    emit("3d78dcb800")  # cmp eax, 0xb8dc78
-    branch("0f82", "done")  # jb done
-    emit("0fb703")  # movzx eax, word [rbx]
-    emit("3d4d5a0000")  # cmp eax, 'MZ'
-    branch("0f85", "done")
-    emit("81bb60dcb80029d6b800")  # cmp dword [rbx+0xb8dc60], 0xB8D629
-    branch("0f85", "done")
-    emit("81bb98dbb80041c70601")  # kind 4 body: mov dword [r14], 1
-    branch("0f85", "done")
-    emit("81bb70dcb80098dbb800")  # kind-4 slot still holds the native body
-    branch("0f85", "done")
-    lea_rip("488d05", marker_rva)  # lea rax, [rip+marker]
-    emit("833800")  # cmp dword [rax], 0
-    branch("0f85", "done")
-    emit("4c8b542428")  # mov r10, [rsp+0x28]     (DllBase)
-    emit("4981c2")  # add r10, imm32          (handler)
-    code.extend(struct.pack("<I", handler_rva))
-    emit("4883ec48")  # sub rsp, 0x48 (8 pushes + 0x48 keeps rsp 16-aligned)
-    emit("4c89542420")  # mov [rsp+0x20], r10
-    lea_rip("488d35", hints_rva)  # lea rsi, [rip+hints]
-    label("next")
-    emit("488b0e")  # mov rcx, [rsi]
-    emit("4883f9ff")  # cmp rcx, -1
-    branch("0f84", "done_sp")  # sentinel
-    emit("4885c9")  # test rcx, rcx
-    emit("7403")  # je +3 (NULL hint)
-    emit("4803cb")  # add rcx, rbx
-    emit("ba00100000")  # mov edx, 0x1000                     (dwSize)
-    emit("41b800300000")  # mov r8d, MEM_COMMIT|MEM_RESERVE      (flAllocationType)
-    emit("41b940000000")  # mov r9d, PAGE_EXECUTE_READWRITE     (flProtect)
-    call_iat(va_slot_rva)
-    emit("4885c0")  # test rax, rax
-    branch("0f84", "advance")
-    emit("4889c1")  # mov rcx, rax
-    emit("482bcb")  # sub rcx, rbx
-    emit("4881f900000100")  # cmp rcx, 0x10000
-    branch("0f82", "advance")
-    emit("4881f90000ff7f")  # cmp rcx, 0x7fff0000
-    branch("0f83", "advance")
-    emit("4889442430")  # mov [rsp+0x30], rax
-    emit("4c8b542420")  # mov r10, [rsp+0x20]
-    emit("66c70048b8")  # mov word [rax], 0xB848       (mov rax, imm64)
-    emit("4c895002")  # mov [rax+2], r10
-    emit("66c7400affe0")  # mov word [rax+0xA], 0xE0FF (jmp rax)
-    emit("488d8b70dcb800")  # lea rcx, [rbx+0xb8dc70]
-    emit("ba04000000")  # mov edx, 4
-    emit(
-        "41b840000000"
-    )  # mov r8d, PAGE_EXECUTE_READWRITE (the slot shares a code page)
-    emit("4c8d4c2428")  # lea r9, [rsp+0x28]
-    call_iat(vp_slot_rva)
-    emit("85c0")  # test eax, eax
-    branch("0f84", "advance")
-    emit("488b442430")  # mov rax, [rsp+0x30]
-    emit("4889c1")  # mov rcx, rax
-    emit("482bcb")  # sub rcx, rbx
-    emit("898b70dcb800")  # mov dword [rbx+0xb8dc70], ecx
-    emit("488d8b70dcb800")  # lea rcx, [rbx+0xb8dc70]
-    emit("ba04000000")  # mov edx, 4
-    emit("448b442428")  # mov r8d, [rsp+0x28]     (old protect)
-    emit("4c8d4c2438")  # lea r9, [rsp+0x38]
-    call_iat(vp_slot_rva)
-    lea_rip("488d05", marker_rva)  # lea rax, [rip+marker]
-    emit("c70001000000")  # mov dword [rax], 1
-    emit("488b4c2430")  # mov rcx, [rsp+0x30]
-    emit("48894808")  # mov [rax+8], rcx     (trampoline, for diagnostics)
-    branch("e9", "done_sp")  # done (frame is up)
-    label("advance")
-    emit("4883c608")  # add rsi, 8
-    branch("e9", "next")
-    label("done_sp")
-    emit("4883c448")  # add rsp, 0x48
-    label("done")
-    emit("415b")  # pop r11
-    emit("415a")  # pop r10
-    emit("4159")  # pop r9
-    emit("4158")  # pop r8
-    emit("5a")  # pop rdx
-    emit("59")  # pop rcx
-    emit("5b")  # pop rbx
-    emit("5e")  # pop rsi
-    off = len(code)
-    code.append(0xE9)
-    code += struct.pack("<i", back_rva - (cave_rva + off + 5))
-
-    for at, name in jmp_fix:
-        struct.pack_into("<i", code, at, cave_rva + labels[name] - (cave_rva + at + 4))
-    for at, rva in rip_fix:
-        struct.pack_into("<i", code, at, rva - (cave_rva + at + 4))
-    return bytes(code)
-
-
 def main():
     global ENCODING, MENU_LO, MENU_HI, UI2_TABLES, EXTRA_STRINGS, UI2_JSON
     global VALIDATORS, STRINGS_TSV
@@ -1663,8 +1404,7 @@ def main():
             "flips the EXE's kind-4 slot to it.  'charmap' writes localization "
             "charmap indices and renders as Latin garbage on 0.9.3 (the kind-4 "
             "handler looks them up again); 'utf8' reproduces the L-0036 build, "
-            "which came out empty; 'cp1251' writes CP1251 bytes and installs "
-            "the cp1251 kind-4 handler cave (L-0050)"
+            "which came out empty; 'cp1251' rebuilds the 0.9.1 diagnostic"
         ),
     )
     ap.add_argument(
@@ -1673,10 +1413,9 @@ def main():
         action="store_false",
         default=True,
         help=(
-            "do not add the DllMain init cave.  With 'fontidx' the cave rewrites "
-            "the game EXE's kind-4 slot to kind 6; with 'cp1251' it installs the "
-            "cp1251 kind-4 handler (L-0050).  Without it the payloads are read "
-            "as ANSI codepoints and Cyrillic comes out empty (L-0048)"
+            "do not add the init cave that rewrites the game EXE's kind-4 text "
+            "slot to kind 6.  Without it the fontidx payloads are read as ANSI "
+            "codepoints and render as Latin garbage (L-0048)"
         ),
     )
     ap.add_argument(
@@ -2073,13 +1812,11 @@ def main():
             hook_blob = b"\0" * pad + hook_blob
             payload = payload + hook_blob
 
-    # ---- the init cave: cp1251 kind-4 hook or the old kind-4 -> kind-6 flip ---
+    # ---- the kind-4 -> kind-6 init cave --------------------------------------
     init_blob = b""
-    init_code = b""
     init_rva = None
     init_site_off = None
     init_patch = None
-    init_kind = None  # "cp1251" | "flip", for the summary line
     if args.kind_flip:
         entry = struct.unpack_from("<I", data, pe.opt + 16)[0]
         foff = pe.rva_to_off(entry)
@@ -2094,76 +1831,28 @@ def main():
                     f"DllMain prologue is {have.hex()}, the cave replays "
                     f"{ENTRY_DISPLACED.hex()}"
                 )
-        if ENCODING == "cp1251":
-            iat = iat_slots(pe, data, ("VirtualAlloc", "VirtualProtect"))
-            for name in ("VirtualAlloc", "VirtualProtect"):
-                if name not in iat:
-                    errors.append(f"{name} is not imported by the DLL")
-                elif pe.rva_to_off(iat[name]) is None:
-                    errors.append(f"{name} IAT slot {iat[name]:#x} is not mapped")
-            if not errors:
-                pre = len(payload)
-                pad = (-pre) % 16
-                handler_rva = new_va + pre + pad
-                payload = payload + b"\0" * pad + K4_HANDLER_BLOB
-                pre = len(payload)
-                pad = (-pre) % 8
-                hints_rva = new_va + pre + pad
-                payload = (
-                    payload
-                    + b"\0" * pad
-                    + struct.pack("<9q", *(tuple(K4_ALLOC_HINTS) + (-1,)))
-                )
-                marker_rva = new_va + len(payload)
-                payload = payload + b"\0" * 16
-                pre = len(payload)
-                pad = (-pre) % 16
-                init_rva = new_va + pre + pad
-                blob = build_k4_hook_cave(
-                    init_rva,
-                    entry + len(ENTRY_DISPLACED),
-                    iat["VirtualProtect"],
-                    iat["VirtualAlloc"],
-                    handler_rva,
-                    hints_rva,
-                    marker_rva,
-                    ENTRY_DISPLACED,
-                )
-                init_blob = b"\0" * pad + blob
-                init_code = blob
-                payload = payload + init_blob
-                init_kind = "cp1251"
-                init_site_off = foff
-                init_patch = (
-                    b"\xe9"
-                    + struct.pack("<i", init_rva - (entry + 5))
-                    + b"\x90" * (len(ENTRY_DISPLACED) - 5)
-                )
-        else:
-            if pe.rva_to_off(EXE_VIRTUALPROTECT_IAT) is None:
-                errors.append(
-                    f"VirtualProtect IAT slot {EXE_VIRTUALPROTECT_IAT:#x} is not mapped"
-                )
-            if not errors:
-                pre = len(payload)
-                pad = (-pre) % 16
-                init_rva = new_va + pre + pad
-                blob = build_kind_flip_cave(
-                    init_rva,
-                    entry + len(ENTRY_DISPLACED),
-                    EXE_VIRTUALPROTECT_IAT,
-                    ENTRY_DISPLACED,
-                )
-                init_blob = b"\0" * pad + blob
-                init_code = blob
-                payload = payload + init_blob
-                init_kind = "flip"
-                init_site_off = foff
-                init_patch = (
-                    b"\xe9"
-                    + struct.pack("<i", init_rva - (entry + 5))
-                    + b"\x90" * (len(ENTRY_DISPLACED) - 5)
-                )
+        if pe.rva_to_off(EXE_VIRTUALPROTECT_IAT) is None:
+            errors.append(
+                f"VirtualProtect IAT slot {EXE_VIRTUALPROTECT_IAT:#x} is not mapped"
+            )
+        if not errors:
+            pre = len(payload)
+            pad = (-pre) % 16
+            init_rva = new_va + pre + pad
+            blob = build_kind_flip_cave(
+                init_rva,
+                entry + len(ENTRY_DISPLACED),
+                EXE_VIRTUALPROTECT_IAT,
+                ENTRY_DISPLACED,
+            )
+            init_blob = b"\0" * pad + blob
+            payload = payload + init_blob
+            init_site_off = foff
+            init_patch = (
+                b"\xe9"
+                + struct.pack("<i", init_rva - (entry + 5))
+                + b"\x90" * (len(ENTRY_DISPLACED) - 5)
+            )
 
     # ---- collect byte patches -------------------------------------------------
     patches = []
@@ -2319,14 +2008,7 @@ def main():
             )
         else:
             print("caption font hook: off")
-        if init_rva is not None and init_kind == "cp1251":
-            print(
-                f"cp1251 kind-4 hook: cave RVA {init_rva:#x}, DllMain "
-                f"{ENTRY_RVA:#x} jump, {len(init_blob)} bytes, handler RVA "
-                f"{handler_rva:#x} ({len(K4_HANDLER_BLOB)} bytes), slot "
-                f"exe+{EXE_KIND4_SLOT:#x} -> trampoline at exe+hint"
-            )
-        elif init_rva is not None:
+        if init_rva is not None:
             print(
                 f"kind flip cave: RVA {init_rva:#x}, DllMain {ENTRY_RVA:#x} "
                 f"jump, {len(init_blob)} bytes, slot "
@@ -2420,7 +2102,7 @@ def main():
         if rc == 0 and hook_rva is not None:
             rc = verify_hook(out_path, hook_rva, ADDRS["setter"], hook_dlen, md)
         if rc == 0 and init_rva is not None:
-            rc = verify_kind_flip(out_path, init_rva, init_code)
+            rc = verify_kind_flip(out_path, init_rva, init_blob)
     return rc
 
 

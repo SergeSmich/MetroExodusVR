@@ -249,7 +249,30 @@ VALUE_CAVE2_TABLE_AT = 145
 # substituted field only if the format has exactly one ``{...}`` pair and the
 # field bytes are all in 0x2b..0x39 (``+ , - . / 0..9``), so a row that
 # substitutes an already-translated glyph string is left alone.
-VALUE_SITES3_RVA = (0xC487F, 0xC54AF, 0xC566D, 0xC56CD)
+#
+# Every other menu-side formatter call lives in the same family and drew its
+# number the same wrong way (``ВЫСОТА ПОЯСА`` showed "oРК СМ" for "+15 CM"):
+# the ``{} CM`` / ``+{} CM`` range rows (0xC0E78, 0xC0ED8 in 0xC0DB0 --
+# belt height; 0xC3C94, 0xC3E85, 0xC450A, 0xC46CD, 0xC4F15) and the
+# ``{} DEG`` / ``{}`` rows (0xBBA8D weapon grip angle, 0xB6B8A int list,
+# 0xC6BF3 float-to-string helper).  All of them pass the arguments the same
+# way, so one cave serves them all.
+VALUE_SITES3_RVA = (
+    0xB6B8A,
+    0xBBA8D,
+    0xC0E78,
+    0xC0ED8,
+    0xC3C94,
+    0xC3E85,
+    0xC450A,
+    0xC46CD,
+    0xC4F15,
+    0xC487F,
+    0xC54AF,
+    0xC566D,
+    0xC56CD,
+    0xC6BF3,
+)
 VALUE_CAVE3_TEMPLATE = bytes.fromhex(
     "4883ec2848894c24184889542420e800000000488b5424204c8b024c8b4a08488b4c24184883c428"
     "4531d24d39ca0f839100000043803c107b740549ffc2ebeb4d89d349ffc34d39cb737a43803c187d"

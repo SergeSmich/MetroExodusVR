@@ -65,13 +65,19 @@ ADDRS = dict(
     # in 0.9.2: 55/55 instructions identical, prologue bytes identical.
     setter=0x0,  # 0.9.3: not located; only --caption-font uses it
     # `sub .., 0x20; cmp .., 0x5e` printable-ASCII gates of the page builder.
-    # Same three patterns as 0.9.1 (0xA4728/0xA4C76/0xA6556): 0xAA290 is the
-    # 32-bit form (`80 f9 5e`), 0xAA7E0 and 0xAC0C0 the byte form (`3c 5e`).
+    # 0.9.3 sites, located by decoding every `sub <r8>, 0x20` candidate:
+    #   0xAA8B0  movzx ecx, [rax] / sub cl, 0x20 / cmp cl, 0x5e  (80 f9 5e)
+    #   0xAAE00  movzx eax, [rcx] / sub al, 0x20 / cmp al, 0x5e  (3c 5e)
+    #   0xAC6E0  movzx eax, [rcx] / sub al, 0x20 / cmp al, 0x5e  (3c 5e)
     # The address is the *entry* of the sequence, so the immediate is located
-    # by decoding; widening it to 0xff is what lets UTF-8 (Cyrillic) strings
-    # through -- a charmap build keeps every byte below 0x80 and does not need
-    # it (L-0033 patched nothing here).
-    validators=(),  # 0.9.3: not relocated; charmap byte range
+    # by decoding; widening it to 0xff accepts every byte.
+    #
+    # A charmap build keeps every byte below 0x80 and does not need it
+    # (L-0033 patched nothing here).  A `fontidx` build maps Cyrillic to glyph
+    # indices above 0x7f, and the mod then refuses the setting or the whole
+    # page ("captions are printable ASCII (at most 127)"), which is exactly why
+    # the category pages came up empty (L-0048).
+    validators=(0xAA8B0, 0xAAE00, 0xAC6E0),
     # Only the mod's own menu code is redirected.  The range is used to warn
     # about display sites outside it; every site comes from --plan anyway.
     # 0.9.2 menu code ends at 0xC5508 (0.9.1 ended below 0xC0000).
@@ -560,6 +566,52 @@ def find_len_store(ins, idx, lit_len):
             and nxt.operands[1].imm == lit_len
         ):
             return nxt
+    return None
+
+
+def find_len_imm(ins, idx, lit_len):
+    """Find ``mov r8d, lit_len`` feeding a ``std::string(ptr, len)`` ctor.
+
+    Pages and switch values are sometimes built with an explicit length::
+
+        mov  r8d, <len>
+        lea  rdx, [rip + lit]
+        lea  rcx, [dest]
+        call 0x8e80
+
+    Here the byte count is a call argument rather than a stored ``string_view``
+    field, so it has to be rewritten too.  Leaving it alone truncates a longer
+    translation and, worse, appends a NUL to a shorter one: 0.9.3 built
+    ``"GRAPHICS"`` as 8 bytes and the translation is 7, so the page caption
+    ended up holding ``"ГРАФИКА\\0"`` and the GRAPHICS page never opened.
+    """
+    for x in ins[idx + 1 : idx + 5]:
+        if x.id == 0:
+            return None
+        if x.mnemonic == "call":
+            if x.op_str.strip() != "0x8e80":
+                return None
+            return _near_len(ins, idx, lit_len)
+        if x.mnemonic == "lea" and x.op_str.startswith("rdx,"):
+            return None
+    return None
+
+
+def _near_len(ins, idx, lit_len):
+    for b in range(1, 5):
+        if idx - b < 0:
+            return None
+        prev = ins[idx - b]
+        if prev.id == 0:
+            return None
+        if prev.mnemonic in ("call", "ret", "jmp") or prev.mnemonic.startswith("j"):
+            return None
+        if prev.mnemonic == "mov" and prev.op_str.startswith("r8d, "):
+            try:
+                imm = int(prev.op_str.split(",")[1].strip(), 0)
+            except ValueError:
+                return None
+            return prev if imm == lit_len else None
     return None
 
 
@@ -1508,7 +1560,12 @@ def main():
                 orig=orig,
                 ru=ru,
                 enc=enc,
-                skip=(ru == orig),
+                # Skip only when the encoded bytes equal the original ones.
+                # With `fontidx` an unchanged Latin caption ("VR", "FSR",
+                # "DLSS", "TAA", "1.00X") still needs rewriting: its ASCII
+                # bytes are glyph indices after the kind flip, so "VR" (56 52)
+                # came out as the glyphs 0x56/0x52, i.e. "ЕЯ" (L-0048).
+                skip=(enc == orig.encode("latin-1", "replace")),
                 lea_sites=[],
                 inline=[],
                 outside=[],
@@ -1562,6 +1619,9 @@ def main():
             )
             if store is not None:
                 e["lea_len"].append((store.address + store.size - 4, store.address))
+            imm = find_len_imm(wide, widx, len(e["orig"])) if widx is not None else None
+            if imm is not None:
+                e["lea_len"].append((imm.address + imm.size - 4, imm.address))
 
         e["inline"] = []
         for site, kind in [

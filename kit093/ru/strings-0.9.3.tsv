@@ -36,21 +36,21 @@
 0x4f3050	LEFT HAND	ЛЕВАЯ
 0x4f3060	RIGHT HAND	ПРАВАЯ
 0x4f3080	CROUCH BUTTON	КНОПКА ПРИСЕДА
-0x4f3090	HOLD	УДЕРЖ.
-0x4f3098	TOGGLE	ПЕРЕКЛ.
+0x4f3090	HOLD	УДЕРЖАНИЕ
+0x4f3098	TOGGLE	ПЕРЕКЛЮЧЕНИЕ
 0x4f30b8	AUTO SPRINT	АВТОБЕГ
 0x4f30e0	MOVE STICK DEADZONE	МЕРТВАЯ ЗОНА СТИКА
 0x4f3110	TURN STICK DEADZONE	МЕРТВАЯ ЗОНА ПОВОРОТА
 0x4f3140	REDUCE HEAD BOB	УМЕНЬШИТЬ КАЧАНИЕ
 0x4f3168	SHOW VR TIPS AGAIN	СНОВА ПОКАЗАТЬ СОВЕТЫ VR
 0x4f3190	PLAY MODE	РЕЖИМ ИГРЫ
-0x4f31a0	ROOM-SCALE	МАСШТАБ
+0x4f31a0	ROOM-SCALE	ПО КОМНАТЕ
 0x4f31b0	STANDING	СТОЯ
 0x4f31bc	SEATED	СИДЯ
 0x4f31e0	PLAYER HEIGHT	РОСТ ИГРОКА
 0x4f3208	WORLD SCALE	МАСШТАБ МИРА
 0x4f3230	BODY TURNING	ПОВОРОТ ТЕЛА
-0x4f3240	FOLLOW HEAD	СЛЕДОВАТЬ ЗА ГОЛОВОЙ
+0x4f3240	FOLLOW HEAD	ПО ГОЛОВЕ
 0x4f3268	BODY POSITION	ПОЛОЖЕНИЕ ТЕЛА
 0x4f3278	FOLLOW	СЛЕДОВАТЬ
 0x4f3298	PHYSICAL CROUCH	ФИЗИЧЕСКОЕ ПРИСЕДАНИЕ
@@ -60,7 +60,7 @@
 0x4f3310	FOLLOW BODY	СЛЕДОВАТЬ ЗА ТЕЛОМ
 0x4f3330	BHAPTICS (EXPERIMENTAL)	BHAPTICS (ЭКСПЕРИМ.)
 0x4f3360	BHAPTICS STRENGTH	СИЛА BHAPTICS
-0x4f3390	DOMINANT HAND	ОСНОВНАЯ РУКА
+0x4f3390	DOMINANT HAND	ВЕДУЩАЯ РУКА
 0x4f33a0	RIGHT	ПРАВАЯ
 0x4f33a8	LEFT	ЛЕВАЯ
 0x4f33c0	WEAPON GRIP ANGLE	УГОЛ ХВАТА ОРУЖИЯ
@@ -90,13 +90,13 @@
 0x4f36d0	HIP	БЕДРО
 0x4f36f0	SIGHTING EYE	ГЛАЗ ПРИЦЕЛА
 0x4f3710	OTHER EYE WHILE SCOPED	ВТОРОЙ ГЛАЗ В ПРИЦЕЛЕ
-0x4f3728	VISIBLE	ВИДИМО
+0x4f3728	VISIBLE	ВИДНО
 0x4f3730	BLURRED	РАЗМЫТО
-0x4f3738	BLACK	ЧЕРНЫЙ
+0x4f3738	BLACK	ЧЕРНО
 0x4f3750	RETICLE TILT	НАКЛОН ПРИЦЕЛА
 0x4f3760	WITH WEAPON	С ОРУЖИЕМ
-0x4f376c	LEVEL	УРОВЕНЬ
-0x4f3778	FIXED TO VIEW	ФИКСИРОВАНО
+0x4f376c	LEVEL	ПО ГОРИЗОНТУ
+0x4f3778	FIXED TO VIEW	К ОБЗОРУ
 0x4f37a0	SCOPE STEERING	НАВЕДЕНИЕ ПРИЦЕЛА
 0x4f37b0	WEAPON	ОРУЖИЕ
 0x4f37b8	WEAPON + HEAD	ОРУЖИЕ + ГОЛОВА
@@ -124,21 +124,21 @@
 0x4f3a64	SMALL	МАЛЫЙ
 0x4f3a6c	MEDIUM	СРЕДНИЙ
 0x4f3a74	LARGE	БОЛЬШОЙ
-0x4f3a98	HIT DIRECTION	НАПРАВЛЕНИЕ УДАРА
+0x4f3a98	HIT DIRECTION	НАПРАВЛЕНИЕ ПОПАДАНИЯ
 0x4f3ac0	LOW-HEALTH PULSE	ПУЛЬС ПРИ РАНЕНИИ
 0x4f3af0	DEBUG OVERLAY	ОТЛАДОЧНЫЙ ОВЕРЛЕЙ
-0x4f3b18	CINEMA FLOOR	ПОЛ КИНО
-0x4f3b40	CINEMA CONTROLLERS	КОНТРОЛЛЕРЫ КИНО
-0x4f3b70	CINEMA INFO	ИНФО КИНО
-0x4f3b98	CINEMA LINKS	ССЫЛКИ КИНО
+0x4f3b18	CINEMA FLOOR	ПОЛ В VR ОКРУЖЕНИИ
+0x4f3b40	CINEMA CONTROLLERS	КОНТРОЛЛЕРЫ
+0x4f3b70	CINEMA INFO	ИНФО В VR ОКРУЖЕНИИ
+0x4f3b98	CINEMA LINKS	ССЫЛКИ В VR ОКРУЖЕНИИ
 0x4f3bc0	CAMERA PRESET	ПРЕСЕТ КАМЕРЫ
 0x4f3bd0	IMMERSIVE	ИММЕРСИВНЫЙ
 0x4f3be0	COMFORT	КОМФОРТНЫЙ
 0x4f3be8	CINEMATIC	КИНЕМАТОГРАФИЧНЫЙ
 0x4f3c08	RE-ALIGN AFTER SCENES	ВЫРАВНИВАТЬ ПОСЛЕ СЦЕН
 0x4f3c30	HEAD LEASH	ПРИВЯЗКА ГОЛОВЫ
-0x4f3c58	CINEMA SCREEN DISTANCE	РАССТОЯНИЕ ЭКРАНА КИНО
-0x4f3c88	CINEMA SCREEN SIZE	РАЗМЕР ЭКРАНА КИНО
+0x4f3c58	CINEMA SCREEN DISTANCE	РАССТОЯНИЕ ЭКРАНА VR
+0x4f3c88	CINEMA SCREEN SIZE	РАЗМЕР ЭКРАНА VR
 0x4f3cf8	FREE CAMERA	СВОБОДНАЯ КАМЕРА
 0x4f3d38	BONE ANGLES	УГЛЫ КОСТЕЙ
 0x4f3d60	SCRIPTED LOCK	БЛОКИРОВКА СКРИПТОМ

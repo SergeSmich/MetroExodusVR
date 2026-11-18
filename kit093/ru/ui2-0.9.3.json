@@ -18,7 +18,7 @@
     {
       "index": 3,
       "orig": "MANUAL RELOADING\n\nTo help with manual reloading this mod offers option to highlight the next weapon's part that needs to be operated to finish reloading.\n\nYou can configure this option later in Options / VR / Weapons.\n\nWould you like to enable it for first few reloads of each weapon now?\n\n",
-      "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\nЧтобы упростить ручную перезарядку, мод может подсвечивать следующую часть оружия, с которой нужно взаимодействовать, чтобы завершить перезарядку.\n\nНастроить это можно позже в Настройки / VR / Оружие.\n\nВключить подсветку для первых нескольких перезарядок каждого оружия?\n\n"
+      "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\nЧтобы упростить ручную перезарядку, мод может подсвечивать следующую часть оружия, с которой нужно взаимодействовать, чтобы завершить перезарядку.\n\nНастроить это можно позже в разделе Настройки / VR / Оружие.\n\nВключить подсветку для первых нескольких перезарядок каждого оружия?\n\n"
     },
     {
       "index": 4,
@@ -38,7 +38,7 @@
     {
       "index": 7,
       "orig": "YOUR GEAR IS ON YOUR BACKPACK\n\nMost of your gear is also available to grab from your backpack. Simply reach for your backpack with your <nondominant> hand over <nondominant> shoulder, grab it (<grip_nondominant>), move in front of your view and use <dominant> hand's grip (<grip_dominant>) to grab items from it (gas mask, filters, binoculars, charger, throwables).\n\n",
-      "ru": "СНАРЯЖЕНИЕ В ВАШЕМ РЮКЗАКЕ\n\nБольшая часть снаряжения доступна и в рюкзаке. Потянитесь к рюкзаку второй рукой над вторым плечом, схватите его (<grip_nondominant>), вынесите перед собой и хватайте из него предметы ведущей рукой (<grip_dominant>) (противогаз, фильтры, бинокль, зарядное устройство, метательные предметы).\n\n"
+      "ru": "СНАРЯЖЕНИЕ В ВАШЕМ РЮКЗАКЕ\n\nБольшая часть снаряжения доступна и в рюкзаке. Потянитесь к рюкзаку противоположной рукой над противоположным плечом, схватите его (<grip_nondominant>), вынесите перед собой и хватайте из него предметы ведущей рукой (<grip_dominant>) (противогаз, фильтры, бинокль, зарядное устройство, метательные предметы).\n\n"
     },
     {
       "index": 8,
@@ -58,12 +58,12 @@
     {
       "index": 11,
       "orig": "GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.\n\nThe mask, filter and tape are also on your backpack: grip <grip_nondominant> over <nondominant> shoulder, then take them with <grip_dominant>.",
-      "ru": "ПРОТИВОГАЗ\n\nНадеть: <grip_nondominant> у второго бедра и поднесите к лицу.\nСнять: схватите его на лице и отведите в сторону.\n\nФильтр: (когда маска надета) <grip_nondominant> у второго бедра и поднесите к лицу.\n\nПротереть: потрите стекло открытой ладонью.\n\nЗаделать трещину: (когда маска надета и треснула) <grip_nondominant> скотч со второго бедра и поднесите к треснувшему стеклу.\n\nМаска, фильтр и скотч также есть в рюкзаке: схватите <grip_nondominant> над вторым плечом, затем берите их <grip_dominant>."
+      "ru": "ПРОТИВОГАЗ\n\nНадеть: <grip_nondominant> у противоположного бедра и поднесите к лицу.\nСнять: схватите его на лице и отведите в сторону.\n\nФильтр: (когда маска надета) <grip_nondominant> у противоположного бедра и поднесите к лицу.\n\nПротереть: потрите стекло открытой ладонью.\n\nЗаделать трещину: (когда маска надета и треснула) <grip_nondominant> скотч с противоположного бедра и поднесите к треснувшему стеклу.\n\nМаска, фильтр и скотч также есть в рюкзаке: схватите <grip_nondominant> над противоположным плечом, затем берите их <grip_dominant>."
     },
     {
       "index": 12,
       "orig": "BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder to take it in your hand, then press <trigger_nondominant> to open it[, or <press:inventory>].\n\nWhile you hold it, take mask, filters, binoculars, charger and throwables from it with <grip_dominant>.",
-      "ru": "РЮКЗАК\n\nВ рюкзаке или инвентаре можно создавать расходники и метательные предметы, а также улучшать оружие.\n\nСхватите <grip_nondominant> над вторым плечом, чтобы взять его в руку, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>].\n\nПока вы держите его, берите из него маску, фильтры, бинокль, зарядное устройство и метательные предметы с помощью <grip_dominant>."
+      "ru": "РЮКЗАК\n\nВ рюкзаке или инвентаре можно создавать расходники и метательные предметы, а также улучшать оружие.\n\nСхватите <grip_nondominant> над противоположным плечом, чтобы взять его в руку, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>].\n\nПока вы держите его, берите из него маску, фильтры, бинокль, зарядное устройство и метательные предметы с помощью <grip_dominant>."
     },
     {
       "index": 13,
@@ -105,7 +105,7 @@
     {
       "index": 4,
       "orig": "How low the upscaler renders. NATIVE AA keeps the full resolution and only smooths edges; the lower modes are faster but less sharp.",
-      "ru": "Насколько низко рендерит апскейлер. НАТИВНОЕ СГЛАЖИВАНИЕ сохраняет полное разрешение и только сглаживает края; более низкие режимы быстрее, но менее четкие."
+      "ru": "С какого разрешения работает апскейлер. НАТИВНОЕ СГЛАЖИВАНИЕ сохраняет полное разрешение и только сглаживает края; более низкие режимы быстрее, но менее четкие."
     },
     {
       "index": 5,
@@ -175,7 +175,7 @@
     {
       "index": 18,
       "orig": "HOLD crouches while the button is held. TOGGLE crouches with one press and stands up with the next.",
-      "ru": "УДЕРЖ. приседает, пока кнопка удерживается. ПЕРЕКЛ. приседает одним нажатием и встает следующим."
+      "ru": "УДЕРЖАНИЕ приседает, пока кнопка удерживается. ПЕРЕКЛЮЧЕНИЕ приседает одним нажатием и встает следующим."
     },
     {
       "index": 19,
@@ -200,7 +200,7 @@
     {
       "index": 23,
       "orig": "ROOM-SCALE lets you walk around your room. STANDING keeps you in one place. SEATED is for playing sitting down.",
-      "ru": "МАСШТАБ позволяет ходить по комнате. СТОЯ удерживает вас на одном месте. СИДЯ предназначен для игры сидя."
+      "ru": "ПО КОМНАТЕ: можно свободно ходить по комнате. СТОЯ удерживает вас на одном месте. СИДЯ – для игры сидя."
     },
     {
       "index": 24,
@@ -215,7 +215,7 @@
     {
       "index": 26,
       "orig": "Crouching in real life crouches in the game. Needs PLAYER HEIGHT.",
-      "ru": "Приседание в реальной жизни приседает в игре. Требуется РОСТ ИГРОКА."
+      "ru": "Реальное приседание. Требуется РОСТ ИГРОКА."
     },
     {
       "index": 27,
@@ -230,7 +230,7 @@
     {
       "index": 29,
       "orig": "FOLLOW HEAD turns your body after your head once you look far enough to the side. LOCKED turns it only with the turn stick.",
-      "ru": "СЛЕДОВАТЬ ЗА ГОЛОВОЙ поворачивает тело за головой, когда вы достаточно далеко посмотрите в сторону. ЗАБЛОКИРОВАНО поворачивает его только стиком поворота."
+      "ru": "ПО ГОЛОВЕ поворачивает тело вслед за головой, когда вы достаточно далеко посмотрите в сторону. ЗАБЛОКИРОВАНО поворачивает его только стиком поворота."
     },
     {
       "index": 30,
@@ -255,12 +255,12 @@
     {
       "index": 34,
       "orig": "HOLD keeps what you take while the grip is held. TOGGLE takes it with one grip and puts it back with a grip where it was taken.",
-      "ru": "УДЕРЖ. держит взятое, пока удерживается хват. ПЕРЕКЛ. берет одним хватом и возвращает хватом туда, откуда взяли."
+      "ru": "УДЕРЖАНИЕ держит взятое, пока удерживается хват. ПЕРЕКЛЮЧЕНИЕ берет предмет одним хватом и возвращает таким же хватом на место."
     },
     {
       "index": 35,
       "orig": "Gripping over your support shoulder takes the backpack into that hand. Take things hanging on it with your other hand; pull the trigger to open it. Off, the grip opens the backpack at once.",
-      "ru": "Хват над вторым плечом берет рюкзак в эту руку. Висящие на нем предметы берите другой рукой; нажмите триггер, чтобы открыть его. Если выключено, хват сразу открывает рюкзак."
+      "ru": "Хват над противоположным плечом берет рюкзак в эту руку. Висящие на нем предметы берите другой рукой; нажмите триггер, чтобы открыть его. Если выключено, хват сразу открывает рюкзак."
     },
     {
       "index": 36,
@@ -340,7 +340,7 @@
     {
       "index": 51,
       "orig": "How the scope's reticle tilts: with the weapon, level with the horizon, or fixed in your view.",
-      "ru": "Как наклоняется сетка прицела: вместе с оружием, по горизонту или фиксировано в вашем обзоре."
+      "ru": "Как наклоняется сетка прицела: вместе с оружием, по горизонту или к обзору."
     },
     {
       "index": 52,
@@ -395,7 +395,7 @@
     {
       "index": 62,
       "orig": "Shows an arc toward whoever just hit you.",
-      "ru": "Показывает дугу в сторону того, кто вас только что ударил."
+      "ru": "Показывает дугу в сторону того, кто в вас только что попал."
     },
     {
       "index": 63,
@@ -517,12 +517,12 @@
     {
       "index": 4,
       "orig": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder, then press <trigger_nondominant> to open it[, or <press:inventory>]",
-      "ru": "Рюкзак: схватите <grip_nondominant> над вторым плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]"
+      "ru": "Рюкзак: схватите <grip_nondominant> над противоположным плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]"
     },
     {
       "index": 5,
       "orig": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder, then press <trigger_nondominant> to open it[, or <press:inventory>]",
-      "ru": "Рюкзак: схватите <grip_nondominant> над вторым плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]"
+      "ru": "Рюкзак: схватите <grip_nondominant> над противоположным плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]"
     },
     {
       "index": 6,
@@ -532,7 +532,7 @@
     {
       "index": 7,
       "orig": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
-      "ru": "Качайте вручную второй рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
+      "ru": "Качайте вручную противоположной рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
     },
     {
       "index": 8,
@@ -542,7 +542,7 @@
     {
       "index": 9,
       "orig": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
-      "ru": "Качайте вручную второй рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
+      "ru": "Качайте вручную противоположной рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>"
     },
     {
       "index": 10,
@@ -622,12 +622,12 @@
     {
       "index": 25,
       "orig": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back or from backpack[, or <press:binoculars>]",
-      "ru": "Бинокль: схватите <grip_nondominant> со второй стороны поясницы или из рюкзака[, или <press:binoculars>]"
+      "ru": "Бинокль: схватите <grip_nondominant> с противоположной стороны поясницы или из рюкзака[, или <press:binoculars>]"
     },
     {
       "index": 26,
       "orig": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back or from backpack[, or <press:binoculars>]",
-      "ru": "Бинокль: схватите <grip_nondominant> со второй стороны поясницы или из рюкзака[, или <press:binoculars>]"
+      "ru": "Бинокль: схватите <grip_nondominant> с противоположной стороны поясницы или из рюкзака[, или <press:binoculars>]"
     },
     {
       "index": 27,
@@ -662,22 +662,22 @@
     {
       "index": 33,
       "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]",
-      "ru": "Зажигалка: схватите <grip_nondominant> со второй стороны груди, затем подожгите паутину[, или <press:lighter>]"
+      "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди, затем подожгите паутину[, или <press:lighter>]"
     },
     {
       "index": 34,
       "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
-      "ru": "Зажигалка: схватите <grip_nondominant> со второй стороны груди[, или <press:lighter>]"
+      "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]"
     },
     {
       "index": 35,
       "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
-      "ru": "Зажигалка: схватите <grip_nondominant> со второй стороны груди[, или <press:lighter>]"
+      "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]"
     },
     {
       "index": 36,
       "orig": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
-      "ru": "Зажигалка: схватите <grip_nondominant> со второй стороны груди[, или <press:lighter>]"
+      "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]"
     },
     {
       "index": 37,
@@ -702,17 +702,17 @@
     {
       "index": 41,
       "orig": "Gas mask: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack) and bring it to your face[, or <press:gasmask>]",
-      "ru": "Противогаз: схватите <grip_nondominant> у второго бедра (или <grip_dominant> из рюкзака) и поднесите к лицу[, или <press:gasmask>]"
+      "ru": "Противогаз: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака) и поднесите к лицу[, или <press:gasmask>]"
     },
     {
       "index": 42,
       "orig": "Filter: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack)[, or <press:filter>]",
-      "ru": "Фильтр: схватите <grip_nondominant> у второго бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]"
+      "ru": "Фильтр: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]"
     },
     {
       "index": 43,
       "orig": "Swap filter: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack)[, or <press:filter>]",
-      "ru": "Сменить фильтр: схватите <grip_nondominant> у второго бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]"
+      "ru": "Сменить фильтр: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]"
     },
     {
       "index": 44,
@@ -727,12 +727,12 @@
     {
       "index": 46,
       "orig": "Seal your mask: grab the tape <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack) and bring it to your visor[, or <press:facepalm>]",
-      "ru": "Заделайте маску: схватите скотч <grip_nondominant> со второго бедра (или <grip_dominant> из рюкзака) и поднесите к стеклу[, или <press:facepalm>]"
+      "ru": "Заделайте маску: скотч <grip_nondominant> с противоположного бедра (или <grip_dominant> из рюкзака) поднесите к стеклу[, или <press:facepalm>]"
     },
     {
       "index": 47,
       "orig": "Seal: tape from <nondominant> hip <grip_nondominant> or backpack <grip_dominant> to the visor[, or <press:facepalm>]",
-      "ru": "Заделать: скотч со второго бедра <grip_nondominant> или из рюкзака <grip_dominant> к стеклу[, или <press:facepalm>]"
+      "ru": "Заделать: скотч с противоположного бедра <grip_nondominant> или из рюкзака <grip_dominant> к стеклу[, или <press:facepalm>]"
     },
     {
       "index": 48,
@@ -780,28 +780,28 @@
     {
       "index": 3,
       "orig": "STORAGE\n\n<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:\n\n* main weapon - over <dominant> shoulder\n* secondary weapon - <dominant> hip\n* special weapon - over <nondominant> shoulder\n\nEQUIPPING\n\n<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.\n\nMODES / POSES\n\n<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.\n\nTHROWABLES\n\n<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you, and on your backpack while you hold it (see Items and devices). Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]\n\nWEAPONS AND AMMO\n\n<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).\n\nMELEE\n\n<tab>Press <wpn_fast_knife>.\n\n",
-      "ru": "ХРАНЕНИЕ\n\n<tab>Носимое оружие можно достать из-за плеча и с ведущего бедра:\n\n* основное оружие – из-за ведущего плеча\n* запасное оружие – с ведущего бедра\n* особое оружие – из-за второго плеча\n\nЭКИПИРОВКА\n\n<tab>Чтобы взять оружие, схватите область кобуры ведущей рукой (<grip_dominant>). Взяв его, можно взяться второй рукой за основную рукоять или цевье для стабилизации и более удобного прицеливания.\n\nРЕЖИМЫ И ПОЛОЖЕНИЯ\n\n<tab>В зависимости от того, как вы держите оружие, мод переключает его между обычным режимом, прицеливанием (ADS, для более точной стрельбы) и убранным положением (например, для быстрого бега). Опустите оружие, чтобы убрать его, или поднесите к глазам, чтобы прицелиться.\n\nМЕТАТЕЛЬНЫЕ ПРЕДМЕТЫ\n\n<tab>Найденные или созданные метательные предметы (приманки, ножи, коктейли Молотова, гранаты) крепятся на поясе спереди, а пока вы держите рюкзак – и на нем (см. Предметы и устройства). Переключайтесь между ними с помощью <trigger_nondominant> или берите их <grip_dominant> либо <grip_nondominant>.[ <Press:wpn_dynamite>, чтобы бросить выбранный.]\n\nОРУЖИЕ И БОЕПРИПАСЫ\n\n<tab>Удерживайте <popup_equipment>, чтобы увидеть оружие и боеприпасы. Удерживая ее, нажмите <rui>, чтобы сменить тип боеприпасов оружия в руках (см. Ручная перезарядка).\n\nБЛИЖНИЙ БОЙ\n\n<tab>Нажмите <wpn_fast_knife>.\n\n",
+      "ru": "ХРАНЕНИЕ\n\n<tab>Носимое оружие можно достать из-за плеча и с ведущего бедра:\n\n* основное оружие – из-за ведущего плеча\n* запасное оружие – с ведущего бедра\n* особое оружие – из-за противоположного плеча\n\nЭКИПИРОВКА\n\n<tab>Чтобы взять оружие, схватите область кобуры ведущей рукой (<grip_dominant>). Взяв его, можно взяться противоположной рукой за рукоять или цевье для стабилизации и более удобного прицеливания.\n\nРЕЖИМЫ И ПОЛОЖЕНИЯ\n\n<tab>В зависимости от того, как вы держите оружие, мод переключает его между обычным режимом, прицеливанием (ADS, для более точной стрельбы) и убранным положением (например, для быстрого бега). Опустите оружие, чтобы убрать его, или поднесите к глазам, чтобы прицелиться.\n\nМЕТАТЕЛЬНЫЕ ПРЕДМЕТЫ\n\n<tab>Найденные или созданные метательные предметы (приманки, ножи, коктейли Молотова, гранаты) крепятся на поясе спереди, а пока вы держите рюкзак – и на нем (см. Предметы и устройства). Переключайтесь между ними с помощью <trigger_nondominant> или берите их <grip_dominant> либо <grip_nondominant>.[ <Press:wpn_dynamite>, чтобы бросить выбранный.]\n\nОРУЖИЕ И БОЕПРИПАСЫ\n\n<tab>Удерживайте <popup_equipment>, чтобы увидеть оружие и боеприпасы. Удерживая ее, нажмите <rui>, чтобы сменить тип боеприпасов оружия в руках (см. Ручная перезарядка).\n\nБЛИЖНИЙ БОЙ\n\n<tab>Нажмите <wpn_fast_knife>.\n\n",
       "orig_title": "Weapons",
       "ru_title": "ОРУЖИЕ"
     },
     {
       "index": 4,
       "orig": "MANUAL RELOADING\n\n<tab>Most weapons will require you to perform these actions with <trigger_nondominant>:\n\n* remove old magazine\n* grab a new magazine from the pouch (<nondominant> hip or chest) and insert it\n* optionally pull the bolt\n\nSome weapons might have special needs such as:\n\n* pushing the magazine through the weapon before you can take it out\n* pulling a lever to release the magazine or chamber a new slug\n* drawing the bow before inserting an arrow\n* pumping the pneumatic system (see below)\n\n<tab>If you're unsure what to do, enable PART HIGHLIGHTS in Options - VR - Weapons. It highlights the next part you need to work to reload the weapon.\n\nPNEUMATIC WEAPONS\n\n<tab>Tikhar, Helsing and Gatling need pressure. Pump manually with your <nondominant> hand: take the pump handle with <trigger_nondominant> and pump it back and forth; it lets go by itself when full. Or hold <rui> and tap <wpn_fire>.\n\nSPECIAL AMMUNITION\n\n<tab>Tikhar can fire Incendiary Ammunition and Helsing explosive bolts. With the weapon in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammunition; reload by hand as usual. Do it again to cancel, or later to switch back. The single-arrow Helsing switches at once, with the game's own reload.\n\nJAMMING\n\n<tab>Weapons in Metro Exodus can get jammed. Their condition affects how often that happens. To reduce the jamming rate, find a Workbench and clean your weapons. To unjam your weapon operate the bolt.\n\nAUTOMATIC RELOADS\n\n<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead.",
-      "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\n<tab>Для большинства оружий потребуется выполнять эти действия с помощью <trigger_nondominant>:\n\n* вынуть старый магазин\n* достать новый магазин из подсумка (второе бедро или вторая сторона груди) и вставить его\n* при необходимости передернуть затвор\n\nУ некоторых оружий есть особые требования:\n\n* протолкнуть магазин через оружие, прежде чем его можно будет вынуть\n* потянуть рычаг, чтобы освободить магазин или дослать новый патрон\n* натянуть лук перед вставкой стрелы\n* накачать пневматическую систему (см. ниже)\n\n<tab>Если не знаете, что делать, включите ПОДСВЕТКУ ЧАСТЕЙ в Настройки – VR – Оружие. Она подсветит следующую часть, с которой нужно работать для перезарядки.\n\nПНЕВМАТИЧЕСКОЕ ОРУЖИЕ\n\n<tab>Тихару, Хельсингу и Гатлингу нужно давление. Качайте вручную второй рукой: возьмите рукоятку помпы с помощью <trigger_nondominant> и качайте вперед-назад; при полной накачке она отпустится сама. Либо удерживайте <rui> и нажимайте <wpn_fire>.\n\nОСОБЫЕ БОЕПРИПАСЫ\n\n<tab>Тихар может стрелять зажигательными боеприпасами, а Хельсинг – разрывными болтами. Держа оружие в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>. Импульс подтвердит, что при следующей перезарядке зарядятся другие боеприпасы; перезаряжайтесь вручную как обычно. Повторите, чтобы отменить, или позже, чтобы переключиться обратно. Однострельный Хельсинг переключается сразу, при перезарядке самой игры.\n\nЗАКЛИНИВАНИЕ\n\n<tab>Оружие в Metro Exodus может заклинивать. Его состояние влияет на частоту заклиниваний. Чтобы снизить вероятность, найдите верстак и почистите оружие. Чтобы устранить заклинивание, передерните затвор.\n\nАВТОМАТИЧЕСКАЯ ПЕРЕЗАРЯДКА\n\n<tab>Также можно отключить ручную перезарядку в Настройки – VR – Оружие и перезаряжаться нажатием <rui>.",
+      "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\n<tab>Для большинства оружий потребуется выполнять эти действия с помощью <trigger_nondominant>:\n\n* вынуть старый магазин\n* достать новый магазин из подсумка (противоположное бедро или противоположная сторона груди) и вставить его\n* при необходимости передернуть затвор\n\nУ некоторых оружий есть особые требования:\n\n* протолкнуть магазин через оружие, прежде чем его можно будет вынуть\n* потянуть рычаг, чтобы освободить магазин или дослать новый патрон\n* натянуть лук перед вставкой стрелы\n* накачать пневматическую систему (см. ниже)\n\n<tab>Если не знаете, что делать, включите ПОДСВЕТКУ ЧАСТЕЙ в Настройки – VR – Оружие. Она подсветит следующую часть, с которой нужно работать для перезарядки.\n\nПНЕВМАТИЧЕСКОЕ ОРУЖИЕ\n\n<tab>Тихару, Хельсингу и Гатлингу нужно давление. Качайте вручную противоположной рукой: возьмите рукоятку помпы с помощью <trigger_nondominant> и качайте вперед-назад; при полной накачке она отпустится сама. Либо удерживайте <rui> и нажимайте <wpn_fire>.\n\nОСОБЫЕ БОЕПРИПАСЫ\n\n<tab>Тихар может стрелять зажигательными боеприпасами, а Хельсинг – разрывными болтами. Держа оружие в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>. Импульс подтвердит, что при следующей перезарядке зарядятся другие боеприпасы; перезаряжайтесь вручную как обычно. Повторите, чтобы отменить, или позже, чтобы переключиться обратно. Однострельный Хельсинг переключается сразу, при перезарядке самой игры.\n\nЗАКЛИНИВАНИЕ\n\n<tab>Оружие в Metro Exodus может заклинивать. Его состояние влияет на частоту заклиниваний. Чтобы снизить вероятность, найдите верстак и почистите оружие. Чтобы устранить заклинивание, передерните затвор.\n\nАВТОМАТИЧЕСКАЯ ПЕРЕЗАРЯДКА\n\n<tab>Также можно отключить ручную перезарядку в Настройки – VR – Оружие и перезаряжаться нажатием <rui>.",
       "orig_title": "Manual reloading",
       "ru_title": "РУЧНАЯ ПЕРЕЗАРЯДКА"
     },
     {
       "index": 5,
       "orig": "EQUIPPING GEAR\n\n<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.\n\nBACKPACK\n\n<tab>Hard to reach equipment is also available to grab from your  backpack. Simply grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack into that hand and move it in front of you. Gas mask, filter, crack tape, binoculars, charger and throwables hang on it: grab them with your <dominant> hand (<grip_dominant>). Let go of the backpack to put it back, or press <trigger_nondominant> to open it.\n\nGEAR AREAS\n\n* chest:\n  * <dominant> - map\n  * <nondominant> - lighter\n* shoulders:\n  * over <dominant> - main weapon (<grip_dominant>)\n  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>, then <trigger_nondominant> to open)\n  * on <dominant> - medkit (<grip_nondominant>)\n* hips:\n  * <dominant> - secondary weapon (<grip_dominant>)\n  * <nondominant> - mask*, filter*, tape* (<grip_nondominant>) or new ammo (<trigger_nondominant>)\n* lower back:\n  * <dominant> - charger* (<grip_dominant>)\n  * <nondominant> - binoculars* (<grip_nondominant>)\n* belt:\n  * front - throwables*\n* forehead:\n  * flashlight (<trigger_nondominant>)\n  * night vision (<grip_dominant> - pull up or down)\n\n* also on the backpack when you hold it\n\n",
-      "ru": "ЭКИПИРОВКА СНАРЯЖЕНИЯ\n\n<tab>Большинство снаряжения доступно прямо на теле: поднесите руку к нужной области и схватите предмет с помощью <grip_dominant> или <grip_nondominant>. Некоторое снаряжение можно взять только определенной рукой.\n\nРЮКЗАК\n\n<tab>Труднодоступное снаряжение можно взять и из рюкзака. Просто схватите (<grip_nondominant>) над вторым плечом, чтобы взять рюкзак в эту руку, и вынесите его перед собой. На нем висят противогаз, фильтр, скотч, бинокль, зарядное устройство и метательные предметы: берите их ведущей рукой (<grip_dominant>). Отпустите рюкзак, чтобы вернуть его, или нажмите <trigger_nondominant>, чтобы открыть.\n\nЗОНЫ СНАРЯЖЕНИЯ\n\n* грудь:\n  * ведущая – карта\n  * вторая – зажигалка\n* плечи:\n  * из-за ведущего – основное оружие (<grip_dominant>)\n  * из-за второго – особое оружие (<grip_dominant>) или рюкзак (<grip_nondominant>, затем <trigger_nondominant>, чтобы открыть)\n  * на ведущем – аптечка (<grip_nondominant>)\n* бедра:\n  * ведущее – запасное оружие (<grip_dominant>)\n  * второе – маска*, фильтр*, скотч* (<grip_nondominant>) или новые боеприпасы (<trigger_nondominant>)\n* поясница:\n  * ведущая – зарядное устройство* (<grip_dominant>)\n  * вторая – бинокль* (<grip_nondominant>)\n* пояс:\n  * спереди – метательные предметы*\n* лоб:\n  * фонарь (<trigger_nondominant>)\n  * ночное видение (<grip_dominant> – потяните вверх или вниз)\n\n* также в рюкзаке, пока вы его держите\n\n",
+      "ru": "ЭКИПИРОВКА СНАРЯЖЕНИЯ\n\n<tab>Большинство снаряжения доступно прямо на теле: поднесите руку к нужной области и схватите предмет с помощью <grip_dominant> или <grip_nondominant>. Некоторое снаряжение можно взять только определенной рукой.\n\nРЮКЗАК\n\n<tab>Труднодоступное снаряжение можно взять и из рюкзака. Просто схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, и вынесите его перед собой. На нем висят противогаз, фильтр, скотч, бинокль, зарядное устройство и метательные предметы: берите их ведущей рукой (<grip_dominant>). Отпустите рюкзак, чтобы вернуть его, или нажмите <trigger_nondominant>, чтобы открыть.\n\nЗОНЫ СНАРЯЖЕНИЯ\n\n* грудь:\n  * ведущая – карта\n  * противоположная – зажигалка\n* плечи:\n  * из-за ведущего – основное оружие (<grip_dominant>)\n  * из-за противоположного – особое оружие (<grip_dominant>) или рюкзак (<grip_nondominant>, затем <trigger_nondominant>, чтобы открыть)\n  * на ведущем – аптечка (<grip_nondominant>)\n* бедра:\n  * ведущее – запасное оружие (<grip_dominant>)\n  * противоположное – маска*, фильтр*, скотч* (<grip_nondominant>) или новые боеприпасы (<trigger_nondominant>)\n* поясница:\n  * ведущая – зарядное устройство* (<grip_dominant>)\n  * противоположная – бинокль* (<grip_nondominant>)\n* пояс:\n  * спереди – метательные предметы*\n* лоб:\n  * фонарь (<trigger_nondominant>)\n  * ночное видение (<grip_dominant> – потяните вверх или вниз)\n\n* также в рюкзаке, пока вы его держите\n\n",
       "orig_title": "Items and devices",
       "ru_title": "ПРЕДМЕТЫ И УСТРОЙСТВА"
     },
     {
       "index": 6,
       "orig": "GAS MASK\n\n<tab>The gas mask is usually located on your <nondominant> hip, or on your backpack while you hold it (grab it from there with <grip_dominant>). To put it on you have to grab it (<grip_nondominant>) and bring it to your face. To take it off you have to grab it from your face (<grip_nondominant>), move it away and let it go.\n\nFILTERS\n\n<tab>When the mask is equipped and your filters can be changed, a new filter will be available for grabbing (<grip_nondominant>) at your <nondominant> hip or on your backpack (<grip_dominant>). Once grabbed, move it close to where it sits on the mask and it will be replaced automatically.[ Alternatively <press:filter>.]\n\nWIPING\n\n<tab>Rub the visor with an open hand to wipe rain, blood or dirt off it.[ Alternatively <press:facepalm>.]\n\nFIXING CRACKS\n\n<tab>When your mask is cracked, a piece of tape will be available for grabbing (<grip_nondominant>) at your <nondominant> hip or on your backpack (<grip_dominant>), in place of the filter. Once grabbed, bring it to the front of your visor and the cracks will be sealed. Let go of it anywhere else to put it back.[ Alternatively <press:facepalm>.]\n\n",
-      "ru": "ПРОТИВОГАЗ\n\n<tab>Противогаз обычно висит на втором бедре или в рюкзаке, пока вы его держите (оттуда берите его с помощью <grip_dominant>). Чтобы надеть его, схватите (<grip_nondominant>) и поднесите к лицу. Чтобы снять, схватите его на лице (<grip_nondominant>), отведите в сторону и отпустите.\n\nФИЛЬТРЫ\n\n<tab>Когда маска надета и фильтры можно менять, новый фильтр появится на втором бедре или в рюкзаке (<grip_dominant>), и его можно будет схватить (<grip_nondominant>). Схватив, поднесите его к месту установки на маске – он заменится автоматически.[ Либо <press:filter>.]\n\nПРОТИРАНИЕ\n\n<tab>Потрите стекло открытой ладонью, чтобы стереть дождь, кровь или грязь.[ Либо <press:facepalm>.]\n\nУСТРАНЕНИЕ ТРЕЩИН\n\n<tab>Когда маска треснула, на втором бедре или в рюкзаке (<grip_dominant>) появляется кусок скотча вместо фильтра, который можно схватить (<grip_nondominant>). Схватив, поднесите его к передней части стекла, и трещины заделаются. Отпустите его в любом другом месте, чтобы вернуть.[ Либо <press:facepalm>.]\n\n",
+      "ru": "ПРОТИВОГАЗ\n\n<tab>Противогаз обычно висит на противоположном бедре или в рюкзаке, пока вы его держите (оттуда берите его с помощью <grip_dominant>). Чтобы надеть его, схватите (<grip_nondominant>) и поднесите к лицу. Чтобы снять, схватите его на лице (<grip_nondominant>), отведите в сторону и отпустите.\n\nФИЛЬТРЫ\n\n<tab>Когда маска надета и фильтры можно менять, новый фильтр появится на противоположном бедре или в рюкзаке (<grip_dominant>), и его можно будет схватить (<grip_nondominant>). Схватив, поднесите его к месту установки на маске – он заменится автоматически.[ Либо <press:filter>.]\n\nПРОТИРАНИЕ\n\n<tab>Потрите стекло открытой ладонью, чтобы стереть дождь, кровь или грязь.[ Либо <press:facepalm>.]\n\nУСТРАНЕНИЕ ТРЕЩИН\n\n<tab>Когда маска треснула, на противоположном бедре или в рюкзаке (<grip_dominant>) появляется кусок скотча вместо фильтра, который можно схватить (<grip_nondominant>). Схватив, поднесите его к передней части стекла, и трещины заделаются. Отпустите его в любом другом месте, чтобы вернуть.[ Либо <press:facepalm>.]\n\n",
       "orig_title": "Gas mask",
       "ru_title": "ПРОТИВОГАЗ"
     },
@@ -829,14 +829,14 @@
     {
       "index": 10,
       "orig": "OPENING BACKPACK\n\n<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack in that hand, then press <trigger_nondominant>[, or <press:inventory>]. Letting go of the grip puts it back. While you hold it, take gear from it with your <dominant> hand (see Items and devices). Once opened you can craft consumables/throwables and modify your weapons. Click an item with the pointer, then press the buttons shown at the bottom; see MENUS on the Basics page.\n\n",
-      "ru": "ОТКРЫТИЕ РЮКЗАКА\n\n<tab>Чтобы открыть инвентарь, схватите (<grip_nondominant>) над вторым плечом, чтобы взять рюкзак в эту руку, затем нажмите <trigger_nondominant>[, или <press:inventory>]. Если отпустить хват, рюкзак вернется на место. Пока вы держите его, берите из него снаряжение ведущей рукой (см. Предметы и устройства). Открыв инвентарь, можно создавать расходники и метательные предметы, а также улучшать оружие. Щелкните предмет указателем, затем нажмите кнопки, показанные внизу; см. МЕНЮ на странице Основы.\n\n",
+      "ru": "ОТКРЫТИЕ РЮКЗАКА\n\n<tab>Чтобы открыть инвентарь, схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, затем нажмите <trigger_nondominant>[, или <press:inventory>]. Если отпустить хват, рюкзак вернется на место. Пока вы держите его, берите из него снаряжение ведущей рукой (см. Предметы и устройства). Открыв инвентарь, можно создавать расходники и метательные предметы, а также улучшать оружие. Щелкните предмет указателем, затем нажмите кнопки, показанные внизу; см. МЕНЮ на странице Основы.\n\n",
       "orig_title": "Backpack / inventory",
       "ru_title": "РЮКЗАК И ИНВЕНТАРЬ"
     },
     {
       "index": 11,
       "orig": "BINOCULARS\n\n<tab>Once you have binoculars, grip (<grip_nondominant>) at the <nondominant> side of your lower back or on your backpack[, or <press:binoculars>]. You can pass them between hands. To use them, bring them to your eyes. Zoom in with <wpn_fire> and out with <aim>.\n\nNIGHT VISION\n\n<tab>To equip night vision, grip (<grip_dominant>) above your forehead and pull them down in front of your eyes[, or <press:nightvision>]. To take them off, grip (<grip_dominant>) in front of your eyes and pull them back up[, or <press:nightvision> again].\n\n",
-      "ru": "БИНОКЛЬ\n\n<tab>Получив бинокль, схватите (<grip_nondominant>) его со второй стороны поясницы или в рюкзаке[, или <press:binoculars>]. Его можно передавать между руками. Чтобы использовать, поднесите к глазам. Приближайте с помощью <wpn_fire>, отдаляйте с помощью <aim>.\n\nНОЧНОЕ ВИДЕНИЕ\n\n<tab>Чтобы надеть ночное видение, схватите (<grip_dominant>) над лбом и потяните вниз перед глазами[, или <press:nightvision>]. Чтобы снять, схватите (<grip_dominant>) перед глазами и потяните вверх[, или снова <press:nightvision>].\n\n",
+      "ru": "БИНОКЛЬ\n\n<tab>Получив бинокль, схватите (<grip_nondominant>) его с противоположной стороны поясницы или в рюкзаке[, или <press:binoculars>]. Его можно передавать между руками. Чтобы использовать, поднесите к глазам. Приближайте с помощью <wpn_fire>, отдаляйте с помощью <aim>.\n\nНОЧНОЕ ВИДЕНИЕ\n\n<tab>Чтобы надеть ночное видение, схватите (<grip_dominant>) над лбом и потяните вниз перед глазами[, или <press:nightvision>]. Чтобы снять, схватите (<grip_dominant>) перед глазами и потяните вверх[, или снова <press:nightvision>].\n\n",
       "orig_title": "Binoculars and NV",
       "ru_title": "БИНОКЛЬ И НОЧНОЕ ВИДЕНИЕ"
     },

@@ -387,8 +387,55 @@ FONT_GLYPHS = tuple(
 # for anything the patch does not cover, our own '!' therefore moves to the
 # free Latin index 0xA1 (it maps to 'é' in the table, a codepoint the Russian
 # kit never uses).
+#
+# L-0055: the game also composes the HUD counters (ammo, item counts) as plain
+# ASCII, and kind 6 takes every byte as a glyph index, so "0".."9" (0x30..0x39)
+# drew as "шРgИКОПСЕН".  Those ten bytes are needed verbatim by the game, so the
+# live table is made to draw ASCII digits as themselves: the digit codepoints
+# move out of their scrambled slots (0x42, 0x57, 0x5c, ...) and the glyphs that
+# sat on 0x30..0x39 take those slots.  Our own strings follow through the
+# overrides below, so a Russian 'ш' is written as 0x5c, never as 0x30.
+# L-0055 tried it and the game lost its whole UI (no menu, no HUD) in VR, so it
+# is off by default: the ten Cyrillic letters evicted from 0x30..0x39 are used by
+# text that is not ours.  Keep the mechanism for a controlled experiment only.
+ASCII_IDENTITY = ""
+
+
+def _ascii_identity_swap():
+    """Live-table patches and the two encoder maps for ``ASCII_IDENTITY``."""
+    patches = []
+    byte_of = {}  # codepoint -> byte kind 6 has to carry
+    char_of = {}  # byte -> codepoint the patched table draws there
+    for ch in ASCII_IDENTITY:
+        cp = ord(ch)
+        slot = FONT_GLYPHS.index(cp)
+        if slot == cp:
+            raise ValueError(f"ASCII identity: {ch!r} already sits at {cp:#x}")
+        old = FONT_GLYPHS[cp]
+        patches.append((cp, old, cp))
+        patches.append((slot, cp, old))
+        byte_of[cp] = cp
+        byte_of[old] = slot
+        char_of[cp] = cp
+        char_of[slot] = old
+    return tuple(patches), byte_of, char_of
+
+
+ASCII_IDENTITY_PATCHES, _ASCII_BYTE_OF, _ASCII_CHAR_OF = _ascii_identity_swap()
+FONT_TABLE_PATCHES = FONT_TABLE_PATCHES + ASCII_IDENTITY_PATCHES
+
 FONTIDX_BYTE_OVERRIDES = {0x21: 0xA1}
+FONTIDX_BYTE_OVERRIDES.update(_ASCII_BYTE_OF)
 FONTIDX_INDEX_OVERRIDES = {0xA1: 0x21}
+FONTIDX_INDEX_OVERRIDES.update({b: cp for b, cp in _ASCII_CHAR_OF.items()})
+
+
+def glyph_byte(cp):
+    """The byte kind 6 has to carry for one codepoint (overrides applied)."""
+    b = FONTIDX_BYTE_OVERRIDES.get(cp)
+    if b is not None:
+        return b
+    return FONT_GLYPHS.index(cp)
 
 
 def load_charmap(path=None):
@@ -1606,7 +1653,7 @@ def value_glyph_table():
     for cp in range(VALUE_TABLE_FIRST, VALUE_TABLE_LAST + 1):
         if cp not in FONT_GLYPHS:
             raise ValueError(f"value cave: U+{cp:04X} has no glyph in the menu font")
-        table.append(FONT_GLYPHS.index(cp))
+        table.append(glyph_byte(cp))
     return bytes(table)
 
 
@@ -2423,7 +2470,7 @@ def main():
         if have != text.encode("ascii"):
             errors.append(f"glyph literal {off:#x}: expected {text!r}, found {have!r}")
             continue
-        patches.append((foff, bytes(FONT_GLYPHS.index(ord(c)) for c in text)))
+        patches.append((foff, bytes(glyph_byte(ord(c)) for c in text)))
     for off, want, ru, width in GLYPH_TEXT_PATCHES:
         foff = pe.rva_to_off(off)
         if foff is None:

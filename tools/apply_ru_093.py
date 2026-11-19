@@ -1411,6 +1411,13 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced, font_aux=No
     emit("51")  # push rcx (HINSTANCE)
     emit("52")  # push rdx (reason)
     emit("4150415141524153")  # push r8 r9 r10 r11
+    # L-0053: the loader calls this entry point with DLL_THREAD_ATTACH for every
+    # thread the process creates, so without the gate the cave would spawn the
+    # poller again from inside the poller's own attach notification (thread
+    # explosion, crash inside KERNELBASE!CreateThread).  Only DLL_PROCESS_ATTACH
+    # (1) may do the work.  rdx is still the reason: nothing below touches it.
+    emit("83fa01")  # cmp edx, 1
+    branch("0f85", "done")  # jne done
     # PEB -> Ldr -> InLoadOrderModuleList.Flink: the first module is the EXE
     emit("65488b042560000000")  # mov rax, gs:[0x60]
     emit("488b4018")  # mov rax, [rax+0x18]
@@ -1455,8 +1462,11 @@ def build_kind_flip_cave(cave_rva, back_rva, vp_slot_rva, displaced, font_aux=No
         # CreateThread(0, 0, poller, exe_base, 0, 0): args 5/6 live at
         # [rsp+0x20]/[rsp+0x28], so the frame is 0x30 (7 pushes left rsp aligned).
         emit("4883ec30")  # sub rsp, 0x30
-        emit("c744242000000000")  # mov dword [rsp+0x20], 0
-        emit("c744242800000000")  # mov dword [rsp+0x28], 0
+        emit("c744242000000000")  # mov dword [rsp+0x20], 0   (dwCreationFlags)
+        # lpThreadId is a POINTER: zeroing 4 bytes left the upper half of the
+        # stale slot (0x1600000000) and CreateThread faulted writing the new
+        # thread id through it (L-0054 crash dump, inside KERNELBASE).
+        emit("48c744242800000000")  # mov qword [rsp+0x28], 0
         emit("31c9")  # xor ecx, ecx
         emit("31d2")  # xor edx, edx
         emit("4c8d05")  # lea r8, [rip + poller]

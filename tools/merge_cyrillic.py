@@ -6,14 +6,27 @@ text comes out as .notdef boxes / nothing.  We copy the Cyrillic outlines from
 a locally installed Arial (regular / bold) into the mod fonts, keeping every
 original Latin glyph, advance width and table intact.
 
+The RCDATA entries are rewritten in place, so a font may not grow past the
+stock resource size.  The merged fonts are therefore subset to the characters
+the kit can emit (ASCII, Latin-1, Cyrillic, the allowed typography) and saved
+without TrueType hinting -- ImGui's stb_truetype rasteriser ignores hints, and
+this keeps every file well under its slot.
+
+Keep the cmap honest: it must stay a plain Unicode map (`M` -> the `M`
+outline).  The links plaque is drawn by ImGui from these very files, so a
+"charmap-baked" cmap (byte -> glyph of another letter) turns the plaque into
+gibberish.
+
 Usage:
-  python tools/merge_cyrillic.py [--src DLL] [--out DIR]
+  python tools/merge_cyrillic.py [--src DLL] [--out DIR] [--no-subset]
 """
 
 import argparse
+import io
 import sys
 from pathlib import Path
 
+from fontTools import subset
 from fontTools.misc.transform import Transform
 from fontTools.pens.recordingPen import DecomposingRecordingPen
 from fontTools.pens.transformPen import TransformPen
@@ -39,6 +52,28 @@ FONTS = {
 }
 
 CYRILLIC = list(range(0x0400, 0x0460))
+
+# Characters the Russian UI may ask these fonts to draw: printable ASCII,
+# Latin-1 (the plaque's (c)/registered/typographic bits), Cyrillic and the
+# punctuation the kit allows.  Everything else is dropped to fit the slot.
+KEEP_CODEPOINTS = (
+    list(range(0x20, 0x7F))
+    + list(range(0xA0, 0x100))
+    + CYRILLIC
+    + [
+        0x2013,
+        0x2014,
+        0x2018,
+        0x2019,
+        0x201A,
+        0x201C,
+        0x201D,
+        0x201E,
+        0x2026,
+        0x2116,
+        0x2122,
+    ]
+)
 
 
 def resource_entries(pe, data):
@@ -175,10 +210,40 @@ def merge(base_path, donor_path, xscale):
     return base, added, xscale
 
 
+def subset_to(blob, limit):
+    """Return ``blob`` trimmed to KEEP_CODEPOINTS if it does not fit ``limit``."""
+    if len(blob) <= limit:
+        return blob, False
+    font = TTFont(io.BytesIO(blob))
+    cmap = font.getBestCmap()
+    unicodes = [cp for cp in KEEP_CODEPOINTS if cp in cmap]
+    opts = subset.Options()
+    opts.desubroutinize = True
+    opts.hinting = False
+    opts.layout_features = []
+    opts.notdef_outline = True
+    opts.glyph_names = True
+    opts.drop_tables.append("DSIG")
+    sub = subset.Subsetter(options=opts)
+    sub.populate(unicodes=unicodes)
+    sub.subset(font)
+    out = io.BytesIO()
+    font.save(out)
+    data = out.getvalue()
+    if len(data) > limit:
+        raise RuntimeError(f"subset still {len(data)} bytes, resource slot is {limit}")
+    return data, True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(DEFAULT_SRC))
     ap.add_argument("--out", default=str(FONT_DIR))
+    ap.add_argument(
+        "--no-subset",
+        action="store_true",
+        help="write the full merged font even if it outgrows the resource slot",
+    )
     args = ap.parse_args()
 
     fonts = extract_fonts(args.src)
@@ -188,17 +253,26 @@ def main():
     tmp_dir.mkdir(exist_ok=True)
 
     for name, (blob, donor_key, scale) in fonts.items():
+        limit = len(blob)
         raw = tmp_dir / f"{name}.ttf"
         raw.write_bytes(blob)
         donor = DONOR[donor_key]
         if not donor.exists():
             raise SystemExit(f"missing donor font {donor}")
         font, added, used = merge(str(raw), str(donor), scale)
+        buf = io.BytesIO()
+        font.save(buf)
+        merged = buf.getvalue()
+        if args.no_subset:
+            data, trimmed = merged, False
+        else:
+            data, trimmed = subset_to(merged, limit)
         out = out_dir / f"{name}.ttf"
-        font.save(str(out))
+        out.write_bytes(data)
         print(
             f"{out.name}: +{added} cyrillic glyphs, xscale {used:.3f}, "
-            f"{out.stat().st_size} bytes"
+            f"{len(data)} bytes (slot {limit}, merged {len(merged)}"
+            f"{', subset' if trimmed else ''})"
         )
     print(f"fonts written to {out_dir}")
 

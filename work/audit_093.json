@@ -1,0 +1,2222 @@
+[
+ {
+  "id": "F-001",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4e3168",
+  "en": "ATTACHED",
+  "ru": "ПРИКРЕПЛЕНА",
+  "issue": "RU длиннее EN: 8 -> 11 (+3)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-002",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4e3190",
+  "en": "LOCKED",
+  "ru": "БЛОКИРОВКА",
+  "issue": "RU длиннее EN: 6 -> 10 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-003",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4e3198",
+  "en": "STATION",
+  "ru": "СТАЦИОНАРНАЯ",
+  "issue": "RU длиннее EN: 7 -> 12 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "E-001",
+  "category": "E",
+  "level": "defect",
+  "location": "tsv:0x4f2eb8",
+  "en": "{} CM",
+  "ru": "{} СМ",
+  "issue": "единица измерения кириллицей: 'СМ' ~ 'CM' из EN",
+  "hint": "проверить вручную: сокращение единицы обычно и есть намеренный перевод (CM -> СМ); дефектом не считается"
+ },
+ {
+  "id": "F-004",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f2ed8",
+  "en": "OFF",
+  "ru": "ВЫКЛ",
+  "issue": "RU длиннее EN: 3 -> 4 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "E-002",
+  "category": "E",
+  "level": "defect",
+  "location": "tsv:0x4f2eec",
+  "en": "+{} CM",
+  "ru": "+{} СМ",
+  "issue": "единица измерения кириллицей: 'СМ' ~ 'CM' из EN",
+  "hint": "проверить вручную: сокращение единицы обычно и есть намеренный перевод (CM -> СМ); дефектом не считается"
+ },
+ {
+  "id": "M-001",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f2ef4",
+  "en": "{} DEG",
+  "ru": "{} Гр.",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-005",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f2f14",
+  "en": "SKIP",
+  "ru": "ПРОПУСК",
+  "issue": "RU длиннее EN: 4 -> 7 (+3)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "D-001",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f2f30",
+  "en": "FSR",
+  "ru": "FSR",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: токен не переводится по правилам"
+ },
+ {
+  "id": "D-002",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f2f34",
+  "en": "DLSS",
+  "ru": "DLSS",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: токен не переводится по правилам"
+ },
+ {
+  "id": "D-003",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f2f44",
+  "en": "VR",
+  "ru": "VR",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: токен не переводится по правилам"
+ },
+ {
+  "id": "F-006",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f2f80",
+  "en": "TURN MODE",
+  "ru": "РЕЖИМ ПОВОРОТА",
+  "issue": "RU длиннее EN: 9 -> 14 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-007",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f2f8c",
+  "en": "SNAP",
+  "ru": "РЕЗКО",
+  "issue": "RU длиннее EN: 4 -> 5 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-008",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f2fb0",
+  "en": "SNAP TURN ANGLE",
+  "ru": "УГОЛ РЕЗКОГО ПОВОРОТА",
+  "issue": "RU длиннее EN: 15 -> 21 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-002",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f2fc0",
+  "en": "{:g} DEG",
+  "ru": "{:g} Гр.",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "M-003",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f3000",
+  "en": "{:g} DEG/S",
+  "ru": "{:g} Гр./с",
+  "issue": "единица измерения строчными: Гр, с (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-009",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3028",
+  "en": "MOVEMENT DIRECTION",
+  "ru": "НАПРАВЛЕНИЕ ДВИЖЕНИЯ",
+  "issue": "RU длиннее EN: 18 -> 20 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-010",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f303c",
+  "en": "HEAD",
+  "ru": "ГОЛОВА",
+  "issue": "RU длиннее EN: 4 -> 6 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-011",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3050",
+  "en": "LEFT HAND",
+  "ru": "ЛЕВАЯ РУКА",
+  "issue": "RU длиннее EN: 9 -> 10 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-012",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3060",
+  "en": "RIGHT HAND",
+  "ru": "ПРАВАЯ РУКА",
+  "issue": "RU длиннее EN: 10 -> 11 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-013",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3080",
+  "en": "CROUCH BUTTON",
+  "ru": "КНОПКА ПРИСЕДАНИЯ",
+  "issue": "RU длиннее EN: 13 -> 17 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-014",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3090",
+  "en": "HOLD",
+  "ru": "УДЕРЖАНИЕ",
+  "issue": "RU длиннее EN: 4 -> 9 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-015",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3098",
+  "en": "TOGGLE",
+  "ru": "ПЕРЕКЛЮЧЕНИЕ",
+  "issue": "RU длиннее EN: 6 -> 12 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-016",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3110",
+  "en": "TURN STICK DEADZONE",
+  "ru": "МЕРТВАЯ ЗОНА ПОВОРОТА",
+  "issue": "RU длиннее EN: 19 -> 21 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-017",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3140",
+  "en": "REDUCE HEAD BOB",
+  "ru": "УМЕНЬШИТЬ КАЧАНИЕ",
+  "issue": "RU длиннее EN: 15 -> 17 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-018",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3190",
+  "en": "PLAY MODE",
+  "ru": "РЕЖИМ ИГРЫ",
+  "issue": "RU длиннее EN: 9 -> 10 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-019",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3208",
+  "en": "WORLD SCALE",
+  "ru": "МАСШТАБ МИРА",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-020",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3268",
+  "en": "BODY POSITION",
+  "ru": "ПОЛОЖЕНИЕ ТЕЛА",
+  "issue": "RU длиннее EN: 13 -> 14 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-021",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3278",
+  "en": "FOLLOW",
+  "ru": "СЛЕЖЕНИЕ",
+  "issue": "RU длиннее EN: 6 -> 8 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-022",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3298",
+  "en": "PHYSICAL CROUCH",
+  "ru": "РЕАЛЬНОЕ ПРИСЕДАНИЕ",
+  "issue": "RU длиннее EN: 15 -> 19 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-023",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f32c0",
+  "en": "BELT HEIGHT",
+  "ru": "ВЫСОТА ПОЯСА",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-024",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3300",
+  "en": "STAY WITH YOU",
+  "ru": "ОСТАВАТЬСЯ С ВАМИ",
+  "issue": "RU длиннее EN: 13 -> 17 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-025",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3310",
+  "en": "FOLLOW BODY",
+  "ru": "СЛЕЖЕНИЕ ЗА ТЕЛОМ",
+  "issue": "RU длиннее EN: 11 -> 17 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-026",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f33a0",
+  "en": "RIGHT",
+  "ru": "ПРАВАЯ",
+  "issue": "RU длиннее EN: 5 -> 6 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-027",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f33a8",
+  "en": "LEFT",
+  "ru": "ЛЕВАЯ",
+  "issue": "RU длиннее EN: 4 -> 5 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-028",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f33f0",
+  "en": "FINGER TRACKING",
+  "ru": "ОТСЛЕЖИВАНИЕ ПАЛЬЦЕВ",
+  "issue": "RU длиннее EN: 15 -> 20 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-029",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3480",
+  "en": "HAND CUES",
+  "ru": "ПОДСКАЗКИ РУК",
+  "issue": "RU длиннее EN: 9 -> 13 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-030",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3560",
+  "en": "USE REACH",
+  "ru": "ИСПОЛЬЗОВАТЬ РУКОЙ",
+  "issue": "RU длиннее EN: 9 -> 18 (+9)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-031",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3588",
+  "en": "USE BY LOOKING",
+  "ru": "ИСПОЛЬЗОВАТЬ ВЗГЛЯДОМ",
+  "issue": "RU длиннее EN: 14 -> 21 (+7)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-032",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f35d8",
+  "en": "MANUAL RELOADING",
+  "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА",
+  "issue": "RU длиннее EN: 16 -> 18 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-033",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3608",
+  "en": "PART HIGHLIGHTS",
+  "ru": "ПОДСВЕТКА ЧАСТЕЙ",
+  "issue": "RU длиннее EN: 15 -> 16 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-034",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3618",
+  "en": "FIRST RELOADS",
+  "ru": "ПЕРВЫЕ ПЕРЕЗАРЯДКИ",
+  "issue": "RU длиннее EN: 13 -> 18 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-035",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3680",
+  "en": "WEAPON FLICK",
+  "ru": "ВСТРЯХИВАНИЕ ОРУЖИЯ",
+  "issue": "RU длиннее EN: 12 -> 19 (+7)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-036",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f36a0",
+  "en": "HARD",
+  "ru": "СИЛЬНО",
+  "issue": "RU длиннее EN: 4 -> 6 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-037",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f36c0",
+  "en": "MAGAZINE POUCH",
+  "ru": "ПОДСУМОК ДЛЯ МАГАЗИНОВ",
+  "issue": "RU длиннее EN: 14 -> 22 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-038",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f36d0",
+  "en": "HIP",
+  "ru": "НА БЕДРЕ",
+  "issue": "RU длиннее EN: 3 -> 8 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-039",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3750",
+  "en": "RETICLE TILT",
+  "ru": "НАКЛОН ПРИЦЕЛА",
+  "issue": "RU длиннее EN: 12 -> 14 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-040",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f376c",
+  "en": "LEVEL",
+  "ru": "ПО ГОРИЗОНТУ",
+  "issue": "RU длиннее EN: 5 -> 12 (+7)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-041",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f37a0",
+  "en": "SCOPE STEERING",
+  "ru": "УПРАВЛЕНИЕ ПРИЦЕЛОМ",
+  "issue": "RU длиннее EN: 14 -> 19 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-042",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f37b8",
+  "en": "WEAPON + HEAD",
+  "ru": "ОРУЖИЕ + ГОЛОВА",
+  "issue": "RU длиннее EN: 13 -> 15 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-043",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f37e0",
+  "en": "REALISTIC NIGHT VISION",
+  "ru": "РЕАЛИСТИЧНОЕ НОЧНОЕ ВИДЕНИЕ",
+  "issue": "RU длиннее EN: 22 -> 27 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-044",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3838",
+  "en": "HUD POSITION",
+  "ru": "ПОЛОЖЕНИЕ HUD",
+  "issue": "RU длиннее EN: 12 -> 13 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-045",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3860",
+  "en": "HUD DISTANCE",
+  "ru": "РАССТОЯНИЕ HUD",
+  "issue": "RU длиннее EN: 12 -> 14 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-046",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3880",
+  "en": "HUD SIZE",
+  "ru": "РАЗМЕР HUD",
+  "issue": "RU длиннее EN: 8 -> 10 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-004",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f38b0",
+  "en": "{:+.0f} DEG",
+  "ru": "{:+.0f} Гр.",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-047",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f38d8",
+  "en": "HUD OPACITY",
+  "ru": "ПРОЗРАЧНОСТЬ HUD",
+  "issue": "RU длиннее EN: 11 -> 16 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-048",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3900",
+  "en": "HINT HEIGHT",
+  "ru": "ВЫСОТА ПОДСКАЗКИ",
+  "issue": "RU длиннее EN: 11 -> 16 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-049",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3928",
+  "en": "HINT SIZE",
+  "ru": "РАЗМЕР ПОДСКАЗКИ",
+  "issue": "RU длиннее EN: 9 -> 16 (+7)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-050",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3950",
+  "en": "HINT TIME",
+  "ru": "ВРЕМЯ ПОДСКАЗКИ",
+  "issue": "RU длиннее EN: 9 -> 15 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "D-004",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f395c",
+  "en": "1.00X",
+  "ru": "1.00X",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-005",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3964",
+  "en": "1.25X",
+  "ru": "1.25X",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-006",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f396c",
+  "en": "1.50X",
+  "ru": "1.50X",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-007",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3974",
+  "en": "2.00X",
+  "ru": "2.00X",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "F-051",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f39d0",
+  "en": "MENU DISTANCE",
+  "ru": "РАССТОЯНИЕ МЕНЮ",
+  "issue": "RU длиннее EN: 13 -> 15 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-052",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f39f0",
+  "en": "MENU SIZE",
+  "ru": "РАЗМЕР МЕНЮ",
+  "issue": "RU длиннее EN: 9 -> 11 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-053",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3a50",
+  "en": "DAMAGE EFFECT SIZE",
+  "ru": "РАЗМЕР ЭФФЕКТОВ УРОНА",
+  "issue": "RU длиннее EN: 18 -> 21 (+3)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-054",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3a6c",
+  "en": "MEDIUM",
+  "ru": "СРЕДНИЙ",
+  "issue": "RU длиннее EN: 6 -> 7 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-055",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3a74",
+  "en": "LARGE",
+  "ru": "БОЛЬШОЙ",
+  "issue": "RU длиннее EN: 5 -> 7 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-056",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3a98",
+  "en": "HIT DIRECTION",
+  "ru": "НАПРАВЛЕНИЕ ПОПАДАНИЯ",
+  "issue": "RU длиннее EN: 13 -> 21 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-057",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3ac0",
+  "en": "LOW-HEALTH PULSE",
+  "ru": "ПУЛЬС ПРИ РАНЕНИИ",
+  "issue": "RU длиннее EN: 16 -> 17 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-058",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3af0",
+  "en": "DEBUG OVERLAY",
+  "ru": "ОТЛАДОЧНЫЙ ОВЕРЛЕЙ",
+  "issue": "RU длиннее EN: 13 -> 18 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-059",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3b18",
+  "en": "CINEMA FLOOR",
+  "ru": "ПОЛ В VR ОКРУЖЕНИИ",
+  "issue": "RU длиннее EN: 12 -> 18 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-060",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3b70",
+  "en": "CINEMA INFO",
+  "ru": "ИНФО В VR ОКРУЖЕНИИ",
+  "issue": "RU длиннее EN: 11 -> 19 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-061",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3b98",
+  "en": "CINEMA LINKS",
+  "ru": "ССЫЛКИ В VR ОКРУЖЕНИИ",
+  "issue": "RU длиннее EN: 12 -> 21 (+9)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-062",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3bd0",
+  "en": "IMMERSIVE",
+  "ru": "ИММЕРСИВНЫЙ",
+  "issue": "RU длиннее EN: 9 -> 11 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-063",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3be8",
+  "en": "CINEMATIC",
+  "ru": "КИНЕМАТОГРАФИЧНЫЙ",
+  "issue": "RU длиннее EN: 9 -> 17 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-064",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3c08",
+  "en": "RE-ALIGN AFTER SCENES",
+  "ru": "ВЫРАВНИВАТЬ ПОСЛЕ СЦЕН",
+  "issue": "RU длиннее EN: 21 -> 22 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-065",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3c30",
+  "en": "HEAD LEASH",
+  "ru": "ПРИВЯЗКА ГОЛОВЫ",
+  "issue": "RU длиннее EN: 10 -> 15 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-066",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3cf8",
+  "en": "FREE CAMERA",
+  "ru": "СВОБОДНАЯ КАМЕРА",
+  "issue": "RU длиннее EN: 11 -> 16 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-067",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3d60",
+  "en": "SCRIPTED LOCK",
+  "ru": "БЛОКИРОВКА СКРИПТОМ",
+  "issue": "RU длиннее EN: 13 -> 19 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-068",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3d90",
+  "en": "ANIMATION LOCK",
+  "ru": "БЛОКИРОВКА АНИМАЦИИ",
+  "issue": "RU длиннее EN: 14 -> 19 (+5)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-069",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3dc0",
+  "en": "AXIS LOCKED",
+  "ru": "ОСЬ ЗАБЛОКИРОВАНА",
+  "issue": "RU длиннее EN: 11 -> 17 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-070",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3de8",
+  "en": "GAMEPLAY UI",
+  "ru": "ИГРОВОЙ ИНТЕРФЕЙС",
+  "issue": "RU длиннее EN: 11 -> 17 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-071",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3e28",
+  "en": "RENDER MODE",
+  "ru": "РЕЖИМ РЕНДЕРА",
+  "issue": "RU длиннее EN: 11 -> 13 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-072",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3e98",
+  "en": "UPSCALER",
+  "ru": "АПСКЕЙЛЕР",
+  "issue": "RU длиннее EN: 8 -> 9 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-073",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3ed0",
+  "en": "NATIVE AA",
+  "ru": "НАТИВНОЕ AA",
+  "issue": "RU длиннее EN: 9 -> 11 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-074",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3ee0",
+  "en": "QUALITY",
+  "ru": "КАЧЕСТВО",
+  "issue": "RU длиннее EN: 7 -> 8 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-075",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3ee8",
+  "en": "BALANCED",
+  "ru": "СБАЛАНСИРОВАННЫЙ",
+  "issue": "RU длиннее EN: 8 -> 16 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-076",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3ef8",
+  "en": "PERFORMANCE",
+  "ru": "ПРОИЗВОДИТЕЛЬНОСТЬ",
+  "issue": "RU длиннее EN: 11 -> 18 (+7)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-077",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3f08",
+  "en": "ULTRA PERFORMANCE",
+  "ru": "УЛЬТРА ПРОИЗВОДИТ.",
+  "issue": "RU длиннее EN: 17 -> 18 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-078",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3f48",
+  "en": "LOW",
+  "ru": "НИЗКО",
+  "issue": "RU длиннее EN: 3 -> 5 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-079",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3f4c",
+  "en": "HIGH",
+  "ru": "ВЫСОКО",
+  "issue": "RU длиннее EN: 4 -> 6 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-080",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f3f68",
+  "en": "DLSS MODEL",
+  "ru": "МОДЕЛЬ DLSS",
+  "issue": "RU длиннее EN: 10 -> 11 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "D-008",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3f88",
+  "en": "K (DLSS 4)",
+  "ru": "K (DLSS 4)",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-009",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3f98",
+  "en": "M (DLSS 4.5)",
+  "ru": "M (DLSS 4.5)",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-010",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3fa8",
+  "en": "L (DLSS 4.5)",
+  "ru": "L (DLSS 4.5)",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-011",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3fb8",
+  "en": "J (DLSS 4)",
+  "ru": "J (DLSS 4)",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "D-012",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f3fc8",
+  "en": "E (DLSS 3)",
+  "ru": "E (DLSS 3)",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: в строке нет кириллицы (латинский токен/число)"
+ },
+ {
+  "id": "M-005",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4008",
+  "en": "ON (45 DEG)",
+  "ru": "ВКЛ (45 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-081",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4008",
+  "en": "ON (45 DEG)",
+  "ru": "ВКЛ (45 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-006",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4018",
+  "en": "ON (40 DEG)",
+  "ru": "ВКЛ (40 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-082",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4018",
+  "en": "ON (40 DEG)",
+  "ru": "ВКЛ (40 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-007",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4028",
+  "en": "ON (35 DEG)",
+  "ru": "ВКЛ (35 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-083",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4028",
+  "en": "ON (35 DEG)",
+  "ru": "ВКЛ (35 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-008",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4038",
+  "en": "ON (30 DEG)",
+  "ru": "ВКЛ (30 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-084",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4038",
+  "en": "ON (30 DEG)",
+  "ru": "ВКЛ (30 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-009",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4048",
+  "en": "ON (25 DEG)",
+  "ru": "ВКЛ (25 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-085",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4048",
+  "en": "ON (25 DEG)",
+  "ru": "ВКЛ (25 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "M-010",
+  "category": "M",
+  "level": "manual",
+  "location": "tsv:0x4f4058",
+  "en": "ON (20 DEG)",
+  "ru": "ВКЛ (20 Гр.)",
+  "issue": "единица измерения строчными: Гр (EN заглавными, RU — сокращение с точкой)",
+  "hint": "не дефект: «Гр.» — обычное сокращение градусов; решить вручную, если нужен строгий верхний регистр (ГР.)"
+ },
+ {
+  "id": "F-086",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4058",
+  "en": "ON (20 DEG)",
+  "ru": "ВКЛ (20 Гр.)",
+  "issue": "RU длиннее EN: 11 -> 12 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-087",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4088",
+  "en": "FOVEATED PERIPHERY",
+  "ru": "ФОВЕАЛЬНАЯ ПЕРИФЕРИЯ",
+  "issue": "RU длиннее EN: 18 -> 20 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "D-013",
+  "category": "D",
+  "level": "defect",
+  "location": "tsv:0x4f409c",
+  "en": "TAA",
+  "ru": "TAA",
+  "issue": "RU совпадает с EN (нет перевода)",
+  "hint": "вероятно намеренно: токен не переводится по правилам"
+ },
+ {
+  "id": "F-088",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f40b0",
+  "en": "DESKTOP MIRROR",
+  "ru": "ЗЕРКАЛО РАБОЧЕГО СТОЛА",
+  "issue": "RU длиннее EN: 14 -> 22 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-089",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f40c0",
+  "en": "LEFT EYE",
+  "ru": "ЛЕВЫЙ ГЛАЗ",
+  "issue": "RU длиннее EN: 8 -> 10 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-090",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4118",
+  "en": "FULLSCREEN",
+  "ru": "ПОЛНЫЙ ЭКРАН",
+  "issue": "RU длиннее EN: 10 -> 12 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-091",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4138",
+  "en": "MIRROR HEADSET UI",
+  "ru": "ИНТЕРФЕЙС В ЗЕРКАЛЕ",
+  "issue": "RU длиннее EN: 17 -> 19 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-092",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4160",
+  "en": "FOVEATED RENDERING",
+  "ru": "ФОВЕАЛЬНЫЙ РЕНДЕРИНГ",
+  "issue": "RU длиннее EN: 18 -> 20 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-093",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4174",
+  "en": "LIGHT",
+  "ru": "ЛЕГКИЙ",
+  "issue": "RU длиннее EN: 5 -> 6 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-094",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4180",
+  "en": "AGGRESSIVE",
+  "ru": "АГРЕССИВНЫЙ",
+  "issue": "RU длиннее EN: 10 -> 11 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-095",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f418c",
+  "en": "ULTRA",
+  "ru": "УЛЬТРА",
+  "issue": "RU длиннее EN: 5 -> 6 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-096",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f41f0",
+  "en": "DISABLE BLUR",
+  "ru": "ОТКЛЮЧИТЬ РАЗМЫТИЕ",
+  "issue": "RU длиннее EN: 12 -> 18 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-097",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4218",
+  "en": "DEPTH OF FIELD",
+  "ru": "ГЛУБИНА РЕЗКОСТИ",
+  "issue": "RU длиннее EN: 14 -> 16 (+2)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-098",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4240",
+  "en": "DEEP BLACKS",
+  "ru": "ГЛУБОКИЕ ЧЕРНЫЕ",
+  "issue": "RU длиннее EN: 11 -> 15 (+4)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-099",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4320",
+  "en": "INTRO VIDEO",
+  "ru": "ВСТУПИТЕЛЬНОЕ ВИДЕО",
+  "issue": "RU длиннее EN: 11 -> 19 (+8)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-100",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f4488",
+  "en": "SCOPES",
+  "ru": "ПРИЦЕЛЫ",
+  "issue": "RU длиннее EN: 6 -> 7 (+1)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "F-101",
+  "category": "F",
+  "level": "defect",
+  "location": "tsv:0x4f44c0",
+  "en": "CAMERA OVERRIDES",
+  "ru": "ПЕРЕОПРЕДЕЛЕНИЯ КАМЕРЫ",
+  "issue": "RU длиннее EN: 16 -> 22 (+6)",
+  "hint": "не дефект само по себе; важно для узких подписей UI"
+ },
+ {
+  "id": "N-001",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[7]:body",
+  "en": "YOUR GEAR IS ON YOUR BACKPACK\n\nMost of your gear is also available to grab from your backpack. Simply reach for your backpack with your <nondominant> hand over <nondominant> shoulder, grab it (<grip_nondominant>), move in front of your view and use <dominant> hand's grip (<grip_dominant>) to grab items from it (gas mask, filters, binoculars, charger, throwables).\n\n",
+  "ru": "СНАРЯЖЕНИЕ В ВАШЕМ РЮКЗАКЕ\n\nБольшая часть снаряжения доступна и в рюкзаке. Потянитесь к рюкзаку противоположной рукой над противоположным плечом, схватите его (<grip_nondominant>), вынесите перед собой и хватайте из него предметы ведущей рукой (<grip_dominant>) (противогаз, фильтры, бинокль, зарядное устройство, метательные предметы).\n\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-002",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[7]:body",
+  "en": "YOUR GEAR IS ON YOUR BACKPACK\n\nMost of your gear is also available to grab from your backpack. Simply reach for your backpack with your <nondominant> hand over <nondominant> shoulder, grab it (<grip_nondominant>), move in front of your view and use <dominant> hand's grip (<grip_dominant>) to grab items from it (gas mask, filters, binoculars, charger, throwables).\n\n",
+  "ru": "СНАРЯЖЕНИЕ В ВАШЕМ РЮКЗАКЕ\n\nБольшая часть снаряжения доступна и в рюкзаке. Потянитесь к рюкзаку противоположной рукой над противоположным плечом, схватите его (<grip_nondominant>), вынесите перед собой и хватайте из него предметы ведущей рукой (<grip_dominant>) (противогаз, фильтры, бинокль, зарядное устройство, метательные предметы).\n\n",
+  "issue": "тег <nondominant>: EN x2, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-003",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[8]:body",
+  "en": "WEAPONS\n\nTake a weapon with <grip_dominant> from over your shoulders or <dominant> hip. Let go to put it away.\n\nPointing a gun down holsters it and aiming down sight stabilizes it.",
+  "ru": "ОРУЖИЕ\n\nВозьмите оружие с помощью <grip_dominant> из-за плеча или с ведущего бедра. Отпустите, чтобы убрать его.\n\nЕсли направить оружие вниз, оно убирается, а при прицеливании стабилизируется.",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-004",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[9]:body",
+  "en": "RELOADING\n\nYou reload by hand: take the old magazine out, take a new one from your <dominant> hip, push it in, then operate the bolt.\n\nTo reload with a button, turn Manual Reloading off in\nOptions / VR / Weapons.",
+  "ru": "ПЕРЕЗАРЯДКА\n\nПерезарядка ручная: выньте старый магазин, достаньте новый с ведущего бедра, вставьте его, затем передерните затвор.\n\nЧтобы перезаряжаться кнопкой, отключите ручную перезарядку в\nНастройки / VR / Оружие.",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-005",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[11]:body",
+  "en": "GAS MASK\n\nPut on: <grip_nondominant> at <nondominant> hip and bring it to your face.\nTake off: grip it on your face and pull it away.\n\nFilter: (while mask is equipped) <grip_nondominant> at <nondominant> hip and bring it to your face.\n\nWipe: rub the visor with an open hand.\n\nFix crack: (while mask is equipped and cracked) <grip_nondominant> tape from <nondominant> hip and take it to the cracked visor.\n\nThe mask, filter and tape are also on your backpack: grip <grip_nondominant> over <nondominant> shoulder, then take them with <grip_dominant>.",
+  "ru": "ПРОТИВОГАЗ\n\nНадеть: <grip_nondominant> у противоположного бедра и поднесите к лицу.\nСнять: схватите его на лице и отведите в сторону.\n\nФильтр: (когда маска надета) <grip_nondominant> у противоположного бедра и поднесите к лицу.\n\nПротереть: потрите стекло открытой ладонью.\n\nЗаделать трещину: (когда маска надета и треснула) <grip_nondominant> скотч с противоположного бедра и поднесите к треснувшему стеклу.\n\nМаска, фильтр и скотч также есть в рюкзаке: схватите <grip_nondominant> над противоположным плечом, затем берите их <grip_dominant>.",
+  "issue": "тег <nondominant>: EN x4, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-006",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[12]:body",
+  "en": "BACKPACK\n\nYou can craft consumables and throwables or modify your weapons in your backpack / inventory.\n\nGrip <grip_nondominant> over <nondominant> shoulder to take it in your hand, then press <trigger_nondominant> to open it[, or <press:inventory>].\n\nWhile you hold it, take mask, filters, binoculars, charger and throwables from it with <grip_dominant>.",
+  "ru": "РЮКЗАК\n\nВ рюкзаке или инвентаре можно создавать расходники и метательные предметы, а также улучшать оружие.\n\nСхватите <grip_nondominant> над противоположным плечом, чтобы взять его в руку, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>].\n\nПока вы держите его, берите из него маску, фильтры, бинокль, зарядное устройство и метательные предметы с помощью <grip_dominant>.",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-007",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:popups[13]:body",
+  "en": "MAP\n\nTo equip map grip <grip_dominant> at <dominant> chest[, or <press:map>].\n",
+  "ru": "КАРТА\n\nЧтобы взять карту, схватите <grip_dominant> у ведущей стороны груди[, или <press:map>].\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-008",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[1]:body",
+  "en": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+  "ru": "Карта: схватите <grip_dominant> с ведущей стороны груди[, или <press:map>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-009",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[2]:body",
+  "en": "Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+  "ru": "Карта: схватите <grip_dominant> с ведущей стороны груди[, или <press:map>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-010",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[3]:body",
+  "en": "Check your journal. Map: grab <grip_dominant> from <dominant> side of chest[, or <press:map>]",
+  "ru": "Проверьте журнал. Карта: схватите <grip_dominant> с ведущей стороны груди[, или <press:map>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-011",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[4]:body",
+  "en": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder, then press <trigger_nondominant> to open it[, or <press:inventory>]",
+  "ru": "Рюкзак: схватите <grip_nondominant> над противоположным плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-012",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[5]:body",
+  "en": "Backpack: grab <grip_nondominant> from over <nondominant> shoulder, then press <trigger_nondominant> to open it[, or <press:inventory>]",
+  "ru": "Рюкзак: схватите <grip_nondominant> над противоположным плечом, затем нажмите <trigger_nondominant>, чтобы открыть его[, или <press:inventory>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-013",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[6]:body",
+  "en": "Weapons: grab <grip_dominant> from your shoulders or <dominant> hip[, or <press:popup_equipment>]",
+  "ru": "Оружие: схватите <grip_dominant> из-за плеча или с ведущего бедра[, или <press:popup_equipment>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-014",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[7]:body",
+  "en": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
+  "ru": "Качайте вручную противоположной рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-015",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[9]:body",
+  "en": "Pump manually with <nondominant> hand (<trigger_nondominant> on the pump handle) or by holding <rui> and tapping <wpn_fire>",
+  "ru": "Качайте вручную противоположной рукой (<trigger_nondominant> на рукоятке помпы) или удерживая <rui> и нажимая <wpn_fire>",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-016",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[25]:body",
+  "en": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back or from backpack[, or <press:binoculars>]",
+  "ru": "Бинокль: схватите <grip_nondominant> с противоположной стороны поясницы или из рюкзака[, или <press:binoculars>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-017",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[26]:body",
+  "en": "Binoculars: grab <grip_nondominant> from <nondominant> side of lower back or from backpack[, or <press:binoculars>]",
+  "ru": "Бинокль: схватите <grip_nondominant> с противоположной стороны поясницы или из рюкзака[, или <press:binoculars>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-018",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[30]:body",
+  "en": "Charger: grab <grip_dominant> from <dominant> side of lower back or from backpack[, or <press:charger>]",
+  "ru": "Зарядное устройство: схватите <grip_dominant> с ведущей стороны поясницы или из рюкзака[, или <press:charger>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-019",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[31]:body",
+  "en": "Charger: grab <grip_dominant> from <dominant> side of lower back or from backpack[, or <press:charger>]",
+  "ru": "Зарядное устройство: схватите <grip_dominant> с ведущей стороны поясницы или из рюкзака[, или <press:charger>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-020",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[32]:body",
+  "en": "Charger: grab <grip_dominant> from <dominant> side of lower back or from backpack[, or <press:charger>]",
+  "ru": "Зарядное устройство: схватите <grip_dominant> с ведущей стороны поясницы или из рюкзака[, или <press:charger>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-021",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[33]:body",
+  "en": "Lighter: grab <grip_nondominant> from <nondominant> chest, then light the web[, or <press:lighter>]",
+  "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди, затем подожгите паутину[, или <press:lighter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-022",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[34]:body",
+  "en": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+  "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-023",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[35]:body",
+  "en": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+  "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-024",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[36]:body",
+  "en": "Lighter: grab <grip_nondominant> from <nondominant> chest[, or <press:lighter>]",
+  "ru": "Зажигалка: схватите <grip_nondominant> с противоположной стороны груди[, или <press:lighter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-025",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[37]:body",
+  "en": "Medkit: grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]",
+  "ru": "Аптечка: схватите <grip_nondominant> у ведущего плеча, отведите, затем верните к телу[, или <press:medkit>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-026",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[38]:body",
+  "en": "Badly hurt: use a medkit. Grab <grip_nondominant> at <dominant> shoulder, move it away, then back to your body[, or <press:medkit>]",
+  "ru": "Сильно ранены: используйте аптечку. Схватите <grip_nondominant> у ведущего плеча, отведите от тела и верните обратно[, или <press:medkit>]",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-027",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[41]:body",
+  "en": "Gas mask: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack) and bring it to your face[, or <press:gasmask>]",
+  "ru": "Противогаз: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака) и поднесите к лицу[, или <press:gasmask>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-028",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[42]:body",
+  "en": "Filter: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack)[, or <press:filter>]",
+  "ru": "Фильтр: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-029",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[43]:body",
+  "en": "Swap filter: grab <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack)[, or <press:filter>]",
+  "ru": "Сменить фильтр: схватите <grip_nondominant> у противоположного бедра (или <grip_dominant> из рюкзака)[, или <press:filter>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-030",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[46]:body",
+  "en": "Seal your mask: grab the tape <grip_nondominant> from <nondominant> hip (or <grip_dominant> from backpack) and bring it to your visor[, or <press:facepalm>]",
+  "ru": "Заделайте маску: скотч <grip_nondominant> с противоположного бедра (или <grip_dominant> из рюкзака) поднесите к стеклу[, или <press:facepalm>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-031",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hints[47]:body",
+  "en": "Seal: tape from <nondominant> hip <grip_nondominant> or backpack <grip_dominant> to the visor[, or <press:facepalm>]",
+  "ru": "Заделать: скотч с противоположного бедра <grip_nondominant> или из рюкзака <grip_dominant> к стеклу[, или <press:facepalm>]",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-032",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[3]:body",
+  "en": "STORAGE\n\n<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:\n\n* main weapon - over <dominant> shoulder\n* secondary weapon - <dominant> hip\n* special weapon - over <nondominant> shoulder\n\nEQUIPPING\n\n<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.\n\nMODES / POSES\n\n<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.\n\nTHROWABLES\n\n<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you, and on your backpack while you hold it (see Items and devices). Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]\n\nWEAPONS AND AMMO\n\n<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).\n\nMELEE\n\n<tab>Press <wpn_fast_knife>.\n\n",
+  "ru": "ХРАНЕНИЕ\n\n<tab>Носимое оружие можно достать из-за плеча и с ведущего бедра:\n\n* основное оружие – из-за ведущего плеча\n* запасное оружие – с ведущего бедра\n* особое оружие – из-за противоположного плеча\n\nЭКИПИРОВКА\n\n<tab>Чтобы взять оружие, схватите область кобуры ведущей рукой (<grip_dominant>). Взяв его, можно взяться противоположной рукой за рукоять или цевье для стабилизации и более удобного прицеливания.\n\nРЕЖИМЫ И ПОЛОЖЕНИЯ\n\n<tab>В зависимости от того, как вы держите оружие, мод переключает его между обычным режимом, прицеливанием (ADS, для более точной стрельбы) и убранным положением (например, для быстрого бега). Опустите оружие, чтобы убрать его, или поднесите к глазам, чтобы прицелиться.\n\nМЕТАТЕЛЬНЫЕ ПРЕДМЕТЫ\n\n<tab>Найденные или созданные метательные предметы (приманки, ножи, коктейли Молотова, гранаты) крепятся на поясе спереди, а пока вы держите рюкзак – и на нем (см. Предметы и устройства). Переключайтесь между ними с помощью <trigger_nondominant> или берите их <grip_dominant> либо <grip_nondominant>.[ <Press:wpn_dynamite>, чтобы бросить выбранный.]\n\nОРУЖИЕ И БОЕПРИПАСЫ\n\n<tab>Удерживайте <popup_equipment>, чтобы увидеть оружие и боеприпасы. Удерживая ее, нажмите <rui>, чтобы сменить тип боеприпасов оружия в руках (см. Ручная перезарядка).\n\nБЛИЖНИЙ БОЙ\n\n<tab>Нажмите <wpn_fast_knife>.\n\n",
+  "issue": "тег <dominant>: EN x4, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-033",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[3]:body",
+  "en": "STORAGE\n\n<tab>Weapons you carry can be grabbed from over your shoulders and from your <dominant> hip:\n\n* main weapon - over <dominant> shoulder\n* secondary weapon - <dominant> hip\n* special weapon - over <nondominant> shoulder\n\nEQUIPPING\n\n<tab>To grab a weapon you will have to grip the holster area with your <dominant> hand (<grip_dominant>). Once equipped you can grab its main handle or foregrip with your <nondominant> hand for stabilization and easier aiming.\n\nMODES / POSES\n\n<tab>The mod switches the weapon between normal, Aim Down Sights (ADS, for more accurate aiming) and Holstered (e.g. for faster running) modes based on how you hold it. Lower the weapon to holster it, or bring it up to your eyes to aim down sights.\n\nTHROWABLES\n\n<tab>Throwables you find or craft (decoys, knives, molotovs, grenades) go on your belt in front of you, and on your backpack while you hold it (see Items and devices). Switch between them with <trigger_nondominant>, or grab them with <grip_dominant> or <grip_nondominant>.[ <Press:wpn_dynamite> to throw the selected one.]\n\nWEAPONS AND AMMO\n\n<tab>Hold <popup_equipment> to see your weapons and ammunition. While holding it, press <rui> to switch the ammunition type of the weapon in your hands (see Manual reloading).\n\nMELEE\n\n<tab>Press <wpn_fast_knife>.\n\n",
+  "ru": "ХРАНЕНИЕ\n\n<tab>Носимое оружие можно достать из-за плеча и с ведущего бедра:\n\n* основное оружие – из-за ведущего плеча\n* запасное оружие – с ведущего бедра\n* особое оружие – из-за противоположного плеча\n\nЭКИПИРОВКА\n\n<tab>Чтобы взять оружие, схватите область кобуры ведущей рукой (<grip_dominant>). Взяв его, можно взяться противоположной рукой за рукоять или цевье для стабилизации и более удобного прицеливания.\n\nРЕЖИМЫ И ПОЛОЖЕНИЯ\n\n<tab>В зависимости от того, как вы держите оружие, мод переключает его между обычным режимом, прицеливанием (ADS, для более точной стрельбы) и убранным положением (например, для быстрого бега). Опустите оружие, чтобы убрать его, или поднесите к глазам, чтобы прицелиться.\n\nМЕТАТЕЛЬНЫЕ ПРЕДМЕТЫ\n\n<tab>Найденные или созданные метательные предметы (приманки, ножи, коктейли Молотова, гранаты) крепятся на поясе спереди, а пока вы держите рюкзак – и на нем (см. Предметы и устройства). Переключайтесь между ними с помощью <trigger_nondominant> или берите их <grip_dominant> либо <grip_nondominant>.[ <Press:wpn_dynamite>, чтобы бросить выбранный.]\n\nОРУЖИЕ И БОЕПРИПАСЫ\n\n<tab>Удерживайте <popup_equipment>, чтобы увидеть оружие и боеприпасы. Удерживая ее, нажмите <rui>, чтобы сменить тип боеприпасов оружия в руках (см. Ручная перезарядка).\n\nБЛИЖНИЙ БОЙ\n\n<tab>Нажмите <wpn_fast_knife>.\n\n",
+  "issue": "тег <nondominant>: EN x2, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-034",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[4]:body",
+  "en": "MANUAL RELOADING\n\n<tab>Most weapons will require you to perform these actions with <trigger_nondominant>:\n\n* remove old magazine\n* grab a new magazine from the pouch (<nondominant> hip or chest) and insert it\n* optionally pull the bolt\n\nSome weapons might have special needs such as:\n\n* pushing the magazine through the weapon before you can take it out\n* pulling a lever to release the magazine or chamber a new slug\n* drawing the bow before inserting an arrow\n* pumping the pneumatic system (see below)\n\n<tab>If you're unsure what to do, enable PART HIGHLIGHTS in Options - VR - Weapons. It highlights the next part you need to work to reload the weapon.\n\nPNEUMATIC WEAPONS\n\n<tab>Tikhar, Helsing and Gatling need pressure. Pump manually with your <nondominant> hand: take the pump handle with <trigger_nondominant> and pump it back and forth; it lets go by itself when full. Or hold <rui> and tap <wpn_fire>.\n\nSPECIAL AMMUNITION\n\n<tab>Tikhar can fire Incendiary Ammunition and Helsing explosive bolts. With the weapon in your hands, hold <popup_equipment> and press <rui> at the same time. A pulse confirms that your next reload loads the other ammunition; reload by hand as usual. Do it again to cancel, or later to switch back. The single-arrow Helsing switches at once, with the game's own reload.\n\nJAMMING\n\n<tab>Weapons in Metro Exodus can get jammed. Their condition affects how often that happens. To reduce the jamming rate, find a Workbench and clean your weapons. To unjam your weapon operate the bolt.\n\nAUTOMATIC RELOADS\n\n<tab>You can also disable manual reloads in Options - VR - Weapons and reload by pressing <rui> instead.",
+  "ru": "РУЧНАЯ ПЕРЕЗАРЯДКА\n\n<tab>Для большинства оружий потребуется выполнять эти действия с помощью <trigger_nondominant>:\n\n* вынуть старый магазин\n* достать новый магазин из подсумка (противоположное бедро или противоположная сторона груди) и вставить его\n* при необходимости передернуть затвор\n\nУ некоторых оружий есть особые требования:\n\n* протолкнуть магазин через оружие, прежде чем его можно будет вынуть\n* потянуть рычаг, чтобы освободить магазин или дослать новый патрон\n* натянуть лук перед вставкой стрелы\n* накачать пневматическую систему (см. ниже)\n\n<tab>Если не знаете, что делать, включите ПОДСВЕТКУ ЧАСТЕЙ в Настройки – VR – Оружие. Она подсветит следующую часть, с которой нужно работать для перезарядки.\n\nПНЕВМАТИЧЕСКОЕ ОРУЖИЕ\n\n<tab>Тихару, Хельсингу и Гатлингу нужно давление. Качайте вручную противоположной рукой: возьмите рукоятку помпы с помощью <trigger_nondominant> и качайте вперед-назад; при полной накачке она отпустится сама. Либо удерживайте <rui> и нажимайте <wpn_fire>.\n\nОСОБЫЕ БОЕПРИПАСЫ\n\n<tab>Тихар может стрелять зажигательными боеприпасами, а Хельсинг – разрывными болтами. Держа оружие в руках, удерживайте <popup_equipment> и одновременно нажмите <rui>. Импульс подтвердит, что при следующей перезарядке зарядятся другие боеприпасы; перезаряжайтесь вручную как обычно. Повторите, чтобы отменить, или позже, чтобы переключиться обратно. Однострельный Хельсинг переключается сразу, при перезарядке самой игры.\n\nЗАКЛИНИВАНИЕ\n\n<tab>Оружие в Metro Exodus может заклинивать. Его состояние влияет на частоту заклиниваний. Чтобы снизить вероятность, найдите верстак и почистите оружие. Чтобы устранить заклинивание, передерните затвор.\n\nАВТОМАТИЧЕСКАЯ ПЕРЕЗАРЯДКА\n\n<tab>Также можно отключить ручную перезарядку в Настройки – VR – Оружие и перезаряжаться нажатием <rui>.",
+  "issue": "тег <nondominant>: EN x2, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-035",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[5]:body",
+  "en": "EQUIPPING GEAR\n\n<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.\n\nBACKPACK\n\n<tab>Hard to reach equipment is also available to grab from your  backpack. Simply grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack into that hand and move it in front of you. Gas mask, filter, crack tape, binoculars, charger and throwables hang on it: grab them with your <dominant> hand (<grip_dominant>). Let go of the backpack to put it back, or press <trigger_nondominant> to open it.\n\nGEAR AREAS\n\n* chest:\n  * <dominant> - map\n  * <nondominant> - lighter\n* shoulders:\n  * over <dominant> - main weapon (<grip_dominant>)\n  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>, then <trigger_nondominant> to open)\n  * on <dominant> - medkit (<grip_nondominant>)\n* hips:\n  * <dominant> - secondary weapon (<grip_dominant>)\n  * <nondominant> - mask*, filter*, tape* (<grip_nondominant>) or new ammo (<trigger_nondominant>)\n* lower back:\n  * <dominant> - charger* (<grip_dominant>)\n  * <nondominant> - binoculars* (<grip_nondominant>)\n* belt:\n  * front - throwables*\n* forehead:\n  * flashlight (<trigger_nondominant>)\n  * night vision (<grip_dominant> - pull up or down)\n\n* also on the backpack when you hold it\n\n",
+  "ru": "ЭКИПИРОВКА СНАРЯЖЕНИЯ\n\n<tab>Большинство снаряжения доступно прямо на теле: поднесите руку к нужной области и схватите предмет с помощью <grip_dominant> или <grip_nondominant>. Некоторое снаряжение можно взять только определенной рукой.\n\nРЮКЗАК\n\n<tab>Труднодоступное снаряжение можно взять и из рюкзака. Просто схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, и вынесите его перед собой. На нем висят противогаз, фильтр, скотч, бинокль, зарядное устройство и метательные предметы: берите их ведущей рукой (<grip_dominant>). Отпустите рюкзак, чтобы вернуть его, или нажмите <trigger_nondominant>, чтобы открыть.\n\nЗОНЫ СНАРЯЖЕНИЯ\n\n* грудь:\n  * ведущая – карта\n  * противоположная – зажигалка\n* плечи:\n  * из-за ведущего – основное оружие (<grip_dominant>)\n  * из-за противоположного – особое оружие (<grip_dominant>) или рюкзак (<grip_nondominant>, затем <trigger_nondominant>, чтобы открыть)\n  * на ведущем – аптечка (<grip_nondominant>)\n* бедра:\n  * ведущее – запасное оружие (<grip_dominant>)\n  * противоположное – маска*, фильтр*, скотч* (<grip_nondominant>) или новые боеприпасы (<trigger_nondominant>)\n* поясница:\n  * ведущая – зарядное устройство* (<grip_dominant>)\n  * противоположная – бинокль* (<grip_nondominant>)\n* пояс:\n  * спереди – метательные предметы*\n* лоб:\n  * фонарь (<trigger_nondominant>)\n  * ночное видение (<grip_dominant> – потяните вверх или вниз)\n\n* также в рюкзаке, пока вы его держите\n\n",
+  "issue": "тег <dominant>: EN x6, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-036",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[5]:body",
+  "en": "EQUIPPING GEAR\n\n<tab>Most of your gear is accessible directly from your body by moving your hand to a given area and gripping it with <grip_dominant> or <grip_nondominant>. Some gear can only be grabbed with a specific hand.\n\nBACKPACK\n\n<tab>Hard to reach equipment is also available to grab from your  backpack. Simply grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack into that hand and move it in front of you. Gas mask, filter, crack tape, binoculars, charger and throwables hang on it: grab them with your <dominant> hand (<grip_dominant>). Let go of the backpack to put it back, or press <trigger_nondominant> to open it.\n\nGEAR AREAS\n\n* chest:\n  * <dominant> - map\n  * <nondominant> - lighter\n* shoulders:\n  * over <dominant> - main weapon (<grip_dominant>)\n  * over <nondominant> - special weapon (<grip_dominant>) or backpack (<grip_nondominant>, then <trigger_nondominant> to open)\n  * on <dominant> - medkit (<grip_nondominant>)\n* hips:\n  * <dominant> - secondary weapon (<grip_dominant>)\n  * <nondominant> - mask*, filter*, tape* (<grip_nondominant>) or new ammo (<trigger_nondominant>)\n* lower back:\n  * <dominant> - charger* (<grip_dominant>)\n  * <nondominant> - binoculars* (<grip_nondominant>)\n* belt:\n  * front - throwables*\n* forehead:\n  * flashlight (<trigger_nondominant>)\n  * night vision (<grip_dominant> - pull up or down)\n\n* also on the backpack when you hold it\n\n",
+  "ru": "ЭКИПИРОВКА СНАРЯЖЕНИЯ\n\n<tab>Большинство снаряжения доступно прямо на теле: поднесите руку к нужной области и схватите предмет с помощью <grip_dominant> или <grip_nondominant>. Некоторое снаряжение можно взять только определенной рукой.\n\nРЮКЗАК\n\n<tab>Труднодоступное снаряжение можно взять и из рюкзака. Просто схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, и вынесите его перед собой. На нем висят противогаз, фильтр, скотч, бинокль, зарядное устройство и метательные предметы: берите их ведущей рукой (<grip_dominant>). Отпустите рюкзак, чтобы вернуть его, или нажмите <trigger_nondominant>, чтобы открыть.\n\nЗОНЫ СНАРЯЖЕНИЯ\n\n* грудь:\n  * ведущая – карта\n  * противоположная – зажигалка\n* плечи:\n  * из-за ведущего – основное оружие (<grip_dominant>)\n  * из-за противоположного – особое оружие (<grip_dominant>) или рюкзак (<grip_nondominant>, затем <trigger_nondominant>, чтобы открыть)\n  * на ведущем – аптечка (<grip_nondominant>)\n* бедра:\n  * ведущее – запасное оружие (<grip_dominant>)\n  * противоположное – маска*, фильтр*, скотч* (<grip_nondominant>) или новые боеприпасы (<trigger_nondominant>)\n* поясница:\n  * ведущая – зарядное устройство* (<grip_dominant>)\n  * противоположная – бинокль* (<grip_nondominant>)\n* пояс:\n  * спереди – метательные предметы*\n* лоб:\n  * фонарь (<trigger_nondominant>)\n  * ночное видение (<grip_dominant> – потяните вверх или вниз)\n\n* также в рюкзаке, пока вы его держите\n\n",
+  "issue": "тег <nondominant>: EN x5, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-037",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[6]:body",
+  "en": "GAS MASK\n\n<tab>The gas mask is usually located on your <nondominant> hip, or on your backpack while you hold it (grab it from there with <grip_dominant>). To put it on you have to grab it (<grip_nondominant>) and bring it to your face. To take it off you have to grab it from your face (<grip_nondominant>), move it away and let it go.\n\nFILTERS\n\n<tab>When the mask is equipped and your filters can be changed, a new filter will be available for grabbing (<grip_nondominant>) at your <nondominant> hip or on your backpack (<grip_dominant>). Once grabbed, move it close to where it sits on the mask and it will be replaced automatically.[ Alternatively <press:filter>.]\n\nWIPING\n\n<tab>Rub the visor with an open hand to wipe rain, blood or dirt off it.[ Alternatively <press:facepalm>.]\n\nFIXING CRACKS\n\n<tab>When your mask is cracked, a piece of tape will be available for grabbing (<grip_nondominant>) at your <nondominant> hip or on your backpack (<grip_dominant>), in place of the filter. Once grabbed, bring it to the front of your visor and the cracks will be sealed. Let go of it anywhere else to put it back.[ Alternatively <press:facepalm>.]\n\n",
+  "ru": "ПРОТИВОГАЗ\n\n<tab>Противогаз обычно висит на противоположном бедре или в рюкзаке, пока вы его держите (оттуда берите его с помощью <grip_dominant>). Чтобы надеть его, схватите (<grip_nondominant>) и поднесите к лицу. Чтобы снять, схватите его на лице (<grip_nondominant>), отведите в сторону и отпустите.\n\nФИЛЬТРЫ\n\n<tab>Когда маска надета и фильтры можно менять, новый фильтр появится на противоположном бедре или в рюкзаке (<grip_dominant>), и его можно будет схватить (<grip_nondominant>). Схватив, поднесите его к месту установки на маске – он заменится автоматически.[ Либо <press:filter>.]\n\nПРОТИРАНИЕ\n\n<tab>Потрите стекло открытой ладонью, чтобы стереть дождь, кровь или грязь.[ Либо <press:facepalm>.]\n\nУСТРАНЕНИЕ ТРЕЩИН\n\n<tab>Когда маска треснула, на противоположном бедре или в рюкзаке (<grip_dominant>) появляется кусок скотча вместо фильтра, который можно схватить (<grip_nondominant>). Схватив, поднесите его к передней части стекла, и трещины заделаются. Отпустите его в любом другом месте, чтобы вернуть.[ Либо <press:facepalm>.]\n\n",
+  "issue": "тег <nondominant>: EN x3, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-038",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[7]:body",
+  "en": "HEALING\n\n<tab>When you're hurt you will hear specific audio cues and see a red overlay around your field of view. To heal yourself (assuming you have any medkits left):\n\n1. grip and hold (<grip_nondominant>) at your <dominant> shoulder\n2. move it away from your body until you feel a pulse\n3. bring it back to your body - anywhere from above your shoulder down to your stomach - to inject\n\n<tab>Letting go before that puts it back unused.[ Alternatively <press:medkit>.]\n\n",
+  "ru": "ЛЕЧЕНИЕ\n\n<tab>Когда вы ранены, вы услышите характерные звуки и увидите красную рамку по краям обзора. Чтобы вылечиться (если остались аптечки):\n\n1. схватите и удерживайте (<grip_nondominant>) у ведущего плеча\n2. отведите от тела, пока не почувствуете импульс\n3. верните к телу – от уровня выше плеча до живота – чтобы сделать укол\n\n<tab>Если отпустить раньше, аптечка вернется неиспользованной.[ Либо <press:medkit>.]\n\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-039",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[8]:body",
+  "en": "FLASHLIGHT\n\n<tab>To toggle the flashlight, press <trigger_nondominant> at your forehead[, or <press:wpn_light>].\n\nCHARGER\n\n<tab>To charge your batteries, grip (<grip_dominant>) at the <dominant> side of your lower back or on your backpack[, or <press:charger>]. Once equipped, pump it with <wpn_fire>.\n\n",
+  "ru": "ФОНАРЬ\n\n<tab>Чтобы включить или выключить фонарь, нажмите <trigger_nondominant> у лба[, или <press:wpn_light>].\n\nЗАРЯДНОЕ УСТРОЙСТВО\n\n<tab>Чтобы зарядить аккумуляторы, схватите (<grip_dominant>) устройство с ведущей стороны поясницы или в рюкзаке[, или <press:charger>]. Взяв его, качайте с помощью <wpn_fire>.\n\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-040",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[9]:body",
+  "en": "MAP\n\n<tab>To equip the map, simply grip it (<grip_dominant>) at the <dominant> side of your chest[, or <press:map>].\n\nJOURNAL\n\n<tab>Once the map is equipped, flip the map over with your hands, or press <wpn_fire> to switch sides.\n\n",
+  "ru": "КАРТА\n\n<tab>Чтобы взять карту, просто схватите ее (<grip_dominant>) у ведущей стороны груди[, или <press:map>].\n\nЖУРНАЛ\n\n<tab>Взяв карту, переверните ее руками или нажмите <wpn_fire>, чтобы сменить сторону.\n\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-041",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[10]:body",
+  "en": "OPENING BACKPACK\n\n<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack in that hand, then press <trigger_nondominant>[, or <press:inventory>]. Letting go of the grip puts it back. While you hold it, take gear from it with your <dominant> hand (see Items and devices). Once opened you can craft consumables/throwables and modify your weapons. Click an item with the pointer, then press the buttons shown at the bottom; see MENUS on the Basics page.\n\n",
+  "ru": "ОТКРЫТИЕ РЮКЗАКА\n\n<tab>Чтобы открыть инвентарь, схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, затем нажмите <trigger_nondominant>[, или <press:inventory>]. Если отпустить хват, рюкзак вернется на место. Пока вы держите его, берите из него снаряжение ведущей рукой (см. Предметы и устройства). Открыв инвентарь, можно создавать расходники и метательные предметы, а также улучшать оружие. Щелкните предмет указателем, затем нажмите кнопки, показанные внизу; см. МЕНЮ на странице Основы.\n\n",
+  "issue": "тег <dominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-042",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[10]:body",
+  "en": "OPENING BACKPACK\n\n<tab>To open your inventory, grip (<grip_nondominant>) over your <nondominant> shoulder to take the backpack in that hand, then press <trigger_nondominant>[, or <press:inventory>]. Letting go of the grip puts it back. While you hold it, take gear from it with your <dominant> hand (see Items and devices). Once opened you can craft consumables/throwables and modify your weapons. Click an item with the pointer, then press the buttons shown at the bottom; see MENUS on the Basics page.\n\n",
+  "ru": "ОТКРЫТИЕ РЮКЗАКА\n\n<tab>Чтобы открыть инвентарь, схватите (<grip_nondominant>) над противоположным плечом, чтобы взять рюкзак в эту руку, затем нажмите <trigger_nondominant>[, или <press:inventory>]. Если отпустить хват, рюкзак вернется на место. Пока вы держите его, берите из него снаряжение ведущей рукой (см. Предметы и устройства). Открыв инвентарь, можно создавать расходники и метательные предметы, а также улучшать оружие. Щелкните предмет указателем, затем нажмите кнопки, показанные внизу; см. МЕНЮ на странице Основы.\n\n",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "N-043",
+  "category": "N",
+  "level": "defect",
+  "location": "ui2:hintpages[11]:body",
+  "en": "BINOCULARS\n\n<tab>Once you have binoculars, grip (<grip_nondominant>) at the <nondominant> side of your lower back or on your backpack[, or <press:binoculars>]. You can pass them between hands. To use them, bring them to your eyes. Zoom in with <wpn_fire> and out with <aim>.\n\nNIGHT VISION\n\n<tab>To equip night vision, grip (<grip_dominant>) above your forehead and pull them down in front of your eyes[, or <press:nightvision>]. To take them off, grip (<grip_dominant>) in front of your eyes and pull them back up[, or <press:nightvision> again].\n\n",
+  "ru": "БИНОКЛЬ\n\n<tab>Получив бинокль, схватите (<grip_nondominant>) его с противоположной стороны поясницы или в рюкзаке[, или <press:binoculars>]. Его можно передавать между руками. Чтобы использовать, поднесите к глазам. Приближайте с помощью <wpn_fire>, отдаляйте с помощью <aim>.\n\nНОЧНОЕ ВИДЕНИЕ\n\n<tab>Чтобы надеть ночное видение, схватите (<grip_dominant>) над лбом и потяните вниз перед глазами[, или <press:nightvision>]. Чтобы снять, схватите (<grip_dominant>) перед глазами и потяните вверх[, или снова <press:nightvision>].\n\n",
+  "issue": "тег <nondominant>: EN x1, RU x0 — заменён словом",
+  "hint": "правило разрешает замену <dominant>/<nondominant> словом; если добавлен в RU — проверить, что выбор руки верный"
+ },
+ {
+  "id": "H-001",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4e3158",
+  "en": "CINEMATIC TRACK",
+  "ru": "ПУТЬ КАМЕРЫ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СЦЕНАРНЫЙ ПУТЬ» -> 0.9.3 «ПУТЬ КАМЕРЫ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-002",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4e3190",
+  "en": "LOCKED",
+  "ru": "БЛОКИРОВКА",
+  "issue": "перевод изменён между версиями: 0.9.2 «ЗАБЛОКИРОВАНО» -> 0.9.3 «БЛОКИРОВКА»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-003",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f2ef4",
+  "en": "{} DEG",
+  "ru": "{} Гр.",
+  "issue": "перевод изменён между версиями: 0.9.2 «{} ГРАД» -> 0.9.3 «{} Гр.»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-004",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f2fc0",
+  "en": "{:g} DEG",
+  "ru": "{:g} Гр.",
+  "issue": "перевод изменён между версиями: 0.9.2 «{:g} ГРАД» -> 0.9.3 «{:g} Гр.»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-005",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f2fe8",
+  "en": "SMOOTH TURN SPEED",
+  "ru": "ПЛАВНЫЙ ПОВОРОТ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СКОРОСТЬ ПЛАВНОГО ПОВОРОТА» -> 0.9.3 «ПЛАВНЫЙ ПОВОРОТ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-006",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3000",
+  "en": "{:g} DEG/S",
+  "ru": "{:g} Гр./с",
+  "issue": "перевод изменён между версиями: 0.9.2 «{:g} ГРАД/С» -> 0.9.3 «{:g} Гр./с»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-007",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3050",
+  "en": "LEFT HAND",
+  "ru": "ЛЕВАЯ РУКА",
+  "issue": "перевод изменён между версиями: 0.9.2 «ЛЕВАЯ» -> 0.9.3 «ЛЕВАЯ РУКА»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-008",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3060",
+  "en": "RIGHT HAND",
+  "ru": "ПРАВАЯ РУКА",
+  "issue": "перевод изменён между версиями: 0.9.2 «ПРАВАЯ» -> 0.9.3 «ПРАВАЯ РУКА»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-009",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3080",
+  "en": "CROUCH BUTTON",
+  "ru": "КНОПКА ПРИСЕДАНИЯ",
+  "issue": "перевод изменён между версиями: 0.9.2 «КНОПКА ПРИСЕДА» -> 0.9.3 «КНОПКА ПРИСЕДАНИЯ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-010",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3090",
+  "en": "HOLD",
+  "ru": "УДЕРЖАНИЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «УДЕРЖ.» -> 0.9.3 «УДЕРЖАНИЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-011",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3098",
+  "en": "TOGGLE",
+  "ru": "ПЕРЕКЛЮЧЕНИЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ПЕРЕКЛ.» -> 0.9.3 «ПЕРЕКЛЮЧЕНИЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-012",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3168",
+  "en": "SHOW VR TIPS AGAIN",
+  "ru": "ПОКАЗАТЬ СОВЕТЫ VR",
+  "issue": "перевод изменён между версиями: 0.9.2 «СНОВА ПОКАЗАТЬ СОВЕТЫ VR» -> 0.9.3 «ПОКАЗАТЬ СОВЕТЫ VR»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-013",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f31a0",
+  "en": "ROOM-SCALE",
+  "ru": "ПО КОМНАТЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «МАСШТАБ» -> 0.9.3 «ПО КОМНАТЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-014",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3240",
+  "en": "FOLLOW HEAD",
+  "ru": "ПО ГОЛОВЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СЛЕДОВАТЬ ЗА ГОЛОВОЙ» -> 0.9.3 «ПО ГОЛОВЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-015",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3278",
+  "en": "FOLLOW",
+  "ru": "СЛЕЖЕНИЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СЛЕДОВАТЬ» -> 0.9.3 «СЛЕЖЕНИЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-016",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3298",
+  "en": "PHYSICAL CROUCH",
+  "ru": "РЕАЛЬНОЕ ПРИСЕДАНИЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ФИЗИЧЕСКОЕ ПРИСЕДАНИЕ» -> 0.9.3 «РЕАЛЬНОЕ ПРИСЕДАНИЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-017",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f32e8",
+  "en": "BELT WHEN CROUCHING",
+  "ru": "ПОЯС ПРИ ПРИСЕДАНИИ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ПОЯС В ПРИСЕДЕ» -> 0.9.3 «ПОЯС ПРИ ПРИСЕДАНИИ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-018",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3310",
+  "en": "FOLLOW BODY",
+  "ru": "СЛЕЖЕНИЕ ЗА ТЕЛОМ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СЛЕДОВАТЬ ЗА ТЕЛОМ» -> 0.9.3 «СЛЕЖЕНИЕ ЗА ТЕЛОМ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-019",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3390",
+  "en": "DOMINANT HAND",
+  "ru": "ВЕДУЩАЯ РУКА",
+  "issue": "перевод изменён между версиями: 0.9.2 «ОСНОВНАЯ РУКА» -> 0.9.3 «ВЕДУЩАЯ РУКА»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-020",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3560",
+  "en": "USE REACH",
+  "ru": "ИСПОЛЬЗОВАТЬ РУКОЙ",
+  "issue": "перевод изменён между версиями: 0.9.2 «РАДИУС ВЗАИМОДЕЙСТВИЯ» -> 0.9.3 «ИСПОЛЬЗОВАТЬ РУКОЙ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-021",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3650",
+  "en": "RESET HIGHLIGHT COUNTS",
+  "ru": "СБРОС СЧЕТЧИКОВ",
+  "issue": "перевод изменён между версиями: 0.9.2 «СБРОСИТЬ СЧЕТЧИКИ ПОДСВЕТКИ» -> 0.9.3 «СБРОС СЧЕТЧИКОВ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-022",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f36d0",
+  "en": "HIP",
+  "ru": "НА БЕДРЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «БЕДРО» -> 0.9.3 «НА БЕДРЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-023",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3710",
+  "en": "OTHER EYE WHILE SCOPED",
+  "ru": "ДРУГОЙ ГЛАЗ В ПРИЦЕЛЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВТОРОЙ ГЛАЗ В ПРИЦЕЛЕ» -> 0.9.3 «ДРУГОЙ ГЛАЗ В ПРИЦЕЛЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-024",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3728",
+  "en": "VISIBLE",
+  "ru": "ВИДНО",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВИДИМО» -> 0.9.3 «ВИДНО»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-025",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3738",
+  "en": "BLACK",
+  "ru": "ЧЕРНО",
+  "issue": "перевод изменён между версиями: 0.9.2 «ЧЕРНЫЙ» -> 0.9.3 «ЧЕРНО»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-026",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f376c",
+  "en": "LEVEL",
+  "ru": "ПО ГОРИЗОНТУ",
+  "issue": "перевод изменён между версиями: 0.9.2 «УРОВЕНЬ» -> 0.9.3 «ПО ГОРИЗОНТУ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-027",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3778",
+  "en": "FIXED TO VIEW",
+  "ru": "К ОБЗОРУ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ФИКСИРОВАНО» -> 0.9.3 «К ОБЗОРУ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-028",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f37a0",
+  "en": "SCOPE STEERING",
+  "ru": "УПРАВЛЕНИЕ ПРИЦЕЛОМ",
+  "issue": "перевод изменён между версиями: 0.9.2 «НАВЕДЕНИЕ ПРИЦЕЛА» -> 0.9.3 «УПРАВЛЕНИЕ ПРИЦЕЛОМ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-029",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f38b0",
+  "en": "{:+.0f} DEG",
+  "ru": "{:+.0f} Гр.",
+  "issue": "перевод изменён между версиями: 0.9.2 «{:+.0f} ГРАД» -> 0.9.3 «{:+.0f} Гр.»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-030",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3998",
+  "en": "ACTION PROMPT SIZE",
+  "ru": "РАЗМЕР ПОДСКАЗОК",
+  "issue": "перевод изменён между версиями: 0.9.2 «РАЗМЕР ПОДСКАЗКИ ДЕЙСТВИЯ» -> 0.9.3 «РАЗМЕР ПОДСКАЗОК»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-031",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3a98",
+  "en": "HIT DIRECTION",
+  "ru": "НАПРАВЛЕНИЕ ПОПАДАНИЯ",
+  "issue": "перевод изменён между версиями: 0.9.2 «НАПРАВЛЕНИЕ УДАРА» -> 0.9.3 «НАПРАВЛЕНИЕ ПОПАДАНИЯ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-032",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3b18",
+  "en": "CINEMA FLOOR",
+  "ru": "ПОЛ В VR ОКРУЖЕНИИ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ПОЛ КИНО» -> 0.9.3 «ПОЛ В VR ОКРУЖЕНИИ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-033",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3b40",
+  "en": "CINEMA CONTROLLERS",
+  "ru": "КОНТРОЛЛЕРЫ",
+  "issue": "перевод изменён между версиями: 0.9.2 «КОНТРОЛЛЕРЫ КИНО» -> 0.9.3 «КОНТРОЛЛЕРЫ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-034",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3b70",
+  "en": "CINEMA INFO",
+  "ru": "ИНФО В VR ОКРУЖЕНИИ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ИНФО КИНО» -> 0.9.3 «ИНФО В VR ОКРУЖЕНИИ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-035",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3b98",
+  "en": "CINEMA LINKS",
+  "ru": "ССЫЛКИ В VR ОКРУЖЕНИИ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ССЫЛКИ КИНО» -> 0.9.3 «ССЫЛКИ В VR ОКРУЖЕНИИ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-036",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3be0",
+  "en": "COMFORT",
+  "ru": "КОМФОРТ",
+  "issue": "перевод изменён между версиями: 0.9.2 «КОМФОРТНЫЙ» -> 0.9.3 «КОМФОРТ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-037",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3c58",
+  "en": "CINEMA SCREEN DISTANCE",
+  "ru": "РАССТОЯНИЕ ЭКРАНА VR",
+  "issue": "перевод изменён между версиями: 0.9.2 «РАССТОЯНИЕ ЭКРАНА КИНО» -> 0.9.3 «РАССТОЯНИЕ ЭКРАНА VR»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-038",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3c88",
+  "en": "CINEMA SCREEN SIZE",
+  "ru": "РАЗМЕР ЭКРАНА VR",
+  "issue": "перевод изменён между версиями: 0.9.2 «РАЗМЕР ЭКРАНА КИНО» -> 0.9.3 «РАЗМЕР ЭКРАНА VR»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-039",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3e40",
+  "en": "PERFORMANCE (AER+)",
+  "ru": "ПРОИЗВОДИТ. (AER+)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ПРОИЗВОДИТЕЛЬНОСТЬ (AER+)» -> 0.9.3 «ПРОИЗВОДИТ. (AER+)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-040",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3e70",
+  "en": "RENDER SCALE (RESTART)",
+  "ru": "МАСШТАБ РЕНДЕРА",
+  "issue": "перевод изменён между версиями: 0.9.2 «МАСШТАБ РЕНДЕРА (ПЕРЕЗАПУСК)» -> 0.9.3 «МАСШТАБ РЕНДЕРА»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-041",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3ed0",
+  "en": "NATIVE AA",
+  "ru": "НАТИВНОЕ AA",
+  "issue": "перевод изменён между версиями: 0.9.2 «НАТИВНОЕ СГЛАЖИВАНИЕ» -> 0.9.3 «НАТИВНОЕ AA»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-042",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f3f08",
+  "en": "ULTRA PERFORMANCE",
+  "ru": "УЛЬТРА ПРОИЗВОДИТ.",
+  "issue": "перевод изменён между версиями: 0.9.2 «УЛЬТРА ПРОИЗВОДИТЕЛЬНОСТЬ» -> 0.9.3 «УЛЬТРА ПРОИЗВОДИТ.»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-043",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4008",
+  "en": "ON (45 DEG)",
+  "ru": "ВКЛ (45 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (45 ГРАД)» -> 0.9.3 «ВКЛ (45 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-044",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4018",
+  "en": "ON (40 DEG)",
+  "ru": "ВКЛ (40 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (40 ГРАД)» -> 0.9.3 «ВКЛ (40 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-045",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4028",
+  "en": "ON (35 DEG)",
+  "ru": "ВКЛ (35 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (35 ГРАД)» -> 0.9.3 «ВКЛ (35 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-046",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4038",
+  "en": "ON (30 DEG)",
+  "ru": "ВКЛ (30 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (30 ГРАД)» -> 0.9.3 «ВКЛ (30 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-047",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4048",
+  "en": "ON (25 DEG)",
+  "ru": "ВКЛ (25 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (25 ГРАД)» -> 0.9.3 «ВКЛ (25 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-048",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4058",
+  "en": "ON (20 DEG)",
+  "ru": "ВКЛ (20 Гр.)",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВКЛ (20 ГРАД)» -> 0.9.3 «ВКЛ (20 Гр.)»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-049",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4138",
+  "en": "MIRROR HEADSET UI",
+  "ru": "ИНТЕРФЕЙС В ЗЕРКАЛЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ЗЕРКАЛИРОВАТЬ UI ШЛЕМА» -> 0.9.3 «ИНТЕРФЕЙС В ЗЕРКАЛЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-050",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4240",
+  "en": "DEEP BLACKS",
+  "ru": "ГЛУБОКИЕ ЧЕРНЫЕ",
+  "issue": "перевод изменён между версиями: 0.9.2 «ГЛУБОКИЙ ЧЕРНЫЙ» -> 0.9.3 «ГЛУБОКИЕ ЧЕРНЫЕ»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-051",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f4268",
+  "en": "HUD RESOLUTION (RESTART)",
+  "ru": "РАЗРЕШЕНИЕ HUD",
+  "issue": "перевод изменён между версиями: 0.9.2 «РАЗРЕШЕНИЕ HUD (ПЕРЕЗАПУСК)» -> 0.9.3 «РАЗРЕШЕНИЕ HUD»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-052",
+  "category": "H",
+  "level": "defect",
+  "location": "tsv:0x4f42b8",
+  "en": "LEGAL NOTICE VIDEO",
+  "ru": "ПРАВОВОЕ ВИДЕО",
+  "issue": "перевод изменён между версиями: 0.9.2 «ВИДЕО ПРАВОВОЙ ИНФОРМАЦИИ» -> 0.9.3 «ПРАВОВОЕ ВИДЕО»",
+  "hint": "не дефект: сверить, что новый вариант точнее EN"
+ },
+ {
+  "id": "H-053",
+  "category": "H",
+  "level": "defect",
+  "location": "ui2:options[80]",
+  "en": "Short moments when the game holds your body without locking the camera, such as getting down into a crawl. AUTO follows CAMERA PRESET.",
+  "ru": "Короткие моменты, когда игра удерживает ваше тело, не блокируя камеру, например когда вы опускаетесь на четвереньки. АВТО следует ПРЕСЕТУ КАМЕРЫ.",
+  "issue": "EN блока изменился; RU тоже правился",
+  "hint": "сверить перевод с новым EN"
+ }
+]
